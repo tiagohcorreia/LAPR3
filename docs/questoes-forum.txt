@@ -1,0 +1,4 @@
+P: Venho por meio este colocar uma questão sobre a presença do sistema de rega no modelo relaciona, o enunciado refere a este componente como uma "caixa preta", isto faz com que no modelo relacional, se representado, seja uma tabela com quase nenhuma utilidade, sendo apenas uma formalidade. Visto isto, é necessário o sistema de rega ser representado no modelo relacional?
+
+R: Tem de distinguir entre a modelação da morfologia do sistema de rega (detalhes internos), que não é necessária, pelo menos para já, e a modelação geral de cada subsistema de rega. Esta última parece-me essencial existir, ainda que possa eventualmente estar pouco detalhada neste sprint.
+Não sei se terão de importar operações de rega do sistema legacy neste sprint. Coloquem o problema ao cliente.
