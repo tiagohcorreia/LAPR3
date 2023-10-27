@@ -48,3 +48,7 @@ Thumbs.db
 *.mov
 *.wmv
 
+*.bak*
+
+docs/sprint1/bddad/relational-model/ip-bddad-v04.vpp
+*.bak_000f
