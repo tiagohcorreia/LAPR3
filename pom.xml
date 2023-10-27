@@ -3,6 +3,19 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version> <!-- Use a versão adequada do plugin -->
+                <configuration>
+                    <source>1.8</source> <!-- Especifique a versão do JDK que deseja usar -->
+                    <target>1.8</target> <!-- Especifique a versão do JDK que deseja usar -->
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
     <groupId>groupId</groupId>
     <artifactId>lapr3-23-24-group-11</artifactId>
