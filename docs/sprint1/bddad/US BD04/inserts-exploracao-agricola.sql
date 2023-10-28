@@ -16,14 +16,14 @@ INSERT INTO Exploracao_Agricola(id, nome) VALUES (302, '...');
 -- tabela Tipo_Edificio
 INSERT INTO Tipo_Edificio(id, tipo, unidade) VALUES (1, 'Armazém', 'm2');
 INSERT INTO Tipo_Edificio(id, tipo, unidade) VALUES (2, 'Garagem', 'm2');
-INSERT INTO Tipo_Edificio(id, tipo, unidade) VALUES (3, 'Moinho', '...');
+INSERT INTO Tipo_Edificio(id, tipo, unidade) VALUES (3, 'Moinho', NULL);
 INSERT INTO Tipo_Edificio(id, tipo, unidade) VALUES (4, 'Rega', 'm3');
 
 -- tabela Edificio
 INSERT INTO Edificio(id, nome, dimensao, exploracao_agricola_id, tipo_edifício_id) VALUES (8, 'Espigueiro', 600, 201, 1);
 INSERT INTO Edificio(id, nome, dimensao, exploracao_agricola_id, tipo_edifício_id) VALUES (9, 'Armazém novo', 800, 202, 1);
 INSERT INTO Edificio(id, nome, dimensao, exploracao_agricola_id, tipo_edifício_id) VALUES (10, 'Armazém grande', 900, 203, 2);
-INSERT INTO Edificio(id, nome, dimensao, exploracao_agricola_id, tipo_edifício_id) VALUES (11, 'Moinho', 0, 250, 3);
+INSERT INTO Edificio(id, nome, dimensao, exploracao_agricola_id, tipo_edifício_id) VALUES (11, 'Moinho', NULL, 250, 3);
 INSERT INTO Edificio(id, nome, dimensao, exploracao_agricola_id, tipo_edifício_id) VALUES (12, 'Tanque do campo grande', 18, 301, 4);
 INSERT INTO Edificio(id, nome, dimensao, exploracao_agricola_id, tipo_edifício_id) VALUES (13, 'Poço da bouça', 35, 302, 4);
 
