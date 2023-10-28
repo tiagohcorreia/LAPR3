@@ -25,6 +25,7 @@ CREATE TABLE Tipo_Edificio (id number(10) NOT NULL, tipo nvarchar2(255), unidade
 CREATE TABLE Tipo_FP (id number(10) NOT NULL, tipo nvarchar2(255), PRIMARY KEY (id));
 CREATE TABLE Tipo_Operacao (id number(10) NOT NULL, nome nvarchar2(255), unidade nvarchar2(255), PRIMARY KEY (id));
 CREATE TABLE Variedade (id number(10) NOT NULL, nome nvarchar2(255), especie_id number(10), ciclo_id number(10), PRIMARY KEY (id));
+
 ALTER TABLE Edificio ADD CONSTRAINT FKEdificio580456 FOREIGN KEY (exploracao_agricola_id) REFERENCES Exploracao_Agricola (id);
 ALTER TABLE Edificio ADD CONSTRAINT FKEdificio4079 FOREIGN KEY (tipo_edifício_id) REFERENCES Tipo_Edificio (id);
 ALTER TABLE Parcela ADD CONSTRAINT FKParcela742203 FOREIGN KEY (exploracao_agricola_id) REFERENCES Exploracao_Agricola (id);
