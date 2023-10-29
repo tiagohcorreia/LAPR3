@@ -17,9 +17,9 @@ INSERT INTO Parcela(id, nome, area, exploracao_agricola_id) VALUES (106, 'Lameir
 INSERT INTO Parcela(id, nome, area, exploracao_agricola_id) VALUES (107, 'Vinha', 2, 1);
 
 -- tabela Edificio
-INSERT INTO Edificio(id, nome, dimensao, exploracao_agricola_id, tipo_edifício_id) VALUES (201, 'Espigueiro', 600, 1, 1);
-INSERT INTO Edificio(id, nome, dimensao, exploracao_agricola_id, tipo_edifício_id) VALUES (202, 'Armazém novo', 800, 1, 1);
-INSERT INTO Edificio(id, nome, dimensao, exploracao_agricola_id, tipo_edifício_id) VALUES (203, 'Armazém grande', 900, 1, 2);
-INSERT INTO Edificio(id, nome, dimensao, exploracao_agricola_id, tipo_edifício_id) VALUES (250, 'Moinho', NULL, 1, 3);
-INSERT INTO Edificio(id, nome, dimensao, exploracao_agricola_id, tipo_edifício_id) VALUES (301, 'Tanque do campo grande', 18, 1, 4);
-INSERT INTO Edificio(id, nome, dimensao, exploracao_agricola_id, tipo_edifício_id) VALUES (302, 'Poço da bouça', 35, 1, 4);
+INSERT INTO Edificio(id, nome, dimensao, exploracao_agricola_id, tipo_edificio_id) VALUES (201, 'Espigueiro', 600, 1, 1);
+INSERT INTO Edificio(id, nome, dimensao, exploracao_agricola_id, tipo_edificio_id) VALUES (202, 'Armazém novo', 800, 1, 1);
+INSERT INTO Edificio(id, nome, dimensao, exploracao_agricola_id, tipo_edificio_id) VALUES (203, 'Armazém grande', 900, 1, 2);
+INSERT INTO Edificio(id, nome, dimensao, exploracao_agricola_id, tipo_edificio_id) VALUES (250, 'Moinho', NULL, 1, 3);
+INSERT INTO Edificio(id, nome, dimensao, exploracao_agricola_id, tipo_edificio_id) VALUES (301, 'Tanque do campo grande', 18, 1, 4);
+INSERT INTO Edificio(id, nome, dimensao, exploracao_agricola_id, tipo_edificio_id) VALUES (302, 'Poço da bouça', 35, 1, 4);
