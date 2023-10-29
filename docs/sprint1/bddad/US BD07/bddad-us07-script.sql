@@ -8,6 +8,6 @@ FROM Parcela
          JOIN Plantacao ON Parcela.id = Plantacao.parcela_id
          JOIN Operacao ON Plantacao.id = Operacao.plantacao_id
          JOIN Tipo_Operacao ON Operacao.tipo_operacao_id = Tipo_Operacao.id
-WHERE Operacao.data BETWEEN TO_DATE('2016-10-06', 'YYYY-MM-DD') AND TO_DATE('2023-03-20', 'YYYY-MM-DD')
+WHERE Operacao.data BETWEEN TO_DATE('2016-10-06', 'YYYY-MM-DD') AND TO_DATE('2023-03-20', 'YYYY-MM-DD') -- as datas devem ser alteradas para o intervalo de tempo que o utilizador quer
 GROUP BY Parcela.nome, Tipo_Operacao.nome
 ORDER BY Parcela.nome, Tipo_Operacao.nome;
