@@ -196,7 +196,7 @@ INSERT INTO Operacao(id,plantacao_id,tipo_operacao_id,data,quantidade) values (2
 INSERT INTO Operacao(id,plantacao_id,tipo_operacao_id,data,quantidade) values (287,104, 107, 44824, 1150);
 INSERT INTO Operacao(id,plantacao_id,tipo_operacao_id,data,quantidade) values (288,106, 106, 44824, 0.6);
 INSERT INTO Operacao(id,plantacao_id,tipo_operacao_id,data,quantidade) values (289,103, 106, 44846, 1.3);
-INSERT INTO Operacao(id,platacao_id,tipo_operacao_id,data,quantidade) values (290,104, 107, 44851, 850);
+INSERT INTO Operacao(id,plantacao_id,tipo_operacao_id,data,quantidade) values (290,104, 107, 44851, 850);
 INSERT INTO Operacao(id,plantacao_id,tipo_operacao_id,data,quantidade) values (291,104, 107, 44871, 900);
 INSERT INTO Operacao(id,plantacao_id,tipo_operacao_id,data,quantidade) values (292,102, 104, 44875, 30);
 INSERT INTO Operacao(id,plantacao_id,tipo_operacao_id,data,quantidade) values (293,102, 104, 44875, 20);
