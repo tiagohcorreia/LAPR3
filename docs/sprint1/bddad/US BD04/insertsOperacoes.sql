@@ -2,10 +2,10 @@ INSERT INTO Tipo_Operacao(id,nome,unidade) values (101, Plantação, un);
 INSERT INTO Tipo_Operacao(id,nome,unidade) values (102, Rega, m3);		
 INSERT INTO Tipo_Operacao(id,nome,unidade) values (103, Fertilização, kg);		
 INSERT INTO Tipo_Operacao(id,nome,unidade) values (104, Poda, un);		
-INSERT INTO Tipo_Operacao(id,nome,unidade) values (105, Aplicação fitofármaco, kg);		
+INSERT INTO Tipo_Operacao(id,nome,unidade) values (105, 'Aplicação fitofármaco', kg);		
 INSERT INTO Tipo_Operacao(id,nome,unidade) values (106, Sementeira, kg);		
 INSERT INTO Tipo_Operacao(id,nome,unidade) values (107, Colheita, kg);		
-INSERT INTO Tipo_Operacao(id,nome,unidade) values (108, Incorporação no solo, ha);
+INSERT INTO Tipo_Operacao(id,nome,unidade) values (108, 'Incorporação no solo', ha);
 		
 INSERT INTO Operacao(id,platancao_id,tipo_operacao_id,data,quantidade) values (101,102, 101, 42649, 30);
 INSERT INTO Operacao(id,platancao_id,tipo_operacao_id,data,quantidade) values (102,102, 101, 42653, 20);
