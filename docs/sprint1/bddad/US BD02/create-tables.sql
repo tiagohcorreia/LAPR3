@@ -5,7 +5,7 @@ CREATE TABLE Ciclo_Temporaria (ciclo_id number(10) NOT NULL, fase_sementeira nva
 CREATE TABLE Colheita (operacao_id number(10) NOT NULL, previsao_colheita_id number(10), PRIMARY KEY (operacao_id));
 CREATE TABLE Composto_Quimico (id number(10) NOT NULL, nome nvarchar2(255), PRIMARY KEY (id));
 CREATE TABLE Cultura (id number(10) NOT NULL, variedade_id number(10), plantacao_id number(10), PRIMARY KEY (id));
-CREATE TABLE Edificio (id number(10) NOT NULL, nome nvarchar2(255), dimensao number(10), exploracao_agricola_id number(10), tipo_edifício_id number(10), PRIMARY KEY (id));
+CREATE TABLE Edificio (id number(10) NOT NULL, nome nvarchar2(255), dimensao number(10), exploracao_agricola_id number(10), tipo_edificio_id number(10), PRIMARY KEY (id));
 CREATE TABLE Especie (id number(10) NOT NULL, nome_comum nvarchar2(255), nome_cientifico nvarchar2(255), tipo_consumo_id number(10), PRIMARY KEY (id));
 CREATE TABLE Exploracao_Agricola (id number(10) NOT NULL, nome nvarchar2(255), PRIMARY KEY (id));
 CREATE TABLE Fator_Producao (id number(10) NOT NULL, nome nvarchar2(255), tipo_id number(10), formulacao_id number(10), PRIMARY KEY (id));
