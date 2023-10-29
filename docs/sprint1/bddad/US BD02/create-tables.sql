@@ -9,7 +9,7 @@ CREATE TABLE Edificio (id number(10) NOT NULL, nome nvarchar2(255), dimensao num
 CREATE TABLE Especie (id number(10) NOT NULL, nome_comum nvarchar2(255), nome_cientifico nvarchar2(255), tipo_consumo_id number(10), PRIMARY KEY (id));
 CREATE TABLE Exploracao_Agricola (id number(10) NOT NULL, nome nvarchar2(255), PRIMARY KEY (id));
 CREATE TABLE Fator_Producao (id number(10) NOT NULL, nome nvarchar2(255), tipo_id number(10), formulacao_id number(10), PRIMARY KEY (id));
-CREATE TABLE Ficha_Tecnica (fator_producao_id number(10) NOT NULL, composto_quimico_id number(10) NOT NULL, quantidade number(19), PRIMARY KEY (fator_producao_id, composto_quimico_id));
+CREATE TABLE Ficha_Tecnica (fator_producao_id number(10) NOT NULL, composto_quimico_id number(10) NOT NULL, quantidade float(10), PRIMARY KEY (fator_producao_id, composto_quimico_id));
 CREATE TABLE Formulacao_FP (id number(10) NOT NULL, tipo nvarchar2(255), PRIMARY KEY (id));
 CREATE TABLE FP_Metodo_Aplicacao (fator_producao_id number(10) NOT NULL, metodo_aplicacao_id number(10) NOT NULL, PRIMARY KEY (fator_producao_id, metodo_aplicacao_id));
 CREATE TABLE Metodo_Aplicacao (id number(10) NOT NULL, tipo nvarchar2(255), PRIMARY KEY (id));
@@ -17,7 +17,7 @@ CREATE TABLE Operacao (id number(10) NOT NULL, plantacao_id number(10), tipo_ope
 CREATE TABLE Parcela (id number(10) NOT NULL, nome nvarchar2(255), area float(10), exploracao_agricola_id number(10), PRIMARY KEY (id));
 CREATE TABLE Plantacao (id number(10) NOT NULL, parcela_id number(10), data_inicio date, PRIMARY KEY (id));
 CREATE TABLE Plantacao_Permanente (plantacao_id number(10) NOT NULL, PRIMARY KEY (plantacao_id));
-CREATE TABLE Plantacao_Temporaria (plantacao_id number(10) NOT NULL, data_fim date, quantidade number(10), PRIMARY KEY (plantacao_id));
+CREATE TABLE Plantacao_Temporaria (plantacao_id number(10) NOT NULL, data_fim date, quantidade float(10), PRIMARY KEY (plantacao_id));
 CREATE TABLE Previsao_Colheita (id number(10) NOT NULL, data_inicio date, semana number(10), quantidade number(10), plantacao_id number(10), PRIMARY KEY (id));
 CREATE TABLE Registro_EM (operacao_id number(10) NOT NULL, velocidade_vento number(10), direcao_vento number(10), temperatura_solo number(10), humidade_solo number(10), radiação number(10), pressão_atmosferica number(10), temperatura_ar number(10), humidade_ar number(10), pluviosidade number(10), data date, estacao_id number(10), PRIMARY KEY (operacao_id));
 CREATE TABLE Tipo_Consumo (id number(10) NOT NULL, tipo nvarchar2(255), PRIMARY KEY (id));
