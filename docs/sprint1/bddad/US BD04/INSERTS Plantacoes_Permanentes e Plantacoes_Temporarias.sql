@@ -10,12 +10,22 @@ INSERT INTO Plantacao(id, parcela_id, data_inicio) VALUES (109, 103, TO_DATE('08
 INSERT INTO Plantacao(id, parcela_id, data_inicio) VALUES (110, 103, TO_DATE('12/10/2022', 'MM/DD/YYYY'));
 INSERT INTO Plantacao(id, parcela_id, data_inicio) VALUES (111, 102, TO_DATE('06/10/2016', 'MM/DD/YYYY'));
 INSERT INTO Plantacao(id, parcela_id, data_inicio) VALUES (112, 102, TO_DATE('10/10/2016', 'MM/DD/YYYY'));
+INSERT INTO Plantacao(id, parcela_id, data_inicio) VALUES (113, NULL, TO_DATE('10/03/2020', 'MM/DD/YYYY'));
+INSERT INTO Plantacao(id, parcela_id, data_inicio) VALUES (114, NULL, TO_DATE('02/06/2020', 'MM/DD/YYYY'));
+INSERT INTO Plantacao(id, parcela_id, data_inicio) VALUES (115, NULL, TO_DATE('20/09/2020', 'MM/DD/YYYY'));
+INSERT INTO Plantacao(id, parcela_id, data_inicio) VALUES (116, NULL, TO_DATE('10/03/2021', 'MM/DD/YYYY'));
+INSERT INTO Plantacao(id, parcela_id, data_inicio) VALUES (117, NULL, TO_DATE('02/06/2021', 'MM/DD/YYYY'));
+INSERT INTO Plantacao(id, parcela_id, data_inicio) VALUES (118, NULL, TO_DATE('20/09/2021', 'MM/DD/YYYY'));
+INSERT INTO Plantacao(id, parcela_id, data_inicio) VALUES (119, NULL, TO_DATE('06/03/2022', 'MM/DD/YYYY'));
+INSERT INTO Plantacao(id, parcela_id, data_inicio) VALUES (120, NULL, TO_DATE('30/05/2022', 'MM/DD/YYYY'));
+INSERT INTO Plantacao(id, parcela_id, data_inicio) VALUES (121, NULL, TO_DATE('20/09/2022', 'MM/DD/YYYY'));
 INSERT INTO Plantacao(id, parcela_id, data_inicio) VALUES (122, 104, TO_DATE('07/01/2017', 'MM/DD/YYYY'));
 INSERT INTO Plantacao(id, parcela_id, data_inicio) VALUES (123, 104, TO_DATE('08/01/2017', 'MM/DD/YYYY'));
 INSERT INTO Plantacao(id, parcela_id, data_inicio) VALUES (124, 104, TO_DATE('08/01/2017', 'MM/DD/YYYY'));
 INSERT INTO Plantacao(id, parcela_id, data_inicio) VALUES (125, 104, TO_DATE('10/12/2018', 'MM/DD/YYYY'));
 INSERT INTO Plantacao(id, parcela_id, data_inicio) VALUES (126, 107, TO_DATE('10/01/2018', 'MM/DD/YYYY'));
 INSERT INTO Plantacao(id, parcela_id, data_inicio) VALUES (127, 107, TO_DATE('11/01/2018', 'MM/DD/YYYY'));
+
 
 
 
