@@ -1,4 +1,5 @@
 package Class;
+
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -48,12 +49,13 @@ public class Rega {
             }
         } else if (regularidade.equals("P")) {
             for (int i = 0; i < numeroDeDias; i++) {
-                if(calendar.get(Calendar.DAY_OF_MONTH) % 2 == 0){
-                datasDeRega.add(calendar.getTime());}
+                if (calendar.get(Calendar.DAY_OF_MONTH) % 2 == 0) {
+                    datasDeRega.add(calendar.getTime());
+                }
                 calendar.add(Calendar.DAY_OF_MONTH, 1);
             }
         } else if (regularidade.equals("3")) {
-            for (int i = 0; i < numeroDeDias/3; i++) {
+            for (int i = 0; i < numeroDeDias / 3; i++) {
                 datasDeRega.add(calendar.getTime());
                 calendar.add(Calendar.DAY_OF_MONTH, 3);
             }

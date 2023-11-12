@@ -1,4 +1,4 @@
-package CONT;
+package controller;
 
 import Class.Rega;
 import Class.estadoRega;
