@@ -1,5 +1,4 @@
 package Class;
-
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -68,5 +67,10 @@ public class Rega {
         fimRega.add(Calendar.MINUTE, duracao);
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
         return dateFormat.format(fimRega.getTime());
+    }
+
+    public static boolean isValidRegularidade(String value) {
+        // Validate the third column based on your specific requirements
+        return value.matches("[TPI3]");
     }
 }

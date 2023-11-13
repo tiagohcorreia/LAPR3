@@ -1,6 +1,8 @@
 package ui.funcionalidades;
 
 import controller.RegaController;
+import Class.Rega;
+import Class.estadoRega;
 
 import java.util.List;
 
@@ -9,8 +11,9 @@ public class SimularSistemaRegaUI implements Runnable {
     @Override
     public void run() {
 
-        /*RegaController regaController = new RegaController();
+        RegaController regaController = new RegaController();
         regaController.Parse();
+        regaController.adjustRegaSchedule("plano_de_rega.csv");
 
         List<estadoRega> estados = regaController.verificarEstadoAtual();
 
@@ -21,7 +24,7 @@ public class SimularSistemaRegaUI implements Runnable {
             } else {
                 System.out.println("Nenhuma rega ativa de momento");
             }
-        }*/
+        }
     }
 }
 
