@@ -20,8 +20,8 @@
 >     ....
 >Regas executadas, quantidades, data da realização, parcela;"
 >Como é que, a partir do ficheiro gerado na US-LP02, sabemos a quantidade de água utilizada na rega?
-
-r: as regas podem ser registadas em minutos e em função do tipo de rega instalado no sector/parcela e respectivo débito poderiamos calcular a quantidade de água. No entanto não entendo que o precisem de fazer, os minutos de rega são suficientes.
+>
+>r: as regas podem ser registadas em minutos e em função do tipo de rega instalado no sector/parcela e respectivo débito poderiamos calcular a quantidade de água. No entanto não entendo que o precisem de fazer, os minutos de rega são suficientes.
 
 
 
