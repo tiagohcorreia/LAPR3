@@ -1,0 +1,102 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+actor "Gestor Agrícola" as Gestor
+participant ":OperacaoMondaUI" as UI
+participant ":OperacaoMondaController" as CTRL
+participant ":RepositorioOperacoes" as Repository
+participant "repositorios\n:Repositorios" as PLAT
+participant "operacoesRepository\n:OperacoesRepository" as OperacoesRepository
+participant ":OperacaoMonda" as OperacaoMonda
+participant ":Cultura" as Cultura
+
+Gestor -> UI : solicita registro de operação de monda
+activate Gestor
+activate UI
+
+    UI -> CTRL : criar
+
+        UI -> CTRL : getListaOperacoes()
+        activate CTRL
+
+            CTRL -> Repository : getInstance()
+            activate Repository
+
+            Repository --> CTRL : repositorios
+            deactivate Repository
+
+            CTRL -> PLAT : getOperacoesRepository()
+            activate PLAT
+
+            PLAT --> CTRL : OperacoesRepository
+            deactivate PLAT
+
+            CTRL -> OperacoesRepository : getListaOperacoes()
+            activate OperacoesRepository
+
+            OperacoesRepository --> CTRL : listaOperacoes
+            deactivate OperacoesRepository
+
+            loop [para cada OperacaoMonda
+
+                CTRL -> OperacaoMonda : getCultura()
+                activate OperacaoMonda
+
+                OperacaoMonda --> CTRL : Cultura
+                deactivate OperacaoMonda
+
+
+
+        CTRL --> UI : listaOperacoesCopy
+        deactivate CTRL
+
+        UI --> UI : manterLista(listaOperacoesCopy)
+
+    UI --> Gestor : exibe lista de operações disponíveis e solicita seleção
+    deactivate UI
+
+    Gestor -> UI : seleciona operação de monda
+    activate UI
+
+    UI -> UI : manterOperacaoSelecionada(operacaoSelecionada)
+
+    UI --> UI : solicita informações específicas da operação de monda
+    deactivate UI
+
+    Gestor -> UI : fornece informações necessárias (tipo de cultura, área, data, etc.)
+    activate UI
+
+    UI --> UI : manterInformacoesOperacao(informacoesOperacao)
+
+    UI -> CTRL : validar e registrar operação de monda no sistema
+    activate CTRL
+
+        opt informacoesOperacao.cultura != null
+            CTRL -> Cultura : validarCultura(informacoesOperacao.cultura)
+            activate Cultura
+            Cultura --> CTRL : validacaoCultura
+            deactivate Cultura
+        end
+
+        CTRL -> OperacaoMonda : validarOperacaoMonda(informacoesOperacao)
+        activate OperacaoMonda
+        OperacaoMonda --> CTRL : validacaoOperacaoMonda
+        deactivate OperacaoMonda
+
+        CTRL -> OperacoesRepository : adicionarOperacaoMonda(informacoesOperacao)
+        activate OperacoesRepository
+        OperacoesRepository --> CTRL : sucessoAdicao
+        deactivate OperacoesRepository
+
+    CTRL --> UI : confirmacaoSucesso
+    deactivate CTRL
+
+    UI --> Gestor : confirmação de sucesso no registro
+    deactivate UI
+
+@enduml
