@@ -18,6 +18,9 @@ Como Gestor Agrícola, quero registar uma operação de monda
 
 >Answer:Uma operação agrícola do tipo monda será sobre uma cultura instalada numa parcela. Isto não significa que não acabe por ser realizada em todas as parcelas com a mesma cultura mas nesse caso até poderá ocorrer noutras datas.
 
+>Question:A operação de monda tem algum modo ? (ex:química, térmica ou manual).No caso de ser química, que tipo de fator de produção/modo de aplicação devem ser considerados?
+
+>Answer:A monda é um processo utilizado pelo diminuir o número de frutos ou plantas, para potenciar maior calibre dos produtos finais.A monda pode ser química, manual ou mecânica (não conheço térmica). No caso de ser química deverá poder guardar o produto químico utilizado e quantidades.
 
 ## Critérios de Aceitação
 
