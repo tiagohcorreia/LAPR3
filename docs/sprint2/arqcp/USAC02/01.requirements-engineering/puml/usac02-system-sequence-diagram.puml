@@ -1,0 +1,38 @@
+@startuml
+
+skinparam SequenceMessageAlign center
+
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - US002
+
+autonumber
+
+actor "Gestor Agrícola" as Gestor
+entity "System" as System
+
+activate Gestor
+Gestor -> System : solicita registro de operação de monda
+activate System
+
+System --> Gestor : exibe opções de operações disponíveis e solicita seleção
+deactivate System
+
+Gestor -> System : seleciona operação de monda
+activate System
+
+System --> Gestor : solicita informações específicas da operação de monda
+deactivate System
+
+Gestor -> System : fornece informações necessárias (tipo de cultura, área, data, etc.)
+activate System
+
+System --> Gestor : valida e registra a operação de monda no sistema
+deactivate System
+
+Gestor --> System : confirmação de sucesso no registro
+deactivate Gestor
+
+@enduml

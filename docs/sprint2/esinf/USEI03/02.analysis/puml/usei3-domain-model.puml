@@ -1,0 +1,39 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+'direção da esquerda para a direita
+
+skinparam classAttributeIconSize 0
+hide circles
+hide methods
+hide empty members
+
+title Modelo de Domínio - Determinar Percurso Mínimo com Carregamentos
+abstract class Utilizador {
+}
+
+class Veiculo {
+    autonomia
+}
+
+class Localidade {
+    nome
+}
+
+class PercursoMinimo {
+    localOrigem : Localidade
+    locaisPassagem : List<Localidade>
+    distanciaEntreLocais : Map<Localidade, Double>
+    localDestino : Localidade
+    distanciaTotal : Double
+    numeroCarregamentos : int
+}
+
+Utilizador "1" -right- "1" Veiculo : possui >
+Utilizador "1" -right- "1" Localidade : está em >
+
+Veiculo "1" -right- "1" PercursoMinimo : determina >
+
+@enduml

@@ -1,0 +1,37 @@
+@startuml
+'skinparam SequenceMessageAlign center
+
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - Determinar Percurso Mínimo com Carregamentos
+
+autonumber
+
+actor "Utilizador" as Utilizador
+entity "System" as System
+
+activate Utilizador
+Utilizador -> System : solicita determinação de percurso mínimo
+activate System
+
+System --> Utilizador : solicita informações específicas (veículo, autonomia, locais)
+deactivate System
+
+Utilizador -> System : fornece informações necessárias (veículo, autonomia, locais)
+activate System
+
+System --> Utilizador : retorna percurso mínimo entre os dois locais mais afastados da rede de distribuição
+deactivate System
+
+Utilizador --> System : solicita detalhes do percurso (locais de passagem, distância entre locais, número de carregamentos, etc.)
+activate System
+
+System --> Utilizador : fornece detalhes do percurso (local de origem, locais de passagem, distância entre locais, local de destino, distância total do percurso, número total de carregamentos)
+deactivate System
+
+Utilizador --> System : confirmação de sucesso na obtenção do percurso mínimo
+deactivate Utilizador
+
+@enduml

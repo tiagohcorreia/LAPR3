@@ -1,0 +1,34 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+'direção da esquerda para a direita
+
+skinparam classAttributeIconSize 0
+hide circles
+hide methods
+hide empty members
+
+title Modelo de Domínio - US002
+abstract class GestorAgricola {
+}
+
+class OperacaoDeMonda {
+    cultura : Cultura
+    data
+    areaAfetada
+    equipamentoUtilizado
+    horasDeTrabalho
+}
+
+class Cultura {
+    tipo
+    area
+    dataPlantio
+}
+
+GestorAgricola "1" -right- "1..*" OperacaoDeMonda : deseja registrar >
+OperacaoDeMonda "1" -right- "1" Cultura : envolve >
+
+@enduml

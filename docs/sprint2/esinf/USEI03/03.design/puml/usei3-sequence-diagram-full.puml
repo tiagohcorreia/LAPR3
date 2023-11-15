@@ -1,0 +1,93 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+actor "Utilizador" as Utilizador
+participant ":SolicitarPercursoMinimoUI" as UI
+participant ":SolicitarPercursoMinimoController" as CTRL
+participant ":RepositorioLocais" as Repository
+participant "repositorios\n:Repositorios" as PLAT
+participant "percursoMinimoRepository\n:PercursoMinimoRepository" as PercursoMinimoRepository
+participant ":SolicitarPercursoMinimo" as SolicitarPercursoMinimo
+participant ":Localidade" as Localidade
+
+Utilizador -> UI : solicita percurso mínimo para veículo
+activate Utilizador
+activate UI
+
+    UI -> CTRL : criar
+
+        UI -> CTRL : getListaLocais()
+        activate CTRL
+
+            CTRL -> Repository : getInstance()
+            activate Repository
+
+            Repository --> CTRL : repositorios
+            deactivate Repository
+
+            CTRL -> PLAT : getPercursoMinimoRepository()
+            activate PLAT
+
+            PLAT --> CTRL : PercursoMinimoRepository
+            deactivate PLAT
+
+            CTRL -> PercursoMinimoRepository : getListaLocais()
+            activate PercursoMinimoRepository
+
+            PercursoMinimoRepository --> CTRL : listaLocais
+            deactivate PercursoMinimoRepository
+
+            loop [para cada Localidade
+
+                CTRL -> SolicitarPercursoMinimo : getNomeLocalidade()
+                activate SolicitarPercursoMinimo
+
+                SolicitarPercursoMinimo --> CTRL : NomeLocalidade
+                deactivate SolicitarPercursoMinimo
+
+            end
+
+        CTRL --> UI : listaLocaisCopy
+        deactivate CTRL
+
+        UI --> UI : manterLista(listaLocaisCopy)
+
+    UI --> Utilizador : exibe lista de locais disponíveis e solicita seleção
+    deactivate UI
+
+    Utilizador -> UI : seleciona local de origem e destino
+    activate UI
+
+    UI -> UI : manterLocaisSelecionados(locaisSelecionados)
+
+    UI --> UI : solicita informações específicas do veículo
+    deactivate UI
+
+    Utilizador -> UI : fornece informações necessárias (autonomia do veículo, etc.)
+    activate UI
+
+    UI -> CTRL : calcularPercursoMinimo(locaisSelecionados, autonomiaVeiculo)
+    activate CTRL
+
+        CTRL -> SolicitarPercursoMinimo : validarAutonomiaVeiculo(autonomiaVeiculo)
+        activate SolicitarPercursoMinimo
+        SolicitarPercursoMinimo --> CTRL : validacaoAutonomiaVeiculo
+        deactivate SolicitarPercursoMinimo
+
+        CTRL -> PercursoMinimoRepository : obterPercursoMinimo(locaisSelecionados, autonomiaVeiculo)
+        activate PercursoMinimoRepository
+        PercursoMinimoRepository --> CTRL : percursoMinimo
+        deactivate PercursoMinimoRepository
+
+    CTRL --> UI : percursoMinimoCopy
+    deactivate CTRL
+
+    UI --> Utilizador : exibe percurso mínimo, locais de passagem, distância total e número de carregamentos
+    deactivate UI
+
+@enduml
