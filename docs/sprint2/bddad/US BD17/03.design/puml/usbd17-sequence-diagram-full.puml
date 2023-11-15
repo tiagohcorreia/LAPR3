@@ -1,0 +1,114 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+actor "Gestor Agrícola" as Gestor
+participant ":ConsultaFatoresProducaoUI" as UI
+participant ":ConsultaFatoresProducaoController" as CTRL
+participant ":RepositorioFatoresProducao" as Repository
+participant "repositorios\n:Repositorios" as PLAT
+participant "fatoresProducaoRepository\n:FatoresProducaoRepository" as FatoresProducaoRepository
+participant ":ConsultaFatoresProducao" as ConsultaFatoresProducao
+participant ":Parcela" as Parcela
+participant ":FatorProducao" as FatorProducao
+
+Gestor -> UI : solicita consulta de fatores de produção
+activate Gestor
+activate UI
+
+    UI -> CTRL : criar
+
+        UI -> CTRL : getListaConsultas()
+        activate CTRL
+
+            CTRL -> Repository : getInstance()
+            activate Repository
+
+            Repository --> CTRL : repositorios
+            deactivate Repository
+
+            CTRL -> PLAT : getFatoresProducaoRepository()
+            activate PLAT
+
+            PLAT --> CTRL : FatoresProducaoRepository
+            deactivate PLAT
+
+            CTRL -> FatoresProducaoRepository : getListaConsultas()
+            activate FatoresProducaoRepository
+
+            FatoresProducaoRepository --> CTRL : listaConsultas
+            deactivate FatoresProducaoRepository
+
+            loop [para cada ConsultaFatoresProducao
+
+                CTRL -> ConsultaFatoresProducao : getParcela()
+                activate ConsultaFatoresProducao
+
+                ConsultaFatoresProducao --> CTRL : Parcela
+                deactivate ConsultaFatoresProducao
+
+                CTRL -> ConsultaFatoresProducao : getIntervaloDeTempo()
+                activate ConsultaFatoresProducao
+
+                ConsultaFatoresProducao --> CTRL : IntervaloDeTempo
+                deactivate ConsultaFatoresProducao
+
+                CTRL -> FatorProducao : getTipoSubstancia()
+                activate FatorProducao
+
+                FatorProducao --> CTRL : TipoSubstancia
+                deactivate FatorProducao
+
+            end
+
+        CTRL --> UI : listaConsultasCopy
+        deactivate CTRL
+
+        UI --> UI : manterLista(listaConsultasCopy)
+
+    UI --> Gestor : exibe lista de consultas disponíveis e solicita seleção
+    deactivate UI
+
+    Gestor -> UI : seleciona consulta de fatores de produção
+    activate UI
+
+    UI -> UI : manterConsultaSelecionada(consultaSelecionada)
+
+    UI --> UI : solicita informações específicas da consulta
+    deactivate UI
+
+    Gestor -> UI : fornece informações necessárias (número da parcela, intervalo de tempo, etc.)
+    activate UI
+
+    UI --> UI : manterInformacoesConsulta(informacoesConsulta)
+
+    UI -> CTRL : obterListaFatoresProducao(informacoesConsulta)
+    activate CTRL
+
+        opt informacoesConsulta.parcela != null
+            CTRL -> Parcela : validarParcela(informacoesConsulta.parcela)
+            activate Parcela
+            Parcela --> CTRL : validacaoParcela
+            deactivate Parcela
+        end
+
+        CTRL -> ConsultaFatoresProducao : validarConsultaFatoresProducao(informacoesConsulta)
+        activate ConsultaFatoresProducao
+        ConsultaFatoresProducao --> CTRL : validacaoConsultaFatoresProducao
+        deactivate ConsultaFatoresProducao
+
+        CTRL -> FatoresProducaoRepository : obterListaFatoresProducao(informacoesConsulta)
+        activate FatoresProducaoRepository
+        FatoresProducaoRepository --> CTRL : listaFatoresProducao
+        deactivate FatoresProducaoRepository
+
+    CTRL --> UI : listaFatoresProducaoCopy
+    deactivate CTRL
+
+    UI --> Gestor : exibe lista dos fatores de produção
+    deactivate UI
+
+@enduml
