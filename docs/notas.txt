@@ -1,0 +1,2 @@
+- adicionar estado fenologico aos modelos de dominio e relacional
+- adicionar operadores às operações
