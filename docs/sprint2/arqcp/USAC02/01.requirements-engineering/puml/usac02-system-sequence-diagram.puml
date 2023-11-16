@@ -14,7 +14,7 @@ actor "Gestor Agrícola" as Gestor
 entity "System" as System
 
 activate Gestor
-Gestor -> System : solicita registro de operação de monda
+Gestor -> System : solicita registro de operação de monda.
 activate System
 
 System --> Gestor : exibe opções de operações disponíveis e solicita seleção
