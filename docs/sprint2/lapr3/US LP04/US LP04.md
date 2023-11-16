@@ -1,14 +1,13 @@
-# US BD11
+# US LP04
 
 ## Descrição
 
-Como Gestor Agrícola, quero registar uma operação de semeadura
+Como Product Owner, pretendo que seja desenvolvidas funcionalidades que permitam a evocação das USBD11.
 
 ---
 ## From the Specifications Document
 
-> "Ação desenvolvida no contexto da actividade  agrícola, designadamente: semear. As operações são usualmente 
-> realizadas por operadores  frequentemente auxiliados por máquinas e instrumentos agrícolas"
+> N/A
 
 ---
 ## Clarificações do Cliente 
@@ -25,7 +24,8 @@ Como Gestor Agrícola, quero registar uma operação de semeadura
 ---
 ## Análise
 
-- Fazer uma função que adiciona um insert para a tabela de semeadura
+- Fazer uma interface que chama a função desenvolvida na US BD11
+- Não é preciso desenvolver interface gráfica
 
 ---
 ## Termos Importantes do Glossário
@@ -36,15 +36,16 @@ o plantio, a irrigação, a fertilização, o controle de pragas e doenças, a c
 - **Semear:** Ato de pôr na terra a semente para germinar.
 
 ---
-
 ## Excerto Modelo Domínio
 
-![Excerto Modelo Dominio](/diagramas/ExcertoModeloDominio.png)
+![Excerto Modelo Dominio](/png/ExcertoModeloDominio.png)
 
 ---
-
 ## Excerto Modelo Relacional
 
-![Excerto Modelo Relacional](/diagramas/ExcertoModeloRelacional.png)
----
+![Excerto Modelo Relacional](/png/ExcertoModeloRelacional.png)
 
+---
+## Diagrama de Sequência
+
+![Sequence Diagram](/svg/DiagramaSequencia.svg)
