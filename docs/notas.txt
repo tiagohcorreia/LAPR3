@@ -1,2 +1,5 @@
+bddad:
+- gerir as unidades e os tipos de operaçao
+- ligar operaçoes de rega a setores
 - adicionar estado fenologico aos modelos de dominio e relacional
 - adicionar operadores às operações
