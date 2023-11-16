@@ -1,3 +1,66 @@
+P: Numa operação realizada sobre uma cultura o produto resultante (quando aplicável) depende do tipo de operação?
+   Exemplo: Numa operação de colheita sobre uma macieira o produto é sempre a maça? E numa operação de Poda o produto são os ramos?
+
+R: supondo que produto signifique "Produto Agrícola", o objectivo da produção agrícola (e.g., fruta, flores, fibras, cereais, ...) a colheita terá produtos associados mas a poda não.
+   Uma determinada actividade agrícola não se molda ao modelo de dados mas o reverso, de facto, este deve ser o espírito em qualquer domínio de conhecimento que pretendam modelar/capturar.
+
+
+
+P: No enunciado da USLP03 encontra-se a seguinte instrução:
+   "[...] que de forma escalonada após a conclusão da rega em cada sector registe essa operacão no caderno de campo."
+   Como deve ser feita a implementação deste requisito de escalonamento? Devemos recorrer a threads?
+
+R: o cliente não sabe responder a perguntas do tipo "Como deve ser feita a implementação deste requisito de X?".
+   Suspeito que podem existir diferentes soluções (a nível do Java ou do sistema operativo).
+   Não faço ideia da utilidade disto mas encontrei este link: https://builtin.com/software-engineering-perspectives/java-scheduler
+   pode valer a pena dar uma vista de olhos.
+
+
+
+P: O nosso grupo tinha uma dúvida perante o registo de uma operação de rega no caderno de campo. O enunciado refere que deveríamos importar um ficheiro que tivesse sido gerado na USLP02 e enviássemos os seus dados para a base de dados externa. A nossa dúvida reside nas informações em especifico. O ficheiro produzido a US anterior tem os seguintes parâmetros: "Dia, Setor, Hora Inicio, Hora Fim"; contudo o caderno de campo exige que se registe: "Data da operação, Quantidade, Parcela".
+   A nossa pergunta global é: temos de criar uma tabela nova para ter as informações relativas ao ficheiro gerado na USLP2 ou será que temos de adaptar essas informações para o caderno de campo? Se temos de adaptar, nós temos perguntas individuais para cada parâmetro:
+   A Quantidade o cliente já nos informou que seriam os minutos, o que é estranho porque esta é uma informação presente no plano de rega. Teremos de desfazer o que fizemos nessa mesma US, relativamente á conversão dos minutos em horas concretas (ex: 15min -> 8:10-8:25). E, isto quer dizer que a quantidade será sempre minutos ou haverá instâncias em que é valores de massa como kg ou até mesmo litros?
+   A Parcela, apesar do cliente ter referido durante a reunião, não temos muita a certeza de como criar parcelas no momento. Entendemos que vamos ter de associar um setor a várias parcelas, contudo não entendemos se temos de fazer isso agora ou esperamos até termos essas informações.
+   Por ultimo, a Data de Operação tínhamos duvida se iria conter horas ou só mesmo o dia, mas essa pergunta já foi feita, portanto isso veremos depois.
+
+R: de facto o enunciado não refere que deveriam importar um ficheiro:
+   "USLP03 - Como Product Owner, pretendo que seja desenvolvida uma funcionalidade que, de forma automática, consuma o plano de rega gerado pelo simulador do controlador desenvolvido na USLP02 e que de forma escalonada após a conclusão da rega em cada sector registe essa operação no caderno de campo."
+   Relativamente à necessidade de criar tabelas, como cliente não sei responder. Mas parece-me que o sistema de informação deve ser capaz de armazenar a informação relevante para gestão da instalação agrícola. Se diferentes operações agrícolas requerem informação diferente, talvez tenham de ser modeladas de forma diferente.
+   A solução está a ser desenvolvida em sprints exactamente para acomodar requisitos que vão evoluindo.
+   Por simplificação, a quantidade de rega deverá ser guardada em minutos, pois o cálculo das quantidades reais de água dispensadas exigiria um grande esforço de modelação e introdução de informação que extravaza o contexto deste trabalho.
+   Existe uma relação entre parcelas e sectores descrita no enunciado, a modelação deve acomodar esses aspectos. A única questão que ficou em aberto é se será fornecida informação sobre os sectores existentes na quinta mas isso não impede de forma alguma o desenvolvimento da solução.
+   As regas, em particular podem ser realizadas mais do que uma vez por dia, por essa razão parece-me relevante registar a hora a ques são realizadas.
+
+
+
+
+P: A operação de monda tem algum modo ? (ex:química, térmica ou manual).
+No caso de ser química, que tipo de fator de produção/modo de aplicação devem ser considerados?
+
+r: a monda é um processo utilizado pelo diminuir o número de frutos ou plantas, para potenciar maior calibre dos produtos finais.
+A monda pode ser química, manual ou mecânica (não conheço térmica). No caso de ser química deverá poder guardar o produto químico utilizado e quantidades.
+
+
+
+p:  O meu grupo tem uma dúvida acerca da data de realização da rega. Esta apenas inclui o dia em que a rega foi realizada ou inclui também a hora de início e fim desta?
+
+r: como podem ser várias regas num mesmo dia, deveriam indicar a hora em que regou e os minutos de rega.
+
+
+
+p: "Quando o enunciado se refere a "e que de forma escalonada após a conclusão da rega em cada sector registe essa operação" ,  significa que a operação apenas tem que ser registada comparando a data e hora atual do computador com a do ficheiro que o plano de rega gerou?"
+Devem ser criadas as entradas nos Cadernos de Campo das instalações agrícolas no momento que é gerado o plano de rega ou no momento de consulta será comparada a data e hora atual do computador com as do plano gerado e apenas criar a entrada se data e hora presentes no plano já tiverem passado?
+
+r: deve ser criada a entrada no Caderno de Campo assim que termina a rega num sector.
+
+
+
+p: Vimos por este meio solicitar, que nos indique se os critérios de aceitação das US's do Sprint2 vão ser ainda definidos ou se é a equipa a definir.
+
+r: no caso em que não sejam explicitamente definidos, caberá à equipa faze-lo.
+
+
+
 p: Quando o enunciado se refere a "e que de forma escalonada após a conclusão da rega em cada sector registe essa operação"  ,  significa que a operação apenas tem que ser registada comparando a data e hora atual do computador com a do ficheiro que o plano de rega gerou?
 Qual deve ser o formato do caderno de campo?
 O caderno de campo é também um ficheiro .csv ? 
