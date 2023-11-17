@@ -1,3 +1,53 @@
+P: Numa conversa consigo, disse que existem mondas que são feitas à base de substâncias químicas o que, no fundo, é uma operação de aplicação de fatores de produção. Isso é aplicável ao domínio deste negócio, sendo que estamos a falar de agricultura em modo biológico, ou foi apenas uma observação de cultura geral?
+
+R: na agricultura a monda pode ser utilizada com fins diversos e ser realizada de formas distintas.
+   - Monda de fruto, retirar da árvore parte da fruta numa fase muito precoce para obter fruta com melhor calibre e manter a árvore mais equilibrada (evita produções aneiras, alternadas ao longo dos anos)
+   - Monda vegetal, por exemplo arrancar o excesso de plantas de milho ou cenoura que estão a competir entre si
+   - Monda de ervas daninhas, consiste em arrancar ou limitar a evolução de espécies vegetais que concorrem com a cultura principal, prefiro a designação, controlo de infestantes.
+   No que diz respeito à utilização de químicos na AB, existe um mal-entendido generalizado sobre o tema, na AB não é permitida a utilização de químicos de síntese. Os quimicos, esses são utilizados constantemente, o monóxido de di-hidrogênio é o produto mais utilizado em regas.
+
+
+
+P: Boa noite é possivel ter duas parcelas com a mesma designacao?
+
+R: só se o gestor da quinta gostar de brincar às charadas com os trabalhadores :-)
+   Não, a designação têm de ser um identificador único.
+
+
+
+P: Acredito que se pode ter plantações diferentes da mesma cultura temporária em estados fenológicos diferentes, mas queria esclarecer se isso é possível para plantações da mesma cultura permanente.
+
+R: sim, culturas temporárias da mesma cultura podem ter estados fenológicos (foram semeados/plantados em datas distintas para por exemplo prologaram o periodo de disponibilidade no mercado, comemos alface durante todo o ano) mas isso já é mais incomum nas culturas permanentes (embora possa ser feito com recurso a tratamentos químicos/hormonais, não permitidos em AB).
+
+
+
+P: Dentre as seguintes operações agrícolas: poda, tutoramento e desfolha, alguma delas é específica de culturas permanentes ou temporárias?
+
+R: o cliente não conhece todas as culturas para responder taxativamente a essa questão.
+   Embora algumas das operações sejam mais comuns num tipo ou outro, creio que será mais prudente assumir que as operações são válidas para ambos os tipos.
+
+
+
+P: Suponhamos que numa dada parcela foi feita a plantação de X unidades duma variedade permanente (20 macieiras gala, por exemplo), e mais tarde é feita uma nova plantação dessa mesma variedade nessa mesma parcela (mais 30 macieiras gala); quando, no futuro, se pretender realizar uma poda sobre as macieiras gala dessa parcela, a operação será sobre todas as macieiras gala(mais antigas e mais recentes), ou devemos considerá-las como duas plantações diferentes distinguidas pela idade?
+
+R: Em bom rigor muitas das operações poderiam ser diferentes mas no contexto deste trabalho (académico) é perfeitamente razoável assumir que serão tratadas como apenas uma cultura.
+
+
+
+P: Q1: Quando é registada uma operação de semeadura devem também ser registadas informações relativamente à colheita prevista?
+   Q2: Uma única operação de rega pode cobrir vários sectores?
+   Q3: Um único sensor de qualquer tipo pode ler vários valores ao mesmo tempo?
+   Q4: Precisamos de saber mais sobre o operador. Qual a sua relevância para o sistema, e que informações precisamos saber desse conceito? Como se relaciona com operação? É necessário gravar horas da atividade deste?
+   E para os casos onde o operador usa uma máquina, essas horas serão contabilizadas como horas mão de obra ou horas mecânicas?
+
+R: Q1: Creio que não. Porque tipicamente os valores previstos (teóricos) estão associados a uma cultura e valores padrão (ha, árvore, etc). A semeadura será realizada numa parcela/cultura.
+   De qualquer forma após alguns ciclos produtivos é mais provável obter previsões mais precisas com base nas produções anteriores da quinta do que nos valores indicados na literatura (que estão sempre dependentes da região, solos, clima, práticas culturais).
+   Q2: Não.
+   Q3: Não.
+   Q4: Para já não existem US que envolvam o operador.
+
+
+
 P: Numa operação realizada sobre uma cultura o produto resultante (quando aplicável) depende do tipo de operação?
    Exemplo: Numa operação de colheita sobre uma macieira o produto é sempre a maça? E numa operação de Poda o produto são os ramos?
 
