@@ -8,3 +8,6 @@ bddad:
 - nem todas as operaçoes sao feitas em plantaçoes em especifico (sementeira, plantaçao, aplicaçao de fator de produçao)
 algumas sao em setores, outras na parcela, outras sao registros de sensores, outros sao em dadas culturas da parcela
 - as colheitas sao por variedade
+
+perguntas ao cliente:
+- desfolha, tutoraçao ocorre apenas em plantaçoes permanentes
