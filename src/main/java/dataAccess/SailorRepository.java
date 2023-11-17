@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+
 import domain.Sailor;
 import oracle.jdbc.OracleTypes;
 
@@ -33,10 +34,10 @@ public class SailorRepository {
 
             sailors = resultSetToList(resultSet);
         } finally {
-            if(!Objects.isNull(callStmt)) {
+            if (!Objects.isNull(callStmt)) {
                 callStmt.close();
             }
-            if(!Objects.isNull(resultSet)) {
+            if (!Objects.isNull(resultSet)) {
                 resultSet.close();
             }
         }
@@ -60,7 +61,7 @@ public class SailorRepository {
             callStmt.execute();
             connection.commit();
         } finally {
-            if(!Objects.isNull(callStmt)) {
+            if (!Objects.isNull(callStmt)) {
                 callStmt.close();
             }
         }
@@ -83,7 +84,7 @@ public class SailorRepository {
             connection.commit();
 
         } finally {
-            if(!Objects.isNull(callStmt)) {
+            if (!Objects.isNull(callStmt)) {
                 callStmt.close();
             }
         }
@@ -91,8 +92,11 @@ public class SailorRepository {
     }
 
     private List<Sailor> resultSetToList(ResultSet resultSet) throws SQLException {
+
         List<Sailor> sailors = new ArrayList<>();
+
         while (true) {
+
             if (!resultSet.next()) break;
             Sailor sailor = new Sailor(
                     resultSet.getInt("sailorId"),
