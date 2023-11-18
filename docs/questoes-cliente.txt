@@ -1,3 +1,21 @@
+P: No caso de uma parcela ter dimensões bastante grandes e existir a necessidade de ser servida por vários setores, as suas culturas devem ser divididas pelos mesmos, isto é, uma cultura só pode pertencer a um setor ou uma cultura pode pertencer a vários setores?
+
+R: uma cultura numa parcela será servida apenas por um sector de rega.
+
+
+
+P: No meu ponto de vista o que é solicitado da sua parte é o registo das operações de rega no caderno de campo conforme vão sendo realizadas. No entanto não percebi como é que o cliente as quer visualizar. É suposto ir armazenando num ficheiro conforme vou inserindo na base de dados? É suposto solicitar à base de dados através de uma query e guardar num ficheiro?.
+
+R: em termos de demo pode ser interessante escrever uma mensagem no ecra mas num contexto de utilização "real" poderiamos fazer um query à BD para obter essa informação (não é necessário).
+
+
+
+P: Podem haver espécies diferentes com a mesma variedade?
+
+R: tecnicamente sim mas isso não tem nenhuma relevancia para o negócio; por exemplo, se tivessemos uma abóbora Estrela e uma maça Estrela, não referimos apenas a variedade mas a junção de cultura/variedade.
+
+
+
 P: Numa conversa consigo, disse que existem mondas que são feitas à base de substâncias químicas o que, no fundo, é uma operação de aplicação de fatores de produção. Isso é aplicável ao domínio deste negócio, sendo que estamos a falar de agricultura em modo biológico, ou foi apenas uma observação de cultura geral?
 
 R: na agricultura a monda pode ser utilizada com fins diversos e ser realizada de formas distintas.
