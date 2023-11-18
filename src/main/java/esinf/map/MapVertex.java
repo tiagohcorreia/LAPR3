@@ -55,7 +55,7 @@ public class MapVertex<V, E> {
 
         if (!outVerts.isEmpty())
             for (V vert : outVerts.keySet())
-                st += outVerts.get(vert);
+                st += outVerts.get(vert) + "\n";
 
         return st;
     }
