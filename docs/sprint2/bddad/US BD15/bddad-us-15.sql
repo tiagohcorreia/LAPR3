@@ -6,19 +6,19 @@ CREATE OR REPLACE PROCEDURE registrarPoda(parcelaId Parcela.id%TYPE NOT NULL, va
     IS
     id Operacao_Agricola.id%TYPE := (SELECT MAX(id)
                                      FROM Operacao_Agricola);
-    id_exists EXCEPTION;
+    id_exists_excep EXCEPTION;
 BEGIN
     id := id + 1;
     IF (
         id IN (SELECT id FROM Operacao_Agricola)
         ) THEN
-        RAISE id_exists;
+        RAISE id_exists_excep;
     END IF;
     INSERT INTO Operacao_Agricola(id, data)
     VALUES (id, data);
     INSERT INTO Poda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id)
     VALUES (id, parcelaId, variedadeId, quantidade, metodoExecucaoId);
 EXCEPTION
-    WHEN id_exists
+    WHEN id_exists_excep
         THEN DBSM_OUTPUT.put_line('Não foi possível registrar a operação.');
 END;
