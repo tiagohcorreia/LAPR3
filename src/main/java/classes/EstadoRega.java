@@ -1,11 +1,11 @@
-package Class;
+package classes;
 
-public class estadoRega {
+public class EstadoRega {
     private boolean isActive;
     private String sector;
     private long remainingMinutes;
 
-    public estadoRega(boolean isActive, String sector, long remainingMinutes) {
+    public EstadoRega(boolean isActive, String sector, long remainingMinutes) {
         this.isActive = isActive;
         this.sector = sector;
         this.remainingMinutes = remainingMinutes;

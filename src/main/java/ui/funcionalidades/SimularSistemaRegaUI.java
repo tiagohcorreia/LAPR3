@@ -1,8 +1,7 @@
 package ui.funcionalidades;
 
 import controller.RegaController;
-import Class.Rega;
-import Class.estadoRega;
+import classes.EstadoRega;
 
 import java.util.List;
 
@@ -15,9 +14,9 @@ public class SimularSistemaRegaUI implements Runnable {
         regaController.Parse();
         regaController.adjustRegaSchedule("plano_de_rega.csv");
 
-        List<estadoRega> estados = regaController.verificarEstadoAtual();
+        List<EstadoRega> estados = regaController.verificarEstadoAtual();
 
-        for (estadoRega estado : estados) {
+        for (EstadoRega estado : estados) {
 
             if (estado.isActive()) {
 

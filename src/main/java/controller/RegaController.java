@@ -1,7 +1,7 @@
 package controller;
 
-import Class.Rega;
-import Class.estadoRega;
+import classes.Rega;
+import classes.EstadoRega;
 
 import java.io.*;
 import java.text.ParseException;
@@ -173,8 +173,8 @@ public class RegaController {
     }
 
 
-    public List<estadoRega> verificarEstadoAtual() {
-        List<estadoRega> estados = new ArrayList<>();
+    public List<EstadoRega> verificarEstadoAtual() {
+        List<EstadoRega> estados = new ArrayList<>();
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 
@@ -195,7 +195,7 @@ public class RegaController {
                     if (specifiedDate.after(inicioRega) && specifiedDate.before(fimRega)) {
                         String sector = rega[1];
                         long tempoRestante = (fimRega.getTime() - specifiedDate.getTime()) / (1000 * 60);
-                        estados.add(new estadoRega(true, sector, tempoRestante));
+                        estados.add(new EstadoRega(true, sector, tempoRestante));
                     }
                 } catch (ParseException e) {
                     e.printStackTrace();
@@ -203,7 +203,7 @@ public class RegaController {
             }
 
             if (estados.isEmpty()) {
-                estados.add(new estadoRega(false, null, 0));
+                estados.add(new EstadoRega(false, null, 0));
             }
 
         } catch (ParseException e) {
