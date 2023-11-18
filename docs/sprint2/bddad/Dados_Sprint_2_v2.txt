@@ -15,20 +15,20 @@ Adubo para aplicação no solo, BIOFERTIL N6, da Nutrofertil, granulado, Matéri
 
 Inserir os seguintes setores de rega:
 
-Setor 10
-Início a 01/05/2017, sem data fim
-Caudal máximo: 2500 l/h
-Parcelas: Campo grande
-Culturas:
-- Oliveira Galega, 30 un, 01/05/2017, sem data fim
-- Oliveira Picual, 20 un, 01/05/2017, sem data fim
+    Setor 10
+    Início a 01/05/2017, sem data fim
+    Caudal máximo: 2500 l/h
+    Parcelas: Campo grande
+    Culturas:
+    - Oliveira Galega, 30 un, 01/05/2017, sem data fim
+    - Oliveira Picual, 20 un, 01/05/2017, sem data fim
 
 Setor 11
 Início a 01/05/2017, sem data fim
 Caudal máximo: 1500 l/h
 Parcelas: Campo grande
 Culturas:
-- Oliveira Arbquina, 40 un, 01/05/2017, sem data fim
+- Oliveira Arbequina, 40 un, 01/05/2017, sem data fim
 
 Setor 21
 Início a 01/05/2017, sem data fim
