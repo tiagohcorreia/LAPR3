@@ -1,6 +1,7 @@
 package ui;
 
 import dataAccess.DatabaseConnection;
+import esinf.map.MapGraph;
 import ui.funcionalidades.SimularSistemaRegaUI;
 import ui.menu.MainMenuUI;
 
@@ -10,12 +11,11 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Properties;
 
+import static esinf.map.MapGraphLoader.loadGraph;
+
 public class Main {
 
     public static void main(String[] args) {
-
-        SimularSistemaRegaUI simularSistemaRegaUI = new SimularSistemaRegaUI();
-        simularSistemaRegaUI.run();
 
         try {
 
