@@ -225,6 +225,30 @@ public class Utils {
         return true;
     }
 
+    /**
+     * Read float from console double.
+     *
+     * @param prompt the prompt
+     * @return the float
+     */
+    public static float readFloatFromConsole(String prompt) {
+
+        do {
+            try {
+                String input = readLineFromConsole(prompt);
+
+                float value = Float.parseFloat(input);
+
+                return value;
+
+            } catch (NumberFormatException ex) {
+
+                Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } while (true);
+    }
+
     static public void enterToContinue() {
         readLineFromConsole("Press [Enter] to continue...");
     }

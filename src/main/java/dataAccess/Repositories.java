@@ -4,9 +4,11 @@ public class Repositories {
 
     private static final Repositories instance = new Repositories();
     private SailorRepository sailorRepository = null;
+    private SementeiraRepository sementeiraRepository = null;
 
     private Repositories() {
         sailorRepository = new SailorRepository();
+        sementeiraRepository = new SementeiraRepository();
     }
 
     public static Repositories getInstance() {
@@ -15,6 +17,9 @@ public class Repositories {
 
     public SailorRepository getSailorRepository() {
         return sailorRepository;
+    }
+    public SementeiraRepository getSementeiraRepository() {
+        return sementeiraRepository;
     }
 
 }
