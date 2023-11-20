@@ -22,7 +22,7 @@ public class SementeiraRepository {
         try {
 
             Connection connection = DatabaseConnection.getInstance().getConnection();
-            callableStatement = connection.prepareCall("{ call sementeiraRegister(?, ?, ?, ?, ?, ?)}");
+            callableStatement = connection.prepareCall("{ call registarSementeira(?, ?, ?, ?, ?, ?)}");
 
             callableStatement.setInt(1, operacaoId);
             callableStatement.setInt(2, parcelaId);
