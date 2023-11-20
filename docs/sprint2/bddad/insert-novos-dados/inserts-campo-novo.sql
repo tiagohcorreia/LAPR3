@@ -36,16 +36,18 @@ INSERT INTO Operacao_Agricola(id, data) VALUES (357, TO_DATE('2023-09-06', 'YYYY
 INSERT INTO Operacao_Agricola(id, data) VALUES (358, TO_DATE('2013-09-13', 'YYYY-MM-DD'));
 INSERT INTO Operacao_Agricola(id, data) VALUES (359, TO_DATE('2013-09-20', 'YYYY-MM-DD'));
 
+-- Semeadura
 
+-- Monda
 
---Colheita
-INSERT INTO Colheita(operacao_id,parcela_id,produto_id,quantidade) values (328,...,...,8000);
-INSERT INTO Colheita(operacao_id,parcela_id,produto_id,quantidade) values (329,...,...,5000);
-INSERT INTO Colheita(operacao_id,parcela_id,produto_id,quantidade) values (330,...,...,900);
-INSERT INTO Colheita(operacao_id,parcela_id,produto_id,quantidade) values (331,...,...,1500);
-INSERT INTO Colheita(operacao_id,parcela_id,produto_id,quantidade) values (332,...,...,1200);
+-- Colheita
+INSERT INTO Colheita(operacao_id,parcela_id,produto_id,quantidade) values (328, .., ..,8000);
+INSERT INTO Colheita(operacao_id,parcela_id,produto_id,quantidade) values (329, .., ..,5000);
+INSERT INTO Colheita(operacao_id,parcela_id,produto_id,quantidade) values (330, .., ..,900);
+INSERT INTO Colheita(operacao_id,parcela_id,produto_id,quantidade) values (331, .., ..,1500);
+INSERT INTO Colheita(operacao_id,parcela_id,produto_id,quantidade) values (332, .., ..,1200);
 
---Rega
+-- Rega
 -- Setor 42
 INSERT INTO Rega(operacao_id, setor_id, duracao) VALUES (333, 42, 60);
 INSERT INTO Rega(operacao_id, setor_id, duracao) VALUES (334, 42, 60);
