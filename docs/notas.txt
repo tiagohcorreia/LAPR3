@@ -1,13 +1,11 @@
 apontamento de cenas para resolver
 
 bddad:
-- gerir as unidades e os tipos de operaçao
-- ligar operaçoes de rega a setores
 - adicionar estado fenologico aos modelos de dominio e relacional
 - adicionar operadores às operações
-- nem todas as operaçoes sao feitas em plantaçoes em especifico (sementeira, plantaçao, aplicaçao de fator de produçao)
-algumas sao em setores, outras na parcela, outras sao registros de sensores, outros sao em dadas culturas da parcela
-- as colheitas sao por variedade
 
 perguntas ao cliente:
-- desfolha, tutoraçao ocorre apenas em plantaçoes permanentes
+- (...)
+
+requisitos nao funcionais:
+- o product owner nao é um usuario do sistema
