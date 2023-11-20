@@ -10,7 +10,12 @@ Dado um veículo, a sua autonomia e atendendo a que os carregamentos só podem s
 
 ## Clarificações do Cliente 
 
->Question:
+>Question:Considerando que temos acesso a coordenadas e a distancias de cada Edge, devemos considerar os dois pontos mais afastados como sendo os mais afastados a nível de caminho pelo grafo ou pela distancia de um ponto de GPS a outro?
+
+>Answer:Na 3ª US pretende-se o percurso mínimo possível entre os dois locais mais afastados da rede de distribuição, ou seja, os dois vértices mais afastados no grafo.
+
+
+> >Question:
 
 >Answer:
 
