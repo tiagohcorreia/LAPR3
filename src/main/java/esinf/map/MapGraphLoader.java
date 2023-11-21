@@ -1,6 +1,7 @@
 package esinf.map;
 
 import java.io.BufferedReader;
+import esinf.store.GraphStore;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -43,7 +44,7 @@ public class MapGraphLoader {
                     graph.addEdge(locId1, locId2, distancia);
             }
         }
-
+        GraphStore.setGraph(graph);
         return graph;
     }
 }
