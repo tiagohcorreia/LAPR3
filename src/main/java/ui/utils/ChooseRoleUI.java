@@ -9,7 +9,6 @@ public class ChooseRoleUI implements Runnable{
     public void run() {
 
         System.out.println("1.Gestor Agricola");
-        System.out.println("2.Product Owner");
 
         int option = Utils.readIntegerFromConsole("Choose your role");
 
@@ -19,12 +18,6 @@ public class ChooseRoleUI implements Runnable{
 
                 GestorAgricolaUI gestorAgricolaUI = new GestorAgricolaUI();
                 gestorAgricolaUI.run();
-                break;
-
-            case 2:
-
-                ProductOwnerUI productOwnerUI = new ProductOwnerUI();
-                productOwnerUI.run();
                 break;
 
             default:

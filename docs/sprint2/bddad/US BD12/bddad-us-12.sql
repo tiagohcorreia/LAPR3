@@ -42,3 +42,5 @@ WHEN variedade_nao_existe
 WHEN fator_producao_nao_existe
         THEN DBMS_OUTPUT.put_line('O fator de produção especificado não está registrada na base de dados');
 END;
+
+    --retornaar valor para designar sucesso ou insucesso
