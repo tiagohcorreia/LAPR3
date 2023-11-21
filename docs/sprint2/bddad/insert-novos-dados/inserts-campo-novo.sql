@@ -83,11 +83,11 @@ INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (361, 41, 120, '07
 
 
 -- Monda
-INSERT INTO Monda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id, fator_producao_id) VALUES (360, 1, 1, 1, 1, 1);
-INSERT INTO Monda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id, fator_producao_id) VALUES (361, 2, 2, 2, 2, 2);
-INSERT INTO Monda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id, fator_producao_id) VALUES (362, 3, 3, 3, 3, 3);
-INSERT INTO Monda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id, fator_producao_id) VALUES (363, 4, 4, 4, 4, 4);
-INSERT INTO Monda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id, fator_producao_id) VALUES (364, 5, 5, 5, 5, 5);
+INSERT INTO Monda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id, fator_producao_id) VALUES (360, 108, ?, ?, ?, ?);
+INSERT INTO Monda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id, fator_producao_id) VALUES (361, 108, ?, ?, ?, ?);
+INSERT INTO Monda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id, fator_producao_id) VALUES (362, 108, ?, ?, ?, ?);
+INSERT INTO Monda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id, fator_producao_id) VALUES (363, 108, ?, ?, ?, ?);
+INSERT INTO Monda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id, fator_producao_id) VALUES (364, 108, ?, ?, ?, ?);
 
 --Semeadura
 
