@@ -1,7 +1,8 @@
 package dataAccess;
 
-import oracle.jdbc.datasource.impl.OracleDataSource;
-
+import oracle.jdbc.pool.OracleDataSource;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Objects;
@@ -24,25 +25,21 @@ public class DatabaseConnection {
     }
 
     public Connection getConnection() {
-
         if (Objects.isNull(connection)) {
             throw new RuntimeException("Connection does not exit");
         }
         return connection;
     }
 
-    public int testConnection() {
-
+    public int testConnection(){
         if (Objects.isNull(connection)) {
             return CONNECTION_FAILURE;
         }
-
         return CONNECTION_SUCCESS;
     }
 
     public void closeConnection() throws SQLException {
-
-        if (!connection.isClosed())
+        if(!connection.isClosed())
             connection.close();
     }
 
@@ -59,10 +56,8 @@ public class DatabaseConnection {
     }
 
     public static DatabaseConnection getInstance() throws SQLException {
-
-        if (Objects.isNull(instance))
+        if(Objects.isNull(instance))
             instance = new DatabaseConnection();
-
         return instance;
     }
 

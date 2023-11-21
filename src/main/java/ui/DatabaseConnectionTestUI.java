@@ -2,7 +2,6 @@ package ui;
 
 import controller.DatabaseConnectionTestController;
 import dataAccess.DatabaseConnection;
-
 import java.sql.SQLException;
 
 public class DatabaseConnectionTestUI implements Runnable {
@@ -14,22 +13,15 @@ public class DatabaseConnectionTestUI implements Runnable {
     }
 
     public void run() {
-
         int result = 0;
-
         try {
-
             result = controller.DatabaseConnectionTest();
-
         } catch (SQLException e) {
-
             throw new RuntimeException(e);
         }
 
-        if (result == DatabaseConnection.CONNECTION_SUCCESS)
-
+        if(result==DatabaseConnection.CONNECTION_SUCCESS)
             System.out.println("Connected to the database.");
-
         else
             System.out.println("Not connected to the database!");
     }

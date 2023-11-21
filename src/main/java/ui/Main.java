@@ -2,6 +2,7 @@ package ui;
 
 import dataAccess.DatabaseConnection;
 import esinf.map.MapGraph;
+import esinf.store.GraphStore;
 import ui.funcionalidades.SimularSistemaRegaUI;
 import ui.menu.MainMenuUI;
 
@@ -18,6 +19,15 @@ public class Main {
     public static void main(String[] args) {
 
         try {
+            MapGraph<String, Integer> graph = loadGraph("docs/esinf_data/locais_big.csv", "docs/esinf_data/distancias_big.csv");
+            GraphStore.setGraph(graph);
+
+            // Now you can access the graph using GraphStorage.getGraph() whenever needed
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
 
             MainMenuUI mainMenuUI = new MainMenuUI();
             mainMenuUI.run();
@@ -26,22 +36,21 @@ public class Main {
 
             e.printStackTrace();
         }
-        /* try {
-        loadProperties();
+      /*  try {
+            loadProperties();
 
-        String ipAddress = System.getProperty("database.inet");
-        InetAddress inet = InetAddress.getByName(ipAddress);
+            String ipAddress = System.getProperty("database.inet");
+            InetAddress inet = InetAddress.getByName(ipAddress);
 
-        MainMenuUI menu = new MainMenuUI();
-        menu.run();
-        DatabaseConnection.getInstance().closeConnection();
-    } catch (
-    UnknownHostException e) {
-        System.out.println("\nDatabase Server not reachable!");
-    } catch (Exception e) {
-        System.out.println("App properties not loaded!");
+            MainMenuUI menu = new MainMenuUI();
+            menu.run();
+            DatabaseConnection.getInstance().closeConnection();
+        } catch (UnknownHostException e) {
+            System.out.println("\nDatabase Server not reachable!");
+        } catch (Exception e) {
+            System.out.println("App properties not loaded!");
+        }
     }
-}
 
     private static void loadProperties() throws IOException {
         Properties properties = new Properties(System.getProperties());
@@ -51,9 +60,10 @@ public class Main {
         inputStream.close();
 
         System.setProperties(properties);
-    }*/
-    }
+    } */
 
+
+    }
 
 }
 

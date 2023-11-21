@@ -269,25 +269,25 @@ INSERT INTO Poda(operacao_id,parcela_id,variedade_id,quantidade) values (304, 10
 
 /* Sementeira */
 
-INSERT INTO Sementeira(operacao_id,parcela_id,variedade_temp_id,area) values (162, 106,178,0.9);
-INSERT INTO Sementeira(operacao_id,parcela_id,variedade_temp_id,area) values (164, 103,181,1.2);
-INSERT INTO Sementeira(operacao_id,parcela_id,variedade_temp_id,area) values (167, 106,177,0.6);
-INSERT INTO Sementeira(operacao_id,parcela_id,variedade_temp_id,area) values (182, 106,192,0.6);
-INSERT INTO Sementeira(operacao_id,parcela_id,variedade_temp_id,area) values (183, 101,179,36);
-INSERT INTO Sementeira(operacao_id,parcela_id,variedade_temp_id,area) values (184, 103,179,1.3);
-INSERT INTO Sementeira(operacao_id,parcela_id,variedade_temp_id,area) values (200, 106,176,0.9);
-INSERT INTO Sementeira(operacao_id,parcela_id,variedade_temp_id,area) values (203, 103,181,1.2);
-INSERT INTO Sementeira(operacao_id,parcela_id,variedade_temp_id,area) values (204, 101,182,30);
-INSERT INTO Sementeira(operacao_id,parcela_id,variedade_temp_id,area) values (208, 106,174,0.6);
-INSERT INTO Sementeira(operacao_id,parcela_id,variedade_temp_id,area) values (232, 106,192,0.6);
-INSERT INTO Sementeira(operacao_id,parcela_id,variedade_temp_id,area) values (234, 101,179,36);
-INSERT INTO Sementeira(operacao_id,parcela_id,variedade_temp_id,area) values (235, 103,179,1.3);
-INSERT INTO Sementeira(operacao_id,parcela_id,variedade_temp_id,area) values (252, 106,176,0.9);
-INSERT INTO Sementeira(operacao_id,parcela_id,variedade_temp_id,area) values (255, 103,181,1.2);
-INSERT INTO Sementeira(operacao_id,parcela_id,variedade_temp_id,area) values (256, 101,182,30);
-INSERT INTO Sementeira(operacao_id,parcela_id,variedade_temp_id,area) values (260, 106,177,0.6);
-INSERT INTO Sementeira(operacao_id,parcela_id,variedade_temp_id,area) values (288, 106,183,0.6);
-INSERT INTO Sementeira(operacao_id,parcela_id,variedade_temp_id,area) values (289, 103,179,1.3);
+INSERT INTO Sementeira(operacao_id,parcela_id,variedade_id,area) values (162, 106,79,0.9);
+INSERT INTO Sementeira(operacao_id,parcela_id,variedade_id,area) values (164, 103,82,1.2);
+INSERT INTO Sementeira(operacao_id,parcela_id,variedade_id,area) values (167, 106,78,0.6);
+INSERT INTO Sementeira(operacao_id,parcela_id,variedade_id,area) values (182, 106,93,0.6);
+INSERT INTO Sementeira(operacao_id,parcela_id,variedade_id,area) values (183, 101,80,36);
+INSERT INTO Sementeira(operacao_id,parcela_id,variedade_id,area) values (184, 103,80,1.3);
+INSERT INTO Sementeira(operacao_id,parcela_id,variedade_id,area) values (200, 106,77,0.9);
+INSERT INTO Sementeira(operacao_id,parcela_id,variedade_id,area) values (203, 103,82,1.2);
+INSERT INTO Sementeira(operacao_id,parcela_id,variedade_id,area) values (204, 101,83,30);
+INSERT INTO Sementeira(operacao_id,parcela_id,variedade_id,area) values (208, 106,75,0.6);
+INSERT INTO Sementeira(operacao_id,parcela_id,variedade_id,area) values (232, 106,93,0.6);
+INSERT INTO Sementeira(operacao_id,parcela_id,variedade_id,area) values (234, 101,80,36);
+INSERT INTO Sementeira(operacao_id,parcela_id,variedade_id,area) values (235, 103,80,1.3);
+INSERT INTO Sementeira(operacao_id,parcela_id,variedade_id,area) values (252, 106,77,0.9);
+INSERT INTO Sementeira(operacao_id,parcela_id,variedade_id,area) values (255, 103,82,1.2);
+INSERT INTO Sementeira(operacao_id,parcela_id,variedade_id,area) values (256, 101,83,30);
+INSERT INTO Sementeira(operacao_id,parcela_id,variedade_id,area) values (260, 106,78,0.6);
+INSERT INTO Sementeira(operacao_id,parcela_id,variedade_id,area) values (288, 106,84,0.6);
+INSERT INTO Sementeira(operacao_id,parcela_id,variedade_id,area) values (289, 103,80,1.3);
 
 /* Colheita */
 

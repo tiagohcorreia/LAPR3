@@ -7,10 +7,10 @@ import java.io.IOException;
 public class MapGraphLoader {
 
     public static MapGraph<String, Integer> loadGraph(String locaisFile, String distanciasFile) throws IOException {
-        MapGraph<String, Integer> graph = new MapGraph<>(true);
+        MapGraph<String, Integer> graph = new MapGraph<>(false);
 
 
-        try (BufferedReader br = new BufferedReader(new FileReader(locaisFile))) {
+         try (BufferedReader br = new BufferedReader(new FileReader(locaisFile))) {
             String line;
             boolean isFirstLine = true;
 
