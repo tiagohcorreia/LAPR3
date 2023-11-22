@@ -32,8 +32,9 @@ Como Gestor Agrícola, quero registar uma operação de colheita
 
 ## Termos Importantes do Glossário
 
-- Colheita —> Ato ou efeito de ceifar, cortar ou apanhar produtos agrícolas.
+- Colheita -> Ato ou efeito de ceifar, cortar ou apanhar produtos agrícolas.
 - Operação -> Área de terra usada para cultivo agrícola.
+- Parcela -> Área de terra usada para cultivo agrícola.
 
 
 
