@@ -1,9 +1,6 @@
 package dataAccess;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,6 +12,7 @@ import domain.Sailor;
 import oracle.jdbc.OracleTypes;
 
 public class OperacaoAgricolaRepository {
+
 
     public OperacaoAgricolaRepository() {
     }
@@ -92,6 +90,8 @@ public class OperacaoAgricolaRepository {
         }
         return deletedRows;
     }
+
+
 
     private List<OperacaoAgricola> resultSetToList(ResultSet resultSet) throws SQLException {
 

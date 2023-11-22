@@ -3,7 +3,6 @@ package ui.funcionalidades;
 import controller.ColheitaRegisterController;
 import controller.OperacaoAgricolaRegisterController;
 
-
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,25 +19,32 @@ public class ColheitaRegisterUI implements Runnable {
         controllerop = new OperacaoAgricolaRegisterController();
     }
 
-
     public void run() {
-
         try {
             System.out.println("Register a new Colheita");
 
             Scanner scanner = new Scanner(System.in);
             System.out.print("OperacaoId: ");
-            int operacaoId = scanner.nextInt();
+            int operacaoId = controllerop.getNextId();
+            System.out.printf("Using %d\n", operacaoId);
 
             System.out.print("Date (yyyy-mm-dd): ");
             String strDate = scanner.next();
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            Date date = formatter.parse(strDate);
+            formatter.setLenient(false);  // Set leniency to false
 
-            Date currentDate = new Date();
-            if (date.after(currentDate)) {
-                System.out.println("Error: Cannot register an operation with a future date.");
-                return;
+            Date date = null;
+            boolean validDate = false;
+            while (!validDate) {
+                try {
+                    date = formatter.parse(strDate);
+                    validDate = true;
+                } catch (ParseException e) {
+                    System.out.println("Error: Invalid date format. Please enter the date in yyyy-mm-dd format.");
+                    scanner.nextLine();
+                    System.out.print("Date (yyyy-mm-dd): ");
+                    strDate = scanner.next();
+                }
             }
 
             System.out.print("ParcelaId: ");
@@ -52,12 +58,24 @@ public class ColheitaRegisterUI implements Runnable {
 
             System.out.print("Quantidade: ");
             float quantidade = scanner.nextFloat();
-            controllerop.operacaoAgricolaRegister(operacaoId,date);
-            controller.colheitaRegister(operacaoId,parcelaId,produtoId,metodoExecucaoId,quantidade);
-            System.out.println("\nColheita registered.");
 
-        } catch (SQLException | ParseException e) {
+            while (quantidade < 0) {
+                System.out.println("Error: Quantity cannot be a negative number. Please enter a non-negative quantity.");
+                System.out.print("Quantidade: ");
+                quantidade = scanner.nextFloat();
+            }
+
+
+            controllerop.operacaoAgricolaRegister(operacaoId, date);
+            controller.colheitaRegister(operacaoId, parcelaId, produtoId, metodoExecucaoId, quantidade);
+
+            System.out.println("\nColheita registered.");
+        } catch (SQLException e) {
+
+
             System.out.println("\nColheita not registered!\n" + e.getMessage());
+
         }
     }
 }
+
