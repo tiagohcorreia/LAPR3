@@ -1,15 +1,17 @@
 package esinf;
 
-import esinf.matrix.MatrixGraph;
+import esinf.Edge;
+import esinf.Graph;
+import esinf.map.MapGraph;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 import java.util.function.BinaryOperator;
 
-public class Algorithms {
+/**
+ * @author Sérgio Cardoso - 1210891
+ */
 
+public class Algorithms {
     /**
      * Performs breadth-first search of a Graph starting in a vertex
      *
@@ -18,37 +20,31 @@ public class Algorithms {
      * @return a LinkedList with the vertices of breadth-first search
      */
     public static <V, E> LinkedList<V> BreadthFirstSearch(Graph<V, E> g, V vert) {
+        if (g == null || !g.validVertex(vert)) return null;
 
-        LinkedList<V> result = new LinkedList<>();
-
-        if (g == null || !g.validVertex(vert)) {
-            return result;
-        }
-
-        Queue<V> queue = new LinkedList<>();
         boolean[] visited = new boolean[g.numVertices()];
+        Arrays.fill(visited, false);
 
-        visited[g.key(vert)] = true;
-        queue.add(vert);
+        LinkedList<V> qbfs = new LinkedList<>();
+        LinkedList<V> qaux = new LinkedList<>();
 
-        while (!queue.isEmpty()) {
+        qbfs.add(vert);
+        qaux.add(vert);
+        int key = g.key(vert);
+        visited[key] = true;
 
-            V current = queue.poll();
-            result.add(current);
-
-            for (V neighbor : g.adjVertices(current)) {
-
-                int key = g.key(neighbor);
-
-                if (!visited[key]) {
-
-                    visited[key] = true;
-                    queue.add(neighbor);
+        while (!qaux.isEmpty()) {
+            vert = qaux.removeFirst();
+            for (V vAdj : g.adjVertices(vert)) {
+                int k = g.key(vAdj);
+                if (!visited[k]) {
+                    qbfs.add(vAdj);
+                    qaux.add(vAdj);
+                    visited[k] = true;
                 }
             }
         }
-
-        return result;
+        return qbfs;
     }
 
     /**
@@ -60,19 +56,18 @@ public class Algorithms {
      * @param qdfs    return LinkedList with vertices of depth-first search
      */
     private static <V, E> void DepthFirstSearch(Graph<V, E> g, V vOrig, boolean[] visited, LinkedList<V> qdfs) {
+        if (g == null) return;
+        int key = g.key(vOrig);
+        if (key < 0) return;
 
-        visited[g.key(vOrig)] = true;
+        if (visited[key]) return;
         qdfs.add(vOrig);
+        visited[key] = true;
 
-        for (V neighbor : g.adjVertices(vOrig)) {
-
-            int key = g.key(neighbor);
-
-            if (!visited[key]) {
-
-                DepthFirstSearch(g, neighbor, visited, qdfs);
-            }
+        for (V vAdj : g.adjVertices(vOrig)) {
+            DepthFirstSearch(g, vAdj, visited, qdfs);
         }
+
     }
 
     /**
@@ -83,15 +78,12 @@ public class Algorithms {
      * @return a LinkedList with the vertices of depth-first search
      */
     public static <V, E> LinkedList<V> DepthFirstSearch(Graph<V, E> g, V vert) {
-
-        LinkedList<V> result = new LinkedList<>();
-
-        if (g == null || !g.validVertex(vert)) return result;
-
+        if (g == null || !g.validVertex(vert)) return null;
         boolean[] visited = new boolean[g.numVertices()];
-        DepthFirstSearch(g, vert, visited, result);
-
-        return result;
+        Arrays.fill(visited, false);
+        LinkedList<V> output = new LinkedList<>();
+        DepthFirstSearch(g, vert, visited, output);
+        return output;
     }
 
     /**
@@ -106,28 +98,26 @@ public class Algorithms {
      */
     private static <V, E> void allPaths(Graph<V, E> g, V vOrig, V vDest, boolean[] visited,
                                         LinkedList<V> path, ArrayList<LinkedList<V>> paths) {
-
-        visited[g.key(vOrig)] = true;
-        path.add(vOrig);
+        int vKey = g.key(vOrig);
+        if (visited[vKey]) return;
 
         if (vOrig.equals(vDest)) {
-
-            paths.add(new LinkedList<>(path));
-
-        } else {
-
-            for (V neighbor : g.adjVertices(vOrig)) {
-
-                int key = g.key(neighbor);
-
-                if (!visited[key]) {
-
-                    allPaths(g, neighbor, vDest, visited, path, paths);
-                }
-            }
+            LinkedList<V> pathCopy = new LinkedList<>(path);
+            pathCopy.addFirst(vDest);
+            Collections.reverse(pathCopy);
+            paths.add(new LinkedList<>(pathCopy));
+            return;
         }
-        visited[g.key(vOrig)] = false;
-        path.removeLast();
+
+        path.push(vOrig);
+        visited[vKey] = true;
+
+        for (V vAdj : g.adjVertices(vOrig)) {
+            allPaths(g, vAdj, vDest, visited, path, paths);
+        }
+        path.pop();
+        visited[vKey] = false;
+
     }
 
     /**
@@ -139,8 +129,13 @@ public class Algorithms {
      * @return paths ArrayList with all paths from vOrig to vDest
      */
     public static <V, E> ArrayList<LinkedList<V>> allPaths(Graph<V, E> g, V vOrig, V vDest) {
-
-        throw new UnsupportedOperationException("Not supported yet.");
+        if (g == null || !g.validVertex(vOrig) || !g.validVertex(vDest)) return null;
+        boolean[] visited = new boolean[g.numVertices()];
+        Arrays.fill(visited, false);
+        LinkedList<V> path = new LinkedList<>();
+        ArrayList<LinkedList<V>> paths = new ArrayList<>();
+        allPaths(g, vOrig, vDest, visited, path, paths);
+        return paths;
     }
 
     /**
@@ -154,11 +149,57 @@ public class Algorithms {
      * @param pathKeys minimum path vertices keys
      * @param dist     minimum distances
      */
-    private static <V, E> void shortestPathDijkstra(Graph<V, E> g, V vOrig,
-                                                    Comparator<E> ce, BinaryOperator<E> sum, E zero,
-                                                    boolean[] visited, V[] pathKeys, E[] dist) {
+    public static <V, E> void shortestPathDijkstra(Graph<V, E> g, V vOrig,
+                                                   Comparator<E> ce, BinaryOperator<E> sum, E zero,
+                                                   boolean[] visited, List<V> pathKeys, List<E> dist) {
+        if (g == null || !g.validVertex(vOrig)) return;
+        for (int i = 0; i < visited.length; i++) {
+            dist.add(null);
+            pathKeys.add(null);
+        }
+        int vOrigKey = g.key(vOrig);
+        dist.set(vOrigKey, zero);
+        pathKeys.set(vOrigKey, vOrig);
 
-        throw new UnsupportedOperationException("Not supported yet.");
+        while (vOrigKey != -1) {
+            visited[vOrigKey] = true;
+            vOrig = g.vertex(vOrigKey);
+            for (V vAdj : g.adjVertices(vOrig)) {
+                Edge<V, E> myEdge = g.edge(vOrig, vAdj);
+                int vAdjKey = g.key(vAdj);
+
+                if (dist.get(vAdjKey) != null) {
+                    if (!visited[vAdjKey] && ce.compare(dist.get(vAdjKey), sum.apply(dist.get(vOrigKey), myEdge.getWeight())) > 0) {
+                        dist.set(vAdjKey, sum.apply(dist.get(vOrigKey), myEdge.getWeight()));
+                        pathKeys.set(vAdjKey, vOrig);
+                    }
+                } else {
+                    dist.set(vAdjKey, sum.apply(dist.get(vOrigKey), myEdge.getWeight()));
+                    pathKeys.set(vAdjKey, vOrig);
+                }
+            }
+            vOrigKey = getVertMinDist(dist, visited, ce, zero);
+        }
+
+    }
+
+    private static <E> int getVertMinDist(List<E> dist, boolean[] visited, Comparator<E> ce, E zero) {
+        int minDistanceKey = -1;
+        E min = null;
+        for (int i = 0; i < dist.size(); i++) {
+            if (dist.get(i) == null) continue;
+            if (min == null && dist.get(i) != zero && !visited[i]) {
+                min = dist.get(i);
+                minDistanceKey = i;
+                continue;
+            }
+            if (min == null) continue;
+            if (!visited[i] && ce.compare(dist.get(i), min) < 0) {
+                min = dist.get(i);
+                minDistanceKey = i;
+            }
+        }
+        return minDistanceKey;
     }
 
 
@@ -174,11 +215,24 @@ public class Algorithms {
      * @param shortPath returns the vertices which make the shortest path
      * @return if vertices exist in the graph and are connected, true, false otherwise
      */
+
+
     public static <V, E> E shortestPath(Graph<V, E> g, V vOrig, V vDest,
                                         Comparator<E> ce, BinaryOperator<E> sum, E zero,
                                         LinkedList<V> shortPath) {
 
-        throw new UnsupportedOperationException("Not supported yet.");
+        if (g == null || !g.validVertex(vOrig) || !g.validVertex(vDest)) return null;
+
+        int size = g.numVertices();
+        boolean[] visited = new boolean[size];
+        List<V> pathKeys = new ArrayList<>(size);
+        List<E> dist = new ArrayList<>(size);
+
+        shortestPathDijkstra(g, vOrig, ce, sum, zero, visited, pathKeys, dist);
+        getPath(g, vOrig, vDest, pathKeys, shortPath);
+        if (shortPath.isEmpty()) return null;
+
+        return dist.get(g.key(vDest));
     }
 
     /**
@@ -196,8 +250,22 @@ public class Algorithms {
     public static <V, E> boolean shortestPaths(Graph<V, E> g, V vOrig,
                                                Comparator<E> ce, BinaryOperator<E> sum, E zero,
                                                ArrayList<LinkedList<V>> paths, ArrayList<E> dists) {
+        if (g == null || !g.validVertex(vOrig)) return false;
+        int size = g.numVertices();
+        boolean[] visited = new boolean[size];
+        List<V> pathKeys = new ArrayList<>(size);
+        List<E> dist = new ArrayList<>(size);
 
-        throw new UnsupportedOperationException("Not supported yet.");
+        shortestPathDijkstra(g, vOrig, ce, sum, zero, visited, pathKeys, dist);
+
+        for (V vDest : g.vertices()) {
+            dists.add(dist.get(g.key(vDest)));
+            LinkedList<V> path = new LinkedList<>();
+            getPath(g, vOrig, vDest, pathKeys, path);
+            paths.add(path);
+        }
+
+        return true;
     }
 
     /**
@@ -210,23 +278,212 @@ public class Algorithms {
      * @param pathKeys minimum path vertices keys
      * @param path     stack with the minimum path (correct order)
      */
-    private static <V, E> void getPath(Graph<V, E> g, V vOrig, V vDest,
-                                       V[] pathKeys, LinkedList<V> path) {
+    public static <V, E> void getPath(Graph<V, E> g, V vOrig, V vDest,
+                                      List<V> pathKeys, LinkedList<V> path) {
 
-        throw new UnsupportedOperationException("Not supported yet.");
+        if (g == null || !g.validVertex(vOrig) || !g.validVertex(vDest)) return;
+        if (vOrig.equals(vDest)) {
+            path.add(vOrig);
+            return;
+        }
+        V vertex = vDest;
+        while (!vertex.equals(vOrig)) {
+            path.addFirst(vertex);
+            int keySearch = g.key(vertex);
+            vertex = pathKeys.get(keySearch);
+            if (vertex == null) {
+                path.clear();
+                return;
+            }
+        }
+
+        path.addFirst(vertex);
+
     }
 
     /**
-     * Calculates the minimum distance graph using Floyd-Warshall
+     * Given an undirected, connected graph with positive edge weights, a minimum spanning tree (MST) is calculated.
+     * This algorithm uses Prim's algorithm.
      *
-     * @param g   initial graph
-     * @param ce  comparator between elements of type E
-     * @param sum sum two elements of type E
-     * @return the minimum distance graph
+     * @param g    graph to calculate.
+     * @param zero neutral element of the sum in elements of type E.
+     * @param ce   comparator between elements of type E.
+     * @return minimum spanning tree.
      */
-    public static <V, E> MatrixGraph<V, E> minDistGraph(Graph<V, E> g, Comparator<E> ce, BinaryOperator<E> sum) {
+    public static <V, E> MapGraph<V, E> primMST(Graph<V, E> g, E zero,
+                                                Comparator<E> ce) {
+        if (g == null)
+            return null;
 
-        throw new UnsupportedOperationException("Not supported yet.");
+        if (g.isDirected())
+            return null;
+
+        int size = g.numVertices();
+
+        ArrayList<E> dist = new ArrayList<>(size);
+        ArrayList<V> path = new ArrayList<>(size);
+        boolean[] visited = new boolean[size];
+
+        for (int i = 0; i < size; i++) {
+            dist.add(null);
+            path.add(null);
+            visited[i] = false;
+        }
+
+        V vOrig = g.vertex(g.numVertices() - 1);
+        dist.set(g.numVertices() - 1, zero);
+        path.set(g.numVertices() - 1, vOrig);
+        int vOrigKey = g.key(vOrig);
+
+        while (vOrigKey != -1) {
+            visited[vOrigKey] = true;
+            vOrig = g.vertex(vOrigKey);
+            for (V vAdj : g.adjVertices(vOrig)) {
+                Edge<V, E> edge = g.edge(vOrig, vAdj);
+                int vAdjKey = g.key(vAdj);
+                if (dist.get(vAdjKey) != null) {
+                    if (!visited[vAdjKey] && ce.compare(dist.get(vAdjKey), edge.getWeight()) > 0) {
+                        dist.set(vAdjKey, edge.getWeight());
+                        path.set(vAdjKey, vOrig);
+                    }
+                } else {
+                    path.set(vAdjKey, vOrig);
+                    dist.set(vAdjKey, edge.getWeight());
+                }
+            }
+            vOrigKey = getVertMinDist(dist, visited, ce, zero);
+        }
+        MapGraph<V, E> mst = new MapGraph<>(false);
+
+        for (V vertex : g.vertices())
+            mst.addVertex(vertex);
+
+        buildMST(mst, path, dist, zero);
+        return mst;
+    }
+
+    private static <V, E> void buildMST(Graph<V, E> mst, ArrayList<V> path, ArrayList<E> dist, E zero) {
+        for (int i = 0; i < path.size(); i++) {
+            E d = dist.get(i);
+            if (d.equals(zero))
+                continue;
+            V v1 = path.get(i);
+            V v2 = mst.vertex(i);
+            mst.addEdge(v1, v2, d);
+        }
+    }
+
+    /**
+     * Calculates a minimum spanning tree using Kruskal's algorithm
+     *
+     * @param g graph to calculate
+     * @return minimum spanning tree
+     */
+    public static <V, E> MapGraph<V, E> kruskalMST(Graph<V, E> g) {
+        if (g == null) return null;
+        if (g.isDirected()) return null;
+
+        MapGraph<V, E> mst = new MapGraph<>(false);
+
+        for (V vertex : g.vertices()) {
+            mst.addVertex(vertex);
+        }
+
+        List<Edge<V, E>> lstEdges = new ArrayList<>();
+        for (Edge<V, E> edge : g.edges()) {
+            lstEdges.add(edge);
+        }
+
+        lstEdges.sort(Comparator.comparing(Edge::getWeightDouble));
+
+        for (Edge<V, E> edge : lstEdges) {
+            LinkedList<V> connectedVerts = DepthFirstSearch(mst, edge.getVOrig());
+            if (!connectedVerts.contains(edge.getVDest())) {
+                mst.addEdge(edge.getVOrig(), edge.getVDest(), edge.getWeight());
+            }
+        }
+        return mst;
+    }
+
+    public static <V, E> Double totalGraphDistance(Graph<V, E> g) {
+        if (g == null) return null;
+        Double totalDistance = 0.0;
+        for (Edge<V, E> edge : g.edges()) {
+            totalDistance += edge.getWeightDouble();
+        }
+        return totalDistance;
+    }
+
+
+    //__________________________
+
+    /**
+     * Shortest-path between two vertices in an unweighted graph
+     *
+     * @param g         graph
+     * @param vOrig     origin vertex
+     * @param vDest     destination vertex
+     * @param shortPath returns the vertices which make the shortest path
+     * @return if vertices exist in the graph and are connected, true, false otherwise
+     */
+    public static <V,E> boolean shortestPath(Graph<V,E> g, V vOrig, V vDest, LinkedList<V> shortPath) {
+        if (g == null || !g.validVertex(vOrig) || !g.validVertex(vDest)) return false;
+
+        boolean[] visited = new boolean[g.numVertices()];
+        List<V> pathKeys = new ArrayList<>(g.numVertices());
+
+        breadthFirstSearch(g, vOrig, visited, pathKeys);
+
+        getPath(g, vOrig, vDest, pathKeys, shortPath);
+        return !shortPath.isEmpty();
+    }
+
+    /**
+     * Shortest-path between a vertex and all other vertices in an unweighted graph
+     *
+     * @param g     graph
+     * @param vOrig start vertex
+     * @param paths returns all the minimum paths
+     * @return if vOrig exists in the graph true, false otherwise
+     */
+    public static <V,E> boolean shortestPaths(Graph<V,E> g, V vOrig, ArrayList<LinkedList<V>> paths) {
+        if (g == null || !g.validVertex(vOrig)) return false;
+
+        boolean[] visited = new boolean[g.numVertices()];
+        List<V> pathKeys = new ArrayList<>(g.numVertices());
+
+        breadthFirstSearch(g, vOrig, visited, pathKeys);
+
+        for (V vDest : g.vertices()) {
+            LinkedList<V> path = new LinkedList<>();
+            getPath(g, vOrig, vDest, pathKeys, path);
+            paths.add(path);
+        }
+
+        return true;
+    }
+
+    // Helper method for breadth-first search in unweighted graph
+    private static <V,E> void breadthFirstSearch(Graph<V,E> g, V vert, boolean[] visited, List<V> pathKeys) {
+        Queue<V> queue = new LinkedList<>();
+        int vertKey = g.key(vert);
+
+        visited[vertKey] = true;
+        queue.add(vert);
+        pathKeys.add(null);
+
+        while (!queue.isEmpty()) {
+            V current = queue.poll();
+
+            for (V vAdj : g.adjVertices(current)) {
+                int vAdjKey = g.key(vAdj);
+                if (!visited[vAdjKey]) {
+                    visited[vAdjKey] = true;
+                    queue.add(vAdj);
+                    pathKeys.add(current);
+                }
+            }
+        }
     }
 
 }

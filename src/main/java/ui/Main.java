@@ -1,7 +1,10 @@
 package ui;
 
 import dataAccess.DatabaseConnection;
+import esinf.Edge;
 import esinf.map.MapGraph;
+import esinf.model.Distancia;
+import esinf.model.Local;
 import esinf.store.GraphStore;
 import ui.funcionalidades.SimularSistemaRegaUI;
 import ui.menu.MainMenuUI;
@@ -19,7 +22,7 @@ public class Main {
     public static void main(String[] args) {
 
         try {
-            MapGraph<String, Integer> graph = loadGraph("docs/esinf_data/locais_big.csv", "docs/esinf_data/distancias_big.csv");
+            MapGraph<Local, Distancia> graph = loadGraph("docs/esinf_data/locais_big.csv", "docs/esinf_data/distancias_big.csv");
             GraphStore.setGraph(graph);
 
             // Now you can access the graph using GraphStorage.getGraph() whenever needed

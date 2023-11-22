@@ -1,7 +1,10 @@
 package esinf.map;
 
 import esinf.Algorithms;
+import esinf.Edge;
 import esinf.Graph;
+import esinf.model.Distancia;
+import esinf.model.Local;
 import esinf.store.GraphStore;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,7 +22,7 @@ class MapGraphLoaderTest {
     @Test
     public void testGraph() {
         try {
-            MapGraph<String, Integer> distributionNetwork = loadGraph("docs\\esinf_data\\locais_big.csv", "docs\\esinf_data\\distancias_big.csv");
+            MapGraph<Local, Distancia> distributionNetwork = loadGraph("docs\\esinf_data\\locais_big.csv", "docs\\esinf_data\\distancias_big.csv");
             // Now you have a MapGraph representing your distribution network
             System.out.println(distributionNetwork);
         } catch (IOException e) {
@@ -27,4 +30,14 @@ class MapGraphLoaderTest {
         }
     }
 
+
+    @Test
+    public void testLocals() {
+        try {
+            MapGraph<Local, Distancia> distributionNetwork = loadGraph("docs\\esinf_data\\locais_big.csv", "docs\\esinf_data\\distancias_big.csv");
+            // Now you have a MapGraph representing your distribution network
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
