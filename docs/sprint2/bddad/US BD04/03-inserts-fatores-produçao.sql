@@ -31,6 +31,11 @@ INSERT INTO Composto_Quimico(id, nome) VALUES (9, 'MgO');
 INSERT INTO Composto_Quimico(id, nome) VALUES (10, 'Bacillus pumilus');
 INSERT INTO Composto_Quimico(id, nome) VALUES (11, 'Ácidos gordos (na forma de sais de potássio)');
 INSERT INTO Composto_Quimico(id, nome) VALUES (12, 'Terpenóides');
+INSERT INTO Composto_Quimico(id, nome) VALUES (13, 'N');
+INSERT INTO Composto_Quimico(id, nome) VALUES (14, 'P2O5');
+INSERT INTO Composto_Quimico(id, nome) VALUES (15, 'K2O');
+INSERT INTO Composto_Quimico(id, nome) VALUES (16, 'Ca');
+INSERT INTO Composto_Quimico(id, nome) VALUES (17, 'MgO');
 
 -- tabela Fator_Producao
 INSERT INTO Fator_Producao(id, nome, tipo_id, formulacao_id) VALUES (1, 'Calda Bordalesa ASCENZA', 1, 1);
@@ -44,6 +49,8 @@ INSERT INTO Fator_Producao(id, nome, tipo_id, formulacao_id) VALUES (8, 'Biocal 
 INSERT INTO Fator_Producao(id, nome, tipo_id, formulacao_id) VALUES (9, 'Sonata', 1, 4);
 INSERT INTO Fator_Producao(id, nome, tipo_id, formulacao_id) VALUES (10, 'FLiPPER ', 1, 5);
 INSERT INTO Fator_Producao(id, nome, tipo_id, formulacao_id) VALUES (11, 'Requiem Prime', 1, 4);
+INSERT INTO Fator_Producao(id, nome, tipo_id, formulacao_id) VALUES (12, 'Fertimax Extrume de Cavalo, da Nutrofertil', 2, 2);
+INSERT INTO Fator_Producao(id, nome, tipo_id, formulacao_id) VALUES (13, 'BIOFERTIL N6, da Nutrofertil', 2, 2);
 
 -- tabela FP_Metodo_Aplicacao
 INSERT INTO FP_Metodo_Aplicacao(fator_producao_id, metodo_aplicacao_id) VALUES (1, 1);
@@ -81,3 +88,17 @@ INSERT INTO Ficha_Tecnica(fator_producao_id, composto_quimico_id, quantidade) VA
 INSERT INTO Ficha_Tecnica(fator_producao_id, composto_quimico_id, quantidade) VALUES (9, 10, 0.9774);
 INSERT INTO Ficha_Tecnica(fator_producao_id, composto_quimico_id, quantidade) VALUES (10, 11, 0.478);
 INSERT INTO Ficha_Tecnica(fator_producao_id, composto_quimico_id, quantidade) VALUES (11, 12, 0.1442);
+
+INSERT INTO Ficha_Tecnica(fator_producao_id, composto_quimico_id, quantidade) VALUES (12, 13, 0.03);
+INSERT INTO Ficha_Tecnica(fator_producao_id, composto_quimico_id, quantidade) VALUES (12, 14, 0.008);
+INSERT INTO Ficha_Tecnica(fator_producao_id, composto_quimico_id, quantidade) VALUES (12, 15, 0.004);
+INSERT INTO Ficha_Tecnica(fator_producao_id, composto_quimico_id, quantidade) VALUES (12, 16, 0.016);
+INSERT INTO Ficha_Tecnica(fator_producao_id, composto_quimico_id, quantidade) VALUES (12, 17, 0.003);
+INSERT INTO Ficha_Tecnica(fator_producao_id, composto_quimico_id, quantidade) VALUES (12, 5, 0.0000004);
+
+INSERT INTO Ficha_Tecnica(fator_producao_id, composto_quimico_id, quantidade) VALUES (13, 13, 0.03);
+INSERT INTO Ficha_Tecnica(fator_producao_id, composto_quimico_id, quantidade) VALUES (13, 14, 0.025);
+INSERT INTO Ficha_Tecnica(fator_producao_id, composto_quimico_id, quantidade) VALUES (13, 15, 0.024);
+INSERT INTO Ficha_Tecnica(fator_producao_id, composto_quimico_id, quantidade) VALUES (13, 16, 0.06);
+INSERT INTO Ficha_Tecnica(fator_producao_id, composto_quimico_id, quantidade) VALUES (13, 17, 0.003);
+INSERT INTO Ficha_Tecnica(fator_producao_id, composto_quimico_id, quantidade) VALUES (13, 5, 0.0000020);

@@ -15,6 +15,8 @@ INSERT INTO Parcela(id, nome, area, exploracao_agricola_id) VALUES (104, 'Lameir
 INSERT INTO Parcela(id, nome, area, exploracao_agricola_id) VALUES (105, 'Lameiro do moinho', 1.1, 1);
 INSERT INTO Parcela(id, nome, area, exploracao_agricola_id) VALUES (106, 'Lameiro do moinho', 0.3, 1);
 INSERT INTO Parcela(id, nome, area, exploracao_agricola_id) VALUES (107, 'Vinha', 2, 1);
+INSERT INTO Parcela(id, nome, area) VALUES (108, 'Campo Novo', 1.1);
+
 
 -- tabela Edificio
 INSERT INTO Edificio(id, nome, dimensao, exploracao_agricola_id, tipo_edificio_id) VALUES (201, 'Espigueiro', 600, 1, 1);

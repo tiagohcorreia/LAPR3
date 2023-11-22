@@ -30,11 +30,11 @@ VALUES (11, NULL, 1500, TO_DATE('01/05/2017', 'DD/MM/YYYY'), NULL, NULL);
 
 -- Oliveira Arbequina, 40 un, 01/05/2017, sem data fim
 INSERT INTO Plantacao(id, parcela_id)
-VALUES (128, 102);
+VALUES (131, 102);
 INSERT INTO Plantacao_Permanente(plantacao_id, variedade_perm_id, quantidade, data_inicio, data_fim)
-VALUES (128, 185, 40, TO_DATE('01/05/2017', 'DD/MM/YYYY'), NULL);
+VALUES (131, 185, 40, TO_DATE('01/05/2017', 'DD/MM/YYYY'), NULL);
 INSERT INTO SetorRega_Plantacao(id, setor_id, plantacao_id, data_inicio, data_fim)
-VALUES (3, 11, 128, TO_DATE('01/05/2017', 'DD/MM/YYYY'), NULL);
+VALUES (3, 11, 131, TO_DATE('01/05/2017', 'DD/MM/YYYY'), NULL);
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -55,18 +55,13 @@ VALUES (4, 21, 122, TO_DATE('01/05/2017', 'DD/MM/YYYY'), NULL);
 INSERT INTO SetorRega_Plantacao(id, setor_id, plantacao_id, data_inicio, data_fim)
 VALUES (5, 21, 123, TO_DATE('01/05/2017', 'DD/MM/YYYY'), NULL);
 
--- Macieira Royal Gala, 60 un, 01/05/2017, sem data fim
--- inserir em Lameiro do Moinho
-INSERT INTO Plantacao(id, parcela_id)
-VALUES (129, 105);
-INSERT INTO Plantacao_Permanente(plantacao_id, variedade_perm_id, quantidade, data_inicio, data_fim)
-VALUES (129, 147, 60, TO_DATE('01/05/2017', 'DD/MM/YYYY'), NULL);
+-- Macieira Royal Gala, 40 un, 01/05/2017, sem data fim
 INSERT INTO SetorRega_Plantacao(id, setor_id, plantacao_id, data_inicio, data_fim)
-VALUES (6, 21, 129, TO_DATE('01/05/2017', 'DD/MM/YYYY'), NULL);
+VALUES (6, 21, 124, TO_DATE('01/05/2017', 'DD/MM/YYYY'), NULL);
 
--- Macieira Royal Gala, 40 un, 01/05/2019, sem data fim
+-- Macieira Royal Gala, 30 un, 01/05/2019, sem data fim
 INSERT INTO SetorRega_Plantacao(id, setor_id, plantacao_id, data_inicio, data_fim)
-VALUES (7, 21, 124, TO_DATE('01/05/2019', 'DD/MM/YYYY'), NULL);
+VALUES (7, 21, 125, TO_DATE('01/05/2019', 'DD/MM/YYYY'), NULL);
 
 -- Macieira Pipo de Basto, 40 un, 01/05/2019, sem data fim
 -- inserir em Lameiro do Moinho
