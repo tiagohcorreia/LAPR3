@@ -54,4 +54,8 @@ public class Edge<V, E> {
     public int hashCode() {
         return Objects.hash(vOrig, vDest);
     }
+
+    public double getWeightDouble() {
+        return (double) weight;
+    }
 }

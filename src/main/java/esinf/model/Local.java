@@ -2,12 +2,19 @@ package esinf.model;
 
 import esinf.gps.GPS;
 
+import javax.sound.sampled.FloatControl;
 import java.util.Objects;
 
 public class Local {
+    final private GPS DEFAULT_GPS=new GPS();
 
     private String localId;
     private GPS gps;
+
+    public Local(String localId) {
+        this.localId = localId;
+        this.gps = DEFAULT_GPS;
+    }
 
     public Local(String localId, GPS gps) {
         this.localId = localId;
