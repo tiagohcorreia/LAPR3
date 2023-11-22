@@ -13,7 +13,7 @@ INSERT INTO Parcela(id, nome, area, exploracao_agricola_id) VALUES (102, 'Campo 
 INSERT INTO Parcela(id, nome, area, exploracao_agricola_id) VALUES (103, 'Campo do poço', 1.5, 1);
 INSERT INTO Parcela(id, nome, area, exploracao_agricola_id) VALUES (104, 'Lameiro da ponte', 0.8, 1);
 INSERT INTO Parcela(id, nome, area, exploracao_agricola_id) VALUES (105, 'Lameiro do moinho', 1.1, 1);
-INSERT INTO Parcela(id, nome, area, exploracao_agricola_id) VALUES (106, 'Lameiro do moinho', 0.3, 1);
+INSERT INTO Parcela(id, nome, area, exploracao_agricola_id) VALUES (106, 'Horta Nova', 0.3, 1);
 INSERT INTO Parcela(id, nome, area, exploracao_agricola_id) VALUES (107, 'Vinha', 2, 1);
 INSERT INTO Parcela(id, nome, area) VALUES (108, 'Campo Novo', 1.1);
 

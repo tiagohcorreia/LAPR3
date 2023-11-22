@@ -17,6 +17,8 @@ INSERT INTO Metodo_Aplicacao(id, tipo) VALUES (3, 'Adubo foliar');
 INSERT INTO Metodo_Aplicacao(id, tipo) VALUES (4, 'Fertirrega');
 INSERT INTO Metodo_Aplicacao(id, tipo) VALUES (5, 'Correção solo');
 INSERT INTO Metodo_Aplicacao(id, tipo) VALUES (6, 'Insecticida');
+INSERT INTO Metodo_Aplicacao(id, tipo) VALUES (7, 'Solo');
+
 
 -- tabela Composto_Quimico
 INSERT INTO Composto_Quimico(id, nome) VALUES (1, 'CU');
@@ -89,6 +91,7 @@ INSERT INTO Ficha_Tecnica(fator_producao_id, composto_quimico_id, quantidade) VA
 INSERT INTO Ficha_Tecnica(fator_producao_id, composto_quimico_id, quantidade) VALUES (10, 11, 0.478);
 INSERT INTO Ficha_Tecnica(fator_producao_id, composto_quimico_id, quantidade) VALUES (11, 12, 0.1442);
 
+-- ficha tecnica Ferimax Extrume de Cavalo
 INSERT INTO Ficha_Tecnica(fator_producao_id, composto_quimico_id, quantidade) VALUES (12, 13, 0.03);
 INSERT INTO Ficha_Tecnica(fator_producao_id, composto_quimico_id, quantidade) VALUES (12, 14, 0.008);
 INSERT INTO Ficha_Tecnica(fator_producao_id, composto_quimico_id, quantidade) VALUES (12, 15, 0.004);
@@ -96,6 +99,7 @@ INSERT INTO Ficha_Tecnica(fator_producao_id, composto_quimico_id, quantidade) VA
 INSERT INTO Ficha_Tecnica(fator_producao_id, composto_quimico_id, quantidade) VALUES (12, 17, 0.003);
 INSERT INTO Ficha_Tecnica(fator_producao_id, composto_quimico_id, quantidade) VALUES (12, 5, 0.0000004);
 
+-- ficha tecnica de Biofertil N6
 INSERT INTO Ficha_Tecnica(fator_producao_id, composto_quimico_id, quantidade) VALUES (13, 13, 0.03);
 INSERT INTO Ficha_Tecnica(fator_producao_id, composto_quimico_id, quantidade) VALUES (13, 14, 0.025);
 INSERT INTO Ficha_Tecnica(fator_producao_id, composto_quimico_id, quantidade) VALUES (13, 15, 0.024);
