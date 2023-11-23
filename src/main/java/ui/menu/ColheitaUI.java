@@ -15,9 +15,7 @@ public class ColheitaUI implements Runnable {
     @Override
     public void run() {
         List<MenuItem> options = new ArrayList<MenuItem>();
-        options.add(new MenuItem("Register a Colheita", new ColheitaRegisterUI()));
-       // options.add(new MenuItem("Delete a Colheita", new ColheitaDeleteUI()));
-        // options.add(new MenuItem("Show List of Colheitas", new ColheitasListUI()));
+        options.add(new MenuItem("Registrar uma Colheita", new ColheitaRegisterUI()));
         int option = 0;
         do {
             option = Utils.showAndSelectIndex(options, "\n\nColheita Menu");

@@ -26,26 +26,35 @@ public class ColheitaRegisterUI implements Runnable {
             Scanner scanner = new Scanner(System.in);
             System.out.print("OperacaoId: ");
             int operacaoId = controllerop.getNextId();
-            System.out.printf("Using %d\n", operacaoId);
+            System.out.printf("Usando id %d\n", operacaoId);
 
             System.out.print("Date (yyyy-mm-dd): ");
             String strDate = scanner.next();
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            formatter.setLenient(false);  // Set leniency to false
+            formatter.setLenient(false);
+
+            Date currentDate = new Date();
 
             Date date = null;
             boolean validDate = false;
             while (!validDate) {
                 try {
                     date = formatter.parse(strDate);
-                    validDate = true;
+                    if (date.after(currentDate)) {
+                        System.out.println("Erro: Data invalida.Insira uma data que nao se encontre no futuro.");
+                        System.out.print("Data (yyyy-mm-dd): ");
+                        strDate = scanner.next();
+                    } else {
+                        validDate = true;
+                    }
                 } catch (ParseException e) {
-                    System.out.println("Error: Invalid date format. Please enter the date in yyyy-mm-dd format.");
+                        System.out.println("Erro: Formato de rega invalido. Insira a data no formato yyyy-mm-dd.");
                     scanner.nextLine();
-                    System.out.print("Date (yyyy-mm-dd): ");
+                    System.out.print("Data (yyyy-mm-dd): ");
                     strDate = scanner.next();
                 }
             }
+
 
             System.out.print("ParcelaId: ");
             int parcelaId = scanner.nextInt();
@@ -65,9 +74,8 @@ public class ColheitaRegisterUI implements Runnable {
                 quantidade = scanner.nextFloat();
             }
 
-
-            controllerop.operacaoAgricolaRegister(operacaoId, date);
             controller.colheitaRegister(operacaoId, parcelaId, produtoId, metodoExecucaoId, quantidade);
+            controllerop.operacaoAgricolaRegister(operacaoId, date);
 
             System.out.println("\nColheita registered.");
         } catch (SQLException e) {
