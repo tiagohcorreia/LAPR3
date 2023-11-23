@@ -13,18 +13,15 @@ values (5, 'Cenoura', 'Daucus carota subsp. Sativus');
 INSERT INTO Cultura(id, nome_comum, nome_cientifico)
 values (6, 'Tremoço', 'Lupinus luteus');
 INSERT INTO Cultura(id, nome_comum, nome_cientifico)
-values (6, 'Tremoço', 'Lupinus albus');
+values (7, 'Milho', 'Zea mays');
 INSERT INTO Cultura(id, nome_comum, nome_cientifico)
-values (8, 'Milho', 'Zea mays');
+values (8, 'Nabo greleiro', 'Brassica rapa');
 INSERT INTO Cultura(id, nome_comum, nome_cientifico)
-values (9, 'Nabo greleiro', 'Brassica rapa');
-INSERT INTO Cultura(id, nome_comum, nome_cientifico)
-values (11, 'Oliveira', 'Olea europaea');
+values (9, 'Oliveira', 'Olea europaea');
 INSERT INTO Cultura(id, nome_comum, nome_cientifico)
 values (10, 'Nabo', 'Brassica rapa');
 INSERT INTO Cultura(id, nome_comum, nome_cientifico)
-values (12, 'Videira', 'Vitis vinifera');
-
+values (11, 'Videira', 'Vitis vinifera');
 
 INSERT INTO Variedade(id, nome, cultura_id)
 values (1, 'Ameixoeira Rainha Claudia Caranguejeira', 1);
@@ -189,33 +186,33 @@ values (80, 'Tremoço Amarelo', 6);
 INSERT INTO Variedade(id, nome, cultura_id)
 values (81, 'Tremoço Branco', 6);
 INSERT INTO Variedade(id, nome, cultura_id)
-values (82, 'Milho Mas 24.C', 8);
+values (82, 'Milho Mas 24.C', 7);
 INSERT INTO Variedade(id, nome, cultura_id)
-values (83, 'Milho Doce Golden Bantam', 8);
+values (83, 'Milho Doce Golden Bantam', 7);
 INSERT INTO Variedade(id, nome, cultura_id)
-values (84, 'Nabo Greleiro Senhora Conceição', 9);
+values (84, 'Nabo Greleiro Senhora Conceição', 8);
 INSERT INTO Variedade(id, nome, cultura_id)
-values (85, 'Oliveira Cobrançosa', 11);
+values (85, 'Oliveira Cobrançosa', 9);
 INSERT INTO Variedade(id, nome, cultura_id)
-values (86, 'Oliveira Arbequina', 11);
+values (86, 'Oliveira Arbequina', 9);
 INSERT INTO Variedade(id, nome, cultura_id)
-values (87, 'Oliveira Hojiblanca', 11);
+values (87, 'Oliveira Hojiblanca', 9);
 INSERT INTO Variedade(id, nome, cultura_id)
-values (88, 'Oliveira Negrinha do Freixo', 11);
+values (88, 'Oliveira Negrinha do Freixo', 9);
 INSERT INTO Variedade(id, nome, cultura_id)
-values (89, 'Oliveira Picual', 11);
+values (89, 'Oliveira Picual', 9);
 INSERT INTO Variedade(id, nome, cultura_id)
-values (90, 'Oliveira Maçanilha', 11);
+values (90, 'Oliveira Maçanilha', 9);
 INSERT INTO Variedade(id, nome, cultura_id)
-values (91, 'Oliveira Conserva de Elvas', 11);
+values (91, 'Oliveira Conserva de Elvas', 9);
 INSERT INTO Variedade(id, nome, cultura_id)
-values (92, 'Oliveira Galega', 11);
+values (92, 'Oliveira Galega', 9);
 INSERT INTO Variedade(id, nome, cultura_id)
 values (93, 'Nabo S. Cosme', 10);
 INSERT INTO Variedade(id, nome, cultura_id)
-values (94, 'Videira Dona Maria', 12);
+values (94, 'Videira Dona Maria', 11);
 INSERT INTO Variedade(id, nome, cultura_id)
-values (95, 'Videira Cardinal', 12);
+values (95, 'Videira Cardinal', 11);
 
 INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
 VALUES (1, 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto');
@@ -413,9 +410,9 @@ VALUES (93, 'Fevereiro a abril, agosto a outubro', '90 dias');
 
 -- Abóbora manteiga, designada por Cucurbita moschata var 'Butternut'
 INSERT INTO Cultura(id, nome_comum, nome_cientifico)
-VALUES (13, 'Abóbora', 'Cucurbita Moschata');
+VALUES (12, 'Abóbora', 'Cucurbita Moschata');
 INSERT INTO Variedade(id, nome, cultura_id)
-VALUES (96, 'Abóbora manteiga', 13);
+VALUES (96, 'Abóbora manteiga', 12);
 INSERT INTO Variedade_Temporaria(variedade_id, fase_sementeira, fase_colheita)
 VALUES (96, null, null);
 
