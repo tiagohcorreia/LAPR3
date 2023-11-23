@@ -2,6 +2,7 @@ package esinf.store;
 
 import dataStructure.Distancia;
 import dataStructure.FurthestPlacesData;
+import esinf.Edge;
 import esinf.Graph;
 import esinf.map.MapGraph;
 import esinf.model.Local;
@@ -9,15 +10,19 @@ import esinf.model.Local;
 import java.util.*;
 
 public class GraphStore {
+    static boolean directed = false;
+    private static MapGraph<Local, Integer> graph = new MapGraph<>(directed);
 
-    private static MapGraph<Local, Integer> graph;
-
-    public static MapGraph<Local, Integer> getGraph() {
+    public  MapGraph<Local, Integer> getGraph() {
         return graph;
     }
 
-    public static void setGraph(MapGraph<Local, Integer> newGraph) {
-        graph = newGraph;
+    public  void addVertex(Local vertex) {
+        graph.addVertex(vertex);
+    }
+
+    public  void addEdge(Local local1,Local local2, int distancia) {
+        graph.addEdge(local1,local2,distancia);
     }
 
 
