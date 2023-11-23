@@ -33,7 +33,7 @@ Como Gestor Agrícola, quero registar uma operação de colheita
 ## Termos Importantes do Glossário
 
 - Colheita -> Ato ou efeito de ceifar, cortar ou apanhar produtos agrícolas.
-- Operação -> Área de terra usada para cultivo agrícola.
+- peração Agrícola -> Todas as atividades relacionadas com a produção agrícola. Incluem o preparo do solo, o plantio, a irrigação, a fertilização, o controle de pragas e doenças, a colheita e a pós-colheita.
 - Parcela -> Área de terra usada para cultivo agrícola.
 
 
