@@ -1,12 +1,11 @@
 package controller;
 
 import dataAccess.ColheitaRepository;
+import dataAccess.DatabaseConnection;
 import dataAccess.Repositories;
 import dataAccess.SailorRepository;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Date;
 import java.util.Objects;
 
@@ -36,6 +35,22 @@ public class ColheitaRegisterController {
             throw new SQLException("Error: Quantity cannot be negative.");
         }
         ColheitaRepository.colheitaRegister(operacaoId, parcelaId, produtoId, metodoExecucaoId, quantidade);
+    }
+
+    public boolean isIdValid(String tableName, int id) throws SQLException {
+        Connection connection = DatabaseConnection.getInstance().getConnection();
+        String sql = "SELECT COUNT(*) FROM " + tableName + " WHERE id = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, id);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    int count = resultSet.getInt(1);
+                    return count > 0;
+                }
+            }
+        }
+        return false;
     }
 
     public void beginTransaction() throws SQLException {
