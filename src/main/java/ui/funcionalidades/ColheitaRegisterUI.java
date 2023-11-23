@@ -48,7 +48,7 @@ public class ColheitaRegisterUI implements Runnable {
                         validDate = true;
                     }
                 } catch (ParseException e) {
-                        System.out.println("Erro: Formato de rega invalido. Insira a data no formato yyyy-mm-dd.");
+                        System.out.println("Erro: Formato de data invalido. Insira a data no formato yyyy-mm-dd.");
                     scanner.nextLine();
                     System.out.print("Data (yyyy-mm-dd): ");
                     strDate = scanner.next();
@@ -56,32 +56,55 @@ public class ColheitaRegisterUI implements Runnable {
             }
 
 
-            System.out.print("ParcelaId: ");
-            int parcelaId = scanner.nextInt();
+            int parcelaId;
+            do {
+                System.out.print("ParcelaId: ");
+                parcelaId = scanner.nextInt();
+                if (!controller.isIdValid("PARCELA", parcelaId)) {
+                    System.out.println("Erro: ParcelaId nao registado na base de dados. Insira um Id existente.");
+                }
+            } while (!controller.isIdValid("PARCELA", parcelaId));
 
-            System.out.print("ProdutoId: ");
-            int produtoId = scanner.nextInt();
+            int produtoId;
+            do {
+                System.out.print("ProdutoId: ");
+                produtoId = scanner.nextInt();
+                if (!controller.isIdValid("Produto", produtoId)) {
+                    System.out.println("Erro: ProdutoId nao registado na base de dados. Insira um Id existente.");
+                }
+            } while (!controller.isIdValid("Produto", produtoId));
 
             System.out.print("MetodoExecucaoId: ");
             int metodoExecucaoId = scanner.nextInt();
 
-            System.out.print("Quantidade: ");
-            float quantidade = scanner.nextFloat();
+            float quantidade;
 
-            while (quantidade < 0) {
-                System.out.println("Error: Quantity cannot be a negative number. Please enter a non-negative quantity.");
+            while (true) {
                 System.out.print("Quantidade: ");
+
+                while (!scanner.hasNextFloat()) {
+                    System.out.println("Erro: Quantidade deve ser um numero valido.");
+                    System.out.print("Quantidade: ");
+                    scanner.next();
+                }
+
                 quantidade = scanner.nextFloat();
+
+                if (quantidade > 0) {
+                    break;
+                } else {
+                    System.out.println("Erro: Quantidade noo pode ser um valor negativo.");
+                }
             }
 
             controller.colheitaRegister(operacaoId, parcelaId, produtoId, metodoExecucaoId, quantidade);
             controllerop.operacaoAgricolaRegister(operacaoId, date);
 
-            System.out.println("\nColheita registered.");
+            System.out.println("\nColheita registada.");
         } catch (SQLException e) {
 
 
-            System.out.println("\nColheita not registered!\n" + e.getMessage());
+            System.out.println("\nColheita nao registada!\n" + e.getMessage());
 
         }
     }
