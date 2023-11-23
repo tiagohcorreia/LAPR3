@@ -1,7 +1,6 @@
 package controller;
 
 import classes.Rega;
-import classes.EstadoRega;
 
 import java.io.*;
 import java.text.ParseException;
@@ -37,21 +36,21 @@ public class RegaController {
                         try {
                             int duracao = Integer.parseInt(elements[1].trim());
 
-                            // Validate the third column
+
                             String regularidade = elements[2].trim();
                             if (Rega.isValidRegularidade(regularidade)) {
                                 instructions.add(new Rega.RegaInstruction(setor, duracao, regularidade));
                             } else {
-                                System.out.println("Error: Incorrect Regularity Value in line " + lineNumber);
-                                System.exit(1); // Terminate the program
+                                System.out.println("Erro: Valor de Regularidade errado na linha " + lineNumber);
+                                System.exit(1);
                             }
                         } catch (NumberFormatException e) {
-                            System.out.println("Error: Second column should contain a numeric value in line " + lineNumber);
-                            System.exit(1); // Terminate the program
+                            System.out.println("Erro: A segunda coluna tem que ser um valor do tipo numero na linha " + lineNumber);
+                            System.exit(1);
                         }
                     } else {
-                        System.out.println("Error: Incorrect number of columns in line " + lineNumber);
-                        System.exit(1); // Terminate the program
+                        System.out.println("Erro: Numero incorreto de colunas na linha " + lineNumber);
+                        System.exit(1);
                     }
                 }
                 lineNumber++;
@@ -61,7 +60,7 @@ public class RegaController {
             System.exit(1); // Terminate the program
         }
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Calendar calendar = Calendar.getInstance();
         Date dataDeGeracao = calendar.getTime();
 
@@ -89,7 +88,7 @@ public class RegaController {
             }
         }
 
-        SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+        SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
         Comparator<String[]> dateTimeComparator = (rega1, rega2) -> {
             try {
@@ -132,7 +131,7 @@ public class RegaController {
                     int duration = Integer.parseInt(rega[2]);
                     String startTimeString = rega[3];
                     String endTimeString = rega[4];
-                    Calendar currentDateCalendar = Calendar.getInstance();
+
 
                     if(!data.equals(auxData) && auxData != null){  lastEndTime = startTimeString;}
 
@@ -164,6 +163,7 @@ public class RegaController {
                 for (String[] rega : adjustedPlanoDeRega) {
                     writer.write(String.join(",", rega) + "\n");
                 }
+                System.out.println("Plano de rega gerado com sucesso!\n");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -173,44 +173,4 @@ public class RegaController {
     }
 
 
-    public List<EstadoRega> verificarEstadoAtual() {
-        List<EstadoRega> estados = new ArrayList<>();
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
-
-        // Get user input for the specified date and time
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter the date and time (yyyy/MM/dd HH:mm): ");
-        String userInput = scanner.nextLine();
-
-        try {
-            // Parse the user input to a Date object
-            Date specifiedDate = dateFormat.parse(userInput);
-
-            for (String[] rega : adjustedPlanoDeRega) {
-                try {
-                    Date inicioRega = dateFormat.parse(rega[0] + " " + rega[3]);
-                    Date fimRega = dateFormat.parse(rega[0] + " " + rega[4]);
-
-                    if (specifiedDate.after(inicioRega) && specifiedDate.before(fimRega)) {
-                        String sector = rega[1];
-                        long tempoRestante = (fimRega.getTime() - specifiedDate.getTime()) / (1000 * 60);
-                        estados.add(new EstadoRega(true, sector, tempoRestante));
-                    }
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            if (estados.isEmpty()) {
-                estados.add(new EstadoRega(false, null, 0));
-            }
-
-        } catch (ParseException e) {
-            System.out.println("Invalid date and time format. Please enter in the format yyyy/MM/dd HH:mm.");
-            e.printStackTrace();
-        }
-
-        return estados;
-    }
 }
