@@ -19,11 +19,11 @@ VALUES (9, 'Maçã Malápio', ?);
 INSERT INTO PRODUTO (ID, NOME, VARIEDADE_ID)
 VALUES (10, 'Maçã Porta da Loja', ?);
 INSERT INTO PRODUTO (ID, NOME, VARIEDADE_ID)
-VALUES (11, 'Arbequina', ?);
+VALUES (11, 'Azeitona Arbequina', ?);
 INSERT INTO PRODUTO (ID, NOME, VARIEDADE_ID)
-VALUES (12, 'Picual', ?);
+VALUES (12, 'Azeitona Picual', ?);
 INSERT INTO PRODUTO (ID, NOME, VARIEDADE_ID)
-VALUES (13, 'Galega', ?);
+VALUES (13, 'Azeitona Galega', ?);
 INSERT INTO PRODUTO (ID, NOME, VARIEDADE_ID)
 VALUES (14, 'Cenoura Sugarsnax Hybrid', ?);
 INSERT INTO PRODUTO (ID, NOME, VARIEDADE_ID)

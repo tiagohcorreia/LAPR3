@@ -1427,3 +1427,124 @@ INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
 VALUES (377, TO_DATE('18/09/2023', 'DD/MM/YYYY'));
 INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
 VALUES (377, 22, 120, '23:00');
+
+---------------------------------------------------------------------------------
+
+-- OPERAÇOES CAMPO GRANDE
+
+-- 12/10/2016 operação de plantação de Oliveira Arbequina, 40 un
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (378, TO_DATE('2016-10-12', 'YYYY-MM-DD'));
+INSERT INTO Op_Plantacao(operacao_id, parcela_id, VARIEDADE_ID, quantidade)
+values (378, 102, 86, 40);
+
+-- 13/01/2021 operação de aplicação de fator de produção BIOFERTIL N6, Oliveira Picual, 120 kg
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (379, TO_DATE('2021-01-13', 'YYYY-MM-DD'));
+INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, fator_producao_id, metodo_aplicacao_id, quantidade,
+                         area)
+VALUES (379, 102, 89, 13, null, 120, null);
+
+-- 12/01/2021 operação de aplicação de fator de produção BIOFERTIL N6, Oliveira Galega, 180 kg
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (380, TO_DATE('2021-01-12', 'YYYY-MM-DD'));
+INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, fator_producao_id, metodo_aplicacao_id, quantidade,
+                         area)
+VALUES (380, 102, 92, 13, null, 180, null);
+
+-- 12/01/2021 operação de aplicação de fator de produção BIOFERTIL N6, Oliveira Arbequina, 240 kg
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (381, TO_DATE('2021-01-12', 'YYYY-MM-DD'));
+INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, fator_producao_id, metodo_aplicacao_id, quantidade,
+                         area)
+VALUES (381, 102, 86, 13, null, 240, null);
+
+-- 12/01/2022 operação de aplicação de fator de produção BIOFERTIL N6, Oliveira Picual, 120 kg
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (382, TO_DATE('2022-01-12', 'YYYY-MM-DD'));
+INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, fator_producao_id, metodo_aplicacao_id, quantidade,
+                         area)
+VALUES (382, 102, 89, 13, null, 120, null);
+
+-- 12/01/2022 operação de aplicação de fator de produção BIOFERTIL N6, Oliveira Galega, 180 kg
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (383, TO_DATE('2022-01-12', 'YYYY-MM-DD'));
+INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, fator_producao_id, metodo_aplicacao_id, quantidade,
+                         area)
+VALUES (383, 102, 92, 13, null, 180, null);
+
+-- 13/01/2022 operação de aplicação de fator de produção BIOFERTIL N6, Oliveira Arbequina, 240 kg
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (384, TO_DATE('2022-01-13', 'YYYY-MM-DD'));
+INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, fator_producao_id, metodo_aplicacao_id, quantidade,
+                         area)
+VALUES (384, 102, 86, 13, null, 240, null);
+
+-- 12/01/2023 operação de aplicação de fator de produção BIOFERTIL N6, Oliveira Picual, 120 kg
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (385, TO_DATE('2023-01-12', 'YYYY-MM-DD'));
+INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, fator_producao_id, metodo_aplicacao_id, quantidade,
+                         area)
+VALUES (385, 102, 89, 13, null, 120, null);
+
+-- 12/01/2023 operação de aplicação de fator de produção BIOFERTIL N6, Oliveira Galega, 180 kg
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (386, TO_DATE('2023-01-12', 'YYYY-MM-DD'));
+INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, fator_producao_id, metodo_aplicacao_id, quantidade,
+                         area)
+VALUES (386, 102, 92, 13, null, 180, null);
+
+-- 12/01/2023 operação de aplicação de fator de produção BIOFERTIL N6, Oliveira Arbequina, 240 kg
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (387, TO_DATE('2023-01-12', 'YYYY-MM-DD'));
+INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, fator_producao_id, metodo_aplicacao_id, quantidade,
+                         area)
+VALUES (387, 102, 86, 13, null, 240, null);
+--
+-- 02/11/2023 operação de colheita de azeitona Arbequina, 400 kg
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (388, TO_DATE('2023-11-02', 'YYYY-MM-DD'));
+INSERT INTO Colheita(operacao_id, parcela_id, produto_id, quantidade)
+values (388, 102, 11, 400);
+
+-- 05/11/2023 operação de colheita de azeitona Picual, 300 kg
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (389, TO_DATE('2023-11-05', 'YYYY-MM-DD'));
+INSERT INTO Colheita(operacao_id, parcela_id, produto_id, quantidade)
+values (389, 102, 12, 300);
+
+-- 08/11/2023 operação de colheita de azeitona Galega, 350 kg
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (390, TO_DATE('2023-11-08', 'YYYY-MM-DD'));
+INSERT INTO Colheita(operacao_id, parcela_id, produto_id, quantidade)
+values (390, 102, 13, 350);
+--
+-- 02/06/2023 operação de rega, setor 10, 60 min, 06:00
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (391, TO_DATE('2023-06-02', 'YYYY-MM-DD'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (391, 10, 60, '06:00');
+
+-- 02/07/2023 operação de rega, setor 10, 120 min, 06:00
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (392, TO_DATE('2023-07-02', 'YYYY-MM-DD'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (392, 10, 120, '06:00');
+
+-- 02/08/2023 operação de rega, setor 10, 180 min, 05:00
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (393, TO_DATE('2023-08-02', 'YYYY-MM-DD'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (393, 10, 180, '05:00');
+
+-- 04/09/2023 operação de rega, setor 10, 120 min, 06:00
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (394, TO_DATE('2023-09-04', 'YYYY-MM-DD'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (394, 10, 120, '06:00');
+
+-- 02/10/2023 operação de rega, setor 10, 60 min, 06:00
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (395, TO_DATE('2023-10-02', 'YYYY-MM-DD'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (395, 10, 60, '06:00');
