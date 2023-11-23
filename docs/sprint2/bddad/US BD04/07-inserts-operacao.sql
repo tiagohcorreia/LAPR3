@@ -645,27 +645,27 @@ VALUES (416, TO_DATE('2023-09-20', 'YYYY-MM-DD'));
 /* Metodo Execucao */
 
 INSERT INTO Metodo_execucao(id, nome)
-values (1, Solo);
+values (1, 'Solo');
 INSERT INTO Metodo_execucao(id, nome)
-values (2, Foliar);
+values (2, 'Foliar');
 
 /* Plantacao */
 
-INSERT INTO Op_Plantacao(operacao_id, parcela_id, variedade_perm_id, quantidade)
+INSERT INTO Op_Plantacao(operacao_id, parcela_id, VARIEDADE_ID, quantidade)
 values (101, 102, 191, 30);
-INSERT INTO Op_Plantacao(operacao_id, parcela_id, variedade_perm_id, quantidade)
+INSERT INTO Op_Plantacao(operacao_id, parcela_id, VARIEDADE_ID, quantidade)
 values (102, 102, 188, 20);
-INSERT INTO Op_Plantacao(operacao_id, parcela_id, variedade_perm_id, quantidade)
+INSERT INTO Op_Plantacao(operacao_id, parcela_id, VARIEDADE_ID, quantidade)
 values (103, 104, 140, 90);
-INSERT INTO Op_Plantacao(operacao_id, parcela_id, variedade_perm_id, quantidade)
+INSERT INTO Op_Plantacao(operacao_id, parcela_id, VARIEDADE_ID, quantidade)
 values (104, 104, 136, 60);
-INSERT INTO Op_Plantacao(operacao_id, parcela_id, variedade_perm_id, quantidade)
+INSERT INTO Op_Plantacao(operacao_id, parcela_id, VARIEDADE_ID, quantidade)
 values (105, 104, 147, 40);
-INSERT INTO Op_Plantacao(operacao_id, parcela_id, variedade_perm_id, quantidade)
+INSERT INTO Op_Plantacao(operacao_id, parcela_id, VARIEDADE_ID, quantidade)
 values (120, 107, 193, 500);
-INSERT INTO Op_Plantacao(operacao_id, parcela_id, variedade_perm_id, quantidade)
+INSERT INTO Op_Plantacao(operacao_id, parcela_id, VARIEDADE_ID, quantidade)
 values (121, 107, 194, 700);
-INSERT INTO Op_Plantacao(operacao_id, parcela_id, variedade_perm_id, quantidade)
+INSERT INTO Op_Plantacao(operacao_id, parcela_id, VARIEDADE_ID, quantidade)
 values (137, 104, 147, 30);
 
 /* Poda */
@@ -889,56 +889,45 @@ values (305, 106, 84, 250);
 
 /* Fator Producao */
 
-INSERT INTO Aplicacao_FP(operacao_id, fator_producao_id)
-values (115, 3);
-INSERT INTO Aplicacao_FP(operacao_id, fator_producao_id)
-values (116, 3);
-INSERT INTO Aplicacao_FP(operacao_id, fator_producao_id)
-values (122, 4);
-INSERT INTO Aplicacao_FP(operacao_id, fator_producao_id)
-values (123, 4);
-INSERT INTO Aplicacao_FP(operacao_id, fator_producao_id)
-values (124, 4);
-INSERT INTO Aplicacao_FP(operacao_id, fator_producao_id)
-values (143, 1);
-INSERT INTO Aplicacao_FP(operacao_id, fator_producao_id)
-values (144, 1);
-INSERT INTO Aplicacao_FP(operacao_id, fator_producao_id)
-values (145, 4);
-INSERT INTO Aplicacao_FP(operacao_id, fator_producao_id)
-values (146, 4);
-INSERT INTO Aplicacao_FP(operacao_id, fator_producao_id)
-values (147, 4);
-INSERT INTO Aplicacao_FP(operacao_id, fator_producao_id)
-values (160, 1);
-INSERT INTO Aplicacao_FP(operacao_id, fator_producao_id)
-values (161, 1);
-INSERT INTO Aplicacao_FP(operacao_id, fator_producao_id)
-values (163, 8);
-INSERT INTO Aplicacao_FP(operacao_id, fator_producao_id)
-values (190, 3);
-INSERT INTO Aplicacao_FP(operacao_id, fator_producao_id)
-values (191, 3);
-INSERT INTO Aplicacao_FP(operacao_id, fator_producao_id)
-values (198, 1);
-INSERT INTO Aplicacao_FP(operacao_id, fator_producao_id)
-values (199, 1);
-INSERT INTO Aplicacao_FP(operacao_id, fator_producao_id)
-values (205, 5);
-INSERT INTO Aplicacao_FP(operacao_id, fator_producao_id)
-values (250, 1);
-INSERT INTO Aplicacao_FP(operacao_id, fator_producao_id)
-values (251, 1);
-INSERT INTO Aplicacao_FP(operacao_id, fator_producao_id)
-values (258, 5);
-INSERT INTO Aplicacao_FP(operacao_id, fator_producao_id)
-values (299, 3);
-INSERT INTO Aplicacao_FP(operacao_id, fator_producao_id)
-values (300, 3);
-INSERT INTO Aplicacao_FP(operacao_id, fator_producao_id)
-values (306, 1);
-INSERT INTO Aplicacao_FP(operacao_id, fator_producao_id)
-values (307, 1);
+INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, fator_producao_id, metodo_aplicacao_id, quantidade,
+                         area)
+VALUES (115, 102, 92, 3, 7, 15, null);
+INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, fator_producao_id, metodo_aplicacao_id, quantidade,
+                         area)
+VALUES (116, 102, 89, 3, 7, 10, null);
+INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, fator_producao_id, metodo_aplicacao_id, quantidade,
+                         area)
+VALUES (122, 104, 41, 4, 7, 10, null);
+INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, fator_producao_id, metodo_aplicacao_id, quantidade,
+                         area)
+VALUES (123, 104, 37, 4, 7, 6, null);
+INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, fator_producao_id, metodo_aplicacao_id, quantidade,
+                         area)
+VALUES (124, 104, 48, 4, 7, 5, null);
+INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, fator_producao_id, metodo_aplicacao_id, quantidade,
+                         area)
+VALUES (145, 104, 41, 4, 7, 10, null);
+INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, fator_producao_id, metodo_aplicacao_id, quantidade,
+                         area)
+VALUES (146, 104, 37, 4, 7, 5, null);
+INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, fator_producao_id, metodo_aplicacao_id, quantidade,
+                         area)
+VALUES (147, 104, 48, 4, 7, 7, null);
+INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, fator_producao_id, metodo_aplicacao_id, quantidade,
+                         area)
+VALUES (163, 103, NULL, 8, 7, 600, null);
+INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, fator_producao_id, metodo_aplicacao_id, quantidade,
+                         area)
+VALUES (190, 102, 92, 3, 7, 10, null);
+INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, fator_producao_id, metodo_aplicacao_id, quantidade,
+                         area)
+VALUES (191, 102, 89, 3, 7, 7, null);
+INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, fator_producao_id, metodo_aplicacao_id, quantidade,
+                         area)
+VALUES (299, 102, 92, 3, 7, 15, null);
+INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, fator_producao_id, metodo_aplicacao_id, quantidade,
+                         area)
+VALUES (300, 102, 89, 3, 7, 10, null);
 
 ---------------------------------------------------------------------------------
 
@@ -947,17 +936,17 @@ values (307, 1);
 INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
                          AREA)
 VALUES (309, 105, NULL, 13, 7, 3200, 1.1);
-INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_PERM_ID, METODO_EXECUCAO_ID, QUANTIDADE)
+INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, METODO_EXECUCAO_ID, QUANTIDADE)
 VALUES (310, 105, 143, NULL, 50);
-INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_PERM_ID, METODO_EXECUCAO_ID, QUANTIDADE)
+INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, METODO_EXECUCAO_ID, QUANTIDADE)
 VALUES (311, 105, 155, NULL, 20);
-INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_PERM_ID, METODO_EXECUCAO_ID, QUANTIDADE)
+INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, METODO_EXECUCAO_ID, QUANTIDADE)
 VALUES (312, 105, 160, NULL, 40);
-INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_PERM_ID, METODO_EXECUCAO_ID, QUANTIDADE)
+INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, METODO_EXECUCAO_ID, QUANTIDADE)
 VALUES (313, 105, 144, NULL, 30);
-INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_PERM_ID, METODO_EXECUCAO_ID, QUANTIDADE)
+INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, METODO_EXECUCAO_ID, QUANTIDADE)
 VALUES (314, 105, 145, NULL, 40);
-INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_PERM_ID, METODO_EXECUCAO_ID, QUANTIDADE)
+INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, METODO_EXECUCAO_ID, QUANTIDADE)
 VALUES (315, 105, 156, NULL, 50);
 INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
                          AREA)
@@ -1051,43 +1040,47 @@ VALUES (347, 105, 44, NULL, 700);
 INSERT INTO COLHEITA(OPERACAO_ID, PARCELA_ID, PRODUTO_ID, METODO_EXECUCAO_ID, QUANTIDADE)
 VALUES (348, 105, 44, NULL, 800);
 
-INSERT INTO REGA (OPERACAO_ID, SETOR_ID, DURACAO)
-VALUES (349, 22, 120);
-INSERT INTO REGA (OPERACAO_ID, SETOR_ID, DURACAO)
-VALUES (350, 22, 120);
-INSERT INTO REGA (OPERACAO_ID, SETOR_ID, DURACAO)
-VALUES (351, 22, 120);
-INSERT INTO REGA (OPERACAO_ID, SETOR_ID, DURACAO)
-VALUES (352, 22, 120);
-INSERT INTO REGA (OPERACAO_ID, SETOR_ID, DURACAO)
-VALUES (353, 22, 180);
-INSERT INTO REGA (OPERACAO_ID, SETOR_ID, DURACAO)
-VALUES (354, 22, 180);
-INSERT INTO REGA (OPERACAO_ID, SETOR_ID, DURACAO)
-VALUES (355, 22, 180);
-INSERT INTO REGA (OPERACAO_ID, SETOR_ID, DURACAO)
-VALUES (356, 22, 180);
-INSERT INTO REGA (OPERACAO_ID, SETOR_ID, DURACAO)
-VALUES (357, 22, 150);
-INSERT INTO REGA (OPERACAO_ID, SETOR_ID, DURACAO)
-VALUES (358, 22, 150);
-INSERT INTO REGA (OPERACAO_ID, SETOR_ID, DURACAO)
-VALUES (359, 22, 150);
-INSERT INTO REGA (OPERACAO_ID, SETOR_ID, DURACAO)
-VALUES (360, 22, 120);
-INSERT INTO REGA (OPERACAO_ID, SETOR_ID, DURACAO)
-VALUES (361, 22, 120);
-INSERT INTO REGA (OPERACAO_ID, SETOR_ID, DURACAO)
-VALUES (362, 22, 120);
-INSERT INTO REGA (OPERACAO_ID, SETOR_ID, DURACAO)
-VALUES (363, 22, 120);
+INSERT INTO REGA (OPERACAO_ID, SETOR_ID, DURACAO, HORA)
+VALUES (349, 22, 120, '23:00');
+INSERT INTO REGA (OPERACAO_ID, SETOR_ID, DURACAO, HORA)
+VALUES (350, 22, 120, '23:00');
+INSERT INTO REGA (OPERACAO_ID, SETOR_ID, DURACAO, HORA)
+VALUES (351, 22, 120, '23:00');
+INSERT INTO REGA (OPERACAO_ID, SETOR_ID, DURACAO, HORA)
+VALUES (352, 22, 120, '23:00');
+INSERT INTO REGA (OPERACAO_ID, SETOR_ID, DURACAO, HORA)
+VALUES (353, 22, 180, '23:00');
+INSERT INTO REGA (OPERACAO_ID, SETOR_ID, DURACAO, HORA)
+VALUES (354, 22, 180, '23:00');
+INSERT INTO REGA (OPERACAO_ID, SETOR_ID, DURACAO, HORA)
+VALUES (355, 22, 180, '23:00');
+INSERT INTO REGA (OPERACAO_ID, SETOR_ID, DURACAO, HORA)
+VALUES (356, 22, 180, '23:00');
+INSERT INTO REGA (OPERACAO_ID, SETOR_ID, DURACAO, HORA)
+VALUES (357, 22, 150, '23:00');
+INSERT INTO REGA (OPERACAO_ID, SETOR_ID, DURACAO, HORA)
+VALUES (358, 22, 150, '23:00');
+INSERT INTO REGA (OPERACAO_ID, SETOR_ID, DURACAO, HORA)
+VALUES (359, 22, 150, '23:00');
+INSERT INTO REGA (OPERACAO_ID, SETOR_ID, DURACAO, HORA)
+VALUES (360, 22, 120, '23:00');
+INSERT INTO REGA (OPERACAO_ID, SETOR_ID, DURACAO, HORA)
+VALUES (361, 22, 120, '23:00');
+INSERT INTO REGA (OPERACAO_ID, SETOR_ID, DURACAO, HORA)
+VALUES (362, 22, 120, '23:00');
+INSERT INTO REGA (OPERACAO_ID, SETOR_ID, DURACAO, HORA)
+VALUES (363, 22, 120, '23:00');
 
 ---------------------------------------------------------------------------------
 
 -- OPERAÇOES CAMPO GRANDE
 
-INSERT INTO Aplicacao_FP(operacao_id, fator_producao_id)
-values (364, ?); /* colocar id do fator producao BIOFERTIL N6 */
+--13/01/2021 operação de aplicação de fator de produção BIOFERTIL N6, Oliveira Picual, 120 kg
+INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, fator_producao_id, metodo_aplicacao_id, quantidade,
+                         area)
+VALUES (364, 102, 89, 13, null, 120, null);
+
+
 INSERT INTO Aplicacao_FP(operacao_id, fator_producao_id)
 values (365, ?);
 INSERT INTO Aplicacao_FP(operacao_id, fator_producao_id)
@@ -1107,7 +1100,7 @@ values (372, ?);
 INSERT INTO Aplicacao_FP(operacao_id, fator_producao_id)
 values (373, ?);
 
-INSERT INTO Op_Plantacao(operacao_id, parcela_id, variedade_perm_id, quantidade)
+INSERT INTO Op_Plantacao(operacao_id, parcela_id, VARIEDADE_ID, quantidade)
 values (374, 102, 185, 40);
 
 INSERT INTO Colheita(operacao_id, parcela_id, produto_id, quantidade)
@@ -1133,49 +1126,88 @@ VALUES (382, 10, 60);
 -- OPERAÇÕES CAMPO NOVO
 
 -- Colheita
-INSERT INTO Colheita(operacao_id,parcela_id,produto_id,metodo_execucao_id, quantidade) values (328, 108, ?, ?, 8000);
-INSERT INTO Colheita(operacao_id,parcela_id,produto_id,metodo_execucao_id, quantidade) values (329, 108, ?, ?, 5000);
-INSERT INTO Colheita(operacao_id,parcela_id,produto_id,metodo_execucao_id, quantidade) values (330, 108, ?, ?,900);
-INSERT INTO Colheita(operacao_id,parcela_id,produto_id,metodo_execucao_id, quantidade) values (331, 108, ?, ?,1500);
-INSERT INTO Colheita(operacao_id,parcela_id,produto_id,metodo_execucao_id, quantidade) values (332, 108, ?, ?, 1200);
-INSERT INTO Colheita(operacao_id,parcela_id,produto_id,metodo_execucao_id, quantidade) values (333, 108, ?, ?, 1200);
-INSERT INTO Colheita(operacao_id,parcela_id,produto_id,metodo_execucao_id, quantidade) values (334, 108, ?, ?, 1200);
+INSERT INTO Colheita(operacao_id, parcela_id, produto_id, metodo_execucao_id, quantidade)
+values (328, 108, ?, ?, 8000);
+INSERT INTO Colheita(operacao_id, parcela_id, produto_id, metodo_execucao_id, quantidade)
+values (329, 108, ?, ?, 5000);
+INSERT INTO Colheita(operacao_id, parcela_id, produto_id, metodo_execucao_id, quantidade)
+values (330, 108, ?, ?, 900);
+INSERT INTO Colheita(operacao_id, parcela_id, produto_id, metodo_execucao_id, quantidade)
+values (331, 108, ?, ?, 1500);
+INSERT INTO Colheita(operacao_id, parcela_id, produto_id, metodo_execucao_id, quantidade)
+values (332, 108, ?, ?, 1200);
+INSERT INTO Colheita(operacao_id, parcela_id, produto_id, metodo_execucao_id, quantidade)
+values (333, 108, ?, ?, 1200);
+INSERT INTO Colheita(operacao_id, parcela_id, produto_id, metodo_execucao_id, quantidade)
+values (334, 108, ?, ?, 1200);
 
 -- Rega
 -- Setor 42
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (335, 42, 60, '06:00');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (336, 42, 60, '06:00');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (337, 42, 120, '04:00');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (338, 42, 120, '04:00');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (339, 42, 120, '04:00');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (340, 42, 150, '04:00');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (341, 42, 150, '04:00');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (342, 42, 120, '21:30');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (343, 42, 120, '21:30');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (344, 42, 120, '21:30');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (345, 42, 120, '21:30');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (346, 42, 120, '21:30');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (347, 42, 120, '21:30');
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (335, 42, 60, '06:00');
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (336, 42, 60, '06:00');
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (337, 42, 120, '04:00');
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (338, 42, 120, '04:00');
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (339, 42, 120, '04:00');
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (340, 42, 150, '04:00');
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (341, 42, 150, '04:00');
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (342, 42, 120, '21:30');
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (343, 42, 120, '21:30');
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (344, 42, 120, '21:30');
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (345, 42, 120, '21:30');
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (346, 42, 120, '21:30');
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (347, 42, 120, '21:30');
 
 -- Setor 41
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (348, 41, 120, '07:30');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (349, 41, 120, '07:30');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (350, 41, 120, '06:20');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (351, 41, 120, '06:20');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (352, 41, 120, '06:20');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (353, 41, 120, '06:20');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (354, 41, 120, '06:20');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (355, 41, 120, '06:20');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (356, 41, 120, '06:20');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (357, 41, 120, '06:20');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (358, 41, 120, '06:20');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (359, 41, 120, '06:20');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (360, 41, 120, '07:00');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (361, 41, 120, '07:00');
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (348, 41, 120, '07:30');
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (349, 41, 120, '07:30');
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (350, 41, 120, '06:20');
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (351, 41, 120, '06:20');
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (352, 41, 120, '06:20');
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (353, 41, 120, '06:20');
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (354, 41, 120, '06:20');
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (355, 41, 120, '06:20');
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (356, 41, 120, '06:20');
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (357, 41, 120, '06:20');
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (358, 41, 120, '06:20');
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (359, 41, 120, '06:20');
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (360, 41, 120, '07:00');
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (361, 41, 120, '07:00');
 
 -- Monda
-INSERT INTO Monda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id, fator_producao_id) VALUES (360, 108, ?, ?, ?, ?);
-INSERT INTO Monda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id, fator_producao_id) VALUES (361, 108, ?, ?, ?, ?);
-INSERT INTO Monda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id, fator_producao_id) VALUES (362, 108, ?, ?, ?, ?);
-INSERT INTO Monda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id, fator_producao_id) VALUES (363, 108, ?, ?, ?, ?);
-INSERT INTO Monda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id, fator_producao_id) VALUES (364, 108, ?, ?, ?, ?);
+INSERT INTO Monda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id, fator_producao_id)
+VALUES (360, 108, ?, ?, ?, ?);
+INSERT INTO Monda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id, fator_producao_id)
+VALUES (361, 108, ?, ?, ?, ?);
+INSERT INTO Monda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id, fator_producao_id)
+VALUES (362, 108, ?, ?, ?, ?);
+INSERT INTO Monda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id, fator_producao_id)
+VALUES (363, 108, ?, ?, ?, ?);
+INSERT INTO Monda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id, fator_producao_id)
+VALUES (364, 108, ?, ?, ?, ?);

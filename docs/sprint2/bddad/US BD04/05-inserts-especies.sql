@@ -1,207 +1,438 @@
-INSERT INTO Cultura(id,nome_comum,nome_cientifico) values (1, 'Ameixoeira','Prunus domestica');
-INSERT INTO Cultura(id,nome_comum,nome_cientifico) values (2, 'Damasqueiro','Prunus armeniaca');
-INSERT INTO Cultura(id,nome_comum,nome_cientifico) values (3, 'Macieira','Malus domestica');
-INSERT INTO Cultura(id,nome_comum,nome_cientifico) values (4, 'Pera Nashi','Pyrus pyrifolia');
-INSERT INTO Cultura(id,nome_comum,nome_cientifico) values (5, 'Cenoura','Daucus carota subsp. Sativus');
-INSERT INTO Cultura(id,nome_comum,nome_cientifico) values (6, 'Tremoço','Lupinus luteus');
-INSERT INTO Cultura(id,nome_comum,nome_cientifico) values (6, 'Tremoço','Lupinus albus');
-INSERT INTO Cultura(id,nome_comum,nome_cientifico) values (8, 'Milho','Zea mays');
-INSERT INTO Cultura(id,nome_comum,nome_cientifico) values (9, 'Nabo greleiro','Brassica rapa');
-INSERT INTO Cultura(id,nome_comum,nome_cientifico) values (11, 'Oliveira','Olea europaea');
-INSERT INTO Cultura(id,nome_comum,nome_cientifico) values (10, 'Nabo','Brassica rapa');
-INSERT INTO Cultura(id,nome_comum,nome_cientifico) values (12, 'Videira','Vitis vinifera');
-INSERT INTO Cultura(id,nome_comum,nome_cientifico) values (13, 'Abóbora manteiga','Cucurbita moschata');
+-- DADOS LEGACY
 
-INSERT INTO Variedade(id,nome,cultura_id) values (100, 'RAINHA CLAUDIA CARANGUEJEIRA',1);
-INSERT INTO Variedade(id,nome,cultura_id) values (101, 'PRESIDENT',1);
-INSERT INTO Variedade(id,nome,cultura_id) values (102, 'STANLEY',1);
-INSERT INTO Variedade(id,nome,cultura_id) values (103, 'ANGELENO',1);
-INSERT INTO Variedade(id,nome,cultura_id) values (104, 'BLACK BEAUTY',1);
-INSERT INTO Variedade(id,nome,cultura_id) values (105, 'BLACK STAR',1);
-INSERT INTO Variedade(id,nome,cultura_id) values (106, 'BLACK GOLD',1);
-INSERT INTO Variedade(id,nome,cultura_id) values (107, 'BLACK DIAMOND',1);
-INSERT INTO Variedade(id,nome,cultura_id) values (108, 'BLACK AMBER',1);
-INSERT INTO Variedade(id,nome,cultura_id) values (109, 'BLACK SPLENDOR',1);
-INSERT INTO Variedade(id,nome,cultura_id) values (110, 'FORTUNA',1);
-INSERT INTO Variedade(id,nome,cultura_id) values (111, 'FRIAR',1);
-INSERT INTO Variedade(id,nome,cultura_id) values (112, 'EL DORADO',1);
-INSERT INTO Variedade(id,nome,cultura_id) values (113, 'ELEPHANT HEART',1);
-INSERT INTO Variedade(id,nome,cultura_id) values (114, 'GOLDEN JAPAN',1);
-INSERT INTO Variedade(id,nome,cultura_id) values (115, 'HARRY PITCHON',1);
-INSERT INTO Variedade(id,nome,cultura_id) values (116, 'LAETITIA',1);
-INSERT INTO Variedade(id,nome,cultura_id) values (117, 'METLEY',1);
-INSERT INTO Variedade(id,nome,cultura_id) values (118, 'MIRABELLE DE NANCY',1);
-INSERT INTO Variedade(id,nome,cultura_id) values (119, 'QUEEN ROSE',1);
-INSERT INTO Variedade(id,nome,cultura_id) values (120, 'RED BEAUT',1);
-INSERT INTO Variedade(id,nome,cultura_id) values (121, 'SANTA ROSA',1);
-INSERT INTO Variedade(id,nome,cultura_id) values (122, 'SHIRO',1);
-INSERT INTO Variedade(id,nome,cultura_id) values (123, 'SUNGOLD',1);
-INSERT INTO Variedade(id,nome,cultura_id) values (124, 'WILSON PERFECTION',1);
-INSERT INTO Variedade(id,nome,cultura_id) values (125, 'AUTUMN GIANT',1);
-INSERT INTO Variedade(id,nome,cultura_id) values (126, 'BULIDA',2);
-INSERT INTO Variedade(id,nome,cultura_id) values (127, 'CANINO',2);
-INSERT INTO Variedade(id,nome,cultura_id) values (128, 'LIABAUD',2);
-INSERT INTO Variedade(id,nome,cultura_id) values (129, 'MAILLOT JAUNE',2);
-INSERT INTO Variedade(id,nome,cultura_id) values (130, 'POLONAIS',2);
-INSERT INTO Variedade(id,nome,cultura_id) values (131, 'AKANE',3);
-INSERT INTO Variedade(id,nome,cultura_id) values (132, 'BELGOLDEN',3);
-INSERT INTO Variedade(id,nome,cultura_id) values (133, 'BRAVO DE ESMOLFE',3);
-INSERT INTO Variedade(id,nome,cultura_id) values (134, 'CASA NOVA DE ALCOBAÇA',3);
-INSERT INTO Variedade(id,nome,cultura_id) values (135, 'EROVAN',3);
-INSERT INTO Variedade(id,nome,cultura_id) values (136, 'FUJI',3);
-INSERT INTO Variedade(id,nome,cultura_id) values (137, 'GRANNY SMITH',3);
-INSERT INTO Variedade(id,nome,cultura_id) values (138, 'GOLDEN DELICIOUS',3);
-INSERT INTO Variedade(id,nome,cultura_id) values (139, 'HI-EARLY',3);
-INSERT INTO Variedade(id,nome,cultura_id) values (140, 'JONAGORED',3);
-INSERT INTO Variedade(id,nome,cultura_id) values (141, 'LYSGOLDEN',3);
-INSERT INTO Variedade(id,nome,cultura_id) values (142, 'MUTSU',3);
-INSERT INTO Variedade(id,nome,cultura_id) values (143, 'PORTA DA LOJA',3);
-INSERT INTO Variedade(id,nome,cultura_id) values (144, 'REINETTE OU CANADA',3);
-INSERT INTO Variedade(id,nome,cultura_id) values (145, 'REINETTE OU GRAND FAY',3);
-INSERT INTO Variedade(id,nome,cultura_id) values (146, 'RISCADINHA DE PALMELA',3);
-INSERT INTO Variedade(id,nome,cultura_id) values (147, 'ROYAL GALA',3);
-INSERT INTO Variedade(id,nome,cultura_id) values (148, 'REDCHIEF',3);
-INSERT INTO Variedade(id,nome,cultura_id) values (149, 'STARKING',3);
-INSERT INTO Variedade(id,nome,cultura_id) values (150, 'SUMMER RED',3);
-INSERT INTO Variedade(id,nome,cultura_id) values (151, 'WELL SPUR DELICIOUS',3);
-INSERT INTO Variedade(id,nome,cultura_id) values (152, 'NOIVA',3);
-INSERT INTO Variedade(id,nome,cultura_id) values (153, 'OLHO ABERTO',3);
-INSERT INTO Variedade(id,nome,cultura_id) values (154, 'CAMOESA ROSA',3);
-INSERT INTO Variedade(id,nome,cultura_id) values (155, 'MALÁPIO',3);
-INSERT INTO Variedade(id,nome,cultura_id) values (156, 'GRONHO DOCE',3);
-INSERT INTO Variedade(id,nome,cultura_id) values (157, 'PÉ DE BOI ',3);
-INSERT INTO Variedade(id,nome,cultura_id) values (158, 'PINOVA',3);
-INSERT INTO Variedade(id,nome,cultura_id) values (159, 'PARDO LINDO',3);
-INSERT INTO Variedade(id,nome,cultura_id) values (160, 'PIPO DE BASTO',3);
-INSERT INTO Variedade(id,nome,cultura_id) values (161, 'PRIMA',3);
-INSERT INTO Variedade(id,nome,cultura_id) values (162, 'QUERINA',3);
-INSERT INTO Variedade(id,nome,cultura_id) values (163, 'VISTA BELLA',3);
-INSERT INTO Variedade(id,nome,cultura_id) values (164, 'GOLDEN SMOOTHEE',3);
-INSERT INTO Variedade(id,nome,cultura_id) values (165, 'GOLDEN SUPREMA',3);
-INSERT INTO Variedade(id,nome,cultura_id) values (166, 'GLOSTER 69',3);
-INSERT INTO Variedade(id,nome,cultura_id) values (167, 'FREEDOM',3);
-INSERT INTO Variedade(id,nome,cultura_id) values (168, 'SNINSEIKI',4);
-INSERT INTO Variedade(id,nome,cultura_id) values (169, 'KUMOI',4);
-INSERT INTO Variedade(id,nome,cultura_id) values (170, 'HOSUI',4);
-INSERT INTO Variedade(id,nome,cultura_id) values (171, 'NIJISSEIKI',4);
-INSERT INTO Variedade(id,nome,cultura_id) values (172, 'Carson Hybrid',5);
-INSERT INTO Variedade(id,nome,cultura_id) values (173, 'Red Cored Chantenay',5);
-INSERT INTO Variedade(id,nome,cultura_id) values (174, 'Danvers Half Long',5);
-INSERT INTO Variedade(id,nome,cultura_id) values (175, 'Imperator 58',5);
-INSERT INTO Variedade(id,nome,cultura_id) values (176, 'Sugarsnax Hybrid',5);
-INSERT INTO Variedade(id,nome,cultura_id) values (177, 'Nelson Hybrid',5);
-INSERT INTO Variedade(id,nome,cultura_id) values (178, 'Scarlet Nantes',5);
-INSERT INTO Variedade(id,nome,cultura_id) values (179, 'Amarelo',6);
-INSERT INTO Variedade(id,nome,cultura_id) values (180, 'Branco',6);
-INSERT INTO Variedade(id,nome,cultura_id) values (181, 'MAS 24.C',8);
-INSERT INTO Variedade(id,nome,cultura_id) values (182, 'Doce Golden Bantam',8);
-INSERT INTO Variedade(id,nome,cultura_id) values (183, 'Senhora Conceição',9);
-INSERT INTO Variedade(id,nome,cultura_id) values (184, 'COBRANÇOSA',11);
-INSERT INTO Variedade(id,nome,cultura_id) values (185, 'ARBEQUINA',11);
-INSERT INTO Variedade(id,nome,cultura_id) values (186, 'HOJIBLANCA',11);
-INSERT INTO Variedade(id,nome,cultura_id) values (187, 'NEGRINHA DO FREIXO',11);
-INSERT INTO Variedade(id,nome,cultura_id) values (188, 'PICUAL',11);
-INSERT INTO Variedade(id,nome,cultura_id) values (189, 'MAÇANILHA',11);
-INSERT INTO Variedade(id,nome,cultura_id) values (190, 'CONSERVA DE ELVAS',11);
-INSERT INTO Variedade(id,nome,cultura_id) values (191, 'GALEGA',11);
-INSERT INTO Variedade(id,nome,cultura_id) values (192, 'S. Cosme',10);
-INSERT INTO Variedade(id,nome,cultura_id) values (193, 'Dona Maria',12);
-INSERT INTO Variedade(id,nome,cultura_id) values (194, 'Cardinal',12);
+INSERT INTO Cultura(id, nome_comum, nome_cientifico)
+values (1, 'Ameixoeira', 'Prunus domestica');
+INSERT INTO Cultura(id, nome_comum, nome_cientifico)
+values (2, 'Damasqueiro', 'Prunus armeniaca');
+INSERT INTO Cultura(id, nome_comum, nome_cientifico)
+values (3, 'Macieira', 'Malus domestica');
+INSERT INTO Cultura(id, nome_comum, nome_cientifico)
+values (4, 'Pera Nashi', 'Pyrus pyrifolia');
+INSERT INTO Cultura(id, nome_comum, nome_cientifico)
+values (5, 'Cenoura', 'Daucus carota subsp. Sativus');
+INSERT INTO Cultura(id, nome_comum, nome_cientifico)
+values (6, 'Tremoço', 'Lupinus luteus');
+INSERT INTO Cultura(id, nome_comum, nome_cientifico)
+values (6, 'Tremoço', 'Lupinus albus');
+INSERT INTO Cultura(id, nome_comum, nome_cientifico)
+values (8, 'Milho', 'Zea mays');
+INSERT INTO Cultura(id, nome_comum, nome_cientifico)
+values (9, 'Nabo greleiro', 'Brassica rapa');
+INSERT INTO Cultura(id, nome_comum, nome_cientifico)
+values (11, 'Oliveira', 'Olea europaea');
+INSERT INTO Cultura(id, nome_comum, nome_cientifico)
+values (10, 'Nabo', 'Brassica rapa');
+INSERT INTO Cultura(id, nome_comum, nome_cientifico)
+values (12, 'Videira', 'Vitis vinifera');
 
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (100, 'RAINHA CLAUDIA CARANGUEJEIRA', 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto', 1);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (101, 'PRESIDENT', 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto', 1);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (102, 'STANLEY', 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto', 1);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (103, 'ANGELENO', 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto', 1);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (104, 'BLACK BEAUTY', 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto', 1);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (105, 'BLACK STAR', 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto', 1);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (106, 'BLACK GOLD', 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto', 1);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (107, 'BLACK DIAMOND', 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto', 1);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (108, 'BLACK AMBER', 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto', 1);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (109, 'BLACK SPLENDOR', 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto', 1);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (110, 'FORTUNA', 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto', 1);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (111, 'FRIAR', 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto', 1);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (112, 'EL DORADO', 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto', 1);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (113, 'ELEPHANT HEART', 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto', 1);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (114, 'GOLDEN JAPAN', 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto', 1);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (115, 'HARRY PITCHON', 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto', 1);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (116, 'LAETITIA', 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto', 1);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (117, 'METLEY', 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto', 1);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (118, 'MIRABELLE DE NANCY', 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto', 1);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (119, 'QUEEN ROSE', 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto', 1);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (120, 'RED BEAUT', 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto', 1);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (121, 'SANTA ROSA', 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto', 1);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (122, 'SHIRO', 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto', 1);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (123, 'SUNGOLD', 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto', 1);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (124, 'WILSON PERFECTION', 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto', 1);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (125, 'AUTUMN GIANT', 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto', 1);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (126, 'BULIDA', 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto', 2);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (127, 'CANINO', 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto', 2);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (128, 'LIABAUD', 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto', 2);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (129, 'MAILLOT JAUNE', 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto', 2);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (130, 'POLONAIS', 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto', 2);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (131, 'AKANE', 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro', 3);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (132, 'BELGOLDEN', 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro', 3);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (133, 'BRAVO DE ESMOLFE', 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro', 3);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (134, 'CASA NOVA DE ALCOBAÇA', 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro', 3);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (135, 'EROVAN', 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro', 3);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (136, 'FUJI', 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro', 3);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (137, 'GRANNY SMITH', 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro', 3);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (138, 'GOLDEN DELICIOUS', 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro', 3);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (139, 'HI-EARLY', 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro', 3);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (140, 'JONAGORED', 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro', 3);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (141, 'LYSGOLDEN', 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro', 3);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (142, 'MUTSU', 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro', 3);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (143, 'PORTA DA LOJA', 'Janeiro', 'Abril a maio', 'Novembro a dezembro', 3);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (144, 'REINETTE OU CANADA', 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro', 3);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (145, 'REINETTE OU GRAND FAY', 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro', 3);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (146, 'RISCADINHA DE PALMELA', 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro', 3);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (147, 'ROYAL GALA', 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro', 3);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (148, 'REDCHIEF', 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro', 3);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (149, 'STARKING', 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro', 3);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (150, 'SUMMER RED', 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro', 3);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (151, 'WELLSPUR DELICIOUS', 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro', 3);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (152, 'NOIVA', 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro', 3);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (153, 'OLHO ABERTO', 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro', 3);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (154, 'CAMOESA ROSA', 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro', 3);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (155, 'MALÁPIO', 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro', 3);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (156, 'GRONHO DOCE', 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro', 3);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (157, 'PÉ DE BOI ', 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro', 3);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (158, 'PINOVA', 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro', 3);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (159, 'PARDO LINDO', 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro', 3);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (160, 'PIPO DE BASTO', 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro', 3);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (161, 'PRIMA', 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro', 3);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (162, 'QUERINA', 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro', 3);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (163, 'VISTA BELLA', 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro', 3);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (164, 'GOLDEN SMOOTHEE', 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro', 3);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (165, 'GOLDEN SUPREMA', 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro', 3);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (166, 'GLOSTER 69', 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro', 3);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (167, 'FREEDOM', 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro', 3);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (168, 'SNINSEIKI', '', '', '', 4);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (169, 'KUMOI', '', '', '', 4);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (170, 'HOSUI', '', '', '', 4);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (171, 'NIJISSEIKI', '', '', '', 4);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (184, 'COBRANÇOSA', '', '', 'Outubro a novembro', 11);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (185, 'ARBEQUINA', '', '', 'Outubro a novembro', 11);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (186, 'HOJIBLANCA', '', '', 'Outubro a novembro', 11);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (187, 'NEGRINHA DO FREIXO', '', '', 'Outubro a novembro', 11);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (188, 'PICUAL', '', '', 'Outubro a novembro', 11);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (189, 'MAÇANILHA', '', '', 'Outubro a novembro', 11);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (190, 'CONSERVA DE ELVAS', '', '', 'Outubro a novembro', 11);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (191, 'GALEGA', '', '', 'Outubro a novembro', 11);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (193, 'Dona Maria', 'Dezembro a janeiro', 'Maio', 'Junho a agosto', 12);
-INSERT INTO Variedade_Permanente(id, nome, fase_poda, fase_floracao, fase_colheita, cultura_id) VALUES (194, 'Cardinal', 'Dezembro a janeiro', 'Maio', 'Junho a agosto', 12);
 
-INSERT INTO Variedade_Temporaria(id, nome, fase_sementeira, fase_colheita,cultura_id) VALUES (172,'Carson Hybrid', '', '80 dias', 5);
-INSERT INTO Variedade_Temporaria(id, nome, fase_sementeira, fase_colheita,cultura_id) VALUES (173,'Red Cored Chantenay', '', '80 dias', 5);
-INSERT INTO Variedade_Temporaria(id, nome, fase_sementeira, fase_colheita,cultura_id) VALUES (174,'Danvers Half Long', '', '80 dias', 5);
-INSERT INTO Variedade_Temporaria(id, nome, fase_sementeira, fase_colheita,cultura_id) VALUES (175,'Imperator 58', '', '80 dias', 5);
-INSERT INTO Variedade_Temporaria(id, nome, fase_sementeira, fase_colheita,cultura_id) VALUES (176,'Sugarsnax Hybrid', '', '80 dias', 5);
-INSERT INTO Variedade_Temporaria(id, nome, fase_sementeira, fase_colheita,cultura_id) VALUES (177,'Nelson Hybrid', '', '80 dias', 5);
-INSERT INTO Variedade_Temporaria(id, nome, fase_sementeira, fase_colheita,cultura_id) VALUES (178,'Scarlet Nantes', '', '80 dias', 5);
-INSERT INTO Variedade_Temporaria(id, nome, fase_sementeira, fase_colheita,cultura_id) VALUES (179,'Amarelo', '', '', 6);
-INSERT INTO Variedade_Temporaria(id, nome, fase_sementeira, fase_colheita,cultura_id) VALUES (180,'Branco', '', '', 6);
-INSERT INTO Variedade_Temporaria(id, nome, fase_sementeira, fase_colheita,cultura_id) VALUES (181,'MAS 24.C', 'Abril a junho', 'Julho a setembro', 8);
-INSERT INTO Variedade_Temporaria(id, nome, fase_sementeira, fase_colheita,cultura_id) VALUES (182,'Doce Golden Bantam', 'Abril a junho', 'Julho a setembro', 8);
-INSERT INTO Variedade_Temporaria(id, nome, fase_sementeira, fase_colheita,cultura_id) VALUES (183,'Senhora Conceição', 'Março a setembro', 'Junho a fevereiro', 9);
-INSERT INTO Variedade_Temporaria(id, nome, fase_sementeira, fase_colheita,cultura_id) VALUES (192,'S. Cosme', 'Fevereiro a abril, agosto a outubro', '90 dias', 10);
-INSERT INTO Variedade_Temporaria(id, nome, fase_sementeira, fase_colheita,cultura_id) VALUES (,'Butternut', '', '', 13);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (1, 'Ameixoeira Rainha Claudia Caranguejeira', 1);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (2, 'Ameixoeira President', 1);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (3, 'Ameixoeira Stanley', 1);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (4, 'Ameixoeira Angeleno', 1);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (5, 'Ameixoeira Black Beauty', 1);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (6, 'Ameixoeira Black Star', 1);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (7, 'Ameixoeira Black Gold', 1);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (8, 'Ameixoeira Black Diamond', 1);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (9, 'Ameixoeira Black Amber', 1);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (10, 'Ameixoeira Black Splendor', 1);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (11, 'Ameixoeira Fortuna', 1);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (12, 'Ameixoeira Friar', 1);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (13, 'Ameixoeira El Dorado', 1);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (14, 'Ameixoeira Elephant Heart', 1);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (15, 'Ameixoeira Golden Japan', 1);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (16, 'Ameixoeira Harry Pitchon', 1);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (17, 'Ameixoeira Laetitia', 1);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (18, 'Ameixoeira Metley', 1);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (19, 'Ameixoeira Mirabelle de Nancy', 1);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (20, 'Ameixoeira Queen Rose', 1);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (21, 'Ameixoeira Red Beaut', 1);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (22, 'Ameixoeira Santa Rosa', 1);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (23, 'Ameixoeira Shiro', 1);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (24, 'Ameixoeira Sungold', 1);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (25, 'Ameixoeira Wilson Perfection', 1);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (26, 'Ameixoeira Autumn Giant', 1);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (27, 'Damasqueiro Bulida', 2);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (28, 'Damasqueiro Canino', 2);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (29, 'Damasqueiro Liabaud', 2);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (30, 'Damasqueiro Maillot Jaune', 2);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (31, 'Damasqueiro Polonais', 2);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (32, 'Macieira Akane', 3);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (33, 'Macieira Belgolden', 3);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (34, 'Macieira Bravo de Esmolfe', 3);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (35, 'Macieira Casa Nova de Alcobaça', 3);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (36, 'Macieira Erovan', 3);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (37, 'Macieira Fuji', 3);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (38, 'Macieira Granny Smith', 3);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (39, 'Macieira Golden Delicious', 3);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (40, 'Macieira Hi-Early', 3);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (41, 'Macieira Jonagored', 3);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (42, 'Macieira Lysgolden', 3);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (43, 'Macieira Mutsu', 3);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (44, 'Macieira Porta da Loja', 3);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (45, 'Macieira Reinette ou Canada', 3);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (46, 'Macieira Reinette ou Grand Fay', 3);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (47, 'Macieira Riscadinha de Palmela', 3);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (48, 'Macieira Royal Gala', 3);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (49, 'Macieira Redchief', 3);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (50, 'Macieira Starking', 3);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (51, 'Macieira Summer Red', 3);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (52, 'Macieira Wellspur Delicious', 3);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (53, 'Macieira Noiva', 3);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (54, 'Macieira Olho Aberto', 3);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (55, 'Macieira Camoesa Rosa', 3);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (56, 'Macieira Malapio', 3);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (57, 'Macieira Gronho Doce', 3);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (58, 'Macieira Pé de Boi', 3);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (59, 'Macieira Pinova', 3);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (60, 'Macieira Pardo Lindo', 3);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (61, 'Macieira Pipo de Basto', 3);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (62, 'Macieira Prima', 3);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (63, 'Macieira Querina', 3);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (64, 'Macieira Vista Bella', 3);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (65, 'Macieira Golden Smoothee', 3);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (66, 'Macieira Golden Suprema', 3);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (67, 'Macieira Gloster 69', 3);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (68, 'Macieira Freedom', 3);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (69, 'Pera Nashi Sninseiki', 4);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (70, 'Pera Nashi Kumoi', 4);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (71, 'Pera Nashi Hosui', 4);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (72, 'Pera Nashi Nijisseiki', 4);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (73, 'Cenoura Carson Hybrid', 5);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (74, 'Cenoura Red Cored Chantenay', 5);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (75, 'Cenoura Danvers Half Long', 5);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (76, 'Cenoura Imperator 58', 5);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (77, 'Cenoura Sugarsnax Hybrid', 5);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (78, 'Cenoura Nelson Hybrid', 5);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (79, 'Cenoura Scarlet Nantes', 5);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (80, 'Tremoço Amarelo', 6);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (81, 'Tremoço Branco', 6);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (82, 'Milho Mas 24.C', 8);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (83, 'Milho Doce Golden Bantam', 8);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (84, 'Nabo Greleiro Senhora Conceição', 9);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (85, 'Oliveira Cobrançosa', 11);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (86, 'Oliveira Arbequina', 11);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (87, 'Oliveira Hojiblanca', 11);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (88, 'Oliveira Negrinha do Freixo', 11);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (89, 'Oliveira Picual', 11);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (90, 'Oliveira Maçanilha', 11);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (91, 'Oliveira Conserva de Elvas', 11);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (92, 'Oliveira Galega', 11);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (93, 'Nabo S. Cosme', 10);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (94, 'Videira Dona Maria', 12);
+INSERT INTO Variedade(id, nome, cultura_id)
+values (95, 'Videira Cardinal', 12);
+
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (1, 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (2, 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (3, 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (4, 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (5, 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (6, 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (7, 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (8, 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (9, 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (10, 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (11, 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (12, 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (13, 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (14, 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (15, 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (16, 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (17, 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (18, 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (19, 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (20, 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (21, 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (22, 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (23, 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (24, 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (25, 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (26, 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (27, 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (28, 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (29, 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (30, 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (31, 'Novembro a dezembro', 'Fevereiro a março', 'Julho a agosto');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (32, 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (33, 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (34, 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (35, 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (36, 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (37, 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (38, 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (39, 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (40, 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (41, 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (42, 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (43, 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (44, 'Janeiro', 'Abril a maio', 'Novembro a dezembro');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (45, 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (46, 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (47, 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (48, 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (49, 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (50, 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (51, 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (52, 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (53, 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (54, 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (55, 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (56, 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (57, 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (58, 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (59, 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (60, 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (61, 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (62, 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (63, 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (64, 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (65, 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (66, 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (67, 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (68, 'Novembro a dezembro', 'Março a abril', 'Agosto a setembro');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (69, null, null, null);
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (70, null, null, null);
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (71, null, null, null);
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (72, null, null, null);
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (85, null, null, 'Outubro a novembro');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (86, null, null, 'Outubro a novembro');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (87, null, null, 'Outubro a novembro');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (88, null, null, 'Outubro a novembro');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (89, null, null, 'Outubro a novembro');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (90, null, null, 'Outubro a novembro');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (91, null, null, 'Outubro a novembro');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (92, null, null, 'Outubro a novembro');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (94, 'Dezembro a janeiro', 'Maio', 'Junho a agosto');
+INSERT INTO Variedade_Permanente(variedade_id, fase_poda, fase_floracao, fase_colheita)
+VALUES (95, 'Dezembro a janeiro', 'Maio', 'Junho a agosto');
+
+INSERT INTO Variedade_Temporaria(variedade_id, fase_sementeira, fase_colheita)
+VALUES (73, null, '80 dias');
+INSERT INTO Variedade_Temporaria(variedade_id, fase_sementeira, fase_colheita)
+VALUES (74, null, '80 dias');
+INSERT INTO Variedade_Temporaria(variedade_id, fase_sementeira, fase_colheita)
+VALUES (75, null, '80 dias');
+INSERT INTO Variedade_Temporaria(variedade_id, fase_sementeira, fase_colheita)
+VALUES (76, null, '80 dias');
+INSERT INTO Variedade_Temporaria(variedade_id, fase_sementeira, fase_colheita)
+VALUES (77, null, '80 dias');
+INSERT INTO Variedade_Temporaria(variedade_id, fase_sementeira, fase_colheita)
+VALUES (78, null, '80 dias');
+INSERT INTO Variedade_Temporaria(variedade_id, fase_sementeira, fase_colheita)
+VALUES (79, null, '80 dias');
+INSERT INTO Variedade_Temporaria(variedade_id, fase_sementeira, fase_colheita)
+VALUES (80, null, null);
+INSERT INTO Variedade_Temporaria(variedade_id, fase_sementeira, fase_colheita)
+VALUES (81, null, null);
+INSERT INTO Variedade_Temporaria(variedade_id, fase_sementeira, fase_colheita)
+VALUES (82, 'Abril a junho', 'Julho a setembro');
+INSERT INTO Variedade_Temporaria(variedade_id, fase_sementeira, fase_colheita)
+VALUES (83, 'Abril a junho', 'Julho a setembro');
+INSERT INTO Variedade_Temporaria(variedade_id, fase_sementeira, fase_colheita)
+VALUES (84, 'Março a setembro', 'Junho a fevereiro');
+INSERT INTO Variedade_Temporaria(variedade_id, fase_sementeira, fase_colheita)
+VALUES (93, 'Fevereiro a abril, agosto a outubro', '90 dias');
+
+-- NOVOS DADOS ----------------------------------------------------------------------------------------------
+
+-- Abóbora manteiga, designada por Cucurbita moschata var 'Butternut'
+INSERT INTO Cultura(id, nome_comum, nome_cientifico)
+VALUES (13, 'Abóbora', 'Cucurbita');
+INSERT INTO Variedade(id, nome, cultura_id)
+VALUES (96, 'Abóbora manteiga', 13);
+INSERT INTO Variedade_Temporaria(variedade_id, fase_sementeira, fase_colheita)
+VALUES (96, null, null);
+
+-- Macieira Canada, 30 un, 01/05/2019, sem data fim
+INSERT INTO Variedade(id, nome, cultura_id)
+VALUES (97, 'Macieira Canada', 3);
+INSERT INTO Variedade_Permanente(variedade_id, fase_plantacao, fase_poda, fase_floracao, fase_colheita)
+VALUES (97, NULL, NULL, NULL, NULL);
+
+-- Macieira Grand Fay, 40 un, 01/05/2019, sem data fim
+INSERT INTO Variedade(id, nome, cultura_id)
+VALUES (98, 'Macieira Grand Fay', 3);
+INSERT INTO Variedade_Permanente(variedade_id, fase_plantacao, fase_poda, fase_floracao, fase_colheita)
+VALUES (98, NULL, NULL, NULL, NULL);
+
+-- Macieira Gronho Doce, 50 un, 01/05/2019, sem data fim
+INSERT INTO Variedade(id, nome, cultura_id)
+VALUES (99, 'Macieira Gronho Doce', 3);
+INSERT INTO Variedade_Permanente(variedade_id, fase_plantacao, fase_poda, fase_floracao, fase_colheita)
+VALUES (99, NULL, NULL, NULL, NULL);
