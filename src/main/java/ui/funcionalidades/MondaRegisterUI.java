@@ -3,6 +3,7 @@ package ui.funcionalidades;
 import controller.ColheitaRegisterController;
 import controller.MondaRegisterController;
 import controller.OperacaoAgricolaRegisterController;
+import ui.utils.Utils;
 
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -18,19 +19,19 @@ public class MondaRegisterUI implements Runnable {
     public MondaRegisterUI() {
         controller = new MondaRegisterController();
         controllerop = new OperacaoAgricolaRegisterController();
+
     }
 
     public void run() {
         try {
             System.out.println("Register a new Monda");
 
-            Scanner scanner = new Scanner(System.in);
             System.out.print("OperacaoId: ");
             int operacaoId = controllerop.getNextId();
             System.out.printf("Using %d\n", operacaoId);
 
-            System.out.print("Date (yyyy-mm-dd): ");
-            String strDate = scanner.next();
+
+            String strDate = Utils.readLineFromConsole("Date (yyyy-mm-dd): ");
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             formatter.setLenient(false);  // Set leniency to false
 
@@ -41,32 +42,25 @@ public class MondaRegisterUI implements Runnable {
                     date = formatter.parse(strDate);
                     validDate = true;
                 } catch (ParseException e) {
-                    System.out.println("Error: Invalid date format. Please enter the date in yyyy-mm-dd format.");
-                    scanner.nextLine();
-                    System.out.print("Date (yyyy-mm-dd): ");
-                    strDate = scanner.next();
+                    Utils.readLineFromConsole("Error: Invalid date format. Please enter the date in yyyy-mm-dd format.");
+                    strDate = Utils.readLineFromConsole("Date (yyyy-mm-dd): ");
                 }
             }
 
-            System.out.print("ParcelaId: ");
-            int parcelaId = scanner.nextInt();
 
-            System.out.print("VariedadeId: ");
-            int variedadeId = scanner.nextInt();
+            int parcelaId = Utils.readIntegerFromConsole("ParcelaId: ");
 
-            System.out.print("FatorProducaoId: ");
-            int fatorProducaoId = scanner.nextInt();
+            int variedadeId = Utils.readIntegerFromConsole("VariedadeId: ");
 
-            System.out.print("MetodoExecucaoId: ");
-            int metodoExecucaoId = scanner.nextInt();
+            int fatorProducaoId = Utils.readIntegerFromConsole("FatorProducaoId: ");
 
-            System.out.print("Quantidade: ");
-            float quantidade = scanner.nextFloat();
+            int metodoExecucaoId = Utils.readIntegerFromConsole("MetodoExecucaoId: ");
+
+            float quantidade = Utils.readFloatFromConsole("Quantidade: ");
 
             while (quantidade < 0) {
                 System.out.println("Error: Quantity cannot be a negative number. Please enter a non-negative quantity.");
-                System.out.print("Quantidade: ");
-                quantidade = scanner.nextFloat();
+                quantidade = Utils.readFloatFromConsole("Quantidade: ");
             }
 
 
