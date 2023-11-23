@@ -55,6 +55,8 @@ public class ColheitaRegisterUI implements Runnable {
                 }
             }
 
+            controllerop.getTableData("Parcela");
+            controllerop.printTableData("Parcela");
 
             int parcelaId;
             do {
@@ -64,6 +66,9 @@ public class ColheitaRegisterUI implements Runnable {
                     System.out.println("Erro: ParcelaId nao registado na base de dados. Insira um Id existente.");
                 }
             } while (!controller.isIdValid("PARCELA", parcelaId));
+
+            controllerop.getTableData("Produto");
+            controllerop.printTableData("Produto");
 
             int produtoId;
             do {
@@ -82,23 +87,22 @@ public class ColheitaRegisterUI implements Runnable {
             while (true) {
                 System.out.print("Quantidade: ");
 
-                while (!scanner.hasNextFloat()) {
+                try {
+                    String input = scanner.next();
+                    quantidade = Float.parseFloat(input);
+
+                    if (quantidade > 0) {
+                        break;
+                    } else {
+                        System.out.println("Erro: Quantidade nao pode ser um valor negativo.");
+                    }
+                } catch (NumberFormatException e) {
                     System.out.println("Erro: Quantidade deve ser um numero valido.");
-                    System.out.print("Quantidade: ");
-                    scanner.next();
-                }
-
-                quantidade = scanner.nextFloat();
-
-                if (quantidade > 0) {
-                    break;
-                } else {
-                    System.out.println("Erro: Quantidade noo pode ser um valor negativo.");
                 }
             }
 
-            controller.colheitaRegister(operacaoId, parcelaId, produtoId, metodoExecucaoId, quantidade);
             controllerop.operacaoAgricolaRegister(operacaoId, date);
+            controller.colheitaRegister(operacaoId, parcelaId, produtoId, metodoExecucaoId, quantidade);
 
             System.out.println("\nColheita registada.");
         } catch (SQLException e) {
