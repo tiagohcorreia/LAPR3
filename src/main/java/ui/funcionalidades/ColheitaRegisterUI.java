@@ -26,54 +26,89 @@ public class ColheitaRegisterUI implements Runnable {
             Scanner scanner = new Scanner(System.in);
             System.out.print("OperacaoId: ");
             int operacaoId = controllerop.getNextId();
-            System.out.printf("Using %d\n", operacaoId);
+            System.out.printf("Usando id %d\n", operacaoId);
 
             System.out.print("Date (yyyy-mm-dd): ");
             String strDate = scanner.next();
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            formatter.setLenient(false);  // Set leniency to false
+            formatter.setLenient(false);
+
+            Date currentDate = new Date();
 
             Date date = null;
             boolean validDate = false;
             while (!validDate) {
                 try {
                     date = formatter.parse(strDate);
-                    validDate = true;
+                    if (date.after(currentDate)) {
+                        System.out.println("Erro: Data invalida.Insira uma data que nao se encontre no futuro.");
+                        System.out.print("Data (yyyy-mm-dd): ");
+                        strDate = scanner.next();
+                    } else {
+                        validDate = true;
+                    }
                 } catch (ParseException e) {
-                    System.out.println("Error: Invalid date format. Please enter the date in yyyy-mm-dd format.");
+                        System.out.println("Erro: Formato de data invalido. Insira a data no formato yyyy-mm-dd.");
                     scanner.nextLine();
-                    System.out.print("Date (yyyy-mm-dd): ");
+                    System.out.print("Data (yyyy-mm-dd): ");
                     strDate = scanner.next();
                 }
             }
 
-            System.out.print("ParcelaId: ");
-            int parcelaId = scanner.nextInt();
+            controllerop.getTableData("Parcela");
+            controllerop.printTableData("Parcela");
 
-            System.out.print("ProdutoId: ");
-            int produtoId = scanner.nextInt();
+            int parcelaId;
+            do {
+                System.out.print("ParcelaId: ");
+                parcelaId = scanner.nextInt();
+                if (!controller.isIdValid("PARCELA", parcelaId)) {
+                    System.out.println("Erro: ParcelaId nao registado na base de dados. Insira um Id existente.");
+                }
+            } while (!controller.isIdValid("PARCELA", parcelaId));
+
+            controllerop.getTableData("Produto");
+            controllerop.printTableData("Produto");
+
+            int produtoId;
+            do {
+                System.out.print("ProdutoId: ");
+                produtoId = scanner.nextInt();
+                if (!controller.isIdValid("Produto", produtoId)) {
+                    System.out.println("Erro: ProdutoId nao registado na base de dados. Insira um Id existente.");
+                }
+            } while (!controller.isIdValid("Produto", produtoId));
 
             System.out.print("MetodoExecucaoId: ");
             int metodoExecucaoId = scanner.nextInt();
 
-            System.out.print("Quantidade: ");
-            float quantidade = scanner.nextFloat();
+            float quantidade;
 
-            while (quantidade < 0) {
-                System.out.println("Error: Quantity cannot be a negative number. Please enter a non-negative quantity.");
+            while (true) {
                 System.out.print("Quantidade: ");
-                quantidade = scanner.nextFloat();
-            }
 
+                try {
+                    String input = scanner.next();
+                    quantidade = Float.parseFloat(input);
+
+                    if (quantidade > 0) {
+                        break;
+                    } else {
+                        System.out.println("Erro: Quantidade nao pode ser um valor negativo.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Erro: Quantidade deve ser um numero valido.");
+                }
+            }
 
             controllerop.operacaoAgricolaRegister(operacaoId, date);
             controller.colheitaRegister(operacaoId, parcelaId, produtoId, metodoExecucaoId, quantidade);
 
-            System.out.println("\nColheita registered.");
+            System.out.println("\nColheita registada.");
         } catch (SQLException e) {
 
 
-            System.out.println("\nColheita not registered!\n" + e.getMessage());
+            System.out.println("\nColheita nao registada!\n" + e.getMessage());
 
         }
     }
