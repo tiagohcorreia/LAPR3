@@ -1,8 +1,9 @@
-package ui.menu;
+package ui.funcionalidades;
 
 
 import ui.funcionalidades.ColheitaRegisterUI;
 
+import ui.menu.MenuItem;
 import ui.utils.Utils;
 import java.util.ArrayList;
 import java.util.List;

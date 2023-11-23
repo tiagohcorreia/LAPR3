@@ -10,7 +10,7 @@ public class ChooseRoleUI implements Runnable{
 
         System.out.println("1.Gestor Agricola");
 
-        int option = Utils.readIntegerFromConsole("Choose your role");
+        int option = Utils.readIntegerFromConsole("Escolha o user");
 
         switch (option) {
 

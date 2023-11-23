@@ -1,5 +1,7 @@
 package ui.user;
 
+import ui.funcionalidades.ColheitaUI;
+import ui.funcionalidades.MondaRegisterUI;
 import ui.funcionalidades.SementeiraRegisterUI;
 import ui.menu.MenuItem;
 import ui.utils.Utils;
@@ -19,6 +21,8 @@ public class GestorAgricolaUI implements Runnable {
         List<MenuItem> options = new ArrayList<MenuItem>();
 
         options.add(new MenuItem("Registar Sementeira", new SementeiraRegisterUI()));
+        options.add(new MenuItem("Registar Colheita", new ColheitaUI()));
+        options.add(new MenuItem("Registar Monda", new MondaRegisterUI()));
 
         int option = 0;
 
