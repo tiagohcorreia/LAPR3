@@ -931,283 +931,499 @@ VALUES (300, 102, 89, 3, 7, 10, null);
 
 ---------------------------------------------------------------------------------
 
--- OPERAÇOES LAMEIRO DA MOINHO
+-- OPERAÇOES LAMEIRO DA PONTE
 
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (309, 105, NULL, 13, 7, 3200, 1.1);
-INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, METODO_EXECUCAO_ID, QUANTIDADE)
-VALUES (310, 105, 143, NULL, 50);
-INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, METODO_EXECUCAO_ID, QUANTIDADE)
-VALUES (311, 105, 155, NULL, 20);
-INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, METODO_EXECUCAO_ID, QUANTIDADE)
-VALUES (312, 105, 160, NULL, 40);
-INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, METODO_EXECUCAO_ID, QUANTIDADE)
-VALUES (313, 105, 144, NULL, 30);
-INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, METODO_EXECUCAO_ID, QUANTIDADE)
-VALUES (314, 105, 145, NULL, 40);
-INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, METODO_EXECUCAO_ID, QUANTIDADE)
-VALUES (315, 105, 156, NULL, 50);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (316, 105, 143, 7, 7, 100, 155);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (317, 105, 155, 8, 8, 40, 155);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (318, 105, 160, 9, 9, 80, 155);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (319, 105, 144, 10, 10, 60, 155);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (320, 105, 145, 11, 11, 80, 155);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (321, 105, 156, 12, 12, 100, 155);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (322, 105, 143, 13, 13, 150, 155);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (323, 105, 155, 14, 14, 60, 155);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (324, 105, 160, 15, 15, 120, 155);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (325, 105, 144, 16, 16, 90, 155);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (326, 105, 145, 17, 17, 120, 155);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (327, 105, 156, 18, 18, 150, 155);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (328, 105, 143, 19, 19, 150, 155);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (329, 105, 155, 20, 20, 60, 155);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (330, 105, 160, 21, 21, 120, 155);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (331, 105, 144, 22, 22, 90, 155);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (332, 105, 145, 23, 23, 120, 155);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (333, 105, 156, 24, 24, 150, 155);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (334, 105, 143, 25, 25, 5, 155);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (335, 105, 155, 26, 26, 2, 155);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (336, 105, 160, 27, 27, 4, 155);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (337, 105, 144, 28, 28, 3, 155);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (338, 105, 145, 29, 29, 4, 155);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (339, 105, 156, 30, 30, 5, 155);
+-- 14/05/2023 operação de rega, setor 21, 120 min, 07:00
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (301, to_date('14-05-2023', 'dd-mm-yyyy'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (301, 21, 120, '07:00');
 
-INSERT INTO COLHEITA(OPERACAO_ID, PARCELA_ID, PRODUTO_ID, METODO_EXECUCAO_ID, QUANTIDADE)
-VALUES (340, 105, 45, NULL, 700);
-INSERT INTO COLHEITA(OPERACAO_ID, PARCELA_ID, PRODUTO_ID, METODO_EXECUCAO_ID, QUANTIDADE)
-VALUES (341, 105, 46, NULL, 600);
-INSERT INTO COLHEITA(OPERACAO_ID, PARCELA_ID, PRODUTO_ID, METODO_EXECUCAO_ID, QUANTIDADE)
-VALUES (342, 105, 46, NULL, 700);
-INSERT INTO COLHEITA(OPERACAO_ID, PARCELA_ID, PRODUTO_ID, METODO_EXECUCAO_ID, QUANTIDADE)
-VALUES (343, 105, 61, NULL, 600);
-INSERT INTO COLHEITA(OPERACAO_ID, PARCELA_ID, PRODUTO_ID, METODO_EXECUCAO_ID, QUANTIDADE)
-VALUES (344, 105, 61, NULL, 700);
-INSERT INTO COLHEITA(OPERACAO_ID, PARCELA_ID, PRODUTO_ID, METODO_EXECUCAO_ID, QUANTIDADE)
-VALUES (345, 105, 57, NULL, 1200);
-INSERT INTO COLHEITA(OPERACAO_ID, PARCELA_ID, PRODUTO_ID, METODO_EXECUCAO_ID, QUANTIDADE)
-VALUES (346, 105, 56, NULL, 700);
-INSERT INTO COLHEITA(OPERACAO_ID, PARCELA_ID, PRODUTO_ID, METODO_EXECUCAO_ID, QUANTIDADE)
-VALUES (347, 105, 44, NULL, 700);
-INSERT INTO COLHEITA(OPERACAO_ID, PARCELA_ID, PRODUTO_ID, METODO_EXECUCAO_ID, QUANTIDADE)
-VALUES (348, 105, 44, NULL, 800);
+--01/06/2023 operação de rega, setor 21, 120 min, 07:00
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (302, to_date('01-06-2023', 'dd-mm-yyyy'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (302, 21, 120, '07:00');
 
-INSERT INTO REGA (OPERACAO_ID, SETOR_ID, DURACAO, HORA)
-VALUES (349, 22, 120, '23:00');
-INSERT INTO REGA (OPERACAO_ID, SETOR_ID, DURACAO, HORA)
-VALUES (350, 22, 120, '23:00');
-INSERT INTO REGA (OPERACAO_ID, SETOR_ID, DURACAO, HORA)
-VALUES (351, 22, 120, '23:00');
-INSERT INTO REGA (OPERACAO_ID, SETOR_ID, DURACAO, HORA)
-VALUES (352, 22, 120, '23:00');
-INSERT INTO REGA (OPERACAO_ID, SETOR_ID, DURACAO, HORA)
-VALUES (353, 22, 180, '23:00');
-INSERT INTO REGA (OPERACAO_ID, SETOR_ID, DURACAO, HORA)
-VALUES (354, 22, 180, '23:00');
-INSERT INTO REGA (OPERACAO_ID, SETOR_ID, DURACAO, HORA)
-VALUES (355, 22, 180, '23:00');
-INSERT INTO REGA (OPERACAO_ID, SETOR_ID, DURACAO, HORA)
-VALUES (356, 22, 180, '23:00');
-INSERT INTO REGA (OPERACAO_ID, SETOR_ID, DURACAO, HORA)
-VALUES (357, 22, 150, '23:00');
-INSERT INTO REGA (OPERACAO_ID, SETOR_ID, DURACAO, HORA)
-VALUES (358, 22, 150, '23:00');
-INSERT INTO REGA (OPERACAO_ID, SETOR_ID, DURACAO, HORA)
-VALUES (359, 22, 150, '23:00');
-INSERT INTO REGA (OPERACAO_ID, SETOR_ID, DURACAO, HORA)
-VALUES (360, 22, 120, '23:00');
-INSERT INTO REGA (OPERACAO_ID, SETOR_ID, DURACAO, HORA)
-VALUES (361, 22, 120, '23:00');
-INSERT INTO REGA (OPERACAO_ID, SETOR_ID, DURACAO, HORA)
-VALUES (362, 22, 120, '23:00');
-INSERT INTO REGA (OPERACAO_ID, SETOR_ID, DURACAO, HORA)
+--15/06/2023 operação de rega, setor 21, 120 min, 07:00
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (303, to_date('15-06-2023', 'dd-mm-yyyy'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (303, 21, 120, '07:00');
+
+--30/06/2023 operação de rega, setor 21, 120 min, 07:00
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (304, to_date('30-06-2023', 'dd-mm-yyyy'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (304, 21, 120, '07:00');
+
+--07/07/2023 operação de rega, setor 21, 180 min, 07:00
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (305, to_date('07-07-2023', 'dd-mm-yyyy'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (305, 21, 180, '07:00');
+
+--14/07/2023 operação de rega, setor 21, 180 min, 22:00
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (306, to_date('14-07-2023', 'dd-mm-yyyy'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (306, 21, 180, '22:00');
+
+--21/07/2023 operação de rega, setor 21, 180 min, 22:00
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (307, to_date('21-07-2023', 'dd-mm-yyyy'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (307, 21, 180, '22:00');
+
+--28/07/2023 operação de rega, setor 21, 180 min, 22:00
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (308, to_date('28-07-2023', 'dd-mm-yyyy'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (308, 21, 180, '22:00');
+
+--04/08/2023 operação de rega, setor 21, 150 min, 22:00
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (309, to_date('04-08-2023', 'dd-mm-yyyy'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (309, 21, 150, '22:00');
+
+--11/08/2023 operação de rega, setor 21, 150 min, 22:00
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (310, to_date('11-08-2023', 'dd-mm-yyyy'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (310, 21, 150, '22:00');
+
+--18/08/2023 operação de rega, setor 21, 150 min, 22:00
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (311, to_date('19-08-2023', 'dd-mm-yyyy'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (311, 21, 150, '22:00');
+
+--25/08/2023 operação de rega, setor 21, 120 min, 22:00
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (312, to_date('25-08-2023', 'dd-mm-yyyy'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (312, 21, 120, '22:00');
+
+--01/09/2023 operação de rega, setor 21, 120 min, 22:00
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (313, to_date('01-09-2023', 'dd-mm-yyyy'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (313, 21, 120, '22:00');
+
+--08/09/2023 operação de rega, setor 21, 120 min, 22:00
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (314, to_date('08-09-2023', 'dd-mm-yyyy'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (314, 21, 120, '22:00');
+
+--15/09/2023 operação de rega, setor 21, 120 min, 22:00
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (315, to_date('15-09-2023', 'dd-mm-yyyy'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (315, 21, 120, '22:00');
+
+--18/08/2023 operação de colheita de maçã Royal Gala, 700 kg
+-- Lameiro da Ponte
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (316, to_date('18-08-2023', 'dd-mm-yyyy'));
+INSERT INTO Colheita(operacao_id, parcela_id, produto_id, metodo_execucao_id, quantidade)
+VALUES (316, 104, ?, null, 700);
+
+
+--30/08/2023 operação de colheita de maçã Royal Gala, 900 kg
+-- Lameiro da Ponte
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (317, to_date('30-08-2023', 'dd-mm-yyyy'));
+INSERT INTO Colheita(operacao_id, parcela_id, produto_id, metodo_execucao_id, quantidade)
+VALUES (317, 104, 2, null, 900);
+
+--05/09/2023 operação de colheita de maçã Jonagored, 900 kg
+-- Lameiro da Ponte
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (318, to_date('05-09-2023', 'dd-mm-yyyy'));
+INSERT INTO Colheita(operacao_id, parcela_id, produto_id, metodo_execucao_id, quantidade)
+VALUES (318, 104, 3, null, 900);
+
+--08/09/2023 operação de colheita de maçã Jonagored, 1050 kg
+-- Lameiro da Ponte
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (319, to_date('08-09-2023', 'dd-mm-yyyy'));
+INSERT INTO Colheita(operacao_id, parcela_id, produto_id, metodo_execucao_id, quantidade)
+VALUES (319, 104, 3, null, 1050);
+
+--28/09/2023 operação de colheita de maçã Fuji, 950 kg
+-- Lameiro da Ponte
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (320, to_date('28-09-2023', 'dd-mm-yyyy'));
+INSERT INTO Colheita(operacao_id, parcela_id, produto_id, metodo_execucao_id, quantidade)
+VALUES (320, 104, 4, null, 950);
+
+--03/10/2023 operação de colheita de maçã Fuji, 800 kgº
+-- Lameiro da Ponte
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (321, to_date('03-10-2023', 'dd-mm-yyyy'));
+INSERT INTO Colheita(operacao_id, parcela_id, produto_id, metodo_execucao_id, quantidade)
+VALUES (321, 104, 4, null, 800);
+
+---------------------------------------------------------------------------------
+
+-- OPERAÇOES LAMEIRO DO MOINHO
+
+-- 04/01/2019 operação de aplicação de fator de produção BIOFERTIL N6, no solo, 1.1 ha, 3200 kg
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (322, TO_DATE('04/01/2019', 'DD/MM/YYYY'));
+INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
+                         AREA)
+VALUES (322, 105, null, 13, 7, 3200, 1.1);
+
+-- 09/01/2019 operação de plantação de Macieira Porta da Loja, 50 un
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (323, TO_DATE('09/01/2019', 'DD/MM/YYYY'));
+INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, METODO_EXECUCAO_ID, QUANTIDADE)
+VALUES (323, 105, 44, NULL, 50);
+
+-- 09/01/2019 operação de plantação de Macieira Malápio, 20 un
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (324, TO_DATE('09/01/2019', 'DD/MM/YYYY'));
+INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, METODO_EXECUCAO_ID, QUANTIDADE)
+VALUES (324, 105, 56, NULL, 20);
+
+-- 10/01/2019 operação de plantação de Macieira Pipo de Basto, 40 un
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (325, TO_DATE('10/01/2019', 'DD/MM/YYYY'));
+INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, METODO_EXECUCAO_ID, QUANTIDADE)
+VALUES (325, 105, 61, NULL, 40);
+
+-- 10/01/2019 operação de plantação de Macieira Canada, 30 un
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (326, TO_DATE('10/01/2019', 'DD/MM/YYYY'));
+INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, METODO_EXECUCAO_ID, QUANTIDADE)
+VALUES (326, 105, 97, NULL, 30);
+
+-- 11/01/2019 operação de plantação de Macieira Grand Fay, 40 un
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (327, TO_DATE('11/01/2019', 'DD/MM/YYYY'));
+INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, METODO_EXECUCAO_ID, QUANTIDADE)
+VALUES (327, 105, 98, NULL, 40);
+
+-- 11/01/2019 operação de plantação de Macieira Gronho Doce, 50 un
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (328, TO_DATE('11/01/2019', 'DD/MM/YYYY'));
+INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, METODO_EXECUCAO_ID, QUANTIDADE)
+VALUES (328, 105, 99, NULL, 50);
+
+-- 06/01/2020 operação de aplicação de fator de produção Fertimax Extrume de Cavalo, no solo, Macieira Porta da Loja, 100 kg
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (329, TO_DATE('06/01/2020', 'DD/MM/YYYY'));
+INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
+                         AREA)
+VALUES (329, 105, 44, 12, 7, 100, null);
+
+-- 06/01/2020 operação de aplicação de fator de produção Fertimax Extrume de Cavalo, no solo, Macieira Malápio, 40 kg
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (330, TO_DATE('06/01/2020', 'DD/MM/YYYY'));
+INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
+                         AREA)
+VALUES (330, 105, 56, 12, 7, 40, null);
+
+-- 06/01/2020 operação de aplicação de fator de produção Fertimax Extrume de Cavalo, no solo, Macieira Pipo de Basto, 80 kg
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (331, TO_DATE('06/01/2020', 'DD/MM/YYYY'));
+INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
+                         AREA)
+VALUES (331, 105, 61, 12, 7, 80, null);
+
+-- 06/01/2020 operação de aplicação de fator de produção Fertimax Extrume de Cavalo, no solo, Macieira Canada, 60 kg
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (332, TO_DATE('06/01/2020', 'DD/MM/YYYY'));
+INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
+                         AREA)
+VALUES (332, 105, 97, 12, 7, 60, null);
+
+-- 07/01/2020 operação de aplicação de fator de produção Fertimax Extrume de Cavalo, no solo, Macieira Grand Fay, 80 kg
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (333, TO_DATE('07/01/2020', 'DD/MM/YYYY'));
+INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
+                         AREA)
+VALUES (333, 105, 98, 12, 7, 80, null);
+
+-- 07/01/2020 operação de aplicação de fator de produção Fertimax Extrume de Cavalo, no solo, Macieira Gronho Doce, 100 kg
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (334, TO_DATE('07/01/2020', 'DD/MM/YYYY'));
+INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
+                         AREA)
+VALUES (334, 105, 99, 12, 7, 100, null);
+
+-- 07/01/2021 operação de aplicação de fator de produção Fertimax Extrume de Cavalo, no solo, Macieira Porta da Loja, 150 kg
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (335, TO_DATE('07/01/2021', 'DD/MM/YYYY'));
+INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
+                         AREA)
+VALUES (335, 105, 44, 12, 7, 150, null);
+
+-- 07/01/2021 operação de aplicação de fator de produção Fertimax Extrume de Cavalo, no solo, Macieira Malápio, 60 kg
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (336, TO_DATE('07/01/2021', 'DD/MM/YYYY'));
+INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
+                         AREA)
+VALUES (336, 105, 56, 12, 7, 60, null);
+
+-- 08/01/2021 operação de aplicação de fator de produção Fertimax Extrume de Cavalo, no solo, Macieira Pipo de Basto, 120 kg
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (337, TO_DATE('08/01/2021', 'DD/MM/YYYY'));
+INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
+                         AREA)
+VALUES (337, 105, 61, 12, 7, 120, null);
+
+-- 07/01/2021 operação de aplicação de fator de produção Fertimax Extrume de Cavalo, no solo, Macieira Canada, 90 kg
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (338, TO_DATE('07/01/2021', 'DD/MM/YYYY'));
+INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
+                         AREA)
+VALUES (338, 105, 97, 12, 7, 90, null);
+
+-- 07/01/2021 operação de aplicação de fator de produção Fertimax Extrume de Cavalo, no solo, Macieira Grand Fay, 120 kg
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (339, TO_DATE('07/01/2021', 'DD/MM/YYYY'));
+INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
+                         AREA)
+VALUES (339, 105, 98, 12, 7, 120, null);
+
+-- 08/01/2021 operação de aplicação de fator de produção Fertimax Extrume de Cavalo, no solo, Macieira Gronho Doce, 150 kg
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (340, TO_DATE('08/01/2021', 'DD/MM/YYYY'));
+INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
+                         AREA)
+VALUES (340, 105, 99, 12, 7, 150, null);
+
+-- 15/01/2022 operação de aplicação de fator de produção BIOFERTIL N6, no solo, Macieira Porta da Loja, 150 kg
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (341, TO_DATE('15/01/2022', 'DD/MM/YYYY'));
+INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
+                         AREA)
+VALUES (342, 105, 44, 13, 7, 150, null);
+
+-- 15/01/2022 operação de aplicação de fator de produção BIOFERTIL N6, no solo, Macieira Malápio, 60 kg
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (343, TO_DATE('15/01/2022', 'DD/MM/YYYY'));
+INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
+                         AREA)
+VALUES (343, 105, 56, 13, 7, 60, null);
+
+-- 15/01/2022 operação de aplicação de fator de produção BIOFERTIL N6, no solo, Macieira Pipo de Basto, 120 kg
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (344, TO_DATE('15/01/2022', 'DD/MM/YYYY'));
+INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
+                         AREA)
+VALUES (344, 105, 61, 13, 7, 120, null);
+
+-- 16/01/2022 operação de aplicação de fator de produção BIOFERTIL N6, no solo, Macieira Canada, 90 kg
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (345, TO_DATE('16/01/2022', 'DD/MM/YYYY'));
+INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
+                         AREA)
+VALUES (345, 105, 97, 13, 7, 90, null);
+
+-- 16/01/2022 operação de aplicação de fator de produção BIOFERTIL N6, no solo, Macieira Grand Fay, 120 kg
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (346, TO_DATE('16/01/2022', 'DD/MM/YYYY'));
+INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
+                         AREA)
+VALUES (346, 105, 98, 13, 7, 120, null);
+
+-- 16/01/2022 operação de aplicação de fator de produção BIOFERTIL N6, no solo, Macieira Gronho Doce, 150 kg
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (347, TO_DATE('16/01/2022', 'DD/MM/YYYY'));
+INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
+                         AREA)
+VALUES (347, 105, 99, 13, 7, 150, null);
+
+-- 15/05/2023 operação de aplicação de fator de produção EPSO Microtop, foliar, Macieira Porta da Loja, 5 kg
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (348, TO_DATE('15/05/2023', 'DD/MM/YYYY'));
+INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
+                         AREA)
+VALUES (348, 105, 44, 5, 8, 5, null);
+
+-- 15/05/2023 operação de aplicação de fator de produção EPSO Microtop, foliar, Macieira Malápio, 2 kg
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (349, TO_DATE('15/05/2023', 'DD/MM/YYYY'));
+INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
+                         AREA)
+VALUES (349, 105, 56, 5, 8, 2, null);
+
+-- 15/05/2023 operação de aplicação de fator de produção EPSO Microtop, foliar, Macieira Pipo de Basto, 4 kg
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (350, TO_DATE('15/05/2023', 'DD/MM/YYYY'));
+INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
+                         AREA)
+VALUES (350, 105, 61, 5, 8, 4, null);
+
+-- 15/05/2023 operação de aplicação de fator de produção EPSO Microtop, foliar, Macieira Canada, 3 kg
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (351, TO_DATE('15/05/2023', 'DD/MM/YYYY'));
+INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
+                         AREA)
+VALUES (351, 105, 97, 5, 8, 3, null);
+
+-- 15/05/2023 operação de aplicação de fator de produção EPSO Microtop, foliar, Macieira Grand Fay, 4 kg
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (352, TO_DATE('15/05/2023', 'DD/MM/YYYY'));
+INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
+                         AREA)
+VALUES (352, 105, 98, 5, 8, 4, null);
+
+-- 15/05/2023 operação de aplicação de fator de produção EPSO Microtop, foliar, Macieira Gronho Doce, 5 kg
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (353, TO_DATE('15/05/2023', 'DD/MM/YYYY'));
+INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
+                         AREA)
+VALUES (353, 105, 99, 5, 8, 5, null);
+
+
+-- 15/09/2023 operação de colheita de maçã Canada, 700 kg
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (354, TO_DATE('15/09/2023', 'DD/MM/YYYY'));
+INSERT INTO COLHEITA(OPERACAO_ID, PARCELA_ID, PRODUTO_ID, METODO_EXECUCAO_ID, QUANTIDADE)
+VALUES (354, 105, 5, NULL, 700);
+
+-- 16/09/2023 operação de colheita de maçã Grand Fay, 600 kg
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (355, TO_DATE('16/09/2023', 'DD/MM/YYYY'));
+INSERT INTO COLHEITA(OPERACAO_ID, PARCELA_ID, PRODUTO_ID, METODO_EXECUCAO_ID, QUANTIDADE)
+VALUES (355, 105, 6, NULL, 600);
+
+-- 20/09/2023 operação de colheita de maçã Grand Fay, 700 kg
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (356, TO_DATE('20/09/2023', 'DD/MM/YYYY'));
+INSERT INTO COLHEITA(OPERACAO_ID, PARCELA_ID, PRODUTO_ID, METODO_EXECUCAO_ID, QUANTIDADE)
+VALUES (356, 105, 6, NULL, 700);
+
+-- 27/09/2023 operação de colheita de maçã Pipo de Basto, 600 kg
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (357, TO_DATE('27/09/2023', 'DD/MM/YYYY'));
+INSERT INTO COLHEITA(OPERACAO_ID, PARCELA_ID, PRODUTO_ID, METODO_EXECUCAO_ID, QUANTIDADE)
+VALUES (357, 105, 7, NULL, 600);
+
+-- 05/10/2023 operação de colheita de maçã Pipo de Basto, 700 kg
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (358, TO_DATE('05/10/2023', 'DD/MM/YYYY'));
+INSERT INTO COLHEITA(OPERACAO_ID, PARCELA_ID, PRODUTO_ID, METODO_EXECUCAO_ID, QUANTIDADE)
+VALUES (358, 105, 7, NULL, 700);
+
+-- 15/10/2023 operação de colheita de maçã Gronho Doce, 1200 kg
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (359, TO_DATE('15/10/2023', 'DD/MM/YYYY'));
+INSERT INTO COLHEITA(OPERACAO_ID, PARCELA_ID, PRODUTO_ID, METODO_EXECUCAO_ID, QUANTIDADE)
+VALUES (359, 105, 8, NULL, 1200);
+
+-- 15/10/2023 operação de colheita de maçã Malápio, 700 kg
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (360, TO_DATE('15/10/2023', 'DD/MM/YYYY'));
+INSERT INTO COLHEITA(OPERACAO_ID, PARCELA_ID, PRODUTO_ID, METODO_EXECUCAO_ID, QUANTIDADE)
+VALUES (360, 105, 9, NULL, 700);
+
+-- 12/11/2023 operação de colheita de maçã Porta da Loja, 700 kg
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (361, TO_DATE('12/11/2023', 'DD/MM/YYYY'));
+INSERT INTO COLHEITA(OPERACAO_ID, PARCELA_ID, PRODUTO_ID, METODO_EXECUCAO_ID, QUANTIDADE)
+VALUES (361, 105, 10, NULL, 700);
+
+-- 15/11/2023 operação de colheita de maçã Porta da Loja, 800 kg
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (362, TO_DATE('15/11/2023', 'DD/MM/YYYY'));
+INSERT INTO COLHEITA(OPERACAO_ID, PARCELA_ID, PRODUTO_ID, METODO_EXECUCAO_ID, QUANTIDADE)
+VALUES (362, 105, 10, NULL, 800);
+
+
+
+-- 13/05/2023 operação de rega, setor 22, 120 min, 23:00
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (363, TO_DATE('13/05/2023', 'DD/MM/YYYY'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
 VALUES (363, 22, 120, '23:00');
 
----------------------------------------------------------------------------------
+-- 02/06/2023 operação de rega, setor 22, 120 min, 23:00
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (364, TO_DATE('02/06/2023', 'DD/MM/YYYY'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (364, 22, 120, '23:00');
 
--- OPERAÇOES CAMPO GRANDE
+-- 16/06/2023 operação de rega, setor 22, 120 min, 23:00
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (365, TO_DATE('16/06/2023', 'DD/MM/YYYY'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (365, 22, 120, '23:00');
 
---13/01/2021 operação de aplicação de fator de produção BIOFERTIL N6, Oliveira Picual, 120 kg
-INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, fator_producao_id, metodo_aplicacao_id, quantidade,
-                         area)
-VALUES (364, 102, 89, 13, null, 120, null);
+-- 01/07/2023 operação de rega, setor 22, 120 min, 23:00
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (366, TO_DATE('01/07/2023', 'DD/MM/YYYY'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (366, 22, 120, '23:00');
 
+-- 08/07/2023 operação de rega, setor 22, 180 min, 23:00
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (367, TO_DATE('08/07/2023', 'DD/MM/YYYY'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (367, 22, 180, '23:00');
 
-INSERT INTO Aplicacao_FP(operacao_id, fator_producao_id)
-values (365, ?);
-INSERT INTO Aplicacao_FP(operacao_id, fator_producao_id)
-values (366, ?);
-INSERT INTO Aplicacao_FP(operacao_id, fator_producao_id)
-values (367, ?);
-INSERT INTO Aplicacao_FP(operacao_id, fator_producao_id)
-values (368, ?);
-INSERT INTO Aplicacao_FP(operacao_id, fator_producao_id)
-values (369, ?);
-INSERT INTO Aplicacao_FP(operacao_id, fator_producao_id)
-values (370, ?);
-INSERT INTO Aplicacao_FP(operacao_id, fator_producao_id)
-values (371, ?);
-INSERT INTO Aplicacao_FP(operacao_id, fator_producao_id)
-values (372, ?);
-INSERT INTO Aplicacao_FP(operacao_id, fator_producao_id)
-values (373, ?);
+-- 15/07/2023 operação de rega, setor 22, 180 min, 23:00
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (368, TO_DATE('15/07/2023', 'DD/MM/YYYY'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (368, 22, 180, '23:00');
 
-INSERT INTO Op_Plantacao(operacao_id, parcela_id, VARIEDADE_ID, quantidade)
-values (374, 102, 185, 40);
+-- 22/07/2023 operação de rega, setor 22, 180 min, 23:00
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (369, TO_DATE('22/07/2023', 'DD/MM/YYYY'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (369, 22, 180, '23:00');
 
-INSERT INTO Colheita(operacao_id, parcela_id, produto_id, quantidade)
-values (375, 102, 86, 400);
-INSERT INTO Colheita(operacao_id, parcela_id, produto_id, quantidade)
-values (376, 102, 89, 300);
-INSERT INTO Colheita(operacao_id, parcela_id, produto_id, quantidade)
-values (377, 102, 92, 350);
+-- 29/07/2023 operação de rega, setor 22, 180 min, 23:00
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (370, TO_DATE('29/07/2023', 'DD/MM/YYYY'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (370, 22, 180, '23:00');
 
-INSERT INTO Rega(operacao_id, setor_id, duracao)
-VALUES (378, 10, 60);
-INSERT INTO Rega(operacao_id, setor_id, duracao)
-VALUES (379, 10, 120);
-INSERT INTO Rega(operacao_id, setor_id, duracao)
-VALUES (380, 10, 180);
-INSERT INTO Rega(operacao_id, setor_id, duracao)
-VALUES (381, 10, 120);
-INSERT INTO Rega(operacao_id, setor_id, duracao)
-VALUES (382, 10, 60);
+-- 05/08/2023 operação de rega, setor 22, 150 min, 23:00
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (371, TO_DATE('05/08/2023', 'DD/MM/YYYY'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (371, 22, 150, '23:00');
 
----------------------------------------------------------------------------------
+-- 10/08/2023 operação de rega, setor 22, 150 min, 23:00
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (372, TO_DATE('10/08/2023', 'DD/MM/YYYY'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (372, 22, 150, '23:00');
 
--- OPERAÇÕES CAMPO NOVO
+-- 17/08/2023 operação de rega, setor 22, 150 min, 23:00
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (373, TO_DATE('17/08/2023', 'DD/MM/YYYY'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (373, 22, 150, '23:00');
 
--- Colheita
-INSERT INTO Colheita(operacao_id, parcela_id, produto_id, metodo_execucao_id, quantidade)
-values (328, 108, ?, ?, 8000);
-INSERT INTO Colheita(operacao_id, parcela_id, produto_id, metodo_execucao_id, quantidade)
-values (329, 108, ?, ?, 5000);
-INSERT INTO Colheita(operacao_id, parcela_id, produto_id, metodo_execucao_id, quantidade)
-values (330, 108, ?, ?, 900);
-INSERT INTO Colheita(operacao_id, parcela_id, produto_id, metodo_execucao_id, quantidade)
-values (331, 108, ?, ?, 1500);
-INSERT INTO Colheita(operacao_id, parcela_id, produto_id, metodo_execucao_id, quantidade)
-values (332, 108, ?, ?, 1200);
-INSERT INTO Colheita(operacao_id, parcela_id, produto_id, metodo_execucao_id, quantidade)
-values (333, 108, ?, ?, 1200);
-INSERT INTO Colheita(operacao_id, parcela_id, produto_id, metodo_execucao_id, quantidade)
-values (334, 108, ?, ?, 1200);
+-- 24/08/2023 operação de rega, setor 22, 120 min, 23:00
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (374, TO_DATE('24/08/2023', 'DD/MM/YYYY'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (374, 22, 120, '23:00');
 
--- Rega
--- Setor 42
+-- 02/09/2023 operação de rega, setor 22, 120 min, 23:00
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (375, TO_DATE('02/09/2023', 'DD/MM/YYYY'));
 INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (335, 42, 60, '06:00');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (336, 42, 60, '06:00');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (337, 42, 120, '04:00');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (338, 42, 120, '04:00');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (339, 42, 120, '04:00');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (340, 42, 150, '04:00');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (341, 42, 150, '04:00');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (342, 42, 120, '21:30');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (343, 42, 120, '21:30');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (344, 42, 120, '21:30');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (345, 42, 120, '21:30');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (346, 42, 120, '21:30');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (347, 42, 120, '21:30');
+VALUES (375, 22, 120, '23:00');
 
--- Setor 41
+-- 09/09/2023 operação de rega, setor 22, 120 min, 23:00
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (376, TO_DATE('09/09/2023', 'DD/MM/YYYY'));
 INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (348, 41, 120, '07:30');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (349, 41, 120, '07:30');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (350, 41, 120, '06:20');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (351, 41, 120, '06:20');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (352, 41, 120, '06:20');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (353, 41, 120, '06:20');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (354, 41, 120, '06:20');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (355, 41, 120, '06:20');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (356, 41, 120, '06:20');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (357, 41, 120, '06:20');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (358, 41, 120, '06:20');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (359, 41, 120, '06:20');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (360, 41, 120, '07:00');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (361, 41, 120, '07:00');
+VALUES (376, 22, 120, '23:00');
 
--- Monda
-INSERT INTO Monda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id, fator_producao_id)
-VALUES (360, 108, ?, ?, ?, ?);
-INSERT INTO Monda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id, fator_producao_id)
-VALUES (361, 108, ?, ?, ?, ?);
-INSERT INTO Monda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id, fator_producao_id)
-VALUES (362, 108, ?, ?, ?, ?);
-INSERT INTO Monda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id, fator_producao_id)
-VALUES (363, 108, ?, ?, ?, ?);
-INSERT INTO Monda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id, fator_producao_id)
-VALUES (364, 108, ?, ?, ?, ?);
+-- 18/09/2023 operação de rega, setor 22, 120 min, 23:00
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
+VALUES (377, TO_DATE('18/09/2023', 'DD/MM/YYYY'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (377, 22, 120, '23:00');

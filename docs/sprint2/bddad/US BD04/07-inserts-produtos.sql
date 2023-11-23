@@ -1,5 +1,3 @@
--- noinspection SqlNoDataSourceInspectionForFile
-
 INSERT INTO PRODUTO (ID, NOME, VARIEDADE_ID)
 VALUES (1, 'Abóbora Manteiga', ?);
 INSERT INTO PRODUTO (ID, NOME, VARIEDADE_ID)

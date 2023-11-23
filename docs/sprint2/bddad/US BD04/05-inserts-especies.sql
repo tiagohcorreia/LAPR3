@@ -413,7 +413,7 @@ VALUES (93, 'Fevereiro a abril, agosto a outubro', '90 dias');
 
 -- Abóbora manteiga, designada por Cucurbita moschata var 'Butternut'
 INSERT INTO Cultura(id, nome_comum, nome_cientifico)
-VALUES (13, 'Abóbora', 'Cucurbita');
+VALUES (13, 'Abóbora', 'Cucurbita Moschata');
 INSERT INTO Variedade(id, nome, cultura_id)
 VALUES (96, 'Abóbora manteiga', 13);
 INSERT INTO Variedade_Temporaria(variedade_id, fase_sementeira, fase_colheita)

@@ -18,6 +18,8 @@ INSERT INTO Metodo_Aplicacao(id, tipo) VALUES (4, 'Fertirrega');
 INSERT INTO Metodo_Aplicacao(id, tipo) VALUES (5, 'Correção solo');
 INSERT INTO Metodo_Aplicacao(id, tipo) VALUES (6, 'Insecticida');
 INSERT INTO Metodo_Aplicacao(id, tipo) VALUES (7, 'Solo');
+INSERT INTO Metodo_Aplicacao(id, tipo) VALUES (8, 'Foliar');
+
 
 
 -- tabela Composto_Quimico
@@ -102,9 +104,9 @@ VALUES (18, 'Materia Organica');
 
 --Fatores de procução --tipo_id = 2: Adubo
 INSERT INTO Fator_Producao(id, nome, tipo_id, formulacao_id)
-VALUES (12, 'Fertimax Extrume de Cavalo, da Nutrofertil', 2, 2);
+VALUES (12, 'Fertimax Extrume de Cavalo', 2, 2);
 INSERT INTO Fator_Producao(id, nome, tipo_id, formulacao_id)
-VALUES (13, 'BIOFERTIL N6, da Nutrofertil', 2, 2);
+VALUES (13, 'BIOFERTIL N6', 2, 2);
 
 --ficha tecnica Fertimax Extrume de Cavalo
 INSERT INTO Ficha_Tecnica(fator_producao_id, composto_quimico_id, quantidade)
