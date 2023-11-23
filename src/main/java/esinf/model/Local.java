@@ -3,9 +3,14 @@ package esinf.model;
 import esinf.gps.GPS;
 
 import javax.sound.sampled.FloatControl;
+import java.util.Comparator;
 import java.util.Objects;
+import java.util.function.Function;
+import java.util.function.ToDoubleFunction;
+import java.util.function.ToIntFunction;
+import java.util.function.ToLongFunction;
 
-public class Local {
+public class Local  {
     final private GPS DEFAULT_GPS=new GPS();
 
     private String localId;
@@ -29,6 +34,7 @@ public class Local {
         return gps;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -36,6 +42,8 @@ public class Local {
         Local local = (Local) o;
         return Objects.equals(localId, local.localId) && Objects.equals(gps, local.gps);
     }
+
+
 
     @Override
     public int hashCode() {

@@ -3,21 +3,16 @@ package esinf.map;
 import java.io.BufferedReader;
 
 import esinf.gps.GPS;
-import esinf.model.Distancia;
 import esinf.model.Local;
 import esinf.store.GraphStore;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 public class MapGraphLoader {
 
-    public static MapGraph<Local, Distancia> loadGraph(String locaisFile, String distanciasFile) throws IOException {
-        MapGraph<Local, Distancia> graph = new MapGraph<>(false);
-        Distancia distance;
-
+    public static MapGraph<Local, Integer> loadGraph(String locaisFile, String distanciasFile) throws IOException {
+        MapGraph<Local, Integer> graph = new MapGraph<>(false);
 
         try (BufferedReader br = new BufferedReader(new FileReader(locaisFile))) {
             String line;
@@ -62,8 +57,7 @@ public class MapGraphLoader {
                 }
                 int distancia = Integer.parseInt(parts[2]);
                 if (local1!=null && local2!=null) {
-                    distance = new Distancia(local1, local2, distancia);
-                    graph.addEdge(local1,local2,distance);
+                    graph.addEdge(local1,local2,distancia);
                 }
 
             }
