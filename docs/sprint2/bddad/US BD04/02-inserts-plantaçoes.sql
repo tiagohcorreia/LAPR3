@@ -165,7 +165,7 @@ VALUES (32, 98, 40, TO_DATE('01/05/2019', 'DD/MM/YYYY'), NULL);
 INSERT INTO Plantacao(id, parcela_id)
 VALUES (33, 105);
 INSERT INTO Plantacao_Permanente(plantacao_id, variedade_perm_id, quantidade, data_inicio, data_fim)
-VALUES (33, 99, 50, TO_DATE('01/05/2019', 'DD/MM/YYYY'), NULL);
+VALUES (33, 57, 50, TO_DATE('01/05/2019', 'DD/MM/YYYY'), NULL);
 
 -- Cenoura Sugarsnax Hybrid, 05/04/2023 a 31/05/2023
 INSERT INTO Plantacao(id, parcela_id)

@@ -1,95 +1,285 @@
 /* Operacoes campo novo */
 
--- Operacao_Agricola
-INSERT INTO Operacao_Agricola(id, data) VALUES (328, TO_DATE('2023-06-14', 'YYYY-MM-DD'));
-INSERT INTO Operacao_Agricola(id, data) VALUES (329, TO_DATE('2023-06-28', 'YYYY-MM-DD'));
-INSERT INTO Operacao_Agricola(id, data) VALUES (330, TO_DATE('2023-09-15', 'YYYY-MM-DD'));
-INSERT INTO Operacao_Agricola(id, data) VALUES (331, TO_DATE('2023-09-25', 'YYYY-MM-DD'));
-INSERT INTO Operacao_Agricola(id, data) VALUES (332, TO_DATE('2023-09-18', 'YYYY-MM-DD'));
-INSERT INTO Operacao_Agricola(id, data) VALUES (333, TO_DATE('2023-09-22', 'YYYY-MM-DD'));
-INSERT INTO Operacao_Agricola(id, data) VALUES (334, TO_DATE('2023-10-05', 'YYYY-MM-DD'));
+-- 01/04/2023 operação de aplicação de fator de produção Biocal Composto, no solo, 1.1 ha, 500 kg
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (?, TO_DATE('01/04/2023', 'DD/MM/YYY'));
+INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, fator_producao_id, metodo_aplicacao_id, quantidade,
+                         area)
+VALUES (?, ?, null, ?, ?, 500, 1.1);
 
 
-INSERT INTO Operacao_Agricola(id, data) VALUES (335, TO_DATE('2023-06-12', 'YYYY-MM-DD'));
-INSERT INTO Operacao_Agricola(id, data) VALUES (336, TO_DATE('2023-06-19', 'YYYY-MM-DD'));
-INSERT INTO Operacao_Agricola(id, data) VALUES (337, TO_DATE('2023-06-30', 'YYYY-MM-DD'));
-INSERT INTO Operacao_Agricola(id, data) VALUES (338, TO_DATE('2023-07-08', 'YYYY-MM-DD'));
-INSERT INTO Operacao_Agricola(id, data) VALUES (339, TO_DATE('2023-07-15', 'YYYY-MM-DD'));
-INSERT INTO Operacao_Agricola(id, data) VALUES (340, TO_DATE('2023-07-22', 'YYYY-MM-DD'));
-INSERT INTO Operacao_Agricola(id, data) VALUES (341, TO_DATE('2023-07-29', 'YYYY-MM-DD'));
-INSERT INTO Operacao_Agricola(id, data) VALUES (342, TO_DATE('2023-08-05', 'YYYY-MM-DD'));
-INSERT INTO Operacao_Agricola(id, data) VALUES (343, TO_DATE('2023-08-12', 'YYYY-MM-DD'));
-INSERT INTO Operacao_Agricola(id, data) VALUES (344, TO_DATE('2023-08-19', 'YYYY-MM-DD'));
-INSERT INTO Operacao_Agricola(id, data) VALUES (345, TO_DATE('2023-08-26', 'YYYY-MM-DD'));
-INSERT INTO Operacao_Agricola(id, data) VALUES (346, TO_DATE('2023-08-31', 'YYYY-MM-DD'));
-INSERT INTO Operacao_Agricola(id, data) VALUES (347, TO_DATE('2023-09-05', 'YYYY-MM-DD'));
-
-INSERT INTO Operacao_Agricola(id, data) VALUES (348, TO_DATE('2023-05-20', 'YYYY-MM-DD'));
-INSERT INTO Operacao_Agricola(id, data) VALUES (349, TO_DATE('2023-06-02', 'YYYY-MM-DD'));
-INSERT INTO Operacao_Agricola(id, data) VALUES (350, TO_DATE('2023-06-09', 'YYYY-MM-DD'));
-INSERT INTO Operacao_Agricola(id, data) VALUES (351, TO_DATE('2023-07-09', 'YYYY-MM-DD'));
-INSERT INTO Operacao_Agricola(id, data) VALUES (352, TO_DATE('2023-07-16', 'YYYY-MM-DD'));
-INSERT INTO Operacao_Agricola(id, data) VALUES (353, TO_DATE('2023-07-23', 'YYYY-MM-DD'));
-INSERT INTO Operacao_Agricola(id, data) VALUES (354, TO_DATE('2023-07-30', 'YYYY-MM-DD'));
-INSERT INTO Operacao_Agricola(id, data) VALUES (355, TO_DATE('2023-08-07', 'YYYY-MM-DD'));
-INSERT INTO Operacao_Agricola(id, data) VALUES (356, TO_DATE('2023-08-14', 'YYYY-MM-DD'));
-INSERT INTO Operacao_Agricola(id, data) VALUES (357, TO_DATE('2023-08-21', 'YYYY-MM-DD'));
-INSERT INTO Operacao_Agricola(id, data) VALUES (358, TO_DATE('2023-08-28', 'YYYY-MM-DD'));
-INSERT INTO Operacao_Agricola(id, data) VALUES (359, TO_DATE('2023-09-06', 'YYYY-MM-DD'));
-INSERT INTO Operacao_Agricola(id, data) VALUES (360, TO_DATE('2023-09-13', 'YYYY-MM-DD'));
-INSERT INTO Operacao_Agricola(id, data) VALUES (361, TO_DATE('2023-09-20', 'YYYY-MM-DD'));
-
--- Colheita
-INSERT INTO Colheita(operacao_id,parcela_id,produto_id,metodo_execucao_id, quantidade) values (328, 108, ?, ?, 8000);
-INSERT INTO Colheita(operacao_id,parcela_id,produto_id,metodo_execucao_id, quantidade) values (329, 108, ?, ?, 5000);
-INSERT INTO Colheita(operacao_id,parcela_id,produto_id,metodo_execucao_id, quantidade) values (330, 108, ?, ?,900);
-INSERT INTO Colheita(operacao_id,parcela_id,produto_id,metodo_execucao_id, quantidade) values (331, 108, ?, ?,1500);
-INSERT INTO Colheita(operacao_id,parcela_id,produto_id,metodo_execucao_id, quantidade) values (332, 108, ?, ?, 1200);
-INSERT INTO Colheita(operacao_id,parcela_id,produto_id,metodo_execucao_id, quantidade) values (333, 108, ?, ?, 1200);
-INSERT INTO Colheita(operacao_id,parcela_id,produto_id,metodo_execucao_id, quantidade) values (334, 108, ?, ?, 1200);
-
--- Rega
--- Setor 42
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (335, 42, 60, '06:00');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (336, 42, 60, '06:00');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (337, 42, 120, '04:00');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (338, 42, 120, '04:00');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (339, 42, 120, '04:00');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (340, 42, 150, '04:00');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (341, 42, 150, '04:00');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (342, 42, 120, '21:30');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (343, 42, 120, '21:30');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (344, 42, 120, '21:30');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (345, 42, 120, '21:30');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (346, 42, 120, '21:30');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (347, 42, 120, '21:30');
-
--- Setor 41
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (348, 41, 120, '07:30');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (349, 41, 120, '07:30');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (350, 41, 120, '06:20');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (351, 41, 120, '06:20');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (352, 41, 120, '06:20');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (353, 41, 120, '06:20');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (354, 41, 120, '06:20');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (355, 41, 120, '06:20');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (356, 41, 120, '06:20');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (357, 41, 120, '06:20');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (358, 41, 120, '06:20');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (359, 41, 120, '06:20');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (360, 41, 120, '07:00');
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora) VALUES (361, 41, 120, '07:00');
+-- 05/04/2023 operação de semeadura de cenouras Sugarsnax Hybrid, 0.5 ha, 1.2 kg
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (?, TO_DATE('05/04/2023', 'DD/MM/YYY'));
+INSERT INTO Sementeira(operacao_id, parcela_id, variedade_id, quantidade, area, metodo_execucao_id)
+VALUES (?, ?, ?, 1.2, 0.5, null);
 
 
+-- 06/04/2023 operação de semeadura de abóbora manteiga, 0.6 ha, 1.5 kg
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (?, TO_DATE('06/04/2023', 'DD/MM/YYY'));
+INSERT INTO Sementeira(operacao_id, parcela_id, variedade_id, quantidade, area, metodo_execucao_id)
+VALUES (?, ?, ?, 1.5, 0.6, null);
 
--- Monda
-INSERT INTO Monda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id, fator_producao_id) VALUES (360, 108, ?, ?, ?, ?);
-INSERT INTO Monda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id, fator_producao_id) VALUES (361, 108, ?, ?, ?, ?);
-INSERT INTO Monda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id, fator_producao_id) VALUES (362, 108, ?, ?, ?, ?);
-INSERT INTO Monda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id, fator_producao_id) VALUES (363, 108, ?, ?, ?, ?);
-INSERT INTO Monda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id, fator_producao_id) VALUES (364, 108, ?, ?, ?, ?);
+-- 08/05/2023 operação de monda de plantação de cenouras Sugarsnax Hybrid, 0.5 ha
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (?, TO_DATE('08/05/2023', 'DD/MM/YYY'));
+INSERT INTO Monda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id, fator_producao_id)
+VALUES (?, ?, ?, 0.5, null, null);
 
---Semeadura
+-- 20/05/2023 operação de monda de plantação de abóbora manteiga, 0.6 ha
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (?, TO_DATE('20/05/2023', 'DD/MM/YYY'));
+INSERT INTO Monda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id, fator_producao_id)
+VALUES (?, ?, ?, 0.6, ?, null);
+
+-- 14/06/2023 operação de colheita de cenouras Sugarsnax Hybrid, 1500 kg
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (?, TO_DATE('14/06/2023', 'DD/MM/YYY'));
+INSERT INTO Colheita(operacao_id, parcela_id, produto_id, metodo_execucao_id, quantidade)
+values (?, ?, ?, ?, 1500);
+
+-- 20/06/2023 operação de monda de plantação de abóbora manteiga, 0.6 ha
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (?, TO_DATE('20/06/2023', 'DD/MM/YYY'));
+INSERT INTO Monda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id, fator_producao_id)
+VALUES (?, ?, ?, 0.6, ?, null);
+
+-- 28/06/2023 operação de colheita de cenouras Sugarsnax Hybrid, 2500 kg
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (?, TO_DATE('28/06/2023', 'DD/MM/YYY'));
+INSERT INTO Colheita(operacao_id, parcela_id, produto_id, metodo_execucao_id, quantidade)
+values (?, ?, ?, ?, 2500);
+
+-- 03/07/2023 operação de aplicação de fator de produção Fertimax Extrume de Cavalo, no solo, 0.5 ha, 1800 kg
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (?, TO_DATE('03/07/2023', 'DD/MM/YYY'));
+INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, fator_producao_id, metodo_aplicacao_id, quantidade,
+                         area)
+VALUES (?, ?, null, ?, ?, 1800, 0.5);
 
 
+-- 04/07/2023 operação de mobilização do solo, 0.5 ha
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (?, TO_DATE('04/07/2023', 'DD/MM/YYY'));
+INSERT INTO Moblilizacao_Solo(operacao_id, parcela_id, area)
+VALUES (?, ?, 0.5);
 
+
+-- 05/07/2023 operação de semeadura de cenouras Danvers Half Long, 0.5 ha, 1.2 kg
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (?, TO_DATE('05/07/2023', 'DD/MM/YYY'));
+INSERT INTO Sementeira(operacao_id, parcela_id, variedade_id, quantidade, area, metodo_execucao_id)
+VALUES (?, ?, ?, 1.2, 0.5, null);
+
+-- 08/08/2023 operação de monda de plantação de cenouras Danvers Half Long, 0.5 ha
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (?, TO_DATE('08/08/2023', 'DD/MM/YYY'));
+INSERT INTO Monda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id, fator_producao_id)
+VALUES (?, ?, ?, 0.5, ?, null);
+
+-- 15/09/2023 operação de colheita de abóbora manteiga, 8000 kg
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (?, TO_DATE('15/09/2023', 'DD/MM/YYY'));
+INSERT INTO Colheita(operacao_id, parcela_id, produto_id, metodo_execucao_id, quantidade)
+values (?, ?, ?, ?, 8000);
+
+-- 25/09/2023 operação de colheita de abóbora manteiga, 5000 kg
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (?, TO_DATE('25/09/2023', 'DD/MM/YYY'));
+INSERT INTO Colheita(operacao_id, parcela_id, produto_id, metodo_execucao_id, quantidade)
+values (?, ?, ?, ?, 5000);
+
+-- 18/09/2023 operação de colheita de cenouras Danvers Half Long, 900 kg
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (?, TO_DATE('18/09/2023', 'DD/MM/YYY'));
+INSERT INTO Colheita(operacao_id, parcela_id, produto_id, metodo_execucao_id, quantidade)
+values (?, ?, ?, ?, 900);
+
+-- 22/09/2023 operação de colheita de cenouras Danvers Half Long, 1500 kg
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (?, TO_DATE('22/09/2023', 'DD/MM/YYY'));
+INSERT INTO Colheita(operacao_id, parcela_id, produto_id, metodo_execucao_id, quantidade)
+values (?, ?, ?, ?, 1500);
+
+-- 05/10/2023 operação de colheita de cenouras Danvers Half Long, 1200 kg
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (?, TO_DATE('05/10/2023', 'DD/MM/YYY'));
+INSERT INTO Colheita(operacao_id, parcela_id, produto_id, metodo_execucao_id, quantidade)
+values (?, ?, ?, ?, 1200);
+
+-- 10/10/2023 operação de mobilização do solo, 1.1 ha
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (?, TO_DATE('10/10/2023', 'DD/MM/YYY'));
+INSERT INTO Moblilizacao_Solo(operacao_id, parcela_id, area)
+VALUES (?, ?, 1.1);
+
+-- 12/10/2023 operação de semeadura de Tremoço Amarelo, 1.1 ha, 32 kg
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (?, TO_DATE('12/10/2023', 'DD/MM/YYY'));
+INSERT INTO Sementeira(operacao_id, parcela_id, variedade_id, quantidade, area, metodo_execucao_id)
+VALUES (?, ?, ?, 32, 1.1, null);
+
+
+-- 12/06/2023 operação de rega, setor 42, 60 min, 06:00
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (?, TO_DATE('12/06/2023', 'DD/MM/YYY'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (?, 42, 60, '06:00');
+
+-- 19/06/2023 operação de rega, setor 42, 60 min, 06:00
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (?, TO_DATE('19/06/2023', 'DD/MM/YYY'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (?, 42, 60, '06:00');
+
+-- 30/06/2023 operação de rega, setor 42, 120 min, 04:00
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (?, TO_DATE('30/06/2023', 'DD/MM/YYY'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (?, 42, 120, '04:00');
+
+-- 08/07/2023 operação de rega, setor 42, 120 min, 04:00
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (?, TO_DATE('08/07/2023', 'DD/MM/YYY'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (?, 42, 120, '04:00');
+
+-- 15/07/2023 operação de rega, setor 42, 120 min, 04:00
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (?, TO_DATE('15/07/2023', 'DD/MM/YYY'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (?, 42, 120, '04:00');
+
+-- 22/07/2023 operação de rega, setor 42, 150 min, 04:00
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (?, TO_DATE('22/07/2023', 'DD/MM/YYY'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (?, 42, 150, '04:00');
+
+-- 29/07/2023 operação de rega, setor 42, 150 min, 04:00
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (?, TO_DATE('29/07/2023', 'DD/MM/YYY'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (?, 42, 150, '04:00');
+
+-- 05/08/2023 operação de rega, setor 42, 120 min, 21:30
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (?, TO_DATE('05/08/2023', 'DD/MM/YYY'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (?, 42, 120, '21:30');
+
+-- 12/08/2023 operação de rega, setor 42, 120 min, 21:30
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (?, TO_DATE('12/08/2023', 'DD/MM/YYY'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (?, 42, 120, '21:30');
+
+-- 19/08/2023 operação de rega, setor 42, 120 min, 21:30
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (?, TO_DATE('19/08/2023', 'DD/MM/YYY'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (?, 42, 120, '21:30');
+
+-- 26/08/2023 operação de rega, setor 42, 120 min, 21:30
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (?, TO_DATE('26/08/2023', 'DD/MM/YYY'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (?, 42, 120, '21:30');
+
+-- 31/08/2023 operação de rega, setor 42, 120 min, 21:30
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (?, TO_DATE('31/08/2023', 'DD/MM/YYY'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (?, 42, 120, '21:30');
+
+-- 05/09/2023 operação de rega, setor 42, 120 min, 21:30
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (?, TO_DATE('05/09/2023', 'DD/MM/YYY'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (?, 42, 120, '21:30');
+
+
+-- 20/05/2023 operação de rega, setor 41, 120 min, 07:30
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (?, TO_DATE('20/05/2023', 'DD/MM/YYY'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (?, 41, 120, '07.30');
+
+-- 02/06/2023 operação de rega, setor 41, 120 min, 07:30
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (?, TO_DATE('02/06/2023', 'DD/MM/YYY'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (?, 41, 120, '07.30');
+
+-- 09/06/2023 operação de rega, setor 41, 120 min, 06:20
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (?, TO_DATE('09/06/2023', 'DD/MM/YYY'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (?, 41, 120, '06:20');
+
+-- 09/07/2023 operação de rega, setor 41, 120 min, 06:20
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (?, TO_DATE('09/07/2023', 'DD/MM/YYY'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (?, 41, 120, '06:20');
+
+-- 16/07/2023 operação de rega, setor 41, 120 min, 06:20
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (?, TO_DATE('16/07/2023', 'DD/MM/YYY'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (?, 41, 120, '06:20');
+
+-- 23/07/2023 operação de rega, setor 41, 120 min, 06:20
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (?, TO_DATE('23/07/2023', 'DD/MM/YYY'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (?, 41, 120, '06:20');
+
+-- 30/07/2023 operação de rega, setor 41, 120 min, 06:20
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (?, TO_DATE('30/07/2023', 'DD/MM/YYY'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (?, 41, 120, '06:20');
+
+-- 07/08/2023 operação de rega, setor 41, 120 min, 06:20
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (?, TO_DATE('07/08/2023', 'DD/MM/YYY'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (?, 41, 120, '06:20');
+
+-- 14/08/2023 operação de rega, setor 41, 120 min, 06:20
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (?, TO_DATE('14/08/2023', 'DD/MM/YYY'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (?, 41, 120, '06:20');
+
+-- 21/08/2023 operação de rega, setor 41, 120 min, 06:20
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (?, TO_DATE('21/08/2023', 'DD/MM/YYY'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (?, 41, 120, '06:20');
+
+-- 28/08/2023 operação de rega, setor 41, 120 min, 06:20
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (?, TO_DATE('28/08/2023', 'DD/MM/YYY'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (?, 41, 120, '06:20');
+
+-- 06/09/2023 operação de rega, setor 41, 120 min, 06:20
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (?, TO_DATE('06/09/2023', 'DD/MM/YYY'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (?, 41, 120, '06:20');
+
+-- 13/09/2023 operação de rega, setor 41, 120 min, 07:00
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (?, TO_DATE('13/09/2023', 'DD/MM/YYY'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (?, 41, 120, '07:00');
+
+-- 20/09/2023 operação de rega, setor 41, 120 min, 07:00
+INSERT INTO Operacao_Agricola(id, data)
+VALUES (?, TO_DATE('20/09/2023', 'DD/MM/YYY'));
+INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
+VALUES (?, 41, 120, '07:00');

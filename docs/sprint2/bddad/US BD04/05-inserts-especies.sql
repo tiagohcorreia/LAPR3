@@ -430,9 +430,3 @@ INSERT INTO Variedade(id, nome, cultura_id)
 VALUES (98, 'Macieira Grand Fay', 3);
 INSERT INTO Variedade_Permanente(variedade_id, fase_plantacao, fase_poda, fase_floracao, fase_colheita)
 VALUES (98, NULL, NULL, NULL, NULL);
-
--- Macieira Gronho Doce, 50 un, 01/05/2019, sem data fim
-INSERT INTO Variedade(id, nome, cultura_id)
-VALUES (99, 'Macieira Gronho Doce', 3);
-INSERT INTO Variedade_Permanente(variedade_id, fase_plantacao, fase_poda, fase_floracao, fase_colheita)
-VALUES (99, NULL, NULL, NULL, NULL);
