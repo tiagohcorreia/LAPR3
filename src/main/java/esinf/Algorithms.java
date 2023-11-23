@@ -7,9 +7,6 @@ import esinf.map.MapGraph;
 import java.util.*;
 import java.util.function.BinaryOperator;
 
-/**
- * @author Sérgio Cardoso - 1210891
- */
 
 public class Algorithms {
     /**
@@ -152,11 +149,16 @@ public class Algorithms {
     public static <V, E> void shortestPathDijkstra(Graph<V, E> g, V vOrig,
                                                    Comparator<E> ce, BinaryOperator<E> sum, E zero,
                                                    boolean[] visited, List<V> pathKeys, List<E> dist) {
+
         if (g == null || !g.validVertex(vOrig)) return;
+        dist.clear();
+        dist.addAll(Collections.nCopies(g.numVertices(), null));
+
+
         for (int i = 0; i < visited.length; i++) {
-            dist.add(null);
             pathKeys.add(null);
         }
+
         int vOrigKey = g.key(vOrig);
         dist.set(vOrigKey, zero);
         pathKeys.set(vOrigKey, vOrig);
@@ -180,8 +182,8 @@ public class Algorithms {
             }
             vOrigKey = getVertMinDist(dist, visited, ce, zero);
         }
-
     }
+
 
     private static <E> int getVertMinDist(List<E> dist, boolean[] visited, Comparator<E> ce, E zero) {
         int minDistanceKey = -1;
@@ -226,7 +228,7 @@ public class Algorithms {
         int size = g.numVertices();
         boolean[] visited = new boolean[size];
         List<V> pathKeys = new ArrayList<>(size);
-        List<E> dist = new ArrayList<>(size);
+        List<E> dist = new ArrayList<>();
 
         shortestPathDijkstra(g, vOrig, ce, sum, zero, visited, pathKeys, dist);
         getPath(g, vOrig, vDest, pathKeys, shortPath);
@@ -282,23 +284,61 @@ public class Algorithms {
                                       List<V> pathKeys, LinkedList<V> path) {
 
         if (g == null || !g.validVertex(vOrig) || !g.validVertex(vDest)) return;
-        if (vOrig.equals(vDest)) {
+        if (vOrig.equals(vDest) && path.isEmpty()) {
             path.add(vOrig);
             return;
         }
+
         V vertex = vDest;
         while (!vertex.equals(vOrig)) {
             path.addFirst(vertex);
             int keySearch = g.key(vertex);
             vertex = pathKeys.get(keySearch);
-            if (vertex == null) {
+
+            if (vertex == null && vertex != vOrig) {
                 path.clear();
                 return;
             }
         }
+        if (path.getLast().equals(vOrig)) System.out.println(path.getLast());
 
-        path.addFirst(vertex);
+        path.addFirst(vOrig);/*
+        System.out.println(path.getFirst());
+        System.out.println(path);
+        int size=path.size();
+        path.remove(size-1);
+        System.out.println(path);*/
+        removeDuplicates(path);
+        removeElementsAfter(path, vDest);
+    }
 
+    public static <V> void removeElementsAfter(LinkedList<V> list, V target) {
+        if (list == null || target == null || list.isEmpty()) {
+            return; // Handle null or empty list
+        }
+
+        int index = list.indexOf(target);
+
+        if (index != -1) {
+            // If the target element is found, remove all elements that come after it
+            list.subList(index + 1, list.size()).clear();
+        }
+    }
+
+    public static <V> void removeDuplicates(LinkedList<V> list) {
+        Set<V> uniqueElements = new HashSet<>();
+        LinkedList<V> result = new LinkedList<>();
+
+        for (V element : list) {
+            if (uniqueElements.add(element)) {
+                // If the element is not already in the set, add it to the result list
+                result.add(element);
+            }
+        }
+
+        // Clear the original list and add the unique elements
+        list.clear();
+        list.addAll(result);
     }
 
     /**
@@ -426,7 +466,7 @@ public class Algorithms {
      * @param shortPath returns the vertices which make the shortest path
      * @return if vertices exist in the graph and are connected, true, false otherwise
      */
-    public static <V,E> boolean shortestPath(Graph<V,E> g, V vOrig, V vDest, LinkedList<V> shortPath) {
+    public static <V, E> boolean shortestPath(Graph<V, E> g, V vOrig, V vDest, LinkedList<V> shortPath) {
         if (g == null || !g.validVertex(vOrig) || !g.validVertex(vDest)) return false;
 
         boolean[] visited = new boolean[g.numVertices()];
@@ -446,7 +486,7 @@ public class Algorithms {
      * @param paths returns all the minimum paths
      * @return if vOrig exists in the graph true, false otherwise
      */
-    public static <V,E> boolean shortestPaths(Graph<V,E> g, V vOrig, ArrayList<LinkedList<V>> paths) {
+    public static <V, E> boolean shortestPaths(Graph<V, E> g, V vOrig, ArrayList<LinkedList<V>> paths) {
         if (g == null || !g.validVertex(vOrig)) return false;
 
         boolean[] visited = new boolean[g.numVertices()];
@@ -464,7 +504,7 @@ public class Algorithms {
     }
 
     // Helper method for breadth-first search in unweighted graph
-    private static <V,E> void breadthFirstSearch(Graph<V,E> g, V vert, boolean[] visited, List<V> pathKeys) {
+    private static <V, E> void breadthFirstSearch(Graph<V, E> g, V vert, boolean[] visited, List<V> pathKeys) {
         Queue<V> queue = new LinkedList<>();
         int vertKey = g.key(vert);
 
@@ -485,5 +525,5 @@ public class Algorithms {
             }
         }
     }
-
 }
+

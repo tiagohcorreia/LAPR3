@@ -1,4 +1,6 @@
-package esinf.model;
+package dataStructure;
+
+import esinf.model.Local;
 
 import java.util.Objects;
 
@@ -6,9 +8,9 @@ public class Distancia {
 
     private Local local1;
     private Local local2;
-    private long lenght;
+    private double lenght;
 
-    public Distancia(Local local1, Local local2, long lenght) {
+    public Distancia(Local local1, Local local2, double lenght) {
         this.local1 = local1;
         this.local2 = local2;
         this.lenght = lenght;
@@ -22,7 +24,7 @@ public class Distancia {
         return local2;
     }
 
-    public long getLenght() {
+    public double getLenght() {
         return lenght;
     }
 
