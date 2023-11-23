@@ -13,16 +13,16 @@ public class GraphStore {
     static boolean directed = false;
     private static MapGraph<Local, Integer> graph = new MapGraph<>(directed);
 
-    public  MapGraph<Local, Integer> getGraph() {
+    public MapGraph<Local, Integer> getGraph() {
         return graph;
     }
 
-    public  void addVertex(Local vertex) {
+    public void addVertex(Local vertex) {
         graph.addVertex(vertex);
     }
 
-    public  void addEdge(Local local1,Local local2, int distancia) {
-        graph.addEdge(local1,local2,distancia);
+    public void addEdge(Local local1, Local local2, int distancia) {
+        graph.addEdge(local1, local2, distancia);
     }
 
 
@@ -75,10 +75,27 @@ public class GraphStore {
 
     }
 
-   /* public FurthestPlacesData getFurthestPlacesData(double autonomy) {
+    public double getDistanceBetweenOriginAndDestination(MapGraph graph, LinkedList<Local> shortPath) {
+        Integer sum = 0;
+        for (int i = 0; i < shortPath.size()-1; i++) {
+                sum += (int)graph.edge(shortPath.get(i), shortPath.get(i+1)).getWeight();
+        }
+        return sum;
+    }
+
+//    public FurthestPlacesData getDistanceBetweenEveryLocalPair(LinkedList<Local> shortPath2) {  double sum = 0;
+//        for (int i = 0; i < shortPath.size(); i++) {
+//            for (int j = 0; j < shortPath.size() - 1; j++) {
+//                sum += graph.edge(shortPath.get(i), shortPath.get(j)).getWeightDouble();
+//            }
+//        }
+//        return sum;}
+
+ /*  public FurthestPlacesData getFurthestPlacesData(double autonomy) {
         Distancia distanciaData = getFurthestPlaces();
         Graph<Local, Integer> clone=removeEdgesAboveAutonomy(autonomy);
 
     }*/
+
 
 }

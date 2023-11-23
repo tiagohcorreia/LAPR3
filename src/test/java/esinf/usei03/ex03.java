@@ -97,23 +97,41 @@ public class ex03 {
     }
 
     @Test
-    public void testShortestPath() throws IOException {
+    public void testShortestPathBetweenTwoPlaces() throws IOException {
         GraphStore storage = new GraphStore();
-      MapGraphLoader.loadGraph("docs\\esinf_data\\locais_small.csv", "docs\\esinf_data\\distancias_small.csv");
-      MapGraph clone=storage.getGraph();
-      LinkedList<Local> shortPath = new LinkedList<>();
-        ArrayList<Local> list = clone.vertices();
+        MapGraphLoader.loadGraph("docs\\esinf_data\\locais_small.csv", "docs\\esinf_data\\distancias_small.csv");
+        MapGraph clone = storage.getGraph();
+        LinkedList<Local> shortPath2 = new LinkedList<>();
         Distancia data = storage.getFurthestPlaces();
-        System.out.println(clone.edges());
 
-       // Algorithms.shortestPath(clone, data.getLocal1(), data.getLocal2(), shortPath);
-
-        // LinkedList<String> shortPath = new LinkedList<>();
-        Integer lenPath = Algorithms.shortestPath(clone, list.get(0), list.get(1), Integer::compare, Integer::sum, 0, shortPath);
-       // assertEquals(335, lenPath, "Length path should be 0 if vertices are the same");
-       // assertEquals(Arrays.asList("Porto", "Aveiro", "Coimbra", "Lisboa"), shortPath, "Shortest Path Porto - Lisboa");
+        Algorithms.shortestPath(clone, data.getLocal1(), data.getLocal2(), Integer::compare, Integer::sum, 0, shortPath2);
+        System.out.println(shortPath2);
+        for (Local l : shortPath2) {
+            System.out.println(l.getLocalId());
+        }
+        LinkedList<String> shortPath = new LinkedList<>();
+        Integer lenPath = Algorithms.shortestPath(incompleteMap, "Porto", "Lisboa", Integer::compare, Integer::sum, 0, shortPath);
+        assertEquals(335, lenPath, "Length path should be 0 if vertices are the same");
+        assertEquals(Arrays.asList("Porto", "Aveiro", "Coimbra", "Lisboa"), shortPath, "Shortest Path Porto - Lisboa");
 
     }
+
+    @Test
+    public void testDistanceBetweenOriginAndDestination() throws IOException {
+        GraphStore storage = new GraphStore();
+        MapGraphLoader.loadGraph("docs\\esinf_data\\locais_small.csv", "docs\\esinf_data\\distancias_small.csv");
+        MapGraph clone = storage.getGraph();
+        LinkedList<Local> shortPath2 = new LinkedList<>();
+        Distancia data = storage.getFurthestPlaces();
+        Algorithms.shortestPath(clone, data.getLocal1(), data.getLocal2(), Integer::compare, Integer::sum, 0, shortPath2);
+        for (int i = 0; i < shortPath2.size(); i++) {
+            System.out.println(shortPath2.get(i).getLocalId());
+        }
+        int expected = 604469;
+        double distance = storage.getDistanceBetweenOriginAndDestination(clone, shortPath2);
+        assertEquals(expected, distance);
+    }
+
 }
 
 

@@ -11,43 +11,13 @@ public class FurthestPlacesData {
     private final double DEFAULT_DISTANCE = 0;
     private Local local1;
     private Local local2;
-    private double autonomiaDoVeiculoUsado;
+    private double vehicleAutonomy;
     private LinkedList<Local> shortPath;
-    private double distanciaEntreLocais;
-    private List<Local> locaisDePassagem;
-    private List<Local> locaisDeCarregamento;
-    private List<Distancia> distancia;
-    private int numeroDeParagensDoVeiculo;
-
-
-
-    private int numeroDeCarregamento;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof FurthestPlacesData that)) return false;
-        return Double.compare(that.DEFAULT_DISTANCE, DEFAULT_DISTANCE) == 0 && Double.compare(that.getDistanciaEntreLocais(), getDistanciaEntreLocais()) == 0 && Double.compare(that.getAutonomiaDoVeiculoUsado(), getAutonomiaDoVeiculoUsado()) == 0 && getNumeroDeParagensDoVeiculo() == that.getNumeroDeParagensDoVeiculo() && getNumeroDeCarregamento() == that.getNumeroDeCarregamento() && Double.compare(that.getDistanciaTotalDoPercurso(), getDistanciaTotalDoPercurso()) == 0 && DEFAULT_LOCAL.equals(that.DEFAULT_LOCAL) && getLocal1().equals(that.getLocal1()) && getLocal2().equals(that.getLocal2()) && getShortPath().equals(that.getShortPath()) && getLocaisDePassagem().equals(that.getLocaisDePassagem()) && getLocaisDeCarregamento().equals(that.getLocaisDeCarregamento()) && getDistancia().equals(that.getDistancia());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(DEFAULT_LOCAL, DEFAULT_DISTANCE, getLocal1(), getLocal2(), getDistanciaEntreLocais(), getAutonomiaDoVeiculoUsado(), getShortPath(), getLocaisDePassagem(), getLocaisDeCarregamento(), getDistancia(), getNumeroDeParagensDoVeiculo(), getNumeroDeCarregamento(), getDistanciaTotalDoPercurso());
-    }
-
-    private double distanciaTotalDoPercurso;
-
-    public FurthestPlacesData() {
-        this.local1 = DEFAULT_LOCAL;
-        this.local2 = DEFAULT_LOCAL;
-        this.distanciaEntreLocais = DEFAULT_DISTANCE;
-    }
-
-    public FurthestPlacesData(Local local1, Local local2, double distanciaEntreLocais) {
-        this.local1 = local1;
-        this.local2 = local2;
-        this.distanciaEntreLocais = distanciaEntreLocais;
-    }
+    private double distanceFromOriginToDestination;// todos os locals
+    private List<Local> vehicleChargeStops; //onde o veiculo carregou
+    private List<Distancia> distanceBetweenLocals;//distanciaa entre todos os pares
+    private int vehiclesStops; //nmr de lugares onde o veiculo parou
+    private int numberOfTimesVehicleWasCharged; //quantas vezes o veiculo parou
 
     public Local getLocal1() {
         return local1;
@@ -65,20 +35,12 @@ public class FurthestPlacesData {
         this.local2 = local2;
     }
 
-    public double getDistanciaEntreLocais() {
-        return distanciaEntreLocais;
+    public double getVehicleAutonomy() {
+        return vehicleAutonomy;
     }
 
-    public void setDistanciaEntreLocais(double distanciaEntreLocais) {
-        this.distanciaEntreLocais = distanciaEntreLocais;
-    }
-
-    public double getAutonomiaDoVeiculoUsado() {
-        return autonomiaDoVeiculoUsado;
-    }
-
-    public void setAutonomiaDoVeiculoUsado(double autonomiaDoVeiculoUsado) {
-        this.autonomiaDoVeiculoUsado = autonomiaDoVeiculoUsado;
+    public void setVehicleAutonomy(double vehicleAutonomy) {
+        this.vehicleAutonomy = vehicleAutonomy;
     }
 
     public LinkedList<Local> getShortPath() {
@@ -89,67 +51,71 @@ public class FurthestPlacesData {
         this.shortPath = shortPath;
     }
 
-    public List<Local> getLocaisDePassagem() {
-        return locaisDePassagem;
+    public double getDistanceFromOriginToDestination() {
+        return distanceFromOriginToDestination;
     }
 
-    public void setLocaisDePassagem(List<Local> locaisDePassagem) {
-        this.locaisDePassagem = locaisDePassagem;
+    public void setDistanceFromOriginToDestination(double distanceFromOriginToDestination) {
+        this.distanceFromOriginToDestination = distanceFromOriginToDestination;
     }
 
-    public List<Local> getLocaisDeCarregamento() {
-        return locaisDeCarregamento;
+    public List<Local> getVehicleChargeStops() {
+        return vehicleChargeStops;
     }
 
-    public void setLocaisDeCarregamento(List<Local> locaisDeCarregamento) {
-        this.locaisDeCarregamento = locaisDeCarregamento;
+    public void setVehicleChargeStops(List<Local> vehicleChargeStops) {
+        this.vehicleChargeStops = vehicleChargeStops;
     }
 
-    public List<Distancia> getDistancia() {
-        return distancia;
+    public List<Distancia> getDistanceBetweenLocals() {
+        return distanceBetweenLocals;
     }
 
-    public void setDistancia(List<Distancia> distancia) {
-        this.distancia = distancia;
+    public void setDistanceBetweenLocals(List<Distancia> distanceBetweenLocals) {
+        this.distanceBetweenLocals = distanceBetweenLocals;
     }
 
-    public int getNumeroDeParagensDoVeiculo() {
-        return numeroDeParagensDoVeiculo;
+    public int getVehiclesStops() {
+        return vehiclesStops;
     }
 
-    public void setNumeroDeParagensDoVeiculo(int numeroDeParagensDoVeiculo) {
-        this.numeroDeParagensDoVeiculo = numeroDeParagensDoVeiculo;
+    public void setVehiclesStops(int vehiclesStops) {
+        this.vehiclesStops = vehiclesStops;
     }
 
-    public int getNumeroDeCarregamento() {
-        return numeroDeCarregamento;
+    public int getNumberOfTimesVehicleWasCharged() {
+        return numberOfTimesVehicleWasCharged;
     }
 
-    public void setNumeroDeCarregamento(int numeroDeCarregamento) {
-        this.numeroDeCarregamento = numeroDeCarregamento;
+    public void setNumberOfTimesVehicleWasCharged(int numberOfTimesVehicleWasCharged) {
+        this.numberOfTimesVehicleWasCharged = numberOfTimesVehicleWasCharged;
     }
 
-    public double getDistanciaTotalDoPercurso() {
-        return distanciaTotalDoPercurso;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof FurthestPlacesData that)) return false;
+        return Double.compare(that.DEFAULT_DISTANCE, DEFAULT_DISTANCE) == 0 && Double.compare(that.vehicleAutonomy, vehicleAutonomy) == 0 && Double.compare(that.distanceFromOriginToDestination, distanceFromOriginToDestination) == 0 && vehiclesStops == that.vehiclesStops && numberOfTimesVehicleWasCharged == that.numberOfTimesVehicleWasCharged && Objects.equals(DEFAULT_LOCAL, that.DEFAULT_LOCAL) && local1.equals(that.local1) && local2.equals(that.local2) && shortPath.equals(that.shortPath) && vehicleChargeStops.equals(that.vehicleChargeStops) && distanceBetweenLocals.equals(that.distanceBetweenLocals);
     }
 
-    public void setDistanciaTotalDoPercurso(double distanciaTotalDoPercurso) {
-        this.distanciaTotalDoPercurso = distanciaTotalDoPercurso;
+    @Override
+    public int hashCode() {
+        return Objects.hash(DEFAULT_LOCAL, DEFAULT_DISTANCE, local1, local2, vehicleAutonomy, shortPath, distanceFromOriginToDestination, vehicleChargeStops, distanceBetweenLocals, vehiclesStops, numberOfTimesVehicleWasCharged);
     }
+
     @Override
     public String toString() {
         return "FurthestPlacesData{" +
+                ", DEFAULT_DISTANCE=" + DEFAULT_DISTANCE +
                 ", local1=" + local1 +
                 ", local2=" + local2 +
-                ", distanciaEntreLocais=" + distanciaEntreLocais +
-                ", autonomiaDoVeiculoUsado=" + autonomiaDoVeiculoUsado +
+                ", vehicleAutonomy=" + vehicleAutonomy +
                 ", shortPath=" + shortPath +
-                ", locaisDePassagem=" + locaisDePassagem +
-                ", locaisDeCarregamento=" + locaisDeCarregamento +
-                ", distancia=" + distancia +
-                ", numeroDeParagensDoVeiculo=" + numeroDeParagensDoVeiculo +
-                ", numeroDeCarregamento=" + numeroDeCarregamento +
-                ", distanciaTotalDoPercurso=" + distanciaTotalDoPercurso +
+                ", distanceFromOriginToDestination=" + distanceFromOriginToDestination +
+                ", vehicleChargeStops=" + vehicleChargeStops +
+                ", distanceBetweenLocals=" + distanceBetweenLocals +
+                ", vehiclesStops=" + vehiclesStops +
+                ", numberOfTimesVehicleWasCharged=" + numberOfTimesVehicleWasCharged +
                 '}';
     }
 }

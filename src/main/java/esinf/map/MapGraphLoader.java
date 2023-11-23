@@ -61,7 +61,6 @@ public class MapGraphLoader {
                 }
             }
         }
-        System.out.println(graphStore.getGraph().edges());
         return graph;
     }
 }
