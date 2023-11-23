@@ -1,5 +1,7 @@
 package ui.utils;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Objects;
 
 public class MenuItem {
@@ -15,9 +17,9 @@ public class MenuItem {
      */
     public MenuItem(String description, Runnable ui) {
 
-        /*if (StringUtils.isBlank(description)) {
+        if (StringUtils.isBlank(description)) {
             throw new IllegalArgumentException("MenuItem description cannot be null or empty.");
-        }*/
+        }
 
         if (Objects.isNull(ui)) {
             throw new IllegalArgumentException("MenuItem does not support a null UI.");
