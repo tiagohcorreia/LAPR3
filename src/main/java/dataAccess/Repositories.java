@@ -18,6 +18,9 @@ public class Repositories {
         colheitaRepository = new ColheitaRepository();
         mondaRepository = new MondaRepository();
         operacaoAgricolaRepository  = new OperacaoAgricolaRepository();
+        parcelaRepository = new ParcelaRepository();
+        metodoExcucaoRepository = new MetodoExcucaoRepository();
+        variedadeRepository = new VariedadeRepository();
     }
 
     public static Repositories getInstance() {
