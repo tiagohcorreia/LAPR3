@@ -19,6 +19,12 @@ VALUES (?, 'Fertimax Extrume de Cavalo, da Nutrofertil', 2, 2);
 INSERT INTO Fator_Producao(id, nome, tipo_id, formulacao_id)
 VALUES (?, 'BIOFERTIL N6, da Nutrofertil', 2, 2);
 
+INSERT INTO FP_Metodo_Aplicacao(fator_producao_id, metodo_aplicacao_id)
+VALUES (?, ?);
+INSERT INTO FP_Metodo_Aplicacao(fator_producao_id, metodo_aplicacao_id)
+VALUES (?, ?);
+
+
 --ficha tecnica Fertimax Extrume de Cavalo
 INSERT INTO Ficha_Tecnica(fator_producao_id, composto_quimico_id, quantidade)
 VALUES (?, ?, 0.03);
