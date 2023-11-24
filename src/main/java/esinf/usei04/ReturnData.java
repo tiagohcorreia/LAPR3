@@ -3,51 +3,33 @@ package esinf.usei04;
 import esinf.Graph;
 import esinf.model.Local;
 
-import java.util.List;
 
 public class ReturnData {
 
-    private Graph graph;
-    private List<Local> listaEgdes;
-    private List<Double> listaPesos;
-    private double pesoTotal;
+    private Graph<Local, Integer> graph;
+    private int pesoTotal;
 
-    public ReturnData(Graph graph, List<Local> listaEgdes, List<Double> listaPesos, double pesoTotal) {
+    public ReturnData(Graph<Local, Integer> graph, int pesoTotal) {
         this.graph = graph;
-        this.listaEgdes = listaEgdes;
-        this.listaPesos = listaPesos;
         this.pesoTotal = pesoTotal;
     }
 
-    public ReturnData() {
-    }
-
-    public Graph getGraph() {
+    public Graph<Local, Integer> getGraph() {
         return graph;
     }
 
-    public List<Local> getListaEgdes() {
-        return listaEgdes;
-    }
-
-    public List<Double> getListaPesos() {
-        return listaPesos;
-    }
-
-    public double getPesoTotal() {
+    public int getPesoTotal() {
         return pesoTotal;
     }
 
     @Override
     public String toString() {
 
-        final StringBuilder sb = new StringBuilder("RetrunData{");
+        final StringBuilder sb = new StringBuilder("Minimum Spanning Tree: \n");
 
-        sb.append("graph=").append(graph);
-        sb.append(", listaEgdes=").append(listaEgdes);
-        sb.append(", listaPesos=").append(listaPesos);
-        sb.append(", pesoTotal=").append(pesoTotal);
-        sb.append('}');
+        sb.append("Graph: \n").append(graph);
+        sb.append(", PesoTotal:").append(pesoTotal);
+
         return sb.toString();
     }
 }

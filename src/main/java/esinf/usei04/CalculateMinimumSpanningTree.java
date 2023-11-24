@@ -11,9 +11,7 @@ import java.io.IOException;
 import java.util.*;
 
 public class CalculateMinimumSpanningTree {
-    public ReturnData calculateMinimumSpanningTreeWithKruskal() throws IOException {
-
-        Graph<Local, Integer> graph = MapGraphLoader.loadGraph("docs/esinf_data/locais_small.csv", "docs/esinf_data/distancias_small.csv");
+    public static ReturnData calculateMinimumSpanningTreeWithKruskal(Graph<Local, Integer> graph) {
 
         if (graph.isDirected()) return null;
 
@@ -30,16 +28,10 @@ public class CalculateMinimumSpanningTree {
         }
 
         // Ordenar
-        edgeList.sort(Comparator.comparing(Edge::getWeightDouble));
-
-        // Lista para armazenar os pesos das arestas
-        List<Double> weightList = new ArrayList<>();
-
-        // Lista para armazenar os vetices visitados na arvore
-        List<Local> visitedVertices = new ArrayList<>();
+        edgeList.sort(Comparator.comparing(Edge::getWeight));
 
         // armazana o total dos pesos
-        double totalWeight = 0;
+        int totalWeight = 0;
 
         for (Edge<Local, Integer> edge : edgeList) {
 
@@ -48,12 +40,9 @@ public class CalculateMinimumSpanningTree {
             if (!connectedVerteces.contains(edge.getVDest())) {
 
                 minimumSpanningTree.addEdge(edge.getVOrig(), edge.getVDest(), edge.getWeight());
-                weightList.add(edge.getWeightDouble());
                 totalWeight += edge.getWeight();
             }
-            visitedVertices = minimumSpanningTree.vertices();
-
         }
-        return new ReturnData(minimumSpanningTree, visitedVertices, weightList, totalWeight);
+        return new ReturnData(minimumSpanningTree, totalWeight);
     }
 }
