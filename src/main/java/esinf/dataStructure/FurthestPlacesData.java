@@ -22,7 +22,7 @@ public class FurthestPlacesData {
     private List<Local> shortPath;
     private double distanceFromOriginToDestination;// todos os locals
     private List<Local> vehicleChargeStops; //onde o veiculo carregou
-    private List<Distance> distanceBetweenLocals;//distanciaa entre todos os pares
+    private List<Distance> distanceBetweenLocals;//distancia entre todos os pares
     private int vehiclesStops; //nmr de lugares onde o veiculo parou
 
 
@@ -138,7 +138,6 @@ public class FurthestPlacesData {
     @Override
     public String toString() {
         return "FurthestPlacesData{" +
-                ", DEFAULT_DISTANCE=" + DEFAULT_DISTANCE +
                 ", local1=" + local1 +
                 ", local2=" + local2 +
                 ", vehicleAutonomy=" + vehicleAutonomy +
