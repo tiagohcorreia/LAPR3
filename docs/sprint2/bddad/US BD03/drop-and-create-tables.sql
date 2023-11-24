@@ -237,7 +237,7 @@ CREATE TABLE Sementeira
     operacao_id        number(10) NOT NULL,
     parcela_id         number(10) NOT NULL,
     variedade_id       number(10) NOT NULL,
-    quantidade         float(10),
+    quantidade         float(10)  NOT NULL,
     area               float(10)  NOT NULL,
     metodo_execucao_id number(10),
     PRIMARY KEY (operacao_id)
@@ -348,8 +348,6 @@ ALTER TABLE Desfolha
     ADD CONSTRAINT FKDesfolha442796 FOREIGN KEY (operacao_id) REFERENCES Operacao_Agricola (id);
 ALTER TABLE Tutoramento
     ADD CONSTRAINT FKTutorament176015 FOREIGN KEY (operacao_id) REFERENCES Operacao_Agricola (id);
-ALTER TABLE Op_Plantacao
-    ADD CONSTRAINT FKOp_Plantac35629 FOREIGN KEY (operacao_id) REFERENCES Operacao_Agricola (id);
 ALTER TABLE Monda
     ADD CONSTRAINT FKMonda459456 FOREIGN KEY (operacao_id) REFERENCES Operacao_Agricola (id);
 ALTER TABLE Colheita
@@ -438,6 +436,8 @@ ALTER TABLE Incorporacao_Solo
     ADD CONSTRAINT FKIncorporac487990 FOREIGN KEY (parcela_id) REFERENCES Parcela (id);
 ALTER TABLE Incorporacao_Solo
     ADD CONSTRAINT FKIncorporac38854 FOREIGN KEY (variedade_id) REFERENCES Variedade (id);
+ALTER TABLE Op_Plantacao
+    ADD CONSTRAINT FKOp_Plantac35629 FOREIGN KEY (operacao_id) REFERENCES Operacao_Agricola (id);
 ALTER TABLE Aplicacao_FP
     ADD CONSTRAINT FKAplicacao_767975 FOREIGN KEY (fator_producao_id) REFERENCES Fator_Producao (id);
 ALTER TABLE Aplicacao_FP

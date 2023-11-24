@@ -97,7 +97,7 @@ VALUES (3, 2);
 INSERT INTO FP_Metodo_Aplicacao(fator_producao_id, metodo_aplicacao_id)
 VALUES (4, 2);
 INSERT INTO FP_Metodo_Aplicacao(fator_producao_id, metodo_aplicacao_id)
-VALUES (5, null);
+VALUES (5, 3);
 INSERT INTO FP_Metodo_Aplicacao(fator_producao_id, metodo_aplicacao_id)
 VALUES (5, 4);
 INSERT INTO FP_Metodo_Aplicacao(fator_producao_id, metodo_aplicacao_id)

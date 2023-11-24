@@ -1,5 +1,4 @@
-delete
-from OPERACAO_AGRICOLA;
+
 delete
 from SEMENTEIRA;
 delete
@@ -20,6 +19,8 @@ delete
 from APLICACAO_FP;
 delete
 from MOBLILIZACAO_SOLO;
+delete
+from OPERACAO_AGRICOLA;
 
 INSERT INTO Operacao_Agricola (id, data)
 VALUES (101, TO_DATE('06-10-2016', 'dd-mm-yyyy'));
@@ -186,10 +187,10 @@ VALUES (161, TO_DATE('20-01-2020', 'dd-mm-yyyy'));
 INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, fator_producao_id, metodo_aplicacao_id, quantidade,
                          area)
 VALUES (161, 107, 95, 1, null, 2.5, null);
-INSERT INTO Operacao_Agricola (id, data)
-VALUES (162, TO_DATE('12-03-2020', 'dd-mm-yyyy'));
-INSERT INTO Sementeira(operacao_id, parcela_id, variedade_id, quantidade, area, metodo_execucao_id)
-VALUES (162, 106, 79, 0.9, null, null);
+/*INSERT INTO OPERACAO_AGRICOLA (ID, DATA)
+VALUES (162, TO_DATE('12-03-2020', 'DD-MM-YYYY'));
+INSERT INTO SEMENTEIRA(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, QUANTIDADE, AREA, METODO_EXECUCAO_ID)
+VALUES (162, 106, 79, 0.9, NULL, NULL);*/
 INSERT INTO Operacao_Agricola (id, data)
 VALUES (163, TO_DATE('30-03-2020', 'dd-mm-yyyy'));
 INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, fator_producao_id, metodo_aplicacao_id, quantidade,
@@ -198,7 +199,7 @@ VALUES (163, 103, null, 8, 7, 600, null);
 INSERT INTO Operacao_Agricola (id, data)
 VALUES (164, TO_DATE('05-04-2020', 'dd-mm-yyyy'));
 INSERT INTO Sementeira(operacao_id, parcela_id, variedade_id, quantidade, area, metodo_execucao_id)
-VALUES (164, 103, 82, 1.2, null, null);
+VALUES (164, 103, 82, null, 1.2, null);
 
 
 INSERT INTO Operacao_Agricola (id, data)
@@ -219,7 +220,7 @@ VALUES (183, 101, 80, 36, null, null);
 INSERT INTO Operacao_Agricola (id, data)
 VALUES (184, TO_DATE('12-10-2020', 'dd-mm-yyyy'));
 INSERT INTO Sementeira(operacao_id, parcela_id, variedade_id, quantidade, area, metodo_execucao_id)
-VALUES (184, 103, 80, 1.3, null, null);
+VALUES (184, 103, 80, null, 1.3, null);
 INSERT INTO Operacao_Agricola (id, data)
 VALUES (185, TO_DATE('10-11-2020', 'dd-mm-yyyy'));
 INSERT INTO Poda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id)
@@ -290,7 +291,7 @@ VALUES (202, 101, 80, 1.3);
 INSERT INTO Operacao_Agricola (id, data)
 VALUES (203, TO_DATE('03-04-2021', 'dd-mm-yyyy'));
 INSERT INTO Sementeira(operacao_id, parcela_id, variedade_id, quantidade, area, metodo_execucao_id)
-VALUES (203, 103, 82, 1.2, null, null);
+VALUES (203, 103, 82, null, 1.2, null);
 INSERT INTO Operacao_Agricola (id, data)
 VALUES (204, TO_DATE('15-04-2021', 'dd-mm-yyyy'));
 INSERT INTO Sementeira(operacao_id, parcela_id, variedade_id, quantidade, area, metodo_execucao_id)
@@ -317,11 +318,11 @@ VALUES (232, 106, 93, 0.6, null, null);
 INSERT INTO Operacao_Agricola (id, data)
 VALUES (234, TO_DATE('03-10-2021', 'dd-mm-yyyy'));
 INSERT INTO Sementeira(operacao_id, parcela_id, variedade_id, quantidade, area, metodo_execucao_id)
-VALUES (234, 101, 80, 36, null, null);
+VALUES (234, 101, 80, null, null, null);
 INSERT INTO Operacao_Agricola (id, data)
 VALUES (235, TO_DATE('06-10-2021', 'dd-mm-yyyy'));
 INSERT INTO Sementeira(operacao_id, parcela_id, variedade_id, quantidade, area, metodo_execucao_id)
-VALUES (235, 103, 80, 1.3, null, null);
+VALUES (235, 103, 80, null, 1.3, null);
 
 
 
@@ -380,7 +381,7 @@ VALUES (254, 101, 80, 1.3);
 INSERT INTO Operacao_Agricola (id, data)
 VALUES (255, TO_DATE('08-04-2022', 'dd-mm-yyyy'));
 INSERT INTO Sementeira(operacao_id, parcela_id, variedade_id, quantidade, area, metodo_execucao_id)
-VALUES (255, 103, 82, 1.2, null, null);
+VALUES (255, 103, 82, null, 1.2, null);
 INSERT INTO Operacao_Agricola (id, data)
 VALUES (256, TO_DATE('15-04-2022', 'dd-mm-yyyy'));
 INSERT INTO Sementeira(operacao_id, parcela_id, variedade_id, quantidade, area, metodo_execucao_id)
@@ -406,7 +407,7 @@ VALUES (288, 106, 84, 0.6, null, null);
 INSERT INTO Operacao_Agricola (id, data)
 VALUES (289, TO_DATE('12-10-2022', 'dd-mm-yyyy'));
 INSERT INTO Sementeira(operacao_id, parcela_id, variedade_id, quantidade, area, metodo_execucao_id)
-VALUES (289, 103, 80, 1.3, null, null);
+VALUES (289, 103, 80, null, 1.3, null);
 
 
 INSERT INTO Operacao_Agricola (id, data)
