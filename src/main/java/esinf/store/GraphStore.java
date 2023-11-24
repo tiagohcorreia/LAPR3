@@ -146,7 +146,6 @@ public class GraphStore {
     }
 
 
-
     public boolean checkAttributesNonNull(Distance data, MapGraph<Local, Integer> clone, double autonomy) {
         if (data == null || clone == null) {
             return false;
@@ -203,6 +202,13 @@ public class GraphStore {
 
 
         return data2;
+    }
+
+
+    public boolean clean() {
+        boolean directed = false;
+        graph = new MapGraph<>(directed);
+        return graph.vertices().isEmpty();
     }
 }
 
