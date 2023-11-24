@@ -7,16 +7,48 @@ import java.util.List;
 import java.util.Objects;
 
 public class FurthestPlacesData {
+    private final int DEFAULT_VALUE = 0;
     private final Local DEFAULT_LOCAL = null;
-    private final double DEFAULT_DISTANCE = 0;
+    private final Local DEFAULT_DISTANCE = null;
+
+    private final List<Local> DEFAULT_SHORTPATH = null;
+    private final double DEFAULT_VALUE2 = 0;
+    private final List<Distance> DEFAULT_DISTANCE2 = null;
+
+
     private Local local1;
     private Local local2;
     private double vehicleAutonomy;
-    private LinkedList<Local> shortPath;
+    private List<Local> shortPath;
     private double distanceFromOriginToDestination;// todos os locals
     private List<Local> vehicleChargeStops; //onde o veiculo carregou
-    private List<Distancia> distanceBetweenLocals;//distanciaa entre todos os pares
+    private List<Distance> distanceBetweenLocals;//distanciaa entre todos os pares
     private int vehiclesStops; //nmr de lugares onde o veiculo parou
+
+
+
+    public FurthestPlacesData() {
+        this.local1 = DEFAULT_LOCAL;
+        this.local2 = DEFAULT_LOCAL;
+        this.vehicleAutonomy = 0;
+        this.shortPath = DEFAULT_SHORTPATH;
+        this.distanceFromOriginToDestination = DEFAULT_VALUE2;
+        this.vehicleChargeStops = DEFAULT_SHORTPATH;
+        this.distanceBetweenLocals = DEFAULT_DISTANCE2;
+        this.vehiclesStops = DEFAULT_VALUE;
+        this.numberOfTimesVehicleWasCharged = DEFAULT_VALUE;
+    }
+    public FurthestPlacesData(Local local1, Local local2, double vehicleAutonomy, LinkedList<Local> shortPath, double distanceFromOriginToDestination, List<Local> vehicleChargeStops, List<Distance> distanceBetweenLocals, int vehiclesStops, int numberOfTimesVehicleWasCharged) {
+        this.local1 = local1;
+        this.local2 = local2;
+        this.vehicleAutonomy = vehicleAutonomy;
+        this.shortPath = shortPath;
+        this.distanceFromOriginToDestination = distanceFromOriginToDestination;
+        this.vehicleChargeStops = vehicleChargeStops;
+        this.distanceBetweenLocals = distanceBetweenLocals;
+        this.vehiclesStops = vehiclesStops;
+        this.numberOfTimesVehicleWasCharged = numberOfTimesVehicleWasCharged;
+    }
     private int numberOfTimesVehicleWasCharged; //quantas vezes o veiculo parou
 
     public Local getLocal1() {
@@ -43,7 +75,7 @@ public class FurthestPlacesData {
         this.vehicleAutonomy = vehicleAutonomy;
     }
 
-    public LinkedList<Local> getShortPath() {
+    public List<Local> getShortPath() {
         return shortPath;
     }
 
@@ -67,11 +99,11 @@ public class FurthestPlacesData {
         this.vehicleChargeStops = vehicleChargeStops;
     }
 
-    public List<Distancia> getDistanceBetweenLocals() {
+    public List<Distance> getDistanceBetweenLocals() {
         return distanceBetweenLocals;
     }
 
-    public void setDistanceBetweenLocals(List<Distancia> distanceBetweenLocals) {
+    public void setDistanceBetweenLocals(List<Distance> distanceBetweenLocals) {
         this.distanceBetweenLocals = distanceBetweenLocals;
     }
 
@@ -95,12 +127,12 @@ public class FurthestPlacesData {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof FurthestPlacesData that)) return false;
-        return Double.compare(that.DEFAULT_DISTANCE, DEFAULT_DISTANCE) == 0 && Double.compare(that.vehicleAutonomy, vehicleAutonomy) == 0 && Double.compare(that.distanceFromOriginToDestination, distanceFromOriginToDestination) == 0 && vehiclesStops == that.vehiclesStops && numberOfTimesVehicleWasCharged == that.numberOfTimesVehicleWasCharged && Objects.equals(DEFAULT_LOCAL, that.DEFAULT_LOCAL) && local1.equals(that.local1) && local2.equals(that.local2) && shortPath.equals(that.shortPath) && vehicleChargeStops.equals(that.vehicleChargeStops) && distanceBetweenLocals.equals(that.distanceBetweenLocals);
+        return DEFAULT_VALUE == that.DEFAULT_VALUE && Double.compare(that.DEFAULT_VALUE2, DEFAULT_VALUE2) == 0 && Double.compare(that.getVehicleAutonomy(), getVehicleAutonomy()) == 0 && Double.compare(that.getDistanceFromOriginToDestination(), getDistanceFromOriginToDestination()) == 0 && getVehiclesStops() == that.getVehiclesStops() && getNumberOfTimesVehicleWasCharged() == that.getNumberOfTimesVehicleWasCharged() && Objects.equals(DEFAULT_LOCAL, that.DEFAULT_LOCAL) && Objects.equals(DEFAULT_DISTANCE, that.DEFAULT_DISTANCE) && Objects.equals(DEFAULT_SHORTPATH, that.DEFAULT_SHORTPATH) && Objects.equals(DEFAULT_DISTANCE2, that.DEFAULT_DISTANCE2) && getLocal1().equals(that.getLocal1()) && getLocal2().equals(that.getLocal2()) && getShortPath().equals(that.getShortPath()) && getVehicleChargeStops().equals(that.getVehicleChargeStops()) && getDistanceBetweenLocals().equals(that.getDistanceBetweenLocals());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(DEFAULT_LOCAL, DEFAULT_DISTANCE, local1, local2, vehicleAutonomy, shortPath, distanceFromOriginToDestination, vehicleChargeStops, distanceBetweenLocals, vehiclesStops, numberOfTimesVehicleWasCharged);
+        return Objects.hash(DEFAULT_VALUE, DEFAULT_LOCAL, DEFAULT_DISTANCE, DEFAULT_SHORTPATH, DEFAULT_VALUE2, DEFAULT_DISTANCE2, getLocal1(), getLocal2(), getVehicleAutonomy(), getShortPath(), getDistanceFromOriginToDestination(), getVehicleChargeStops(), getDistanceBetweenLocals(), getVehiclesStops(), getNumberOfTimesVehicleWasCharged());
     }
 
     @Override
