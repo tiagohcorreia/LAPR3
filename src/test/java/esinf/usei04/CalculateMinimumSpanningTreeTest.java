@@ -31,7 +31,7 @@ class CalculateMinimumSpanningTreeTest {
     @Test
     void testeSmallLocaisDistancias() throws IOException {
 
-       MapGraph<Local, Integer> graph = MapGraphLoader.loadGraph("docs/esinf_data/locais_small.csv", "docs/esinf_data/distancias_small.csv");
+       MapGraph<Local, Integer> graph =  MapGraphLoader.loadGraph("docs/esinf_data/locais_small.csv", "docs/esinf_data/distancias_small.csv");
     }
 
     @Test

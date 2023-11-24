@@ -8,11 +8,14 @@ import esinf.store.GraphStore;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.SQLOutput;
+import java.util.Objects;
 
 public class MapGraphLoader {
 
     public static MapGraph<Local, Integer> loadGraph(String locaisFile, String distanciasFile) throws IOException {
         MapGraph<Local, Integer> graph = new MapGraph<>(false);
+        GraphStore graphStore = new GraphStore();
 
         try (BufferedReader br = new BufferedReader(new FileReader(locaisFile))) {
             String line;
@@ -30,8 +33,7 @@ public class MapGraphLoader {
                 double lng = Double.parseDouble(parts[2]);
                 GPS gps = new GPS(lat, lng);
                 Local local = new Local(locId, gps);
-                graph.addVertex(local);
-
+                graphStore.addVertex(local);
             }
         }
 
@@ -39,31 +41,26 @@ public class MapGraphLoader {
             String line;
             boolean isFirstLine = true;
             while ((line = br.readLine()) != null) {
-                String[] parts = line.split(",");
                 if (isFirstLine) {
                     isFirstLine = false;
                     continue;
                 }
+                String[] parts = line.split(",");
                 String locId1 = parts[0];
                 String locId2 = parts[1];
-                Local local1=null;
-                Local local2=null;
+                int distancia = Integer.parseInt(parts[2]);
+                Local local1 = null;
+                Local local2 = null;
 
-                for (Local l : graph.vertices()) {
+                for (Local l : graphStore.getGraph().vertices()) {
                     if (l.getLocalId().equals(locId1)) local1 = l;
-                }
-                for (Local l : graph.vertices()) {
                     if (l.getLocalId().equals(locId2)) local2 = l;
                 }
-                int distancia = Integer.parseInt(parts[2]);
-                if (local1!=null && local2!=null) {
-                    graph.addEdge(local1,local2,distancia);
+                if (local1 != null && local2 != null) {
+                    graphStore.addEdge(local1,local2,distancia);
                 }
-
             }
         }
-        GraphStore.setGraph(graph);
-
         return graph;
     }
 }
