@@ -22,6 +22,38 @@ public class IdealVerticesCalculator<V, E> {
         this.neutralValue=neutralValue;
     }
 
+    public Graph<V, E> getGraph() {
+        return graph;
+    }
+
+    public void setGraph(Graph<V, E> graph) {
+        this.graph = graph;
+    }
+
+    public Comparator<E> getComparator() {
+        return comparator;
+    }
+
+    public void setComparator(Comparator<E> comparator) {
+        this.comparator = comparator;
+    }
+
+    public BinaryOperator<E> getBinaryOperator() {
+        return binaryOperator;
+    }
+
+    public void setBinaryOperator(BinaryOperator<E> binaryOperator) {
+        this.binaryOperator = binaryOperator;
+    }
+
+    public E getNeutralValue() {
+        return neutralValue;
+    }
+
+    public void setNeutralValue(E neutralValue) {
+        this.neutralValue = neutralValue;
+    }
+
     public Map<V, Integer> getVerticesCentrality(){
 
         Map<V, ArrayList<LinkedList<V>>> allShortestPathsForAllVertices=getAllShortestPathsForAllVertices();
