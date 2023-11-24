@@ -80,8 +80,8 @@ public abstract class CommonGraph<V, E> implements Graph<V, E> {
         }
     }
 
-    /* equals implementation compares graphs, independently of their representation
-     * @param the other graph to test for equality
+    /** equals implementation compares graphs, independently of their representation
+     * @param otherObj the other graph to test for equality
      * @return true if both objects represent the same graph
      */
     @Override
