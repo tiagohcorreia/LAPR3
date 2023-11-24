@@ -1,10 +1,8 @@
 package esinf.store;
 
-import dataStructure.Distance;
-import dataStructure.FurthestPlacesData;
+import esinf.dataStructure.Distance;
+import esinf.dataStructure.FurthestPlacesData;
 import esinf.Algorithms;
-import esinf.Edge;
-import esinf.Graph;
 import esinf.map.MapGraph;
 import esinf.model.Local;
 

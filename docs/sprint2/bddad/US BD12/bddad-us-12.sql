@@ -23,7 +23,7 @@ BEGIN
         RAISE variedade_nao_existe;
     ELSIF (fatorProducaoId NOT IN Fator_Producao.id) THEN
         RAISE fator_producao_nao_existe;
-        ELS
+        E
 END IF;
 
 INSERT INTO Operacao_Agricola(id, data)

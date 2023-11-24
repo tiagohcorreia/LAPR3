@@ -1,4 +1,4 @@
-package dataStructure;
+package esinf.dataStructure;
 
 import esinf.model.Local;
 

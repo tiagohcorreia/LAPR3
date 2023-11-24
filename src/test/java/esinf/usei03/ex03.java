@@ -1,7 +1,7 @@
 package esinf.usei03;
 
-import dataStructure.Distance;
-import dataStructure.FurthestPlacesData;
+import esinf.dataStructure.Distance;
+import esinf.dataStructure.FurthestPlacesData;
 import esinf.*;
 import esinf.map.MapGraph;
 import esinf.map.MapGraphLoader;
