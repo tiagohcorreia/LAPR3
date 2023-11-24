@@ -1,8 +1,7 @@
 package ui.funcionalidades;
 
-import controller.ColheitaRegisterController;
-import controller.MondaRegisterController;
-import controller.OperacaoAgricolaRegisterController;
+import controller.*;
+import domain.Variedade;
 import ui.utils.Utils;
 
 import java.sql.SQLException;
@@ -24,7 +23,8 @@ public class MondaRegisterUI implements Runnable {
 
     public void run() {
         try {
-            System.out.println("Register a new Monda");
+
+            System.out.println("Registar nova Monda");
 
             System.out.print("OperacaoId: ");
             int operacaoId = controllerop.getNextId();
@@ -47,31 +47,39 @@ public class MondaRegisterUI implements Runnable {
                 }
             }
 
-
+            ParcelasListController controller1 = new ParcelasListController();
+            controller1.showAllParcelas();
             int parcelaId = Utils.readIntegerFromConsole("ParcelaId: ");
 
+
+            VariedadeListController controller2 = new VariedadeListController();
+            controller2.showVariedades();
             int variedadeId = Utils.readIntegerFromConsole("VariedadeId: ");
 
+            FatorProducaoListController controller3 = new FatorProducaoListController();
+            controller3.showAllFatoresProducao();
             int fatorProducaoId = Utils.readIntegerFromConsole("FatorProducaoId: ");
 
+            MetodoExecucaoListController controller4 = new MetodoExecucaoListController();
+            controller4.showMetodosExecucao();
             int metodoExecucaoId = Utils.readIntegerFromConsole("MetodoExecucaoId: ");
 
             float quantidade = Utils.readFloatFromConsole("Quantidade: ");
 
             while (quantidade < 0) {
+
                 System.out.println("Error: Quantity cannot be a negative number. Please enter a non-negative quantity.");
                 quantidade = Utils.readFloatFromConsole("Quantidade: ");
             }
 
-
             controllerop.operacaoAgricolaRegister(operacaoId, date);
             controller.mondaRegister(operacaoId, parcelaId, variedadeId,fatorProducaoId, metodoExecucaoId, quantidade);
 
-            System.out.println("\nMonda registered.");
+            System.out.println("\nMonda registada.");
+
         } catch (SQLException e) {
 
-
-            System.out.println("\nMonda was not registered!\n" + e.getMessage());
+            System.err.println("\nMonda não foi registada!\n" + e.getMessage());
 
         }
     }

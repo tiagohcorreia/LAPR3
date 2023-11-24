@@ -4,13 +4,13 @@ import esinf.model.Local;
 
 import java.util.Objects;
 
-public class Distancia {
+public class Distance {
 
     private Local local1;
     private Local local2;
     private double lenght;
 
-    public Distancia(Local local1, Local local2, double lenght) {
+    public Distance(Local local1, Local local2, double lenght) {
         this.local1 = local1;
         this.local2 = local2;
         this.lenght = lenght;
@@ -32,8 +32,8 @@ public class Distancia {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Distancia distancia = (Distancia) o;
-        return lenght == distancia.lenght && Objects.equals(local1, distancia.local1) && Objects.equals(local2, distancia.local2);
+        Distance distance = (Distance) o;
+        return lenght == distance.lenght && Objects.equals(local1, distance.local1) && Objects.equals(local2, distance.local2);
     }
 
     @Override
@@ -44,7 +44,7 @@ public class Distancia {
     @Override
     public String toString() {
 
-        final StringBuilder sb = new StringBuilder("Distancia {");
+        final StringBuilder sb = new StringBuilder("Distance {");
 
         sb.append("local1=").append(local1);
         sb.append(", local2=").append(local2);
