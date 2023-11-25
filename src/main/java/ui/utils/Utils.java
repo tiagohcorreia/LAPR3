@@ -180,7 +180,7 @@ public class Utils {
         String input;
         Integer value;
         do {
-            input = Utils.readLineFromConsole("Type your option: ");
+            input = Utils.readLineFromConsole("Insira uma opcao: ");
             value = Integer.valueOf(input);
         } while (value < 0 || value > list.size());
 
@@ -201,7 +201,7 @@ public class Utils {
         String input;
         Integer value;
         do {
-            input = Utils.readLineFromConsole("Type your option: ");
+            input = Utils.readLineFromConsole("Insira uma opcao: ");
             try {
                 value = Integer.valueOf(input);
             } catch (NumberFormatException ex) {

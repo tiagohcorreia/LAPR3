@@ -13,8 +13,13 @@ public class OperacaoAgricolaRegisterController {
 
     private OperacaoAgricolaRepository operacaoAgricolaRepository;
     private Connection connection;
+<<<<<<< HEAD
     private static final String JDBC_URL = "jdbc:oracle:thin:@vsgate-s1.dei.isep.ipp.pt:11127/xe";
     private static final String USERNAME = "dephane";
+=======
+    private static final String JDBC_URL = "jdbc:oracle:thin:@localhost:1521/xe";
+    private static final String USERNAME = "loc";
+>>>>>>> 5bbb559 (L3IP-54 #time 4h #Implementacao da US03 de lapr3)
     private static final String PASSWORD = "basedados";
 
     public OperacaoAgricolaRegisterController() {
