@@ -36,6 +36,8 @@ class CalculateMinimumSpanningTreeTest {
 
         GraphStore storage = new GraphStore();
 
+        storage.clean();
+
         MapGraphLoader.loadGraph("docs/esinf_data/locais_small.csv", "docs/esinf_data/distancias_small.csv");
 
         MapGraph<Local, Integer> graph = storage.getGraph();
@@ -51,6 +53,8 @@ class CalculateMinimumSpanningTreeTest {
 
         GraphStore storage = new GraphStore();
 
+        storage.clean();
+
         MapGraphLoader.loadGraph("docs/esinf_data/locais_small.csv", "docs/esinf_data/distancias_small.csv");
 
         MapGraph<Local, Integer> graph = storage.getGraph();
@@ -65,6 +69,8 @@ class CalculateMinimumSpanningTreeTest {
     void testeTotalPesoSmallLocaisDistancias() throws IOException {
 
         GraphStore storage = new GraphStore();
+
+        storage.clean();
 
         MapGraphLoader.loadGraph("docs/esinf_data/locais_small.csv", "docs/esinf_data/distancias_small.csv");
 
@@ -103,6 +109,8 @@ class CalculateMinimumSpanningTreeTest {
 
         GraphStore storage = new GraphStore();
 
+        storage.clean();
+
         MapGraphLoader.loadGraph("docs/esinf_data/locais_big.csv", "docs/esinf_data/distancias_big.csv");
 
         MapGraph<Local, Integer> graph = storage.getGraph();
@@ -118,6 +126,8 @@ class CalculateMinimumSpanningTreeTest {
 
         GraphStore storage = new GraphStore();
 
+        storage.clean();
+
         MapGraphLoader.loadGraph("docs/esinf_data/locais_big.csv", "docs/esinf_data/distancias_big.csv");
 
         MapGraph<Local, Integer> graph = storage.getGraph();
@@ -132,6 +142,8 @@ class CalculateMinimumSpanningTreeTest {
     void testeTotalPesoBigLocaisDistancias() throws IOException {
 
         GraphStore storage = new GraphStore();
+
+        storage.clean();
 
         MapGraphLoader.loadGraph("docs/esinf_data/locais_big.csv", "docs/esinf_data/distancias_big.csv");
 
