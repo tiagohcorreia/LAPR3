@@ -11,11 +11,8 @@ public class Repositories {
     private VariedadeRepository variedadeRepository = null;
     private MetodoExcucaoRepository metodoExcucaoRepository = null;
     private OperacaoAgricolaRepository operacaoAgricolaRepository = null;
-<<<<<<< HEAD
     private FatorProducaoRepository fatorProducaoRepository = null;
-=======
     private RegaRepository regaRepository = null;
->>>>>>> 5bbb559 (L3IP-54 #time 4h #Implementacao da US03 de lapr3)
 
     private Repositories() {
         sailorRepository = new SailorRepository();
@@ -23,14 +20,11 @@ public class Repositories {
         colheitaRepository = new ColheitaRepository();
         mondaRepository = new MondaRepository();
         operacaoAgricolaRepository  = new OperacaoAgricolaRepository();
-<<<<<<< HEAD
         parcelaRepository = new ParcelaRepository();
         metodoExcucaoRepository = new MetodoExcucaoRepository();
         variedadeRepository = new VariedadeRepository();
         fatorProducaoRepository = new FatorProducaoRepository();
-=======
         regaRepository = new RegaRepository();
->>>>>>> 5bbb559 (L3IP-54 #time 4h #Implementacao da US03 de lapr3)
     }
 
     public static Repositories getInstance() {
@@ -56,12 +50,9 @@ public class Repositories {
     public MetodoExcucaoRepository getMetodoExcucaoRepository() {
         return metodoExcucaoRepository;
     }
-<<<<<<< HEAD
     public FatorProducaoRepository getFatorProducaoRepository() {
         return fatorProducaoRepository;
     }
 
-=======
     public RegaRepository getRegaRepository() { return regaRepository;}
->>>>>>> 5bbb559 (L3IP-54 #time 4h #Implementacao da US03 de lapr3)
 }

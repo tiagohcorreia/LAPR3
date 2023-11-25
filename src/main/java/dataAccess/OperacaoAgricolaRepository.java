@@ -6,9 +6,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-import domain.Colheita;
 import domain.OperacaoAgricola;
-import domain.Sailor;
+
 import oracle.jdbc.OracleTypes;
 
 public class OperacaoAgricolaRepository {
