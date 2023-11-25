@@ -1,6 +1,6 @@
 package controller;
 
-import classes.Rega;
+import domain.Rega;
 
 import java.io.*;
 import java.text.ParseException;
