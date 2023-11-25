@@ -1,10 +1,8 @@
 package esinf.store;
 
-import dataStructure.Distance;
-import dataStructure.FurthestPlacesData;
+import esinf.dataStructure.Distance;
+import esinf.dataStructure.FurthestPlacesData;
 import esinf.Algorithms;
-import esinf.Edge;
-import esinf.Graph;
 import esinf.map.MapGraph;
 import esinf.model.Local;
 
@@ -35,18 +33,13 @@ public class GraphStore {
     public MapGraph<Local, Integer> removeEdgesAboveAutonomy(double autonomy) {
         MapGraph<Local, Integer> clone = getCloneGraph();
         List<Local> list = clone.vertices();
-        int count = 0;
-        // System.out.println(clone);
         for (int i = 0; i < clone.numVertices(); i++) {
             for (int j = 0; j < clone.numVertices() - 1; j++) {
-                count++;
                 if (clone.edge(i, j) != null) {
-                    if (clone.edge(list.get(i), list.get(j)).getWeightDouble() > autonomy) {
+                    if (clone.edge(list.get(i), list.get(j)).getWeight() > autonomy) {
                         clone.removeEdge(clone.vertex(i), clone.vertex(j));
                     }
-                    if (clone.edge(i, j) != null) {
-                        System.out.println(clone.edge(i, j));
-                    }
+
                 }
             }
         }
@@ -119,28 +112,12 @@ public class GraphStore {
         return list;
     }*/
 
-    public Set<Distance> getCumulativeDistanceBetweenPairs(MapGraph graph, LinkedList<Local> shortPath) {
+    public List<Distance> getDistanceBetweenPairs(MapGraph graph, LinkedList<Local> shortPath) {
         List<Distance> cumulativeDistances = new ArrayList<>();
-        int temp = 0;
-        int cumulativeDistance;
         for (int i = 0; i < shortPath.size() - 1; i++) {
-            cumulativeDistance = 0;
-            if (!checkExistentDistance(cumulativeDistances, shortPath.get(i), shortPath.get(i + 1))) {
-                cumulativeDistance += (int) graph.edge(shortPath.get(i), shortPath.get(i + 1)).getWeight();
-                cumulativeDistances.add(new Distance(shortPath.get(i), shortPath.get(i + 1), cumulativeDistance));
-            }
-            temp = i + 1;
-            if (i > 0 && temp < shortPath.size()) {
-                for (int j = 0; j < i + 1; j++) {
-                    if (!checkExistentDistance(cumulativeDistances, shortPath.get(j), shortPath.get(temp))) {
-                        cumulativeDistances.add(new Distance(shortPath.get(j), shortPath.get(temp), cumulativeDistance));
-
-                    }
-                }
-            }
+            cumulativeDistances.add(new Distance(shortPath.get(i), shortPath.get(i + 1), (int) graph.edge(shortPath.get(i), shortPath.get(i + 1)).getWeight()));
         }
-        Set<Distance> set = new HashSet<>(cumulativeDistances);
-        return set;
+        return cumulativeDistances;
     }
 
     public int getNumberOfVehicleStops(MapGraph graph, LinkedList<Local> shortPath, double autonomy) {
@@ -168,27 +145,6 @@ public class GraphStore {
         return found;
     }
 
-    public List<Distance> getCumulativeDistanceBetweenPairs2(MapGraph graph, LinkedList<Local> shortPath) {
-        List<Distance> cumulativeDistances = new ArrayList<>();
-
-        for (int i = 0; i < shortPath.size() - 1; i++) {
-            int cumulativeDistance = 0;
-
-            if (i > 0)
-                for (int j = i; j - 1 > -1; j--) {
-                    if (checkExistentDistance(cumulativeDistances, shortPath.get(j - 1), shortPath.get(j))) {
-                        cumulativeDistances.add(new Distance(shortPath.get(j - 1), shortPath.get(j), cumulativeDistance));
-                    }
-                }
-            cumulativeDistance += (int) graph.edge(shortPath.get(i), shortPath.get(i + 1)).getWeight();
-            cumulativeDistances.add(new Distance(shortPath.get(i), shortPath.get(i + 1), cumulativeDistance));
-
-        }
-
-        return cumulativeDistances;
-
-
-    }
 
     public boolean checkAttributesNonNull(Distance data, MapGraph<Local, Integer> clone, double autonomy) {
         if (data == null || clone == null) {
@@ -205,7 +161,7 @@ public class GraphStore {
         Algorithms.shortestPath(clone, local1, local2, Integer::compare, Integer::sum, 0, shortPath2);
         double distanceFromOriginToDestination = getDistanceBetweenOriginAndDestination(clone, shortPath2);
         List<Local> vehicleChargeStops = getVehicleChargeStops(clone, shortPath2, autonomy);
-        List<Distance> distanceBetweenLocals = getCumulativeDistanceBetweenPairs2(clone, shortPath2);
+        List<Distance> distanceBetweenLocals = getDistanceBetweenPairs(clone, shortPath2);
         int vehiclesStops = getNumberOfVehicleStops(clone, shortPath2, autonomy);
 
         return (
@@ -221,33 +177,38 @@ public class GraphStore {
     public FurthestPlacesData getFurthestPlacesData(double autonomy) {
         FurthestPlacesData data2;
         Distance data = getFurthestPlaces();
-        System.out.println(data);
         MapGraph<Local, Integer> clone = removeEdgesAboveAutonomy(autonomy);
-        System.out.println(data);
 
-        LinkedList<Local> shortPath2 = new LinkedList<>();        System.out.println(shortPath2);
+        LinkedList<Local> shortPath2 = new LinkedList<>();
 
-        Local local1 = data.getLocal1();        System.out.println(local1);
+        Local local1 = data.getLocal1();
 
-        Local local2 = data.getLocal2();        System.out.println(local2);
+        Local local2 = data.getLocal2();
 
-        double vehicleAutonomy = autonomy;        System.out.println(vehicleAutonomy);
+        double vehicleAutonomy = autonomy;
 
         Algorithms.shortestPath(clone, data.getLocal1(), data.getLocal2(), Integer::compare, Integer::sum, 0, shortPath2);
-        double distanceFromOriginToDestination = getDistanceBetweenOriginAndDestination(clone, shortPath2);        System.out.println(distanceFromOriginToDestination);
+        double distanceFromOriginToDestination = getDistanceBetweenOriginAndDestination(clone, shortPath2);
 
-        List<Local> vehicleChargeStops = getVehicleChargeStops(clone, shortPath2, autonomy);        System.out.println(vehicleChargeStops);
+        List<Local> vehicleChargeStops = getVehicleChargeStops(clone, shortPath2, autonomy);
 
-        List<Distance> distanceBetweenLocals = getCumulativeDistanceBetweenPairs2(clone, shortPath2);        System.out.println(distanceBetweenLocals);
+        List<Distance> distanceBetweenLocals = getDistanceBetweenPairs(clone, shortPath2);
 
-        int vehiclesStops = getNumberOfVehicleStops(clone, shortPath2, autonomy);        System.out.println(vehiclesStops);
+        int vehiclesStops = getNumberOfVehicleStops(clone, shortPath2, autonomy);
 
-        int numberOfTimesVehicleWasCharged = getNumberOfVehicleCharges(clone, shortPath2, vehicleAutonomy);        System.out.println(numberOfTimesVehicleWasCharged);
+        int numberOfTimesVehicleWasCharged = getNumberOfVehicleCharges(clone, shortPath2, vehicleAutonomy);
 
         data2 = new FurthestPlacesData(local1, local2, vehicleAutonomy, shortPath2, distanceFromOriginToDestination, vehicleChargeStops, distanceBetweenLocals, vehiclesStops, numberOfTimesVehicleWasCharged);
 
 
         return data2;
+    }
+
+
+    public boolean clean() {
+        boolean directed = false;
+        graph = new MapGraph<>(directed);
+        return graph.vertices().isEmpty();
     }
 }
 

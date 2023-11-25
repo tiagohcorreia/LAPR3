@@ -1,6 +1,7 @@
 package esinf.map;
 
 import esinf.model.Local;
+import esinf.store.GraphStore;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -13,8 +14,9 @@ class MapGraphLoaderTest {
     @Test
     public void testGraph() {
         try {
-            MapGraph<Local, Integer> distributionNetwork = loadGraph("docs\\esinf_data\\locais_big.csv", "docs\\esinf_data\\distancias_big.csv");
-            // Now you have a MapGraph representing your distribution network
+            MapGraphLoader.loadGraph("docs\\esinf_data\\locais_big.csv", "docs\\esinf_data\\distancias_big.csv");
+            GraphStore storage=new GraphStore();
+            MapGraph<Local, Integer> distributionNetwork = storage.getGraph();  // Now you have a MapGraph representing your distribution network
             System.out.println(distributionNetwork);
         } catch (IOException e) {
             e.printStackTrace();

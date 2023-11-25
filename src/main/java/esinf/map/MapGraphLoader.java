@@ -13,8 +13,7 @@ import java.util.Objects;
 
 public class MapGraphLoader {
 
-    public static MapGraph<Local, Integer> loadGraph(String locaisFile, String distanciasFile) throws IOException {
-        MapGraph<Local, Integer> graph = new MapGraph<>(false);
+    public static boolean loadGraph(String locaisFile, String distanciasFile) throws IOException {
         GraphStore graphStore = new GraphStore();
 
         try (BufferedReader br = new BufferedReader(new FileReader(locaisFile))) {
@@ -60,8 +59,11 @@ public class MapGraphLoader {
                     graphStore.addEdge(local1,local2,distancia);
                 }
             }
+        }catch (Exception e) {
+            e.printStackTrace();
+            return false;
         }
-        return graph;
+        return true;
     }
 }
 

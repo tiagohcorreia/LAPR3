@@ -1,7 +1,7 @@
 package esinf.usei03;
 
-import dataStructure.Distance;
-import dataStructure.FurthestPlacesData;
+import esinf.dataStructure.Distance;
+import esinf.dataStructure.FurthestPlacesData;
 import esinf.*;
 import esinf.map.MapGraph;
 import esinf.map.MapGraphLoader;
@@ -67,14 +67,16 @@ public class ex03 {
     public void testClone() throws IOException {
         GraphStore storage = new GraphStore();
         MapGraphLoader.loadGraph("docs\\esinf_data\\locais_big.csv", "docs\\esinf_data\\distancias_big.csv");
-        System.out.println();
         assertEquals(storage.getGraph(), storage.getCloneGraph());
     }
 
 
     @Test
     public void testRemoveEdgesAboveAutonomy() throws IOException {
+
         GraphStore storage = new GraphStore();
+        storage.clean();
+
         MapGraphLoader.loadGraph("docs\\esinf_data\\locais_big.csv", "docs\\esinf_data\\distancias_big.csv");
         int num = 4;
         int count = 0;
@@ -85,57 +87,64 @@ public class ex03 {
 
         storage.removeEdgesAboveAutonomy(1000);       // assertEquals(expected,atual);
         assertEquals(num, count);
+        storage.clean();
 
     }
 
     @Test
     public void testGetFurthestPlaces() throws IOException {
         GraphStore storage = new GraphStore();
+        storage.clean();
+
         MapGraphLoader.loadGraph("docs\\esinf_data\\locais_big.csv", "docs\\esinf_data\\distancias_big.csv");
         Distance data = storage.getFurthestPlaces();
+        storage.clean();
 
-        System.out.println(data);
     }
 
     @Test
     public void testShortestPathBetweenTwoPlaces() throws IOException {
         GraphStore storage = new GraphStore();
+        storage.clean();
+
         MapGraphLoader.loadGraph("docs\\esinf_data\\locais_small.csv", "docs\\esinf_data\\distancias_small.csv");
         MapGraph clone = storage.getGraph();
         LinkedList<Local> shortPath2 = new LinkedList<>();
         Distance data = storage.getFurthestPlaces();
 
         Algorithms.shortestPath(clone, data.getLocal1(), data.getLocal2(), Integer::compare, Integer::sum, 0, shortPath2);
-        System.out.println(shortPath2);
-        for (Local l : shortPath2) {
-            System.out.println(l.getLocalId());
-        }
+
         LinkedList<String> shortPath = new LinkedList<>();
         Integer lenPath = Algorithms.shortestPath(incompleteMap, "Porto", "Lisboa", Integer::compare, Integer::sum, 0, shortPath);
         assertEquals(335, lenPath, "Length path should be 0 if vertices are the same");
         assertEquals(Arrays.asList("Porto", "Aveiro", "Coimbra", "Lisboa"), shortPath, "Shortest Path Porto - Lisboa");
+
 
     }
 
     @Test
     public void testDistanceBetweenOriginAndDestination() throws IOException {
         GraphStore storage = new GraphStore();
+        storage.clean();
+
         MapGraphLoader.loadGraph("docs\\esinf_data\\locais_small.csv", "docs\\esinf_data\\distancias_small.csv");
         MapGraph clone = storage.getGraph();
         LinkedList<Local> shortPath2 = new LinkedList<>();
         Distance data = storage.getFurthestPlaces();
         Algorithms.shortestPath(clone, data.getLocal1(), data.getLocal2(), Integer::compare, Integer::sum, 0, shortPath2);
-        for (int i = 0; i < shortPath2.size(); i++) {
-            System.out.println(shortPath2.get(i).getLocalId());
-        }
+
         int expected = 604469;
         double distance = storage.getDistanceBetweenOriginAndDestination(clone, shortPath2);
         assertEquals(expected, distance);
+
+
     }
 
     @Test
     public void testVehicleChargeStops() throws IOException {
         GraphStore storage = new GraphStore();
+        storage.clean();
+
         MapGraphLoader.loadGraph("docs\\esinf_data\\locais_small.csv", "docs\\esinf_data\\distancias_small.csv");
         MapGraph clone = storage.getGraph();
         LinkedList<Local> shortPath2 = new LinkedList<>();
@@ -162,24 +171,17 @@ public class ex03 {
     @Test
     public void testDistanceBetweenEveryLocalPair() throws IOException {
         GraphStore storage = new GraphStore();
+        storage.clean();
         MapGraphLoader.loadGraph("docs\\esinf_data\\locais_small.csv", "docs\\esinf_data\\distancias_small.csv");
         MapGraph clone = storage.getGraph();
         LinkedList<Local> shortPath2 = new LinkedList<>();
         Distance data = storage.getFurthestPlaces();
         Algorithms.shortestPath(clone, data.getLocal1(), data.getLocal2(), Integer::compare, Integer::sum, 0, shortPath2);
-        for (int i = 0; i < shortPath2.size(); i++) {
-            System.out.println(shortPath2.get(i).getLocalId());
-        }
 
-        Set<Distance> atual = storage.getCumulativeDistanceBetweenPairs(clone, shortPath2);
-        System.out.println(atual.isEmpty());
-        List<Distance> expected = new ArrayList<>();
 
-        for (Distance d : atual
-        ) {
-            System.out.println(d);
-
-        }
+        List<Distance> atual = storage.getDistanceBetweenPairs(clone, shortPath2);
+        int numOfDistances=5;
+        assertEquals(numOfDistances,atual.size());
     }
 
     @Test
@@ -190,9 +192,7 @@ public class ex03 {
         LinkedList<Local> shortPath2 = new LinkedList<>();
         Distance data = storage.getFurthestPlaces();
         Algorithms.shortestPath(clone, data.getLocal1(), data.getLocal2(), Integer::compare, Integer::sum, 0, shortPath2);
-        for (int i = 0; i < shortPath2.size(); i++) {
-            System.out.println(shortPath2.get(i).getLocalId());
-        }
+
 
         int expected = 2;
         int actual=storage.getNumberOfVehicleStops(clone, shortPath2, 170000);
@@ -203,14 +203,14 @@ public class ex03 {
     public void testNumberOfTimesVehiclesWasCharged() throws IOException {
 
         GraphStore storage = new GraphStore();
+        storage.clean();
+
         MapGraphLoader.loadGraph("docs\\esinf_data\\locais_small.csv", "docs\\esinf_data\\distancias_small.csv");
         MapGraph clone = storage.getGraph();
         LinkedList<Local> shortPath2 = new LinkedList<>();
         Distance data = storage.getFurthestPlaces();
         Algorithms.shortestPath(clone, data.getLocal1(), data.getLocal2(), Integer::compare, Integer::sum, 0, shortPath2);
-        for (int i = 0; i < shortPath2.size(); i++) {
-            System.out.println(shortPath2.get(i).getLocalId());
-        }
+
         int expected = 2;
        int actual=storage.getNumberOfVehicleCharges(clone, shortPath2, 170000);
        assertEquals(expected,actual);
@@ -221,16 +221,43 @@ public class ex03 {
     public void testEX3GetFurthestPlacesData() throws IOException {
 
         GraphStore storage = new GraphStore();
+        storage.clean();
+
+        System.out.println(storage.clean());
+
         MapGraphLoader.loadGraph("docs\\esinf_data\\locais_small.csv", "docs\\esinf_data\\distancias_small.csv");
         MapGraph clone = storage.getGraph();
         LinkedList<Local> shortPath2 = new LinkedList<>();
         Distance data = storage.getFurthestPlaces();
         Algorithms.shortestPath(clone, data.getLocal1(), data.getLocal2(), Integer::compare, Integer::sum, 0, shortPath2);
+
+
+        //expected
+        Local local1=shortPath2.getFirst();
+        Local local2=shortPath2.getLast();
+        int autonomy=170000;
+        int distanceFromOriginToDestination=604469;
+        int numOfvehicleStops=2;
+        List<Local> vehicleChargeStops=new ArrayList<>();
+        int numOfDistances=5;
         for (int i = 0; i < shortPath2.size(); i++) {
-            System.out.println(shortPath2.get(i).getLocalId());
+            if(shortPath2.get(i).getLocalId().equals("CT2")||shortPath2.get(i).getLocalId().equals("CT9"))vehicleChargeStops.add(shortPath2.get(i));
         }
-        FurthestPlacesData data1=storage.getFurthestPlacesData(170000);
-        System.out.println(data1);
+
+        FurthestPlacesData data1=storage.getFurthestPlacesData(autonomy);
+
+        assertEquals(local1,data1.getLocal1());
+        assertEquals(local2,data1.getLocal2());
+        assertEquals(autonomy,data1.getVehicleAutonomy());
+        assertEquals(shortPath2,data1.getShortPath());
+        assertEquals(distanceFromOriginToDestination,data1.getDistanceFromOriginToDestination());
+        assertEquals(vehicleChargeStops,data1.getVehicleChargeStops());
+        assertEquals(vehicleChargeStops,data1.getVehicleChargeStops());
+        assertEquals(numOfDistances,data1.getDistanceBetweenLocals().size());
+        assertEquals(numOfvehicleStops,data1.getVehiclesStops());
+        assertEquals(numOfvehicleStops,data1.getNumberOfTimesVehicleWasCharged());
+
+
     }
 
 
