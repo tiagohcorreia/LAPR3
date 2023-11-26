@@ -2,7 +2,6 @@ package domain;
 
 public class FatorProducao {
 
-    //INSERT INTO Fator_Producao(id, nome, tipo_id, formulacao_id) VALUES (?, ?, ?, ?);
     private int id;
     private String nome;
     private int tipoId;

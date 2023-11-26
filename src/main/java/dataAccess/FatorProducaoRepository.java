@@ -66,4 +66,28 @@ public class FatorProducaoRepository {
         }
         return fatorProducaoList;
     }
+
+    public static void fatorProducaoRegister(int operacaoId, int parcelaId, int variedadeId,int fatorProducaoId, int metodoAplicacaoId, float quantidade,float area) throws SQLException {
+
+        CallableStatement callStmt = null;
+        try {
+            Connection connection = DatabaseConnection.getInstance().getConnection();
+            callStmt = connection.prepareCall("{ call registrarAplicacaoFatorProducao(?,?,?,?,?,?,?) }");
+
+            callStmt.setInt(1, operacaoId);
+            callStmt.setInt(2, parcelaId);
+            callStmt.setInt(3, variedadeId);
+            callStmt.setInt(4, fatorProducaoId);
+            callStmt.setInt(5, metodoAplicacaoId);
+            callStmt.setFloat(6, quantidade);
+            callStmt.setFloat(7, area);
+
+            callStmt.execute();
+            connection.commit();
+        } finally {
+            if (!Objects.isNull(callStmt)) {
+                callStmt.close();
+            }
+        }
+    }
 }

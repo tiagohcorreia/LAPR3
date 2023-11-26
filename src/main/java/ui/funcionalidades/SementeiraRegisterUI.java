@@ -1,20 +1,28 @@
 package ui.funcionalidades;
 
-import controller.MetodoExecucaoListController;
-import controller.ParcelasListController;
-import controller.SementeiraRegisterController;
-import controller.VariedadeListController;
+import controller.*;
 import ui.utils.Utils;
 
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Scanner;
 
 public class SementeiraRegisterUI implements Runnable {
-
     private SementeiraRegisterController controller;
+    private ParcelasListController controller2;
+    private VariedadeListController controller3;
+    private MetodoExecucaoListController controller4;
+    private OperacaoAgricolaRegisterController controllerop;
 
     public SementeiraRegisterUI() {
 
         controller = new SementeiraRegisterController();
+        controller2 = new ParcelasListController();
+        controller3 = new VariedadeListController();
+        controller4 = new MetodoExecucaoListController();
+        controllerop = new OperacaoAgricolaRegisterController();
     }
 
     @Override
@@ -24,20 +32,50 @@ public class SementeiraRegisterUI implements Runnable {
 
             System.out.println("Registar Sementeira");
 
-            int operacaoId = Utils.readIntegerFromConsole("Insira a ID da operação");
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("OperacaoId: ");
+            int operacaoId = controllerop.getNextId();
+            System.out.printf("Usando id %d\n", operacaoId);
 
-            ParcelasListController controller2 = new ParcelasListController();
-            controller2.showAllParcelas();
+            System.out.print("Date (yyyy-mm-dd): (Insira E para sair) \n");
+            String strDate = scanner.next();
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            formatter.setLenient(false);
+
+            Date currentDate = new Date();
+            if (strDate.equalsIgnoreCase("E")) {
+                return;
+            }
+            Date date = null;
+            boolean validDate = false;
+            while (!validDate) {
+                try {
+                    date = formatter.parse(strDate);
+                    if (date.after(currentDate)) {
+                        System.out.println("Erro: Data invalida.Insira uma data que nao se encontre no futuro.");
+                        System.out.print("Data (yyyy-mm-dd): ");
+                        strDate = scanner.next();
+                    } else {
+                        validDate = true;
+                    }
+                } catch (ParseException e) {
+                    System.out.println("Erro: Formato de data invalido. Insira a data no formato yyyy-mm-dd.");
+                    scanner.nextLine();
+                    System.out.print("Data (yyyy-mm-dd): ");
+                    strDate = scanner.next();
+                }
+            }
+
+            controllerop.getTableData("Parcela");
+            controllerop.printTableData("Parcela");
 
             int parcelaId = Utils.readIntegerFromConsole("Insira a ID da parcela");
 
-            VariedadeListController controller3 = new VariedadeListController();
-            controller3.showVariedades();
+            controllerop.getTableData("Variedade");
+            controllerop.printTableData("Variedade");
 
             int variedadeId = Utils.readIntegerFromConsole("Insira a ID da variedade");
 
-            MetodoExecucaoListController controller4 = new MetodoExecucaoListController();
-            controller4.showMetodosExecucao();
 
             int metodoExecucaoId = Utils.readIntegerFromConsole("Insira o ID do método de execução");
 
@@ -45,11 +83,32 @@ public class SementeiraRegisterUI implements Runnable {
 
             float area = Utils.readFloatFromConsole("Insira a area (m^2)");
 
-            controller.sementeiraRegister(operacaoId, parcelaId, variedadeId, quantidade, area, metodoExecucaoId);
+            System.out.println(" === Dados da Sementeira ===");
+            System.out.println("ID Operacao: " + operacaoId);
+            System.out.println("ID Parcela: " + parcelaId);
+            System.out.println("ID Variedade: " + variedadeId);
+            System.out.println("ID Metodo de Execução: " + metodoExecucaoId);
+            System.out.println("Quantidade: " + quantidade);
+            System.out.println("Area: " + area);
+
+            int optValidation = Utils.readIntegerFromConsole("1-CONFIRMAR\n0-CANCELAR");
+
+            if (optValidation == 1) {
+                controllerop.operacaoAgricolaRegister(operacaoId,date);
+                controller.sementeiraRegister(operacaoId,parcelaId, variedadeId, quantidade, area, metodoExecucaoId);
+                System.out.println("\nSementeira registada.");
+            } else {
+
+                System.out.println("Operação cancelada");
+            }
 
         } catch (SQLException e) {
 
             System.err.println("Não foi possível registar a sementeira!\n" + e.getMessage());
+
+        } catch (IllegalArgumentException iax) {
+
+            System.err.println(iax.getMessage());
 
         } catch (Exception e) {
 
