@@ -37,6 +37,12 @@ Como Gestor Agrícola, quero registar uma operação de monda
 >Monda vegetal, por exemplo arrancar o excesso de plantas de milho ou cenoura que estão a competir entre si
 >Monda de ervas daninhas, consiste em arrancar ou limitar a evolução de espécies vegetais que concorrem com a cultura principal, prefiro a designação, controlo de infestantes.
 >No que diz respeito à utilização de químicos na AB, existe um mal-entendido generalizado sobre o tema, na AB não é permitida a utilização de químicos de síntese. Os quimicos, esses são utilizados constantemente, o monóxido de di-hidrogênio é o produto mais utilizado em regas.
+
+>Question:Dentro do contexto da USBD12 - Como Gestor Agrícola, quero registar uma operação de monda, esta operação ocorre ao nível da parcela ou da cultura?
+
+>Answer:A realidade é demasiado complexa. Para efeito deste projeto, para já, pode assumir que é de uma cultura.
+
+
 ## Critérios de Aceitação
 
 - **Critério mínimo de aceitação:** só serão avaliadas as US em que haja dados que permitam avaliar o seu funcionamento.

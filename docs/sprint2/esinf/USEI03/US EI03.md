@@ -15,7 +15,9 @@ Dado um veículo, a sua autonomia e atendendo a que os carregamentos só podem s
 >Answer:Na 3ª US pretende-se o percurso mínimo possível entre os dois locais mais afastados da rede de distribuição, ou seja, os dois vértices mais afastados no grafo.
 
 
- >Question:
+ >Question:Em relação ao USEI03, para a determinação dos dois vertices mais distantes, é suposto ter em conta a autonomia?
+Por exemplo, no grafo abaixo, o percurso mínimo dos dois vertices mais distantes tanto pode ser 1-2-4 como 1-3-4. No entanto, se a autonomia máxima for 100000 metros, já não é possível percorrer a aresta entre os vertices 3 e 4 visto que a distancia é superior à autonomia.
+Neste caso, o percurso minimo dos dois vertices mais distantes seria 3-1-2-4 ou 1-2-4?
 
 >Answer:Nesta US primeiro tem de encontrar os dois vértices mais distantes na rede. Depois tem de encontrar um possível caminho mínimo entre esses dois vértices mais distantes. Este caminho mínimo não pode conter troços cuja distância seja superior à autonomia do veículo.
 No exemplo que dá, o caminho 1 - 3- 4 não é possível pois o veículo não tem autonomia para percorrer o troço 3 - 4, por isso o caminho mínimo possível é 1 - 2- 4.
