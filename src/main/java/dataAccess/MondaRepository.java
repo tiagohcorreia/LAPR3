@@ -53,7 +53,7 @@ public class MondaRepository {
         CallableStatement callStmt = null;
         try {
             Connection connection = DatabaseConnection.getInstance().getConnection();
-            callStmt = connection.prepareCall("{ call registrarColheita(?,?,?,?,?) }");
+            callStmt = connection.prepareCall("{ call registrarMonda(?,?,?,?,?,?) }");
 
             callStmt.setInt(1, operacaoId);
             callStmt.setInt(2, parcelaId);

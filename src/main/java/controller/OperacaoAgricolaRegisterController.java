@@ -1,5 +1,6 @@
 package controller;
 
+import dataAccess.DatabaseConnection;
 import dataAccess.OperacaoAgricolaRepository;
 import dataAccess.Repositories;
 
@@ -14,7 +15,7 @@ public class OperacaoAgricolaRegisterController {
     private OperacaoAgricolaRepository operacaoAgricolaRepository;
     private Connection connection;
     private static final String JDBC_URL = "jdbc:oracle:thin:@localhost:1521/xe";
-    private static final String USERNAME = "system";
+    private static final String USERNAME = "loc";
 
     private static final String PASSWORD = "basedados";
 
@@ -79,6 +80,22 @@ public class OperacaoAgricolaRegisterController {
         }
 
         return -1;
+    }
+
+    public boolean isIdValid(String tableName, int id) throws SQLException {
+        Connection connection = DatabaseConnection.getInstance().getConnection();
+        String sql = "SELECT COUNT(*) FROM " + tableName + " WHERE id = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, id);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    int count = resultSet.getInt(1);
+                    return count > 0;
+                }
+            }
+        }
+        return false;
     }
 
     public List<String[]> getTableData(String tableName) {

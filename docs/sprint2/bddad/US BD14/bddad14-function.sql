@@ -8,7 +8,7 @@ CREATE OR REPLACE PROCEDURE registrarAplicacaoFatorProducao(
     p_data IN DATE := NULL
 )
     IS
-    v_id Operacao_Agricola.id%TYPE;
+    p_operacaoId Operacao_Agricola.id%TYPE;
     parcela_nao_existe EXCEPTION;
     variedade_nao_existe EXCEPTION;
     fator_producao_nao_existe EXCEPTION;
@@ -16,11 +16,11 @@ BEGIN
     -- Verificar se parcela_id existe
     IF p_parcelaId IS NOT NULL THEN
         SELECT COUNT(*)
-        INTO v_id
+        INTO p_operacaoId
         FROM Parcela
         WHERE id = p_parcelaId;
 
-        IF v_id = 0 THEN
+        IF p_operacaoId = 0 THEN
             -- Caso a Parcela não exista
             DBMS_OUTPUT.put_line('Parcela especificada não existe na base de dados.');
             RETURN;
@@ -30,11 +30,11 @@ BEGIN
     -- Verificar se variedade existe
     IF p_variedadeId IS NOT NULL THEN
         SELECT COUNT(*)
-        INTO v_id
+        INTO p_operacaoId
         FROM Variedade
         WHERE id = p_variedadeId;
 
-        IF v_id = 0 THEN
+        IF p_operacaoId = 0 THEN
             -- Caso variedade não exista
             DBMS_OUTPUT.put_line('Variedade especificada não existe na base de dados.');
             RETURN;
@@ -44,7 +44,7 @@ BEGIN
     -- Verificar se o ID do fator de produção existe na tabela Fator_Producao
     IF p_fatorProducaoId IS NOT NULL THEN
         BEGIN
-            SELECT 1 INTO v_id FROM Fator_Producao WHERE id = p_fatorProducaoId;
+            SELECT 1 INTO p_operacaoId FROM Fator_Producao WHERE id = p_fatorProducaoId;
         EXCEPTION
             WHEN NO_DATA_FOUND THEN
                 RAISE fator_producao_nao_existe;
@@ -52,12 +52,12 @@ BEGIN
     END IF;
 
     -- Inserir na tabela Operacao_Agricola
-    SELECT COALESCE(MAX(id), 0) + 1 INTO v_id FROM Operacao_Agricola;
-    INSERT INTO Operacao_Agricola(id, data) VALUES (v_id, p_data);
+    SELECT COALESCE(MAX(id), 0) + 1 INTO p_operacaoId FROM Operacao_Agricola;
+    INSERT INTO Operacao_Agricola(id, data) VALUES (p_operacaoId, p_data);
 
     -- Inserir na tabela Aplicacao_FP
     INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, fator_producao_id, metodo_aplicacao_id, quantidade, area)
-    VALUES (v_id, p_parcelaId, p_variedadeId, p_fatorProducaoId, p_metodoAplicacaoId, p_quantidade, p_area);
+    VALUES (p_operacaoId, p_parcelaId, p_variedadeId, p_fatorProducaoId, p_metodoAplicacaoId, p_quantidade, p_area);
 
     DBMS_OUTPUT.put_line('Operação de aplicação de fator de produção registrada com sucesso.');
 EXCEPTION
