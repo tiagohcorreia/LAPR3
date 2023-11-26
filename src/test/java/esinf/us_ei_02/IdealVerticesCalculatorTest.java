@@ -19,6 +19,11 @@ import static org.junit.jupiter.api.Assertions.*;
 class IdealVerticesCalculatorTest {
 
     GraphStore graphStore=new GraphStore();
+    Local l1;
+    Local l2;
+    Local l3;
+    Local l4;
+    Local l5;
     IdealVerticesCalculator<Local, Integer> calculator=new IdealVerticesCalculator<>(graphStore.getGraph(),new IntegerComparator(), new IntegerBinaryOperator(), 0);
 
     @BeforeEach
@@ -26,6 +31,13 @@ class IdealVerticesCalculatorTest {
         graphStore.clean();
         MapGraphLoader.loadGraph("docs\\esinf_data\\other-test-files\\locais-1.csv", "docs\\esinf_data\\other-test-files\\distancias-1.txt");
         calculator=new IdealVerticesCalculator<>(graphStore.getGraph(),new IntegerComparator(), new IntegerBinaryOperator(), 0);
+        ArrayList<Local> vertices=graphStore.getGraph().vertices();
+
+        l1=vertices.get(0);
+        l2=vertices.get(1);
+        l3=vertices.get(2);
+        l4=vertices.get(3);
+        l5=vertices.get(4);
     }
 
     @Test
@@ -37,13 +49,6 @@ class IdealVerticesCalculatorTest {
     void getAllShortestPathsForAllVertices() {
         Map<Local, ArrayList<LinkedList<Local>>> actual=calculator.getAllShortestPathsForAllVertices();
         Map<Local, ArrayList<LinkedList<Local>>> expected=new HashMap<>();
-        ArrayList<Local> vertices=graphStore.getGraph().vertices();
-
-        Local l1=vertices.get(0);
-        Local l2=vertices.get(1);
-        Local l3=vertices.get(2);
-        Local l4=vertices.get(3);
-        Local l5=vertices.get(4);
 
         LinkedList<Local> l12=new LinkedList<>();
         l12.add(l1);
@@ -173,7 +178,7 @@ class IdealVerticesCalculatorTest {
 
     @Test
     void getVerticesAndCentralities() {
-
+        Map <Local, Integer> result=calculator.getVerticesAndCentralities();
     }
 
     @Test
