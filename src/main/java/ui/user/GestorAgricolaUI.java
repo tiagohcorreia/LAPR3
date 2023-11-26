@@ -20,7 +20,6 @@ public class GestorAgricolaUI implements Runnable {
         List<MenuItem> options = new ArrayList<MenuItem>();
 
         options.add(new MenuItem("Registar Sementeira", new SementeiraRegisterUI()));
-        options.add(new MenuItem("Registar Monda", new MondaRegisterUI()));
         options.add(new MenuItem("Registar Poda", new RegisterPruningUI()));
 
 
