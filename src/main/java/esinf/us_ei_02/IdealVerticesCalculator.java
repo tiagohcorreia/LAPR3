@@ -93,7 +93,6 @@ public class IdealVerticesCalculator<V, E> {
                 if (!success) {
                     throw new Exception("Não foi possível obter os caminhos para todos o vértices");
                 } else {
-
                     allShortestPathsForAllVertices.put(v, paths);
                     E totalDistance = neutralValue;
 

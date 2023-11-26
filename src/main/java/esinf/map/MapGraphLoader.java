@@ -13,7 +13,7 @@ import java.util.Objects;
 
 public class MapGraphLoader {
 
-    public static boolean loadGraph(String locaisFile, String distanciasFile) throws IOException {
+    public static boolean loadGraph(String locaisFile, String distanciasFile) {
         GraphStore graphStore = new GraphStore();
 
         try (BufferedReader br = new BufferedReader(new FileReader(locaisFile))) {
@@ -34,6 +34,9 @@ public class MapGraphLoader {
                 Local local = new Local(locId, gps);
                 graphStore.addVertex(local);
             }
+        } catch (IOException e){
+            System.out.println("Operação falhou");
+            e.printStackTrace();
         }
 
         try (BufferedReader br = new BufferedReader(new FileReader(distanciasFile))) {
@@ -59,6 +62,7 @@ public class MapGraphLoader {
                     graphStore.addEdge(local1,local2,distancia);
                 }
             }
+
         }catch (Exception e) {
             e.printStackTrace();
             return false;

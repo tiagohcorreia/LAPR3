@@ -13,14 +13,12 @@ class MapGraphLoaderTest {
 
     @Test
     public void testGraph() {
-        try {
-            MapGraphLoader.loadGraph("docs\\esinf_data\\locais_big.csv", "docs\\esinf_data\\distancias_big.csv");
-            GraphStore storage=new GraphStore();
-            MapGraph<Local, Integer> distributionNetwork = storage.getGraph();  // Now you have a MapGraph representing your distribution network
-            System.out.println(distributionNetwork);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+        MapGraphLoader.loadGraph("docs\\esinf_data\\locais_big.csv", "docs\\esinf_data\\distancias_big.csv");
+        GraphStore storage = new GraphStore();
+        MapGraph<Local, Integer> distributionNetwork = storage.getGraph();  // Now you have a MapGraph representing your distribution network
+        System.out.println(distributionNetwork);
+
     }
 
 
