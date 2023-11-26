@@ -256,6 +256,7 @@ public class Algorithms {
                                                Comparator<E> ce, BinaryOperator<E> sum, E zero,
                                                ArrayList<LinkedList<V>> paths, ArrayList<E> dists) {
         if (g == null || !g.validVertex(vOrig)) return false;
+        /*
         int size = g.numVertices();
         boolean[] visited = new boolean[size];
         List<V> pathKeys = new ArrayList<>(size);
@@ -268,6 +269,13 @@ public class Algorithms {
             LinkedList<V> path = new LinkedList<>();
             getPath(g, vOrig, vDest, pathKeys, path);
             paths.add(path);
+        }
+        */
+        for (V vDest: g.vertices()){
+            LinkedList<V> shortestPath=new LinkedList<>();
+            E distance=shortestPath(g, vOrig, vDest, ce, sum, zero, shortestPath);
+            paths.add(shortestPath);
+            dists.add(distance);
         }
 
         return true;
