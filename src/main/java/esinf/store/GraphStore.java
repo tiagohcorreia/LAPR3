@@ -204,7 +204,6 @@ public class GraphStore {
         return data2;
     }
 
-
     public boolean clean() {
         boolean directed = false;
         graph = new MapGraph<>(directed);
