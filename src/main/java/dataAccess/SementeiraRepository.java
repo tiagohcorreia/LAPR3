@@ -15,7 +15,7 @@ public class SementeiraRepository {
     public SementeiraRepository() {
     }
 
-    public void sementeiraRegister(int parcelaId, int variedadeId, float quantidade, float area, int metodoExecucaoId) throws SQLException {
+    public void sementeiraRegister(int operacaoId,int parcelaId, int variedadeId, float quantidade, float area, int metodoExecucaoId) throws SQLException {
 
         CallableStatement callableStatement = null;
 
@@ -25,6 +25,7 @@ public class SementeiraRepository {
 
             callableStatement = connection.prepareCall("{ call registarSementeira(?, ?, ?, ?, ?, ?)}");
 
+            callableStatement.setInt(1, operacaoId);
             callableStatement.setInt(2, parcelaId);
             callableStatement.setInt(3, variedadeId);
             callableStatement.setFloat(4, quantidade);
@@ -52,6 +53,7 @@ public class SementeiraRepository {
             if (!resultSet.next()) break;
 
             Sementeira sementeira = new Sementeira(
+                    resultSet.getInt("operacaoId"),
                     resultSet.getInt("parcelaId"),
                     resultSet.getInt("veriedadeId"),
                     resultSet.getFloat("quantidade"),
