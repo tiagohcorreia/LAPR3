@@ -12,6 +12,7 @@ public class Repositories {
     private MetodoExcucaoRepository metodoExcucaoRepository = null;
     private OperacaoAgricolaRepository operacaoAgricolaRepository = null;
     private FatorProducaoRepository fatorProducaoRepository = null;
+    private RegaRepository regaRepository = null;
 
     private Repositories() {
         sailorRepository = new SailorRepository();
@@ -23,6 +24,7 @@ public class Repositories {
         metodoExcucaoRepository = new MetodoExcucaoRepository();
         variedadeRepository = new VariedadeRepository();
         fatorProducaoRepository = new FatorProducaoRepository();
+        regaRepository = new RegaRepository();
     }
 
     public static Repositories getInstance() {
@@ -52,4 +54,5 @@ public class Repositories {
         return fatorProducaoRepository;
     }
 
+    public RegaRepository getRegaRepository() { return regaRepository;}
 }

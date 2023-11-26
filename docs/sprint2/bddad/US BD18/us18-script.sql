@@ -1,46 +1,50 @@
-CREATE OR REPLACE FUNCTION obter_operacoes_por_parcela(
-    p_parcela_id NUMBER,    --Substituir pelo valor pedido
-    p_data_inicio DATE,     --Substituir pelo valor pedido
-    p_data_fim DATE         --Substituir pelo valor pedido
+--Parcela = Campo Novo
+--Intervalo = entre 01/07/2023 e 02/10/2023
+--Resultado:
+--Terão de ser apresentadas as operações correspondentes às apresentadas abaixo.
+--Não será necessário apresentar todos os dados da operação, mas apenas: Data e cultura (se aplicável).
+--Parcela e tipo estão implícitos, mas também podem ser incluídos.
+
+CREATE OR REPLACE FUNCTION obterOperacoesPorParcela(
+    p_parcela_id IN NUMBER, --Substituir pelos valores pedidos
+    p_data_inicio IN DATE,  --Substituir pelos valores pedidos
+    p_data_fim IN DATE      --Substituir pelos valores pedidos
 )
 RETURN SYS_REFCURSOR
 IS
     v_cursor SYS_REFCURSOR;
 BEGIN
 OPEN v_cursor FOR
-SELECT
-    o.id AS operacao_id,
-    o.data AS data_operacao,
-    CASE
-        WHEN a.operacao_id IS NOT NULL THEN 'Aplicacao_FP'
-        WHEN c.operacao_id IS NOT NULL THEN 'Colheita'
-        WHEN d.operacao_id IS NOT NULL THEN 'Desfolha'
-        WHEN s.operacao_id IS NOT NULL THEN 'Sementeira'
-        WHEN r.operacao_id IS NOT NULL THEN 'Rega'
-        WHEN p.operacao_id IS NOT NULL THEN 'Poda'
-        WHEN m.operacao_id IS NOT NULL THEN 'Monda'
-        WHEN t.operacao_id IS NOT NULL THEN 'Tutoramento'
-        WHEN op.operacao_id IS NOT NULL THEN 'OP_Plantacao'
-        WHEN m.operacao_id IS NOT NULL THEN 'Mobilizacao_Solo'
-
-        ELSE 'Outro Tipo de Operacao'
-        END AS tipo_operacao
-FROM
-    Operacao_Agricola o
-        LEFT JOIN Aplicacao_FP a ON o.id = a.operacao_id AND a.parcela_id = p_parcela_id
-        LEFT JOIN Colheita c ON o.id = c.operacao_id AND c.parcela_id = p_parcela_id
-        LEFT JOIN Desfolha d ON o.id = d.operacao_id AND d.parcela_id = p_parcela_id
-        LEFT JOIN Sementeira s ON o.id = s.operacao_id AND s.parcela_id = p_parcela_id
-        LEFT JOIN Rega r ON o.id = r.operacao_id AND r.parcela_id = p_parcela_id
-        LEFT JOIN Poda p ON o.id = p.operacao_id AND p.parcela_id = p_parcela_id
-        LEFT JOIN Monda m ON o.id = m.operacao_id AND m.parcela = p_parcela_id
-        LEFT JOIN Tutoramento t ON o.id = t.operacao_id AND t.parcela = p_parcela_id
-        LEFT JOIN OP_Plantacao op ON o.id = op.operacao_id AND op.parcela = p_parcela_id
-        LEFT JOIN Mobilizacao_Solo m ON o.id = m.operacao_id AND m.parcela = p_parcela_id
-
-WHERE
-    o.data BETWEEN p_data_inicio AND p_data_fim
-  AND (a.operacao_id IS NOT NULL OR c.operacao_id IS NOT NULL OR d.operacao_id IS NOT NULL);
+SELECT oa.id   AS operacao_id,
+       oa.data,
+       CASE
+           WHEN afp.operacao_id IS NOT NULL THEN 'Aplicacao_FP'
+           WHEN col.operacao_id IS NOT NULL THEN 'Colheita'
+           WHEN des.operacao_id IS NOT NULL THEN 'Desfolha'
+           WHEN inc.operacao_id IS NOT NULL THEN 'Incorporacao_Solo'
+           WHEN mon.operacao_id IS NOT NULL THEN 'Monda'
+           WHEN op_plant.operacao_id IS NOT NULL THEN 'Op_Plantacao'
+           WHEN pod.operacao_id IS NOT NULL THEN 'Poda'
+           WHEN rega.operacao_id IS NOT NULL THEN 'Rega'
+           WHEN sem.operacao_id IS NOT NULL THEN 'Sementeira'
+           WHEN tut.operacao_id IS NOT NULL THEN 'Tutoramento'
+           ELSE 'Outra Operacao'
+           END AS tipo_operacao
+FROM Operacao_Agricola oa
+         LEFT JOIN Aplicacao_FP afp ON oa.id = afp.operacao_id AND oa.data BETWEEN p_data_inicio AND p_data_fim
+         LEFT JOIN Colheita col ON oa.id = col.operacao_id AND oa.data BETWEEN p_data_inicio AND p_data_fim
+         LEFT JOIN Desfolha des ON oa.id = des.operacao_id AND oa.data BETWEEN p_data_inicio AND p_data_fim
+         LEFT JOIN Incorporacao_Solo inc ON oa.id = inc.operacao_id AND oa.data BETWEEN p_data_inicio AND p_data_fim
+         LEFT JOIN Monda mon ON oa.id = mon.operacao_id AND oa.data BETWEEN p_data_inicio AND p_data_fim
+         LEFT JOIN Op_Plantacao op_plant
+                   ON oa.id = op_plant.operacao_id AND oa.data BETWEEN p_data_inicio AND p_data_fim
+         LEFT JOIN Poda pod ON oa.id = pod.operacao_id AND oa.data BETWEEN p_data_inicio AND p_data_fim
+         LEFT JOIN Rega rega ON oa.id = rega.operacao_id AND oa.data BETWEEN p_data_inicio AND p_data_fim
+         LEFT JOIN Sementeira sem ON oa.id = sem.operacao_id AND oa.data BETWEEN p_data_inicio AND p_data_fim
+         LEFT JOIN Tutoramento tut ON oa.id = tut.operacao_id AND oa.data BETWEEN p_data_inicio AND p_data_fim
+WHERE oa.data BETWEEN p_data_inicio AND p_data_fim
+  AND sem.parcela_id = p_parcela_id;
 
 RETURN v_cursor;
 END;
+/

@@ -1,37 +1,38 @@
 package dataAccess;
 
-import java.sql.*;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-import domain.OperacaoAgricola;
-
+import domain.Colheita;
+import domain.RegaTable;
 import oracle.jdbc.OracleTypes;
 
-public class OperacaoAgricolaRepository {
+public class RegaRepository {
 
-
-    public OperacaoAgricolaRepository() {
+    public RegaRepository() {
     }
 
-    public List<OperacaoAgricola> getOperacoesAgricolas() throws SQLException {
+    public List<RegaTable> getRegas() throws SQLException {
 
         CallableStatement callStmt = null;
         ResultSet resultSet = null;
-        List<OperacaoAgricola> operacaoAgricolas = null;
+        List<RegaTable> regas = null;
 
         try {
             Connection connection = DatabaseConnection.getInstance().getConnection();
-            callStmt = connection.prepareCall("{ ? = call fncOperacoesAgricolas() }");
+            callStmt = connection.prepareCall("{ ? = call registarRega() }");
 
             callStmt.registerOutParameter(1, OracleTypes.CURSOR);
 
             callStmt.execute();
             resultSet = (ResultSet) callStmt.getObject(1);
 
-            operacaoAgricolas = resultSetToList(resultSet);
+            regas = resultSetToList(resultSet);
         } finally {
             if (!Objects.isNull(callStmt)) {
                 callStmt.close();
@@ -41,19 +42,20 @@ public class OperacaoAgricolaRepository {
             }
         }
 
-        return operacaoAgricolas;
+        return regas;
     }
 
-    public static void OperacaoAgricolaRegister(int operacaoId, Date date) throws SQLException {
+    public static void regaRegister(int operacaoId, int setorId, int duracao,String hora) throws SQLException {
 
         CallableStatement callStmt = null;
         try {
             Connection connection = DatabaseConnection.getInstance().getConnection();
-            callStmt = connection.prepareCall("{ call RegistrarOperacaoAgricola(?,?) }");
+            callStmt = connection.prepareCall("{ call registarRega(?,?,?,?) }");
 
             callStmt.setInt(1, operacaoId);
-            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-            callStmt.setDate(2, sqlDate);
+            callStmt.setInt(2, setorId);
+            callStmt.setInt(3, duracao);
+            callStmt.setString(4, hora);
 
             callStmt.execute();
             connection.commit();
@@ -64,15 +66,13 @@ public class OperacaoAgricolaRepository {
         }
     }
 
-
-
-    public int operacaoAgricolaDelete(int operacaoId) throws SQLException {
+    public int regaDelete(int operacaoId) throws SQLException {
 
         CallableStatement callStmt = null;
         int deletedRows = 0;
         try {
             Connection connection = DatabaseConnection.getInstance().getConnection();
-            callStmt = connection.prepareCall("{ ? = call fncOperacaoAgricolaDelete(?) }");
+            callStmt = connection.prepareCall("{ ? = call fncColheitaDelete(?) }");
 
             callStmt.registerOutParameter(1, OracleTypes.INTEGER);
             callStmt.setInt(2, operacaoId);
@@ -90,22 +90,23 @@ public class OperacaoAgricolaRepository {
         return deletedRows;
     }
 
+    private List<RegaTable> resultSetToList(ResultSet resultSet) throws SQLException {
 
-
-    private List<OperacaoAgricola> resultSetToList(ResultSet resultSet) throws SQLException {
-
-        List<OperacaoAgricola> operacaoAgricolas = new ArrayList<>();
+        List<RegaTable> regas = new ArrayList<>();
 
         while (true) {
 
             if (!resultSet.next()) break;
-            OperacaoAgricola operacaoAgricola = new OperacaoAgricola(
+            RegaTable regaTable = new RegaTable(
+                    resultSet.getDate("data"),
                     resultSet.getInt("operacaoId"),
-                    resultSet.getDate("date")
+                    resultSet.getInt("setorId"),
+                    resultSet.getInt("duracao"),
+                    resultSet.getString("hora")
             );
-            operacaoAgricolas.add(operacaoAgricola);
+            regas.add(regaTable);
         }
-        return operacaoAgricolas;
+        return regas;
     }
 
 }

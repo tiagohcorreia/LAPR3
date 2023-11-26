@@ -15,6 +15,7 @@ public class OperacaoAgricolaRegisterController {
     private Connection connection;
     private static final String JDBC_URL = "jdbc:oracle:thin:@vsgate-s1.dei.isep.ipp.pt:11127/xe";
     private static final String USERNAME = "dephane";
+
     private static final String PASSWORD = "basedados";
 
     public OperacaoAgricolaRegisterController() {

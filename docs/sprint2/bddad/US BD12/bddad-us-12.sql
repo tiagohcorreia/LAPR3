@@ -1,46 +1,66 @@
 CREATE OR REPLACE PROCEDURE registrarMonda(
-    parcelaId Parcela.id%TYPE NOT NULL,
-    variedadeId Variedade.id%TYPE NOT NULL,
-    quantidade Monda.quantidade%TYPE NOT NULL,
-    metodoExecucaoId Metodo_Execucao.id%TYPE,
-    fatorProducaoId Fator_Producao.id%TYPE,
-    data Operacao_Agricola.data%TYPE
+    p_parcelaId IN NUMBER := NULL,
+    p_variedadeId IN NUMBER := NULL,
+    p_quantidade IN NUMBER := NULL,
+    p_metodoExecucaoId IN NUMBER := NULL,
+    p_fatorProducaoId IN NUMBER := NULL,
+    p_data IN DATE := NULL
 )
-IS
-    id Operacao_Agricola.id%TYPE := (SELECT MAX(id) FROM Operacao_Agricola);
-    id_operacao_existe EXCEPTION;
+    IS
+    v_id Operacao_Agricola.id%TYPE;
     parcela_nao_existe EXCEPTION;
     variedade_nao_existe EXCEPTION;
     fator_producao_nao_existe EXCEPTION;
 BEGIN
-    id := id + 1;
+    -- Verificar se parcela_id existe
+    IF p_parcelaId IS NOT NULL THEN
+        SELECT COUNT(*)
+        INTO v_id
+        FROM Parcela
+        WHERE id = p_parcelaId;
 
-    IF (id IN Operacao_Agricola.id) THEN
-        RAISE id_operacao_existe;
-    ELSIF (parcelaId NOT IN Parcela.id) THEN
-        RAISE parcela_nao_existe;
-    ELSIF (variedadeId NOT IN Variedade.id) THEN
-        RAISE variedade_nao_existe;
-    ELSIF (fatorProducaoId NOT IN Fator_Producao.id) THEN
-        RAISE fator_producao_nao_existe;
+        IF v_id = 0 THEN
+            -- Caso a Parcela não exista
+            DBMS_OUTPUT.put_line('Parcela especificada não existe na base de dados.');
+            RETURN;
+        END IF;
+    END IF;
 
-END IF;
+    -- Verificar se variedade existe
+    IF p_variedadeId IS NOT NULL THEN
+        SELECT COUNT(*)
+        INTO v_id
+        FROM Variedade
+        WHERE id = p_variedadeId;
 
-INSERT INTO Operacao_Agricola(id, data)
-VALUES (id, data);
+        IF v_id = 0 THEN
+            -- Caso variedade não exista
+            DBMS_OUTPUT.put_line('Variedade especificada não existe na base de dados.');
+            RETURN;
+        END IF;
+    END IF;
 
-INSERT INTO Monda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id, fator_producao_id)
-VALUES (id, parcelaId, variedadeId, quantidade, metodoExecucaoId, fatorProducaoId);
+    -- Check if fatorProducaoId exists in Fator_Producao table
+    IF p_fatorProducaoId IS NOT NULL THEN
+        BEGIN
+            SELECT 1 INTO v_id FROM Fator_Producao WHERE id = p_fatorProducaoId;
+        EXCEPTION
+            WHEN NO_DATA_FOUND THEN
+                RAISE fator_producao_nao_existe;
+        END;
+    END IF;
 
+    -- Insert into Operacao_Agricola table
+    SELECT COALESCE(MAX(id), 0) + 1 INTO v_id FROM Operacao_Agricola;
+    INSERT INTO Operacao_Agricola(id, data) VALUES (v_id, p_data);
+
+    -- Insert into Monda table
+    INSERT INTO Monda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id, fator_producao_id)
+    VALUES (v_id, p_parcelaId, p_variedadeId, p_quantidade, p_metodoExecucaoId, p_fatorProducaoId);
+
+    DBMS_OUTPUT.put_line('Operação registrada com sucesso.');
 EXCEPTION
-    WHEN id_operacao_existe
-        THEN DBMS_OUTPUT.put_line('Esta operação colide com uma que já existe.');
-WHEN parcela_nao_existe
-        THEN DBMS_OUTPUT.put_line('A parcela especificada não está registrada na base de dados');
-WHEN variedade_nao_existe
-        THEN DBMS_OUTPUT.put_line('A variedade especificada não está registrada na base de dados');
-WHEN fator_producao_nao_existe
-        THEN DBMS_OUTPUT.put_line('O fator de produção especificado não está registrada na base de dados');
+    WHEN fator_producao_nao_existe THEN
+        DBMS_OUTPUT.put_line('O fator de produção especificado não está registrada na base de dados');
 END;
 
-    --retornaar valor para designar sucesso ou insucesso
