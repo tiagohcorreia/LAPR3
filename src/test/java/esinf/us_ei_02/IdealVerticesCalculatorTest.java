@@ -42,7 +42,12 @@ class IdealVerticesCalculatorTest {
 
     @Test
     void getVerticesByIdealOrder() {
-        //calculator.
+        ArrayList<Local> result=calculator.getVerticesByIdealOrder();
+        assertEquals(l3, result.get(0));
+        assertEquals(l1, result.get(1));
+        assertEquals(l5, result.get(2));
+        assertEquals(l4, result.get(3));
+        assertEquals(l2, result.get(4));
     }
 
     @Test
@@ -179,9 +184,20 @@ class IdealVerticesCalculatorTest {
     @Test
     void getVerticesAndCentralities() {
         Map <Local, Integer> result=calculator.getVerticesAndCentralities();
+        assertEquals(15, result.get(l1));
+        assertEquals(9, result.get(l2));
+        assertEquals(17, result.get(l3));
+        assertEquals(9, result.get(l4));
+        assertEquals(15, result.get(l5));
     }
 
     @Test
     void getVerticesAndProximities() {
+        Map<Local,Integer> result=calculator.getVerticesAndProximities();
+        assertEquals(90, result.get(l1));
+        assertEquals(150, result.get(l2));
+        assertEquals(80, result.get(l3));
+        assertEquals(125, result.get(l4));
+        assertEquals(95, result.get(l5));
     }
 }

@@ -64,15 +64,15 @@ public class IdealVerticesCalculator<V, E> {
 
     public ArrayList<V> getVerticesByIdealOrder() {
         ArrayList<V> verticesSorted = getVerticesByCentrality();
-        Pair<Boolean, ArrayList<Pair<V, V>>> verticesWithSameCentrality = checkVerticesWithSameCentrality();
+        Pair<Boolean, ArrayList<Pair<V, V>>> verticesWithSameCentrality = getVerticesWithSameCentrality();
 
         if (verticesWithSameCentrality.getKey()) {
 
-            verticesSorted = getVerticesByCentralityAndProximity(verticesSorted, verticesWithSameCentrality);
-            Pair<Boolean, ArrayList<Pair<V, V>>> verticesWithSameCentralityAndProximity = checkVerticesWithSameCentralityAndProximity(verticesWithSameCentrality);
+            verticesSorted = getVerticesByCentralityAndInfluence(verticesSorted, verticesWithSameCentrality);
+            Pair<Boolean, ArrayList<Pair<V, V>>> verticesWithSameCentralityAndInfluence = getVerticesWithSameCentralityAndInfluence(verticesWithSameCentrality);
 
-            if (verticesWithSameCentralityAndProximity.getKey()) {
-                verticesSorted = getVerticesByCentralityProximityAndImportance(verticesSorted, verticesWithSameCentralityAndProximity);
+            if (verticesWithSameCentralityAndInfluence.getKey()) {
+                verticesSorted = getVerticesByCentralityInfluenceAndProximity(verticesSorted, verticesWithSameCentralityAndInfluence);
             }
         }
 
@@ -113,17 +113,19 @@ public class IdealVerticesCalculator<V, E> {
 
     public Map<V, Integer> getVerticesAndCentralities() {
         verticesAndCentralities = new HashMap<>();
-        for (V v : graph.vertices()) {
+        for (V v1 : graph.vertices()) {
 
             //counts how many shortests paths the vertice belongs to
             int count = 0;
 
-            for (LinkedList<V> l : allShortestPathsForAllVertices.get(v)) {
-                if (l.contains(v)) {
-                    count++;
+            for (V v2: graph.vertices()){
+                for (LinkedList<V> l : allShortestPathsForAllVertices.get(v2)) {
+                    if (l.contains(v1)) {
+                        count++;
+                    }
                 }
             }
-            verticesAndCentralities.put(v, count);
+            verticesAndCentralities.put(v1, count);
         }
 
         return verticesAndCentralities;
@@ -146,7 +148,7 @@ public class IdealVerticesCalculator<V, E> {
         return verticesByCentrality;
     }
 
-    private Pair<Boolean, ArrayList<Pair<V, V>>> checkVerticesWithSameCentrality() {
+    private Pair<Boolean, ArrayList<Pair<V, V>>> getVerticesWithSameCentrality() {
         Pair<Boolean, ArrayList<Pair<V, V>>> verticesWithSameCentrality = new MutablePair<>(false, new ArrayList<>());
         ArrayList<Map.Entry<V, Integer>> mapEntries = new ArrayList<>(verticesAndCentralities.entrySet());
 
@@ -174,16 +176,16 @@ public class IdealVerticesCalculator<V, E> {
         return verticesWithSameCentrality;
     }
 
-    private ArrayList<V> getVerticesByCentralityAndProximity(ArrayList<V> verticesSorted, Pair<Boolean, ArrayList<Pair<V, V>>> verticesWithSameCentrality) {
+    private ArrayList<V> getVerticesByCentralityAndInfluence(ArrayList<V> verticesSorted, Pair<Boolean, ArrayList<Pair<V, V>>> verticesWithSameCentrality) {
         for (Pair<V, V> pair : verticesWithSameCentrality.getValue()) {
 
             V v1 = pair.getLeft();
             V v2 = pair.getRight();
 
-            E prox1 = verticesAndProximities.get(v1);
-            E prox2 = verticesAndProximities.get(v2);
+            int v1Degree= graph.inDegree(v1);
+            int v2Degree= graph.inDegree(v2);
 
-            if (comparator.compare(prox1, prox2) > 0) {
+            if (v1Degree > v2Degree) {
 
                 int i1 = verticesSorted.indexOf(v1);
                 int i2 = verticesSorted.indexOf(v2);
@@ -196,34 +198,34 @@ public class IdealVerticesCalculator<V, E> {
         return verticesSorted;
     }
 
-    private Pair<Boolean, ArrayList<Pair<V, V>>> checkVerticesWithSameCentralityAndProximity(Pair<Boolean, ArrayList<Pair<V, V>>> verticesWithSameCentrality) {
-        Pair<Boolean, ArrayList<Pair<V, V>>> verticesWithSameCentralityAndProximity = new MutablePair<>(false, new ArrayList<>());
+    private Pair<Boolean, ArrayList<Pair<V, V>>> getVerticesWithSameCentralityAndInfluence(Pair<Boolean, ArrayList<Pair<V, V>>> verticesWithSameCentrality) {
+        Pair<Boolean, ArrayList<Pair<V, V>>> verticesWithSameCentralityAndInfluence = new MutablePair<>(false, new ArrayList<>());
         for (Pair<V, V> pair : verticesWithSameCentrality.getValue()) {
 
             V v1 = pair.getKey();
             V v2 = pair.getValue();
-            E v1Proximity = verticesAndProximities.get(v1);
-            E v2Proximity = verticesAndProximities.get(v2);
+            int v1Degree= graph.inDegree(v1);
+            int v2Degree= graph.inDegree(v2);
 
-            if (v1Proximity.equals(v2Proximity)) {
-                verticesWithSameCentralityAndProximity = new MutablePair<>(true, new ArrayList<>());
-                verticesWithSameCentralityAndProximity.getValue().add(pair);
+            if (v1Degree==v2Degree) {
+                verticesWithSameCentralityAndInfluence = new MutablePair<>(true, new ArrayList<>());
+                verticesWithSameCentralityAndInfluence.getValue().add(pair);
             }
         }
 
-        return verticesWithSameCentralityAndProximity;
+        return verticesWithSameCentralityAndInfluence;
     }
 
-    private ArrayList<V> getVerticesByCentralityProximityAndImportance(ArrayList<V> verticesSorted, Pair<Boolean, ArrayList<Pair<V, V>>> verticesWithSameCentralityAndProximity) {
+    private ArrayList<V> getVerticesByCentralityInfluenceAndProximity(ArrayList<V> verticesSorted, Pair<Boolean, ArrayList<Pair<V, V>>> verticesWithSameCentralityAndProximity) {
         for (Pair<V, V> pair : verticesWithSameCentralityAndProximity.getValue()) {
 
             V v1 = pair.getLeft();
             V v2 = pair.getRight();
 
-            int d1 = graph.inDegree(v1);
-            int d2 = graph.inDegree(v2);
+            E prox1=verticesAndProximities.get(v1);
+            E prox2=verticesAndProximities.get(v2);
 
-            if (d1 > d2) {
+            if (comparator.compare(prox1, prox2) > 0) {
 
                 int i1 = verticesSorted.indexOf(v1);
                 int i2 = verticesSorted.indexOf(v2);
