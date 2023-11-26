@@ -24,8 +24,8 @@ public class SementeiraRegisterController {
         return sementeiraRepository;
     }
 
-    public void sementeiraRegister(int operacaoId, int parcelaId, int variedadeId, float quantidade, float area, int metodoExecucaoId) throws SQLException {
+    public void sementeiraRegister(int parcelaId, int variedadeId, float quantidade, float area, int metodoExecucaoId) throws SQLException {
 
-        sementeiraRepository.sementeiraRegister(operacaoId, parcelaId, variedadeId, quantidade, area, metodoExecucaoId);
+        sementeiraRepository.sementeiraRegister(parcelaId, variedadeId, quantidade, area, metodoExecucaoId);
     }
 }
