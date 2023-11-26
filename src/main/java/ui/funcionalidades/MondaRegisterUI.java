@@ -23,7 +23,7 @@ public class MondaRegisterUI implements Runnable {
 
     public void run() {
         try {
-
+            Scanner scanner = new Scanner(System.in);
             System.out.println("Registar nova Monda");
 
             System.out.print("OperacaoId: ");
@@ -31,37 +31,97 @@ public class MondaRegisterUI implements Runnable {
             System.out.printf("Using %d\n", operacaoId);
 
 
-            String strDate = Utils.readLineFromConsole("Date (yyyy-mm-dd): ");
+            System.out.print("Date (yyyy-mm-dd): (Insira E para sair) \n");
+            String strDate = scanner.next();
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            formatter.setLenient(false);  // Set leniency to false
+            formatter.setLenient(false);
 
+            Date currentDate = new Date();
+            if (strDate.equalsIgnoreCase("E")) {
+                return;
+            }
             Date date = null;
             boolean validDate = false;
             while (!validDate) {
                 try {
                     date = formatter.parse(strDate);
-                    validDate = true;
+                    if (date.after(currentDate)) {
+                        System.out.println("Erro: Data invalida.Insira uma data que nao se encontre no futuro.");
+                        System.out.print("Data (yyyy-mm-dd): ");
+                        strDate = scanner.next();
+                    } else {
+                        validDate = true;
+                    }
                 } catch (ParseException e) {
-                    Utils.readLineFromConsole("Error: Invalid date format. Please enter the date in yyyy-mm-dd format.");
-                    strDate = Utils.readLineFromConsole("Date (yyyy-mm-dd): ");
+                    System.out.println("Erro: Formato de data invalido. Insira a data no formato yyyy-mm-dd.");
+                    scanner.nextLine();
+                    System.out.print("Data (yyyy-mm-dd): ");
+                    strDate = scanner.next();
                 }
             }
 
-            ParcelasListController controller1 = new ParcelasListController();
-            controller1.showAllParcelas();
-            int parcelaId = Utils.readIntegerFromConsole("ParcelaId: ");
+            controllerop.getTableData("Parcela");
+            controllerop.printTableData("Parcela");
+            int parcelaId = 0;
+            String parcelaInput;
+            do {
+                System.out.print("ParcelaId (Insira E para sair): \n");
+                parcelaInput = scanner.next().trim();
+                if (parcelaInput.equalsIgnoreCase("E")) {
+                    return;
+                }
+                try {
+                    parcelaId = Integer.parseInt(parcelaInput);
+                    if (!controllerop.isIdValid("Parcela", parcelaId)) {
+                        System.out.println("Erro: ParcelaId nao registado na base de dados. Insira um Id existente.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Erro: Insira um número válido para ParcelaId ou E para sair.");
+                }
+            } while (!controllerop.isIdValid("Parcela", parcelaId));
 
 
-            VariedadeListController controller2 = new VariedadeListController();
-            controller2.showVariedades();
-            int variedadeId = Utils.readIntegerFromConsole("VariedadeId: ");
+            controllerop.getTableData("Variedade");
+            controllerop.printTableData("Variedade");
+            int variedadeId = 0;
+            String variedadeInput;
+            do {
+                System.out.print("VariedadeId (Insira E para sair): \n");
+                variedadeInput = scanner.next().trim();
+                if (variedadeInput.equalsIgnoreCase("E")) {
+                    return;
+                }
+                try {
+                    variedadeId = Integer.parseInt(variedadeInput);
+                    if (!controllerop.isIdValid("Variedade", variedadeId)) {
+                        System.out.println("Erro: VariedadeId nao registado na base de dados. Insira um Id existente.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Erro: Insira um número válido para VariedadeId ou E para sair.");
+                }
+            } while (!controllerop.isIdValid("Variedade", variedadeId));
 
-            FatorProducaoListController controller3 = new FatorProducaoListController();
-            controller3.showAllFatoresProducao();
-            int fatorProducaoId = Utils.readIntegerFromConsole("FatorProducaoId: ");
+            controllerop.getTableData("Fator_Producao");
+            controllerop.printTableData("Fator_Producao");
+            int fatorProducaoId = 0;
+            String fatorProducaoInput;
+            do {
+                System.out.print("Fator Producao Id (Insira E para sair): \n");
+                fatorProducaoInput = scanner.next().trim();
+                if (fatorProducaoInput.equalsIgnoreCase("E")) {
+                    // Go back to the main menu or exit the program
+                    return;
+                }
+                try {
+                    fatorProducaoId = Integer.parseInt(fatorProducaoInput);
+                    if (!controllerop.isIdValid("FATOR_PRODUCAO", fatorProducaoId)) {
+                        System.out.println("Erro: FatorProducaoId nao registado na base de dados. Insira um Id existente.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Erro: Insira um numero válido para FatorProducaoId ou E para sair.");
+                }
+            } while (!controllerop.isIdValid("FATOR_PRODUCAO", fatorProducaoId));
 
-            MetodoExecucaoListController controller4 = new MetodoExecucaoListController();
-            controller4.showMetodosExecucao();
             int metodoExecucaoId = Utils.readIntegerFromConsole("MetodoExecucaoId: ");
 
             float quantidade = Utils.readFloatFromConsole("Quantidade: ");

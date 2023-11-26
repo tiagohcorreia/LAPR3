@@ -21,6 +21,7 @@ public class ProductOwnerUI implements Runnable {
 
         options.add(new MenuItem("Registar Sementeira", new SementeiraRegisterUI()));
         options.add(new MenuItem("Registar Colheita", new ColheitaRegisterUI()));
+        options.add(new MenuItem("Registar Monda", new MondaRegisterUI()));
         options.add(new MenuItem("Gerar Plano de Rega", new SimularSistemaRegaUI()));
         options.add(new MenuItem("Verificar Estado da Rega", new EstadoRegaUI()));
 
