@@ -1,9 +1,8 @@
-# US BD05 
+# US BD14 - Registar aplicação de fator de produção 
 
 ## Descrição
 
-Como Gestor Agrícola, pretendo saber a quantidade de produtos colhidos numa dada parcela, para cada produto, num dado 
-intervalo de tempo.
+Como Gestor Agrícola, quero registar uma operação de aplicação de fator de produção.
 
 ## From the specifications document
 
