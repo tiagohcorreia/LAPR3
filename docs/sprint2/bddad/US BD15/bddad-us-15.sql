@@ -1,53 +1,4 @@
 -- Como Gestor Agrícola, quero registar uma operação de poda
-declare
-    operationSuccess number;
-begin
-    operationSuccess := registrarPoda(104, 48, to_date('28-11-2023', 'dd-mm-yyyy'), 10, null);
-    if (operationSuccess = 1) then
-        DBMS_OUTPUT.put_line('Registo efetuado com sucesso.');
-    else
-        DBMS_OUTPUT.put_line('Não foi possível registrar a operação.');
-    end if;
-end;
-
-CREATE OR REPLACE FUNCTION registrarPoda(parcelaId Parcela.id%TYPE, variedadeId Variedade.id%TYPE,
-                                         data Operacao_Agricola.data%TYPE, quantidade Poda.quantidade%TYPE,
-                                         metodoExecucaoId Metodo_Execucao.id%TYPE)
-    RETURN NUMBER
-    IS
-    returnValue       NUMBER                    := 0;
-    id                Operacao_Agricola.id%TYPE := 0;
-    operationIdExists Operacao_Agricola.id%TYPE;
-BEGIN
-    SELECT MAX(id) into id FROM Operacao_Agricola;
-    id := id + 1;
-
-    IF (checkIfOperationIdExists(id) = 1
-        or checkIfParcelExists(parcelaId) = 0
-        or checkIfVarietyExists(variedadeId) = 0) THEN
-        RETURN returnValue; -- returns 0 wich means operation insuccess
-    END IF;
-
-    if (checkIfVarietyIsInParcel(parcelaId, variedadeId) = 0) then
-        return returnValue;
-    end if;
-
-    SAVEPOINT sp1;
-
-    INSERT INTO Operacao_Agricola(id, data)
-    VALUES (id, data);
-    INSERT INTO Poda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id)
-    VALUES (id, parcelaId, variedadeId, quantidade, metodoExecucaoId);
-
-    if (checkIfOperationIdExists(id) = 1
-        and checkIfPodaIsRegistered(id) = 1) then
-        commit;
-        returnValue := 1;
-    else
-        rollback to sp1;
-    end if;
-    return returnValue;
-END;
 
 create or replace function checkIfOperationIdExists(id operacao_agricola.id%type)
     return number
@@ -174,4 +125,53 @@ begin
     end loop;
     close c1;
     return returnValue;
+end;
+
+CREATE OR REPLACE FUNCTION registrarPoda(parcelaId Parcela.id%TYPE, variedadeId Variedade.id%TYPE,
+                                         data Operacao_Agricola.data%TYPE, quantidade Poda.quantidade%TYPE,
+                                         metodoExecucaoId Metodo_Execucao.id%TYPE)
+    RETURN NUMBER
+    IS
+    returnValue NUMBER                    := 0;
+    id          Operacao_Agricola.id%TYPE := 0;
+BEGIN
+    SELECT MAX(id) into id FROM Operacao_Agricola;
+    id := id + 1;
+
+    IF (checkIfOperationIdExists(id) = 1
+        or checkIfParcelExists(parcelaId) = 0
+        or checkIfVarietyExists(variedadeId) = 0) THEN
+        RETURN returnValue; -- returns 0 wich means operation insuccess
+    END IF;
+
+    if (checkIfVarietyIsInParcel(parcelaId, variedadeId) = 0) then
+        return returnValue; -- returns 0 wich means operation insuccess
+    end if;
+
+    SAVEPOINT sp1;
+
+    INSERT INTO Operacao_Agricola(id, data)
+    VALUES (id, data);
+    INSERT INTO Poda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id)
+    VALUES (id, parcelaId, variedadeId, quantidade, metodoExecucaoId);
+
+    if (checkIfOperationIdExists(id) = 1
+        and checkIfPodaIsRegistered(id) = 1) then
+        commit;
+        returnValue := 1;
+    else
+        rollback to sp1;
+    end if;
+    return returnValue;
+END;
+
+declare
+    operationSuccess number;
+begin
+    operationSuccess := registrarPoda(104, 48, to_date('28-11-2023', 'dd-mm-yyyy'), 10, null);
+    if (operationSuccess = 1) then
+        DBMS_OUTPUT.put_line('Registo efetuado com sucesso. Return value: ' || operationSuccess);
+    else
+        DBMS_OUTPUT.put_line('Não foi possível registrar a operação. Return value: ' || operationSuccess);
+    end if;
 end;
