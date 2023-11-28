@@ -12,7 +12,7 @@ DELETE FROM Incorporacao_Solo;
 DELETE FROM Metodo_Aplicacao;
 DELETE FROM Metodo_Dispensasao;
 DELETE FROM Metodo_Execucao;
-DELETE FROM Moblilizacao_Solo;
+DELETE FROM Mobilizacao_Solo;
 DELETE FROM Monda;
 DELETE FROM Op_Plantacao;
 DELETE FROM Operacao_Agricola;

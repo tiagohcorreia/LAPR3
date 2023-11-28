@@ -17,7 +17,7 @@ from COLHEITA;
 delete
 from APLICACAO_FP;
 delete
-from MOBLILIZACAO_SOLO;
+from MOBILIZACAO_SOLO;
 delete
 from incorporacao_solo;
 delete
@@ -1118,7 +1118,7 @@ VALUES (412, 108, null, 12, 7, 1800, 0.5);
 -- 04/07/2023 operação de mobilização do solo, 0.5 ha
 INSERT INTO Operacao_Agricola(id, data)
 VALUES (413, TO_DATE('04/07/2023', 'DD/MM/YYYY'));
-INSERT INTO Moblilizacao_Solo(operacao_id, parcela_id, area)
+INSERT INTO Mobilizacao_Solo(operacao_id, parcela_id, area)
 VALUES (413, 108, 0.5);
 
 
@@ -1167,7 +1167,7 @@ values (420, 108, 15, null, 1200);
 -- 10/10/2023 operação de mobilização do solo, 1.1 ha
 INSERT INTO Operacao_Agricola(id, data)
 VALUES (421, TO_DATE('10/10/2023', 'DD/MM/YYYY'));
-INSERT INTO Moblilizacao_Solo(operacao_id, parcela_id, area)
+INSERT INTO Mobilizacao_Solo(operacao_id, parcela_id, area)
 VALUES (421, 108, 1.1);
 
 -- 12/10/2023 operação de semeadura de Tremoço Amarelo, 1.1 ha, 32 kg
