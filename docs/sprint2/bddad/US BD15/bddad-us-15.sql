@@ -57,6 +57,7 @@ create or replace function checkIfOperationIdExists(id operacao_agricola.id%type
     cursor c1 is select id
                  from operacao_agricola;
 begin
+    open c1;
     loop
         fetch c1 into otherId;
         if (id = otherId) then
@@ -64,6 +65,7 @@ begin
         end if;
         exit when c1%notfound;
     end loop;
+    close c1;
     return returnValue;
 end;
 
@@ -75,6 +77,7 @@ create or replace function checkIfParcelExists(id parcela.id%type)
     cursor c1 is select id
                  from parcela;
 begin
+    open c1;
     loop
         fetch c1 into otherId;
         if (id = otherId) then
@@ -82,6 +85,7 @@ begin
         end if;
         exit when c1%notfound;
     end loop;
+    close c1;
     return returnValue;
 end;
 
@@ -93,6 +97,7 @@ create or replace function checkIfVarietyExists(id variedade.id%type)
     cursor c1 is select id
                  from variedade;
 begin
+    open c1;
     loop
         fetch c1 into otherId;
         if (id = otherId) then
@@ -100,10 +105,11 @@ begin
         end if;
         exit when c1%notfound;
     end loop;
+    close c1;
     return returnValue;
 end;
 
-create or replace function checkIfExecutionMethodExists(id Metodo_Execucao.id%type)
+/*create or replace function checkIfExecutionMethodExists(id Metodo_Execucao.id%type)
     return number
     is
     returnValue number := 0;
@@ -119,7 +125,7 @@ begin
         exit when c1%notfound;
     end loop;
     return returnValue;
-end;
+end;*/
 
 create or replace function checkIfVarietyIsInParcel(parcelaId Parcela.id%TYPE, variedadeId Variedade.id%TYPE)
     return number
@@ -138,6 +144,7 @@ create or replace function checkIfVarietyIsInParcel(parcelaId Parcela.id%TYPE, v
                   and plantacao_permanente.variedade_perm_id = variedade.id
                   and plantacao_temporaria.variedade_temp_id = variedade.id;
 begin
+    open c;
     loop
         fetch c into otherVarietyId;
         if (otherVarietyId = variedadeId) then
@@ -145,6 +152,7 @@ begin
         end if;
         exit when c%notfound or returnValue = 1;
     end loop;
+    close c;
     return returnValue;
 end;
 
@@ -156,6 +164,7 @@ create or replace function checkIfPodaIsRegistered(id poda.operacao_id%type)
     cursor c1 is select operacao_id
                  from poda;
 begin
+    open c1;
     loop
         fetch c1 into otherId;
         if (id = otherId) then
@@ -163,5 +172,6 @@ begin
         end if;
         exit when c1%notfound;
     end loop;
+    close c1;
     return returnValue;
 end;
