@@ -77,7 +77,27 @@ public class SementeiraRegisterUI implements Runnable {
             int variedadeId = Utils.readIntegerFromConsole("Insira a ID da variedade");
 
 
-            int metodoExecucaoId = Utils.readIntegerFromConsole("Insira o ID do método de execução");
+            controllerop.getTableData("Metodo_Execucao");
+            controllerop.printTableData("Metodo_Execucao");
+
+            int metodoExecucaoId = 0;
+            String metodoExecucaoInput;
+            do {
+                System.out.print("Metodo Execucao Id (Insira E para sair): \n");
+                metodoExecucaoInput = scanner.next().trim();
+                if (metodoExecucaoInput.equalsIgnoreCase("E")) {
+                    // Go back to the main menu or exit the program
+                    return;
+                }
+                try {
+                    metodoExecucaoId = Integer.parseInt(metodoExecucaoInput);
+                    if (!controllerop.isIdValid("Metodo_Execucao", metodoExecucaoId)) {
+                        System.out.println("Erro: ProdutoId nao registado na base de dados. Insira um Id existente.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Erro: Insira um numero valido para metodoExecucaoId ou E para sair.");
+                }
+            } while (!controllerop.isIdValid("Metodo_Execucao", metodoExecucaoId));
 
             float quantidade = Utils.readFloatFromConsole("Insira a quantidade");
 
