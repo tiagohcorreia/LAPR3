@@ -103,12 +103,6 @@ public class PodaRegisterUI implements Runnable {
                 }
             } while (!controllerop.isIdValid("Variedade", variedadeId));
 
-            System.out.print("MetodoExecucaoId (Insira E para sair): \n");
-            String metodoExecucaoIdInput = scanner.next().trim();
-            if (metodoExecucaoIdInput.equalsIgnoreCase("E")) {
-                // Go back to the main menu or exit the program
-                return;
-            }
             controllerop.getTableData("Metodo_Execucao");
             controllerop.printTableData("Metodo_Execucao");
 

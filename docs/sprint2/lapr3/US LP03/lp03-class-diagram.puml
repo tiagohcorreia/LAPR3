@@ -1,0 +1,57 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+
+package ui.funcionalidades {
+    class SimularSistemaRegaUI {
+        - controller: RegaRegisterController
+        --
+        + RegaRegisterUI()
+        + run(): void
+    }
+}
+
+package controller {
+    class RegaRegisterController {
+        - RegaRegister(int operacaoId, int setorId, int duracao, String hora): void
+    }
+
+    class OperacaoAgricolaRegisterController {
+        - getNextId(): int
+        - getTableData(tableName: String): void
+        - printTableData(tableName: String): void
+        - isIdValid(tableName: String, id: int): boolean
+        + operacaoAgricolaRegister(operacaoId: int, date: Date): void
+    }
+}
+
+package ui.utils {
+    class Utils {
+        + readIntegerFromConsole(prompt: String): int
+        + readFloatFromConsole(prompt: String): float
+    }
+}
+
+
+class OperacaoAgricolaRegisterController {
+    - getNextId(): int
+    - getTableData(tableName: String): void
+    - printTableData(tableName: String): void
+    - isIdValid(tableName: String, id: int): boolean
+    + operacaoAgricolaRegister(operacaoId: int, date: Date): void
+}
+
+class Utils {
+    + readIntegerFromConsole(prompt: String): int
+    + readFloatFromConsole(prompt: String): float
+}
+
+SimularSistemaRegaUI --> RegaRegisterController: <<uses>>
+RegaRegisterController --> OperacaoAgricolaRegisterController: <<uses>>
+RegaRegisterController --> Utils: <<uses>>
+
+OperacaoAgricolaRegisterController --> Utils: <<uses>>
+
+@enduml
