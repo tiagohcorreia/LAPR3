@@ -62,7 +62,7 @@ VALUES (?, ?, null, ?, ?, 1800, 0.5);
 -- 04/07/2023 operação de mobilização do solo, 0.5 ha
 INSERT INTO Operacao_Agricola(id, data)
 VALUES (?, TO_DATE('04/07/2023', 'DD/MM/YYY'));
-INSERT INTO Moblilizacao_Solo(operacao_id, parcela_id, area)
+INSERT INTO Mobilizacao_Solo(operacao_id, parcela_id, area)
 VALUES (?, ?, 0.5);
 
 
@@ -111,7 +111,7 @@ values (?, ?, ?, ?, 1200);
 -- 10/10/2023 operação de mobilização do solo, 1.1 ha
 INSERT INTO Operacao_Agricola(id, data)
 VALUES (?, TO_DATE('10/10/2023', 'DD/MM/YYY'));
-INSERT INTO Moblilizacao_Solo(operacao_id, parcela_id, area)
+INSERT INTO Mobilizacao_Solo(operacao_id, parcela_id, area)
 VALUES (?, ?, 1.1);
 
 -- 12/10/2023 operação de semeadura de Tremoço Amarelo, 1.1 ha, 32 kg

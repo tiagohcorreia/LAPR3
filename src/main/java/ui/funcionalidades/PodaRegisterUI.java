@@ -2,6 +2,7 @@ package ui.funcionalidades;
 
 import controller.ColheitaRegisterController;
 import controller.OperacaoAgricolaRegisterController;
+import controller.PodaRegisterController;
 
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -9,19 +10,19 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
-public class ColheitaRegisterUI implements Runnable {
+public class PodaRegisterUI implements Runnable {
 
-    private ColheitaRegisterController controller;
+    private PodaRegisterController controller;
     private OperacaoAgricolaRegisterController controllerop;
 
-    public ColheitaRegisterUI() {
-        controller = new ColheitaRegisterController();
+    public PodaRegisterUI() {
+        controller = new PodaRegisterController();
         controllerop = new OperacaoAgricolaRegisterController();
     }
 
     public void run() {
         try {
-            System.out.println("Register a new Colheita");
+            System.out.println("Registar uma Poda");
 
             Scanner scanner = new Scanner(System.in);
             System.out.print("OperacaoId: ");
@@ -50,7 +51,7 @@ public class ColheitaRegisterUI implements Runnable {
                         validDate = true;
                     }
                 } catch (ParseException e) {
-                        System.out.println("Erro: Formato de data invalido. Insira a data no formato yyyy-mm-dd.");
+                    System.out.println("Erro: Formato de data invalido. Insira a data no formato yyyy-mm-dd.");
                     scanner.nextLine();
                     System.out.print("Data (yyyy-mm-dd): ");
                     strDate = scanner.next();
@@ -71,37 +72,43 @@ public class ColheitaRegisterUI implements Runnable {
                 }
                 try {
                     parcelaId = Integer.parseInt(parcelaInput);
-                    if (!controller.isIdValid("PARCELA", parcelaId)) {
+                    if (!controllerop.isIdValid("PARCELA", parcelaId)) {
                         System.out.println("Erro: ParcelaId nao registado na base de dados. Insira um Id existente.");
                     }
                 } catch (NumberFormatException e) {
                     System.out.println("Erro: Insira um número válido para ParcelaId ou E para sair.");
                 }
-            } while (!controller.isIdValid("PARCELA", parcelaId));
+            } while (!controllerop.isIdValid("PARCELA", parcelaId));
 
 
-            controllerop.getTableData("Produto");
-            controllerop.printTableData("Produto");
+            controllerop.getTableData("Variedade");
+            controllerop.printTableData("Variedade");
 
-            int produtoId = 0;
-            String produtoInput;
+            int variedadeId = 0;
+            String variedadeInput;
             do {
-                System.out.print("ProdutoId (Insira E para sair): \n");
-                produtoInput = scanner.next().trim();
-                if (produtoInput.equalsIgnoreCase("E")) {
+                System.out.print("VariedadeId (Insira E para sair): \n");
+                variedadeInput = scanner.next().trim();
+                if (variedadeInput.equalsIgnoreCase("E")) {
                     // Go back to the main menu or exit the program
                     return;
                 }
                 try {
-                    produtoId = Integer.parseInt(produtoInput);
-                    if (!controller.isIdValid("Produto", produtoId)) {
-                        System.out.println("Erro: ProdutoId nao registado na base de dados. Insira um Id existente.");
+                   variedadeId = Integer.parseInt(variedadeInput);
+                    if (!controllerop.isIdValid("Variedade", variedadeId)) {
+                        System.out.println("Erro: VariedadeId nao registado na base de dados. Insira um Id existente.");
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("Erro: Insira um número válido para ProdutoId ou E para sair.");
+                    System.out.println("Erro: Insira um namero valido para VariedadeId ou E para sair.");
                 }
-            } while (!controller.isIdValid("Produto", produtoId));
+            } while (!controllerop.isIdValid("Variedade", variedadeId));
 
+            System.out.print("MetodoExecucaoId (Insira E para sair): \n");
+            String metodoExecucaoIdInput = scanner.next().trim();
+            if (metodoExecucaoIdInput.equalsIgnoreCase("E")) {
+                // Go back to the main menu or exit the program
+                return;
+            }
             controllerop.getTableData("Metodo_Execucao");
             controllerop.printTableData("Metodo_Execucao");
 
@@ -151,13 +158,13 @@ public class ColheitaRegisterUI implements Runnable {
             }
 
             controllerop.operacaoAgricolaRegister(operacaoId, date);
-            controller.colheitaRegister(operacaoId, parcelaId, produtoId, metodoExecucaoId, quantidade);
+            controller.podaRegister(operacaoId, parcelaId, variedadeId, quantidade, metodoExecucaoId);
 
-            System.out.println("\nColheita registada.");
+            System.out.println("\nPoda registada.");
         } catch (SQLException e) {
 
 
-            System.out.println("\nColheita nao registada!\n" + e.getMessage());
+            System.out.println("\nPoda nao registada!\n" + e.getMessage());
 
         }
     }
