@@ -27,7 +27,7 @@ Como Gestor Agrícola, quero registar uma operação de monda
 >Anwer:Lamento, mas no contexto dos dados adicionais que recebeu para o sprint 2 e do script para a sprint review 2, a pergunta não faz qualquer sentido.
 
 >Question:Onde dever ser aplicada a operação de monda: numa cultura especifica de uma parcela ou em todas as culturas daquele tipo numa parcela (ambas estas situações acontecem no sistema legado).
-
+ 
 >Anwer:uma operação agrícola do tipo monda será sobre uma cultura instalada numa parcela. Isto não significa que não acabe por ser realizada em todas as parcelas com a mesma cultura mas nesse caso até poderá ocorrer noutras datas.
 
 >Question:Numa conversa consigo, disse que existem mondas que são feitas à base de substâncias químicas o que, no fundo, é uma operação de aplicação de fatores de produção. Isso é aplicável ao domínio deste negócio, sendo que estamos a falar de agricultura em modo biológico, ou foi apenas uma observação de cultura geral?
