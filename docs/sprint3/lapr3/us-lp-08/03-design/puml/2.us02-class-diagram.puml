@@ -1,0 +1,240 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+skinparam linetype orto
+
+'left to right direction
+
+class CreateAnnouncementUI{
+-requestData()
+
+-submitData(String businessType, int price, String comissionType, \ndouble comission, Date publicationDate, int area, int distanceFromCenter, \nString state, String district, String city, int zipcode, String street)
+
+-submitData(String businessType, int price, String comissionType, \ndouble comission, Date publicationDate, int area, int distanceFromCenter, \nString state, String district, String city, int zipcode, String street, \nint numBedrooms, int numBathrooms, int numParkingSpaces, boolean heatingExistence, \nboolean airConditianingExistence)
+
+-submitData(String businessType, int price, String comissionType, \ndouble comission, Date publicationDate, int area, int distanceFromCenter, \nString state, String district, String city, int zipcode, String street, \nint numBedrooms, int numBathrooms, int numParkingSpaces, boolean heatingExistence, \nboolean airConditianingExistence, boolean basementExistence, boolean loftExistence, \nSunExposure sunExposure)
+}
+
+class CreateAnnouncementController{
++CreateAnnouncementController()
+
++State[] getStatesList()
+
++Districts[] getDistictsList(state)
+
++City[] getCitiesList(district)
+
++createAdvertisement(String businessType, int price, String comissionType, \ndouble comission, Date publicationDate, int area, int distanceFromCenter, \nString state, String district, String city, int zipcode, String street)
+
++createAdvertisement(String businessType, int price, String comissionType, \ndouble comission, Date publicationDate, int area, int distanceFromCenter, \nString state, String district, String city, int zipcode, String street, \nint numBedrooms, int numBathrooms, int numParkingSpaces, boolean heatingExistence, \nboolean airConditianingExistence)
+
++createAdvertisement(String businessType, int price, String comissionType, \ndouble comission, Date publicationDate, int area, int distanceFromCenter, \nString state, String district, String city, int zipcode, String street, \nint numBedrooms, int numBathrooms, int numParkingSpaces, boolean heatingExistence, \nboolean airConditianingExistence, boolean basementExistence, boolean loftExistence, \nSunExposure sunExposure)
+}
+
+class Repositories{
++Repositories()
++Repositories getInstance()
++StatesRepository getStatesRepository()
++AdvertisementsRepository getAdvertisementsRepository()
+}
+
+class StatesRepository{
+-ArrayList<State> states
++State[] getStatesList()
+}
+
+class State{
+-String name
+-DistrictsCollection districts
++State(String name)
++DistrictsCollection getDistrictsCollection()
+}
+
+class DistrictsCollection{
+-ArrayList<District> districts
++District[] getDistrictsList()
+}
+
+class District{
+-String name
+-CitiesCollection cities
++District(String name)
++CitiesCollection getCitiesCollection()
+}
+
+class CitiesCollection{
+-ArrayList<City> cities
++City[] getCitiesList()
+}
+
+class City{
+-String name
++City(String name)
+}
+
+class AppSession{
++AppSession()
++AppSession getInstance()
++UserSession getCurrentSession()
+}
+
+class UserSession{
+-String userEmail
++UserSession(String email)
++String getUserEmail()
+}
+
+class AdvertisementsRepository{
+-LeasesRepository leases
+-SalesRepository sales
++SalesRepository getSalesRepository()
++LeasesRepository getLeasesRepository()
++boolean isThereProperty(Advertisement advertisement)
+}
+
+class LeasesRepository{
+-ArrayList<Lease> leases
+
++createLease(String agentEmail, int price, String comissionType, \ndouble comission, Date publicationDate, int area, int distanceFromCenter, \nString state, String district, String city, int zipcode, String street)
+
++createLease(String agentEmail, int price, String comissionType, \ndouble comission, Date publicationDate, int area, int distanceFromCenter, \nString state, String district, String city, int zipcode, String street, \nint numBedrooms, int numBathrooms, int numParkingSpaces, boolean heatingExistence, \nboolean airConditianingExistence)
+
++createLease(String agentEmail, int price, String comissionType, \ndouble comission, Date publicationDate, int area, int distanceFromCenter, \nString state, String district, String city, int zipcode, String street, \nint numBedrooms, int numBathrooms, int numParkingSpaces, boolean heatingExistence, \nboolean airConditianingExistence, boolean basementExistence, boolean loftExistence, \nSunExposure sunExposure)
+
++boolean isThereProperty(Advertisement advertisement)
+}
+
+class SalesRepository{
+-ArrayList<Sale> sales
+
++createSale(String agentEmail, int price, String comissionType, \ndouble comission, Date publicationDate, int area, int distanceFromCenter, \nString state, String district, String city, int zipcode, String street)
+
++createSale(String agentEmail, int price, String comissionType, \ndouble comission, Date publicationDate, int area, int distanceFromCenter, \nString state, String district, String city, int zipcode, String street, \nint numBedrooms, int numBathrooms, int numParkingSpaces, boolean heatingExistence, \nboolean airConditianingExistence)
+
++createSale(String agentEmail, int price, String comissionType, \ndouble comission, Date publicationDate, int area, int distanceFromCenter, \nString state, String district, String city, int zipcode, String street, \nint numBedrooms, int numBathrooms, int numParkingSpaces, boolean heatingExistence, \nboolean airConditianingExistence, boolean basementExistence, boolean loftExistence, \nSunExposure sunExposure)
+
++boolean isThereProperty(Advertisement advertisement)
+}
+
+class Advertisement{
+-String agentEmail
+-int price
+-String comissionType
+-double comission
+-Property property
+-Date publicationDate
+
++Advertisement(String agentEmail, int price, String comissionType, \ndouble comission, Date publicationDate, int area, int distanceFromCenter, \nString state, String district, String city, int zipcode, String street)
+
++Advertisement(String agentEmail, int price, String comissionType, \ndouble comission, Date publicationDate, int area, int distanceFromCenter, \nString state, String district, String city, int zipcode, String street, \nint numBedrooms, int numBathrooms, int numParkingSpaces, boolean heatingExistence, \nboolean airConditianingExistence)
+
++Advertisement(String agentEmail, int price, String comissionType, \ndouble comission, Date publicationDate, int area, int distanceFromCenter, \nString state, String district, String city, int zipcode, String street, \nint numBedrooms, int numBathrooms, int numParkingSpaces, boolean heatingExistence, \nboolean airConditianingExistence, boolean basementExistence, boolean loftExistence, \nSunExposure sunExposure)
+
++int calculateComission(int price, double comission)
+}
+
+class Lease{
++Lease(String agentEmail, int price, String comissionType, \ndouble comission, Date publicationDate, int area, int distanceFromCenter, \nString state, String district, String city, int zipcode, String street)
+
++Lease(String agentEmail, int price, String comissionType, \ndouble comission, Date publicationDate, int area, int distanceFromCenter, \nString state, String district, String city, int zipcode, String street, \nint numBedrooms, int numBathrooms, int numParkingSpaces, boolean heatingExistence, \nboolean airConditianingExistence)
+
++Lease(String agentEmail, int price, String comissionType, \ndouble comission, Date publicationDate, int area, int distanceFromCenter, \nString state, String district, String city, int zipcode, String street, \nint numBedrooms, int numBathrooms, int numParkingSpaces, boolean heatingExistence, \nboolean airConditianingExistence, boolean basementExistence, boolean loftExistence, \nSunExposure sunExposure)
+}
+
+class Sale{
++Sale(String agentEmail, int price, String comissionType, \ndouble comission, Date publicationDate, int area, int distanceFromCenter, \nString state, String district, String city, int zipcode, String street)
+
++Sale(String agentEmail, int price, String comissionType, \ndouble comission, Date publicationDate, int area, int distanceFromCenter, \nString state, String district, String city, int zipcode, String street, \nint numBedrooms, int numBathrooms, int numParkingSpaces, boolean heatingExistence, \nboolean airConditianingExistence)
+
++Sale(String agentEmail, int price, String comissionType, \ndouble comission, Date publicationDate, int area, int distanceFromCenter, \nString state, String district, String city, int zipcode, String street, \nint numBedrooms, int numBathrooms, int numParkingSpaces, boolean heatingExistence, \nboolean airConditianingExistence, boolean basementExistence, boolean loftExistence, \nSunExposure sunExposure)
+}
+
+class Property{
+-Adress adress
+-int area
+-int distanceFromCenter
+
++Property(int area, int distanceFromCenter, String state, \nString district, String city, int zipcode, String street)
+}
+
+class Land{
++Land(int area, int distanceFromCenter, String state, \nString district, String city, int zipcode, String street)
+}
+
+class ResidentialProperty{
+-int numBedrooms
+-int numBathrooms
+-int numParkingSpaces
+-boolean heating
+-boolean airCondiatianing
++ResidentialProperty(int area, int distanceFromCenter, String state, \nString district, String city, int zipcode, String street, int numBedrooms, \nint numBathrooms, int numParkingSpaces, boolean heatingExistence, boolean airConditianingExistence)
+}
+
+class Apartment{
++Apartment(int area, int distanceFromCenter, String state, \nString district, String city, int zipcode, String street, int numBedrooms, \nint numBathrooms, int numParkingSpaces, boolean heatingExistence, \nboolean airConditianingExistence)
+}
+
+class House{
+-boolean basement
+-boolean lolt
+-SunExposure sunExposure
++House(int area, int distanceFromCenter, String state, String district, \nString city, int zipcode, String street, int numBedrooms, int numBathrooms, \nint numParkingSpaces, boolean heatingExistence, boolean airConditianingExistence, \nboolean basementExistence, boolean loftExistence, SunExposure sunExposure)
+}
+
+class Adress{
+-String street
+-int zipcode
+-String city
+-String district
+-String state
++Adress(String state, String district, String city, int zipcode, String street)
+}
+
+enum SunExposure{
+NORTH
+SOUTH
+EAST
+WEST
+}
+
+Repositories->Repositories:creates instance
+
+AppSession->AppSession:creates instance
+
+CreateAnnouncementUI"1"..>"1"CreateAnnouncementController
+
+CreateAnnouncementController"1"..>"1"Repositories
+
+Repositories"1"*--"1"StatesRepository
+StatesRepository"1"*--"*"State
+State"1"*-d-"1"DistrictsCollection
+DistrictsCollection"1"*-d-"*"District
+District"1"*--"1"CitiesCollection
+CitiesCollection"1"*--"*"City
+
+CreateAnnouncementController"1"..>"1"AppSession
+
+AppSession"1"*-d-"*"UserSession
+
+Repositories"1"*--"1"AdvertisementsRepository
+AdvertisementsRepository"1"*--"1"SalesRepository
+AdvertisementsRepository"1"*-d-"1"LeasesRepository
+SalesRepository"1"*--"*"Sale
+LeasesRepository"1"*-d-"*"Lease
+
+Sale--|>Advertisement
+Lease--|>Advertisement
+
+Advertisement"1"*--"1"Property
+
+Property<|-d-Land
+Property<|-d-ResidentialProperty
+ResidentialProperty<|--Apartment
+ResidentialProperty<|--House
+
+Property"1"*-"1"Adress
+
+House"1"*--"1"SunExposure
+@enduml
