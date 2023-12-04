@@ -1,3 +1,29 @@
+P: Nos novos dados existe uma operação de semeadura e nos dados legacy  existe uma operação de sementeira. Estes dois termos referem-se à mesma operação ou consideramos como operações distintas?
+
+R: são sinônimos.
+
+
+
+P: Em relação a USBD31 Como Gestor Agrícola, pretendo registar uma receita de fertirrega para usar em operações de rega.
+
+Por favor pode dar um exemplo de uma receita de fertirrega?
+
+R: posso fazer ainda melhor:
+- Histórico de Versões (na primeira página do enunciado):
+"Explicitação Sistema de Fertirrega"
+
+- Índice: (segunda página "2.3.1 Fertirrega" página 8.
+
+Exemplos de receitas/misturas/mix
+
+
+
+P: É de algum interesse ao cliente saber a hora precisa na qual ocorreu qualquer operação, ou essa informação é somente necessária para operações do tipo rega?
+
+R: normalmente as operações agrícolas prologam-se no tempo e a mão-de-obra é um dos factores de produção com grande impacto nas contas empresas agrícolas, assim sendo, seria muito interessante, para a análise futura, o registo da hora de início e a duração (aproximada) da operação.
+
+
+
 P: De acordo com os dados do sistema legacy, existem operações de sementeiras de tremoços. Mas vi que também lá existem operações de "Incorporação no solo" para os tremoços.
    Em que consiste esta operação?
 
@@ -388,13 +414,4 @@ r: a unidade de referência para áreas em agricultura é o hectare; o dados leg
 
 p: Todos os respetivos sensores(temperatura, humidade, etc) devem estar ligados a uma entidade que guarda os dados recolhidos ou os sensores devem estar ligados individualmente á estação metereológica?
 
-r: no essencial uma estação meteorológica agrícola (EMA) é constituída por um conjunto de sensores que medem diferentes grandezas meteológicas com interesse para a acitividade agrícola, como por exemplo, humidade atmosférica, direcção e velocidade do vento, pressão atmosférica; normalmente existe um controlador que concentra as leituras dos diferentes sensores mas pode depender do fabricante.
-Os sensores do solo podem ler desde humidade e muitas outras (por exemplo pH) depende da sofisticação, e podem não estar integrados na EMA.
-
-
-
-p: Sabemos que uma parcela pode ter varias culturas, mas uma cultura pode estar em varias parcelas?
-
-r: sim de facto, uma parcela pode ter várias culturas, por exemplo, é possível ter milho, feijão e abóboras porque criam "sinergias", chamadas consorciações (os feijões fixam o azoto no solo, o azoto é fundamental para o milho, as canas do milho protegem as abóboras do sol, e também servem como estacas para o feijão, para além disso as raizes das aboboreiras são muito fortes e profundas, e como tal arejam o solo). Este é um clássico mas existem muitos exemplos destes, seja para repelir pragas ou para evitar o aparecimento de infestantes.
-
-Sim, uma cultura pode estar em múltiplas parcelas, depende das necessidades de produção. Ou por exemplo, caso se pretenda fazer adubação verde (para aumentar a fertilidade do solo) ou forrageiras para pasto para animais, nesses casos é muito comum existirem diferentes parcelas com as mesmas culturas.
+r: no essencial uma estação meteorológica agrícola (EMA) é constituída por um conjunto de sensores que medem diferentes grandezas meteológicas com interesse para a acitividade agrícola, como por exemplo, humidade atmosférica, direcção e velocidade do vento, pressão atmosférica; normalmente existe um controlador que concentra as leituras dos diferentes sensores mas pode depender do 
