@@ -1,6 +1,9 @@
 --USBD11 - Como Gestor Agrícola, quero registar uma operaçao de semeadura
 
---Registar uma operação de semeadura na Horta Nova, em 20/09/2023, de Nabo greleiro Senhora Conceição, 0.5 ha, 1.2 kg de semente
+--Caso de sucesso
+--Registar uma operação de semeadura na Horta Nova, em 20/09/2023, de Nabo greleiro Senhora Conceição, 0.3 ha, 0.9 kg de semente
+
+--Caso de insucesso
 --Registar uma operação de semeadura no Campo Novo, em 19/09/2023, de Nabo greleiro Senhora Conceição, 0.75 ha, 1.8 kg de semente
 
 CREATE OR REPLACE PROCEDURE registarSementeira(
