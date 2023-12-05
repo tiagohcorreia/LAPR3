@@ -1,11 +1,14 @@
+--  USBD14 - Como Gestor Agrícola, quero registar uma operação de aplicação de
+--  fator de produção
+
 CREATE OR REPLACE PROCEDURE registrarAplicacaoFatorProducao(
-    p_parcelaId IN NUMBER := NULL,
-    p_variedadeId IN NUMBER := NULL,
-    p_quantidade IN NUMBER := NULL,
-    p_metodoAplicacaoId IN NUMBER := NULL,
-    p_area IN NUMBER := NULL,
-    p_fatorProducaoId IN NUMBER := NULL,
-    p_data IN DATE := NULL
+    p_parcelaId number,
+    p_variedadeId number,
+    p_quantidade fator_producao.quantidade%TYPE,
+    p_metodoAplicacaoId number,
+    p_area fator_producao.area%TYPE,
+    p_fatorProducaoId number,
+    p_data date
 )
     IS
     p_operacaoId Operacao_Agricola.id%TYPE;
