@@ -38,7 +38,7 @@ BEGIN
     IF (checkIfParcelExists(parcelaId) = 0
         or checkIfVarietyExists(variedadeId) = 0
         or checkIfFpExists(fatorProducaoId) = 0
-        or checkIfVarietyIsInParcel(parcelaId, variedadeId)=0) THEN
+        or checkIfVarietyIsInParcel(parcelaId, variedadeId) = 0) THEN
         return 0;
     END IF;
 
@@ -62,13 +62,20 @@ BEGIN
 END;
 
 declare
-parcelaId number:=104;
-variedadeId number:=83;
-quantidade fator_producao.quantidade%TYPE:=2.1;
-metodoAplicacaoId number:=1;
-area fator_producao.area%TYPE:=2;
-fatorProducaoId number:=3;
-data date:=to_date('2020-12-05', 'yyyy-mm-dd');
-    begin
-    registrarAplicacaoFatorProducao(parcelaId, variedadeId, quantidade, metodoAplicacaoId, area, fatorProducaoId, data);
+    parcelaId         number                         := 104;
+    variedadeId       number                         := 83;
+    quantidade        fator_producao.quantidade%TYPE := 2.1;
+    metodoAplicacaoId number                         := 1;
+    area              fator_producao.area%TYPE       := 2;
+    fatorProducaoId   number                         := 3;
+    data              date                           := to_date('2020-12-05', 'yyyy-mm-dd');
+    result            number;
+begin
+    result := registrarAplicacaoFatorProducao(parcelaId, variedadeId, quantidade, metodoAplicacaoId, area,
+                                              fatorProducaoId, data);
+    if result = 1 then
+        dbms_output.put_line('Aplicação de fator de produção registada com sucesso');
+    else
+        dbms_output.put_line('Aplicação de fator de produção não registada');
+    end if;
 end;
