@@ -1,6 +1,5 @@
 package dataAccess;
 
-import domain.Sailor;
 import domain.Variedade;
 import oracle.jdbc.OracleTypes;
 
@@ -17,7 +16,7 @@ public class VariedadeRepository {
     public VariedadeRepository() {
     }
 
-    public List<Variedade> getSailors() throws SQLException {
+    public List<Variedade> getVarieties() throws SQLException {
 
         CallableStatement callStmt = null;
         ResultSet resultSet = null;

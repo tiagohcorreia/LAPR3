@@ -1,0 +1,44 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title User Story 02 - System Sequence Diagram (SSD)
+
+autonumber
+
+actor "Gestor Agrícola" as user
+participant ":System" as sys
+
+activate user
+    user -> sys: pede para registrar poda
+
+    activate sys
+    sys-->user: pede para introduzir a data de realização da operação
+    deactivate
+
+    user->sys: introduz a data da operação
+
+    activate sys
+    sys-->user: lista parcelas registadas no sistema e pede para escolher
+    deactivate sys
+
+    user->sys: seleciona a parcela pretendida
+
+    activate sys
+    sys-->user: lista as variedades presentes na parcela e pede para escolher
+    deactivate
+
+    user->sys: seleciona a variedade pretendida
+
+    activate sys
+    sys-->user: lista métodos de execução e pede para escolher
+    deactivate
+
+    user->sys: seleciona o método pretendido
+
+    activate sys
+    sys-->user: indica o sucesso ou insucesso da operação
+    deactivate
+    
+@enduml

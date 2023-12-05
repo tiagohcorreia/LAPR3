@@ -1,4 +1,4 @@
-# US 002 - To publish an announcement
+# US LP08 - REGISTRAR PODA
 
 [Requirements Engineering](01-requirements/Readme.md)
 

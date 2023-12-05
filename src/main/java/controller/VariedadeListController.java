@@ -27,7 +27,7 @@ public class VariedadeListController {
     }
 
     public List<Variedade> getVariedades() throws SQLException {
-        return variedadeRepository.getSailors();
+        return variedadeRepository.getVarieties();
     }
 
     public void showVariedades() {
