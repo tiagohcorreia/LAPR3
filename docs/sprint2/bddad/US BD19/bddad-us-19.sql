@@ -28,14 +28,14 @@ begin
     return queryCursor;
 end;
 
-create or replace procedure imprimirAplicacoesFpDentroDeIntervalo(c1 sys_refcursor,
-                                                                  tipoFpId tipo_fp.id%type)
+create or replace procedure imprimirAplicacoesFpDentroDeIntervalo(tipoFpId tipo_fp.id%type)
     is
     tipoFpNome tipo_fp.tipo%type;
     data operacao_agricola.data%type;
     parcelaNome parcela.nome%type;
     fpNome fator_producao.nome%type;
     variedadeNome variedade.nome%type;
+    c1 sys_refcursor:=obterAplicacoesFpDentroDeIntervalo(to_date('01-01-2019', 'dd-mm-yyyy'), to_date('06-07-2023', 'dd-mm-yyyy'), tipoFpId);
 begin
     select tipo into tipoFpNome
     from tipo_fp tfp
@@ -57,7 +57,6 @@ end;
 
 declare
     tipoFpId tipo_fp.id%type:=2;
-    c1 sys_refcursor:=obterAplicacoesFpDentroDeIntervalo(to_date('01-01-2019', 'dd-mm-yyyy'), to_date('06-07-2023', 'dd-mm-yyyy'), tipoFpId);
 begin
-    imprimirAplicacoesFpDentroDeIntervalo(c1, tipoFpId);
+    imprimirAplicacoesFpDentroDeIntervalo(tipoFpId);
 end;
