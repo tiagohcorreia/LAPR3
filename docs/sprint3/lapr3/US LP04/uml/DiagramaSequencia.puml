@@ -1,0 +1,22 @@
+@startuml
+
+autonumber
+
+title Sequence Diagram
+
+actor ProductOwner as po
+participant System as s
+
+po -> s: inicia o processo de registar uma sementeira
+
+s -> po: pede os dados necessários
+
+po -> s: insere os dados
+
+s -> po: pede confirmação
+
+po -> s: confirma
+
+s -> po: informa o sucesso da operação
+
+@enduml

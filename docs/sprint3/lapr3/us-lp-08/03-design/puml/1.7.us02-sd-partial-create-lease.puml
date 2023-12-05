@@ -1,0 +1,91 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant ":CreateAnnoucementController" as Controller
+participant "advertisementsRepository\n:AdvertisementsRepository" as advertisementsRepository
+participant "leasesRepository\n:LeasesRepository" as leases
+participant "lease\n:Lease" as lease
+participant "land\n:Land" as land
+participant "apartment\n:Apartment" as apartment
+participant "house\n:House" as house
+
+
+
+autonumber
+
+
+activate Controller
+
+    Controller->advertisementsRepository:getLeasesRepository()
+
+    activate advertisementsRepository
+    advertisementsRepository-->Controller:leasesRepository
+    deactivate advertisementsRepository
+
+   alt propertyType=land
+
+       Controller->leases:createLeases(responsibleAgent,price,comissionType,comission,\nstate,district,city,zipcode,street,area,distanceFromCenter)
+
+       activate leases
+       leases->lease**
+
+   activate lease
+   lease->land**:creates
+
+   activate land
+   land->adress**:creates
+   land-->lease
+   deactivate land
+
+   lease-->leases
+   deactivate lease
+
+       leases-->Controller:lease
+       deactivate leases
+
+   else propertyType=apartment
+
+       Controller->leases:createLeases(responsibleAgent,price,comissionType,comission,state,district,city,zipcode,street,\narea,distanceFromCenter,nBedrooms,nBathrooms,nParkingSpaces,heating,airConditianing)
+
+       activate leases
+       leases->lease**
+
+       activate lease
+   lease->apartment**:creates
+
+   activate apartment
+   apartment->adress**
+   apartment-->lease
+   deactivate apartment
+
+   lease-->leases
+   deactivate lease
+
+   leases-->Controller:lease
+   deactivate leases
+
+   else propertyType=house
+
+       Controller->leases:createLeases(createSale(responsibleAgent,price,comissionType,comission,state,district,city,zipcode,street,area,\ndistanceFromCenter,nBedrooms,nBathrooms,nParkingSpaces,heating,airConditianing,basement,loft,sun)
+
+   activate leases
+   leases->lease**:creates
+
+       activate lease
+       lease->house**:creates
+
+       activate house
+       house->adress**:creates
+       house-->lease
+       deactivate house
+
+       lease-->leases
+       deactivate lease
+
+       leases-->Controller:lease
+       deactivate leases
+
+   end
+@enduml

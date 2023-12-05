@@ -1,0 +1,3 @@
+- qual o significado do numero de colaboradores
+- esclarecer o conceito de centralidade dum vertice: v´ertices com maior número de caminhos mínimos que passam por eles
+- quando é que para o algoritmo que calcula todas as simple paths entre dois vertices

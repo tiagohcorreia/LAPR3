@@ -1,0 +1,178 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+actor "Unregistered User" as User
+participant ":MondaRegisterUI" as UI
+participant ":MondaRegisterController" as CTRL
+participant ":OperacaoAgricolaRegisterController" as OperacaoController
+participant ":Utils" as Utils
+participant ":Scanner" as Scanner
+participant ":Date" as Date
+participant ":SimpleDateFormat" as SimpleDateFormat
+participant ":SQLException" as SQLException
+
+User -> UI : invokes Monda registration
+activate User
+activate UI
+UI -> CTRL : create
+activate CTRL
+CTRL -> OperacaoController : new OperacaoAgricolaRegisterController()
+activate OperacaoController
+OperacaoController --> CTRL : instance
+deactivate OperacaoController
+
+UI -> Utils : readIntegerFromConsole("OperacaoId: ")
+activate Utils
+Utils --> UI : operacaoId
+deactivate Utils
+
+UI -> OperacaoController : getNextId()
+activate OperacaoController
+OperacaoController --> UI : operacaoId
+deactivate OperacaoController
+
+UI -> Utils : readStringFromConsole("Date (yyyy-mm-dd): (Insira E para sair) \n")
+activate Utils
+Utils --> UI : strDate
+deactivate Utils
+
+UI -> SimpleDateFormat : new SimpleDateFormat("yyyy-MM-dd")
+activate SimpleDateFormat
+deactivate SimpleDateFormat
+
+UI -> Date : new Date()
+activate Date
+deactivate Date
+
+UI -> Utils : isExit(strDate)
+activate Utils
+Utils --> UI : false
+deactivate Utils
+
+UI -> SimpleDateFormat : parse(strDate)
+activate SimpleDateFormat
+SimpleDateFormat --> UI : date
+deactivate SimpleDateFormat
+
+UI -> Utils : isFutureDate(date, currentDate)
+activate Utils
+Utils --> UI : false
+deactivate Utils
+
+UI -> OperacaoController : getTableData("Parcela")
+activate OperacaoController
+OperacaoController --> UI : tableData
+deactivate OperacaoController
+
+UI -> OperacaoController : printTableData("Parcela")
+activate OperacaoController
+OperacaoController --> UI : printedTableData
+deactivate OperacaoController
+
+UI -> Utils : readIntegerFromConsole("ParcelaId (Insira E para sair): \n")
+activate Utils
+Utils --> UI : parcelaInput
+deactivate Utils
+
+UI -> OperacaoController : isExit(parcelaInput)
+activate OperacaoController
+OperacaoController --> UI : false
+deactivate OperacaoController
+
+UI -> Utils : parseInt(parcelaInput)
+activate Utils
+Utils --> UI : parcelaId
+deactivate Utils
+
+UI -> OperacaoController : isIdValid("Parcela", parcelaId)
+activate OperacaoController
+OperacaoController --> UI : true
+deactivate OperacaoController
+
+UI -> OperacaoController : getTableData("Variedade")
+activate OperacaoController
+OperacaoController --> UI : tableData
+deactivate OperacaoController
+
+UI -> OperacaoController : printTableData("Variedade")
+activate OperacaoController
+OperacaoController --> UI : printedTableData
+deactivate OperacaoController
+
+UI -> Utils : readIntegerFromConsole("VariedadeId (Insira E para sair): \n")
+activate Utils
+Utils --> UI : variedadeInput
+deactivate Utils
+
+UI -> OperacaoController : isExit(variedadeInput)
+activate OperacaoController
+OperacaoController --> UI : false
+deactivate OperacaoController
+
+UI -> Utils : parseInt(variedadeInput)
+activate Utils
+Utils --> UI : variedadeId
+deactivate Utils
+
+UI -> OperacaoController : isIdValid("Variedade", variedadeId)
+activate OperacaoController
+OperacaoController --> UI : true
+deactivate OperacaoController
+
+UI -> OperacaoController : getTableData("Fator_Producao")
+activate OperacaoController
+OperacaoController --> UI : tableData
+deactivate OperacaoController
+
+UI -> OperacaoController : printTableData("Fator_Producao")
+activate OperacaoController
+OperacaoController --> UI : printedTableData
+deactivate OperacaoController
+
+UI -> Utils : readIntegerFromConsole("Fator Producao Id (Insira E para sair): \n")
+activate Utils
+Utils --> UI : fatorProducaoInput
+deactivate Utils
+
+UI -> OperacaoController : isExit(fatorProducaoInput)
+activate OperacaoController
+OperacaoController --> UI : false
+deactivate OperacaoController
+
+UI -> Utils : parseInt(fatorProducaoInput)
+activate Utils
+Utils --> UI : fatorProducaoId
+deactivate Utils
+
+UI -> OperacaoController : isIdValid("FATOR_PRODUCAO", fatorProducaoId)
+activate OperacaoController
+OperacaoController --> UI : true
+deactivate OperacaoController
+
+UI -> Utils : readIntegerFromConsole("MetodoExecucaoId: ")
+activate Utils
+Utils --> UI : metodoExecucaoId
+deactivate Utils
+
+UI -> Utils : readFloatFromConsole("Quantidade: ")
+activate Utils
+Utils --> UI : quantidade
+deactivate Utils
+
+UI -> OperacaoController : operacaoAgricolaRegister(operacaoId, date)
+activate OperacaoController
+OperacaoController --> UI : true
+deactivate OperacaoController
+
+UI -> CTRL : mondaRegister(operacaoId, parcelaId, variedadeId, fatorProducaoId, metodoExecucaoId, quantidade)
+activate CTRL
+CTRL --> UI : true
+deactivate CTRL
+
+UI --> User : Monda registada.
+deactivate UI
+deactivate User
+
+@enduml

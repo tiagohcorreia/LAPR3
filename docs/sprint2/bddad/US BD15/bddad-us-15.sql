@@ -3,8 +3,7 @@
 create or replace function checkIfOperationIdExists(id operacao_agricola.id%type)
     return number
     is
-    returnValue number := 0;
-    otherId     operacao_agricola.id%type;
+    otherId operacao_agricola.id%type;
     cursor c1 is select id
                  from operacao_agricola;
 begin
@@ -12,19 +11,19 @@ begin
     loop
         fetch c1 into otherId;
         if (id = otherId) then
-            returnValue := 1;
+            close c1;
+            return 1;
         end if;
         exit when c1%notfound;
     end loop;
     close c1;
-    return returnValue;
+    return 0;
 end;
 
 create or replace function checkIfParcelExists(id parcela.id%type)
     return number
     is
-    returnValue number := 0;
-    otherId     parcela.id%type;
+    otherId parcela.id%type;
     cursor c1 is select id
                  from parcela;
 begin
@@ -32,19 +31,19 @@ begin
     loop
         fetch c1 into otherId;
         if (id = otherId) then
-            returnValue := 1;
+            close c1;
+            return 1;
         end if;
         exit when c1%notfound;
     end loop;
     close c1;
-    return returnValue;
+    return 0;
 end;
 
 create or replace function checkIfVarietyExists(id variedade.id%type)
     return number
     is
-    returnValue number := 0;
-    otherId     variedade.id%type;
+    otherId variedade.id%type;
     cursor c1 is select id
                  from variedade;
 begin
@@ -52,12 +51,13 @@ begin
     loop
         fetch c1 into otherId;
         if (id = otherId) then
-            returnValue := 1;
+            close c1;
+            return 1;
         end if;
         exit when c1%notfound;
     end loop;
     close c1;
-    return returnValue;
+    return 0;
 end;
 
 /*create or replace function checkIfExecutionMethodExists(id Metodo_Execucao.id%type)
@@ -81,36 +81,35 @@ end;*/
 create or replace function checkIfVarietyIsInParcel(parcelaId Parcela.id%TYPE, variedadeId Variedade.id%TYPE)
     return number
     is
-    returnValue    number := 0;
     otherVarietyId Variedade.id%TYPE;
-    cursor c is select variedade.id
+    cursor c is select distinct variedade.id
                 from parcela,
                      plantacao,
                      plantacao_permanente,
                      plantacao_temporaria,
                      variedade
                 where parcelaId = plantacao.parcela_id
-                  and plantacao.id = plantacao_permanente.plantacao_id
-                  and plantacao.id = plantacao_temporaria.plantacao_id
-                  and plantacao_permanente.variedade_perm_id = variedade.id
-                  and plantacao_temporaria.variedade_temp_id = variedade.id;
+                  and ((plantacao.id = plantacao_permanente.plantacao_id and
+                        plantacao_permanente.variedade_perm_id = variedade.id)
+                    or (plantacao.id = plantacao_temporaria.plantacao_id and
+                        plantacao_temporaria.variedade_temp_id = variedade.id));
 begin
     open c;
     loop
         fetch c into otherVarietyId;
         if (otherVarietyId = variedadeId) then
-            returnValue := 1;
+            close c;
+            return 1;
         end if;
-        exit when c%notfound or returnValue = 1;
+        exit when c%notfound;
     end loop;
     close c;
-    return returnValue;
+    return 0;
 end;
 
 create or replace function checkIfPodaIsRegistered(id poda.operacao_id%type)
     return number
     is
-    returnValue number := 0;
     otherId     poda.operacao_id%type;
     cursor c1 is select operacao_id
                  from poda;
@@ -119,12 +118,13 @@ begin
     loop
         fetch c1 into otherId;
         if (id = otherId) then
-            returnValue := 1;
+            close c1;
+            return 1;
         end if;
         exit when c1%notfound;
     end loop;
     close c1;
-    return returnValue;
+    return 0;
 end;
 
 CREATE OR REPLACE FUNCTION registrarPoda(parcelaId Parcela.id%TYPE, variedadeId Variedade.id%TYPE,
