@@ -1,4 +1,4 @@
-# US LP08 - REGISTRAR PODA
+# US LP08 - REG
 
 [Requirements Engineering](01-requirements/Readme.md)
 

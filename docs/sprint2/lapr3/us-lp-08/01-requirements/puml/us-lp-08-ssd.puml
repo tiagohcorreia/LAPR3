@@ -3,7 +3,7 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title User Story 02 - System Sequence Diagram (SSD)
+title US LP08 - Registrar Poda - System Sequence Diagram
 
 autonumber
 
@@ -40,5 +40,5 @@ activate user
     activate sys
     sys-->user: indica o sucesso ou insucesso da operação
     deactivate
-    
+
 @enduml
