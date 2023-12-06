@@ -1,9 +1,7 @@
-# US LP08 - REG
+# US LP08 - Registrar Poda
 
-[Requirements Engineering](01-requirements/Readme.md)
+[Requisitos](01-requirements/Readme.md)
 
-[Analysis](02-analysis/Readme.md)
+[Análise](02-analysis%2Flp-08-analysis.md)
 
-[Design]
-
-[Tests & Implementation ]
+[Design](03-design%2Flp08-design-readme.md)
