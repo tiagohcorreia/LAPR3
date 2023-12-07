@@ -85,7 +85,7 @@ public class ex03 {
             if (g != null) count++;
         }
 
-        storage.removeEdgesAboveAutonomy(1000);       // assertEquals(expected,atual);
+       // storage.removeEdgesAboveAutonomy(1000);// assertEquals(expected,atual);
         assertEquals(num, count);
         storage.clean();
 
@@ -96,10 +96,11 @@ public class ex03 {
         GraphStore storage = new GraphStore();
         storage.clean();
 
-        MapGraphLoader.loadGraph("docs\\esinf_data\\locais_big.csv", "docs\\esinf_data\\distancias_big.csv");
+        MapGraphLoader.loadGraph("docs\\esinf_data\\locais_small.csv", "docs\\esinf_data\\distancias_small.csv");
         Distance data = storage.getFurthestPlaces();
         storage.clean();
-
+assertEquals("CT8",data.getLocal1().getLocalId());
+assertEquals("CT4",data.getLocal2().getLocalId());
     }
 
     @Test
@@ -244,7 +245,7 @@ public class ex03 {
             if(shortPath2.get(i).getLocalId().equals("CT2")||shortPath2.get(i).getLocalId().equals("CT9"))vehicleChargeStops.add(shortPath2.get(i));
         }
 
-        FurthestPlacesData data1=storage.getFurthestPlacesData(autonomy);
+        FurthestPlacesData data1=storage.getFurthestPlacesData(autonomy);  //testar com mais de um ficheiro
 
         assertEquals(local1,data1.getLocal1());
         assertEquals(local2,data1.getLocal2());

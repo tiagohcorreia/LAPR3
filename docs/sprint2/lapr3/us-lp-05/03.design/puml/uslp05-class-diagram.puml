@@ -35,10 +35,6 @@ package ui.utils {
     }
 }
 
-import java.util.Date;
-import java.text.SimpleDateFormat;
-import java.util.Scanner;
-
 class MondaRegisterUI {
     - controller: MondaRegisterController
     - controllerop: OperacaoAgricolaRegisterController
@@ -63,5 +59,8 @@ class Utils {
     + readIntegerFromConsole(prompt: String): int
     + readFloatFromConsole(prompt: String): float
 }
-
+MondaRegisterUI --> MondaRegisterController
+MondaRegisterUI --> OperacaoAgricolaRegisterController
+MondaRegisterController --> OperacaoAgricolaRegisterController
+MondaRegisterUI --> Utils
 @enduml

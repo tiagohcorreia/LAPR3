@@ -36,7 +36,7 @@ public class GraphStore {
         for (int i = 0; i < clone.numVertices(); i++) {
             for (int j = 0; j < clone.numVertices() - 1; j++) {
                 if (clone.edge(i, j) != null) {
-                    if (clone.edge(list.get(i), list.get(j)).getWeight() > autonomy) {
+                    if (clone.edge(list.get(i), list.get(j)).getWeight() > autonomy) { //get edge between vertice and check if the veicles autonomy is bigger than its weight
                         clone.removeEdge(clone.vertex(i), clone.vertex(j));
                     }
 
