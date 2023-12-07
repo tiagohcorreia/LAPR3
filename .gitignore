@@ -53,3 +53,4 @@ Thumbs.db
 docs/sprint1/bddad/relational-model/ip-bddad-v04.vpp
 *.bak_000f
 **/src/main/resources/
+application.properties
