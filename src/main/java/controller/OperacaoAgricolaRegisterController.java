@@ -13,9 +13,9 @@ public class OperacaoAgricolaRegisterController {
     private OperacaoAgricolaRepository operacaoAgricolaRepository;
     private Connection connection;
     private static final String JDBC_URL = "jdbc:oracle:thin:@localhost:1521/xe";
-    private static final String USERNAME = "loc";
+    private static final String USERNAME = "dephane";
 
-    private static final String PASSWORD = "basedados";
+    private static final String PASSWORD = "Jusadeagsa59";
 
     public OperacaoAgricolaRegisterController() {
         getOperacaoAgricolaRepository();
@@ -144,18 +144,18 @@ public class OperacaoAgricolaRegisterController {
     }
 
     private void printTableHeader(String[] values) {
-        System.out.printf("%-8s|\t%-8s|\n", values[0], values[1]);
+        System.out.printf("%50s|\t%50s|\n", values[0], values[1]);
         printTableSeparator(2);
     }
 
     private void printTableLine(String[] values) {
-        System.out.printf("%-8s|\t%-8s|\n", values[0], values[1]);
+        System.out.printf("%50s|\t%50s|\n", values[0], values[1]);
         printTableSeparator(2);
     }
 
     private void printTableSeparator(int columnCount) {
         for (int i = 0; i < columnCount; i++) {
-            System.out.print("--------|\t");
+            System.out.printf("%50s|\t", "--------------------------------------------------");
         }
         System.out.println();
     }
