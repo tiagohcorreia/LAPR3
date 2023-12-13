@@ -26,12 +26,9 @@ public class GraphStore {
 
 
     //----------------
-    public MapGraph<Local, Integer> getCloneGraph() {
-        return new MapGraph<>(graph);
-    }
 
     public MapGraph<Local, Integer> removeEdgesAboveAutonomy(double autonomy) {
-        MapGraph<Local, Integer> clone = getCloneGraph();
+        MapGraph<Local, Integer> clone =graph.clone();
         List<Local> list = clone.vertices();
         for (int i = 0; i < clone.numVertices(); i++) {
             for (int j = 0; j < clone.numVertices() - 1; j++) {
@@ -47,7 +44,7 @@ public class GraphStore {
     }
 
     public Distance getFurthestPlaces() {
-        MapGraph<Local, Integer> clone = getCloneGraph();
+        MapGraph<Local, Integer> clone = graph.clone();
         double distance = 0;
         double temp;
         List<Local> list = clone.vertices();
@@ -69,13 +66,6 @@ public class GraphStore {
 
     }
 
-    public double getDistanceBetweenOriginAndDestination(MapGraph graph, LinkedList<Local> shortPath) {
-        Integer sum = 0;
-        for (int i = 0; i < shortPath.size() - 1; i++) {
-            sum += (int) graph.edge(shortPath.get(i), shortPath.get(i + 1)).getWeight();
-        }
-        return sum;
-    }
 
 
     public List<Local> getVehicleChargeStops(MapGraph graph, LinkedList<Local> shortPath, double autonomy) {
@@ -158,8 +148,7 @@ public class GraphStore {
         }
 
         LinkedList<Local> shortPath2 = new LinkedList<>();
-        Algorithms.shortestPath(clone, local1, local2, Integer::compare, Integer::sum, 0, shortPath2);
-        double distanceFromOriginToDestination = getDistanceBetweenOriginAndDestination(clone, shortPath2);
+        double distanceFromOriginToDestination = Algorithms.shortestPath(clone, local1, local2, Integer::compare, Integer::sum, 0, shortPath2);
         List<Local> vehicleChargeStops = getVehicleChargeStops(clone, shortPath2, autonomy);
         List<Distance> distanceBetweenLocals = getDistanceBetweenPairs(clone, shortPath2);
         int vehiclesStops = getNumberOfVehicleStops(clone, shortPath2, autonomy);
@@ -187,8 +176,7 @@ public class GraphStore {
 
         double vehicleAutonomy = autonomy;
 
-        Algorithms.shortestPath(clone, data.getLocal1(), data.getLocal2(), Integer::compare, Integer::sum, 0, shortPath2);
-        double distanceFromOriginToDestination = getDistanceBetweenOriginAndDestination(clone, shortPath2);
+        double distanceFromOriginToDestination =  Algorithms.shortestPath(clone, data.getLocal1(), data.getLocal2(), Integer::compare, Integer::sum, 0, shortPath2);
 
         List<Local> vehicleChargeStops = getVehicleChargeStops(clone, shortPath2, autonomy);
 

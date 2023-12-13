@@ -63,12 +63,6 @@ public class ex03 {
         assertEquals(l1, l2, msg);
     }
 
-    @Test
-    public void testClone() throws IOException {
-        GraphStore storage = new GraphStore();
-        MapGraphLoader.loadGraph("docs\\esinf_data\\locais_big.csv", "docs\\esinf_data\\distancias_big.csv");
-        assertEquals(storage.getGraph(), storage.getCloneGraph());
-    }
 
 
     @Test
@@ -109,7 +103,7 @@ assertEquals("CT4",data.getLocal2().getLocalId());
         storage.clean();
 
         MapGraphLoader.loadGraph("docs\\esinf_data\\locais_small.csv", "docs\\esinf_data\\distancias_small.csv");
-        MapGraph clone = storage.getGraph();
+        MapGraph clone = storage.getGraph().clone();
         LinkedList<Local> shortPath2 = new LinkedList<>();
         Distance data = storage.getFurthestPlaces();
 
@@ -129,7 +123,7 @@ assertEquals("CT4",data.getLocal2().getLocalId());
         storage.clean();
 
         MapGraphLoader.loadGraph("docs\\esinf_data\\locais_small.csv", "docs\\esinf_data\\distancias_small.csv");
-        MapGraph clone = storage.getGraph();
+        MapGraph clone = storage.getGraph().clone();
         LinkedList<Local> shortPath2 = new LinkedList<>();
         Distance data = storage.getFurthestPlaces();
         Algorithms.shortestPath(clone, data.getLocal1(), data.getLocal2(), Integer::compare, Integer::sum, 0, shortPath2);
@@ -147,7 +141,7 @@ assertEquals("CT4",data.getLocal2().getLocalId());
         storage.clean();
 
         MapGraphLoader.loadGraph("docs\\esinf_data\\locais_small.csv", "docs\\esinf_data\\distancias_small.csv");
-        MapGraph clone = storage.getGraph();
+        MapGraph clone = storage.getGraph().clone();
         LinkedList<Local> shortPath2 = new LinkedList<>();
         Distance data = storage.getFurthestPlaces();
         Algorithms.shortestPath(clone, data.getLocal1(), data.getLocal2(), Integer::compare, Integer::sum, 0, shortPath2);
@@ -174,7 +168,7 @@ assertEquals("CT4",data.getLocal2().getLocalId());
         GraphStore storage = new GraphStore();
         storage.clean();
         MapGraphLoader.loadGraph("docs\\esinf_data\\locais_small.csv", "docs\\esinf_data\\distancias_small.csv");
-        MapGraph clone = storage.getGraph();
+        MapGraph clone = storage.getGraph().clone();
         LinkedList<Local> shortPath2 = new LinkedList<>();
         Distance data = storage.getFurthestPlaces();
         Algorithms.shortestPath(clone, data.getLocal1(), data.getLocal2(), Integer::compare, Integer::sum, 0, shortPath2);
@@ -189,7 +183,7 @@ assertEquals("CT4",data.getLocal2().getLocalId());
     public void testNumberOfVehicleStops() throws IOException {
         GraphStore storage = new GraphStore();
         MapGraphLoader.loadGraph("docs\\esinf_data\\locais_small.csv", "docs\\esinf_data\\distancias_small.csv");
-        MapGraph clone = storage.getGraph();
+        MapGraph clone = storage.getGraph().clone();
         LinkedList<Local> shortPath2 = new LinkedList<>();
         Distance data = storage.getFurthestPlaces();
         Algorithms.shortestPath(clone, data.getLocal1(), data.getLocal2(), Integer::compare, Integer::sum, 0, shortPath2);
@@ -207,7 +201,7 @@ assertEquals("CT4",data.getLocal2().getLocalId());
         storage.clean();
 
         MapGraphLoader.loadGraph("docs\\esinf_data\\locais_small.csv", "docs\\esinf_data\\distancias_small.csv");
-        MapGraph clone = storage.getGraph();
+        MapGraph clone = storage.getGraph().clone();
         LinkedList<Local> shortPath2 = new LinkedList<>();
         Distance data = storage.getFurthestPlaces();
         Algorithms.shortestPath(clone, data.getLocal1(), data.getLocal2(), Integer::compare, Integer::sum, 0, shortPath2);
@@ -227,7 +221,7 @@ assertEquals("CT4",data.getLocal2().getLocalId());
         System.out.println(storage.clean());
 
         MapGraphLoader.loadGraph("docs\\esinf_data\\locais_small.csv", "docs\\esinf_data\\distancias_small.csv");
-        MapGraph clone = storage.getGraph();
+        MapGraph clone = storage.getGraph().clone();
         LinkedList<Local> shortPath2 = new LinkedList<>();
         Distance data = storage.getFurthestPlaces();
         Algorithms.shortestPath(clone, data.getLocal1(), data.getLocal2(), Integer::compare, Integer::sum, 0, shortPath2);

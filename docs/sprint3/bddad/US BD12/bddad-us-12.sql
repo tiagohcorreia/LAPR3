@@ -1,10 +1,10 @@
 CREATE OR REPLACE PROCEDURE registrarMonda(
-    p_parcelaId IN NUMBER := NULL,
-    p_variedadeId IN NUMBER := NULL,
-    p_quantidade IN NUMBER := NULL,
-    p_metodoExecucaoId IN NUMBER := NULL,
-    p_fatorProducaoId IN NUMBER := NULL,
-    p_data IN DATE := NULL
+    p_parcelaId NUMBER ,
+    p_variedadeId NUMBER ,
+    p_quantidade  NUMBER ,
+    p_metodoExecucaoId  NUMBER,
+    p_fatorProducaoId  NUMBER ,
+    p_data  DATE
 )
     IS
     v_id Operacao_Agricola.id%TYPE;
