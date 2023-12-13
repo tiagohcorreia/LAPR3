@@ -82,9 +82,6 @@ public class RegaRegisterUI implements Runnable {
 
     private void performRegistration(int index, int operacaoId, RegaTable regaTable, Runnable callback) {
         try {
-            System.out.println("=====================================");
-            System.out.println("Registando Rega");
-            System.out.println("=====================================");
 
             int setorId = regaTable.getSetorId();
             int duracao = regaTable.getDuracao();
@@ -98,7 +95,7 @@ public class RegaRegisterUI implements Runnable {
             System.out.println("\nRega registada na hora local : " + registrationTime);
 
             if (index < controller.getRegaTableList().size() - 1) {
-                Thread.sleep(10000);
+                Thread.sleep(15000);
                 callback.run();
             } else {
                 System.out.println("\nUltima operacao realizada.");

@@ -3,6 +3,7 @@ package ui.funcionalidades;
 import controller.ColheitaRegisterController;
 import controller.FatorProducaoRegisterController;
 import controller.OperacaoAgricolaRegisterController;
+import ui.utils.Utils;
 
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -122,23 +123,23 @@ public class AplicacaoFP_UI implements Runnable {
             } while (!controllerop.isIdValid("FATOR_PRODUCAO", fatorProducaoId));
 
 
-                    List<String[]> data = controllerop.getTableDataByFatorProducaoId("FP_Metodo_Aplicacao", fatorProducaoId);
+            List<String[]> data = controllerop.getTableDataByFatorProducaoId("FP_Metodo_Aplicacao", fatorProducaoId);
 
             if (data.isEmpty()) {
                 System.out.println("Data nao encontrada para o Fator Producao ID.");
             } else {
 
-                controllerop.printTableDataByFatorId("FP_Metodo_Aplicacao", data,fatorProducaoId);
+                controllerop.printTableDataByFatorId("FP_Metodo_Aplicacao", data, fatorProducaoId);
             }
             int metodoAplicacaoId = 0;
             String metodoAplicacaoInput;
 
-                System.out.print("Metodo Aplicacao Id (Insira E para sair): \n");
-                metodoAplicacaoInput = scanner.next().trim();
-                if (metodoAplicacaoInput.equalsIgnoreCase("E")) {
-                    return;
-                }
-                    metodoAplicacaoId = Integer.parseInt(metodoAplicacaoInput);
+            System.out.print("Metodo Aplicacao Id (Insira E para sair): \n");
+            metodoAplicacaoInput = scanner.next().trim();
+            if (metodoAplicacaoInput.equalsIgnoreCase("E")) {
+                return;
+            }
+            metodoAplicacaoId = Integer.parseInt(metodoAplicacaoInput);
 
 
             float quantidade;
@@ -181,19 +182,35 @@ public class AplicacaoFP_UI implements Runnable {
                 }
             }
 
-            if (operacaoId != controllerop.getNextId()){
+            if (operacaoId != controllerop.getNextId()) {
                 System.out.println("Erro: Id operacao ja em uso.");
                 run();
             }
 
-            controllerop.operacaoAgricolaRegister(operacaoId, date);
-            controller.fatorProducaoRegister(operacaoId,parcelaId,variedadeId,fatorProducaoId,metodoAplicacaoId,quantidade,area);
+            System.out.println(" === Dados da Aplicacao FP ===");
+            System.out.println("ID Operacao: " + operacaoId);
+            System.out.println("ID Parcela: " + parcelaId);
+            System.out.println("ID Variedade: " + variedadeId);
+            System.out.println("ID Fator Producao: " + fatorProducaoId);
+            System.out.println("ID Metodo de Aplicacao: " + metodoAplicacaoId);
+            System.out.println("Quantidade: " + quantidade);
+            System.out.println("Area: " + area);
 
-            System.out.println("\nAplicacao FP registada.");
+
+            int optValidation = Utils.readIntegerFromConsole("1-CONFIRMAR\n0-CANCELAR");
+
+            if (optValidation == 1) {
+                controllerop.operacaoAgricolaRegister(operacaoId, date);
+                controller.fatorProducaoRegister(operacaoId, parcelaId, variedadeId,fatorProducaoId,metodoAplicacaoId,quantidade,area);
+                System.out.println("\nAplicacao FP registada.");
+            } else {
+
+                System.out.println("Operação cancelada");
+            }
         } catch (SQLException e) {
 
 
-            System.out.println("\nAplicacao FP nao registada!\n" + e.getMessage());
+            System.out.println("\nAplicacaoFP nao registada!\n" + e.getMessage());
 
         }
     }

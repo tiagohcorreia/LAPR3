@@ -24,39 +24,42 @@ begin
           and fator_producao.tipo_id=tipoFpId
           and Aplicacao_fp.variedade_id = Variedade.id
           and Aplicacao_fp.operacao_id = Operacao_agricola.id
-          and Operacao_agricola.data between dataInferior and dataSuperior;
+          and Operacao_agricola.data between dataInferior and dataSuperior
+    order by Operacao_Agricola.data asc;
     return queryCursor;
 end;
 
-create or replace procedure imprimirAplicacoesFpDentroDeIntervalo(tipoFpId tipo_fp.id%type)
-    is
-    tipoFpNome tipo_fp.tipo%type;
-    data operacao_agricola.data%type;
-    parcelaNome parcela.nome%type;
-    fpNome fator_producao.nome%type;
-    variedadeNome variedade.nome%type;
-    c1 sys_refcursor:=obterAplicacoesFpDentroDeIntervalo(to_date('01-01-2019', 'dd-mm-yyyy'), to_date('06-07-2023', 'dd-mm-yyyy'), tipoFpId);
-begin
-    select tipo into tipoFpNome
-    from tipo_fp tfp
-    where tfp.id = tipoFpId;
+    create or replace procedure imprimirAplicacoesFpDentroDeIntervalo(dataInferior OPERACAO_AGRICOLA.data%type, dataSuperior OPERACAO_AGRICOLA.data%type, tipoFpId tipo_fp.id%type)
+        is
+        tipoFpNome tipo_fp.tipo%type;
+        data operacao_agricola.data%type;
+        parcelaNome parcela.nome%type;
+        fpNome fator_producao.nome%type;
+        variedadeNome variedade.nome%type;
+        c1 sys_refcursor:=obterAplicacoesFpDentroDeIntervalo(dataInferior, dataSuperior, tipoFpId);
+    begin
+        select tipo into tipoFpNome
+        from tipo_fp tfp
+        where tfp.id = tipoFpId;
 
-    dbms_output.put_line('TIPO_FP: ' || tipoFpNome);
-    dbms_output.put_line('------------------------------');
-
-    loop
-        fetch c1 into data, parcelaNome, fpNome, variedadeNome;
-        dbms_output.put_line('DATA_OPERAÇÃO: ' || data);
-        dbms_output.put_line('PARCELA: ' || parcelaNome);
-        dbms_output.put_line('FATOR_PRODUÇÁO: ' || fpNome);
-        dbms_output.put_line('VARIEDADE: ' || variedadeNome);
+        dbms_output.put_line('TIPO_FP: ' || tipoFpNome);
         dbms_output.put_line('------------------------------');
-        exit when c1%notfound;
-    end loop;
-end;
+
+        loop
+            fetch c1 into data, parcelaNome, fpNome, variedadeNome;
+            dbms_output.put_line('DATA_OPERAÇÃO: ' || data);
+            dbms_output.put_line('PARCELA: ' || parcelaNome);
+            dbms_output.put_line('FATOR_PRODUÇÁO: ' || fpNome);
+            dbms_output.put_line('VARIEDADE: ' || variedadeNome);
+            dbms_output.put_line('------------------------------');
+            exit when c1%notfound;
+        end loop;
+    end;
 
 declare
     tipoFpId tipo_fp.id%type:=2;
+    dataInferior OPERACAO_AGRICOLA.data%type:=to_date('01-01-2019', 'dd-mm-yyyy');
+    dataSuperior OPERACAO_AGRICOLA.data%type:=to_date('06-07-2023', 'dd-mm-yyyy');
 begin
-    imprimirAplicacoesFpDentroDeIntervalo(tipoFpId);
+    imprimirAplicacoesFpDentroDeIntervalo(dataInferior, dataSuperior, tipoFpId);
 end;
