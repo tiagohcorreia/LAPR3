@@ -106,3 +106,52 @@ begin
     close c1;
     return 0;
 end;
+
+create or replace function check_if_quantity_is_bigger(parcel_id parcela.id%type,
+                                                       variety_id variedade.id%type,
+                                                       quantity float)
+    return number
+    is
+    other_quantity   float;
+    other_variety_id variedade.id%type;
+    type_of_variety  number := 0; -- 0 for permanent and 1 for temporary
+    cursor c is select variedade_permanente.variedade_id
+                from VARIEDADE_PERMANENTE
+                where variety_id = variedade_permanente.VARIEDADE_ID;
+begin
+
+    OPEN C;
+    if (c%notfound) then
+        type_of_variety := 1;
+    end if;
+
+    CLOSE C;
+
+    if (type_of_variety = 0) then
+        select sum(distinct PLANTACAO_PERMANENTE.quantidade)
+        into other_quantity
+        from parcela,
+             plantacao,
+             PLANTACAO_PERMANENTE,
+             VARIEDADE
+        WHERE PLANTACAO.PARCELA_ID = parcel_id
+          AND PLANTACAO.ID = PLANTACAO_PERMANENTE.PLANTACAO_ID
+          AND PLANTACAO_PERMANENTE.VARIEDADE_PERM_ID = VARIETY_ID;
+    ELSE
+        select sum(distinct PLANTACAO_TEMPORARIA.AREA)
+        into other_quantity
+        from parcela,
+             plantacao,
+             PLANTACAO_TEMPORARIA,
+             VARIEDADE
+        WHERE PLANTACAO.PARCELA_ID = parcel_id
+          AND PLANTACAO.ID = PLANTACAO_TEMPORARIA.PLANTACAO_ID
+          AND PLANTACAO_TEMPORARIA.VARIEDADE_TEMP_ID = VARIETY_ID;
+    end if;
+
+    IF (quantity > other_quantity) THEN
+        RETURN 1;
+    ELSE
+        RETURN 0;
+    end if;
+end;
