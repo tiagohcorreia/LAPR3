@@ -1,0 +1,69 @@
+@startuml
+
+skinparam SequenceMessageAlign center
+
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - US002
+
+autonumber
+
+actor "Gestor Agrícola" as Gestor
+entity "System" as System
+
+activate Gestor
+Gestor -> System : pede para registar uma operação de Aplicacao FP
+activate System
+
+System --> Gestor : pede para inserir a data atual
+deactivate System
+
+Gestor -> System : insere a data atual
+activate System
+
+System --> Gestor : exibe opções de parcelas possíveis e solicita uma seleção
+deactivate System
+
+Gestor -> System : seleciona a parcela
+activate System
+
+System --> Gestor : exibe opções de produtos possíveis e solicita uma seleção
+deactivate System
+
+Gestor -> System : seleciona o variedade
+activate System
+
+System --> Gestor : exibe opções de fator produção possíveis e solicita uma seleção
+deactivate System
+
+Gestor -> System : seleciona a fator produção
+activate System
+
+System --> Gestor : solicita método de aplicacao desejado
+deactivate System
+
+Gestor -> System : fornece id do metode de aplicacao desejado
+activate System
+
+System --> Gestor : solicita a quantidade
+deactivate System
+
+Gestor -> System : insere a quantidade
+activate System
+
+System --> Gestor : solicita a area
+deactivate System
+
+Gestor -> System : insere a area
+activate System
+
+
+System --> Gestor : valida e registra a operação de Aplicacao FP no sistema
+deactivate System
+
+Gestor --> System : confirmação de sucesso no registro
+deactivate Gestor
+
+@enduml
