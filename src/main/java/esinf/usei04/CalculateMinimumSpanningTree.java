@@ -41,8 +41,34 @@ public class CalculateMinimumSpanningTree {
 
                 minimumSpanningTree.addEdge(edge.getVOrig(), edge.getVDest(), edge.getWeight());
                 totalWeight += edge.getWeight();
+                //System.out.println(minimumSpanningTree);
+
+            } else {
+
+                //System.out.println("Skipping edge due to cycle");
             }
         }
         return new ReturnData(minimumSpanningTree, totalWeight);
     }
+
+    /*UnionFind<Local> unionFind = new UnionFind<>(graph.vertices());
+
+            for (Edge<Local, Integer> edge : edgeList) {
+
+                Local vertexOrigRoot = unionFind.find(edge.getVOrig());
+                Local vertexDestRoot = unionFind.find(edge.getVDest());
+
+                //LinkedList<Local> connectedVerteces = Algorithms.DepthFirstSearch(minimumSpanningTree, edge.getVOrig());
+
+                if (!vertexOrigRoot.equals(vertexDestRoot)) {
+                    System.out.println("Adding edge: " + edge.getVOrig() + " - " + edge.getVDest());
+                    minimumSpanningTree.addEdge(edge.getVOrig(), edge.getVDest(), edge.getWeight());
+                    totalWeight += edge.getWeight();
+                    unionFind.union(vertexOrigRoot, vertexDestRoot);
+                } else {
+                    System.out.println("Skipping edge due to cycle.");
+                }
+            }
+            return new ReturnData(minimumSpanningTree, totalWeight);
+        }*/
 }

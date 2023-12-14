@@ -45,6 +45,7 @@ class CalculateMinimumSpanningTreeTest {
         int expeted = 16;
         int result = CalculateMinimumSpanningTree.calculateMinimumSpanningTreeWithKruskal(graph).getGraph().numEdges();
 
+        System.out.println(CalculateMinimumSpanningTree.calculateMinimumSpanningTreeWithKruskal(graph));
         assertEquals(expeted, result);
     }
 
