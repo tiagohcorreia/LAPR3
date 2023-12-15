@@ -1,0 +1,65 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+
+package ui.funcionalidades {
+    class ChargingRoutePlannerUI {
+        - controller: ChargingRoutePlannerController
+        - controllerLoc: LocationController
+        --
+        + ChargingRoutePlannerUI()
+        + run(): void
+    }
+}
+
+package controller {
+    class ChargingRoutePlannerController {
+        - planChargingRoute(vehicleId: int, autonomy: float): void
+    }
+
+    class LocationController {
+        - getLocations(): void
+        - getDistance(location1: String, location2: String): float
+        - getChargingLocations(): void
+        + determineMinimumRoute(locations: List<String>, autonomy: float): void
+    }
+}
+
+package ui.utils {
+    class ConsoleUtils {
+        + readIntegerFromConsole(prompt: String): int
+        + readFloatFromConsole(prompt: String): float
+    }
+}
+
+class ChargingRoutePlannerUI {
+    - controller: ChargingRoutePlannerController
+    - controllerLoc: LocationController
+    --
+    + ChargingRoutePlannerUI() : void
+    + run(): void
+}
+
+class ChargingRoutePlannerController {
+    - planChargingRoute(vehicleId: int, autonomy: float): void
+}
+
+class LocationController {
+    - getLocations(): void
+    - getDistance(location1: String, location2: String): float
+    - getChargingLocations(): void
+    + determineMinimumRoute(locations: List<String>, autonomy: float): void
+}
+
+class ConsoleUtils {
+    + readIntegerFromConsole(prompt: String): int
+    + readFloatFromConsole(prompt: String): float
+}
+
+ChargingRoutePlannerUI --> ChargingRoutePlannerController
+ChargingRoutePlannerUI --> LocationController
+ChargingRoutePlannerController --> LocationController
+ChargingRoutePlannerUI --> ConsoleUtils
+@enduml

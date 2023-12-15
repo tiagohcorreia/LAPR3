@@ -5,18 +5,18 @@ skinparam shadowing false
 skinparam linetype polyline
 
 package ui.funcionalidades {
-    class MondaRegisterUI {
-        - controller: MondaRegisterController
+    class AplicacaoFPRegisterUI {
+        - controller: AplicacaoFPRegisterController
         - controllerop: OperacaoAgricolaRegisterController
         --
-        + MondaRegisterUI()
+        + AplicacaoFPRegisterUI()
         + run(): void
     }
 }
 
 package controller {
-    class MondaRegisterController {
-        - mondaRegister(operacaoId: int, parcelaId: int, variedadeId: int, fatorProducaoId: int, metodoExecucaoId: int, quantidade: float): void
+    class AplicacaoFPRegisterController {
+        - AplicacaoFPRegister(operacaoId: int, parcelaId: int, variedadeId: int,fatorProducaoId : int, metodoAplicacaoId: int, quantidade: float): void
     }
 
     class OperacaoAgricolaRegisterController {
@@ -35,16 +35,16 @@ package ui.utils {
     }
 }
 
-class MondaRegisterUI {
-    - controller: MondaRegisterController
+class AplicacaoFPRegisterUI {
+    - controller: AplicacaoFPRegisterController
     - controllerop: OperacaoAgricolaRegisterController
     --
-    + MondaRegisterUI() : void
+    + AplicacaoFPRegisterUI() : void
     + run(): void
 }
 
-class MondaRegisterController {
-    - mondaRegister(operacaoId: int, parcelaId: int, variedadeId: int, fatorProducaoId: int, metodoExecucaoId: int, quantidade: float): void
+class AplicacaoFPRegisterController {
+    - AplicacaoFPRegister(operacaoId: int, parcelaId: int, variedadeId: int, fatorProducaoId: int, metodoExecucaoId: int, quantidade: float,area : float): void
 }
 
 class OperacaoAgricolaRegisterController {
@@ -59,8 +59,8 @@ class Utils {
     + readIntegerFromConsole(prompt: String): int
     + readFloatFromConsole(prompt: String): float
 }
-MondaRegisterUI --> MondaRegisterController
-MondaRegisterUI --> OperacaoAgricolaRegisterController
-MondaRegisterController --> OperacaoAgricolaRegisterController
-MondaRegisterUI --> Utils
+AplicacaoFPRegisterUI --> AplicacaoFPRegisterController
+AplicacaoFPRegisterUI --> OperacaoAgricolaRegisterController
+AplicacaoFPRegisterController --> OperacaoAgricolaRegisterController
+AplicacaoFPRegisterUI --> Utils
 @enduml

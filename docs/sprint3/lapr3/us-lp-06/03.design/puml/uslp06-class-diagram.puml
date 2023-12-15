@@ -5,18 +5,18 @@ skinparam shadowing false
 skinparam linetype polyline
 
 package ui.funcionalidades {
-    class MondaRegisterUI {
-        - controller: MondaRegisterController
+    class ColheitaRegisterUI {
+        - controller: ColheitaRegisterController
         - controllerop: OperacaoAgricolaRegisterController
         --
-        + MondaRegisterUI()
+        + ColheitaRegisterUI()
         + run(): void
     }
 }
 
 package controller {
-    class MondaRegisterController {
-        - mondaRegister(operacaoId: int, parcelaId: int, variedadeId: int, fatorProducaoId: int, metodoExecucaoId: int, quantidade: float): void
+    class ColheitaRegisterController {
+        - colheitaRegister(operacaoId: int, parcelaId: int, produtoId: int, metodoExecucaoId: int, quantidade: float): void
     }
 
     class OperacaoAgricolaRegisterController {
@@ -35,16 +35,16 @@ package ui.utils {
     }
 }
 
-class MondaRegisterUI {
-    - controller: MondaRegisterController
+class ColheitaRegisterUI {
+    - controller: ColheitaRegisterController
     - controllerop: OperacaoAgricolaRegisterController
     --
-    + MondaRegisterUI() : void
+    + ColheitaRegisterUI() : void
     + run(): void
 }
 
-class MondaRegisterController {
-    - mondaRegister(operacaoId: int, parcelaId: int, variedadeId: int, fatorProducaoId: int, metodoExecucaoId: int, quantidade: float): void
+class ColheitaRegisterController {
+    - ColheitaRegister(operacaoId: int, parcelaId: int, variedadeId: int, fatorProducaoId: int, metodoExecucaoId: int, quantidade: float): void
 }
 
 class OperacaoAgricolaRegisterController {
@@ -59,8 +59,8 @@ class Utils {
     + readIntegerFromConsole(prompt: String): int
     + readFloatFromConsole(prompt: String): float
 }
-MondaRegisterUI --> MondaRegisterController
-MondaRegisterUI --> OperacaoAgricolaRegisterController
-MondaRegisterController --> OperacaoAgricolaRegisterController
-MondaRegisterUI --> Utils
+ColheitaRegisterUI --> ColheitaRegisterController
+ColheitaRegisterUI --> OperacaoAgricolaRegisterController
+ColheitaRegisterController --> OperacaoAgricolaRegisterController
+ColheitaRegisterUI --> Utils
 @enduml

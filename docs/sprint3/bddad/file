@@ -1,0 +1,52 @@
+select sum(distinct PLANTACAO_TEMPORARIA.AREA)
+from parcela,
+     plantacao,
+     PLANTACAO_TEMPORARIA,
+     VARIEDADE
+WHERE PLANTACAO.PARCELA_ID = 103
+  AND PLANTACAO.ID = PLANTACAO_TEMPORARIA.PLANTACAO_ID
+  AND PLANTACAO_TEMPORARIA.VARIEDADE_TEMP_ID = 82;
+-- resultado 1.2
+
+select sum(distinct PLANTACAO_PERMANENTE.quantidade)
+from parcela,
+     plantacao,
+     PLANTACAO_PERMANENTE,
+     VARIEDADE
+WHERE PLANTACAO.PARCELA_ID = 104
+  AND PLANTACAO.ID = PLANTACAO_PERMANENTE.PLANTACAO_ID
+  AND PLANTACAO_PERMANENTE.VARIEDADE_PERM_ID = 48;
+-- resultado 70
+
+
+select DISTINCT variedade.id, variedade.nome, plantacao_temporaria.area
+from plantacao_temporaria,
+     parcela,
+     plantacao,
+     VARIEDADE
+where 103 = plantacao.PARCELA_ID
+  and plantacao.id = plantacao_temporaria.PLANTACAO_ID
+  and plantacao_temporaria.VARIEDADE_TEMP_ID = VARIEDADE.ID;
+
+select distinct parcela.id, parcela.nome, VARIEDADE.nome, variedade.id
+from parcela,
+     variedade,
+     plantacao,
+     PLANTACAO_PERMANENTE,
+     PLANTACAO_TEMPORARIA
+where 108 = plantacao.parcela_id
+  and ((PLANTACAO.id = PLANTACAO_PERMANENTE.PLANTACAO_ID and PLANTACAO_PERMANENTE.VARIEDADE_PERM_ID = variedade.id)
+    or (PLANTACAO.id = PLANTACAO_TEMPORARIA.PLANTACAO_ID and PLANTACAO_TEMPORARIA.VARIEDADE_temp_ID = variedade.id))
+order by parcela.id;
+
+declare
+    parcel_id  parcela.id%type   := 104;
+    variety_id variedade.id%type := 48;
+    quantity float:=60;
+begin
+    if (check_if_quantity_is_bigger(parcel_id, variety_id, quantity) > 0) then
+        dbms_output.PUT_LINE('is bigger');
+    else
+        dbms_output.PUT_LINE('is not bigger');
+    end if;
+end;

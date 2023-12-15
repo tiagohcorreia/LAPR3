@@ -56,7 +56,7 @@ BEGIN
             NULL;
         END LOOP;
 
-    IF SQL%NOTFOUND THEN
+    IF SQL%NOTFOUND THENMETODO_DISPENSASAO
         RAISE produto_nao_existe;
     END IF;
 

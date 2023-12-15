@@ -1,10 +1,10 @@
 CREATE OR REPLACE PROCEDURE registrarMonda(
-    p_parcelaId IN NUMBER := NULL,
-    p_variedadeId IN NUMBER := NULL,
-    p_quantidade IN NUMBER := NULL,
-    p_metodoExecucaoId IN NUMBER := NULL,
-    p_fatorProducaoId IN NUMBER := NULL,
-    p_data IN DATE := NULL
+    p_parcelaId  NUMBER ,
+    p_variedadeId  NUMBER ,
+    p_quantidade  float ,
+    p_metodoExecucaoId  NUMBER ,
+    p_fatorProducaoId  NUMBER ,
+    p_data  DATE
 )
     IS
     v_id Operacao_Agricola.id%TYPE;
@@ -63,4 +63,32 @@ EXCEPTION
     WHEN fator_producao_nao_existe THEN
         DBMS_OUTPUT.put_line('O fator de produção especificado não está registrada na base de dados');
 END;
+
+-- caso sucesso
+-- Registar uma operação de monda no Campo novo, em 08/09/2023, na plantação de cenouras Danvers Half Long, 0.5 ha
+declare
+    p_parcelaId        NUMBER := 108;
+    p_variedadeId      NUMBER := 75;
+    p_quantidade       NUMBER := 0.5;
+    p_metodoExecucaoId NUMBER := NULL;
+    p_fatorProducaoId  NUMBER := NULL;
+    p_data             DATE   := to_date('08-09-2023', 'dd-mm-yyyy');
+begin
+    registrarMonda(p_parcelaId, p_variedadeId, p_quantidade, p_metodoExecucaoId, p_fatorProducaoId, p_data);
+end;
+
+
+-- caso insucesso
+-- Registar uma operação de monda no Campo novo, em 11/10/2023, na plantação de cenouras Danvers Half Long, 0.5 ha
+declare
+    p_parcelaId        NUMBER := 108;
+    p_variedadeId      NUMBER := 75;
+    p_quantidade       NUMBER := 0.5;
+    p_metodoExecucaoId NUMBER := NULL;
+    p_fatorProducaoId  NUMBER := NULL;
+    p_data             DATE   := to_date('11-10-2023', 'dd-mm-yyyy');
+begin
+    registrarMonda(p_parcelaId, p_variedadeId, p_quantidade, p_metodoExecucaoId, p_fatorProducaoId, p_data);
+end;
+
 

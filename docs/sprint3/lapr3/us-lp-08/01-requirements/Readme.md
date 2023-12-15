@@ -1,4 +1,4 @@
-# US 008 - Evocação da USBD15
+# US LP08 - REGISTRAR PODA
 
 ## 1. Requisitos
 
@@ -6,10 +6,11 @@
 ### 1.1. Descrição da US
 
 
-Como Product Owner, pretendo que sejam desenvolvidas funcionalidades que permitam a evocação da USBD15.
+Como Product Owner, pretendo que sejam desenvolvidas funcionalidades que permitam a evocação da USBD15: "Como Gestor Agrícola, desejo registrar uma operação de poda".
 
 
-### 1.2. Especificações e especificações do Product Owner
+
+### 1.2. Especificações e esclarecimentos do Product Owner:
 
 
 **Do documento de especificações:**
@@ -32,61 +33,45 @@ Como Product Owner, pretendo que sejam desenvolvidas funcionalidades que permita
 >
 >**Resposta:** A indicação dos períodos previstos diz respeito à realização de operações agrícolas (por exemplo, poda) e estado fenológico das plantas (por exemplo, floração). As operações agrícolas e estados fenológicos estão intimamente ligados e é importante a sua compreensão para a construção/actualização adequada dos artefactos que capturam a informação do domínio do problema. No entanto, são as USs que determinam a necessidade de modelar estes aspectos nos diferentes níveis de abstracção (conceptual, lógico, ...), enquanto não forem necessários em qualquer US, podem ser considerados "informativos".
 
-
-### 1.3. Acceptance Criteria
-
-* **AC1:** All required data are mandatory, except number of bathrooms, available equipment, and sun exposure
-* **AC2:** Only alphanumeric characters and diacritics (accents) are allowed for street adress.
-* **AC3:** Zipcode, area, distance from city center, number of bedrooms, number of bathroooms, number of parking spaces, price and comission value must be integer numbers. 
-* **AC4:** The comission percentage must be a non-negative number.
-
-
-### 1.4. Found out Dependencies
-
-* None
-
-### 1.5 Input and Output Data
-
-
-**Input Data:**
-
->* **Typed data:**
->  * area in m2
->  * distance from the city center
->  * street adress
->  * zipcode
->  * price
->  * comission (value/percentage)
->  * Additional data for Apartments and Houses:
->    * number of bedrooms
->    * number of bathrooms
->    * number of parking spaces
+>**Questão**: Dentre as seguintes operações agrícolas: poda, tutoramento e desfolha, alguma delas é específica de culturas permanentes ou temporárias?
 >
+>**Resposta**: O cliente não conhece todas as culturas para responder taxativamente a essa questão. Embora algumas das operações sejam mais comuns num tipo ou outro, creio que será mais prudente assumir que as operações são válidas para ambos os tipos.
+
+### 1.3. Critérios de aceitação
+
+* **AC1:** A parcela em que foi feita poda deve existir no sistema
+* **AC2:** A variedade em que foi feita a poda deve estar registada no sistemad
+* **AC3:** A variedade em que foi feita a poda deve existir na parcela 
+* **AC4:** Não é permitido o registo de operações com datas no futuro
+
+
+### 1.4. Dependências identificadas
+
+* **USBD15** - Como Gestor Agrícola, desejo registrar uma operação de poda.
+
+
+### 1.5 Dados de entrada e de saída
+
+**Inputs:**
+
+>* **Dados introduzidos:**
+>  * quantidade tratada na poda
+>  * data da operação
 >
->* **Selected data:**
->  * type of business (sale/lease)
->  * type of property
->  * property state
->  * property district
->  * property city
->  * type of comission (amount/percentage)
->  * Additional data for Apartments and Houses:
->    * existence of central heating
->    * existence of air conditianing
->  * Additional data for Houses exclusively:
->    * existence of basement
->    * existence of inhabitable loft
->    * direction of sun exposure
+> 
+>* **Dados selecionados:**
+>  * id da parcela
+>  * id da variedade
+>  * id do método de execução
 
-**Output Data:**
+**Outputs:**
 
-* Summary of the inputted data
-* Success/Insucess of submission
+* Sucesso/insucesso da operação
 
 ### 1.6. System Sequence Diagram (SSD)
 
-![System Sequence Diagram](svg/us02-system-sequence-diagram.svg)
+![System Sequence Diagram](svg/us-lp-08-ssd.svg)
 
-### 1.7 Other Relevant Remarks
+### 1.7 Observações relevantes
 
-None.
+Nenhuma.

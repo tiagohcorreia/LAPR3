@@ -1,0 +1,105 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+actor "User" as User
+participant "RegaRegisterUI" as UI
+participant "RegaRegisterController" as Controller
+database "RegaRepository" as Repository
+participant "OperacaoAgricolaRegisterController" as OperacaoController
+participant "MainMenuUI" as MainMenu
+
+User -> UI: run()
+activate UI
+UI -> Controller: create RegaRegisterController
+activate Controller
+deactivate UI
+Controller -> Repository: getRegaRepository()
+activate Repository
+Repository --> Controller: regaRepository
+deactivate Repository
+deactivate Controller
+
+
+UI -> Controller: readCSV(filePath)
+activate UI
+activate Controller
+deactivate UI
+Controller -> Repository: regaRepository.readCSV(filePath)
+activate Repository
+Repository --> Controller: regaTableList
+deactivate Repository
+deactivate Controller
+activate UI
+UI -> UI: registerNextOperation(0)
+
+
+
+UI -> Controller: getRegaTableList()
+activate Controller
+Controller --> UI: regaTableList
+deactivate Controller
+
+UI -> UI: registerRegaOperation(0)
+
+
+UI -> Controller: getRegaTable(0)
+activate Controller
+Controller --> UI: regaTable
+deactivate Controller
+
+UI -> Controller: getEndTime()
+activate Controller
+Controller --> UI: endTime
+deactivate Controller
+
+UI -> UI: registerRegaOperation(0)
+
+
+UI -> Controller: getNextId()
+activate Controller
+Controller --> OperacaoController: getNextId()
+activate OperacaoController
+OperacaoController --> Controller: operacaoId
+deactivate OperacaoController
+deactivate Controller
+
+UI -> UI: registerRegaOperation(0)
+
+
+UI -> Controller: operacaoAgricolaRegister(operacaoId, date)
+activate Controller
+Controller --> OperacaoController: operacaoAgricolaRegister(operacaoId, date)
+activate OperacaoController
+OperacaoController --> Controller: true
+deactivate OperacaoController
+deactivate Controller
+
+UI -> Controller: regaRegister(operacaoId, setorId, duracao, hora)
+activate Controller
+Controller --> Repository: regaRepository.regaRegister(operacaoId, setorId, duracao, hora)
+activate Repository
+Repository --> Controller: true
+deactivate Repository
+deactivate Controller
+
+
+
+UI -> Controller: regaRegister(operacaoId, setorId, duracao, hora)
+activate Controller
+Controller --> Repository: regaRepository.regaRegister(operacaoId, setorId, duracao, hora)
+activate Repository
+Repository --> Controller: true
+deactivate Repository
+deactivate Controller
+
+UI -> UI: get registrationTime
+UI -> MainMenu: create MainMenuUI
+activate MainMenu
+MainMenu -> MainMenu: display main menu
+deactivate MainMenu
+UI -> MainMenu: return control
+deactivate UI
+
+@enduml
