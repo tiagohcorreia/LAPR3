@@ -97,7 +97,7 @@ declare
     metodoAplicacaoId number                       := 7;
     area              aplicacao_fp.area%TYPE       := 2.1;
     fatorProducaoId   number                       := 12;
-    data              date                         := to_date('2023-10-06', 'yyyy-mm-dd');
+    data              date                         := to_date('2023-10-08', 'yyyy-mm-dd');
     result            number;
 begin
     result := registrar_Aplicacao_FP(parcelaId, variedadeId, quantidade, metodoAplicacaoId, area,

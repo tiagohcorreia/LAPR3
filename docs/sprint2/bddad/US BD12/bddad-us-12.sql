@@ -77,6 +77,7 @@ begin
     registrarMonda(p_parcelaId, p_variedadeId, p_quantidade, p_metodoExecucaoId, p_fatorProducaoId, p_data);
 end;
 
+
 -- caso insucesso
 -- Registar uma operação de monda no Campo novo, em 11/10/2023, na plantação de cenouras Danvers Half Long, 0.5 ha
 declare
@@ -85,7 +86,7 @@ declare
     p_quantidade       NUMBER := 0.5;
     p_metodoExecucaoId NUMBER := NULL;
     p_fatorProducaoId  NUMBER := NULL;
-    p_data             DATE   := to_date('11-09-2023', 'dd-mm-yyyy');
+    p_data             DATE   := to_date('11-10-2023', 'dd-mm-yyyy');
 begin
     registrarMonda(p_parcelaId, p_variedadeId, p_quantidade, p_metodoExecucaoId, p_fatorProducaoId, p_data);
 end;

@@ -98,10 +98,10 @@ END;
 DECLARE
     operationSuccess NUMBER;
     parcela_id NUMBER := 106;
-    variedade_id NUMBER := 93;
+    variedade_id NUMBER := 84;
     data_operacao DATE := TO_DATE('2023-09-20', 'YYYY-MM-DD');
-    quantidade FLOAT := 1.2;
-    area FLOAT := 0.5;
+    quantidade FLOAT := 0.9;
+    area FLOAT := 0.3;
     metodo_execucao_id NUMBER := NULL;
 
 BEGIN
@@ -123,7 +123,7 @@ END;
 DECLARE
     operationSuccess NUMBER;
     parcela_id NUMBER := 108;
-    variedade_id NUMBER := 93;
+    variedade_id NUMBER := 84;
     data_operacao DATE := TO_DATE('2023-09-19', 'YYYY-MM-DD');
     quantidade FLOAT := 1.8;
     area FLOAT := 0.75;
