@@ -1,7 +1,7 @@
 package ui.menu;
 
 import ui.*;
-import ui.funcionalidades.ColheitaUI;
+import ui.funcionalidades.ColheitaRegisterUI;
 import ui.funcionalidades.EstadoRegaUI;
 import ui.funcionalidades.SimularSistemaRegaUI;
 import ui.utils.ChooseRoleUI;

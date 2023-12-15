@@ -1,11 +1,11 @@
 CREATE OR REPLACE PROCEDURE registrarAplicacaoFatorProducao(
-    p_parcelaId IN NUMBER := NULL,
-    p_variedadeId IN NUMBER := NULL,
-    p_quantidade IN NUMBER := NULL,
-    p_metodoAplicacaoId IN NUMBER := NULL,
-    p_area IN NUMBER := NULL,
-    p_fatorProducaoId IN NUMBER := NULL,
-    p_data IN DATE := NULL
+    p_parcelaId  NUMBER ,
+    p_variedadeId  NUMBER ,
+    p_quantidade  NUMBER,
+    p_metodoAplicacaoId  NUMBER ,
+    p_area APLICACAO_FP.AREA%TYPE ,
+    p_fatorProducaoId  NUMBER ,
+    p_data DATE
 )
     IS
     p_operacaoId Operacao_Agricola.id%TYPE;
@@ -64,3 +64,24 @@ EXCEPTION
     WHEN fator_producao_nao_existe THEN
         DBMS_OUTPUT.put_line('O fator de produção especificado não está registrado na base de dados');
 END;
+
+
+
+
+--SUCESSO
+DECLARE
+    PARCELAID PARCELA.ID%type:=108;
+    VARIEDADEID VARIEDADE.ID%type:=NULL;
+    METODODEAPLICACAOID METODO_APLICACAO.ID%type:=7;
+    FATORPRODUCAOID FATOR_PRODUCAO.ID%type:=12;
+    QUANTIDADE MONDA.QUANTIDADE%type:=4000;
+    AREA APLICACAO_FP.AREA%type:=1.1;
+
+    DATA DATE:=TO_DATE('06/10/2023', 'dd/mm/yyyy');
+BEGIN
+    registrarAplicacaoFatorProducao(PARCELAID,VARIEDADEID,QUANTIDADE,METODODEAPLICACAOID,AREA,FATORPRODUCAOID,DATA);
+end;
+
+--INSUCESSO
+
+

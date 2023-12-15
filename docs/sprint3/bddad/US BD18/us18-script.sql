@@ -7,9 +7,9 @@
 --Parcela e tipo estão implícitos, mas também podem ser incluídos.
 
 CREATE OR REPLACE FUNCTION obterOperacoesPorParcela(
-    p_parcela_id IN NUMBER, --Substituir pelos valores pedidos
-    p_data_inicio IN DATE,  --Substituir pelos valores pedidos
-    p_data_fim IN DATE      --Substituir pelos valores pedidos
+    p_parcela_id IN NUMBER:=108, --Substituir pelos valores pedidos
+    p_data_inicio IN DATE:=TO_DATE('2023-07-01', 'YYYY-MM-DD'),  --Substituir pelos valores pedidos
+    p_data_fim IN DATE :=TO_DATE('2023-10-02', 'YYYY-MM-DD')     --Substituir pelos valores pedidos
 )
 RETURN SYS_REFCURSOR
 

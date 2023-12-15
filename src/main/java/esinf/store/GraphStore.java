@@ -48,23 +48,18 @@ public class GraphStore {
         double distance = 0;
         double temp;
         List<Local> list = clone.vertices();
+        List<Local> listOfNeighbours = clone.vertices();
+
         Distance data = null;
         for (int i = 0; i < list.size(); i++) {
-            for (int j = 0; j < list.size() - 1; j++) {
-                if (list.get(i) != null && list.get(j) != null) {
-                    Local lcl1 = list.get(i);
-                    Local lcl2 = list.get(j);
-                    temp = lcl1.getGps().getDistance(lcl2.getGps());
-                    if (temp > distance) {
-                        distance = temp;
-                        data = new Distance(lcl1, lcl2, distance);
-                    }
-                }
-            }
+
+
         }
         return data;
 
     }
+
+   // public ArrayList<Local> checkFurthest(List<>) {
 
 
 

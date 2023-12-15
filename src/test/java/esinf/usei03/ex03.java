@@ -126,10 +126,10 @@ assertEquals("CT4",data.getLocal2().getLocalId());
         MapGraph clone = storage.getGraph().clone();
         LinkedList<Local> shortPath2 = new LinkedList<>();
         Distance data = storage.getFurthestPlaces();
-        Algorithms.shortestPath(clone, data.getLocal1(), data.getLocal2(), Integer::compare, Integer::sum, 0, shortPath2);
+        double distance =  Algorithms.shortestPath(clone, data.getLocal1(), data.getLocal2(), Integer::compare, Integer::sum, 0, shortPath2);
 
         int expected = 604469;
-        double distance = storage.getDistanceBetweenOriginAndDestination(clone, shortPath2);
+
         assertEquals(expected, distance);
 
 

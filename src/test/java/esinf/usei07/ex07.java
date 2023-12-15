@@ -22,10 +22,10 @@ public class ex07 {
 
         GraphStore storage = new GraphStore();
         storage.clean();
-
         System.out.println(storage.clean());
 
         MapGraphLoader.loadGraph("docs\\esinf_data\\locais_small.csv", "docs\\esinf_data\\distancias_small.csv");
+
         MapGraph clone = storage.getGraph().clone();
         LinkedList<Local> shortPath2 = new LinkedList<>();
         Distance data = storage.getFurthestPlaces();
