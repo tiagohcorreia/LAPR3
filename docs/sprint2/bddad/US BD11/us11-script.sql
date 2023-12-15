@@ -51,14 +51,21 @@ BEGIN
 
     -- Verificar se Variedade esta dentro de parcela
     IF CHECKIFVARIETYISINPARCEL(parcelaId, variedadeId) = 0 THEN
+        DBMS_OUTPUT.put_line('Variedade não existe na parcela especificada.');
         return returnValue; -- 0 Não Sucesso
+    END IF;
+
+    -- Verificar se area maior que area da parcela
+    IF CHECK_IF_AREA_IS_GREATER_THEN_PARCEL(parcelaId, area_v) = 1 THEN
+        DBMS_OUTPUT.put_line('Area especificada maior que area da parcela.');
+        RETURN returnValue;
     end if;
 
-    -- Verificar se metodo de execução existe
-    IF CHECKIFMETODOEXECUCAOEXISTS(metodo_execucao_id) = 0 THEN
-        DBMS_OUTPUT.put_line('Método de Execução especificado não existe na base de dados');
+    --Verificar se quantidade maior
+    IF CHECK_IF_QUANTITY_IS_BIGGER(parcelaId, variedadeId, quantidade_v) = 1 THEN
+        DBMS_OUTPUT.put_line('Quantidade inválida');
         RETURN returnValue;
-    END IF;
+    end if;
 
 -----------------------------------------------------------------------------------------------------------------------
 
@@ -85,13 +92,21 @@ END;
 
 -----------------------------------------------------------------------------------------------------------------------
 
+--Caso de Sucesso
 --Registar uma operação de semeadura na Horta Nova, em 20/09/2023, de Nabo greleiro Senhora Conceição, 0.5 ha, 1.2 kg de semente
 
 DECLARE
     operationSuccess NUMBER;
+    parcela_id NUMBER := 106;
+    variedade_id NUMBER := 93;
+    data_operacao DATE := TO_DATE('2023-09-20', 'YYYY-MM-DD');
+    quantidade FLOAT := 1.2;
+    area FLOAT := 0.5;
+    metodo_execucao_id NUMBER := NULL;
+
 BEGIN
 
-    operationSuccess := registarSementeira(106, 93, TO_DATE('2023-09-20', 'YYYY-MM-DD'), 1.2, 0.5, NULL);
+    operationSuccess := registarSementeira(parcela_id, variedade_id, data_operacao, quantidade, area, metodo_execucao_id);
 
     IF (operationSuccess = 1) THEN
         DBMS_OUTPUT.put_line('Sementeira registrada com sucesso.');
@@ -102,13 +117,20 @@ END;
 
 -----------------------------------------------------------------------------------------------------------------------
 
+--Caso de Não Sucesso
 --Registar uma operação de semeadura no Campo Novo, em 19/09/2023, de Nabo greleiro Senhora Conceição, 0.75 ha, 1.8 kg de semente
 
 DECLARE
     operationSuccess NUMBER;
+    parcela_id NUMBER := 108;
+    variedade_id NUMBER := 93;
+    data_operacao DATE := TO_DATE('2023-09-19', 'YYYY-MM-DD');
+    quantidade FLOAT := 1.8;
+    area FLOAT := 0.75;
+    metodo_execucao_id NUMBER := NULL;
 BEGIN
 
-    operationSuccess := registarSementeira(108, 93, TO_DATE('2023-09-19', 'YYYY-MM-DD'), 1.8, 0.75, NULL);
+    operationSuccess := registarSementeira(parcela_id, variedade_id, data_operacao, quantidade, area, metodo_execucao_id);
 
     IF (operationSuccess = 1) THEN
         DBMS_OUTPUT.put_line('Sementeira registrada com sucesso.');
@@ -117,5 +139,5 @@ BEGIN
     END IF;
 END;
 
-----------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------
 
