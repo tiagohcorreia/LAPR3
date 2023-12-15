@@ -3,6 +3,7 @@ package ui.funcionalidades;
 import controller.ColheitaRegisterController;
 import controller.OperacaoAgricolaRegisterController;
 import controller.PodaRegisterController;
+import ui.utils.Utils;
 
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -151,10 +152,23 @@ public class PodaRegisterUI implements Runnable {
                 run();
             }
 
-            controllerop.operacaoAgricolaRegister(operacaoId, date);
-            controller.podaRegister(operacaoId, parcelaId, variedadeId, quantidade, metodoExecucaoId);
+            System.out.println(" === Dados da Poda ===");
+            System.out.println("ID Operacao: " + operacaoId);
+            System.out.println("ID Parcela: " + parcelaId);
+            System.out.println("ID Variedade: " + variedadeId);
+            System.out.println("Quantidade: " + quantidade);
+            System.out.println("ID Metodo de Aplicacao: " + metodoExecucaoId);
 
-            System.out.println("\nPoda registada.");
+            int optValidation = Utils.readIntegerFromConsole("1-CONFIRMAR\n0-CANCELAR");
+
+            if (optValidation == 1) {
+                controllerop.operacaoAgricolaRegister(operacaoId, date);
+                controller.podaRegister(operacaoId, parcelaId, variedadeId, quantidade, metodoExecucaoId);
+
+            System.out.println("\nPoda registada."); }
+            else{
+                System.out.println("Operação cancelada");
+            }
         } catch (SQLException e) {
 
 

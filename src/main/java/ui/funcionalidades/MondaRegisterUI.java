@@ -157,10 +157,26 @@ public class MondaRegisterUI implements Runnable {
                 run();
             }
 
-            controllerop.operacaoAgricolaRegister(operacaoId, date);
-            controller.mondaRegister(operacaoId, parcelaId, variedadeId,fatorProducaoId, metodoExecucaoId, quantidade);
+            System.out.println(" === Dados da Monda ===");
+            System.out.println("ID Operacao: " + operacaoId);
+            System.out.println("ID Parcela: " + parcelaId);
+            System.out.println("ID Variedade: " + variedadeId);
+            System.out.println("ID Fator Producao: " + fatorProducaoId);
+            System.out.println("ID Metodo de Aplicacao: " + metodoExecucaoId);
+            System.out.println("Quantidade: " + quantidade);
 
-            System.out.println("\nMonda registada.");
+
+            int optValidation = Utils.readIntegerFromConsole("1-CONFIRMAR\n0-CANCELAR");
+
+            if (optValidation == 1) {
+                controllerop.operacaoAgricolaRegister(operacaoId, date);
+                controller.mondaRegister(operacaoId, parcelaId, variedadeId, fatorProducaoId, metodoExecucaoId, quantidade);
+
+                System.out.println("\nMonda registada.");
+            } else {
+                System.out.println("Operação cancelada");
+            }
+
 
         } catch (SQLException e) {
 
