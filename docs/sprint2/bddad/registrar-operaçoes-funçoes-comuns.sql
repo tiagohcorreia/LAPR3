@@ -132,8 +132,8 @@ create or replace function check_if_quantity_is_bigger(parcel_id parcela.id%type
                                                        quantity float)
     return number
     is
-    other_quantity   float;
-    type_of_variety  number := 0; -- 0 for permanent and 1 for temporary
+    other_quantity  float;
+    type_of_variety number := 0; -- 0 for permanent and 1 for temporary
     cursor c is select variedade_permanente.variedade_id
                 from VARIEDADE_PERMANENTE
                 where variety_id = variedade_permanente.VARIEDADE_ID;
@@ -173,4 +173,22 @@ begin
     ELSE
         RETURN 0;
     end if;
+end;
+
+create or replace function check_if_area_is_greater_then_parcel(parcel_id parcela.id%type,
+                                                                other_area parcela.area%type)
+    return number
+    is
+    parcel_area parcela.area%type;
+begin
+    select area
+    into parcel_area
+    from parcela
+    where parcela.id = parcel_id;
+
+    if other_area > parcel_area then
+        return 1;
+    end if;
+
+    return 0;
 end;
