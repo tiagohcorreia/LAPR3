@@ -74,7 +74,7 @@ begin
 end;
 
 
--- caso de sucesso
+-- caso de insucesso
 declare
     operationSuccess number;
 begin
