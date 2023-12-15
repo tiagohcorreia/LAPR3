@@ -113,7 +113,6 @@ create or replace function check_if_quantity_is_bigger(parcel_id parcela.id%type
     return number
     is
     other_quantity   float;
-    other_variety_id variedade.id%type;
     type_of_variety  number := 0; -- 0 for permanent and 1 for temporary
     cursor c is select variedade_permanente.variedade_id
                 from VARIEDADE_PERMANENTE
