@@ -107,7 +107,7 @@ end ;
 -- caso insucesso
 -- Registar uma operação de colheita no Campo Grande, em 05/10/2023, de Maçã Golden, 800 kg
 declare
-    p_data               Operacao_Agricola.data%TYPE := TO_DATE('2023-11-05', 'YYYY-MM-DD');
+    p_data               Operacao_Agricola.data%TYPE := TO_DATE('2023-10-05', 'YYYY-MM-DD');
     p_current_date_in    Operacao_Agricola.data%TYPE := sysdate;
     p_parcela_id         Parcela.id%TYPE             := 102;
     p_produto_id         Produto.id%TYPE             := null;
