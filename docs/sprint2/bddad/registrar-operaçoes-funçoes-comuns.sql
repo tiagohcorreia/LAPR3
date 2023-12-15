@@ -106,3 +106,23 @@ begin
     close c1;
     return 0;
 end;
+
+create or replace function checkIfMetodoExecucaoExists(id METODO_EXECUCAO.id%type)
+    return number
+    is
+    otherId METODO_EXECUCAO.id%type;
+    cursor c1 is select id
+                 from METODO_EXECUCAO;
+begin
+    open c1;
+    loop
+        fetch c1 into otherId;
+        if (id = otherId) then
+            close c1;
+            return 1;
+        end if;
+        exit when c1%notfound;
+    end loop;
+    close c1;
+    return 0;
+end;
