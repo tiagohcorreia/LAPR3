@@ -3,18 +3,36 @@ package esinf.usei04;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The type Union find.
+ *
+ * @param <T> the type parameter
+ */
 public class UnionFind<T> {
-
     private Map<T, T> parent;
 
+    /**
+     * Instantiates a new Union find.
+     *
+     * @param elements the elements
+     */
     public UnionFind(Iterable<T> elements) {
+
         parent = new HashMap<>();
+
         for (T element : elements) {
             parent.put(element, element);
         }
     }
 
+    /**
+     * Find t.
+     *
+     * @param element the element
+     * @return the t
+     */
     public T find(T element) {
+
         if (!parent.containsKey(element)) {
             return null; // Element not present in the Union-Find structure
         }
@@ -26,6 +44,7 @@ public class UnionFind<T> {
 
         // Path compression
         while (!element.equals(root)) {
+
             T next = parent.get(element);
             parent.put(element, root);
             element = next;
@@ -34,7 +53,14 @@ public class UnionFind<T> {
         return root;
     }
 
+    /**
+     * Union.
+     *
+     * @param element1 the element 1
+     * @param element2 the element 2
+     */
     public void union(T element1, T element2) {
+
         T root1 = find(element1);
         T root2 = find(element2);
 
