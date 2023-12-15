@@ -18,7 +18,7 @@ BEGIN
     return 0;
 end;
 
-CREATE OR REPLACE FUNCTION registarSementeira(
+CREATE OR REPLACE FUNCTION registar_Sementeira(
     parcelaId Parcela.id%TYPE,
     variedadeId Variedade.id%TYPE,
     data_v Operacao_Agricola.data%TYPE,
