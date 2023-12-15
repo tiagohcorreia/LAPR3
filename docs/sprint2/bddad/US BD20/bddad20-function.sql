@@ -12,7 +12,7 @@ create or replace function getMonthlyWateringTotal(
 begin
     open return for
         -- Consulta para obter o total de rega mensal
-        SELECT EXTRACT(MONTH FROM op_agr.data) as mes, sum(rg.duracao) as totais_rega
+        SELECT distinct EXTRACT(MONTH FROM op_agr.data) as mes, sum(rg.duracao) as totais_rega
         FROM rega rg,
              operacao_agricola op_agr,
              setor_rega str,
@@ -24,7 +24,8 @@ begin
           AND str.id = rg.setor_id  -- Relacionamento entre setor de rega e rega
           AND rg.operacao_id = op_agr.id  -- Relacionamento entre rega e operação agrícola
           AND op_agr.data BETWEEN beginDate and endDate  -- Filtrando por intervalo de datas
-        GROUP BY EXTRACT(MONTH FROM op_agr.data);
+        GROUP BY EXTRACT(MONTH FROM op_agr.data)
+        order by mes;
 
     return return; -- Retorna o cursor contendo os resultados da consulta
 end;
@@ -63,5 +64,17 @@ end;
 -- Bloco anônimo para chamar o procedimento
 begin
     -- Chama o procedimento com valores específicos
+    printMonthlyWateringTotal(104, to_date('01-06-2023', 'dd-mm-yyyy'), to_date('06-11-2023', 'dd-mm-yyyy'));
+    dbms_output.put_line(' ');
+    dbms_output.put_line(' ');
+
+    printMonthlyWateringTotal(105, to_date('01-06-2023', 'dd-mm-yyyy'), to_date('06-11-2023', 'dd-mm-yyyy'));
+    dbms_output.put_line(' ');
+    dbms_output.put_line(' ');
+
+    printMonthlyWateringTotal(102, to_date('01-06-2023', 'dd-mm-yyyy'), to_date('06-11-2023', 'dd-mm-yyyy'));
+    dbms_output.put_line(' ');
+    dbms_output.put_line(' ');
+
     printMonthlyWateringTotal(108, to_date('01-06-2023', 'dd-mm-yyyy'), to_date('06-11-2023', 'dd-mm-yyyy'));
 end;

@@ -33,7 +33,8 @@ BEGIN
 
     IF (checkIfOperationIdExists(id) = 1
         or checkIfParcelExists(parcelaId) = 0
-        or checkIfVarietyExists(variedadeId) = 0) THEN
+        or checkIfVarietyExists(variedadeId) = 0
+        or check_if_quantity_is_bigger(parcelaId, variedadeId, quantidade) = 1) THEN
         RETURN returnValue; -- returns 0 wich means operation insuccess
     END IF;
 
@@ -58,10 +59,26 @@ BEGIN
     return returnValue;
 END;
 
+
+
+-- caso de sucesso
 declare
     operationSuccess number;
 begin
-    operationSuccess := registrarPoda(104, 48, to_date('28-11-2023', 'dd-mm-yyyy'), 10, null);
+    operationSuccess := registrarPoda(102, 92, to_date('06-11-2023', 'dd-mm-yyyy'), 20, null);
+    if (operationSuccess = 1) then
+        DBMS_OUTPUT.put_line('Registo efetuado com sucesso. Return value: ' || operationSuccess);
+    else
+        DBMS_OUTPUT.put_line('Não foi possível registrar a operação. Return value: ' || operationSuccess);
+    end if;
+end;
+
+
+-- caso de insucesso
+declare
+    operationSuccess number;
+begin
+    operationSuccess := registrarPoda(102, 92, to_date('06-11-2023', 'dd-mm-yyyy'), 60, null);
     if (operationSuccess = 1) then
         DBMS_OUTPUT.put_line('Registo efetuado com sucesso. Return value: ' || operationSuccess);
     else

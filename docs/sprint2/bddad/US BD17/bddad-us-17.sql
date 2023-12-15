@@ -65,8 +65,8 @@ end;
 
 declare
     parcelaId  parcela.id%type := 105;
-    dataInicio OPERACAO_AGRICOLA.data%type:=TO_DATE('2019-01-04', 'YYYY-MM-DD');
-    dataFim    OPERACAO_AGRICOLA.data%type:=TO_DATE('2019-01-04', 'YYYY-MM-DD');
+    dataInicio OPERACAO_AGRICOLA.data%type:=TO_DATE('2019-01-01', 'YYYY-MM-DD');
+    dataFim    OPERACAO_AGRICOLA.data%type:=TO_DATE('2023-07-06', 'YYYY-MM-DD');
 begin
     imprimirParcelasFP(parcelaId, dataInicio, dataFim);
 end;

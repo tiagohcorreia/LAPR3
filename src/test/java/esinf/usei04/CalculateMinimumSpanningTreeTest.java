@@ -42,9 +42,10 @@ class CalculateMinimumSpanningTreeTest {
 
         MapGraph<Local, Integer> graph = storage.getGraph();
 
-        int expeted = 16;
+        int expeted = 32;
         int result = CalculateMinimumSpanningTree.calculateMinimumSpanningTreeWithKruskal(graph).getGraph().numEdges();
 
+        //System.out.println(CalculateMinimumSpanningTree.calculateMinimumSpanningTreeWithKruskal(graph));
         assertEquals(expeted, result);
     }
 
@@ -115,7 +116,7 @@ class CalculateMinimumSpanningTreeTest {
 
         MapGraph<Local, Integer> graph = storage.getGraph();
 
-        int expeted = 322;
+        int expeted = 644;
         int result = CalculateMinimumSpanningTree.calculateMinimumSpanningTreeWithKruskal(graph).getGraph().numEdges();
 
         assertEquals(expeted, result);

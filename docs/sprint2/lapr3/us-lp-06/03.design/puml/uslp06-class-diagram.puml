@@ -1,0 +1,66 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+
+package ui.funcionalidades {
+    class ColheitaRegisterUI {
+        - controller: ColheitaRegisterController
+        - controllerop: OperacaoAgricolaRegisterController
+        --
+        + ColheitaRegisterUI()
+        + run(): void
+    }
+}
+
+package controller {
+    class ColheitaRegisterController {
+        - colheitaRegister(operacaoId: int, parcelaId: int, produtoId: int, metodoExecucaoId: int, quantidade: float): void
+    }
+
+    class OperacaoAgricolaRegisterController {
+        - getNextId(): int
+        - getTableData(tableName: String): void
+        - printTableData(tableName: String): void
+        - isIdValid(tableName: String, id: int): boolean
+        + operacaoAgricolaRegister(operacaoId: int, date: Date): void
+    }
+}
+
+package ui.utils {
+    class Utils {
+        + readIntegerFromConsole(prompt: String): int
+        + readFloatFromConsole(prompt: String): float
+    }
+}
+
+class ColheitaRegisterUI {
+    - controller: ColheitaRegisterController
+    - controllerop: OperacaoAgricolaRegisterController
+    --
+    + ColheitaRegisterUI() : void
+    + run(): void
+}
+
+class ColheitaRegisterController {
+    - ColheitaRegister(operacaoId: int, parcelaId: int, variedadeId: int, fatorProducaoId: int, metodoExecucaoId: int, quantidade: float): void
+}
+
+class OperacaoAgricolaRegisterController {
+    - getNextId(): int
+    - getTableData(tableName: String): void
+    - printTableData(tableName: String): void
+    - isIdValid(tableName: String, id: int): boolean
+    + operacaoAgricolaRegister(operacaoId: int, date: Date): void
+}
+
+class Utils {
+    + readIntegerFromConsole(prompt: String): int
+    + readFloatFromConsole(prompt: String): float
+}
+ColheitaRegisterUI --> ColheitaRegisterController
+ColheitaRegisterUI --> OperacaoAgricolaRegisterController
+ColheitaRegisterController --> OperacaoAgricolaRegisterController
+ColheitaRegisterUI --> Utils
+@enduml

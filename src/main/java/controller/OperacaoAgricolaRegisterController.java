@@ -13,9 +13,9 @@ public class OperacaoAgricolaRegisterController {
     private OperacaoAgricolaRepository operacaoAgricolaRepository;
     private Connection connection;
     private static final String JDBC_URL = "jdbc:oracle:thin:@localhost:1521/xe";
-    private static final String USERNAME = "dephane";
+    private static final String USERNAME = "loc";
 
-    private static final String PASSWORD = "Jusadeagsa59";
+    private static final String PASSWORD = "basedados";
 
     public OperacaoAgricolaRegisterController() {
         getOperacaoAgricolaRepository();

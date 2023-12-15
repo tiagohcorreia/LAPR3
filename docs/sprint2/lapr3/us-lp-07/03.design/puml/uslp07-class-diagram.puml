@@ -1,0 +1,66 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+
+package ui.funcionalidades {
+    class AplicacaoFPRegisterUI {
+        - controller: AplicacaoFPRegisterController
+        - controllerop: OperacaoAgricolaRegisterController
+        --
+        + AplicacaoFPRegisterUI()
+        + run(): void
+    }
+}
+
+package controller {
+    class AplicacaoFPRegisterController {
+        - AplicacaoFPRegister(operacaoId: int, parcelaId: int, variedadeId: int,fatorProducaoId : int, metodoAplicacaoId: int, quantidade: float): void
+    }
+
+    class OperacaoAgricolaRegisterController {
+        - getNextId(): int
+        - getTableData(tableName: String): void
+        - printTableData(tableName: String): void
+        - isIdValid(tableName: String, id: int): boolean
+        + operacaoAgricolaRegister(operacaoId: int, date: Date): void
+    }
+}
+
+package ui.utils {
+    class Utils {
+        + readIntegerFromConsole(prompt: String): int
+        + readFloatFromConsole(prompt: String): float
+    }
+}
+
+class AplicacaoFPRegisterUI {
+    - controller: AplicacaoFPRegisterController
+    - controllerop: OperacaoAgricolaRegisterController
+    --
+    + AplicacaoFPRegisterUI() : void
+    + run(): void
+}
+
+class AplicacaoFPRegisterController {
+    - AplicacaoFPRegister(operacaoId: int, parcelaId: int, variedadeId: int, fatorProducaoId: int, metodoExecucaoId: int, quantidade: float,area : float): void
+}
+
+class OperacaoAgricolaRegisterController {
+    - getNextId(): int
+    - getTableData(tableName: String): void
+    - printTableData(tableName: String): void
+    - isIdValid(tableName: String, id: int): boolean
+    + operacaoAgricolaRegister(operacaoId: int, date: Date): void
+}
+
+class Utils {
+    + readIntegerFromConsole(prompt: String): int
+    + readFloatFromConsole(prompt: String): float
+}
+AplicacaoFPRegisterUI --> AplicacaoFPRegisterController
+AplicacaoFPRegisterUI --> OperacaoAgricolaRegisterController
+AplicacaoFPRegisterController --> OperacaoAgricolaRegisterController
+AplicacaoFPRegisterUI --> Utils
+@enduml

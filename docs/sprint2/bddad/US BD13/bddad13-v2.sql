@@ -18,7 +18,7 @@ begin
     return 0;
 end;
 
-create or replace function registrarColheita(
+create or replace function registrar_Colheita(
     p_data Operacao_Agricola.data%TYPE,
     p_current_date_in Operacao_Agricola.data%TYPE := NULL,
     p_parcela_id Parcela.id%TYPE,
@@ -49,6 +49,10 @@ BEGIN
         return 0;
     end if;
 
+    if check_if_product_exists(p_produto_id)=0 then
+        return 0;
+    end if;
+
     select variedade_id
     into variedade_id
     from produto,
@@ -59,6 +63,7 @@ BEGIN
     if (CHECKIFVARIETYISINPARCEL(p_parcela_id, variedade_id) = 0) then
         return 0;
     end if;
+
 
     savepoint s1;
     INSERT INTO Operacao_Agricola(id, data)
@@ -76,15 +81,40 @@ BEGIN
     return 1;
 end;
 
+
+
+
+-- caso sucesso
+-- Registar uma operação de colheita no Campo Grande, em 05/11/2023, de azeitona Galega, 100 kg
 declare
-    p_data               Operacao_Agricola.data%TYPE := TO_DATE('2024-02-22', 'YYYY-MM-DD');
+    p_data               Operacao_Agricola.data%TYPE := TO_DATE('2023-11-05', 'YYYY-MM-DD');
     p_current_date_in    Operacao_Agricola.data%TYPE := sysdate;
-    p_parcela_id         Parcela.id%TYPE             := 104;
-    p_produto_id         Produto.id%TYPE             := 2;
-    p_quantidade         Colheita.quantidade%TYPE    := 15;
-    p_metodo_execucao_id Metodo_Execucao.id%TYPE     := 1;
+    p_parcela_id         Parcela.id%TYPE             := 102;
+    p_produto_id         Produto.id%TYPE             := 13;
+    p_quantidade         Colheita.quantidade%TYPE    := 100;
+    p_metodo_execucao_id Metodo_Execucao.id%TYPE     := null;
 BEGIN
-    if (registrarColheita(p_data, p_current_date_in, p_parcela_id, p_produto_id, p_quantidade, p_metodo_execucao_id) =
+    if (registrar_Colheita(p_data, p_current_date_in, p_parcela_id, p_produto_id, p_quantidade, p_metodo_execucao_id) =
+        0) then
+        DBMS_OUTPUT.put_line('Não foi possível registrar a colheita');
+    else
+        DBMS_OUTPUT.put_line('Operação de colheita registrada com sucesso.');
+    end if;
+end ;
+
+
+
+-- caso insucesso
+-- Registar uma operação de colheita no Campo Grande, em 05/10/2023, de Maçã Golden, 800 kg
+declare
+    p_data               Operacao_Agricola.data%TYPE := TO_DATE('2023-11-05', 'YYYY-MM-DD');
+    p_current_date_in    Operacao_Agricola.data%TYPE := sysdate;
+    p_parcela_id         Parcela.id%TYPE             := 102;
+    p_produto_id         Produto.id%TYPE             := null;
+    p_quantidade         Colheita.quantidade%TYPE    := 800;
+    p_metodo_execucao_id Metodo_Execucao.id%TYPE     := null;
+BEGIN
+    if (registrar_Colheita(p_data, p_current_date_in, p_parcela_id, p_produto_id, p_quantidade, p_metodo_execucao_id) =
         0) then
         DBMS_OUTPUT.put_line('Não foi possível registrar a colheita');
     else
