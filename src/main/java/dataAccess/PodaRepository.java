@@ -2,16 +2,9 @@ package dataAccess;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.Objects;
 
-import domain.Colheita;
-import domain.Poda;
-import domain.Sailor;
 import oracle.jdbc.OracleTypes;
 
 public class PodaRepository {
