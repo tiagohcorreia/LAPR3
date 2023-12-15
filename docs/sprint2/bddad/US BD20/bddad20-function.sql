@@ -64,5 +64,17 @@ end;
 -- Bloco anônimo para chamar o procedimento
 begin
     -- Chama o procedimento com valores específicos
+    printMonthlyWateringTotal(104, to_date('01-06-2023', 'dd-mm-yyyy'), to_date('06-11-2023', 'dd-mm-yyyy'));
+    dbms_output.put_line(' ');
+    dbms_output.put_line(' ');
+
+    printMonthlyWateringTotal(105, to_date('01-06-2023', 'dd-mm-yyyy'), to_date('06-11-2023', 'dd-mm-yyyy'));
+    dbms_output.put_line(' ');
+    dbms_output.put_line(' ');
+
+    printMonthlyWateringTotal(102, to_date('01-06-2023', 'dd-mm-yyyy'), to_date('06-11-2023', 'dd-mm-yyyy'));
+    dbms_output.put_line(' ');
+    dbms_output.put_line(' ');
+
     printMonthlyWateringTotal(108, to_date('01-06-2023', 'dd-mm-yyyy'), to_date('06-11-2023', 'dd-mm-yyyy'));
 end;
