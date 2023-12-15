@@ -106,7 +106,7 @@ DECLARE
 
 BEGIN
 
-    operationSuccess := registarSementeira(parcela_id, variedade_id, data_operacao, quantidade, area, metodo_execucao_id);
+    operationSuccess := registar_Sementeira(parcela_id, variedade_id, data_operacao, quantidade, area, metodo_execucao_id);
 
     IF (operationSuccess = 1) THEN
         DBMS_OUTPUT.put_line('Sementeira registrada com sucesso.');
@@ -130,7 +130,7 @@ DECLARE
     metodo_execucao_id NUMBER := NULL;
 BEGIN
 
-    operationSuccess := registarSementeira(parcela_id, variedade_id, data_operacao, quantidade, area, metodo_execucao_id);
+    operationSuccess := registar_Sementeira(parcela_id, variedade_id, data_operacao, quantidade, area, metodo_execucao_id);
 
     IF (operationSuccess = 1) THEN
         DBMS_OUTPUT.put_line('Sementeira registrada com sucesso.');
