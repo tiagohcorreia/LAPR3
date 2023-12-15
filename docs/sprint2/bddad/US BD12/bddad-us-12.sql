@@ -64,3 +64,5 @@ EXCEPTION
         DBMS_OUTPUT.put_line('O fator de produção especificado não está registrada na base de dados');
 END;
 
+
+
