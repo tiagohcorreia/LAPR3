@@ -192,3 +192,22 @@ begin
 
     return 0;
 end;
+
+create or replace function check_if_product_exists(product_id produto.id%type)
+    return number
+    is
+    other_product_id produto.id%type;
+    cursor c1 is select id
+                from produto;
+begin
+    open c1;
+    loop
+        fetch c1 into other_product_id;
+        if other_product_id = product_id then
+            return 1;
+        end if;
+        exit when c1%notfound;
+    end loop;
+    close c1;
+    return 0;
+end;

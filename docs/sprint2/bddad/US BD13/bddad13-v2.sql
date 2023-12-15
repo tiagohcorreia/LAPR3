@@ -49,6 +49,10 @@ BEGIN
         return 0;
     end if;
 
+    if check_if_product_exists(p_produto_id)=0 then
+        return 0;
+    end if;
+
     select variedade_id
     into variedade_id
     from produto,
@@ -59,6 +63,7 @@ BEGIN
     if (CHECKIFVARIETYISINPARCEL(p_parcela_id, variedade_id) = 0) then
         return 0;
     end if;
+
 
     savepoint s1;
     INSERT INTO Operacao_Agricola(id, data)
@@ -105,7 +110,7 @@ declare
     p_data               Operacao_Agricola.data%TYPE := TO_DATE('2023-11-05', 'YYYY-MM-DD');
     p_current_date_in    Operacao_Agricola.data%TYPE := sysdate;
     p_parcela_id         Parcela.id%TYPE             := 102;
-    p_produto_id         Produto.id%TYPE             := 13;
+    p_produto_id         Produto.id%TYPE             := null;
     p_quantidade         Colheita.quantidade%TYPE    := 800;
     p_metodo_execucao_id Metodo_Execucao.id%TYPE     := null;
 BEGIN
