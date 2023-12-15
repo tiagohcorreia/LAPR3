@@ -4,8 +4,8 @@
 create or replace function verificarSeAplicacaoFpExiste(id aplicacao_fp.operacao_id%type)
     return number
     is
-    returnValue number:=0;
-    otherId aplicacao_fp.operacao_id%type;
+    returnValue number := 0;
+    otherId     aplicacao_fp.operacao_id%type;
     cursor c1 is select operacao_id
                  from aplicacao_fp;
 begin
@@ -13,7 +13,7 @@ begin
     loop
         fetch c1 into otherId;
         if (id = otherId) then
-            returnValue:=1;
+            returnValue := 1;
         end if;
         exit when c1%notfound;
     end loop;
@@ -42,7 +42,7 @@ BEGIN
     END IF;
 
     if variedadeId is not null then
-        if (checkIfVarietyExists(variedadeId) = 0 or checkIfVarietyIsInParcel(parcelaId, variedadeId) = 0)then
+        if (checkIfVarietyExists(variedadeId) = 0 or checkIfVarietyIsInParcel(parcelaId, variedadeId) = 0) then
             return 0;
         end if;
     end if;
@@ -68,16 +68,15 @@ BEGIN
 END;
 
 
-
 -- caso de sucesso
 declare
-    parcelaId         number                         := 108;
-    variedadeId       number                         := null;
+    parcelaId         number                       := 108;
+    variedadeId       number                       := null;
     quantidade        aplicacao_fp.quantidade%TYPE := 4000;
-    metodoAplicacaoId number                         := 7;
+    metodoAplicacaoId number                       := 7;
     area              aplicacao_fp.area%TYPE       := 1.1;
-    fatorProducaoId   number                         := 12;
-    data              date                           := to_date('2023-10-06', 'yyyy-mm-dd');
+    fatorProducaoId   number                       := 12;
+    data              date                         := to_date('2023-10-06', 'yyyy-mm-dd');
     result            number;
 begin
     result := registrar_Aplicacao_FP(parcelaId, variedadeId, quantidade, metodoAplicacaoId, area,
@@ -92,17 +91,17 @@ end;
 
 -- caso de insucesso
 declare
-    parcelaId         number                         := 108;
-    variedadeId       number                         := null;
+    parcelaId         number                       := 108;
+    variedadeId       number                       := null;
     quantidade        aplicacao_fp.quantidade%TYPE := 8000;
-    metodoAplicacaoId number                         := 7;
+    metodoAplicacaoId number                       := 7;
     area              aplicacao_fp.area%TYPE       := 2.1;
-    fatorProducaoId   number                         := 12;
-    data              date                           := to_date('2023-10-06', 'yyyy-mm-dd');
+    fatorProducaoId   number                       := 12;
+    data              date                         := to_date('2023-10-06', 'yyyy-mm-dd');
     result            number;
 begin
     result := registrar_Aplicacao_FP(parcelaId, variedadeId, quantidade, metodoAplicacaoId, area,
-                                              fatorProducaoId, data);
+                                     fatorProducaoId, data);
     if result = 1 then
         dbms_output.put_line('Aplicação de fator de produção registada com sucesso');
     else
