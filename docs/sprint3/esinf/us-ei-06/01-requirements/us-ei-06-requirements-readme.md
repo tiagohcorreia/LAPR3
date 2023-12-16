@@ -48,7 +48,7 @@ Encontrar para um produtor os diferentes percursos que consegue fazer entre um l
 
 ### 1.6. System Sequence Diagram (SSD)
 
-![System Sequence Diagram](svg/us-lp-08-ssd.svg)
+![us-ei-06-ssd.svg](svg%2Fus-ei-06-ssd.svg)
 
 ### 1.7 Observações relevantes
 

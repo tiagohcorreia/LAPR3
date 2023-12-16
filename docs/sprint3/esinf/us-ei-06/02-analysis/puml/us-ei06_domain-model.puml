@@ -1,0 +1,26 @@
+@startuml
+skinparam packageStyle rectangle
+
+skinparam classAttributeIconSize 0
+hide circle
+hide methods
+
+class Local{
+id
+latitude
+longitude
+}
+
+class Hub{
+opening hour
+closing hour
+}
+
+class Vehicle{
+autonomy
+average speed
+}
+
+Local <-- Hub: is placed in
+
+@enduml
