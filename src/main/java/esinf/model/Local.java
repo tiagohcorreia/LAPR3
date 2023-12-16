@@ -11,14 +11,16 @@ import java.util.function.ToIntFunction;
 import java.util.function.ToLongFunction;
 
 public class Local  {
-    final private GPS DEFAULT_GPS=new GPS();
 
     private String localId;
     private GPS gps;
 
-    public Local(String localId) {
-        this.localId = localId;
-        this.gps = DEFAULT_GPS;
+    final private String DEFAULT_LOCAL_ID="(no id)";
+    final private GPS DEFAULT_GPS=new GPS();
+
+    public Local(){
+        localId=DEFAULT_LOCAL_ID;
+        gps=DEFAULT_GPS;
     }
 
     public Local(String localId, GPS gps) {
