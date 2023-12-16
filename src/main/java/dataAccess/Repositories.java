@@ -3,7 +3,6 @@ package dataAccess;
 public class Repositories {
 
     private static final Repositories instance = new Repositories();
-    private SailorRepository sailorRepository = null;
     private SementeiraRepository sementeiraRepository = null;
     private ColheitaRepository colheitaRepository = null;
     private MondaRepository mondaRepository = null;
@@ -16,7 +15,6 @@ public class Repositories {
     private PodaRepository podaRepository = null;
 
     private Repositories() {
-        sailorRepository = new SailorRepository();
         sementeiraRepository = new SementeiraRepository();
         colheitaRepository = new ColheitaRepository();
         mondaRepository = new MondaRepository();
@@ -34,9 +32,6 @@ public class Repositories {
     }
     public MondaRepository getMondaRepository() {
         return mondaRepository;
-    }
-    public SailorRepository getSailorRepository() {
-        return sailorRepository;
     }
     public ParcelaRepository getParcelaRepository() {
         return parcelaRepository;

@@ -13,6 +13,11 @@ class AlgorithmsTest {
 
     final Graph<String, Integer> completeMap = new MapGraph<>(false);
     Graph<String, Integer> incompleteMap = new MapGraph<>(false);
+    CommonGraph<String, Integer> graph2=new MapGraph<>(false);
+    String a="A";
+    String b="B";
+    String c="C";
+    String d="D";
 
     public AlgorithmsTest() {
     }
@@ -49,6 +54,18 @@ class AlgorithmsTest {
         completeMap.addEdge("Aveiro", "Viseu", 85);
         completeMap.addEdge("Leiria", "Castelo Branco", 170);
         completeMap.addEdge("Lisboa", "Faro", 280);
+
+        graph2.addVertex(a);
+        graph2.addVertex(b);
+        graph2.addVertex(c);
+        graph2.addVertex(d);
+
+        graph2.addEdge(a, b, 1);
+        graph2.addEdge(a, d, 1);
+        graph2.addEdge(a, c, 1);
+        graph2.addEdge(a, c, 1);
+        graph2.addEdge(b, d, 1);
+        graph2.addEdge(c, d, 1);
     }
 
     private void checkContentEquals(List<String> l1, List<String> l2, String msg) {
@@ -195,6 +212,34 @@ class AlgorithmsTest {
         Algorithms.shortestPaths(incompleteMap, "Braga", Integer::compare, Integer::sum, 0, paths, dists);
         assertEquals(255, dists.get(completeMap.key("Leiria")), "Path between Braga and Leiria should be 255 Km");
         assertEquals(Arrays.asList("Braga", "Porto", "Aveiro", "Leiria"), paths.get(completeMap.key("Leiria")), "Path to Leiria");
+    }
+
+    @Test
+    public void testAllPaths(){
+
+        ArrayList<LinkedList<String>> allPaths=Algorithms.allPaths(graph2, a, c);
+
+        LinkedList<String> path1=new LinkedList<>();
+        LinkedList<String> path2=new LinkedList<>();
+        LinkedList<String> path3=new LinkedList<>();
+
+        path1.add(a);
+        path1.add(b);
+        path1.add(d);
+        path1.add(c);
+
+        path2.add(a);
+        path2.add(d);
+        path2.add(c);
+
+        path3.add(a);
+        path3.add(c);
+
+        assertEquals(allPaths.get(0), path1, "path 1 incorrect");
+        assertEquals(allPaths.get(1), path2, "path 2 incorrect");
+        assertEquals(allPaths.get(2), path3, "path 3 incorrect");
+
+       // System.out.println(allPaths);
     }
 
 }

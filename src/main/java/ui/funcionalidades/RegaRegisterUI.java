@@ -63,8 +63,7 @@ public class RegaRegisterUI implements Runnable {
             Date date = regaTable.getData();
 
             if (endDate.before(currentDate)) {
-                operacaoController.operacaoAgricolaRegister(operacaoId, date);
-                performRegistration(index, operacaoId, regaTable, callback);
+                callback.run();
             } else {
                 System.out.println("Final da rega programado no futuro as horas: " + dateTimeFormat.format(endDate));
 
@@ -93,9 +92,10 @@ public class RegaRegisterUI implements Runnable {
             String registrationTime = dateFormat.format(new Date());
 
             System.out.println("\nRega registada na hora local : " + registrationTime);
+            duracao = duracao*60*1000;
 
             if (index < controller.getRegaTableList().size() - 1) {
-                Thread.sleep(15000);
+                Thread.sleep(duracao);
                 callback.run();
             } else {
                 System.out.println("\nUltima operacao realizada.");

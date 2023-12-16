@@ -1,0 +1,66 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+
+package ui.funcionalidades {
+    class SementeiraRegisterUI {
+        - controller: SementeiraRegisterController
+        - controllerop: OperacaoAgricolaRegisterController
+        --
+        + SementeiraRegisterUI()
+        + run(): void
+    }
+}
+
+package controller {
+    class SementeiraRegisterController {
+        - SementeiraRegister(operacaoId: int, parcelaId: int, variedadeId: int, metodoExecucaoId: int, quantidade: float,area : float): void
+    }
+
+    class OperacaoAgricolaRegisterController {
+        - getNextId(): int
+        - getTableData(tableName: String): void
+        - printTableData(tableName: String): void
+        - isIdValid(tableName: String, id: int): boolean
+        + operacaoAgricolaRegister(operacaoId: int, date: Date): void
+    }
+}
+
+package ui.utils {
+    class Utils {
+        + readIntegerFromConsole(prompt: String): int
+        + readFloatFromConsole(prompt: String): float
+    }
+}
+
+class SementeiraRegisterUI {
+    - controller: SementeiraRegisterController
+    - controllerop: OperacaoAgricolaRegisterController
+    --
+    + SementeiraRegisterUI() : void
+    + run(): void
+}
+
+class SementeiraRegisterController {
+    - SementeiraRegister(operacaoId: int, parcelaId: int, variedadeId: int, fatorProducaoId: int, metodoExecucaoId: int, quantidade: float): void
+}
+
+class OperacaoAgricolaRegisterController {
+    - getNextId(): int
+    - getTableData(tableName: String): void
+    - printTableData(tableName: String): void
+    - isIdValid(tableName: String, id: int): boolean
+    + operacaoAgricolaRegister(operacaoId: int, date: Date): void
+}
+
+class Utils {
+    + readIntegerFromConsole(prompt: String): int
+    + readFloatFromConsole(prompt: String): float
+}
+SementeiraRegisterUI --> SementeiraRegisterController
+SementeiraRegisterUI --> OperacaoAgricolaRegisterController
+SementeiraRegisterController --> OperacaoAgricolaRegisterController
+SementeiraRegisterUI --> Utils
+@enduml

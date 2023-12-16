@@ -10,8 +10,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version> <!-- Use a versão adequada do plugin -->
                 <configuration>
-                    <source>16</source> <!-- Especifique a versão do JDK que deseja usar -->
-                    <target>16</target> <!-- Especifique a versão do JDK que deseja usar -->
+                    <source>8</source> <!-- Especifique a versão do JDK que deseja usar -->
+                    <target>8</target> <!-- Especifique a versão do JDK que deseja usar -->
                 </configuration>
             </plugin>
         </plugins>

@@ -1,0 +1,68 @@
+@startuml
+
+skinparam SequenceMessageAlign center
+
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - Vehicle Charging Route
+
+autonumber
+
+actor "Vehicle Operator" as Operator
+entity "Routing System" as RoutingSystem
+
+activate Operator
+Operator -> RoutingSystem : requests to plan the minimum charging route
+activate RoutingSystem
+
+RoutingSystem --> Operator : requests current date input
+deactivate RoutingSystem
+
+Operator -> RoutingSystem : inputs the current date
+activate RoutingSystem
+
+RoutingSystem --> Operator : displays possible locations for charging and requests a selection
+deactivate RoutingSystem
+
+Operator -> RoutingSystem : selects the charging location
+activate RoutingSystem
+
+RoutingSystem --> Operator : displays possible vehicle types and requests a selection
+deactivate RoutingSystem
+
+Operator -> RoutingSystem : selects the vehicle type
+activate RoutingSystem
+
+RoutingSystem --> Operator : displays possible charging stations and requests a selection
+deactivate RoutingSystem
+
+Operator -> RoutingSystem : selects the charging station
+activate RoutingSystem
+
+RoutingSystem --> Operator : requests specific information for the charging route
+deactivate RoutingSystem
+
+Operator -> RoutingSystem : provides necessary information (vehicle type, autonomy, etc.)
+activate RoutingSystem
+
+RoutingSystem --> Operator : requests preferred charging strategy
+deactivate RoutingSystem
+
+Operator -> RoutingSystem : provides the preferred charging strategy
+activate RoutingSystem
+
+RoutingSystem --> Operator : requests the number of stops for the charging route
+deactivate RoutingSystem
+
+Operator -> RoutingSystem : provides the number of stops
+activate RoutingSystem
+
+RoutingSystem --> Operator : validates and plans the minimum charging route
+deactivate RoutingSystem
+
+Operator --> RoutingSystem : confirmation of successful route planning
+deactivate Operator
+
+@enduml

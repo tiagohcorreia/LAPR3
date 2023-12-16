@@ -1,0 +1,42 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+actor "Unregistered User" as User
+participant ":ChargingRoutePlannerUI" as UI
+participant ":ChargingRoutePlannerController" as CTRL
+participant ":LocationController" as LocationController
+participant ":Utils" as Utils
+participant ":ConsoleUtils" as ConsoleUtils
+
+User -> UI : invokes Charging Route Planning
+activate User
+activate UI
+UI -> CTRL : create
+activate CTRL
+CTRL -> LocationController : new LocationController()
+activate LocationController
+LocationController --> CTRL : instance
+deactivate LocationController
+
+UI -> Utils : readIntegerFromConsole("Vehicle ID: ")
+activate Utils
+Utils --> UI : vehicleId
+deactivate Utils
+
+UI -> Utils : readFloatFromConsole("Vehicle Autonomy: ")
+activate Utils
+Utils --> UI : autonomy
+deactivate Utils
+
+UI -> LocationController : determineMinimumRoute(locations, autonomy)
+activate LocationController
+LocationController --> UI : minimumRoute
+deactivate LocationController
+
+UI --> User : Minimum Route Determined: {minimumRoute}
+deactivate UI
+deactivate User
+
+@enduml

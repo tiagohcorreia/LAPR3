@@ -3,10 +3,8 @@ package controller;
 import dataAccess.ColheitaRepository;
 import dataAccess.DatabaseConnection;
 import dataAccess.Repositories;
-import dataAccess.SailorRepository;
 
 import java.sql.*;
-import java.util.Date;
 import java.util.Objects;
 
 public class ColheitaRegisterController {

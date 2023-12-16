@@ -44,8 +44,9 @@ public class GPS {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof GPS that)) return false;
-        return Double.compare(that.latitude, latitude) == 0 && Double.compare(that.longitude, longitude) == 0;
+        if (!(o instanceof GPS)) return false;
+        GPS otherGPS=(GPS) o;
+        return Double.compare(this.latitude, otherGPS.getLatitude()) == 0 && Double.compare(this.longitude, otherGPS.getLongitude()) == 0;
     }
 
     @Override
