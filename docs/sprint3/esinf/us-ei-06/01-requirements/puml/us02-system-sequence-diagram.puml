@@ -1,0 +1,94 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title User Story 02 - System Sequence Diagram (SSD)
+
+autonumber
+
+actor "Real Estate Agent" as Employee
+participant ":System" as System
+
+activate Employee
+
+    Employee -> System : asks to create new announcement
+
+    activate System
+    System--> Employee : asks to select type of business and type of property
+    deactivate System
+
+        Employee -> System : selects data
+
+    activate System
+    System-->Employee: shows list of states and asks to select one
+    deactivate System
+
+    Employee -> System : selects property state
+
+        activate System
+        System--> Employee : shows list of districts in the chosen state and asks to select one
+        deactivate System
+
+    Employee -> System : selects property district
+
+    activate System
+    System--> Employee : shows list of cities in the chosen district and asks to select one
+    deactivate System
+
+    Employee -> System : selects property city
+
+    activate System
+    System--> Employee : asks to enter: zipcode, street adress, area and distance from center
+    deactivate System
+
+     Employee -> System : enters data
+
+alt propertyType:apartment/house
+
+activate System
+System-->Employee: asks to enter number of bedrooms, bathrooms and parking spaces
+deactivate System
+
+Employee->System: enters data
+
+activate System
+System-->Employee:asks to select existence of heating and/or air conditianing
+deactivate System
+
+Employee->System:selects data
+
+alt propertyType=house
+
+activate System
+System-->Employee:asks to select existence of basement and/or inhabitable loft, and type of sun exposure
+deactivate System
+
+Employee->System:selects data
+
+activate System
+end
+end
+
+     System--> Employee : asks to select type of comission
+     deactivate System
+
+         Employee -> System : selects data
+
+         activate System
+         System-->Employee:asks to enter price and comission (value/percentage)
+         deactivate System
+
+         Employee->System:enters data
+
+         activate System
+         System--> Employee : displays summmary and asks to confim
+         deactivate System
+
+         Employee -> System : confirms submission
+
+         activate System
+         System--> Employee : displays operation success
+         deactivate System
+
+@enduml

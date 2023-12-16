@@ -1,0 +1,59 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+    class MondaRegisterUI {
+        - controller: MondaRegisterController
+        - controllerop: OperacaoAgricolaRegisterController
+
+        + MondaRegisterUI()
+        + run()
+    }
+
+    class MondaRegisterController {
+        + mondaRegister(int, int, int, int, int, float): void
+    }
+
+    class OperacaoAgricolaRegisterController {
+        + getNextId(): int
+        + operacaoAgricolaRegister(int, Date): void
+    }
+
+    class Utils {
+        + readLineFromConsole(String): String
+        + readIntegerFromConsole(String): int
+        + readFloatFromConsole(String): float
+    }
+
+    class ParcelasListController {
+        + showAllParcelas(): void
+    }
+
+    class VariedadeListController {
+        + showVariedades(): void
+    }
+
+    class FatorProducaoListController {
+        + showAllFatoresProducao(): void
+    }
+
+    class MetodoExecucaoListController {
+        + showMetodosExecucao(): void
+    }
+
+
+
+
+
+MondaRegisterUI --> MondaRegisterController
+MondaRegisterUI --> OperacaoAgricolaRegisterController
+MondaRegisterController --> OperacaoAgricolaRegisterController
+MondaRegisterController --> ParcelasListController
+MondaRegisterController --> VariedadeListController
+MondaRegisterController --> FatorProducaoListController
+MondaRegisterController --> MetodoExecucaoListController
+MondaRegisterController --> Utils
+OperacaoAgricolaRegisterController --> Utils
+
+@enduml
