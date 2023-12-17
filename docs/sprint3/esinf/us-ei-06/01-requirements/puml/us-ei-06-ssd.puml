@@ -1,0 +1,44 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title US EI06 - System Sequence Diagram
+
+autonumber
+
+actor "User" as user
+participant ":System" as sys
+
+activate user
+    user -> sys: pede a lista de percursos
+
+    activate sys
+    sys-->user: lista e pede para selecionar o local de origem
+    deactivate
+
+    user->sys: seleciona o local de origem
+
+    activate sys
+    sys-->user: lista e pede para selecionar o hub de destino
+    deactivate sys
+
+    user->sys: seleciona o hub de destino
+
+    activate sys
+    sys-->user: pede para introduzir a autonomia do veículo
+    deactivate
+
+    user->sys: introduz a autonomia do veículo
+
+    activate sys
+    sys-->user: pede para introduzir a velocidade média do veículo
+    deactivate
+
+    user->sys: introduz a velocidade do veículo
+
+    activate sys
+    sys-->user: mostra a lista de percursos possíveis
+    deactivate
+
+@enduml
