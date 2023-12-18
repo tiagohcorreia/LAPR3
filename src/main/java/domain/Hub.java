@@ -77,6 +77,6 @@ public class Hub extends Local{
                 ", openingHours=" + openingHours +
                 ", closingHours=" + closingHours +
                 ", dischargeTime=" + dischargeTime +
-                '}';
+                "}\n";
     }
 }
