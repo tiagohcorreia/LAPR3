@@ -74,7 +74,7 @@ public class Hub extends Local{
         return "Hub{" +
                 "localId='" + super.getLocalId() +
                 ", gps=" + super.getGps() +
-                "openingHours=" + openingHours +
+                ", openingHours=" + openingHours +
                 ", closingHours=" + closingHours +
                 ", dischargeTime=" + dischargeTime +
                 '}';
