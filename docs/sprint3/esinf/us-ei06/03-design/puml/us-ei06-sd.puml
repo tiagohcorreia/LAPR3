@@ -1,0 +1,84 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title US EI06 - Sequence Diagram
+
+autonumber
+
+actor "User" as user
+participant "ui\n:GetPossibleRoutesUI" as ui
+participant "ctrl\n:GetPossibleRoutesCtrl" as ctrl
+participant ":LocalsStore" as locals
+participant ":HubsStore" as hubs
+participant ":PossibleRoutesCalculator" as calculat
+
+activate user
+    user -> ui: pede a lista de percursos
+
+    activate ui
+    ui->ctrl: getLocals()
+
+    activate ctrl
+    ctrl->locals:getLocals()
+
+    activate locals
+    locals-->ctrl:locals
+    deactivate
+
+    ctrl-->ui: locals
+    deactivate
+
+    ui-->user: lista e pede para selecionar o local de origem
+    deactivate
+
+    user->ui: seleciona o local de origem
+
+    activate ui
+    ui->ctrl: getHubs()
+
+    activate ctrl
+    ctrl->hubs:getHubs()
+
+    activate hubs
+    hubs-->ctrl:hubs
+    deactivate
+
+    ctrl-->ui: hubs
+    deactivate
+
+    ui-->user: lista e pede para selecionar o hub de destino
+    deactivate ui
+
+    user->ui: seleciona o hub de destino
+
+    activate ui
+    ui-->user: pede para introduzir a autonomia do veículo
+    deactivate
+
+    user->ui: introduz a autonomia do veículo
+
+    activate ui
+    ui-->user: pede para introduzir a velocidade média do veículo
+    deactivate
+
+    user->ui: introduz a velocidade do veículo
+
+    activate ui
+    ui->ctrl: getPossibleRoutes()
+
+    activate ctrl
+    ctrl->calculat:getPossibleRoutes(origin, hub, vehicleAutonomy, vehicleSpeed)
+
+    activate calculat
+    calculat-->ctrl: possibleRoutes
+    deactivate
+
+    ctrl-->ui:possibleRoutes
+    deactivate
+
+    ui-->user: mostra a lista de percursos possíveis
+    deactivate
+
+@enduml

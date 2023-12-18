@@ -1,4 +1,4 @@
-package esinf.us_ei_02;
+package esinf.us_ei02;
 
 import java.util.Comparator;
 import java.util.Map;

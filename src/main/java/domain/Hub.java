@@ -1,42 +1,33 @@
 package domain;
 
+import esinf.gps.GPS;
 import esinf.model.Local;
 
 import javax.xml.crypto.Data;
 import java.time.LocalTime;
 import java.util.Objects;
 
-public class Hub {
-    private Local local;
+public class Hub extends Local{
     private LocalTime openingHours;
     private LocalTime closingHours;
     private int dischargeTime;
 
-    private final Local DEFAULT_LOCAL=new Local();
     private final LocalTime DEFAULT_OPENING_HOURS=LocalTime.MIDNIGHT;
     private final LocalTime DEFAULT_CLOSING_HOURS=LocalTime.MIDNIGHT;
     private final int DEFAULT_DISCHARGE_TIME=0;
 
     public Hub(){
-        this.local = DEFAULT_LOCAL;
+        super();
         this.openingHours = DEFAULT_OPENING_HOURS;
         this.closingHours = DEFAULT_CLOSING_HOURS;
         this.dischargeTime = DEFAULT_DISCHARGE_TIME;
     }
 
-    public Hub(Local local, LocalTime openingHours, LocalTime closingHours, int dischargeTime) {
-        this.local = local;
+    public Hub(String localId, GPS gps, LocalTime openingHours, LocalTime closingHours, int dischargeTime) {
+        super(localId, gps);
         this.openingHours = openingHours;
         this.closingHours = closingHours;
         this.dischargeTime = dischargeTime;
-    }
-
-    public Local getLocal() {
-        return local;
-    }
-
-    public void setLocal(Local local) {
-        this.local = local;
     }
 
     public LocalTime getOpeningHours() {
@@ -68,23 +59,24 @@ public class Hub {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
         Hub hub = (Hub) o;
-        return getDischargeTime() == hub.getDischargeTime() && Objects.equals(getLocal(), hub.getLocal()) && Objects.equals(getOpeningHours(), hub.getOpeningHours()) && Objects.equals(getClosingHours(), hub.getClosingHours());
+        return getDischargeTime() == hub.getDischargeTime() && Objects.equals(getOpeningHours(), hub.getOpeningHours()) && Objects.equals(getClosingHours(), hub.getClosingHours());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getLocal(), getOpeningHours(), getClosingHours(), getDischargeTime());
+        return Objects.hash(super.hashCode(), getOpeningHours(), getClosingHours(), getDischargeTime());
     }
 
     @Override
     public String toString() {
-        return "Hub {" +
-                "local=" + local +
-                ", openingHours=" + openingHours +
+        return "Hub{" +
+                "localId='" + super.getLocalId() +
+                ", gps=" + super.getGps() +
+                "openingHours=" + openingHours +
                 ", closingHours=" + closingHours +
                 ", dischargeTime=" + dischargeTime +
-                "}\n";
+                '}';
     }
-
 }

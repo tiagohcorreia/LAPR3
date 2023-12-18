@@ -54,12 +54,9 @@ public class Local  {
 
     @Override
     public String toString() {
-
-        final StringBuilder sb = new StringBuilder("Local {");
-
-        sb.append("localId='").append(localId).append('\'');
-        sb.append(", gps=").append(gps);
-        sb.append('}');
-        return sb.toString();
+        return "Local{" +
+                "localId='" + localId + '\'' +
+                ", gps=" + gps +
+                '}';
     }
 }

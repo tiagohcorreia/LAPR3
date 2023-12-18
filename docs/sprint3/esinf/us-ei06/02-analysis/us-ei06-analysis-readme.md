@@ -4,4 +4,4 @@
 
 ### Modelo de domínio parcial
 
-![uslp05_domain-model.svg](svg%2Fuslp05_domain-model.svg)
+![us-ei06-domain-model.svg](svg%2Fus-ei06-domain-model.svg)

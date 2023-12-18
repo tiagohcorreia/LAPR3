@@ -1,11 +1,11 @@
 package esinf.us_ei_02;
 
-import esinf.Graph;
 import esinf.IntegerBinaryOperator;
 import esinf.IntegerComparator;
 import esinf.map.MapGraphLoader;
 import esinf.model.Local;
 import esinf.store.GraphStore;
+import esinf.us_ei02.IdealVerticesCalculator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
