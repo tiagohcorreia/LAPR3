@@ -40,7 +40,8 @@ private LocalTime leavingHour;
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Record record)) return false;
+        if (!(o instanceof Record)) return false;
+        Record record=(Record) o;
         return getHub().equals(record.getHub()) && getArrivingHour().equals(record.getArrivingHour()) && getLeavingHour().equals(record.getLeavingHour());
     }
 

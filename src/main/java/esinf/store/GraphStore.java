@@ -1,5 +1,6 @@
 package esinf.store;
 
+import esinf.Edge;
 import esinf.dataStructure.Distance;
 import esinf.dataStructure.FurthestPlacesData;
 import esinf.Algorithms;
@@ -24,7 +25,41 @@ public class GraphStore {
         graph.addEdge(local1, local2, distancia);
     }
 
+    /**
+     * Replaces a local (vertex) by a new local.
+     * It is useful to set hubs.
+     * @param oldLocal vertex to be replaced
+     * @param newLocal new vertex
+     * @return false if operation fails by some reason, true if operation succeeds
+     */
+    public boolean replaceLocal(Local oldLocal, Local newLocal){
 
+        try {
+            graph.addVertex(newLocal);
+
+            for (Edge<Local, Integer> e: graph.edges()){
+
+                if (e.getVOrig().equals(oldLocal)){
+                    Local destiny=e.getVDest();
+                    Integer distance=e.getWeight();
+                    graph.removeEdge(oldLocal, destiny);
+                    graph.addEdge(newLocal, destiny, distance);
+
+                } else if (e.getVDest().equals(oldLocal)){
+                    Local origin=e.getVOrig();
+                    Integer distance=e.getWeight();
+                    graph.removeEdge(origin, oldLocal);
+                    graph.addEdge(origin, newLocal, distance);
+                }
+            }
+
+            return true;
+
+        } catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
     //----------------
 
     public MapGraph<Local, Integer> removeEdgesAboveAutonomy(double autonomy) {

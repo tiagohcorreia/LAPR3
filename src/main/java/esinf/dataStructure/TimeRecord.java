@@ -46,7 +46,8 @@ public class TimeRecord {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof TimeRecord that)) return false;
+        if (!(o instanceof TimeRecord)) return false;
+        TimeRecord that=(TimeRecord) o;
         return getTotalTime().equals(that.getTotalTime()) && getTimeAffectedToVehicleCharging().equals(that.getTimeAffectedToVehicleCharging()) && getTimeAffectedToTheRoute().equals(that.getTimeAffectedToTheRoute()) && getTimeAffectedBTheUnloadingTime().equals(that.getTimeAffectedBTheUnloadingTime());
     }
 
