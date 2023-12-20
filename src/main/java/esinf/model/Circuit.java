@@ -1,6 +1,5 @@
 package esinf.model;
 
-import domain.Hub;
 import esinf.dataStructure.Distance;
 
 import java.util.List;
@@ -15,8 +14,8 @@ public class Circuit {
     private int numberOfChargings;
     private double totalTime;
 
-    public Circuit(Vehicle vehicle,Hub origin, List<Hub> hubs, List<Integer> collaborators, List<Distance> distances, double totalDistance, int numberOfChargings, double totalTime) {
-        this.vehicle =  vehicle;
+    public Circuit(Vehicle vehicle, Hub origin, List<Hub> hubs, List<Integer> collaborators, List<Distance> distances, double totalDistance, int numberOfChargings, double totalTime) {
+        this.vehicle = vehicle;
         this.origin = origin;
         this.hubs = hubs;
         this.collaborators = collaborators;

@@ -1,22 +1,20 @@
-package domain;
+package esinf.model;
 
 import esinf.gps.GPS;
-import esinf.model.Local;
 
-import javax.xml.crypto.Data;
 import java.time.LocalTime;
 import java.util.Objects;
 
-public class Hub extends Local{
+public class Hub extends Local {
     private LocalTime openingHours;
     private LocalTime closingHours;
     private int dischargeTime;
 
-    private final LocalTime DEFAULT_OPENING_HOURS=LocalTime.MIDNIGHT;
-    private final LocalTime DEFAULT_CLOSING_HOURS=LocalTime.MIDNIGHT;
-    private final int DEFAULT_DISCHARGE_TIME=0;
+    private final LocalTime DEFAULT_OPENING_HOURS = LocalTime.MIDNIGHT;
+    private final LocalTime DEFAULT_CLOSING_HOURS = LocalTime.MIDNIGHT;
+    private final int DEFAULT_DISCHARGE_TIME = 0;
 
-    public Hub(){
+    public Hub() {
         super();
         this.openingHours = DEFAULT_OPENING_HOURS;
         this.closingHours = DEFAULT_CLOSING_HOURS;

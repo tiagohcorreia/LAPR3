@@ -1,6 +1,6 @@
 package esinf.store;
 
-import domain.Hub;
+import esinf.model.Hub;
 import esinf.Edge;
 import esinf.Graph;
 import esinf.map.MapGraphLoader;
