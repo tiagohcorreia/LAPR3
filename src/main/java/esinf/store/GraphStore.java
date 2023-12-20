@@ -1,5 +1,6 @@
 package esinf.store;
 
+import domain.Hub;
 import esinf.Edge;
 import esinf.dataStructure.Distance;
 import esinf.dataStructure.FurthestPlacesData;
@@ -53,12 +54,35 @@ public class GraphStore {
                 }
             }
 
+            graph.removeVertex(oldLocal);
+
             return true;
 
         } catch (Exception e){
             e.printStackTrace();
             return false;
         }
+    }
+
+    /**
+     * replaces the locals specified in the ArrayList simplesLocals by the hub in the same index at ArrayList hubs
+     * @param simpleLocals list of simple locals to be replaced
+     * @param hubs list of hubs
+     * @return false for operation failure, true for operation success
+     */
+    public boolean replaceSimpleLocalsByHubs(ArrayList<Local> simpleLocals,
+                                      ArrayList<Hub> hubs){
+        if (simpleLocals.size()!=hubs.size()){
+            return false;
+        }
+
+        for (int i=0; i < simpleLocals.size(); i++){
+            Local simpleLocal=simpleLocals.get(i);
+            Local hub=hubs.get(i);
+            replaceLocal(simpleLocal, hub);
+        }
+
+        return true;
     }
     //----------------
 

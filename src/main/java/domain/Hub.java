@@ -61,7 +61,9 @@ public class Hub extends Local{
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Hub hub = (Hub) o;
-        return getDischargeTime() == hub.getDischargeTime() && Objects.equals(getOpeningHours(), hub.getOpeningHours()) && Objects.equals(getClosingHours(), hub.getClosingHours());
+        return getDischargeTime() == hub.getDischargeTime()
+                && Objects.equals(getOpeningHours(), hub.getOpeningHours())
+                && Objects.equals(getClosingHours(), hub.getClosingHours());
     }
 
     @Override

@@ -42,7 +42,8 @@ public class Local  {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Local local = (Local) o;
-        return Objects.equals(localId, local.localId) && Objects.equals(gps, local.gps);
+        return Objects.equals(localId, local.localId)
+                && Objects.equals(gps, local.gps);
     }
 
 
@@ -57,6 +58,6 @@ public class Local  {
         return "Local{" +
                 "localId='" + localId + '\'' +
                 ", gps=" + gps +
-                '}';
+                "}\n";
     }
 }
