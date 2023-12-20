@@ -1,0 +1,12 @@
+@startuml
+
+autonumber
+
+actor User as u
+participant SYSTEM as s
+
+u -> s: começa o pedido de improtação
+
+s -> u: devolve os dados obtidos do ficheiro
+
+@enduml

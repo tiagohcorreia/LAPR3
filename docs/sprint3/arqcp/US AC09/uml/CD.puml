@@ -1,0 +1,26 @@
+@startuml
+
+title Diagrama de Classes
+
+interface Runnable {
+    + run()
+}
+
+class LoadDataFromFileUSAC09Controller {
+    - controller
+    + loadData()
+}
+
+class LoadDataFromFileUSAC09UI {
+    + run()
+}
+
+class read_file_to_strucuture {
+    + loadData()
+}
+
+Runnable -left-|> LoadDataFromFileUSAC09UI
+LoadDataFromFileUSAC09UI ..> LoadDataFromFileUSAC09Controller
+LoadDataFromFileUSAC09Controller ..> read_file_to_strucuture
+
+@enduml
