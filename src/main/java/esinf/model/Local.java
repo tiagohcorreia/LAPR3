@@ -36,6 +36,10 @@ public class Local  {
         return gps;
     }
 
+    public int getNumberOfCollaborators(){
+        return Integer.parseInt(localId.substring(2));
+    }
+
 
     @Override
     public boolean equals(Object o) {

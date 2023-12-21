@@ -38,7 +38,11 @@ public class Edge<V, E> {
 
     @Override
     public String toString() {
-        return String.format("%s -> %s\nWeight: %s", vOrig, vDest, weight);
+        return "Edge{" +
+                "vOrig=" + vOrig +
+                ", vDest=" + vDest +
+                ", weight=" + weight +
+                "\n";
     }
 
     @Override
@@ -54,6 +58,8 @@ public class Edge<V, E> {
     public int hashCode() {
         return Objects.hash(vOrig, vDest);
     }
+
+
 
     public double getWeightDouble() {
         return (double) weight;

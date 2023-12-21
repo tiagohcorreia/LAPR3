@@ -2,48 +2,44 @@ package domain;
 
 import esinf.gps.GPS;
 import esinf.model.Local;
+import esinf.model.Schedule;
 
-import javax.xml.crypto.Data;
 import java.time.LocalTime;
 import java.util.Objects;
 
-public class Hub extends Local{
-    private LocalTime openingHours;
-    private LocalTime closingHours;
+public class Hub extends Local {
+
+    private Schedule schedule;
     private int dischargeTime;
 
-    private final LocalTime DEFAULT_OPENING_HOURS=LocalTime.MIDNIGHT;
-    private final LocalTime DEFAULT_CLOSING_HOURS=LocalTime.MIDNIGHT;
-    private final int DEFAULT_DISCHARGE_TIME=0;
+    private final Schedule DEFAULT_SCHEDULE = new Schedule();
+    private final int DEFAULT_DISCHARGE_TIME = 0;
 
-    public Hub(){
+    private final int NUMBER_OF_COLLABORATORS_LIMIT_1 = 105;
+    private final int NUMBER_OF_COLLABORATORS_LIMIT_2 = 215;
+
+    private final Schedule SCHEDULE_1 = new Schedule(LocalTime.of(9, 0), LocalTime.of(14, 0));
+    private final Schedule SCHEDULE_2 = new Schedule(LocalTime.of(11, 0), LocalTime.of(16, 0));
+    private final Schedule SCHEDULE_3 = new Schedule(LocalTime.of(12, 0), LocalTime.of(17, 0));
+
+    public Hub() {
         super();
-        this.openingHours = DEFAULT_OPENING_HOURS;
-        this.closingHours = DEFAULT_CLOSING_HOURS;
+        this.schedule = DEFAULT_SCHEDULE;
         this.dischargeTime = DEFAULT_DISCHARGE_TIME;
     }
 
-    public Hub(String localId, GPS gps, LocalTime openingHours, LocalTime closingHours, int dischargeTime) {
+    public Hub(String localId, GPS gps, int dischargeTime) {
         super(localId, gps);
-        this.openingHours = openingHours;
-        this.closingHours = closingHours;
+        generateSchedule();
         this.dischargeTime = dischargeTime;
     }
 
-    public LocalTime getOpeningHours() {
-        return openingHours;
+    public Schedule getSchedule() {
+        return schedule;
     }
 
-    public void setOpeningHours(LocalTime openingHours) {
-        this.openingHours = openingHours;
-    }
-
-    public LocalTime getClosingHours() {
-        return closingHours;
-    }
-
-    public void setClosingHours(LocalTime closingHours) {
-        this.closingHours = closingHours;
+    public void setSchedule(Schedule schedule) {
+        this.schedule = schedule;
     }
 
     public int getDischargeTime() {
@@ -54,6 +50,18 @@ public class Hub extends Local{
         this.dischargeTime = dischargeTime;
     }
 
+    private Schedule generateSchedule() {
+
+        if (this.getNumberOfCollaborators() <= NUMBER_OF_COLLABORATORS_LIMIT_1) {
+            schedule = SCHEDULE_1;
+        } else if (this.getNumberOfCollaborators() <= NUMBER_OF_COLLABORATORS_LIMIT_2) {
+            schedule = SCHEDULE_2;
+        } else {
+            schedule = SCHEDULE_3;
+        }
+
+        return schedule;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -61,23 +69,23 @@ public class Hub extends Local{
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Hub hub = (Hub) o;
-        return getDischargeTime() == hub.getDischargeTime()
-                && Objects.equals(getOpeningHours(), hub.getOpeningHours())
-                && Objects.equals(getClosingHours(), hub.getClosingHours());
+        return this.getLocalId().equals(hub.getLocalId()) &&
+                this.getGps().equals(hub.getGps()) &&
+                this.getDischargeTime() == hub.getDischargeTime() &&
+                Objects.equals(this.getSchedule(), hub.getSchedule());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getOpeningHours(), getClosingHours(), getDischargeTime());
+        return Objects.hash(super.hashCode(), getSchedule(), getDischargeTime());
     }
 
     @Override
     public String toString() {
         return "Hub{" +
-                "localId='" + super.getLocalId() +
+                "id=" + super.getLocalId() +
                 ", gps=" + super.getGps() +
-                ", openingHours=" + openingHours +
-                ", closingHours=" + closingHours +
+                ", schedule=" + schedule +
                 ", dischargeTime=" + dischargeTime +
                 "}\n";
     }
