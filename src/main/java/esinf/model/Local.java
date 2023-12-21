@@ -10,7 +10,7 @@ import java.util.function.ToDoubleFunction;
 import java.util.function.ToIntFunction;
 import java.util.function.ToLongFunction;
 
-public class Local  {
+public class Local implements Cloneable{
 
     private String localId;
     private GPS gps;
@@ -34,6 +34,14 @@ public class Local  {
 
     public GPS getGps() {
         return gps;
+    }
+
+    public void setLocalId(String localId) {
+        this.localId = localId;
+    }
+
+    public void setGps(GPS gps) {
+        this.gps = gps;
     }
 
     public int getNumberOfCollaborators(){
@@ -63,5 +71,15 @@ public class Local  {
                 "localId='" + localId + '\'' +
                 ", gps=" + gps +
                 "}\n";
+    }
+
+    @Override
+    public Local clone() {
+        try {
+            Local clone = (Local) super.clone();
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
     }
 }

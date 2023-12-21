@@ -96,6 +96,7 @@ public class PossibleRoutes<V, E> {
 
         int origKey = graph.key(origin);
         if (visited[origKey]) return;
+        //E oldDistanceTravelled=distanceTravelled;
 
         Edge<V, E> edge = graph.edge(route.getRoute().peekFirst(), origin);
 
@@ -125,20 +126,25 @@ public class PossibleRoutes<V, E> {
 
             if (comparat.compare(distanceTravelled, autonomy) <= 0) {
 
-                simpleDistancesOfRoute.add(edge);
 
                 if (origin.equals(destiny)) {
+                    ArrayList<Edge<V, E>> simpleDistancesOfRouteCopy=new ArrayList<>(simpleDistancesOfRoute);
+                    simpleDistancesOfRouteCopy.add(edge);
+
                     Route<V> routeCopy = new Route<>(route.getRoute());
                     LinkedList<V> list = routeCopy.getRoute();
                     list.addFirst(destiny);
                     Collections.reverse(list);
                     routes.add(routeCopy);
+
                     routesAndTotalDistances.put(routeCopy, distanceTravelled);
-                    routeAndSimpleDistances.put(routeCopy, simpleDistancesOfRoute);
+                    routeAndSimpleDistances.put(routeCopy, simpleDistancesOfRouteCopy);
+
                     return;
                 }
 
                 route.getRoute().push(origin);
+                simpleDistancesOfRoute.add(edge);
                 visited[origKey] = true;
 
                 for (V vAdj : graph.adjVertices(origin)) {
@@ -154,10 +160,12 @@ public class PossibleRoutes<V, E> {
                             routesAndTotalDistances,
                             routes);
                 }
-            }
+            } else return;
 
             route.getRoute().pop();
             visited[origKey] = false;
+            simpleDistancesOfRoute.remove(edge);
+            //distanceTravelled=oldDistanceTravelled;
         }
     }
 
