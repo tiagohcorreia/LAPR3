@@ -1,5 +1,7 @@
 package esinf;
 
+import domain.Hub;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.function.Predicate;

@@ -1,4 +1,2 @@
-package esinf.dataStructure;
-
-public class ShortestPathWithNhubsWithHigherCollaboratores {
+package esinf.dataStructure;public class shortestPathWithNhubsWithHigherCollaboratores {
 }

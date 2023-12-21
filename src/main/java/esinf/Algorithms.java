@@ -1,8 +1,13 @@
 package esinf;
 
+import domain.Hub;
 import esinf.Edge;
 import esinf.Graph;
+import esinf.dataStructure.Distance;
 import esinf.map.MapGraph;
+import esinf.model.Circuit;
+import esinf.model.Vehicle;
+import esinf.store.GraphStore;
 
 import java.util.*;
 import java.util.function.BinaryOperator;
@@ -505,5 +510,78 @@ public class Algorithms {
             }
         }
     }
+
+    public static <V, E> LinkedList<V> shortestCircuitWithHubs(Graph<V, E> g, V origin, int numHubs) {
+        if (g == null || !g.validVertex(origin) || numHubs < 0) return new LinkedList<>();
+
+        LinkedList<V> shortestCircuit = new LinkedList<>();
+        List<V> currentPath = new ArrayList<>();
+        boolean[] visited = new boolean[g.numVertices()];
+        double[] shortestDistance = {Double.MAX_VALUE};
+
+        allCircuitsWithHubs(g, origin, origin, numHubs, visited, currentPath, shortestCircuit, shortestDistance);
+
+        return shortestCircuit;
+    }
+
+    public static <V, E> void allCircuitsWithHubs(Graph<V, E> g, V origin, V current, int numHubs,
+                                                   boolean[] visited, List<V> currentPath,
+                                                   LinkedList<V> shortestCircuit, double[] shortestDistance) {
+        visited[g.key(current)] = true;
+        currentPath.add(current);
+
+        double currentDistance = calculateDistance(g, currentPath);
+
+        if (currentPath.size() == numHubs + 1) {
+            // Found a circuit with the specified number of intermediate hubs
+            if (currentDistance < shortestDistance[0]) {
+                shortestDistance[0] = currentDistance;
+                shortestCircuit.clear();
+                shortestCircuit.addAll(currentPath);
+            }
+        } else {
+            for (V vAdj : g.adjVertices(current)) {
+                if (!visited[g.key(vAdj)]) {
+                    allCircuitsWithHubs(g, origin, vAdj, numHubs, visited, currentPath, shortestCircuit, shortestDistance);
+                }
+            }
+        }
+
+        visited[g.key(current)] = false;
+        currentPath.remove(current);
+    }
+
+    private static <V, E> double calculateDistance(Graph<V, E> g, List<V> path) {
+        double distance = 0.0;
+
+        for (int i = 0; i < path.size() - 1; i++) {
+            V currentVertex = path.get(i);
+            V nextVertex = path.get(i + 1);
+
+            // Check if vertices are valid
+            if (g.validVertex(currentVertex) && g.validVertex(nextVertex)) {
+                // Find the edge between two vertices
+                Edge<V, E> edge = null;
+                for (Edge<V, E> e : g.edges()) {
+                    if ((e.getVOrig().equals(currentVertex) && e.getVDest().equals(nextVertex))
+                            || (!g.isDirected() && e.getVDest().equals(currentVertex) && e.getVOrig().equals(nextVertex))) {
+                        edge = e;
+                        break;
+                    }
+                }
+
+                // If edge is found, add its weight to the distance
+                if (edge != null) {
+                    distance += Double.parseDouble(edge.getWeight().toString());
+                }
+            }
+        }
+
+        return distance;
+    }
+
+
+
+
 }
 
