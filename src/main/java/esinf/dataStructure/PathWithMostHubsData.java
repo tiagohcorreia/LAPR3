@@ -1,11 +1,9 @@
 package esinf.dataStructure;
 
-import domain.Hub;
+import esinf.model.Hub;
 import esinf.model.Local;
 
-import javax.xml.crypto.Data;
 import java.util.List;
-import java.util.Map;
 
 public class PathWithMostHubsData {
     private final int DEFAULT_VALUE = 0;

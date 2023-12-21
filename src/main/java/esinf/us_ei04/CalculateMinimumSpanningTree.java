@@ -1,13 +1,11 @@
-package esinf.usei04;
+package esinf.us_ei04;
 
 import esinf.Algorithms;
 import esinf.Edge;
 import esinf.Graph;
 import esinf.map.MapGraph;
-import esinf.map.MapGraphLoader;
 import esinf.model.Local;
 
-import java.io.IOException;
 import java.util.*;
 
 /**

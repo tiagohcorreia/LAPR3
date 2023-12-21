@@ -1,8 +1,7 @@
-package esinf.usei04;
+package esinf.us_ei04;
 
 import esinf.map.MapGraph;
 import esinf.map.MapGraphLoader;
-import esinf.matrix.MatrixGraph;
 import esinf.model.Local;
 import esinf.store.GraphStore;
 import org.junit.jupiter.api.Test;

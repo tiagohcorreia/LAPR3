@@ -1,8 +1,7 @@
 package esinf.dataStructure;
 
-import domain.Hub;
+import esinf.model.Hub;
 
-import javax.xml.crypto.Data;
 import java.time.LocalTime;
 import java.util.Objects;
 

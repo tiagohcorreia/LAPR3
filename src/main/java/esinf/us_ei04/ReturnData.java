@@ -1,4 +1,4 @@
-package esinf.usei04;
+package esinf.us_ei04;
 
 import esinf.Graph;
 import esinf.model.Local;
