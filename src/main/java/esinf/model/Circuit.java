@@ -1,5 +1,6 @@
 package esinf.model;
 
+import esinf.model.Hub;
 import esinf.dataStructure.Distance;
 
 import java.util.List;

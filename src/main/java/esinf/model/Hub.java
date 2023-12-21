@@ -1,4 +1,4 @@
-package domain;
+package esinf.model;
 
 import esinf.gps.GPS;
 import esinf.model.Local;
