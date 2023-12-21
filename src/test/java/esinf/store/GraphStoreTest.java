@@ -61,8 +61,6 @@ class GraphStoreTest {
         Local oldLocal = graph.vertices().get(3);
         Local newLocal = new Hub(oldLocal.getLocalId(),
                 oldLocal.getGps(),
-                LocalTime.of(8, 0),
-                LocalTime.of(18, 0),
                 1);
 
         ArrayList<Edge<Local, Integer>> oldEdges = getOldEdges(oldLocal);
@@ -150,8 +148,6 @@ class GraphStoreTest {
 
         Hub h1 = new Hub(b.getLocalId(),
                 b.getGps(),
-                LocalTime.of(8, 0),
-                LocalTime.of(18, 0),
                 1);
 
         localsToBeReplaced.add(b);
@@ -175,13 +171,9 @@ class GraphStoreTest {
 
         Hub h1 = new Hub(b.getLocalId(),
                 b.getGps(),
-                LocalTime.of(8, 0),
-                LocalTime.of(18, 0),
                 1);
         Hub h2 = new Hub(c.getLocalId(),
                 c.getGps(),
-                LocalTime.of(8, 0),
-                LocalTime.of(18, 0),
                 1);
 
         localsToBeReplaced.add(b);
@@ -208,18 +200,12 @@ class GraphStoreTest {
 
         Hub h1 = new Hub(b.getLocalId(),
                 b.getGps(),
-                LocalTime.of(8, 0),
-                LocalTime.of(18, 0),
                 1);
         Hub h2 = new Hub(c.getLocalId(),
                 c.getGps(),
-                LocalTime.of(8, 0),
-                LocalTime.of(18, 0),
                 1);
         Hub h3 = new Hub(d.getLocalId(),
                 d.getGps(),
-                LocalTime.of(8, 0),
-                LocalTime.of(18, 0),
                 1);
 
         localsToBeReplaced.add(b);
