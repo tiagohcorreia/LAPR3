@@ -252,4 +252,38 @@ public class Utils {
     static public void enterToContinue() {
         readLineFromConsole("Press [Enter] to continue...");
     }
+
+    static public <E> E showAndSelectOneGeneric(List<E> list, String header) {
+        showListGeneric(list, header);
+        return selectObjectGeneric(list);
+    }
+
+    static public <E> void showListGeneric(List<E> list, String header) {
+        System.out.println(header);
+
+        int index = 0;
+        for (E o : list) {
+            index++;
+
+            System.out.println(index + ". " + o.toString());
+        }
+        System.out.println();
+        System.out.println("0 - Cancel");
+    }
+
+    static public <E> E selectObjectGeneric(List<E> list) {
+        String input;
+        int value;
+
+        do {
+            input = Utils.readLineFromConsole("Insira uma opcao: ");
+            value = Integer.parseInt(input);
+        } while (value < 0 || value > list.size());
+
+        if (value == 0) {
+            return null;
+        } else {
+            return list.get(value - 1);
+        }
+    }
 }
