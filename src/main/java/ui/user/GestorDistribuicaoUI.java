@@ -14,6 +14,7 @@ public class GestorDistribuicaoUI implements Runnable {
 
         List<MenuItem> options = new ArrayList<MenuItem>();
 
+        options.add(new MenuItem("Definir hubs", new SetHubsUI()));
         options.add(new MenuItem("Obter rotas possíveis para um hub", new GetPossibleRoutesUI()));
 
         Utils.runMenu(options, "MENU GESTOR DISTRIBUIÇÃO:");

@@ -250,18 +250,15 @@ public class GraphStore {
     }
 
 
-    public void setHubs(int n, Map<Local, Integer> dischargeTimes){
-        IdealVerticesCalculator<Local, Integer> idealVerticesCalculator =new IdealVerticesCalculator<>(graph,
-                new IntegerComparator(),
-                new IntegerBinaryOperator(),
-                0);
-
-        //ArrayList<Local> idealLocals= idealVerticesCalculator.getIdealVertices();
-        /*for (int i=0; i<n; i++){
-            Local l=idealLocals.get(i);
-            Hub h=new Hub(l, dischargeTimes.get(l));
-            replaceLocal(l, h);
-        }*/
+    public boolean generateHubs(Map<Local, Integer> localsAndDischargeTimes){
+        try{
+            for (Map.Entry<Local, Integer> e: localsAndDischargeTimes.entrySet()){
+                replaceLocal(e.getKey(), new Hub(e.getKey(), e.getValue()));
+            }
+            return true;
+        } catch (Exception e){
+            return false;
+        }
     }
 
     public boolean clean() {

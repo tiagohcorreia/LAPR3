@@ -23,12 +23,13 @@ public class Utils {
      */
     static public String readLineFromConsole(String prompt) {
         try {
-            System.out.println("\n" + prompt);
+            System.out.println(prompt);
 
             InputStreamReader converter = new InputStreamReader(System.in);
             BufferedReader in = new BufferedReader(converter);
 
-            return in.readLine();
+            String line = in.readLine();
+            return line;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -47,6 +48,7 @@ public class Utils {
                 String input = readLineFromConsole(prompt);
 
                 int value = Integer.parseInt(input);
+                System.out.println();
 
                 return value;
             } catch (NumberFormatException ex) {
@@ -292,7 +294,7 @@ public class Utils {
         }
     }
 
-    public static void runMenu(List<MenuItem> options, String header){
+    public static void runMenu(List<MenuItem> options, String header) {
 
         int option = 0;
 
@@ -304,5 +306,15 @@ public class Utils {
                 options.get(option).run();
             }
         } while (option != -1);
+    }
+
+    public static boolean getBooleanAnswer(String header) {
+        ArrayList<String> yes_or_no = new ArrayList<>();
+        yes_or_no.add("Sim");
+        yes_or_no.add("Não");
+
+        int in = showAndSelectIndex(yes_or_no, header);
+        System.out.println();
+        return in == 0;
     }
 }
