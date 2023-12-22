@@ -1,8 +1,13 @@
 package ui.utils;
 
+import ui.DatabaseConnectionTestUI;
+import ui.ExitUI;
+import ui.menu.MenuItem;
+
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -251,5 +256,53 @@ public class Utils {
 
     static public void enterToContinue() {
         readLineFromConsole("Press [Enter] to continue...");
+    }
+
+    static public <E> E showAndSelectOneGeneric(List<E> list, String header) {
+        showListGeneric(list, header);
+        return selectObjectGeneric(list);
+    }
+
+    static public <E> void showListGeneric(List<E> list, String header) {
+        System.out.println(header);
+
+        int index = 0;
+        for (E o : list) {
+            index++;
+
+            System.out.println(index + ". " + o.toString());
+        }
+        System.out.println();
+        System.out.println("0 - Cancel");
+    }
+
+    static public <E> E selectObjectGeneric(List<E> list) {
+        String input;
+        int value;
+
+        do {
+            input = Utils.readLineFromConsole("Insira uma opcao: ");
+            value = Integer.parseInt(input);
+        } while (value < 0 || value > list.size());
+
+        if (value == 0) {
+            return null;
+        } else {
+            return list.get(value - 1);
+        }
+    }
+
+    public static void runMenu(List<MenuItem> options, String header){
+
+        int option = 0;
+
+        do {
+            option = Utils.showAndSelectIndex(options, header);
+
+            if ((option >= 0) && (option < options.size())) {
+                System.out.println();
+                options.get(option).run();
+            }
+        } while (option != -1);
     }
 }

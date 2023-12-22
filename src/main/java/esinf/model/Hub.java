@@ -89,4 +89,9 @@ public class Hub extends Local {
                 ", dischargeTime=" + dischargeTime +
                 "}\n";
     }
+
+    @Override
+    public Hub clone() {
+        return (Hub) super.clone();
+    }
 }

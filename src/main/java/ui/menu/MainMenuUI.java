@@ -30,6 +30,7 @@ public class MainMenuUI implements Runnable {
             option = Utils.showAndSelectIndex(options, "\n\nMenu principal");
 
             if ((option >= 0) && (option < options.size())) {
+                System.out.println();
                 options.get(option).run();
             }
         } while (option != -1);

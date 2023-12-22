@@ -1,6 +1,7 @@
 package esinf.model;
 
 import java.util.LinkedList;
+import java.util.Objects;
 
 public class Route<V> {
 
@@ -26,6 +27,19 @@ public class Route<V> {
 
     public LinkedList<V> getRoute(){
         return route;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Route<?> route1 = (Route<?>) o;
+        return Objects.equals(getRoute(), route1.getRoute());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getRoute());
     }
 
     @Override

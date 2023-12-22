@@ -22,4 +22,16 @@ class LocalTest {
         assertEquals(11, r2);
         assertEquals(111, r3);
     }
+
+    @Test
+    void testClone(){
+        Local original=new Local("ct12", new GPS());
+        Local clone=original.clone();
+
+        assertEquals(original, clone);
+
+        clone.setLocalId("ct15");
+
+        assertNotEquals(original, clone);
+    }
 }

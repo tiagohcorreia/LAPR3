@@ -39,4 +39,18 @@ class HubTest {
         assertEquals(s3, hub8.getSchedule());
     }
 
+    @Test
+    void testClone(){
+        Hub original=new Hub("ct12", new GPS(), 0);
+        Hub clone=original.clone();
+
+        System.out.println(clone);
+
+        assertEquals(original, clone);
+
+        clone.setDischargeTime(1);
+
+        assertNotEquals(original, clone);
+    }
+
 }
