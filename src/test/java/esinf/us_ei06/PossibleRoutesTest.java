@@ -18,13 +18,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PossibleRoutesTest {
 
-    final String localsFilePath1 = "docs\\sprint3\\esinf\\us-ei06\\test-files\\locals\\us-ei06-locals-1.txt";
-    final String localsFilePath2 = "docs\\sprint3\\esinf\\us-ei06\\test-files\\locals\\us-ei06-locals-2.txt";
-    final String localsFilePath3 = "docs\\sprint3\\esinf\\us-ei06\\test-files\\locals\\us-ei06-locals-3.txt";
+    final String localsFilePath1 = "src\\test\\java\\esinf\\us_ei06\\test_files\\locals\\us-ei06-locals-1.txt";
+    final String localsFilePath2 = "src\\test\\java\\esinf\\us_ei06\\test_files\\locals\\us-ei06-locals-2.txt";
+    final String localsFilePath3 = "src\\test\\java\\esinf\\us_ei06\\test_files\\locals\\us-ei06-locals-3.txt";
 
-    final String distancesFilePath1 = "docs\\sprint3\\esinf\\us-ei06\\test-files\\distances\\us-ei06-distances-1.txt";
-    final String distancesFilePath2 = "docs\\sprint3\\esinf\\us-ei06\\test-files\\distances\\us-ei06-distances-2.txt";
-    final String distancesFilePath3 = "docs\\sprint3\\esinf\\us-ei06\\test-files\\distances\\us-ei06-distances-3.txt";
+    final String distancesFilePath1 = "src\\test\\java\\esinf\\us_ei06\\test_files\\distances\\us-ei06-distances-1.txt";
+    final String distancesFilePath2 = "src\\test\\java\\esinf\\us_ei06\\test_files\\distances\\us-ei06-distances-2.txt";
+    final String distancesFilePath3 = "src\\test\\java\\esinf\\us_ei06\\test_files\\distances\\us-ei06-distances-3.txt";
 
     GraphStore graphStore = new GraphStore();
     BinaryOperator<Integer> operator = new IntegerBinaryOperator();
