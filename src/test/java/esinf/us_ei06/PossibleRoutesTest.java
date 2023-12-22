@@ -5,7 +5,7 @@ import esinf.IntegerBinaryOperator;
 import esinf.IntegerComparator;
 import esinf.map.MapGraphLoader;
 import esinf.model.Local;
-import esinf.model.Route;
+import esinf.model.Path;
 import esinf.store.GraphStore;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -48,25 +48,25 @@ class PossibleRoutesTest {
         Local c = vertices.get(2);
         Local d = vertices.get(3);
 
-        Route<Local> r1 = new Route<>();
+        Path<Local> r1 = new Path<>();
         r1.getRoute().add(a);
         r1.getRoute().add(b);
         r1.getRoute().add(c);
         r1.getRoute().add(d);
 
-        Route<Local> r2 = new Route<>();
+        Path<Local> r2 = new Path<>();
         r2.getRoute().add(a);
         r2.getRoute().add(b);
         r2.getRoute().add(d);
 
-        ArrayList<Route<Local>> routes=new ArrayList<>();
-        routes.add(r1);
-        routes.add(r2);
+        ArrayList<Path<Local>> paths =new ArrayList<>();
+        paths.add(r1);
+        paths.add(r2);
 
         PossibleRoutes possibleRoutes = new PossibleRoutes<>(graphStore.getGraph(), operator, comparator, neutralValue);
         possibleRoutes.calculatePossibleRoutes(a, d, AUTONOMY);
 
-        assertEquals(routes.toString(), possibleRoutes.getRoutes().toString());
+        assertEquals(paths.toString(), possibleRoutes.getRoutes().toString());
 
         ArrayList<Edge<Local, Integer>> simpleDistances1=(ArrayList<Edge<Local, Integer>>) possibleRoutes.getRoutesAndSimpleDistances().get(r1);
         ArrayList<Edge<Local, Integer>> simpleDistances2=(ArrayList<Edge<Local, Integer>>) possibleRoutes.getRoutesAndSimpleDistances().get(r2);
@@ -90,38 +90,38 @@ class PossibleRoutesTest {
         Local c = vertices.get(2);
         Local d = vertices.get(3);
 
-        Route<Local> r1 = new Route<>();
+        Path<Local> r1 = new Path<>();
         r1.getRoute().add(a);
         r1.getRoute().add(b);
         r1.getRoute().add(c);
         r1.getRoute().add(d);
 
-        Route<Local> r2 = new Route<>();
+        Path<Local> r2 = new Path<>();
         r2.getRoute().add(a);
         r2.getRoute().add(b);
         r2.getRoute().add(d);
 
-        Route<Local> r3 = new Route<>();
+        Path<Local> r3 = new Path<>();
         r3.getRoute().add(a);
         r3.getRoute().add(c);
         r3.getRoute().add(b);
         r3.getRoute().add(d);
 
-        Route<Local> r4 = new Route<>();
+        Path<Local> r4 = new Path<>();
         r4.getRoute().add(a);
         r4.getRoute().add(c);
         r4.getRoute().add(d);
 
-        ArrayList<Route<Local>> routes=new ArrayList<>();
-        routes.add(r1);
-        routes.add(r2);
-        routes.add(r3);
-        routes.add(r4);
+        ArrayList<Path<Local>> paths =new ArrayList<>();
+        paths.add(r1);
+        paths.add(r2);
+        paths.add(r3);
+        paths.add(r4);
 
         PossibleRoutes possibleRoutes = new PossibleRoutes<>(graphStore.getGraph(), operator, comparator, neutralValue);
         possibleRoutes.calculatePossibleRoutes(a, d, AUTONOMY);
 
-        assertEquals(routes.toString(), possibleRoutes.getRoutes().toString());
+        assertEquals(paths.toString(), possibleRoutes.getRoutes().toString());
 
         ArrayList<Edge<Local, Integer>> simpleDistances1=(ArrayList<Edge<Local, Integer>>) possibleRoutes.getRoutesAndSimpleDistances().get(r1);
         ArrayList<Edge<Local, Integer>> simpleDistances2=(ArrayList<Edge<Local, Integer>>) possibleRoutes.getRoutesAndSimpleDistances().get(r2);
@@ -151,43 +151,43 @@ class PossibleRoutesTest {
         Local c = vertices.get(2);
         Local d = vertices.get(3);
 
-        Route<Local> r1 = new Route<>();
+        Path<Local> r1 = new Path<>();
         r1.getRoute().add(a);
         r1.getRoute().add(b);
         r1.getRoute().add(c);
         r1.getRoute().add(d);
 
-        Route<Local> r2 = new Route<>();
+        Path<Local> r2 = new Path<>();
         r2.getRoute().add(a);
         r2.getRoute().add(b);
         r2.getRoute().add(d);
 
-        Route<Local> r3 = new Route<>();
+        Path<Local> r3 = new Path<>();
         r3.getRoute().add(a);
         r3.getRoute().add(c);
         r3.getRoute().add(b);
         r3.getRoute().add(d);
 
-        Route<Local> r4 = new Route<>();
+        Path<Local> r4 = new Path<>();
         r4.getRoute().add(a);
         r4.getRoute().add(c);
         r4.getRoute().add(d);
 
-        Route<Local> r5 = new Route<>();
+        Path<Local> r5 = new Path<>();
         r5.getRoute().add(a);
         r5.getRoute().add(d);
 
-        ArrayList<Route<Local>> routes=new ArrayList<>();
-        routes.add(r1);
-        routes.add(r2);
-        routes.add(r3);
-        routes.add(r4);
-        routes.add(r5);
+        ArrayList<Path<Local>> paths =new ArrayList<>();
+        paths.add(r1);
+        paths.add(r2);
+        paths.add(r3);
+        paths.add(r4);
+        paths.add(r5);
 
         PossibleRoutes possibleRoutes = new PossibleRoutes<>(graphStore.getGraph(), operator, comparator, neutralValue);
         possibleRoutes.calculatePossibleRoutes(a, d, AUTONOMY);
 
-        assertEquals(routes.toString(), possibleRoutes.getRoutes().toString());
+        assertEquals(paths.toString(), possibleRoutes.getRoutes().toString());
 
         ArrayList<Edge<Local, Integer>> simpleDistances1=(ArrayList<Edge<Local, Integer>>) possibleRoutes.getRoutesAndSimpleDistances().get(r1);
         ArrayList<Edge<Local, Integer>> simpleDistances2=(ArrayList<Edge<Local, Integer>>) possibleRoutes.getRoutesAndSimpleDistances().get(r2);
@@ -220,29 +220,29 @@ class PossibleRoutesTest {
         Local c = vertices.get(2);
         Local d = vertices.get(3);
 
-        Route<Local> r2 = new Route<>();
+        Path<Local> r2 = new Path<>();
         r2.getRoute().add(a);
         r2.getRoute().add(b);
         r2.getRoute().add(d);
 
-        Route<Local> r4 = new Route<>();
+        Path<Local> r4 = new Path<>();
         r4.getRoute().add(a);
         r4.getRoute().add(c);
         r4.getRoute().add(d);
 
-        Route<Local> r5 = new Route<>();
+        Path<Local> r5 = new Path<>();
         r5.getRoute().add(a);
         r5.getRoute().add(d);
 
-        ArrayList<Route<Local>> routes=new ArrayList<>();
-        routes.add(r2);
-        routes.add(r4);
-        routes.add(r5);
+        ArrayList<Path<Local>> paths =new ArrayList<>();
+        paths.add(r2);
+        paths.add(r4);
+        paths.add(r5);
 
         PossibleRoutes possibleRoutes = new PossibleRoutes<>(graphStore.getGraph(), operator, comparator, neutralValue);
         possibleRoutes.calculatePossibleRoutes(a, d, AUTONOMY);
 
-        assertEquals(routes.toString(), possibleRoutes.getRoutes().toString());
+        assertEquals(paths.toString(), possibleRoutes.getRoutes().toString());
 
         ArrayList<Edge<Local, Integer>> simpleDistances2=(ArrayList<Edge<Local, Integer>>) possibleRoutes.getRoutesAndSimpleDistances().get(r2);
         ArrayList<Edge<Local, Integer>> simpleDistances4=(ArrayList<Edge<Local, Integer>>) possibleRoutes.getRoutesAndSimpleDistances().get(r4);
@@ -269,17 +269,17 @@ class PossibleRoutesTest {
         Local c = vertices.get(2);
         Local d = vertices.get(3);
 
-        Route<Local> r5 = new Route<>();
+        Path<Local> r5 = new Path<>();
         r5.getRoute().add(a);
         r5.getRoute().add(d);
 
-        ArrayList<Route<Local>> routes=new ArrayList<>();
-        routes.add(r5);
+        ArrayList<Path<Local>> paths =new ArrayList<>();
+        paths.add(r5);
 
         PossibleRoutes possibleRoutes = new PossibleRoutes<>(graphStore.getGraph(), operator, comparator, neutralValue);
         possibleRoutes.calculatePossibleRoutes(a, d, AUTONOMY);
 
-        assertEquals(routes.toString(), possibleRoutes.getRoutes().toString());
+        assertEquals(paths.toString(), possibleRoutes.getRoutes().toString());
 
         ArrayList<Edge<Local, Integer>> simpleDistances5=(ArrayList<Edge<Local, Integer>>) possibleRoutes.getRoutesAndSimpleDistances().get(r5);
 
@@ -300,43 +300,43 @@ class PossibleRoutesTest {
         Local c = vertices.get(2);
         Local d = vertices.get(3);
 
-        Route<Local> r1 = new Route<>();
+        Path<Local> r1 = new Path<>();
         r1.getRoute().add(a);
         r1.getRoute().add(b);
         r1.getRoute().add(c);
         r1.getRoute().add(d);
 
-        Route<Local> r2 = new Route<>();
+        Path<Local> r2 = new Path<>();
         r2.getRoute().add(a);
         r2.getRoute().add(b);
         r2.getRoute().add(d);
 
-        Route<Local> r3 = new Route<>();
+        Path<Local> r3 = new Path<>();
         r3.getRoute().add(a);
         r3.getRoute().add(c);
         r3.getRoute().add(b);
         r3.getRoute().add(d);
 
-        Route<Local> r4 = new Route<>();
+        Path<Local> r4 = new Path<>();
         r4.getRoute().add(a);
         r4.getRoute().add(c);
         r4.getRoute().add(d);
 
-        Route<Local> r5 = new Route<>();
+        Path<Local> r5 = new Path<>();
         r5.getRoute().add(a);
         r5.getRoute().add(d);
 
-        ArrayList<Route<Local>> routes=new ArrayList<>();
-        routes.add(r1);
-        routes.add(r2);
-        routes.add(r3);
-        routes.add(r4);
-        routes.add(r5);
+        ArrayList<Path<Local>> paths =new ArrayList<>();
+        paths.add(r1);
+        paths.add(r2);
+        paths.add(r3);
+        paths.add(r4);
+        paths.add(r5);
 
         PossibleRoutes possibleRoutes = new PossibleRoutes<>(graphStore.getGraph(), operator, comparator, neutralValue);
         possibleRoutes.calculatePossibleRoutes(a, d, AUTONOMY);
 
-        assertEquals(routes.toString(), possibleRoutes.getRoutes().toString());
+        assertEquals(paths.toString(), possibleRoutes.getRoutes().toString());
 
         ArrayList<Edge<Local, Integer>> simpleDistances1=(ArrayList<Edge<Local, Integer>>) possibleRoutes.getRoutesAndSimpleDistances().get(r1);
         ArrayList<Edge<Local, Integer>> simpleDistances2=(ArrayList<Edge<Local, Integer>>) possibleRoutes.getRoutesAndSimpleDistances().get(r2);

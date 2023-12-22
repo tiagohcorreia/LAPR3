@@ -5,7 +5,7 @@ import esinf.IntegerBinaryOperator;
 import esinf.IntegerComparator;
 import esinf.model.Hub;
 import esinf.model.Local;
-import esinf.model.Route;
+import esinf.model.Path;
 import esinf.store.GraphStore;
 import esinf.us_ei06.PossibleRoutes;
 import ui.utils.Utils;
@@ -66,17 +66,17 @@ public class GetPossibleRoutesUI implements Runnable {
     }
 
     public void printRoutes() {
-        ArrayList<Route<Local>> routes = possibleRoutes.getRoutes();
-        Map<Route<Local>, ArrayList<Edge<Local, Integer>>> routesAndSimpleDistances = possibleRoutes.getRoutesAndSimpleDistances();
-        Map<Route<Local>, Integer> routesAndTotalDistances = possibleRoutes.getRoutesAndTotalDistances();
+        ArrayList<Path<Local>> paths = possibleRoutes.getRoutes();
+        Map<Path<Local>, ArrayList<Edge<Local, Integer>>> routesAndSimpleDistances = possibleRoutes.getRoutesAndSimpleDistances();
+        Map<Path<Local>, Integer> routesAndTotalDistances = possibleRoutes.getRoutesAndTotalDistances();
 
         System.out.printf("Rotas entre %s e %s, considerando uma autonomia de %d km %n%n", origin.getLocalId(), destiny.getLocalId(), autonomy);
 
-        for (int i = 0; i < routes.size(); i++) {
-            Route<Local> route = routes.get(i);
+        for (int i = 0; i < paths.size(); i++) {
+            Path<Local> path = paths.get(i);
             System.out.printf("Rota %d: %n", (i + 1));
 
-            for (Local l : route.getRoute()) {
+            for (Local l : path.getRoute()) {
                 if (l instanceof Hub) {
                     System.out.printf("Local: %s (Hub) %n", l.getLocalId());
                 } else {
@@ -86,13 +86,13 @@ public class GetPossibleRoutesUI implements Runnable {
             System.out.println();
 
             System.out.println("Distâncias entre os locais:");
-            ArrayList<Edge<Local, Integer>> simpleDistances = routesAndSimpleDistances.get(route);
+            ArrayList<Edge<Local, Integer>> simpleDistances = routesAndSimpleDistances.get(path);
             for (Edge<Local, Integer> e : simpleDistances) {
                 System.out.printf("%s - %s: %d km %n", e.getVOrig().getLocalId(), e.getVDest().getLocalId(), e.getWeight());
             }
             System.out.println();
 
-            int totalDistance = routesAndTotalDistances.get(route);
+            int totalDistance = routesAndTotalDistances.get(path);
             System.out.printf("Distância total da rota: %d %n", totalDistance);
             System.out.printf("Duração média da rota: %d %n", autonomy / totalDistance);
             System.out.println();

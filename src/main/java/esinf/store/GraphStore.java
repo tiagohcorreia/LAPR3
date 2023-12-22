@@ -1,5 +1,7 @@
 package esinf.store;
 
+import esinf.IntegerBinaryOperator;
+import esinf.IntegerComparator;
 import esinf.model.Hub;
 import esinf.Edge;
 import esinf.dataStructure.Distance;
@@ -7,6 +9,7 @@ import esinf.dataStructure.FurthestPlacesData;
 import esinf.Algorithms;
 import esinf.map.MapGraph;
 import esinf.model.Local;
+import esinf.us_ei02.IdealVerticesCalculator;
 
 import java.util.*;
 
@@ -244,6 +247,21 @@ public class GraphStore {
 
 
         return data2;
+    }
+
+
+    public void setHubs(int n, Map<Local, Integer> dischargeTimes){
+        IdealVerticesCalculator<Local, Integer> idealVerticesCalculator =new IdealVerticesCalculator<>(graph,
+                new IntegerComparator(),
+                new IntegerBinaryOperator(),
+                0);
+
+        //ArrayList<Local> idealLocals= idealVerticesCalculator.getIdealVertices();
+        /*for (int i=0; i<n; i++){
+            Local l=idealLocals.get(i);
+            Hub h=new Hub(l, dischargeTimes.get(l));
+            replaceLocal(l, h);
+        }*/
     }
 
     public boolean clean() {

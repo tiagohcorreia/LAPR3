@@ -2,7 +2,7 @@ package esinf.us_ei06;
 
 import esinf.Edge;
 import esinf.Graph;
-import esinf.model.Route;
+import esinf.model.Path;
 
 import java.util.*;
 import java.util.function.BinaryOperator;
@@ -13,9 +13,9 @@ public class PossibleRoutes<V, E> {
     private BinaryOperator<E> operat;
     private Comparator<E> comparat;
     private E neutralValue;
-    private ArrayList<Route<V>> routes;
-    private Map<Route<V>, ArrayList<Edge<V, E>>> routesAndSimpleDistances;
-    private Map<Route<V>, E> routesAndTotalDistances;
+    private ArrayList<Path<V>> paths;
+    private Map<Path<V>, ArrayList<Edge<V, E>>> routesAndSimpleDistances;
+    private Map<Path<V>, E> routesAndTotalDistances;
 
     public PossibleRoutes(Graph<V, E> graph, BinaryOperator<E> operat, Comparator<E> comparat, E neutralValue) {
         this.graph = graph;
@@ -40,15 +40,15 @@ public class PossibleRoutes<V, E> {
         return neutralValue;
     }
 
-    public ArrayList<Route<V>> getRoutes() {
-        return routes;
+    public ArrayList<Path<V>> getRoutes() {
+        return paths;
     }
 
-    public Map<Route<V>, ArrayList<Edge<V, E>>> getRoutesAndSimpleDistances() {
+    public Map<Path<V>, ArrayList<Edge<V, E>>> getRoutesAndSimpleDistances() {
         return routesAndSimpleDistances;
     }
 
-    public Map<Route<V>, E> getRoutesAndTotalDistances() {
+    public Map<Path<V>, E> getRoutesAndTotalDistances() {
         return routesAndTotalDistances;
     }
 
@@ -60,13 +60,13 @@ public class PossibleRoutes<V, E> {
 
         E distanceTravelled = neutralValue;
 
-        routes = new ArrayList<>();
+        paths = new ArrayList<>();
         routesAndSimpleDistances = new HashMap<>();
         routesAndTotalDistances = new HashMap<>();
 
         boolean[] visited = new boolean[graph.vertices().size()];
         ArrayList<Edge<V, E>> simpleDistancesOfRoute = new ArrayList<>();
-        Route<V> route = new Route<>();
+        Path<V> path = new Path<>();
 
         calculatePossibleRoutes(
                 orig,
@@ -74,11 +74,11 @@ public class PossibleRoutes<V, E> {
                 autonomy,
                 distanceTravelled,
                 visited,
-                route,
+                path,
                 simpleDistancesOfRoute,
                 routesAndSimpleDistances,
                 routesAndTotalDistances,
-                routes);
+                paths);
 
         return true;
     }
@@ -88,21 +88,21 @@ public class PossibleRoutes<V, E> {
                                          E autonomy,
                                          E distanceTravelled,
                                          boolean[] visited,
-                                         Route<V> route,
+                                         Path<V> path,
                                          ArrayList<Edge<V, E>> simpleDistancesOfRoute,
-                                         Map<Route<V>, ArrayList<Edge<V, E>>> routeAndSimpleDistances,
-                                         Map<Route<V>, E> routesAndTotalDistances,
-                                         ArrayList<Route<V>> routes) {
+                                         Map<Path<V>, ArrayList<Edge<V, E>>> routeAndSimpleDistances,
+                                         Map<Path<V>, E> routesAndTotalDistances,
+                                         ArrayList<Path<V>> paths) {
 
         int origKey = graph.key(origin);
         if (visited[origKey]) return;
         //E oldDistanceTravelled=distanceTravelled;
 
-        Edge<V, E> edge = graph.edge(route.getRoute().peekFirst(), origin);
+        Edge<V, E> edge = graph.edge(path.getRoute().peekFirst(), origin);
 
         if (edge == null) {
 
-            route.getRoute().push(origin);
+            path.getRoute().push(origin);
             visited[origKey] = true;
 
             for (V vAdj : graph.adjVertices(origin)) {
@@ -112,11 +112,11 @@ public class PossibleRoutes<V, E> {
                         autonomy,
                         distanceTravelled,
                         visited,
-                        route,
+                        path,
                         simpleDistancesOfRoute,
                         routeAndSimpleDistances,
                         routesAndTotalDistances,
-                        routes);
+                        paths);
             }
 
         } else {
@@ -131,19 +131,19 @@ public class PossibleRoutes<V, E> {
                     ArrayList<Edge<V, E>> simpleDistancesOfRouteCopy=new ArrayList<>(simpleDistancesOfRoute);
                     simpleDistancesOfRouteCopy.add(edge);
 
-                    Route<V> routeCopy = new Route<>(route.getRoute());
-                    LinkedList<V> list = routeCopy.getRoute();
+                    Path<V> pathCopy = new Path<>(path.getRoute());
+                    LinkedList<V> list = pathCopy.getRoute();
                     list.addFirst(destiny);
                     Collections.reverse(list);
-                    routes.add(routeCopy);
+                    paths.add(pathCopy);
 
-                    routesAndTotalDistances.put(routeCopy, distanceTravelled);
-                    routeAndSimpleDistances.put(routeCopy, simpleDistancesOfRouteCopy);
+                    routesAndTotalDistances.put(pathCopy, distanceTravelled);
+                    routeAndSimpleDistances.put(pathCopy, simpleDistancesOfRouteCopy);
 
                     return;
                 }
 
-                route.getRoute().push(origin);
+                path.getRoute().push(origin);
                 simpleDistancesOfRoute.add(edge);
                 visited[origKey] = true;
 
@@ -154,15 +154,15 @@ public class PossibleRoutes<V, E> {
                             autonomy,
                             distanceTravelled,
                             visited,
-                            route,
+                            path,
                             simpleDistancesOfRoute,
                             routeAndSimpleDistances,
                             routesAndTotalDistances,
-                            routes);
+                            paths);
                 }
             } else return;
 
-            route.getRoute().pop();
+            path.getRoute().pop();
             visited[origKey] = false;
             simpleDistancesOfRoute.remove(edge);
             //distanceTravelled=oldDistanceTravelled;

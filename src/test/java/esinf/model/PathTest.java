@@ -5,18 +5,18 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class RouteTest {
+class PathTest {
 
     @Test
     void testEquals() {
 
-        Route<Local> r1=new Route<>();
+        Path<Local> r1=new Path<>();
         r1.getRoute().add(new Local("ct1", new GPS()));
 
-        Route<Local> r2=new Route<>();
+        Path<Local> r2=new Path<>();
         r2.getRoute().add(new Local("ct1", new GPS()));
 
-        Route<Local> r3=new Route<>();
+        Path<Local> r3=new Path<>();
         r3.getRoute().add(new Local("ct2", new GPS()));
 
         boolean result1=r1.equals(r2);
