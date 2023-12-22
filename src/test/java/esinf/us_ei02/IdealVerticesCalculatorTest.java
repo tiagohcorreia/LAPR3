@@ -199,4 +199,15 @@ class IdealVerticesCalculatorTest {
         assertEquals(125, result.get(l4));
         assertEquals(95, result.get(l5));
     }
+
+    @Test
+    void test(){
+        graphStore.clean();
+        MapGraphLoader.loadGraph("docs\\esinf_data\\locais_small.csv", "docs\\esinf_data\\distancias_small.csv");
+        IdealVerticesCalculator<Local, Integer> calculator=new IdealVerticesCalculator<>(graphStore.getGraph(),
+                new IntegerComparator(),
+                new IntegerBinaryOperator(),
+                0);
+        System.out.println(calculator.getVerticesByIdealOrder());
+    }
 }

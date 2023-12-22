@@ -1,8 +1,13 @@
 package ui.utils;
 
+import ui.DatabaseConnectionTestUI;
+import ui.ExitUI;
+import ui.menu.MenuItem;
+
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -285,5 +290,19 @@ public class Utils {
         } else {
             return list.get(value - 1);
         }
+    }
+
+    public static void runMenu(List<MenuItem> options, String header){
+
+        int option = 0;
+
+        do {
+            option = Utils.showAndSelectIndex(options, header);
+
+            if ((option >= 0) && (option < options.size())) {
+                System.out.println();
+                options.get(option).run();
+            }
+        } while (option != -1);
     }
 }
