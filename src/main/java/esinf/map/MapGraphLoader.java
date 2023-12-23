@@ -5,6 +5,7 @@ import java.io.BufferedReader;
 import esinf.gps.GPS;
 import esinf.model.Local;
 import esinf.store.GraphStore;
+import dataAccess.Repositories;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -14,7 +15,7 @@ import java.util.Objects;
 public class MapGraphLoader {
 
     public static boolean loadGraph(String locaisFile, String distanciasFile) {
-        GraphStore graphStore = new GraphStore();
+        GraphStore graphStore = Repositories.getInstance().getGraphStore();
 
         try (BufferedReader br = new BufferedReader(new FileReader(locaisFile))) {
             String line;

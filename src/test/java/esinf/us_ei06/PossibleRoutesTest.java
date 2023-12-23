@@ -9,6 +9,7 @@ import esinf.model.Path;
 import esinf.store.GraphStore;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import dataAccess.Repositories;
 
 import java.util.*;
 import java.util.function.BinaryOperator;
@@ -26,7 +27,7 @@ class PossibleRoutesTest {
     final String distancesFilePath2 = "src\\test\\java\\esinf\\us_ei06\\test_files\\distances\\us-ei06-distances-2.txt";
     final String distancesFilePath3 = "src\\test\\java\\esinf\\us_ei06\\test_files\\distances\\us-ei06-distances-3.txt";
 
-    GraphStore graphStore = new GraphStore();
+    GraphStore graphStore = Repositories.getInstance().getGraphStore();
     BinaryOperator<Integer> operator = new IntegerBinaryOperator();
     Comparator<Integer> comparator = new IntegerComparator();
     Integer neutralValue = 0;

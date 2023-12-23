@@ -6,6 +6,7 @@ import esinf.dataStructure.VertexMetrics;
 import esinf.model.Local;
 import esinf.store.GraphStore;
 import esinf.us_ei02.IdealVerticesCalculator;
+import dataAccess.Repositories;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.Map;
 
 public class SetHubsCtrl {
 
-    private GraphStore graphStore=new GraphStore();
+    private GraphStore graphStore= Repositories.getInstance().getGraphStore();
 
     public int getNumberOfSimpleLocals(){
         return graphStore.getSimpleLocals().size();

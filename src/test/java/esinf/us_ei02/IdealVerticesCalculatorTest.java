@@ -8,6 +8,7 @@ import esinf.model.Local;
 import esinf.store.GraphStore;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import dataAccess.Repositories;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class IdealVerticesCalculatorTest {
 
-    GraphStore graphStore=new GraphStore();
+    GraphStore graphStore= Repositories.getInstance().getGraphStore();
     Local l1;
     Local l2;
     Local l3;

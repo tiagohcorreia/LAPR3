@@ -8,6 +8,7 @@ import esinf.map.MapGraphLoader;
 import esinf.model.Local;
 import esinf.store.GraphStore;
 import org.junit.jupiter.api.Test;
+import dataAccess.Repositories;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class ex07 {
     @Test
     public void testEX7GetPathThatGoesThroughMostHubs() throws IOException {
 
-        GraphStore storage = new GraphStore();
+        GraphStore storage = Repositories.getInstance().getGraphStore();
         storage.clean();
         System.out.println(storage.clean());
 
