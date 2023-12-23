@@ -15,7 +15,7 @@ import java.util.*;
 
 public class GraphStore {
     static boolean directed = false;
-    private static MapGraph<Local, Integer> graph = new MapGraph<>(directed);
+    public static MapGraph<Local, Integer> graph = new MapGraph<>(directed);
 
     public MapGraph<Local, Integer> getGraph() {
         return graph;
@@ -32,26 +32,27 @@ public class GraphStore {
     /**
      * Replaces a local (vertex) by a new local.
      * It is useful to set hubs.
+     *
      * @param oldLocal vertex to be replaced
      * @param newLocal new vertex
      * @return false if operation fails by some reason, true if operation succeeds
      */
-    public boolean replaceLocal(Local oldLocal, Local newLocal){
+    public boolean replaceLocal(Local oldLocal, Local newLocal) {
 
         try {
             graph.addVertex(newLocal);
 
-            for (Edge<Local, Integer> e: graph.edges()){
+            for (Edge<Local, Integer> e : graph.edges()) {
 
-                if (e.getVOrig().equals(oldLocal)){
-                    Local destiny=e.getVDest();
-                    Integer distance=e.getWeight();
+                if (e.getVOrig().equals(oldLocal)) {
+                    Local destiny = e.getVDest();
+                    Integer distance = e.getWeight();
                     graph.removeEdge(oldLocal, destiny);
                     graph.addEdge(newLocal, destiny, distance);
 
-                } else if (e.getVDest().equals(oldLocal)){
-                    Local origin=e.getVOrig();
-                    Integer distance=e.getWeight();
+                } else if (e.getVDest().equals(oldLocal)) {
+                    Local origin = e.getVOrig();
+                    Integer distance = e.getWeight();
                     graph.removeEdge(origin, oldLocal);
                     graph.addEdge(origin, newLocal, distance);
                 }
@@ -61,7 +62,7 @@ public class GraphStore {
 
             return true;
 
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
@@ -69,19 +70,20 @@ public class GraphStore {
 
     /**
      * replaces the locals specified in the ArrayList simplesLocals by the hub in the same index at ArrayList hubs
+     *
      * @param simpleLocals list of simple locals to be replaced
-     * @param hubs list of hubs
+     * @param hubs         list of hubs
      * @return false for operation failure, true for operation success
      */
     public boolean replaceSimpleLocalsByHubs(ArrayList<Local> simpleLocals,
-                                      ArrayList<Hub> hubs){
-        if (simpleLocals.size()!=hubs.size()){
+                                             ArrayList<Hub> hubs) {
+        if (simpleLocals.size() != hubs.size()) {
             return false;
         }
 
-        for (int i=0; i < simpleLocals.size(); i++){
-            Local simpleLocal=simpleLocals.get(i);
-            Local hub=hubs.get(i);
+        for (int i = 0; i < simpleLocals.size(); i++) {
+            Local simpleLocal = simpleLocals.get(i);
+            Local hub = hubs.get(i);
             replaceLocal(simpleLocal, hub);
         }
 
@@ -90,7 +92,7 @@ public class GraphStore {
     //----------------
 
     public MapGraph<Local, Integer> removeEdgesAboveAutonomy(double autonomy) {
-        MapGraph<Local, Integer> clone =graph.clone();
+        MapGraph<Local, Integer> clone = graph.clone();
         List<Local> list = clone.vertices();
         for (int i = 0; i < clone.numVertices(); i++) {
             for (int j = 0; j < clone.numVertices() - 1; j++) {
@@ -121,8 +123,7 @@ public class GraphStore {
 
     }
 
-   // public ArrayList<Local> checkFurthest(List<>) {
-
+    // public ArrayList<Local> checkFurthest(List<>) {
 
 
     public List<Local> getVehicleChargeStops(MapGraph graph, LinkedList<Local> shortPath, double autonomy) {
@@ -233,7 +234,7 @@ public class GraphStore {
 
         double vehicleAutonomy = autonomy;
 
-        double distanceFromOriginToDestination =  Algorithms.shortestPath(clone, data.getLocal1(), data.getLocal2(), Integer::compare, Integer::sum, 0, shortPath2);
+        double distanceFromOriginToDestination = Algorithms.shortestPath(clone, data.getLocal1(), data.getLocal2(), Integer::compare, Integer::sum, 0, shortPath2);
 
         List<Local> vehicleChargeStops = getVehicleChargeStops(clone, shortPath2, autonomy);
 
@@ -250,13 +251,13 @@ public class GraphStore {
     }
 
 
-    public boolean generateHubs(Map<Local, Integer> localsAndDischargeTimes){
-        try{
-            for (Map.Entry<Local, Integer> e: localsAndDischargeTimes.entrySet()){
+    public boolean generateHubs(Map<Local, Integer> localsAndDischargeTimes) {
+        try {
+            for (Map.Entry<Local, Integer> e : localsAndDischargeTimes.entrySet()) {
                 replaceLocal(e.getKey(), new Hub(e.getKey(), e.getValue()));
             }
             return true;
-        } catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
     }
