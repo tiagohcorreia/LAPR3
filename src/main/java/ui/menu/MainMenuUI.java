@@ -24,15 +24,15 @@ public class MainMenuUI implements Runnable {
         options.add(new MenuItem("Escolher User", new ChooseRoleUI()));
         options.add(new MenuItem("Exit", new ExitUI()));
 
-        int option = 0;
+        Utils.runMenu(options, "MENU PRINCIPAL");
+        /*int option = 0;
 
         do {
             option = Utils.showAndSelectIndex(options, "\n\nMenu principal");
 
             if ((option >= 0) && (option < options.size())) {
-                System.out.println();
                 options.get(option).run();
             }
-        } while (option != -1);
+        } while (option != -1);*/
     }
 }

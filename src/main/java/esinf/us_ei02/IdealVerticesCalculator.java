@@ -4,6 +4,7 @@ import esinf.Algorithms;
 import esinf.Graph;
 import esinf.IntegerComparator;
 import esinf.dataStructure.VertexMetrics;
+import esinf.store.GraphStore;
 
 import java.util.*;
 import java.util.Comparator;
@@ -13,6 +14,7 @@ import java.util.function.BinaryOperator;
 public class IdealVerticesCalculator<V, E> {
 
     private Graph<V, E> graph;
+    private ArrayList<V> vertices;
     private Comparator<E> comparator;
     private BinaryOperator<E> binaryOperator;
     private E neutralValue;
@@ -21,8 +23,9 @@ public class IdealVerticesCalculator<V, E> {
     private Map<V, ArrayList<E>> verticesAndPathsDistances = new HashMap<>();
     private boolean calculationsMade = false;
 
-    public IdealVerticesCalculator(Graph<V, E> graph, Comparator<E> comparator, BinaryOperator<E> binaryOperator, E neutralValue) {
-        this.graph = graph;
+    public IdealVerticesCalculator(Graph<V, E> graph, ArrayList<V> vertices, Comparator<E> comparator, BinaryOperator<E> binaryOperator, E neutralValue) {
+        this.graph=graph;
+        this.vertices = vertices;
         this.comparator = comparator;
         this.binaryOperator = binaryOperator;
         this.neutralValue = neutralValue;
@@ -52,7 +55,7 @@ public class IdealVerticesCalculator<V, E> {
 
     private void getAllShortestPaths() {
 
-        for (V v : graph.vertices()) {
+        for (V v : vertices) {
 
             ArrayList<LinkedList<V>> paths = new ArrayList<>();
             ArrayList<E> distances = new ArrayList<>();

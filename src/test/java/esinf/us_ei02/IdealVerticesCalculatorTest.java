@@ -30,7 +30,7 @@ class IdealVerticesCalculatorTest {
     void setUp() {
         graphStore.clean();
         MapGraphLoader.loadGraph("src\\test\\java\\esinf\\us_ei02\\test_files\\locais-1.csv", "src\\test\\java\\esinf\\us_ei02\\test_files\\distancias-1.csv");
-        calculator=new IdealVerticesCalculator<>(graphStore.getGraph(),new IntegerComparator(), new IntegerBinaryOperator(), 0);
+        calculator=new IdealVerticesCalculator<>(graphStore.getGraph(), graphStore.getGraph().vertices(), new IntegerComparator(), new IntegerBinaryOperator(), 0);
         ArrayList<Local> vertices=graphStore.getGraph().vertices();
 
         l1=vertices.get(0);
