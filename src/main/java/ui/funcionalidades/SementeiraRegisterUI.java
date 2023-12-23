@@ -114,8 +114,8 @@ public class SementeiraRegisterUI implements Runnable {
             int optValidation = Utils.readIntegerFromConsole("1-CONFIRMAR\n0-CANCELAR");
 
             if (optValidation == 1) {
-                controllerop.operacaoAgricolaRegister(operacaoId,date);
-                controller.sementeiraRegister(operacaoId,parcelaId, variedadeId, quantidade, area, metodoExecucaoId);
+                controllerop.operacaoAgricolaRegister(operacaoId, date);
+                controller.sementeiraRegister(operacaoId, parcelaId, variedadeId, quantidade, area, metodoExecucaoId);
                 System.out.println("\nSementeira registada.");
             } else {
 

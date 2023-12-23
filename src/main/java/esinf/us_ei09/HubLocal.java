@@ -1,6 +1,5 @@
 package esinf.us_ei09;
 
-import esinf.model.Hub;
 import esinf.model.Local;
 
 import java.util.Set;
