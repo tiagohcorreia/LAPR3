@@ -6,6 +6,7 @@ import esinf.Graph;
 import esinf.model.Local;
 
 import java.util.*;
+import java.util.function.BinaryOperator;
 import java.util.stream.Collectors;
 
 
@@ -29,7 +30,7 @@ public class OrganizeGraphIntoClusters {
                 if (!hub.equals(destination)) {
 
                     LinkedList<Local> shortestPath = new LinkedList<>();
-                    Algorithms.shortestPath(graph, hub, destination, shortestPath);
+                    Algorithms.shortestPathDijkstra(graph, hub, Comparator.naturalOrder(), BinaryOperator.minBy(Comparator.naturalOrder()), 0, new boolean[graph.numVertices()], new ArrayList<>(), new ArrayList<>());
                     shortestPathsFromHub.add(shortestPath);
                 }
             }
@@ -61,14 +62,15 @@ public class OrganizeGraphIntoClusters {
         int maxShortestPaths = 0;
 
         for (Edge<Local, Integer> edge : graph.edges()) {
+
             int edgeShortestPaths = countShortestPaths(edge, shortestPaths);
 
             if (edgeShortestPaths > maxShortestPaths) {
+
                 maxShortestPaths = edgeShortestPaths;
                 edgeWithMaxShortestPaths = edge;
             }
         }
-
         return edgeWithMaxShortestPaths;
     }
 
@@ -77,11 +79,11 @@ public class OrganizeGraphIntoClusters {
         int count = 0;
 
         for (LinkedList<Local> path : shortestPaths) {
+
             if (path.contains(edge.getVOrig()) && path.contains(edge.getVDest())) {
                 count++;
             }
         }
-
         return count;
     }
 

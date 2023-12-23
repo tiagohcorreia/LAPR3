@@ -102,15 +102,192 @@ Outras classes:
 ---
 # 4. Testes
 
-**Test 1:** 
+**Test 1:** Testa se o número de vértices esta correto
+```java
+    @Test
+    void testeNumVerticesSmall() throws IOException {
+
+            GraphStore storage = new GraphStore();
+
+            storage.clean();
+
+            MapGraphLoader.loadGraph("docs/esinf_data/locais_small.csv", "docs/esinf_data/distancias_small.csv");
+
+            MapGraph<Local, Integer> graph = storage.getGraph();
+
+        int expectedNumVertex = 17;
+        int result = OrganizeGraphIntoClusters.organizeGraph(graph).size();
+
+        assertNotNull(graph);
+        assertEquals(expectedNumVertex, result);
+        }
+        
+
+```
 
 ---
 # 5. Implementação
 
-### Nome da classe
+### OrganizeGraphIntoClusters
 
 ```java
+public class OrganizeGraphIntoClusters {
+    public static Map<HubLocal, Set<Local>> organizeGraph(Graph<Local, Integer> graph) {
 
+        if (graph.isDirected()) return null;
+
+        Map<HubLocal, Set<Local>> hubList = new HashMap<>();
+        List<Local> vertexList = new ArrayList<>(graph.vertices());
+
+        while (!vertexList.isEmpty()) {
+
+            Local hub = vertexList.get(0);
+
+            // Encontrar os caminhos mais curtos para todos os pontos a partir do hub
+            List<LinkedList<Local>> shortestPathsFromHub = new ArrayList<>();
+
+            for (Local destination : vertexList) {
+
+                if (!hub.equals(destination)) {
+
+                    LinkedList<Local> shortestPath = new LinkedList<>();
+                    Algorithms.shortestPathDijkstra(graph, hub, Comparator.naturalOrder(), BinaryOperator.minBy(Comparator.naturalOrder()), 0, new boolean[graph.numVertices()], new ArrayList<>(), new ArrayList<>());
+                    shortestPathsFromHub.add(shortestPath);
+                }
+            }
+
+            // Encontrar a aresta com o maior número de caminhos curtos
+            Edge<Local, Integer> edgeToRemove = findEdgeWithMaxShortestPaths(graph, shortestPathsFromHub);
+
+            // Remover aresta
+            if (edgeToRemove != null) {
+                graph.removeEdge(edgeToRemove.getVOrig(), edgeToRemove.getVDest());
+            }
+
+            // Criar novo cluster com o hub e os destinos alcançados
+            Set<Local> cluster = new HashSet<>(shortestPathsFromHub.stream().flatMap(Collection::stream).collect(Collectors.toList()));
+            cluster.add(hub);
+
+            // Adicionar o hub e o cluster a lista de hubs
+            hubList.put(new HubLocal(hub, cluster), cluster);
+
+            // Remover vertices do cluster da lista de vertices
+            vertexList.removeAll(cluster);
+        }
+        return hubList;
+    }
+
+    public static Edge<Local, Integer> findEdgeWithMaxShortestPaths(Graph<Local, Integer> graph, List<LinkedList<Local>> shortestPaths) {
+
+        Edge<Local, Integer> edgeWithMaxShortestPaths = null;
+        int maxShortestPaths = 0;
+
+        for (Edge<Local, Integer> edge : graph.edges()) {
+
+            int edgeShortestPaths = countShortestPaths(edge, shortestPaths);
+
+            if (edgeShortestPaths > maxShortestPaths) {
+
+                maxShortestPaths = edgeShortestPaths;
+                edgeWithMaxShortestPaths = edge;
+            }
+        }
+        return edgeWithMaxShortestPaths;
+    }
+
+    private static int countShortestPaths(Edge<Local, Integer> edge, List<LinkedList<Local>> shortestPaths) {
+
+        int count = 0;
+
+        for (LinkedList<Local> path : shortestPaths) {
+
+            if (path.contains(edge.getVOrig()) && path.contains(edge.getVDest())) {
+                count++;
+            }
+        }
+        return count;
+    }
+}
+
+```
+
+### OrganizeGraphIntoClustersController
+
+```java
+public class OrganizeGraphIntoClustersController {
+
+    public OrganizeGraphIntoClustersController() {
+
+    }
+
+    public Map<HubLocal, Set<Local>> organizeSmall() {
+
+        GraphStore storage = new GraphStore();
+
+        storage.clean();
+
+        MapGraphLoader.loadGraph("docs/esinf_data/locais_small.csv", "docs/esinf_data/distancias_small.csv");
+
+        MapGraph<Local, Integer> graph = storage.getGraph();
+
+        return OrganizeGraphIntoClusters.organizeGraph(graph);
+    }
+
+    public Map<HubLocal, Set<Local>> organizeBig() {
+
+        GraphStore storage = new GraphStore();
+
+        storage.clean();
+
+        MapGraphLoader.loadGraph("docs/esinf_data/locais_big.csv", "docs/esinf_data/distancias_big.csv");
+
+        MapGraph<Local, Integer> graph = storage.getGraph();
+
+        return OrganizeGraphIntoClusters.organizeGraph(graph);
+    }
+}
+
+```
+
+### OrganizeGraphIntoClustersUI
+
+```java
+public class OrganizeGraphIntoClustersUI implements Runnable {
+
+    private final OrganizeGraphIntoClustersController controller = new OrganizeGraphIntoClustersController();
+
+    @Override
+    public void run() {
+
+        System.out.println("1. Ficheiro Small");
+        System.out.println("2. Ficheiro Big");
+        System.out.println();
+
+        try {
+
+            int option = Utils.readIntegerFromConsole("Escolha o ficheiro");
+
+            switch (option) {
+
+                case 1:
+                    System.out.println(this.controller.organizeSmall());
+                    break;
+
+                case 2:
+                    System.out.println(this.controller.organizeBig());
+                    break;
+
+                default:
+                    System.out.println("Opção Inválida");
+                    break;
+            }
+
+        } catch (Exception e) {
+
+            System.err.println(e.getMessage());
+        }
+    }
+}
 
 ```
 
