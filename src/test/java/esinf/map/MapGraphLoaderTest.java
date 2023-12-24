@@ -5,6 +5,7 @@ import esinf.gps.GPS;
 import esinf.model.Local;
 import esinf.store.GraphStore;
 import org.junit.jupiter.api.Test;
+import dataAccess.Repositories;
 
 import static esinf.map.MapGraphLoader.loadGraph;
 import static org.junit.jupiter.api.Assertions.*;
@@ -25,7 +26,7 @@ class MapGraphLoaderTest {
         Local localCT13 = new Local("CT13", gpsCT13);
 
         MapGraphLoader.loadGraph("docs\\esinf_data\\locais_smallv1.csv", "docs\\esinf_data\\distancias_smallv1.csv");
-        GraphStore storage = new GraphStore();
+        GraphStore storage = Repositories.getInstance().getGraphStore();
         MapGraph<Local, Integer> distributionNetwork = storage.getGraph();
 
 

@@ -20,6 +20,6 @@ public class ChooseRoleUI implements Runnable{
         options.add(new ui.menu.MenuItem("Gestor Agrícola", new GestorAgricolaUI()));
         options.add(new ui.menu.MenuItem("Gestor Distribuição", new GestorDistribuicaoUI()));
 
-        Utils.runMenu(options, "UTILIZADORES:");
+        Utils.runMenu(options, "MENU UTILIZADORES");
     }
 }

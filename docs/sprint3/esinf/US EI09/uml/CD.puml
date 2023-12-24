@@ -1,0 +1,30 @@
+@startuml
+
+title Class Diagram
+
+class OrganizeGraphIntoClusters {
+
+    + organizeGraph(Graph<Local, Integer> graph)
+    + findEdgeWithMaxShortestPaths(Graph<Local, Integer> graph, List<LinkedList<Local>> shortestPaths)
+    - countShortestPaths(Edge<Local, Integer> edge, List<LinkedList<Local>> shortestPaths)
+}
+
+class OrganizeGraphIntoClustersController {
+
+    + organizeSmall()
+    + organizeBig()
+}
+
+class OrganizeGraphIntoClustersUI {
+    + run()
+}
+
+interface Runnable {
+    + run()
+}
+
+Runnable -left-|> OrganizeGraphIntoClustersUI
+OrganizeGraphIntoClustersUI ..> OrganizeGraphIntoClustersController
+OrganizeGraphIntoClustersController ..> OrganizeGraphIntoClusters
+
+@enduml

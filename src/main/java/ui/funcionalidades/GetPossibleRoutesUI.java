@@ -1,11 +1,12 @@
 package ui.funcionalidades;
 
+import controller.GetPossibleRoutesCtrl;
 import esinf.Edge;
 import esinf.IntegerBinaryOperator;
 import esinf.IntegerComparator;
 import esinf.model.Hub;
 import esinf.model.Local;
-import esinf.model.Route;
+import esinf.model.Path;
 import esinf.store.GraphStore;
 import esinf.us_ei06.PossibleRoutes;
 import ui.utils.Utils;
@@ -17,27 +18,40 @@ import java.util.Scanner;
 
 public class GetPossibleRoutesUI implements Runnable {
 
+    GetPossibleRoutesCtrl ctrl = new GetPossibleRoutesCtrl();
     Scanner in = new Scanner(System.in);
-    private GraphStore graphStore = new GraphStore();
     private Local origin;
     private Hub destiny;
     private int autonomy;
     private int vehicleSpeed;
     private PossibleRoutes<Local, Integer> possibleRoutes = new PossibleRoutes<>(
-            graphStore.getGraph(),
+            ctrl.getGraph(),
             new IntegerBinaryOperator(),
             new IntegerComparator(),
             0);
 
     @Override
     public void run() {
-        ArrayList<Local> locals = graphStore.getGraph().vertices();
+        ArrayList<Local> locals = ctrl.getGraph().vertices();
         getOrigin(locals);
-        getDestiny(locals);
-        getAutonomy();
-        getVehicleSpeed();
-        possibleRoutes.calculatePossibleRoutes(origin, destiny, autonomy);
-        printRoutes();
+
+        if (origin != null) {
+
+            getDestiny(locals);
+            if (destiny != null) {
+
+                getAutonomy();
+
+                if (autonomy > 0){
+
+                    getVehicleSpeed();
+                    if (vehicleSpeed > 0) {
+                        possibleRoutes.calculatePossibleRoutes(origin, destiny, autonomy);
+                        printRoutes();
+                    }
+                }
+            }
+        }
     }
 
     public void getOrigin(ArrayList<Local> locals) {
@@ -54,51 +68,55 @@ public class GetPossibleRoutesUI implements Runnable {
             }
         }
 
-        destiny = showAndSelectLocal(hubs, "Selecione o hub de destino:");
+        if (hubs.size() > 0) {
+            destiny = showAndSelectLocal(hubs, "Selecione o hub de destino:");
+        } else System.out.println("Não existem hubs registados no sistema\n");
     }
 
     public void getAutonomy() {
-        autonomy = Utils.readIntegerFromConsole("Introduza a autonomia (em Km) do veículo:");
+        autonomy = Utils.readPositiveIntegerFromConsole("Introduza a autonomia (em Km) do veículo:");
     }
 
     public void getVehicleSpeed() {
-        vehicleSpeed = Utils.readIntegerFromConsole("Introduza a velocidade média (em Km/h) do veículo:");
+        vehicleSpeed = Utils.readPositiveIntegerFromConsole("Introduza a velocidade média (em Km/h) do veículo:");
     }
 
     public void printRoutes() {
-        ArrayList<Route<Local>> routes = possibleRoutes.getRoutes();
-        Map<Route<Local>, ArrayList<Edge<Local, Integer>>> routesAndSimpleDistances = possibleRoutes.getRoutesAndSimpleDistances();
-        Map<Route<Local>, Integer> routesAndTotalDistances = possibleRoutes.getRoutesAndTotalDistances();
+        ArrayList<Path<Local>> paths = possibleRoutes.getRoutes();
+        Map<Path<Local>, ArrayList<Edge<Local, Integer>>> routesAndSimpleDistances = possibleRoutes.getRoutesAndSimpleDistances();
+        Map<Path<Local>, Integer> routesAndTotalDistances = possibleRoutes.getRoutesAndTotalDistances();
 
-        System.out.printf("Rotas entre %s e %s, considerando uma autonomia de %d km %n%n", origin.getLocalId(), destiny.getLocalId(), autonomy);
+        if (!paths.isEmpty()) {
+            System.out.printf("Rotas entre %s e %s, considerando uma autonomia de %d km %n%n", origin.getLocalId(), destiny.getLocalId(), autonomy);
 
-        for (int i = 0; i < routes.size(); i++) {
-            Route<Local> route = routes.get(i);
-            System.out.printf("Rota %d: %n", (i + 1));
+            for (int i = 0; i < paths.size(); i++) {
+                Path<Local> path = paths.get(i);
+                System.out.printf("Rota %d: %n", (i + 1));
 
-            for (Local l : route.getRoute()) {
-                if (l instanceof Hub) {
-                    System.out.printf("Local: %s (Hub) %n", l.getLocalId());
-                } else {
-                    System.out.printf("Local: %s %n", l.getLocalId());
+                for (Local l : path.getRoute()) {
+                    if (l instanceof Hub) {
+                        System.out.printf("Local: %s (Hub) %n", l.getLocalId());
+                    } else {
+                        System.out.printf("Local: %s %n", l.getLocalId());
+                    }
                 }
-            }
-            System.out.println();
+                System.out.println();
 
-            System.out.println("Distâncias entre os locais:");
-            ArrayList<Edge<Local, Integer>> simpleDistances = routesAndSimpleDistances.get(route);
-            for (Edge<Local, Integer> e : simpleDistances) {
-                System.out.printf("%s - %s: %d km %n", e.getVOrig().getLocalId(), e.getVDest().getLocalId(), e.getWeight());
-            }
-            System.out.println();
+                System.out.println("Distâncias entre os locais:");
+                ArrayList<Edge<Local, Integer>> simpleDistances = routesAndSimpleDistances.get(path);
+                for (Edge<Local, Integer> e : simpleDistances) {
+                    System.out.printf("%s - %s: %d km %n", e.getVOrig().getLocalId(), e.getVDest().getLocalId(), e.getWeight());
+                }
+                System.out.println();
 
-            int totalDistance = routesAndTotalDistances.get(route);
-            System.out.printf("Distância total da rota: %d %n", totalDistance);
-            System.out.printf("Duração média da rota: %d %n", autonomy / totalDistance);
-            System.out.println();
-            System.out.println();
-            System.out.println();
-        }
+                int totalDistance = routesAndTotalDistances.get(path);
+                System.out.printf("Distância total da rota: %dkm %n", totalDistance);
+                System.out.printf("Duração média da rota: %dh %n", totalDistance / vehicleSpeed);
+                System.out.println();
+                System.out.println();
+            }
+        } else System.out.println("Não foram encontradas quaisquer rotas possíveis com os dados fornecidos\n");
+
     }
 
     private <E extends Local> E showAndSelectLocal(List<E> list, String header) {

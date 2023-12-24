@@ -23,12 +23,14 @@ public class Utils {
      */
     static public String readLineFromConsole(String prompt) {
         try {
-            System.out.println("\n" + prompt);
+            System.out.println(prompt);
 
             InputStreamReader converter = new InputStreamReader(System.in);
             BufferedReader in = new BufferedReader(converter);
 
-            return in.readLine();
+            String line = in.readLine();
+            System.out.println();
+            return line;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -42,17 +44,41 @@ public class Utils {
      * @return the int
      */
     static public int readIntegerFromConsole(String prompt) {
+        int value = -1;
+        boolean valid = false;
         do {
             try {
                 String input = readLineFromConsole(prompt);
 
-                int value = Integer.parseInt(input);
-
-                return value;
+                value = Integer.parseInt(input);
+                valid = true;
             } catch (NumberFormatException ex) {
-                Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("ERRO: Input inválido\n");
             }
-        } while (true);
+        } while (!valid);
+        return value;
+    }
+
+    static public int readPositiveIntegerFromConsole(String prompt) {
+        int value = -1;
+        boolean valid = false;
+
+        do {
+            try {
+                String input = readLineFromConsole(prompt);
+
+                value = Integer.parseInt(input);
+                if (value < 0){
+                    throw new NumberFormatException();
+                }
+
+                valid = true;
+            } catch (NumberFormatException ex) {
+                System.out.println("ERRO: Input inválido\n");
+            }
+        } while (!valid);
+
+        return value;
     }
 
     /**
@@ -292,17 +318,25 @@ public class Utils {
         }
     }
 
-    public static void runMenu(List<MenuItem> options, String header){
-
+    public static void runMenu(List<MenuItem> options, String header) {
+        String space="----------------";
         int option = 0;
 
         do {
-            option = Utils.showAndSelectIndex(options, header);
+            option = Utils.showAndSelectIndex(options, String.format("%s  %s  %s", space, header, space));
 
             if ((option >= 0) && (option < options.size())) {
-                System.out.println();
                 options.get(option).run();
             }
         } while (option != -1);
+    }
+
+    public static boolean getBooleanAnswer(String header) {
+        ArrayList<String> yes_or_no = new ArrayList<>();
+        yes_or_no.add("Sim");
+        yes_or_no.add("Não");
+
+        int in = showAndSelectIndex(yes_or_no, header);
+        return in == 0;
     }
 }

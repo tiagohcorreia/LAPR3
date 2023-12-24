@@ -53,4 +53,13 @@ class HubTest {
         assertNotEquals(original, clone);
     }
 
+    @Test
+    void testGetHubFromLocal(){
+        Local l1=new Local("ct10", new GPS());
+        Hub result=new Hub(l1, 0);
+        Hub expected=new Hub("ct10", new GPS(), 0);
+
+        assertEquals(expected, result);
+    }
+
 }

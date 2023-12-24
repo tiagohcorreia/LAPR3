@@ -1,0 +1,16 @@
+@startuml
+
+title System Sequence Diagram
+
+actor GestorDistribuição as g
+participant system as s
+
+g --> s: começa o pedido de orgonização do grafo
+
+s --> g: pede o user para escolher o ficheiro que pretende
+
+g --> s: escolhe o ficheiro
+
+s --> g: mostra o grafo organizado em clusters
+
+@enduml

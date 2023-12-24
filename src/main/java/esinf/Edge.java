@@ -60,7 +60,6 @@ public class Edge<V, E> {
     }
 
 
-
     public double getWeightDouble() {
         return (double) weight;
     }

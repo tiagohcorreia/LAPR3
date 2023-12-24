@@ -1,10 +1,7 @@
 package ui;
 
 import dataAccess.DatabaseConnection;
-import esinf.map.MapGraph;
 import esinf.map.MapGraphLoader;
-import esinf.model.Local;
-import esinf.store.GraphStore;
 import ui.menu.MainMenuUI;
 
 import java.io.IOException;
@@ -13,16 +10,20 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Properties;
 
-import static esinf.map.MapGraphLoader.loadGraph;
-
 public class Main {
 
-    final static String LOCALS_FILE_PATH="docs\\esinf_data\\locais_small.csv";
-    final static String DISTANCES_FILE_PATH="docs\\esinf_data\\distancias_small.csv";
+    final static String LOCALS_FILE_PATH_1 ="docs\\esinf_data\\locais_small.csv";
+    final static String DISTANCES_FILE_PATH_1="docs\\esinf_data\\distancias_small.csv";
+
+    final static String LOCALS_FILE_PATH_2 ="src/test/java/esinf/us_ei06/test_files/locals/us-ei06-locals-1.txt";
+    final static String DISTANCES_FILE_PATH_2 ="src/test/java/esinf/us_ei06/test_files/distances/us-ei06-distances-1.txt";
+
+    final static String LOCALS_FILE_PATH_3 ="src/test/java/esinf/us_ei06/test_files/locals/us-ei06-locals-3.txt";
+    final static String DISTANCES_FILE_PATH_3 ="src/test/java/esinf/us_ei06/test_files/distances/us-ei06-distances-3.txt";
 
     public static void main(String[] args) {
 
-        MapGraphLoader.loadGraph(LOCALS_FILE_PATH, DISTANCES_FILE_PATH);
+        MapGraphLoader.loadGraph(LOCALS_FILE_PATH_3, DISTANCES_FILE_PATH_3);
 
         try {
             loadProperties();

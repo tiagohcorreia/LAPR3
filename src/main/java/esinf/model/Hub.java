@@ -1,8 +1,6 @@
 package esinf.model;
 
 import esinf.gps.GPS;
-import esinf.model.Local;
-import esinf.model.Schedule;
 
 import java.time.LocalTime;
 import java.util.Objects;
@@ -18,9 +16,9 @@ public class Hub extends Local {
     private final int NUMBER_OF_COLLABORATORS_LIMIT_1 = 105;
     private final int NUMBER_OF_COLLABORATORS_LIMIT_2 = 215;
 
-    private final Schedule SCHEDULE_1 = new Schedule(LocalTime.of(9, 0), LocalTime.of(14, 0));
-    private final Schedule SCHEDULE_2 = new Schedule(LocalTime.of(11, 0), LocalTime.of(16, 0));
-    private final Schedule SCHEDULE_3 = new Schedule(LocalTime.of(12, 0), LocalTime.of(17, 0));
+    public static final Schedule SCHEDULE_1 = new Schedule(LocalTime.of(9, 0), LocalTime.of(14, 0));
+    public static final Schedule SCHEDULE_2 = new Schedule(LocalTime.of(11, 0), LocalTime.of(16, 0));
+    public static final Schedule SCHEDULE_3 = new Schedule(LocalTime.of(12, 0), LocalTime.of(17, 0));
 
     public Hub() {
         super();
@@ -32,6 +30,12 @@ public class Hub extends Local {
         super(localId, gps);
         generateSchedule();
         this.dischargeTime = dischargeTime;
+    }
+    
+    public Hub(Local local, int dischargeTime){
+        super(local.getLocalId(), local.getGps());
+        generateSchedule();
+        this.dischargeTime=dischargeTime;
     }
 
     public Schedule getSchedule() {

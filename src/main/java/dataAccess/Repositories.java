@@ -1,5 +1,7 @@
 package dataAccess;
 
+import esinf.store.GraphStore;
+
 public class Repositories {
 
     private static final Repositories instance = new Repositories();
@@ -13,6 +15,7 @@ public class Repositories {
     private FatorProducaoRepository fatorProducaoRepository = null;
     private RegaRepository regaRepository = null;
     private PodaRepository podaRepository = null;
+    private GraphStore graphStore=new GraphStore();
 
     private Repositories() {
         sementeiraRepository = new SementeiraRepository();
@@ -52,4 +55,9 @@ public class Repositories {
     }
     public RegaRepository getRegaRepository() { return regaRepository;}
     public PodaRepository getPodaRepository() { return podaRepository;}
+
+    public GraphStore getGraphStore(){
+        return graphStore;
+    }
+
 }
