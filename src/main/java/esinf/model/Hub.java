@@ -38,6 +38,11 @@ public class Hub extends Local {
         this.dischargeTime=dischargeTime;
     }
 
+    public Hub(String localId, Schedule schedule) {
+        localId = this.getLocalId();
+        schedule = this.schedule;
+    }
+
     public Schedule getSchedule() {
         return schedule;
     }

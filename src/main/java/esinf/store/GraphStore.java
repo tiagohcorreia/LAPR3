@@ -142,9 +142,6 @@ public class GraphStore {
 
     }
 
-    // public ArrayList<Local> checkFurthest(List<>) {
-
-
     public List<Local> getVehicleChargeStops(MapGraph graph, LinkedList<Local> shortPath, double autonomy) {
         Integer sum = 0;
         Integer distance;
@@ -271,13 +268,13 @@ public class GraphStore {
 
 
     public boolean generateHubs(Map<Local, Integer> localsAndDischargeTimes) {
-        boolean out=false;
+        boolean out = false;
         try {
             for (Map.Entry<Local, Integer> e : localsAndDischargeTimes.entrySet()) {
-                out=replaceLocal(e.getKey(), new Hub(e.getKey(), e.getValue()));
+                out = replaceLocal(e.getKey(), new Hub(e.getKey(), e.getValue()));
             }
         } catch (Exception e) {
-            out=false;
+            out = false;
         }
         return out;
     }
