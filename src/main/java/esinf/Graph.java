@@ -1,6 +1,6 @@
 package esinf;
 
-import domain.Hub;
+import esinf.model.Hub;
 
 import java.util.ArrayList;
 import java.util.Collection;
