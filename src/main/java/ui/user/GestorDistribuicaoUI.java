@@ -17,6 +17,7 @@ public class GestorDistribuicaoUI implements Runnable {
         options.add(new MenuItem("Definir hubs", new SetHubsUI()));
         options.add(new MenuItem("Obter rotas possíveis para um hub", new GetPossibleRoutesUI()));
         options.add(new MenuItem("Organizar grafo em clusters (USEI09)", new OrganizeGraphIntoClustersUI()));
+        options.add(new MenuItem("Carregar Hubs do ficheiro (USEI11)", new LoadHubsFromFileUI()));
 
         Utils.runMenu(options, "MENU GESTOR DISTRIBUIÇÃO");
     }

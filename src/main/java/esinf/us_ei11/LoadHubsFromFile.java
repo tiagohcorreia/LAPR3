@@ -13,7 +13,7 @@ import java.time.LocalTime;
 
 public class LoadHubsFromFile {
 
-    public void loadHubsFormFile(String hubFile) {
+    public boolean loadHubsFormFile() {
 
         GraphStore graphStore = Repositories.getInstance().getGraphStore();
 
@@ -45,16 +45,18 @@ public class LoadHubsFromFile {
 
                     graphStore.addVertex(hub);
                 }
+                return true;
             }
 
         } catch (IOException ioException) {
 
             System.err.println("Ficheiro não encontrado");
+            return false;
 
         } catch (Exception e) {
 
             System.err.println(e.getMessage());
         }
-
+        return false;
     }
 }
