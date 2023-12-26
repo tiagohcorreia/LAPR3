@@ -1,5 +1,7 @@
 package esinf;
 
+import esinf.model.Hub;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.function.Predicate;

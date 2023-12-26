@@ -5,21 +5,23 @@ import esinf.dataStructure.Distance;
 
 import java.util.List;
 
+
+
 public class Circuit {
     private Vehicle vehicle;
-    private Hub origin;
+    private Local origin;
+    private List<Local> locals;
     private List<Hub> hubs;
-    private List<Integer> collaborators; // Number of collaborators at each hub
-    private List<Distance> distances; // Distances between consecutive hubs
+    private List<Distance> distances;
     private double totalDistance;
     private int numberOfChargings;
     private double totalTime;
 
-    public Circuit(Vehicle vehicle, Hub origin, List<Hub> hubs, List<Integer> collaborators, List<Distance> distances, double totalDistance, int numberOfChargings, double totalTime) {
+    public Circuit(Vehicle vehicle, Local origin, List<Local> locals,List<Hub> hubs, List<Distance> distances, double totalDistance, int numberOfChargings, double totalTime) {
         this.vehicle = vehicle;
         this.origin = origin;
+        this.locals = locals;
         this.hubs = hubs;
-        this.collaborators = collaborators;
         this.distances = distances;
         this.totalDistance = totalDistance;
         this.numberOfChargings = numberOfChargings;
@@ -34,7 +36,7 @@ public class Circuit {
         this.vehicle = vehicle;
     }
 
-    public Hub getOrigin() {
+    public Local getOrigin() {
         return origin;
     }
 
@@ -42,20 +44,12 @@ public class Circuit {
         this.origin = origin;
     }
 
-    public List<Hub> getHubs() {
-        return hubs;
+    public List<Local> getLocals() {
+        return locals;
     }
 
-    public void setHubs(List<Hub> hubs) {
-        this.hubs = hubs;
-    }
-
-    public List<Integer> getCollaborators() {
-        return collaborators;
-    }
-
-    public void setCollaborators(List<Integer> collaborators) {
-        this.collaborators = collaborators;
+    public void setLocals(List<Local> locals) {
+        this.locals = locals;
     }
 
     public List<Distance> getDistances() {
@@ -90,30 +84,40 @@ public class Circuit {
         this.totalTime = totalTime;
     }
 
-    public void printCircuitDetails() {
-        System.out.println("Vehicle: " + vehicle.getId());
-        System.out.println("Origin: " + origin.getLocalId());
-        System.out.println("Hubs in the circuit:");
-        for (int i = 0; i < hubs.size(); i++) {
-            Hub currentHub = hubs.get(i);
-            System.out.println("Hub " + currentHub.getLocalId() + ", Collaborators: " + collaborators.get(i));
-            if (i < distances.size()) {
-                System.out.println("Distance to next hub: " + distances.get(i).getLenght() + " km");
+    public void printDetails() {
+        System.out.println("Printing Circuit Details:");
+        System.out.println("Vehicle: " + vehicle);
+        System.out.println("Origin: " + origin);
+
+        System.out.println("Locals:");
+        for (Local local : locals) {
+            String localDetails = "Local{id=" + local.getLocalId() + "}";
+            if (hubs.stream().anyMatch(hub -> hub.getLocalId().equals(local.getLocalId()))) {
+                Hub matchingHub = hubs.stream()
+                        .filter(hub -> hub.getLocalId().equals(local.getLocalId()))
+                        .findFirst()
+                        .orElse(null);
+                if (matchingHub != null) {
+                    localDetails += " (has Hub with " + matchingHub.getNumberOfCollaborators() + " collaborators)";
+                }
             }
-            System.out.println("Unloading Time at Hub: " + currentHub.getDischargeTime() + " minutes");
+            System.out.println(localDetails);
         }
-        System.out.println("Total Distance: " + totalDistance + " km");
+
+        System.out.println("Distances:");
+        for (Distance distance : distances) {
+            Local local1 = distance.getLocal1();
+            Local local2 = distance.getLocal2();
+            double length = distance.getLenght();
+
+            String format = String.format("%s -> %s : %.2f meters", local1.getLocalId(), local2.getLocalId(), length);
+            System.out.println(format);
+        }
+
+        System.out.println("Total Distance: " + totalDistance);
         System.out.println("Number of Chargings: " + numberOfChargings);
-        System.out.println("Total Time: " + calculateVehicleDetails() + " minutes");
+        System.out.println("Total Time: " + totalTime);
     }
 
 
-    public double calculateVehicleDetails() {
-        double chargingTime = numberOfChargings * vehicle.getChargingTime();
-        double routeTime = (totalDistance / vehicle.getAverageVelocity()) * 60;
-        double unloadingTime = hubs.stream().mapToDouble(Hub::getDischargeTime).sum();
-
-        totalTime = chargingTime + routeTime + unloadingTime;
-        return totalTime;
-    }
 }

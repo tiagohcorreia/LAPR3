@@ -60,4 +60,8 @@ public class Repositories {
         return graphStore;
     }
 
+
+    public void clear(){
+        graphStore.clean();
+    }
 }
