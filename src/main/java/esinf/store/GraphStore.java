@@ -1,5 +1,6 @@
 package esinf.store;
 
+import esinf.dataStructure.PathWithMostHubsData;
 import esinf.model.Hub;
 import esinf.Edge;
 import esinf.dataStructure.Distance;
@@ -287,6 +288,16 @@ public class GraphStore {
         graph = new MapGraph<>(directed);
         return graph.vertices().isEmpty();
     }
+
+    public PathWithMostHubsData findMaxHubPassingRoute(Local local,double autonomy,int speed) {
+        PathWithMostHubsData data=new PathWithMostHubsData();
+        MapGraph<Local, Integer> clone = removeEdgesAboveAutonomy(autonomy);
+
+
+        return data;
+    }
+
+
 }
 
 
