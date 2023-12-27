@@ -69,4 +69,8 @@ public class Repositories {
         return fertigationMixes;
     }
 
+
+    public void clear(){
+        graphStore.clean();
+    }
 }

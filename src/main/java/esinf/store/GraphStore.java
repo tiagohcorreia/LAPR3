@@ -1,5 +1,6 @@
 package esinf.store;
 
+import esinf.dataStructure.PathWithMostHubsData;
 import esinf.model.Hub;
 import esinf.Edge;
 import esinf.dataStructure.Distance;
@@ -142,9 +143,6 @@ public class GraphStore {
 
     }
 
-    // public ArrayList<Local> checkFurthest(List<>) {
-
-
     public List<Local> getVehicleChargeStops(MapGraph graph, LinkedList<Local> shortPath, double autonomy) {
         Integer sum = 0;
         Integer distance;
@@ -271,13 +269,13 @@ public class GraphStore {
 
 
     public boolean generateHubs(Map<Local, Integer> localsAndDischargeTimes) {
-        boolean out=false;
+        boolean out = false;
         try {
             for (Map.Entry<Local, Integer> e : localsAndDischargeTimes.entrySet()) {
-                out=replaceLocal(e.getKey(), new Hub(e.getKey(), e.getValue()));
+                out = replaceLocal(e.getKey(), new Hub(e.getKey(), e.getValue()));
             }
         } catch (Exception e) {
-            out=false;
+            out = false;
         }
         return out;
     }
@@ -287,6 +285,16 @@ public class GraphStore {
         graph = new MapGraph<>(directed);
         return graph.vertices().isEmpty();
     }
+
+    public PathWithMostHubsData findMaxHubPassingRoute(Local local,double autonomy,int speed) {
+        PathWithMostHubsData data=new PathWithMostHubsData();
+        MapGraph<Local, Integer> clone = removeEdgesAboveAutonomy(autonomy);
+
+
+        return data;
+    }
+
+
 }
 
 

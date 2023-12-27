@@ -8,12 +8,12 @@ public class Schedule {
     private LocalTime openingHours;
     private LocalTime closingHours;
 
-    private final LocalTime DEFAULT_OPENING_HOURS=LocalTime.MIDNIGHT;
-    private final LocalTime DEFAULT_CLOSING_HOURS=LocalTime.MIDNIGHT;
+    private final LocalTime DEFAULT_OPENING_HOURS = LocalTime.MIDNIGHT;
+    private final LocalTime DEFAULT_CLOSING_HOURS = LocalTime.MIDNIGHT;
 
-    public Schedule(){
-        openingHours=DEFAULT_OPENING_HOURS;
-        closingHours=DEFAULT_CLOSING_HOURS;
+    public Schedule() {
+        openingHours = DEFAULT_OPENING_HOURS;
+        closingHours = DEFAULT_CLOSING_HOURS;
     }
 
     public Schedule(LocalTime openingHours, LocalTime closingHours) {
