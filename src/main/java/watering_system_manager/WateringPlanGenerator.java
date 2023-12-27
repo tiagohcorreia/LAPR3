@@ -301,10 +301,6 @@ public class WateringPlanGenerator {
         }
     }
 
-    public boolean calculateFertigationPlan(String regularity, int recurrence) {
-
-    }
-
     public boolean isEven(int num) {
         return num % 2 == 0;
     }
