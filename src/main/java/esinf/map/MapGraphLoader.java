@@ -35,7 +35,7 @@ public class MapGraphLoader {
                 Local local = new Local(locId, gps);
                 graphStore.addVertex(local);
             }
-        } catch (IOException e){
+        } catch (IOException e) {
             System.out.println("Operação falhou");
             e.printStackTrace();
         }
@@ -60,11 +60,11 @@ public class MapGraphLoader {
                     if (l.getLocalId().equals(locId2)) local2 = l;
                 }
                 if (local1 != null && local2 != null) {
-                    graphStore.addEdge(local1,local2,distancia);
+                    graphStore.addEdge(local1, local2, distancia);
                 }
             }
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }

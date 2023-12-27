@@ -5,8 +5,8 @@
     Parcelas: Campo grande
  */
 
-INSERT INTO Setor_Rega(id, area, caudal_maximo, data_inicio, data_fim, metodo_dispensasao_id)
-VALUES (10, NULL, 2500, TO_DATE('01/05/2017', 'DD/MM/YYYY'), NULL, NULL);
+INSERT INTO Setor_Rega(id, nome, area, caudal_maximo, data_inicio, data_fim, metodo_dispensasao_id)
+VALUES (10, 'Setor 10', NULL, 2500, TO_DATE('01/05/2017', 'DD/MM/YYYY'), NULL, NULL);
 
 -- Oliveira Galega, 30 un, 01/05/2017, sem data fim
 INSERT INTO SetorRega_Plantacao(id, setor_id, plantacao_id, data_inicio, data_fim)
@@ -24,8 +24,8 @@ Início a 01/05/2017, sem data fim
 Caudal máximo: 1500 l/h
 Parcelas: Campo grande
  */
-INSERT INTO Setor_Rega(id, area, caudal_maximo, data_inicio, data_fim, metodo_dispensasao_id)
-VALUES (11, NULL, 1500, TO_DATE('01/05/2017', 'DD/MM/YYYY'), NULL, NULL);
+INSERT INTO Setor_Rega(id, nome, area, caudal_maximo, data_inicio, data_fim, metodo_dispensasao_id)
+VALUES (11, 'Setor 11', NULL, 1500, TO_DATE('01/05/2017', 'DD/MM/YYYY'), NULL, NULL);
 
 -- Oliveira Arbequina, 40 un, 01/05/2017, sem data fim
 INSERT INTO SetorRega_Plantacao(id, setor_id, plantacao_id, data_inicio, data_fim)
@@ -39,8 +39,8 @@ Início a 01/05/2017, sem data fim
 Caudal máximo: 3500 l/h
 Parcelas: Lameiro da ponte, Lameiro do Moinho
  */
-INSERT INTO Setor_Rega(id, area, caudal_maximo, data_inicio, data_fim, metodo_dispensasao_id)
-VALUES (21, NULL, 3500, TO_DATE('01/05/2017', 'DD/MM/YYYY'), NULL, NULL);
+INSERT INTO Setor_Rega(id, nome, area, caudal_maximo, data_inicio, data_fim, metodo_dispensasao_id)
+VALUES (21, 'Setor 21', NULL, 3500, TO_DATE('01/05/2017', 'DD/MM/YYYY'), NULL, NULL);
 
 -- Macieira Jonagored, 90 un, 01/05/2017, sem data fim
 INSERT INTO SetorRega_Plantacao(id, setor_id, plantacao_id, data_inicio, data_fim)
@@ -71,8 +71,8 @@ Início a 01/05/2019, sem data fim
 Caudal máximo: 3500 l/h
 Parcelas: Lameiro do Moinho
  */
-INSERT INTO Setor_Rega(id, area, caudal_maximo, data_inicio, data_fim, metodo_dispensasao_id)
-VALUES (22, NULL, 3500, TO_DATE('01/05/2019', 'DD/MM/YYYY'), NULL, NULL);
+INSERT INTO Setor_Rega(id, nome, area, caudal_maximo, data_inicio, data_fim, metodo_dispensasao_id)
+VALUES (22, 'Setor 22', NULL, 3500, TO_DATE('01/05/2019', 'DD/MM/YYYY'), NULL, NULL);
 
 -- Macieira Porta da Loja, 50 un, 01/05/2019, sem data fim
 INSERT INTO SetorRega_Plantacao(id, setor_id, plantacao_id, data_inicio, data_fim)
@@ -103,8 +103,8 @@ Caudal máximo: 2500 l/h
 Parcelas: Campo Novo
  */
 
-INSERT INTO Setor_Rega(id, area, caudal_maximo, data_inicio, data_fim, metodo_dispensasao_id)
-VALUES (41, NULL, 2500, TO_DATE('01/04/2023', 'DD/MM/YYYY'), TO_DATE('10/10/2023', 'DD/MM/YYYY'), NULL);
+INSERT INTO Setor_Rega(id, nome, area, caudal_maximo, data_inicio, data_fim, metodo_dispensasao_id)
+VALUES (41, 'Setor 41', NULL, 2500, TO_DATE('01/04/2023', 'DD/MM/YYYY'), TO_DATE('10/10/2023', 'DD/MM/YYYY'), NULL);
 
 -- Cenoura Sugarsnax Hybrid, 05/04/2023 a 31/05/2023
 INSERT INTO SetorRega_Plantacao(id, setor_id, plantacao_id, data_inicio, data_fim)
@@ -123,8 +123,8 @@ Caudal máximo: 3500 l/h
 Parcelas: Campo Novo
  */
 
-INSERT INTO Setor_Rega(id, area, caudal_maximo, data_inicio, data_fim, metodo_dispensasao_id)
-VALUES (42, NULL, 3500, TO_DATE('01/04/2023', 'DD/MM/YYYY'), TO_DATE('10/10/2023', 'DD/MM/YYYY'), NULL);
+INSERT INTO Setor_Rega(id, nome, area, caudal_maximo, data_inicio, data_fim, metodo_dispensasao_id)
+VALUES (42, 'Setor 42', NULL, 3500, TO_DATE('01/04/2023', 'DD/MM/YYYY'), TO_DATE('10/10/2023', 'DD/MM/YYYY'), NULL);
 
 -- Abóbora Manteiga, 06/04/2023 a 10/09/2023
 INSERT INTO SetorRega_Plantacao(id, setor_id, plantacao_id, data_inicio, data_fim)

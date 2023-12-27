@@ -1,8 +1,8 @@
 package ui.funcionalidades;
 
-import classes.EstadoRega;
-import controller.RegaController;
-import controller.EstadoRegaController;
+import watering_system_manager.EstadoRega;
+import watering_system_manager.WateringPlanGenerator;
+import watering_system_manager.EstadoRegaController;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ public class EstadoRegaUI implements Runnable {
     @Override
     public void run() {
 
-        RegaController regaController = new RegaController();
+        WateringPlanGenerator wateringPlanGenerator = new WateringPlanGenerator();
 
         EstadoRegaController estadoRegaController = new EstadoRegaController();
 

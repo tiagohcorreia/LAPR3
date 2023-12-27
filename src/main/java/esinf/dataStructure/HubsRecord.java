@@ -5,10 +5,11 @@ import esinf.model.Hub;
 import java.time.LocalTime;
 import java.util.Objects;
 
-public class Record {
+public class HubsRecord {
 private Hub hub;
 private LocalTime arrivingHour;
 private LocalTime leavingHour;
+
 
 
     public Hub getHub() {
@@ -35,19 +36,6 @@ private LocalTime leavingHour;
         this.leavingHour = leavingHour;
     }
 
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Record)) return false;
-        Record record=(Record) o;
-        return getHub().equals(record.getHub()) && getArrivingHour().equals(record.getArrivingHour()) && getLeavingHour().equals(record.getLeavingHour());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getHub(), getArrivingHour(), getLeavingHour());
-    }
 
     @Override
     public String toString() {

@@ -1,6 +1,4 @@
-package controller;
-
-import classes.EstadoRega;
+package watering_system_manager;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

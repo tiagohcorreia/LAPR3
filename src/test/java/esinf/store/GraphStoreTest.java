@@ -89,8 +89,6 @@ class GraphStoreTest {
             }
         }
 
-        System.out.println(graph.vertices());
-
         assertEquals(true, allOldEdgesRemoved);
         assertEquals(newEdges.size(), countNewEdges);
         assertEquals(oldNumberEdges, newNumberEdges);
@@ -98,20 +96,20 @@ class GraphStoreTest {
 
     @Test
     void replaceLocalTest1() {
-        testReplaceLocal("docs\\sprint3\\esinf\\us-ei06\\test-files\\locals\\us-ei06-locals-1.txt",
-                "docs\\sprint3\\esinf\\us-ei06\\test-files\\distances\\us-ei06-distances-1.txt");
+        testReplaceLocal("src/test/java/esinf/store/test_files/locals/us-ei06-locals-1.txt",
+                "src/test/java/esinf/store/test_files/distances/us-ei06-distances-1.txt");
     }
 
     @Test
     void replaceLocalTest2() {
-        testReplaceLocal("docs\\sprint3\\esinf\\us-ei06\\test-files\\locals\\us-ei06-locals-2.txt",
-                "docs\\sprint3\\esinf\\us-ei06\\test-files\\distances\\us-ei06-distances-2.txt");
+        testReplaceLocal("src/test/java/esinf/store/test_files/locals/us-ei06-locals-2.txt",
+                "src/test/java/esinf/store/test_files/distances/us-ei06-distances-2.txt");
     }
 
     @Test
     void replaceLocalTest3() {
-        testReplaceLocal("docs\\sprint3\\esinf\\us-ei06\\test-files\\locals\\us-ei06-locals-3.txt",
-                "docs\\sprint3\\esinf\\us-ei06\\test-files\\distances\\us-ei06-distances-3.txt");
+        testReplaceLocal("src/test/java/esinf/store/test_files/locals/us-ei06-locals-3.txt",
+                "src/test/java/esinf/store/test_files/distances/us-ei06-distances-3.txt");
     }
 
 
@@ -130,14 +128,13 @@ class GraphStoreTest {
             }
         }
 
-        System.out.println(graph.vertices());
         assertEquals(true, allHubsAdded, "all hubs not added");
     }
 
     @Test
     void replaceSimpleLocalsByHubsTest1() {
-        MapGraphLoader.loadGraph("docs\\sprint3\\esinf\\us-ei06\\test-files\\locals\\us-ei06-locals-1.txt",
-                "docs\\sprint3\\esinf\\us-ei06\\test-files\\distances\\us-ei06-distances-1.txt");
+        MapGraphLoader.loadGraph("src/test/java/esinf/store/test_files/locals/us-ei06-locals-1.txt",
+                "src/test/java/esinf/store/test_files/distances/us-ei06-distances-1.txt");
 
         ArrayList<Local> localsToBeReplaced = new ArrayList<>();
         ArrayList<Hub> hubs = new ArrayList<>();
@@ -158,8 +155,8 @@ class GraphStoreTest {
 
     @Test
     void replaceSimpleLocalsByHubsTest2() {
-        MapGraphLoader.loadGraph("docs\\sprint3\\esinf\\us-ei06\\test-files\\locals\\us-ei06-locals-2.txt",
-                "docs\\sprint3\\esinf\\us-ei06\\test-files\\distances\\us-ei06-distances-2.txt");
+        MapGraphLoader.loadGraph("src/test/java/esinf/store/test_files/locals/us-ei06-locals-2.txt",
+                "src/test/java/esinf/store/test_files/distances/us-ei06-distances-2.txt");
 
         ArrayList<Local> localsToBeReplaced = new ArrayList<>();
         ArrayList<Hub> hubs = new ArrayList<>();
@@ -186,8 +183,8 @@ class GraphStoreTest {
 
     @Test
     void replaceSimpleLocalsByHubsTest3() {
-        MapGraphLoader.loadGraph("docs\\sprint3\\esinf\\us-ei06\\test-files\\locals\\us-ei06-locals-3.txt",
-                "docs\\sprint3\\esinf\\us-ei06\\test-files\\distances\\us-ei06-distances-3.txt");
+        MapGraphLoader.loadGraph("src/test/java/esinf/store/test_files/locals/us-ei06-locals-3.txt",
+                "src/test/java/esinf/store/test_files/distances/us-ei06-distances-3.txt");
 
         ArrayList<Local> localsToBeReplaced = new ArrayList<>();
         ArrayList<Hub> hubs = new ArrayList<>();
