@@ -25,12 +25,12 @@ public class HubShortestPathFinder<V, E> {
         this.graphStore = new GraphStore();
     }
 
-    public Circuit findShortestCircuitWithHubs(V originLocal, int numHubs, Vehicle vehicle) {
+    public Circuit findShortestCircuitWithHubs(Graph<V,E> graph,V originLocal, int numHubs, Vehicle vehicle,int numVertices) {
 
         System.out.println("originHub: " + originLocal);
         System.out.println("numHubs: " + numHubs);
 
-        List<V> shortestCircuit = greedyTSP.findShortestCircuit(graph, originLocal, numHubs, vehicle);
+        List<V> shortestCircuit = greedyTSP.findShortestCircuit(graph, originLocal,numVertices, numHubs, vehicle);
 
 
         List<Local> locals = shortestCircuit.stream()

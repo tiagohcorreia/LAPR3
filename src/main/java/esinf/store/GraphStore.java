@@ -1,5 +1,6 @@
 package esinf.store;
 
+import esinf.Graph;
 import esinf.model.Hub;
 import esinf.Edge;
 import esinf.dataStructure.Distance;
@@ -280,6 +281,39 @@ public class GraphStore {
             out=false;
         }
         return out;
+    }
+    public boolean replaceLocalsWithHubs(Graph<Local, Integer> graph, List<Hub> hubs) {
+        try {
+            for (Hub hub : hubs) {
+                Local oldLocal = graph.vertex(v -> v.getLocalId().equals(hub.getLocalId()));
+
+                if (oldLocal != null) {
+                    Hub newHub = new Hub(oldLocal, hub.getNumberOfCollaborators());
+
+                    graph.addVertex(newHub);
+                    for (Edge<Local, Integer> e : graph.edges()) {
+                        if (e.getVOrig().equals(oldLocal)) {
+                            Local destiny = e.getVDest();
+                            Integer distance = e.getWeight();
+                            graph.removeEdge(oldLocal, destiny);
+                            graph.addEdge(newHub, destiny, distance);
+
+                        } else if (e.getVDest().equals(oldLocal)) {
+                            Local origin = e.getVOrig();
+                            Integer distance = e.getWeight();
+                            graph.removeEdge(origin, oldLocal);
+                            graph.addEdge(origin, newHub, distance);
+                        }
+                    }
+                    graph.removeVertex(oldLocal);
+                }
+            }
+
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     public boolean clean() {
