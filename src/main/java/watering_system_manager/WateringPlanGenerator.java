@@ -5,63 +5,78 @@ import watering_system_manager.exceptions.*;
 import watering_system_manager.watering_instructions.FertigationInstruction;
 import watering_system_manager.watering_instructions.WateringInstruction;
 import watering_system_manager.watering_plan.WateringPlan;
-import watering_system_manager.watering_plan.WateringPlanElement;
-import watering_system_manager.watering_plan.WateringPlanElementComparator;
+import watering_system_manager.watering_plan.WateringPlanEntry;
+import watering_system_manager.watering_plan.WateringPlanEntryComparator;
 
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.*;
 
 
 public class WateringPlanGenerator {
 
+    private BufferedReader fileReader;
+    private int numberOfPlanDays;
     private WateringPlan plan;
     private List<String[]> adjustedPlanoDeRega;
 
+    public WateringPlanGenerator(BufferedReader fileReader, int numberOfPlanDays) {
+        this.fileReader = fileReader;
+        this.numberOfPlanDays = numberOfPlanDays;
+    }
+
+    public void generatePlan() {
+        if (plan == null) {
+            parse();
+        }
+    }
+
     public void parse() {
-        BufferedReader reader = getInstructionsFileReader();
         ArrayList<WateringInstruction> instructions = new ArrayList<>();
-        ArrayList<String> wateringHours = new ArrayList<>();
+        ArrayList<LocalTime> wateringMoments = new ArrayList<>();
 
-
-        if (reader != null) {
-            getWateringInstructions(reader, wateringHours, instructions);
+        if (fileReader != null) {
+            getWateringInstructions(fileReader, wateringMoments, instructions);
         }
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Calendar calendar = Calendar.getInstance();
         Date generationDate = calendar.getTime();
 
-        plan = new WateringPlan();
+        Map<WateringInstruction, ArrayList<Date>> instructionsAndWateringDays = new HashMap<>();
 
         for (WateringInstruction instruction : instructions) {
-            ArrayList<Date> wateringDays = calculateWateringDays(generationDate, instruction.getRegularidade(), 30);
-
+            ArrayList<Date> wateringDays = calculateWateringDays(generationDate, instruction.getRegularidade(), numberOfPlanDays);
+            instructionsAndWateringDays.put(instruction, wateringDays);
+        }
+            /*
             for (Date date : wateringDays) {
 
-                for (String hora : wateringHours) {
+                ArrayList<LocalTime> wateringMomentsCopy=new ArrayList<>(wateringMoments);
+
+                for (LocalTime m : wateringMomentsCopy) {
                     calendar.setTime(date);
-                    String[] timeParts = hora.split(":");
-                    int hour=Integer.parseInt(timeParts[0]);
-                    int minute=Integer.parseInt(timeParts[1]);
-                    calendar.set(Calendar.HOUR_OF_DAY, hour);
-                    calendar.set(Calendar.MINUTE, minute);
+                    calendar.set(Calendar.HOUR_OF_DAY, m.getHour());
+                    calendar.set(Calendar.MINUTE, m.getMinute());
 
-                    LocalTime begin = LocalTime.of(hour, minute);
+                    LocalTime begin = m;
                     LocalTime end = calculateWateringEnd(calendar, instruction.getDuracao());
-                    plan.addElement(new WateringPlanElement(date, instruction.getSetor(), instruction.getDuracao(), begin, end));
+                    plan.addElement(new WateringPlanEntry(date, instruction.getSetor(), instruction.getDuracao(), begin, end));
                 }
-            }
-        }
+            }*/
 
-        Collections.sort(plan.getList(), new WateringPlanElementComparator());
+        plan = generatePlan(generationDate, wateringMoments, instructionsAndWateringDays);
+        plan.getList().sort(new WateringPlanEntryComparator());
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("plano_de_rega.csv"))) {
             writer.write("Dia,Sector,Duracao,Inicio,Fim\n");
-            for (WateringPlanElement e : plan.getList()) {
-                writer.write(String.format("%s, %s, %s, %s, %s\n", e.getDate(), e.getSector(), e.getDuration(), e.getBegin(), e.getEnd()));
+            for (WateringPlanEntry e : plan.getList()) {
+                LocalDate localDate = e.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                writer.write(String.format("%s,%s,%s,%s,%s\n", localDate, e.getSector(), e.getDuration(), e.getBegin(), e.getEnd()));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -90,19 +105,20 @@ public class WateringPlanGenerator {
                 validIn = true;
             } catch (FileNotFoundException e) {
                 System.out.println("O ficheiro indicado é inválido\n");
+            } catch (NumberFormatException e) {
+
             }
         } while (!validIn);
 
         return reader;
     }
 
-    public boolean getWateringInstructions(BufferedReader fileReader,
-                                           ArrayList<String> horasDeRega,
-                                           ArrayList<WateringInstruction> instructions) {
-        boolean success = false;
+    public void getWateringInstructions(BufferedReader fileReader,
+                                        ArrayList<LocalTime> horasDeRega,
+                                        ArrayList<WateringInstruction> instructions) {
         Repositories repo = Repositories.getInstance();
         String line;
-        int lineNumber = 0;
+        int lineNumber = 1;
 
         try {
 
@@ -110,8 +126,22 @@ public class WateringPlanGenerator {
 
                 try {
                     if (lineNumber == 0) {
-                        String[] horas = line.split(",");
-                        horasDeRega.addAll(Arrays.asList(horas));
+
+                        try {
+                            String[] hours = line.split(",");
+
+                            for (String h : hours) {
+                                String[] parts = h.split(":");
+                                int hour = Integer.parseInt(parts[0]);
+                                int minute = Integer.parseInt(parts[1]);
+                                horasDeRega.add(LocalTime.of(hour, minute));
+                            }
+
+                            horasDeRega.sort(LocalTime::compareTo);
+
+                        } catch (NumberFormatException e) {
+                            System.out.println("ERRO: Momentos de rega inválidos\n");
+                        }
 
                     } else {
                         String[] elements = line.split(",");
@@ -180,14 +210,9 @@ public class WateringPlanGenerator {
 
                 }
             }
-
-            success = true;
-
         } catch (IOException e) {
             e.printStackTrace();// Terminate the program
         }
-
-        return success;
     }
 
     private ArrayList<Date> calculateWateringDays(Date dataInicial, String regularidade, int numeroDeDias) {
@@ -229,11 +254,50 @@ public class WateringPlanGenerator {
         wateringEnd.add(Calendar.MINUTE, duracao);
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
-        String[] time=dateFormat.format(wateringEnd.getTime()).split(":");
-        int hour=Integer.parseInt(time[0]);
-        int minute=Integer.parseInt(time[1]);
+        String[] time = dateFormat.format(wateringEnd.getTime()).split(":");
+        int hour = Integer.parseInt(time[0]);
+        int minute = Integer.parseInt(time[1]);
 
         return LocalTime.of(hour, minute);
+    }
+
+    private WateringPlan generatePlan(Date generationDay, ArrayList<LocalTime> wateringMoments, Map<WateringInstruction, ArrayList<Date>> instructionsAndWateringDays) {
+        WateringPlan plan = new WateringPlan();
+        Calendar currentDate = Calendar.getInstance();
+        currentDate.setTime(generationDay);
+
+        for (int i = 0; i < numberOfPlanDays; i++) {
+            LocalTime lastWatering = wateringMoments.get(0);
+            LocalTime lastWateringCopy = LocalTime.of(lastWatering.getHour(), lastWatering.getMinute());
+
+            for (int j = 0; j < wateringMoments.size(); j++) {
+
+                if (wateringMoments.get(j).compareTo(lastWateringCopy) >= 0) {
+                    lastWateringCopy = wateringMoments.get(j);
+
+                    for (WateringInstruction instruction : instructionsAndWateringDays.keySet()) {
+
+                        if (instructionsAndWateringDays.get(instruction).contains(currentDate.getTime())) {
+
+                            String sector = instruction.getSetor();
+                            int duration = instruction.getDuracao();
+                            LocalTime wateringEnd = lastWateringCopy.plusMinutes(duration);
+
+                            plan.addElement(new WateringPlanEntry(currentDate.getTime(), sector, duration, lastWateringCopy, wateringEnd));
+                            lastWateringCopy = wateringEnd;
+                        }
+                    }
+                } else try {
+                    throw new OverlappingWateringCyclesException();
+
+                } catch (OverlappingWateringCyclesException e) {
+                    System.out.printf("ERRO: Sobreposição do ciclo das %s com o ciclo das %s\n\n", wateringMoments.get(j), wateringMoments.get(j - 1));
+                }
+            }
+
+            currentDate.add(Calendar.DAY_OF_MONTH, 1);
+        }
+        return plan;
     }
 
     public void adjustWateringSchedule(String filePath) {

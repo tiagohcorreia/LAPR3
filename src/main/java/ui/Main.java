@@ -38,6 +38,7 @@ public class Main {
             System.out.println("\nDatabase Server not reachable!");
         } catch (Exception e) {
             System.out.println("App properties not loaded!");
+            e.printStackTrace();
         }
     }
 

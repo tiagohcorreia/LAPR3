@@ -4,7 +4,7 @@ import java.time.LocalTime;
 import java.util.Date;
 import java.util.Objects;
 
-public class WateringPlanElement {
+public class WateringPlanEntry {
 
     private Date date;
     private String sector;
@@ -18,7 +18,7 @@ public class WateringPlanElement {
     private final LocalTime DEFAULT_BEGIN=LocalTime.MIDNIGHT;
     private final LocalTime DEFAULT_END=LocalTime.MIDNIGHT;
 
-    public WateringPlanElement() {
+    public WateringPlanEntry() {
         this.date = DEFAULT_DATE;
         this.sector = DEFAULT_SECTOR;
         this.duration = DEFAULT_DURATION;
@@ -26,7 +26,7 @@ public class WateringPlanElement {
         this.end = DEFAULT_END;
     }
 
-    public WateringPlanElement(Date date, String sector, int duration, LocalTime begin, LocalTime end) {
+    public WateringPlanEntry(Date date, String sector, int duration, LocalTime begin, LocalTime end) {
         this.date = date;
         this.sector = sector;
         this.duration = duration;
@@ -78,7 +78,7 @@ public class WateringPlanElement {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        WateringPlanElement that = (WateringPlanElement) o;
+        WateringPlanEntry that = (WateringPlanEntry) o;
         return getDuration() == that.getDuration() && Objects.equals(getDate(), that.getDate()) && Objects.equals(getSector(), that.getSector()) && Objects.equals(getBegin(), that.getBegin()) && Objects.equals(getEnd(), that.getEnd());
     }
 

@@ -1,6 +1,10 @@
 package esinf;
 
+import dataAccess.Repositories;
+import esinf.gps.GPS;
 import esinf.map.MapGraph;
+import esinf.model.Hub;
+import esinf.model.Local;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -240,6 +244,13 @@ class AlgorithmsTest {
         assertEquals(allPaths.get(2), path3, "path 3 incorrect");
 
        // System.out.println(allPaths);
+    }
+
+    void test(){
+        Local l=new Local("l1", new GPS());
+        Hub h=new Hub(l, 1);
+
+        Repositories.getInstance().getGraphStore().replaceLocal(l, h);
     }
 
 }

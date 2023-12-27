@@ -10,9 +10,6 @@ public class EstadoRegaUI implements Runnable {
 
     @Override
     public void run() {
-
-        WateringPlanGenerator wateringPlanGenerator = new WateringPlanGenerator();
-
         EstadoRegaController estadoRegaController = new EstadoRegaController();
 
         List<EstadoRega> estados = estadoRegaController.verificarEstadoAtual();
