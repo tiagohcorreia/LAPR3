@@ -22,6 +22,8 @@ DROP TABLE Plantacao_Permanente CASCADE CONSTRAINTS;
 DROP TABLE Plantacao_Temporaria CASCADE CONSTRAINTS;
 DROP TABLE Poda CASCADE CONSTRAINTS;
 DROP TABLE Produto CASCADE CONSTRAINTS;
+DROP TABLE Receita_Fertirrega CASCADE CONSTRAINTS;
+DROP TABLE Receita_FP CASCADE CONSTRAINTS;
 DROP TABLE Rega CASCADE CONSTRAINTS;
 DROP TABLE Registro_Sensor CASCADE CONSTRAINTS;
 DROP TABLE Sementeira CASCADE CONSTRAINTS;
@@ -32,9 +34,11 @@ DROP TABLE Tipo_Edificio CASCADE CONSTRAINTS;
 DROP TABLE Tipo_FP CASCADE CONSTRAINTS;
 DROP TABLE Tipo_Sensor CASCADE CONSTRAINTS;
 DROP TABLE Tutoramento CASCADE CONSTRAINTS;
+DROP TABLE Unidade_Receita_Fertirrega CASCADE CONSTRAINTS;
 DROP TABLE Variedade CASCADE CONSTRAINTS;
 DROP TABLE Variedade_Permanente CASCADE CONSTRAINTS;
 DROP TABLE Variedade_Temporaria CASCADE CONSTRAINTS;
+
 
 
 CREATE TABLE Aplicacao_FP (operacao_id number(10) NOT NULL, parcela_id number(10) NOT NULL, variedade_id number(10), fator_producao_id number(10) NOT NULL, metodo_aplicacao_id number(10), quantidade float(10) NOT NULL, area float(10), PRIMARY KEY (operacao_id));
@@ -61,19 +65,23 @@ CREATE TABLE Plantacao_Permanente (plantacao_id number(10) NOT NULL, variedade_p
 CREATE TABLE Plantacao_Temporaria (plantacao_id number(10) NOT NULL, variedade_temp_id number(10) NOT NULL, area float(10) NOT NULL, data_início date NOT NULL, data_fim date, PRIMARY KEY (plantacao_id));
 CREATE TABLE Poda (operacao_id number(10) NOT NULL, parcela_id number(10) NOT NULL, variedade_id number(10) NOT NULL, quantidade float(10) NOT NULL, metodo_execucao_id number(10), PRIMARY KEY (operacao_id));
 CREATE TABLE Produto (id number(10) NOT NULL, nome nvarchar2(255) NOT NULL, variedade_id number(10) NOT NULL, PRIMARY KEY (id));
+CREATE TABLE Receita_Fertirrega (id number(10) GENERATED AS IDENTITY, nome nvarchar2(255) NOT NULL UNIQUE, PRIMARY KEY (id));
+CREATE TABLE Receita_FP (receita_id number(10) NOT NULL, fp_id number(10) NOT NULL, proporcao number(10) NOT NULL, unidade_id number(10) NOT NULL, PRIMARY KEY (receita_id, fp_id));
 CREATE TABLE Rega (operacao_id number(10) NOT NULL, setor_id number(10) NOT NULL, duracao number(10) NOT NULL, hora varchar2(255) NOT NULL, PRIMARY KEY (operacao_id));
 CREATE TABLE Registro_Sensor (id number(10) NOT NULL, sensor_id number(10) NOT NULL, valor float(10) NOT NULL, PRIMARY KEY (id));
 CREATE TABLE Sementeira (operacao_id number(10) NOT NULL, parcela_id number(10) NOT NULL, variedade_id number(10) NOT NULL, quantidade float(10) NOT NULL, area float(10) NOT NULL, metodo_execucao_id number(10), PRIMARY KEY (operacao_id));
 CREATE TABLE Sensor (id number(10) NOT NULL, parcela_id number(10) NOT NULL, tipo_sensor_id number(10) NOT NULL, PRIMARY KEY (id));
-CREATE TABLE Setor_Rega (id number(10) NOT NULL, area float(10), caudal_maximo float(10) NOT NULL, data_inicio date NOT NULL, data_fim date, metodo_dispensasao_id number(10), PRIMARY KEY (id));
+CREATE TABLE Setor_Rega (id number(10) NOT NULL, nome nvarchar2(255) NOT NULL UNIQUE, area float(10), caudal_maximo float(10) NOT NULL, data_inicio date NOT NULL, data_fim date, metodo_dispensasao_id number(10), PRIMARY KEY (id));
 CREATE TABLE SetorRega_Plantacao (id number(10) NOT NULL, setor_id number(10) NOT NULL, plantacao_id number(10) NOT NULL, data_inicio date NOT NULL, data_fim date, PRIMARY KEY (id));
 CREATE TABLE Tipo_Edificio (id number(10) NOT NULL, tipo nvarchar2(255) NOT NULL, unidade nvarchar2(255), PRIMARY KEY (id));
 CREATE TABLE Tipo_FP (id number(10) NOT NULL, tipo nvarchar2(255) NOT NULL, PRIMARY KEY (id));
 CREATE TABLE Tipo_Sensor (id number(10) NOT NULL, nome nvarchar2(255) NOT NULL, unidade nvarchar2(255), PRIMARY KEY (id));
 CREATE TABLE Tutoramento (operacao_id number(10) NOT NULL, parcela_id number(10) NOT NULL, variedade_id number(10) NOT NULL, quantidade float(10), PRIMARY KEY (operacao_id));
+CREATE TABLE Unidade_Receita_Fertirrega (id number(10) GENERATED AS IDENTITY, unidade nvarchar2(255) NOT NULL UNIQUE, PRIMARY KEY (id));
 CREATE TABLE Variedade (id number(10) NOT NULL, nome nvarchar2(255) NOT NULL, cultura_id number(10) NOT NULL, PRIMARY KEY (id));
 CREATE TABLE Variedade_Permanente (variedade_id number(10) NOT NULL, fase_plantacao nvarchar2(255), fase_poda nvarchar2(255), fase_floracao nvarchar2(255), fase_colheita nvarchar2(255), PRIMARY KEY (variedade_id));
 CREATE TABLE Variedade_Temporaria (variedade_id number(10) NOT NULL, fase_sementeira nvarchar2(255), fase_colheita nvarchar2(255), PRIMARY KEY (variedade_id));
+
 
 ALTER TABLE Edificio ADD CONSTRAINT FKEdificio633992 FOREIGN KEY (tipo_edificio_id) REFERENCES Tipo_Edificio (id);
 ALTER TABLE Plantacao ADD CONSTRAINT FKPlantacao800350 FOREIGN KEY (parcela_id) REFERENCES Parcela (id);
@@ -136,4 +144,6 @@ ALTER TABLE Incorporacao_Solo ADD CONSTRAINT FKIncorporac38854 FOREIGN KEY (vari
 ALTER TABLE Op_Plantacao ADD CONSTRAINT FKOp_Plantac35629 FOREIGN KEY (operacao_id) REFERENCES Operacao_Agricola (id);
 ALTER TABLE Aplicacao_FP ADD CONSTRAINT FKAplicacao_767975 FOREIGN KEY (fator_producao_id) REFERENCES Fator_Producao (id);
 ALTER TABLE Aplicacao_FP ADD CONSTRAINT FKAplicacao_80198 FOREIGN KEY (metodo_aplicacao_id) REFERENCES Metodo_Aplicacao (id);
-
+ALTER TABLE Receita_FP ADD CONSTRAINT FKReceita_FP437299 FOREIGN KEY (receita_id) REFERENCES Receita_Fertirrega (id);
+ALTER TABLE Receita_FP ADD CONSTRAINT FKReceita_FP984213 FOREIGN KEY (fp_id) REFERENCES Fator_Producao (id);
+ALTER TABLE Receita_FP ADD CONSTRAINT FKReceita_FP715022 FOREIGN KEY (unidade_id) REFERENCES Unidade_Receita_Fertirrega (id);

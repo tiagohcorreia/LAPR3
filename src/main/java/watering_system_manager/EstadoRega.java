@@ -1,4 +1,4 @@
-package classes;
+package watering_system_manager;
 
 public class EstadoRega {
     private boolean isActive;
