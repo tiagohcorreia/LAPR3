@@ -1,6 +1,5 @@
-package watering_system_manager.domain;
+package domain;
 
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class FertigationMix {

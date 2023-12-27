@@ -15,12 +15,13 @@ import java.util.Objects;
 
 public class WateringSectorsRepository {
 
-    public ArrayList<WateringSector> getSectors() throws SQLException {
+    public ArrayList<WateringSector> getSectors() {
 
-            CallableStatement callStmt = null;
-            ResultSet resultSet = null;
-            ArrayList<WateringSector> sectors = null;
+        CallableStatement callStmt = null;
+        ResultSet resultSet = null;
+        ArrayList<WateringSector> sectors = null;
 
+        try{
             try {
 
                 Connection connection = DatabaseConnection.getInstance().getConnection();
@@ -40,6 +41,9 @@ public class WateringSectorsRepository {
                     resultSet.close();
                 }
             }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
 
         return sectors;
     }
@@ -64,14 +68,32 @@ public class WateringSectorsRepository {
         return sectors;
     }
 
-    public boolean isThereSector(String sectorName) throws SQLException{
-        ArrayList<WateringSector> sectors=getSectors();
-        for (WateringSector s: sectors){
-            if (sectorName.equalsIgnoreCase(s.getName())){
-                return true;
+    public boolean isThereSector(String sectorName) {
+        CallableStatement callStmt = null;
+        int out = -1;
+
+        try {
+
+            try {
+                Connection connection = DatabaseConnection.getInstance().getConnection();
+                callStmt = connection.prepareCall("{ ? = call is_there_sector(?) }");
+                callStmt.registerOutParameter(1, OracleTypes.NUMBER);
+                callStmt.setString(2, sectorName);
+                callStmt.execute();
+                out = callStmt.getInt(1);
+
+            } finally {
+
+                if (!Objects.isNull(callStmt)) {
+                    callStmt.close();
+                }
             }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return false;
+
+        return out == 1;
     }
 
 }

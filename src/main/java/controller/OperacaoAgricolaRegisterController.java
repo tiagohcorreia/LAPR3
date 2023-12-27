@@ -11,14 +11,26 @@ import java.util.Date;
 public class OperacaoAgricolaRegisterController {
 
     private OperacaoAgricolaRepository operacaoAgricolaRepository;
-    private Connection connection;
-    private static final String JDBC_URL = "jdbc:oracle:thin:@localhost:1521/xe";
-    private static final String USERNAME = "loc";
+    private DatabaseConnection database;
 
-    private static final String PASSWORD = "basedados";
+    {
+        try {
+            database = DatabaseConnection.getInstance();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private Connection connection;
+
 
     public OperacaoAgricolaRegisterController() {
         getOperacaoAgricolaRepository();
+        try {
+            connection = DriverManager.getConnection(database.url(), database.user(), database.password());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private OperacaoAgricolaRepository getOperacaoAgricolaRepository() {
@@ -37,16 +49,14 @@ public class OperacaoAgricolaRegisterController {
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
 
-            try (Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD)) {
-                String query = "SELECT MAX(id) FROM OPERACAO_AGRICOLA";
-                try (PreparedStatement preparedStatement = connection.prepareStatement(query);
-                     ResultSet resultSet = preparedStatement.executeQuery()) {
-                    if (resultSet.next()) {
-                        int maxId = resultSet.getInt(1);
-                        return maxId + 1;
-                    } else {
-                        return 1;
-                    }
+            String query = "SELECT MAX(id) FROM OPERACAO_AGRICOLA";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query);
+                 ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    int maxId = resultSet.getInt(1);
+                    return maxId + 1;
+                } else {
+                    return 1;
                 }
             }
         } catch (SQLException | ClassNotFoundException e) {
@@ -75,7 +85,7 @@ public class OperacaoAgricolaRegisterController {
     public List<String[]> getTableData(String tableName) {
         List<String[]> result = new ArrayList<>();
 
-        try (Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD)) {
+        try {
             String query = "SELECT * FROM " + tableName;
             try (PreparedStatement preparedStatement = connection.prepareStatement(query);
                  ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -121,7 +131,7 @@ public class OperacaoAgricolaRegisterController {
     }
 
     private String[] getColumnNames(String tableName) {
-        try (Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD)) {
+        try {
             String query = "SELECT * FROM " + tableName + " WHERE ROWNUM <= 1";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query);
                  ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -163,7 +173,7 @@ public class OperacaoAgricolaRegisterController {
     public List<String[]> getTableDataByFatorProducaoId(String tableName, int fatorProducaoId) {
         List<String[]> result = new ArrayList<>();
 
-        try (Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD)) {
+        try {
             String query = "SELECT * FROM " + tableName + " WHERE Fator_Producao_ID = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setInt(1, fatorProducaoId);

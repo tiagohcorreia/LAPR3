@@ -1,4 +1,4 @@
-package watering_system_manager.domain;
+package domain;
 
 import java.util.Objects;
 

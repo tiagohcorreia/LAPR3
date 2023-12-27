@@ -4,17 +4,20 @@ import dataAccess.Repositories;
 import watering_system_manager.exceptions.*;
 import watering_system_manager.watering_instructions.FertigationInstruction;
 import watering_system_manager.watering_instructions.WateringInstruction;
+import watering_system_manager.watering_plan.WateringPlan;
+import watering_system_manager.watering_plan.WateringPlanElement;
+import watering_system_manager.watering_plan.WateringPlanElementComparator;
 
 import java.io.*;
-import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.*;
 
 
 public class WateringPlanGenerator {
 
-    private List<String[]> planoDeRega;
+    private WateringPlan plan;
     private List<String[]> adjustedPlanoDeRega;
 
     public void parse() {
@@ -31,7 +34,7 @@ public class WateringPlanGenerator {
         Calendar calendar = Calendar.getInstance();
         Date generationDate = calendar.getTime();
 
-        planoDeRega = new ArrayList<>();
+        plan = new WateringPlan();
 
         for (WateringInstruction instruction : instructions) {
             ArrayList<Date> wateringDays = calculateWateringDays(generationDate, instruction.getRegularidade(), 30);
@@ -41,41 +44,24 @@ public class WateringPlanGenerator {
                 for (String hora : wateringHours) {
                     calendar.setTime(date);
                     String[] timeParts = hora.split(":");
-                    calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(timeParts[0]));
-                    calendar.set(Calendar.MINUTE, Integer.parseInt(timeParts[1]));
+                    int hour=Integer.parseInt(timeParts[0]);
+                    int minute=Integer.parseInt(timeParts[1]);
+                    calendar.set(Calendar.HOUR_OF_DAY, hour);
+                    calendar.set(Calendar.MINUTE, minute);
 
-                    String begin = hora;
-                    String fim = Rega.calcularFimRega(calendar, instruction.getDuracao());
-                    planoDeRega.add(new String[]{
-                            dateFormat.format(date),
-                            instruction.getSetor(),
-                            String.valueOf(instruction.getDuracao()),
-                            begin,
-                            fim
-                    });
+                    LocalTime begin = LocalTime.of(hour, minute);
+                    LocalTime end = calculateWateringEnd(calendar, instruction.getDuracao());
+                    plan.addElement(new WateringPlanElement(date, instruction.getSetor(), instruction.getDuracao(), begin, end));
                 }
             }
         }
 
-        SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-
-        Comparator<String[]> dateTimeComparator = (rega1, rega2) -> {
-            try {
-                Date date1 = dateTimeFormat.parse(rega1[0] + " " + rega1[3]); // Combine date and time for rega1
-                Date date2 = dateTimeFormat.parse(rega2[0] + " " + rega2[3]); // Combine date and time for rega2
-                return date1.compareTo(date2);
-            } catch (ParseException e) {
-                e.printStackTrace();
-                return 0;
-            }
-        };
-
-        Collections.sort(planoDeRega, dateTimeComparator);
+        Collections.sort(plan.getList(), new WateringPlanElementComparator());
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("plano_de_rega.csv"))) {
             writer.write("Dia,Sector,Duracao,Inicio,Fim\n");
-            for (String[] rega : planoDeRega) {
-                writer.write(String.join(",", rega) + "\n");
+            for (WateringPlanElement e : plan.getList()) {
+                writer.write(String.format("%s, %s, %s, %s, %s\n", e.getDate(), e.getSector(), e.getDuration(), e.getBegin(), e.getEnd()));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -192,8 +178,6 @@ public class WateringPlanGenerator {
                 } catch (InvalidFertigationRecurrenceException e) {
                     System.out.printf("ERRO: Recorrência de fertirrega inválida na linha %d\n\n", lineNumber);
 
-                } catch (SQLException e) {
-                    System.out.println("ERRO: Erro ao conectar à base de dados\n");
                 }
             }
 
@@ -238,6 +222,18 @@ public class WateringPlanGenerator {
             }
         }
         return datasDeRega;
+    }
+
+    private LocalTime calculateWateringEnd(Calendar wateringBegin, int duracao) {
+        Calendar wateringEnd = (Calendar) wateringBegin.clone();
+        wateringEnd.add(Calendar.MINUTE, duracao);
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        String[] time=dateFormat.format(wateringEnd.getTime()).split(":");
+        int hour=Integer.parseInt(time[0]);
+        int minute=Integer.parseInt(time[1]);
+
+        return LocalTime.of(hour, minute);
     }
 
     public void adjustWateringSchedule(String filePath) {

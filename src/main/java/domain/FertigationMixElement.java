@@ -1,6 +1,4 @@
-package watering_system_manager.domain;
-
-import domain.FatorProducao;
+package domain;
 
 import java.util.Objects;
 
