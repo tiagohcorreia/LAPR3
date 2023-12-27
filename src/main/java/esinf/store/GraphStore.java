@@ -1,5 +1,9 @@
 package esinf.store;
 
+import esinf.IntegerBinaryOperator;
+import esinf.IntegerComparator;
+import esinf.dataStructure.Data;
+
 import esinf.dataStructure.PathWithMostHubsData;
 import esinf.model.Hub;
 import esinf.Edge;
@@ -8,7 +12,10 @@ import esinf.dataStructure.FurthestPlacesData;
 import esinf.Algorithms;
 import esinf.map.MapGraph;
 import esinf.model.Local;
+import esinf.us_ei02.IdealVerticesCalculator;
 
+import java.time.Duration;
+import java.time.LocalTime;
 import java.util.*;
 
 public class GraphStore {
@@ -286,12 +293,69 @@ public class GraphStore {
         return graph.vertices().isEmpty();
     }
 
-    public PathWithMostHubsData findMaxHubPassingRoute(Local local,double autonomy,int speed) {
-        PathWithMostHubsData data=new PathWithMostHubsData();
+    public PathWithMostHubsData findMaxHubPassingRoute(Local local, LocalTime departuretime, double autonomy, int speed, Duration vehicleChargingTime) {
+        PathWithMostHubsData data = new PathWithMostHubsData();
         MapGraph<Local, Integer> clone = removeEdgesAboveAutonomy(autonomy);
+        IdealVerticesCalculator<Local, Integer> calculator = new IdealVerticesCalculator<>(clone, clone.vertices(), new IntegerComparator(), new IntegerBinaryOperator(), 0);
+
+        ArrayList<LinkedList<Local>> paths = new ArrayList<>();
+        ArrayList<Integer> dists = new ArrayList<>();
+        Algorithms.shortestPaths(clone, local, Integer::compare, Integer::sum, 0, paths, dists);
+        List<Hub> hubs = new ArrayList<>();
+
+        checkPathWithMostHubs(clone, hubs, paths, speed, departuretime, vehicleChargingTime,autonomy);
 
 
         return data;
+    }
+
+    private void checkPathWithMostHubs(MapGraph<Local, Integer> clone, List<Hub> hubs, ArrayList<LinkedList<Local>> paths, int speed, LocalTime departuretime, Duration vehicleChargingTime, double autonomy) {
+
+        for (LinkedList<Local> list : paths) {
+            checkData(clone, hubs, speed, departuretime, list, vehicleChargingTime, autonomy);
+        }
+
+    }
+
+    private void checkData(MapGraph<Local, Integer> clone, List<Hub> hubs, int speed, LocalTime departuretime, LinkedList<Local> list, Duration vehicleChargingTime, double autonomy) {
+        Duration routetime;
+        LocalTime temp = departuretime;
+        LocalTime pathDuration = departuretime;
+        Map<Hub, Data> hubData=new HashMap<>();
+        Data data;
+        int distance;
+        List<Local> stops = getVehicleChargeStops(clone, list, autonomy);
+        for (int i = 0; i < list.size() - 1; i++) {
+            distance = clone.edge(list.get(i), list.get(i + 1)).getWeight();
+            routetime = getroutetime(speed, distance); //obtem tempo de um local ate o outro
+            pathDuration = pathDuration.plus(routetime); // soma o tempo entre os locals ao tempo de partida
+            data = new Data(pathDuration); //tempo de chegada no prox local
+            if (list.get(i + 1) instanceof Hub) {
+                data.setHub(true);
+                if (pathDuration.isAfter((((Hub) list.get(i + 1)).getSchedule().getOpeningHours()))&&pathDuration.isBefore((((Hub) list.get(i + 1)).getSchedule().getClosingHours()))) { //se chegar a horas no hub(antes de fechar e depois de abrir)
+                    if (stops.contains(list.get(i+1))){
+                        pathDuration=pathDuration.plus(vehicleChargingTime); //se o local for um dos locais onde o veicuoloo carrega, adicionamos o tempo que levou a carregar ao tempo do percurso
+                    }
+                    pathDuration=pathDuration.plus(Duration.ofSeconds(((Hub) list.get(i+1)).getDischargeTime()));//adicionamos o tempo que levou a descarregar os produtos
+                }
+                data.setDepartureHour(pathDuration);
+            }
+
+
+        }
+
+    }
+
+    private static Duration getroutetime(double distance, double speed) {
+        if (speed > 0) {
+            double tempoDePercursoEmHoras = distance / speed;
+
+            long seconds = (long) (tempoDePercursoEmHoras * 3600);
+
+            return Duration.ofSeconds(seconds);
+        } else {
+            return null;
+        }
     }
 
 
