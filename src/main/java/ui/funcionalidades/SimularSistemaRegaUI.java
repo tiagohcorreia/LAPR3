@@ -11,7 +11,7 @@ public class SimularSistemaRegaUI implements Runnable {
 
         WateringPlanGenerator wateringPlanGenerator = new WateringPlanGenerator();
         wateringPlanGenerator.parse();
-        wateringPlanGenerator.adjustRegaSchedule("plano_de_rega.csv");
+        wateringPlanGenerator.adjustWateringSchedule("plano_de_rega.csv");
         RegaRegisterUI regaRegisterUI = null;
         try {
             regaRegisterUI = new RegaRegisterUI();
