@@ -1,19 +1,17 @@
 package ui.funcionalidades;
 
-import controller.RegaController;
-import classes.EstadoRega;
+import watering_system_manager.WateringPlanGenerator;
 
 import java.sql.SQLException;
-import java.util.List;
 
 public class SimularSistemaRegaUI implements Runnable {
 
     @Override
     public void run() {
 
-        RegaController regaController = new RegaController();
-        regaController.Parse();
-        regaController.adjustRegaSchedule("plano_de_rega.csv");
+        WateringPlanGenerator wateringPlanGenerator = new WateringPlanGenerator();
+        wateringPlanGenerator.parse();
+        wateringPlanGenerator.adjustWateringSchedule("plano_de_rega.csv");
         RegaRegisterUI regaRegisterUI = null;
         try {
             regaRegisterUI = new RegaRegisterUI();

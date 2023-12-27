@@ -7,6 +7,18 @@ public class FatorProducao {
     private int tipoId;
     private int formulacaoId;
 
+    private final int DEFAULT_ID=-1;
+    private final String DEFAULT_NAME="(no name)";
+    private final int DEFAULT_ID_TYPE=-1;
+    private final int DEFAULT_FORMULATION_ID=-1;
+
+    public FatorProducao(){
+        this.id = DEFAULT_ID;
+        this.nome = DEFAULT_NAME;
+        this.tipoId = DEFAULT_ID_TYPE;
+        this.formulacaoId = DEFAULT_FORMULATION_ID;
+    }
+
     public FatorProducao(int id, String nome, int tipoId, int formulacaoId) {
         this.id = id;
         this.nome = nome;
