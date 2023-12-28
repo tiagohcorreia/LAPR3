@@ -1,0 +1,24 @@
+@startuml
+
+class LoadHubsFromFile {
+
+    + loadHubsFormFile()
+}
+
+class LoadHubsFromFileUI {
+    + run()
+}
+
+class LoadHubsFromFileController {
+    + loadHubs()
+}
+
+interface Runnable {
+    + run()
+}
+
+Runnable -left-|> LoadHubsFromFileUI
+LoadHubsFromFileUI ..> LoadHubsFromFileController
+LoadHubsFromFileController ..> LoadHubsFromFile
+
+@enduml

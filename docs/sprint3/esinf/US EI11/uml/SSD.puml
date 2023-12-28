@@ -1,0 +1,13 @@
+@startuml
+
+title System Sequence Diagram
+
+actor GestorDistribuição as g
+participant system as s
+
+g --> s: começa o pedido de importação de Hubs
+
+s --> g: retorna o grafo com os hubs carregados
+
+
+@enduml
