@@ -89,7 +89,7 @@ public class Circuit {
         System.out.println("Vehicle: " + vehicle);
         System.out.println("Origin: " + origin);
 
-        System.out.println("Locals:");
+        System.out.println("Locals to Travel in order:");
         for (Local local : locals) {
             String localDetails = "Local{id=" + local.getLocalId() + "}";
             if (hubs.stream().anyMatch(hub -> hub.getLocalId().equals(local.getLocalId()))) {

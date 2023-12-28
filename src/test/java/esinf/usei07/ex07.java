@@ -85,6 +85,10 @@ public class ex07 {
 
 
         //
+        ArrayList<LinkedList<String>> paths = new ArrayList<>();
+        ArrayList<Integer> dists = new ArrayList<>();
+
+        Algorithms.shortestPaths(clone, "Porto", Integer::compare, Integer::sum, 0, paths, dists);
 
 
 
