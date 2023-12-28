@@ -12,6 +12,7 @@ import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.*;
@@ -45,10 +46,6 @@ public class WateringPlanGenerator {
             getWateringInstructions(wateringMoments, instructions);
         }
 
-        if (wateringMoments.get(0).isBefore(LocalTime.now())) {
-            generationDay = generationDay.plusDays(1);
-        }
-
         Map<WateringInstruction, ArrayList<LocalDate>> instructionsAndWateringDays = new HashMap<>();
         Map<WateringInstruction, ArrayList<LocalDate>> instructionsAndFertigationDays = new HashMap<>();
 
@@ -70,7 +67,7 @@ public class WateringPlanGenerator {
             }
         }
 
-        plan = generatePlan(wateringMoments, instructionsAndWateringDays, instructionsAndFertigationDays);
+        plan = generatePlan(wateringMoments, instructions, instructionsAndWateringDays, instructionsAndFertigationDays);
         plan.getList().sort(new WateringPlanEntryComparator());
         generateOutputFile();
 
@@ -129,18 +126,22 @@ public class WateringPlanGenerator {
                             if (elements.length == 5) {
                                 String mix = elements[3];
 
-                                if (!repo.getFertigationMixes().isThereMix(mix)) {
-                                    throw new InvalidMixException();
-                                }
+                                if (repo.getFertigationMixes().isThereMix(mix)) {
 
-                                int fertigationRecurrence;
-                                try {
-                                    fertigationRecurrence = Integer.parseInt(elements[4]);
-                                } catch (NumberFormatException e) {
-                                    throw new InvalidFertigationRecurrenceException();
-                                }
+                                    int fertigationRecurrence;
+                                    try {
+                                        fertigationRecurrence = Integer.parseInt(elements[4]);
+                                        instructions.add(new FertigationInstruction(sector, duration, regularity, mix, fertigationRecurrence));
 
-                                instructions.add(new FertigationInstruction(sector, duration, regularity, mix, fertigationRecurrence));
+                                    } catch (NumberFormatException e) {
+                                        System.out.printf("ERRO: Recorrência de fertirrega inválida na linha %d\n\n", lineNumber + 1);
+                                        instructions.add(new WateringInstruction(sector, duration, regularity));
+                                    }
+
+                                } else {
+                                    System.out.printf("ERRO: Mix inválido na linha %d\n\n", lineNumber + 1);
+                                    instructions.add(new WateringInstruction(sector, duration, regularity));
+                                }
 
                             } else {
                                 instructions.add(new WateringInstruction(sector, duration, regularity));
@@ -150,8 +151,6 @@ public class WateringPlanGenerator {
                             throw new InvalidNumberOfColumnsException();
                         }
                     }
-
-                    lineNumber++;
 
                 } catch (InvalidNumberOfColumnsException e) {
                     System.out.printf("ERRO: Número inválido de colunas na linha %d\n\n", lineNumber + 1);
@@ -164,14 +163,9 @@ public class WateringPlanGenerator {
 
                 } catch (InvalidSectorException e) {
                     System.out.printf("ERRO: Setor inválido na linha %d\n\n", lineNumber + 1);
-
-                } catch (InvalidMixException e) {
-                    System.out.printf("ERRO: Mix inválido na linha %d\n\n", lineNumber + 1);
-
-                } catch (InvalidFertigationRecurrenceException e) {
-                    System.out.printf("ERRO: Recorrência de fertirrega inválida na linha %d\n\n", lineNumber + 1);
-
                 }
+
+                lineNumber++;
             }
         } catch (IOException e) {
             e.printStackTrace();// Terminate the program
@@ -232,6 +226,7 @@ public class WateringPlanGenerator {
     }
 
     private WateringPlan generatePlan(ArrayList<LocalTime> wateringMoments,
+                                      ArrayList<WateringInstruction> instructions,
                                       Map<WateringInstruction, ArrayList<LocalDate>> instructionsAndWateringDays,
                                       Map<WateringInstruction, ArrayList<LocalDate>> instructionsAndFertigationDays) {
 
@@ -247,7 +242,7 @@ public class WateringPlanGenerator {
                 if (!wateringMoments.get(j).isBefore(lastWateringCopy)) {
                     lastWateringCopy = wateringMoments.get(j);
 
-                    for (WateringInstruction instruct : instructionsAndWateringDays.keySet()) {
+                    for (WateringInstruction instruct : instructions) {
 
                         if (instructionsAndWateringDays.get(instruct).contains(day)) {
 
@@ -255,18 +250,23 @@ public class WateringPlanGenerator {
                             int duration = instruct.getDuracao();
                             LocalTime wateringEnd = lastWateringCopy.plusMinutes(duration);
 
-                            if (instruct instanceof FertigationInstruction &&
-                                    instructionsAndFertigationDays.get(instruct) != null &&
-                                    instructionsAndFertigationDays.get(instruct).contains(day)) {
+                            LocalDateTime wateringDateTime=LocalDateTime.of(day, lastWateringCopy);
+                            if (LocalDateTime.now().isBefore(wateringDateTime)) {
 
-                                plan.addElement(new WateringPlanEntry(day, sector, duration, lastWateringCopy, wateringEnd, ((FertigationInstruction) instruct).getMixName()));
+                                if (instruct instanceof FertigationInstruction &&
+                                        instructionsAndFertigationDays.get(instruct) != null &&
+                                        instructionsAndFertigationDays.get(instruct).contains(day)) {
 
-                            } else {
-                                plan.addElement(new WateringPlanEntry(day, sector, duration, lastWateringCopy, wateringEnd));
+                                    plan.addElement(new WateringPlanEntry(day, sector, duration, lastWateringCopy, wateringEnd, ((FertigationInstruction) instruct).getMixName()));
+
+                                } else {
+                                    plan.addElement(new WateringPlanEntry(day, sector, duration, lastWateringCopy, wateringEnd));
+                                }
                             }
 
                             lastWateringCopy = wateringEnd;
                         }
+
                     }
 
                 } else try {
@@ -284,12 +284,12 @@ public class WateringPlanGenerator {
 
     private void generateOutputFile() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("plano_de_rega.csv"))) {
-            writer.write("Dia(yyyy-mm-dd);Sector;Duracao(mn);Inicio;Fim\n");
+            writer.write("Dia(yyyy-mm-dd),Sector,Duracao(mn),Inicio,Fim\n");
             for (WateringPlanEntry e : plan.getList()) {
                 if (e.isFertigation()) {
-                    writer.write(String.format("%s;%s;%s;%s;%s;%s\n", e.getDate(), e.getSector(), e.getDuration(), e.getBegin(), e.getEnd(), e.getMix()));
+                    writer.write(String.format("%s,%s,%s,%s,%s,%s\n", e.getDate(), e.getSector(), e.getDuration(), e.getBegin(), e.getEnd(), e.getMix()));
                 } else {
-                    writer.write(String.format("%s;%s;%s;%s;%s\n", e.getDate(), e.getSector(), e.getDuration(), e.getBegin(), e.getEnd()));
+                    writer.write(String.format("%s,%s,%s,%s,%s\n", e.getDate(), e.getSector(), e.getDuration(), e.getBegin(), e.getEnd()));
                 }
             }
         } catch (IOException e) {
