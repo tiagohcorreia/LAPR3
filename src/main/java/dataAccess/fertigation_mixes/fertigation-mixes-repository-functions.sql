@@ -35,5 +35,3 @@ begin
         dbms_output.PUT_LINE('mix não existe, retorno: '|| output);
     end if;
 end;
-
-insert into RECEITA_FERTIRREGA(id, NOME) values (1, 'mix1');

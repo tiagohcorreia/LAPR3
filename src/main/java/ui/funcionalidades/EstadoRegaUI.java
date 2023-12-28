@@ -1,18 +1,33 @@
 package ui.funcionalidades;
 
-import watering_system_manager.EstadoRega;
-import watering_system_manager.WateringPlanGenerator;
-import watering_system_manager.EstadoRegaController;
+import controller.EstadoRegaController;
+import watering_system_manager.watering_plan.WateringPlanEntry;
 
-import java.util.List;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 
 public class EstadoRegaUI implements Runnable {
 
+    EstadoRegaController ctrl = new EstadoRegaController();
+
     @Override
     public void run() {
-        EstadoRegaController estadoRegaController = new EstadoRegaController();
 
-        List<EstadoRega> estados = estadoRegaController.verificarEstadoAtual();
+        WateringPlanEntry wateringRecord=ctrl.checkWateringInProgress();
+        if (wateringRecord!=null){
+            System.out.println("Rega ativa no setor: " + wateringRecord.getSector());
+            System.out.println("Tempo restante (minutos): " + ChronoUnit.MINUTES.between(LocalTime.now(), wateringRecord.getEnd()));
+
+            if (wateringRecord.isFertigation()){
+                System.out.println("Fertirrega do mix: " + wateringRecord.getMix());
+            }
+
+            System.out.println();
+
+        } else System.out.println("Não exitem regas em curso no momento\n");
+    }
+
+    /* List<EstadoRega> estados = estadoRegaController.verificarEstadoAtual();
 
         for (EstadoRega estado : estados) {
             if (estado.isActive()) {
@@ -21,6 +36,5 @@ public class EstadoRegaUI implements Runnable {
             } else {
                 System.out.println("Nenhuma rega ativa de momento");
             }
-        }
-    }
+        }*/
 }

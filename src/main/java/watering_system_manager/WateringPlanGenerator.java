@@ -283,12 +283,12 @@ public class WateringPlanGenerator {
 
     private void generateOutputFile() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("plano_de_rega.csv"))) {
-            writer.write("Dia(yyyy-mm-dd),Sector,Duracao(mn),Inicio,Fim\n");
+            writer.write("Dia(yyyy-mm-dd);Sector;Duracao(mn);Inicio;Fim\n");
             for (WateringPlanEntry e : plan.getList()) {
                 if (e.isFertigation()) {
-                    writer.write(String.format("%s,%s,%s,%s,%s,%s\n", e.getDate(), e.getSector(), e.getDuration(), e.getBegin(), e.getEnd(), e.getMix()));
+                    writer.write(String.format("%s;%s;%s;%s;%s;%s\n", e.getDate(), e.getSector(), e.getDuration(), e.getBegin(), e.getEnd(), e.getMix()));
                 } else {
-                    writer.write(String.format("%s,%s,%s,%s,%s\n", e.getDate(), e.getSector(), e.getDuration(), e.getBegin(), e.getEnd()));
+                    writer.write(String.format("%s;%s;%s;%s;%s\n", e.getDate(), e.getSector(), e.getDuration(), e.getBegin(), e.getEnd()));
                 }
             }
         } catch (IOException e) {
