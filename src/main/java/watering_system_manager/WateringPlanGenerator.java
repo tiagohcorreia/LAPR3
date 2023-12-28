@@ -65,7 +65,7 @@ public class WateringPlanGenerator {
                     instructionsAndFertigationDays.put(instruction, fertigationDays);
 
                 } catch (InvalidFertigationRecurrenceException e) {
-                    System.err.printf("ERRO: Recorrência de fertirrega inválida na instrução número %d\n\n", i + 1);
+                    System.err.printf("ERRO: Recorrência de fertirrega incompatível com a regularidade da rega na instrução número %d\n\n", i + 1);
                 }
             }
         }
@@ -128,6 +128,7 @@ public class WateringPlanGenerator {
 
                             if (elements.length == 5) {
                                 String mix = elements[3];
+
                                 if (!repo.getFertigationMixes().isThereMix(mix)) {
                                     throw new InvalidMixException();
                                 }
@@ -219,7 +220,7 @@ public class WateringPlanGenerator {
         ArrayList<LocalDate> fertigationDays = new ArrayList<>();
         LocalDate day = LocalDate.of(generationDay.getYear(), generationDay.getMonth(), generationDay.getDayOfMonth());
 
-        while (!day.isAfter(generationDay.plusDays(numberOfPlanDays))) {
+        while (day.isBefore(generationDay.plusDays(numberOfPlanDays))) {
 
             if (wateringDays.contains(day)) {
                 fertigationDays.add(day);
@@ -235,7 +236,7 @@ public class WateringPlanGenerator {
                                       Map<WateringInstruction, ArrayList<LocalDate>> instructionsAndFertigationDays) {
 
         WateringPlan plan = new WateringPlan();
-        LocalDate currentDay = LocalDate.of(generationDay.getYear(), generationDay.getMonth(), generationDay.getDayOfMonth());
+        LocalDate day = LocalDate.of(generationDay.getYear(), generationDay.getMonth(), generationDay.getDayOfMonth());
 
         for (int i = 0; i < numberOfPlanDays; i++) {
             LocalTime lastWatering = wateringMoments.get(0);
@@ -248,7 +249,7 @@ public class WateringPlanGenerator {
 
                     for (WateringInstruction instruct : instructionsAndWateringDays.keySet()) {
 
-                        if (instructionsAndWateringDays.get(instruct).contains(currentDay)) {
+                        if (instructionsAndWateringDays.get(instruct).contains(day)) {
 
                             String sector = instruct.getSetor();
                             int duration = instruct.getDuracao();
@@ -256,12 +257,12 @@ public class WateringPlanGenerator {
 
                             if (instruct instanceof FertigationInstruction &&
                                     instructionsAndFertigationDays.get(instruct) != null &&
-                                    instructionsAndFertigationDays.get(instruct).contains(currentDay)) {
+                                    instructionsAndFertigationDays.get(instruct).contains(day)) {
 
-                                plan.addElement(new WateringPlanEntry(currentDay, sector, duration, lastWateringCopy, wateringEnd, ((FertigationInstruction) instruct).getMixName()));
+                                plan.addElement(new WateringPlanEntry(day, sector, duration, lastWateringCopy, wateringEnd, ((FertigationInstruction) instruct).getMixName()));
 
                             } else {
-                                plan.addElement(new WateringPlanEntry(currentDay, sector, duration, lastWateringCopy, wateringEnd));
+                                plan.addElement(new WateringPlanEntry(day, sector, duration, lastWateringCopy, wateringEnd));
                             }
 
                             lastWateringCopy = wateringEnd;
@@ -276,7 +277,7 @@ public class WateringPlanGenerator {
                 }
             }
 
-            currentDay = currentDay.plusDays(1);
+            day = day.plusDays(1);
         }
         return plan;
     }
