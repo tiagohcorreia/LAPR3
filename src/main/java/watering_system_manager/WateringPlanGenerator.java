@@ -21,12 +21,14 @@ public class WateringPlanGenerator {
 
     private BufferedReader fileReader;
     private int numberOfPlanDays;
+    private LocalDate generationDay;
     private WateringPlan plan;
-    private List<String[]> adjustedPlanoDeRega;
+    //private List<String[]> adjustedPlanoDeRega;
 
     public WateringPlanGenerator(BufferedReader fileReader, int numberOfPlanDays) {
         this.fileReader = fileReader;
         this.numberOfPlanDays = numberOfPlanDays;
+        generationDay = LocalDate.now();
     }
 
     public void generatePlan() {
@@ -40,85 +42,45 @@ public class WateringPlanGenerator {
         ArrayList<LocalTime> wateringMoments = new ArrayList<>();
 
         if (fileReader != null) {
-            getWateringInstructions(fileReader, wateringMoments, instructions);
+            getWateringInstructions(wateringMoments, instructions);
         }
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Calendar calendar = Calendar.getInstance();
-        Date generationDate = calendar.getTime();
+        if (wateringMoments.get(0).isBefore(LocalTime.now())) {
+            generationDay = generationDay.plusDays(1);
+        }
 
-        Map<WateringInstruction, ArrayList<Date>> instructionsAndWateringDays = new HashMap<>();
+        Map<WateringInstruction, ArrayList<LocalDate>> instructionsAndWateringDays = new HashMap<>();
+        Map<WateringInstruction, ArrayList<LocalDate>> instructionsAndFertigationDays = new HashMap<>();
 
-        for (WateringInstruction instruction : instructions) {
-            ArrayList<Date> wateringDays = calculateWateringDays(generationDate, instruction.getRegularidade(), numberOfPlanDays);
+
+        for (int i = 0; i < instructions.size(); i++) {
+            WateringInstruction instruction = instructions.get(i);
+            ArrayList<LocalDate> wateringDays = calculateWateringDays(instruction.getRegularidade());
             instructionsAndWateringDays.put(instruction, wateringDays);
-        }
-            /*
-            for (Date date : wateringDays) {
 
-                ArrayList<LocalTime> wateringMomentsCopy=new ArrayList<>(wateringMoments);
+            if (instruction instanceof FertigationInstruction) {
 
-                for (LocalTime m : wateringMomentsCopy) {
-                    calendar.setTime(date);
-                    calendar.set(Calendar.HOUR_OF_DAY, m.getHour());
-                    calendar.set(Calendar.MINUTE, m.getMinute());
+                try {
+                    ArrayList<LocalDate> fertigationDays = calculateFertigationDays(((FertigationInstruction) instruction).getFertigationRecurrence(), wateringDays);
+                    instructionsAndFertigationDays.put(instruction, fertigationDays);
 
-                    LocalTime begin = m;
-                    LocalTime end = calculateWateringEnd(calendar, instruction.getDuracao());
-                    plan.addElement(new WateringPlanEntry(date, instruction.getSetor(), instruction.getDuracao(), begin, end));
+                } catch (InvalidFertigationRecurrenceException e) {
+                    System.err.printf("ERRO: Recorrência de fertirrega inválida na instrução número %d\n\n", i + 1);
                 }
-            }*/
+            }
+        }
 
-        plan = generatePlan(generationDate, wateringMoments, instructionsAndWateringDays);
+        plan = generatePlan(wateringMoments, instructionsAndWateringDays, instructionsAndFertigationDays);
         plan.getList().sort(new WateringPlanEntryComparator());
+        generateOutputFile();
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("plano_de_rega.csv"))) {
-            writer.write("Dia,Sector,Duracao,Inicio,Fim\n");
-            for (WateringPlanEntry e : plan.getList()) {
-                LocalDate localDate = e.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                writer.write(String.format("%s,%s,%s,%s,%s\n", localDate, e.getSector(), e.getDuration(), e.getBegin(), e.getEnd()));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
-    /**
-     * initializes and returns a BufferedReader instance with the file specified during the execution of the method
-     *
-     * @return the BufferedReader instance initialized with the specified file, or returns null if the user abort the operation
-     */
-    public BufferedReader getInstructionsFileReader() {
-        Scanner scanner = new Scanner(System.in);
-        boolean validIn = false;
-        BufferedReader reader = null;
-        String input;
-
-        do {
-            System.out.println("Insira a localizacao do ficheiro ou 0 para cancelar: ");
-            input = scanner.nextLine();
-
-            try {
-                if (Integer.parseInt(input) != 0) {
-                    reader = new BufferedReader(new FileReader(input));
-                }
-                validIn = true;
-            } catch (FileNotFoundException e) {
-                System.out.println("O ficheiro indicado é inválido\n");
-            } catch (NumberFormatException e) {
-
-            }
-        } while (!validIn);
-
-        return reader;
-    }
-
-    public void getWateringInstructions(BufferedReader fileReader,
-                                        ArrayList<LocalTime> horasDeRega,
+    public void getWateringInstructions(ArrayList<LocalTime> horasDeRega,
                                         ArrayList<WateringInstruction> instructions) {
         Repositories repo = Repositories.getInstance();
         String line;
-        int lineNumber = 1;
+        int lineNumber = 0;
 
         try {
 
@@ -191,22 +153,22 @@ public class WateringPlanGenerator {
                     lineNumber++;
 
                 } catch (InvalidNumberOfColumnsException e) {
-                    System.out.printf("ERRO: Número inválido de colunas na linha %d\n\n", lineNumber);
+                    System.out.printf("ERRO: Número inválido de colunas na linha %d\n\n", lineNumber + 1);
 
                 } catch (InvalidRegularityException e) {
-                    System.out.printf("ERRO: Regularidade inválida na linha %d\n\n", lineNumber);
+                    System.out.printf("ERRO: Regularidade inválida na linha %d\n\n", lineNumber + 1);
 
                 } catch (InvalidDurationException e) {
-                    System.out.printf("ERRO: Duração inválida na linha %d\n\n", lineNumber);
+                    System.out.printf("ERRO: Duração inválida na linha %d\n\n", lineNumber + 1);
 
                 } catch (InvalidSectorException e) {
-                    System.out.printf("ERRO: Setor inválido na linha %d\n\n", lineNumber);
+                    System.out.printf("ERRO: Setor inválido na linha %d\n\n", lineNumber + 1);
 
                 } catch (InvalidMixException e) {
-                    System.out.printf("ERRO: Mix inválido na linha %d\n\n", lineNumber);
+                    System.out.printf("ERRO: Mix inválido na linha %d\n\n", lineNumber + 1);
 
                 } catch (InvalidFertigationRecurrenceException e) {
-                    System.out.printf("ERRO: Recorrência de fertirrega inválida na linha %d\n\n", lineNumber);
+                    System.out.printf("ERRO: Recorrência de fertirrega inválida na linha %d\n\n", lineNumber + 1);
 
                 }
             }
@@ -215,56 +177,65 @@ public class WateringPlanGenerator {
         }
     }
 
-    private ArrayList<Date> calculateWateringDays(Date dataInicial, String regularidade, int numeroDeDias) {
-        ArrayList<Date> datasDeRega = new ArrayList<>();
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(dataInicial);
+    private ArrayList<LocalDate> calculateWateringDays(String regularidade) {
+        ArrayList<LocalDate> datasDeRega = new ArrayList<>();
+        LocalDate currentDay = LocalDate.of(generationDay.getYear(), generationDay.getMonth(), generationDay.getDayOfMonth());
 
-        if (regularidade.equals("T")) {
-            for (int i = 0; i < numeroDeDias; i++) {
-                datasDeRega.add(calendar.getTime());
-                calendar.add(Calendar.DAY_OF_MONTH, 1);
-            }
-        } else if (regularidade.equals("I")) {
-            for (int i = 0; i < numeroDeDias; i++) {
+        switch (regularidade) {
+            case "T":
+                for (int i = 0; i < numberOfPlanDays; i++) {
+                    datasDeRega.add(currentDay);
+                    currentDay = currentDay.plusDays(1);
+                }
+                break;
+            case "I":
+                for (int i = 0; i < numberOfPlanDays; i++) {
 
-                if (calendar.get(Calendar.DAY_OF_MONTH) % 2 != 0) {
-                    datasDeRega.add(calendar.getTime());
+                    if (currentDay.getDayOfMonth() % 2 != 0) {
+                        datasDeRega.add(currentDay);
+                    }
+                    currentDay = currentDay.plusDays(1);
                 }
-                calendar.add(Calendar.DAY_OF_MONTH, 1);
-            }
-        } else if (regularidade.equals("P")) {
-            for (int i = 0; i < numeroDeDias; i++) {
-                if (calendar.get(Calendar.DAY_OF_MONTH) % 2 == 0) {
-                    datasDeRega.add(calendar.getTime());
+                break;
+            case "P":
+                for (int i = 0; i < numberOfPlanDays; i++) {
+                    if (currentDay.getDayOfMonth() % 2 == 0) {
+                        datasDeRega.add(currentDay);
+                    }
+                    currentDay = currentDay.plusDays(1);
                 }
-                calendar.add(Calendar.DAY_OF_MONTH, 1);
-            }
-        } else if (regularidade.equals("3")) {
-            for (int i = 0; i < numeroDeDias / 3; i++) {
-                datasDeRega.add(calendar.getTime());
-                calendar.add(Calendar.DAY_OF_MONTH, 3);
-            }
+                break;
+            case "3":
+                for (int i = 0; i < numberOfPlanDays / 3; i++) {
+                    datasDeRega.add(currentDay);
+                    currentDay = currentDay.plusDays(3);
+                }
+                break;
         }
         return datasDeRega;
     }
 
-    private LocalTime calculateWateringEnd(Calendar wateringBegin, int duracao) {
-        Calendar wateringEnd = (Calendar) wateringBegin.clone();
-        wateringEnd.add(Calendar.MINUTE, duracao);
+    private ArrayList<LocalDate> calculateFertigationDays(int recurrence, ArrayList<LocalDate> wateringDays) throws InvalidFertigationRecurrenceException {
+        ArrayList<LocalDate> fertigationDays = new ArrayList<>();
+        LocalDate day = LocalDate.of(generationDay.getYear(), generationDay.getMonth(), generationDay.getDayOfMonth());
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
-        String[] time = dateFormat.format(wateringEnd.getTime()).split(":");
-        int hour = Integer.parseInt(time[0]);
-        int minute = Integer.parseInt(time[1]);
+        while (!day.isAfter(generationDay.plusDays(numberOfPlanDays))) {
 
-        return LocalTime.of(hour, minute);
+            if (wateringDays.contains(day)) {
+                fertigationDays.add(day);
+            } else throw new InvalidFertigationRecurrenceException();
+
+            day = day.plusDays(recurrence);
+        }
+        return fertigationDays;
     }
 
-    private WateringPlan generatePlan(Date generationDay, ArrayList<LocalTime> wateringMoments, Map<WateringInstruction, ArrayList<Date>> instructionsAndWateringDays) {
+    private WateringPlan generatePlan(ArrayList<LocalTime> wateringMoments,
+                                      Map<WateringInstruction, ArrayList<LocalDate>> instructionsAndWateringDays,
+                                      Map<WateringInstruction, ArrayList<LocalDate>> instructionsAndFertigationDays) {
+
         WateringPlan plan = new WateringPlan();
-        Calendar currentDate = Calendar.getInstance();
-        currentDate.setTime(generationDay);
+        LocalDate currentDay = LocalDate.of(generationDay.getYear(), generationDay.getMonth(), generationDay.getDayOfMonth());
 
         for (int i = 0; i < numberOfPlanDays; i++) {
             LocalTime lastWatering = wateringMoments.get(0);
@@ -272,21 +243,31 @@ public class WateringPlanGenerator {
 
             for (int j = 0; j < wateringMoments.size(); j++) {
 
-                if (wateringMoments.get(j).compareTo(lastWateringCopy) >= 0) {
+                if (!wateringMoments.get(j).isBefore(lastWateringCopy)) {
                     lastWateringCopy = wateringMoments.get(j);
 
-                    for (WateringInstruction instruction : instructionsAndWateringDays.keySet()) {
+                    for (WateringInstruction instruct : instructionsAndWateringDays.keySet()) {
 
-                        if (instructionsAndWateringDays.get(instruction).contains(currentDate.getTime())) {
+                        if (instructionsAndWateringDays.get(instruct).contains(currentDay)) {
 
-                            String sector = instruction.getSetor();
-                            int duration = instruction.getDuracao();
+                            String sector = instruct.getSetor();
+                            int duration = instruct.getDuracao();
                             LocalTime wateringEnd = lastWateringCopy.plusMinutes(duration);
 
-                            plan.addElement(new WateringPlanEntry(currentDate.getTime(), sector, duration, lastWateringCopy, wateringEnd));
+                            if (instruct instanceof FertigationInstruction &&
+                                    instructionsAndFertigationDays.get(instruct) != null &&
+                                    instructionsAndFertigationDays.get(instruct).contains(currentDay)) {
+
+                                plan.addElement(new WateringPlanEntry(currentDay, sector, duration, lastWateringCopy, wateringEnd, ((FertigationInstruction) instruct).getMixName()));
+
+                            } else {
+                                plan.addElement(new WateringPlanEntry(currentDay, sector, duration, lastWateringCopy, wateringEnd));
+                            }
+
                             lastWateringCopy = wateringEnd;
                         }
                     }
+
                 } else try {
                     throw new OverlappingWateringCyclesException();
 
@@ -295,12 +276,27 @@ public class WateringPlanGenerator {
                 }
             }
 
-            currentDate.add(Calendar.DAY_OF_MONTH, 1);
+            currentDay = currentDay.plusDays(1);
         }
         return plan;
     }
 
-    public void adjustWateringSchedule(String filePath) {
+    private void generateOutputFile() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("plano_de_rega.csv"))) {
+            writer.write("Dia(yyyy-mm-dd),Sector,Duracao(mn),Inicio,Fim\n");
+            for (WateringPlanEntry e : plan.getList()) {
+                if (e.isFertigation()) {
+                    writer.write(String.format("%s,%s,%s,%s,%s,%s\n", e.getDate(), e.getSector(), e.getDuration(), e.getBegin(), e.getEnd(), e.getMix()));
+                } else {
+                    writer.write(String.format("%s,%s,%s,%s,%s\n", e.getDate(), e.getSector(), e.getDuration(), e.getBegin(), e.getEnd()));
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /*public void adjustWateringSchedule(String filePath) {
         try {
             adjustedPlanoDeRega = new ArrayList<>();
             SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
@@ -359,9 +355,5 @@ public class WateringPlanGenerator {
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
-    }
-
-    public boolean isEven(int num) {
-        return num % 2 == 0;
-    }
+    }*/
 }
