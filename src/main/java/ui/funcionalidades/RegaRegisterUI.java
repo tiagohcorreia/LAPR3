@@ -82,11 +82,11 @@ public class RegaRegisterUI implements Runnable {
     private void performRegistration(int index, int operacaoId, RegaTable regaTable, Runnable callback) {
         try {
 
-            int setorId = regaTable.getSetorId();
+            String setor = regaTable.getSetor();
             int duracao = regaTable.getDuracao();
             String hora = regaTable.getHora();
 
-            controller.regaRegister(operacaoId, setorId, duracao, hora);
+            controller.regaRegister(operacaoId, setor, duracao, hora);
 
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String registrationTime = dateFormat.format(new Date());

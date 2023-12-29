@@ -1,7 +1,7 @@
 8:00,15:00
-setor 10,10,T
-setor 11,10,P
-setor 21,10,P
-setor 22,10,m
-setor 41,10,3
+setor 10,14,T
+setor 11,8,T,
+setor 21,25,P
+setor 22,25,I
+setor 41,7,T
 setor 42,10,3
