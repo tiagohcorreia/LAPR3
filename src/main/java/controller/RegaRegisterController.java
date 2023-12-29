@@ -49,7 +49,7 @@ public class RegaRegisterController {
                     continue;
                 }
 
-                String[] parts = line.split(";");
+                String[] parts = line.split(",");
                 if (parts.length == 5) {
                     try {
                         int operacaoId = new OperacaoAgricolaRegisterController().getNextId();

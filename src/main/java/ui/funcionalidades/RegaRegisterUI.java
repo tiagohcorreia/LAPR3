@@ -60,21 +60,21 @@ public class RegaRegisterUI implements Runnable {
 
             System.out.println("Data Atual: " + currentDate);
             System.out.println("Data Final da Rega: " + endDate);
-            Date date = regaTable.getData();
 
-            if (endDate.before(currentDate)) {
+            long fiveSecondsInMillis = 5 * 1000; // 5 seconds in milliseconds
+
+            if (endDate.before(new Date(currentDate.getTime() - fiveSecondsInMillis))) {
                 callback.run();
             } else {
                 System.out.println("Final da rega programado no futuro as horas: " + dateTimeFormat.format(endDate));
 
                 long delay = endDate.getTime() - System.currentTimeMillis();
-                date = regaTable.getData();
-                operacaoController.operacaoAgricolaRegister(operacaoId, date);
+
                 scheduler.schedule(() -> performRegistration(index, operacaoId, regaTable, callback), delay, TimeUnit.MILLISECONDS);
                 new MainMenuUI();
             }
 
-        } catch (ParseException | SQLException e) {
+        } catch (ParseException e) {
             System.out.println("Erro parsing time: " + e.getMessage());
         }
     }
@@ -83,8 +83,11 @@ public class RegaRegisterUI implements Runnable {
         try {
 
             String setor = regaTable.getSetor();
-            int duracao = regaTable.getDuracao();
             String hora = regaTable.getHora();
+            Date date = regaTable.getData();
+            int duracao = regaTable.getDuracao();
+
+            operacaoController.operacaoAgricolaRegister(operacaoId, date);
 
             controller.regaRegister(operacaoId, setor, duracao, hora);
 
