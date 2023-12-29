@@ -15,8 +15,10 @@ public class SimularSistemaRegaUI implements Runnable {
     private final int NUMBER_OF_PLAN_DAYS = 30;
     private GenerateWateringPlanCtrl ctrl = new GenerateWateringPlanCtrl();
 
+
     @Override
     public void run() {
+
 
         BufferedReader fileReader = getFileReader();
         if (fileReader != null) {

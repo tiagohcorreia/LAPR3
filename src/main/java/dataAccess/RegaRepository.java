@@ -45,7 +45,7 @@ public class RegaRepository {
         return regas;
     }
 
-    public static void regaRegister(int operacaoId, int setorId, int duracao,String hora) throws SQLException {
+    public static void regaRegister(int operacaoId, String setor, int duracao,String hora) throws SQLException {
 
         CallableStatement callStmt = null;
         try {
@@ -53,7 +53,7 @@ public class RegaRepository {
             callStmt = connection.prepareCall("{ call registarRega(?,?,?,?) }");
 
             callStmt.setInt(1, operacaoId);
-            callStmt.setInt(2, setorId);
+            callStmt.setString(2, setor);
             callStmt.setInt(3, duracao);
             callStmt.setString(4, hora);
 
@@ -100,7 +100,7 @@ public class RegaRepository {
             RegaTable regaTable = new RegaTable(
                     resultSet.getDate("data"),
                     resultSet.getInt("operacaoId"),
-                    resultSet.getInt("setorId"),
+                    resultSet.getString("setor"),
                     resultSet.getInt("duracao"),
                     resultSet.getString("hora")
             );

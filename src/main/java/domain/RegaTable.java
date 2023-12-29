@@ -9,15 +9,15 @@ import java.util.Date;
 public class RegaTable {
 
     private Integer operacaoId;
-    private Integer setorId;
+    private String setor;
     private Integer duracao;
     private String hora;
     private Date data;
 
-    public RegaTable(Date data,Integer operacaoId, Integer setorId, Integer duracao, String hora) {
+    public RegaTable(Date data,Integer operacaoId, String setor, Integer duracao, String hora) {
         this.data = data;
         this.operacaoId = operacaoId;
-        this.setorId = setorId;
+        this.setor = setor;
         this.duracao = duracao;
         this.hora = hora;
     }
@@ -26,8 +26,8 @@ public class RegaTable {
         return operacaoId;
     }
 
-    public Integer  getSetorId() {
-        return setorId;
+    public String  getSetor() {
+        return setor;
     }
 
     public Integer getDuracao() {

@@ -33,8 +33,8 @@ public class RegaRegisterController {
         return regaRepository;
     }
 
-    public void regaRegister(int operacaoId, int setorId, int duracao, String hora) throws SQLException {
-        RegaRepository.regaRegister(operacaoId, setorId, duracao, hora);
+    public void regaRegister(int operacaoId, String setor, int duracao, String hora) throws SQLException {
+        RegaRepository.regaRegister(operacaoId, setor, duracao, hora);
     }
 
 
@@ -54,7 +54,7 @@ public class RegaRegisterController {
                     try {
                         int operacaoId = new OperacaoAgricolaRegisterController().getNextId();
                         Date data = new SimpleDateFormat("yyyy-MM-dd").parse(parts[0]);
-                        int sectorId = Integer.parseInt(parts[1].trim());
+                        String sectorId = (parts[1].trim());
                         int duration = Integer.parseInt(parts[2].trim());
                         String startTime = parts[3].trim();
 
