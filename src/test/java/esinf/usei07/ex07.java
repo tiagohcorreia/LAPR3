@@ -6,6 +6,7 @@ import esinf.IntegerBinaryOperator;
 import esinf.IntegerComparator;
 import esinf.dataStructure.Distance;
 import esinf.dataStructure.FurthestPlacesData;
+import esinf.dataStructure.PathWithMostHubsData;
 import esinf.dataStructure.VertexMetrics;
 import esinf.map.MapGraph;
 import esinf.map.MapGraphLoader;
@@ -17,9 +18,9 @@ import org.junit.jupiter.api.Test;
 import dataAccess.Repositories;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.time.Duration;
+import java.time.LocalTime;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -68,27 +69,26 @@ public class ex07 {
     }
 
     @Test
-    public void testEX7GetPathThatGoesThroughMostHubs() throws IOException {
+    public void testEX7GetPathThatGoesThroughMostHubs1() throws IOException {
 
         GraphStore storage = Repositories.getInstance().getGraphStore();
         storage.clean();
-
-       // MapGraphLoader.loadGraph("docs\\esinf_data\\locais_small.csv", "docs\\esinf_data\\distancias_small.csv");
-
+        MapGraphLoader.loadGraph("docs\\esinf_data\\locais_small.csv", "docs\\esinf_data\\distancias_small.csv");
         MapGraph clone = storage.getGraph().clone();
-        LinkedList<Local> shortPath2 = new LinkedList<>();
-        Distance data = storage.getFurthestPlaces();
-        Algorithms.shortestPath(clone, data.getLocal1(), data.getLocal2(), Integer::compare, Integer::sum, 0, shortPath2);
-
-        // get hubs ideal location
-        ArrayList<VertexMetrics<Local, Integer>> result=calculator.getIdealVertices();
 
 
-        //
-        ArrayList<LinkedList<String>> paths = new ArrayList<>();
-        ArrayList<Integer> dists = new ArrayList<>();
+        // get hubs
+        List<Local> locals=clone.vertices();
+        Map<Local, Integer> hubs=new HashMap<>();
+        hubs.put(locals.get(4),100);
+        hubs.put(locals.get(1),200);
+        hubs.put(locals.get(2),300);
+        hubs.put(locals.get(3),400);
 
-        Algorithms.shortestPaths(clone, "Porto", Integer::compare, Integer::sum, 0, paths, dists);
+
+        //ex7
+    PathWithMostHubsData data=storage.findMaxHubPassingRoute(locals.get(7),LocalTime.of(14,00,00), 1000.0,150,Duration.ofSeconds(100),  hubs);
+
 
 
 

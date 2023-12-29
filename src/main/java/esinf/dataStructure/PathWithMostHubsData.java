@@ -3,86 +3,52 @@ package esinf.dataStructure;
 import esinf.model.Hub;
 import esinf.model.Local;
 
+import java.time.Duration;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class PathWithMostHubsData {
     private final int DEFAULT_VALUE = 0;
     private final Local DEFAULT_LOCAL = null;
-    private final Local DEFAULT_DISTANCE = null;
-    private final List<Hub> DEFAULT_HUB = null;
+    private final Duration DEFAULT_VALUE2 = null;
+    private final List<LocalsData> DEFAULT_LOCALS = null;
+    private final LinkedList<Local> DEFAULT_SHORTPATH = null;
 
-    private final List<Local> DEFAULT_SHORTPATH = null;
-    private final double DEFAULT_VALUE2 = 0;
-    private final List<Distance> DEFAULT_DISTANCE2 = null;
-    private final List<HubsRecord> DEFAULT_DISTANCE3 = null;
-
-
+    /////
     private Local origin;  //local de partida
-    private List<Hub> hubs; //locais(hubs) de passagem em Hubs
-    List<HubsRecord> arrivingHourInEachHub;
+    private List<LocalsData> locals; //informação sobre os locals(locais,os que sao hub, arriving hour, e se for hub departuretime)
+    LinkedList<Local> path;
     private double pathTotalDistance; // distancia do percurso inteiro
     private int numberOfTimesTheVehicleWasCharged;
-
-    private double vehicleAutonomy; //autonomia do veiculo
-    private double vehicleSpeed; //velocidade do veiculo
-    private double distanceFromOriginToDestination;// todos os locals
-    private List<Local> vehicleChargeStops; //onde o veiculo carregou
-    private List<Distance> distanceBetweenLocals;//distancia entre todos os pares
-    private int vehiclesStops; //nmr de lugares onde o veiculo parou
-
-
+    private Duration routeTotalDuration;  // duração total do percurso
+    private Duration vehicleChargingDuration;  // duração total dos carregamentos do veiculo
+    private Duration vehicleInTheRoadDuration;  // duração total do percurso na estrada
+    private Duration vehicleDischargingDuration;  // duração total dos descarregamentos dos cabazes
 
     public PathWithMostHubsData() {
-        this.origin = DEFAULT_DISTANCE;
-        this.hubs = DEFAULT_HUB;
-        this.arrivingHourInEachHub = DEFAULT_DISTANCE3;
+        this.origin = DEFAULT_LOCAL;
+        this.locals = DEFAULT_LOCALS;
+        this.path = DEFAULT_SHORTPATH;
         this.pathTotalDistance = DEFAULT_VALUE;
         this.numberOfTimesTheVehicleWasCharged = DEFAULT_VALUE;
-        this.vehicleAutonomy = DEFAULT_VALUE;
-        this.vehicleSpeed = DEFAULT_VALUE;
-        this.distanceFromOriginToDestination = DEFAULT_VALUE;
-        this.vehicleChargeStops = DEFAULT_SHORTPATH;
-        this.distanceBetweenLocals = DEFAULT_DISTANCE2;
-        this.vehiclesStops = DEFAULT_VALUE;
+        this.routeTotalDuration = DEFAULT_VALUE2;
+        this.vehicleChargingDuration = DEFAULT_VALUE2;
+        this.vehicleInTheRoadDuration = DEFAULT_VALUE2;
+        this.vehicleDischargingDuration = DEFAULT_VALUE2;
     }
 
-    public PathWithMostHubsData(Local origin, List<Hub> hubs, List<HubsRecord> arrivingHourInEachHub, double pathTotalDistance, int numberOfTimesTheVehicleWasCharged, double vehicleAutonomy, double vehicleSpeed, double distanceFromOriginToDestination, List<Local> vehicleChargeStops, List<Distance> distanceBetweenLocals, int vehiclesStops) {
+    public PathWithMostHubsData(Local origin, List<LocalsData> locals, LinkedList<Local> path, double pathTotalDistance, int numberOfTimesTheVehicleWasCharged, Duration routeTotalDuration, Duration vehicleChargingDuration, Duration vehicleInTheRoadDuration, Duration vehicleDischargingDuration) {
         this.origin = origin;
-        this.hubs = hubs;
-        this.arrivingHourInEachHub = arrivingHourInEachHub;
+        this.locals = locals;
+        this.path = path;
         this.pathTotalDistance = pathTotalDistance;
         this.numberOfTimesTheVehicleWasCharged = numberOfTimesTheVehicleWasCharged;
-        this.vehicleAutonomy = vehicleAutonomy;
-        this.vehicleSpeed = vehicleSpeed;
-        this.distanceFromOriginToDestination = distanceFromOriginToDestination;
-        this.vehicleChargeStops = vehicleChargeStops;
-        this.distanceBetweenLocals = distanceBetweenLocals;
-        this.vehiclesStops = vehiclesStops;
-    }
-
-    public int getDEFAULT_VALUE() {
-        return DEFAULT_VALUE;
-    }
-
-    public Local getDEFAULT_LOCAL() {
-        return DEFAULT_LOCAL;
-    }
-
-    public Local getDEFAULT_DISTANCE() {
-        return DEFAULT_DISTANCE;
-    }
-
-    public List<Local> getDEFAULT_SHORTPATH() {
-        return DEFAULT_SHORTPATH;
-    }
-
-    public double getDEFAULT_VALUE2() {
-        return DEFAULT_VALUE2;
-    }
-
-    public List<Distance> getDEFAULT_DISTANCE2() {
-        return DEFAULT_DISTANCE2;
+        this.routeTotalDuration = routeTotalDuration;
+        this.vehicleChargingDuration = vehicleChargingDuration;
+        this.vehicleInTheRoadDuration = vehicleInTheRoadDuration;
+        this.vehicleDischargingDuration = vehicleDischargingDuration;
     }
 
     public Local getOrigin() {
@@ -93,20 +59,20 @@ public class PathWithMostHubsData {
         this.origin = origin;
     }
 
-    public List<Hub> getHubs() {
-        return hubs;
+    public List<LocalsData> getLocals() {
+        return locals;
     }
 
-    public void setHubs(List<Hub> hubs) {
-        this.hubs = hubs;
+    public void setLocals(List<LocalsData> locals) {
+        this.locals = locals;
     }
 
-    public List<HubsRecord> getArrivingHourInEachHub() {
-        return arrivingHourInEachHub;
+    public LinkedList<Local> getPath() {
+        return path;
     }
 
-    public void setArrivingHourInEachHub(List<HubsRecord> arrivingHourInEachHub) {
-        this.arrivingHourInEachHub = arrivingHourInEachHub;
+    public void setPath(LinkedList<Local> path) {
+        this.path = path;
     }
 
     public double getPathTotalDistance() {
@@ -125,81 +91,63 @@ public class PathWithMostHubsData {
         this.numberOfTimesTheVehicleWasCharged = numberOfTimesTheVehicleWasCharged;
     }
 
-    public double getVehicleAutonomy() {
-        return vehicleAutonomy;
+    public Duration getRouteTotalDuration() {
+        return routeTotalDuration;
     }
 
-    public void setVehicleAutonomy(double vehicleAutonomy) {
-        this.vehicleAutonomy = vehicleAutonomy;
+    public void setRouteTotalDuration(Duration routeTotalDuration) {
+        this.routeTotalDuration = routeTotalDuration;
     }
 
-    public double getVehicleSpeed() {
-        return vehicleSpeed;
+    public Duration getVehicleChargingDuration() {
+        return vehicleChargingDuration;
     }
 
-    public void setVehicleSpeed(double vehicleSpeed) {
-        this.vehicleSpeed = vehicleSpeed;
+    public void setVehicleChargingDuration(Duration vehicleChargingDuration) {
+        this.vehicleChargingDuration = vehicleChargingDuration;
     }
 
-    public double getDistanceFromOriginToDestination() {
-        return distanceFromOriginToDestination;
+    public Duration getVehicleInTheRoadDuration() {
+        return vehicleInTheRoadDuration;
     }
 
-    public void setDistanceFromOriginToDestination(double distanceFromOriginToDestination) {
-        this.distanceFromOriginToDestination = distanceFromOriginToDestination;
+    public void setVehicleInTheRoadDuration(Duration vehicleInTheRoadDuration) {
+        this.vehicleInTheRoadDuration = vehicleInTheRoadDuration;
     }
 
-    public List<Local> getVehicleChargeStops() {
-        return vehicleChargeStops;
+    public Duration getVehicleDischargingDuration() {
+        return vehicleDischargingDuration;
     }
 
-    public void setVehicleChargeStops(List<Local> vehicleChargeStops) {
-        this.vehicleChargeStops = vehicleChargeStops;
+    public void setVehicleDischargingDuration(Duration vehicleDischargingDuration) {
+        this.vehicleDischargingDuration = vehicleDischargingDuration;
     }
-
-    public List<Distance> getDistanceBetweenLocals() {
-        return distanceBetweenLocals;
-    }
-
-    public void setDistanceBetweenLocals(List<Distance> distanceBetweenLocals) {
-        this.distanceBetweenLocals = distanceBetweenLocals;
-    }
-
-    public int getVehiclesStops() {
-        return vehiclesStops;
-    }
-
-    public void setVehiclesStops(int vehiclesStops) {
-        this.vehiclesStops = vehiclesStops;
-    }
-
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof PathWithMostHubsData)) return false;
         PathWithMostHubsData that = (PathWithMostHubsData) o;
-        return getDEFAULT_VALUE() == that.getDEFAULT_VALUE() && Double.compare(getDEFAULT_VALUE2(), that.getDEFAULT_VALUE2()) == 0 && Double.compare(getPathTotalDistance(), that.getPathTotalDistance()) == 0 && getNumberOfTimesTheVehicleWasCharged() == that.getNumberOfTimesTheVehicleWasCharged() && Double.compare(getVehicleAutonomy(), that.getVehicleAutonomy()) == 0 && Double.compare(getVehicleSpeed(), that.getVehicleSpeed()) == 0 && Double.compare(getDistanceFromOriginToDestination(), that.getDistanceFromOriginToDestination()) == 0 && getVehiclesStops() == that.getVehiclesStops() && Objects.equals(getDEFAULT_LOCAL(), that.getDEFAULT_LOCAL()) && Objects.equals(getDEFAULT_DISTANCE(), that.getDEFAULT_DISTANCE()) && Objects.equals(getDEFAULT_SHORTPATH(), that.getDEFAULT_SHORTPATH()) && Objects.equals(getDEFAULT_DISTANCE2(), that.getDEFAULT_DISTANCE2()) && Objects.equals(getOrigin(), that.getOrigin()) && Objects.equals(getHubs(), that.getHubs()) && Objects.equals(getArrivingHourInEachHub(), that.getArrivingHourInEachHub()) && Objects.equals(getVehicleChargeStops(), that.getVehicleChargeStops()) && Objects.equals(getDistanceBetweenLocals(), that.getDistanceBetweenLocals());
+        return  Double.compare(pathTotalDistance, that.pathTotalDistance) == 0 && numberOfTimesTheVehicleWasCharged == that.numberOfTimesTheVehicleWasCharged && Objects.equals(DEFAULT_LOCAL, that.DEFAULT_LOCAL) &&Objects.equals(DEFAULT_SHORTPATH, that.DEFAULT_SHORTPATH)  && Objects.equals(origin, that.origin) && Objects.equals(locals, that.locals) && Objects.equals(path, that.path) && Objects.equals(routeTotalDuration, that.routeTotalDuration) && Objects.equals(vehicleChargingDuration, that.vehicleChargingDuration) && Objects.equals(vehicleInTheRoadDuration, that.vehicleInTheRoadDuration) && Objects.equals(vehicleDischargingDuration, that.vehicleDischargingDuration);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getDEFAULT_VALUE(), getDEFAULT_LOCAL(), getDEFAULT_DISTANCE(), getDEFAULT_SHORTPATH(), getDEFAULT_VALUE2(), getDEFAULT_DISTANCE2(), getOrigin(), getHubs(), getArrivingHourInEachHub(), getPathTotalDistance(), getNumberOfTimesTheVehicleWasCharged(), getVehicleAutonomy(), getVehicleSpeed(), getDistanceFromOriginToDestination(), getVehicleChargeStops(), getDistanceBetweenLocals(), getVehiclesStops());
+        return Objects.hash(DEFAULT_VALUE, DEFAULT_LOCAL,  DEFAULT_SHORTPATH, DEFAULT_VALUE2,  origin, locals, path, pathTotalDistance, numberOfTimesTheVehicleWasCharged, routeTotalDuration, vehicleChargingDuration, vehicleInTheRoadDuration, vehicleDischargingDuration);
     }
+
     @Override
     public String toString() {
         return "PathWithMostHubsData{" +
-                ", origin=" + origin +
-                ", hubs=" + hubs +
-                ", arrivingHourInEachHub=" + arrivingHourInEachHub +
+              ", origin=" + origin +
+                ", locals=" + locals +
+                ", path=" + path +
                 ", pathTotalDistance=" + pathTotalDistance +
                 ", numberOfTimesTheVehicleWasCharged=" + numberOfTimesTheVehicleWasCharged +
-                ", vehicleAutonomy=" + vehicleAutonomy +
-                ", vehicleSpeed=" + vehicleSpeed +
-                ", distanceFromOriginToDestination=" + distanceFromOriginToDestination +
-                ", vehicleChargeStops=" + vehicleChargeStops +
-                ", distanceBetweenLocals=" + distanceBetweenLocals +
-                ", vehiclesStops=" + vehiclesStops +
+                ", routeTotalDuration=" + routeTotalDuration +
+                ", vehicleChargingDuration=" + vehicleChargingDuration +
+                ", vehicleInTheRoadDuration=" + vehicleInTheRoadDuration +
+                ", vehicleDischargingDuration=" + vehicleDischargingDuration +
                 '}';
     }
 }
