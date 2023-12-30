@@ -1,0 +1,49 @@
+@startuml
+
+title Class Diagram
+
+class CancelarOperacaoUI {
+    - repository
+    - controller
+
+    + run()
+}
+
+interface Runnable {
+    + run()
+}
+
+class CancelarOperacaoController {
+
+    + cancelOperation()
+    + showOperationList()
+}
+
+class OperacaoAgricolaRepository {
+    + getOperacoesAgricolas()
+    + OperacaoAgricolaRegister()
+    + operacaoAgricolaDelete()
+    + operacaoAgricolaCancel()
+    + resultSetToList()
+}
+
+class OperacaoAgricolaRegisterController {
+    - operacaoAgricolaRepository
+    - database
+    - connection
+
+    - getOperacaoAgricolaRepository()
+    - operacaoAgricolaRegister()
+    - getNextId()
+    - getColumnNames()
+    - printTableData()
+    - getTableData()
+}
+
+
+Runnable -left-|> CancelarOperacaoUI
+CancelarOperacaoUI ..> CancelarOperacaoController
+CancelarOperacaoController ..> OperacaoAgricolaRepository
+CancelarOperacaoController ..> OperacaoAgricolaRegisterController
+
+@enduml

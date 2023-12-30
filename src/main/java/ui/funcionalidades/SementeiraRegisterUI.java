@@ -34,7 +34,9 @@ public class SementeiraRegisterUI implements Runnable {
 
             Scanner scanner = new Scanner(System.in);
             System.out.print("OperacaoId: ");
+
             int operacaoId = controllerop.getNextId();
+
             System.out.printf("Usando id %d\n", operacaoId);
 
             System.out.print("Date (yyyy-mm-dd): (Insira E para sair) \n");
@@ -46,19 +48,28 @@ public class SementeiraRegisterUI implements Runnable {
             if (strDate.equalsIgnoreCase("E")) {
                 return;
             }
+
             Date date = null;
             boolean validDate = false;
+
             while (!validDate) {
+
                 try {
+
                     date = formatter.parse(strDate);
+
                     if (date.after(currentDate)) {
+
                         System.out.println("Erro: Data invalida.Insira uma data que nao se encontre no futuro.");
                         System.out.print("Data (yyyy-mm-dd): ");
                         strDate = scanner.next();
+
                     } else {
                         validDate = true;
                     }
+
                 } catch (ParseException e) {
+
                     System.out.println("Erro: Formato de data invalido. Insira a data no formato yyyy-mm-dd.");
                     scanner.nextLine();
                     System.out.print("Data (yyyy-mm-dd): ");
@@ -82,21 +93,29 @@ public class SementeiraRegisterUI implements Runnable {
 
             int metodoExecucaoId = 0;
             String metodoExecucaoInput;
+
             do {
+
                 System.out.print("Metodo Execucao Id (Insira E para sair): \n");
                 metodoExecucaoInput = scanner.next().trim();
+
                 if (metodoExecucaoInput.equalsIgnoreCase("E")) {
                     // Go back to the main menu or exit the program
                     return;
                 }
+
                 try {
+
                     metodoExecucaoId = Integer.parseInt(metodoExecucaoInput);
                     if (!controllerop.isIdValid("Metodo_Execucao", metodoExecucaoId)) {
                         System.out.println("Erro: ProdutoId nao registado na base de dados. Insira um Id existente.");
                     }
+
                 } catch (NumberFormatException e) {
+
                     System.out.println("Erro: Insira um numero valido para metodoExecucaoId ou E para sair.");
                 }
+
             } while (!controllerop.isIdValid("Metodo_Execucao", metodoExecucaoId));
 
             float quantidade = Utils.readFloatFromConsole("Insira a quantidade");
@@ -114,9 +133,11 @@ public class SementeiraRegisterUI implements Runnable {
             int optValidation = Utils.readIntegerFromConsole("1-CONFIRMAR\n0-CANCELAR");
 
             if (optValidation == 1) {
+
                 controllerop.operacaoAgricolaRegister(operacaoId, date);
                 controller.sementeiraRegister(operacaoId, parcelaId, variedadeId, quantidade, area, metodoExecucaoId);
                 System.out.println("\nSementeira registada.");
+
             } else {
 
                 System.out.println("Operação cancelada");

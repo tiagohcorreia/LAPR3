@@ -1,0 +1,21 @@
+@startuml
+
+title System Sequence Diagram
+
+autonumber
+
+actor Gestor_Agricola as g
+participant System as s
+
+g -> s: começa o processo de cancelamento de uma operação
+
+s -> g: lista as operações registadas
+
+s -> g: pede ao user para escolher a operação a ser cancelada
+
+g -> s: escolhe a operação a ser cancelada
+
+s -> g: informa o sucesso/insucesso da operação
+
+
+@enduml
