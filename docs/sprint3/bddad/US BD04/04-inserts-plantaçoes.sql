@@ -64,22 +64,24 @@ VALUES (26, 107);
 INSERT INTO Plantacao(id, parcela_id)
 VALUES (27, 107);
 
-INSERT INTO Plantacao_Permanente(plantacao_id, variedade_perm_id, quantidade, data_inicio, data_fim)
-VALUES (11, 92, 30, TO_DATE('06/10/2016', 'dd/mm/yyyy'), null);
-INSERT INTO Plantacao_Permanente(plantacao_id, variedade_perm_id, quantidade, data_inicio, data_fim)
-VALUES (12, 89, 20, TO_DATE('10/10/2016', 'dd/mm/yyyy'), null);
-INSERT INTO Plantacao_Permanente(plantacao_id, variedade_perm_id, quantidade, data_inicio, data_fim)
-VALUES (22, 41, 90, TO_DATE('07/01/2017', 'dd/mm/yyyy'), null);
-INSERT INTO Plantacao_Permanente(plantacao_id, variedade_perm_id, quantidade, data_inicio, data_fim)
-VALUES (23, 37, 60, TO_DATE('08/01/2017', 'dd/mm/yyyy'), null);
-INSERT INTO Plantacao_Permanente(plantacao_id, variedade_perm_id, quantidade, data_inicio, data_fim)
-VALUES (24, 48, 40, TO_DATE('08/01/2017', 'dd/mm/yyyy'), null);
-INSERT INTO Plantacao_Permanente(plantacao_id, variedade_perm_id, quantidade, data_inicio, data_fim)
-VALUES (25, 48, 30, TO_DATE('10/12/2018', 'dd/mm/yyyy'), null);
-INSERT INTO Plantacao_Permanente(plantacao_id, variedade_perm_id, quantidade, data_inicio, data_fim)
-VALUES (26, 94, 500, TO_DATE('10/01/2018', 'dd/mm/yyyy'), null);
-INSERT INTO Plantacao_Permanente(plantacao_id, variedade_perm_id, quantidade, data_inicio, data_fim)
-VALUES (27, 95, 700, TO_DATE('11/01/2018', 'dd/mm/yyyy'), null);
+INSERT INTO Plantacao_Permanente(plantacao_id, variedade_perm_id, compasso, distancia_filas, quantidade, data_inicio,
+                                 data_fim)
+VALUES (11, 92, 6, 7.5, 30, TO_DATE('06/10/2016', 'dd/mm/yyyy'), null);
+INSERT INTO Plantacao_Permanente(plantacao_id, variedade_perm_id, compasso, distancia_filas, quantidade, data_inicio,
+                                 data_fim)
+VALUES (12, 89, 6, 7.5, 20, TO_DATE('10/10/2016', 'dd/mm/yyyy'), null);
+INSERT INTO Plantacao_Permanente(plantacao_id, variedade_perm_id, compasso, distancia_filas, quantidade, data_inicio,
+                                 data_fim)
+VALUES (22, 41, 5, 5, 90, TO_DATE('07/01/2017', 'dd/mm/yyyy'), null);
+INSERT INTO Plantacao_Permanente(plantacao_id, variedade_perm_id, compasso, distancia_filas, quantidade, data_inicio,
+                                 data_fim)
+VALUES (23, 37, 5, 5, 60, TO_DATE('08/01/2017', 'dd/mm/yyyy'), null);
+INSERT INTO Plantacao_Permanente(plantacao_id, variedade_perm_id, compasso, distancia_filas, quantidade, data_inicio,
+                                 data_fim)
+VALUES (24, 48, 5, 5, 40, TO_DATE('08/01/2017', 'dd/mm/yyyy'), null);
+INSERT INTO Plantacao_Permanente(plantacao_id, variedade_perm_id, compasso, distancia_filas, quantidade, data_inicio,
+                                 data_fim)
+VALUES (25, 48, 5, 5, 30, TO_DATE('10/12/2018', 'dd/mm/yyyy'), null);
 
 INSERT INTO Plantacao_Temporaria(plantacao_id, variedade_temp_id, area, data_início, data_fim)
 VALUES (1, 80, 1.1, TO_DATE('10/10/2020', 'dd/mm/yyyy'), TO_DATE('30/03/2021', 'dd/mm/yyyy'));
