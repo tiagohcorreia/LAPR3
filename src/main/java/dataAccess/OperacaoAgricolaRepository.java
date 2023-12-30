@@ -10,12 +10,24 @@ import domain.OperacaoAgricola;
 
 import oracle.jdbc.OracleTypes;
 
+/**
+ * The type Operacao agricola repository.
+ */
 public class OperacaoAgricolaRepository {
 
 
+    /**
+     * Instantiates a new Operacao agricola repository.
+     */
     public OperacaoAgricolaRepository() {
     }
 
+    /**
+     * Gets operacoes agricolas.
+     *
+     * @return the operacoes agricolas
+     * @throws SQLException the sql exception
+     */
     public List<OperacaoAgricola> getOperacoesAgricolas() throws SQLException {
 
         CallableStatement callStmt = null;
@@ -23,6 +35,7 @@ public class OperacaoAgricolaRepository {
         List<OperacaoAgricola> operacaoAgricolas = null;
 
         try {
+
             Connection connection = DatabaseConnection.getInstance().getConnection();
             callStmt = connection.prepareCall("{ ? = call fncOperacoesAgricolas() }");
 
@@ -32,10 +45,13 @@ public class OperacaoAgricolaRepository {
             resultSet = (ResultSet) callStmt.getObject(1);
 
             operacaoAgricolas = resultSetToList(resultSet);
+
         } finally {
+
             if (!Objects.isNull(callStmt)) {
                 callStmt.close();
             }
+
             if (!Objects.isNull(resultSet)) {
                 resultSet.close();
             }
@@ -44,6 +60,13 @@ public class OperacaoAgricolaRepository {
         return operacaoAgricolas;
     }
 
+    /**
+     * Operacao agricola register.
+     *
+     * @param operacaoId the operacao id
+     * @param date       the date
+     * @throws SQLException the sql exception
+     */
     public static void OperacaoAgricolaRegister(int operacaoId, Date date) throws SQLException {
 
         CallableStatement callStmt = null;
@@ -65,11 +88,18 @@ public class OperacaoAgricolaRepository {
     }
 
 
-
+    /**
+     * Operacao agricola delete int.
+     *
+     * @param operacaoId the operacao id
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public int operacaoAgricolaDelete(int operacaoId) throws SQLException {
 
         CallableStatement callStmt = null;
         int deletedRows = 0;
+
         try {
             Connection connection = DatabaseConnection.getInstance().getConnection();
             callStmt = connection.prepareCall("{ ? = call fncOperacaoAgricolaDelete(?) }");
@@ -83,6 +113,7 @@ public class OperacaoAgricolaRepository {
             connection.commit();
 
         } finally {
+
             if (!Objects.isNull(callStmt)) {
                 callStmt.close();
             }
@@ -90,6 +121,38 @@ public class OperacaoAgricolaRepository {
         return deletedRows;
     }
 
+    /**
+     * Operacao agricola cancel int.
+     *
+     * @param operacaoId the operacao id
+     * @return the int
+     * @throws SQLException the sql exception
+     */
+    public int operacaoAgricolaCancel(int operacaoId) throws SQLException {
+
+        CallableStatement callStmt = null;
+        int canceledRows = 0;
+
+        try {
+            Connection connection = DatabaseConnection.getInstance().getConnection();
+            callStmt = connection.prepareCall("{ ? = call cancel_operation(?) }");
+
+            callStmt.registerOutParameter(1, OracleTypes.INTEGER);
+            callStmt.setInt(2, operacaoId);
+
+            callStmt.execute();
+            canceledRows = callStmt.getInt(1);
+
+            connection.commit();
+
+        } finally {
+
+            if (!Objects.isNull(callStmt)) {
+                callStmt.close();
+            }
+        }
+        return canceledRows;
+    }
 
 
     private List<OperacaoAgricola> resultSetToList(ResultSet resultSet) throws SQLException {
