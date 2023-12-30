@@ -15,18 +15,15 @@ public class GerarGrafoUI implements Runnable {
         GraphStore graphStore = new GraphStore();
 
         // para testar estou a usar strings ja predefinidas, depois muda-se.
-        System.out.println("Enter the file path for the locals CSV:");
+        System.out.println("locais file:");
         String localsFilePath = local;
 
-        System.out.println("Enter the file path for the distances CSV:");
+        System.out.println("distancias file:");
         String distancesFilePath = distancias;
 
         MapGraphLoader.loadGraph(localsFilePath, distancesFilePath);
 
-        System.out.println("Graph has been generated successfully!");
+        System.out.println("O grafo foi generado com sucesso!");
 
-        // Return to the menu
-        System.out.println("Press Enter to go back to the main menu...");
-        scanner.nextLine();
     }
 }

@@ -27,22 +27,24 @@ public class GreedyTSP<V, E> {
         // Remove edges above autonomy at the beginning
         graph = removeEdgesAboveAutonomy(vehicle, graph);
 
+        int hubCount = 0;
         V currentVertex = origin;
+        if(origin instanceof Hub){hubCount++;}
         circuit.add(currentVertex);
         visited[graph.key(currentVertex)] = true;
 
 
-        int hubCount = (currentVertex instanceof Hub) ? 1 : 0;
 
         while (circuit.size() < numVertices && hubCount < numHubs) {
             V nextVertex = findNextVertex(graph, currentVertex, origin, visited, vehicle, numHubs - hubCount);
             if (nextVertex == null) {
-                throw new IllegalStateException("Unable to find the next vertex.");
+                throw new IllegalStateException("Unable to find a valid circuit for the current specifications");
             }
 
-            if (nextVertex instanceof Hub && nextVertex != origin) {
+            if (nextVertex instanceof Hub && !visited[graph.key(nextVertex)]) {
                 hubCount++;
             }
+
 
             E edgeWeight = graph.edge(currentVertex, nextVertex).getWeight();
             totalDistance += (edgeWeight != null) ? (int) edgeWeight : 0;
