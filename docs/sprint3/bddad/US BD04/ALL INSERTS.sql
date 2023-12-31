@@ -636,46 +636,46 @@ VALUES (21, 84, 0.25, TO_DATE('20/09/2022', 'dd/mm/yyyy'), TO_DATE('14/01/2023',
 -- inserir em Campo Grande
 INSERT INTO Plantacao(id, parcela_id)
 VALUES (28, 102);
-INSERT INTO Plantacao_Permanente(plantacao_id, variedade_perm_id, quantidade, data_inicio, data_fim)
-VALUES (28, 86, 40, TO_DATE('01/05/2017', 'DD/MM/YYYY'), NULL);
+INSERT INTO Plantacao_Permanente(plantacao_id, variedade_perm_id,compasso,distancia_filas, quantidade, data_inicio, data_fim)
+VALUES (28, 86,12,12,40, TO_DATE('01/05/2017', 'DD/MM/YYYY'), NULL);
 
 -- Macieira Pipo de Basto, 40 un, 01/05/2019, sem data fim
 -- inserir em Lameiro do Moinho
 INSERT INTO Plantacao(id, parcela_id)
 VALUES (29, 105);
-INSERT INTO Plantacao_Permanente(plantacao_id, variedade_perm_id, quantidade, data_inicio, data_fim)
-VALUES (29, 61, 40, TO_DATE('01/05/2019', 'DD/MM/YYYY'), NULL);
+INSERT INTO Plantacao_Permanente(plantacao_id, variedade_perm_id,compasso,distancia_filas, quantidade, data_inicio, data_fim)
+VALUES (29, 61,12,12,40, TO_DATE('01/05/2019', 'DD/MM/YYYY'), NULL);
 
 -- Macieira Porta da Loja, 50 un, 01/05/2019, sem data fim
 -- inserir em Lameiro do Moinho
 INSERT INTO Plantacao(id, parcela_id)
 VALUES (30, 105);
-INSERT INTO Plantacao_Permanente(plantacao_id, variedade_perm_id, quantidade, data_inicio, data_fim)
-VALUES (30, 44, 50, TO_DATE('01/05/2019', 'DD/MM/YYYY'), NULL);
+INSERT INTO Plantacao_Permanente(plantacao_id, variedade_perm_id,compasso,distancia_filas, quantidade, data_inicio, data_fim)
+VALUES (30, 44,12,12,50, TO_DATE('01/05/2019', 'DD/MM/YYYY'), NULL);
 
 -- Macieira Malápio, 20 un, 01/05/2019, sem data fim
 INSERT INTO Plantacao(id, parcela_id)
 VALUES (31, 105);
-INSERT INTO Plantacao_Permanente(plantacao_id, variedade_perm_id, quantidade, data_inicio, data_fim)
-VALUES (31, 56, 20, TO_DATE('01/05/2019', 'DD/MM/YYYY'), NULL);
+INSERT INTO Plantacao_Permanente(plantacao_id, variedade_perm_id,compasso,distancia_filas, quantidade, data_inicio, data_fim)
+VALUES (31, 56,12,12,20, TO_DATE('01/05/2019', 'DD/MM/YYYY'), NULL);
 
 -- Macieira Canada, 30 un, 01/05/2019, sem data fim
 INSERT INTO Plantacao(id, parcela_id)
 VALUES (32, 105);
-INSERT INTO Plantacao_Permanente(plantacao_id, variedade_perm_id, quantidade, data_inicio, data_fim)
-VALUES (32, 97, 30, TO_DATE('01/05/2019', 'DD/MM/YYYY'), NULL);
+INSERT INTO Plantacao_Permanente(plantacao_id, variedade_perm_id,compasso,distancia_filas, quantidade, data_inicio, data_fim)
+VALUES (32, 97,12,12,30, TO_DATE('01/05/2019', 'DD/MM/YYYY'), NULL);
 
 -- Macieira Grand Fay, 40 un, 01/05/2019, sem data fim
 INSERT INTO Plantacao(id, parcela_id)
 VALUES (33, 105);
-INSERT INTO Plantacao_Permanente(plantacao_id, variedade_perm_id, quantidade, data_inicio, data_fim)
-VALUES (33, 98, 40, TO_DATE('01/05/2019', 'DD/MM/YYYY'), NULL);
+INSERT INTO Plantacao_Permanente(plantacao_id, variedade_perm_id,compasso,distancia_filas, quantidade, data_inicio, data_fim)
+VALUES (33, 98,12,12,40, TO_DATE('01/05/2019', 'DD/MM/YYYY'), NULL);
 
 -- Macieira Gronho Doce, 50 un, 01/05/2019, sem data fim
 INSERT INTO Plantacao(id, parcela_id)
 VALUES (34, 105);
-INSERT INTO Plantacao_Permanente(plantacao_id, variedade_perm_id, quantidade, data_inicio, data_fim)
-VALUES (34, 57, 50, TO_DATE('01/05/2019', 'DD/MM/YYYY'), NULL);
+INSERT INTO Plantacao_Permanente(plantacao_id, variedade_perm_id,compasso,distancia_filas, quantidade, data_inicio, data_fim)
+VALUES (34, 57,12,12,50, TO_DATE('01/05/2019', 'DD/MM/YYYY'), NULL);
 
 -- Cenoura Sugarsnax Hybrid, 05/04/2023 a 31/05/2023
 INSERT INTO Plantacao(id, parcela_id)
@@ -1081,14 +1081,22 @@ INSERT INTO Poda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execu
 VALUES (114, 102, 89, 20, null);
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (115, TO_DATE('10-12-2017', 'dd-mm-yyyy'), null, 1);
-INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, metodo_aplicacao_id, quantidade, area)
-VALUES (115, 102, 92, 7, 15, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (115,15);
+INSERT INTO Aplicacao_FP_Variedade(operacao_id,METODO_APLICACAO_ID)
+VALUES (115,7);
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (115,102,92);
 INSERT INTO FP_APLICADOS(operacao_id, fp_id)
 VALUES (115, 3);
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (116, TO_DATE('10-12-2017', 'dd-mm-yyyy'), null, 1);
-INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, metodo_aplicacao_id, quantidade, area)
-VALUES (116, 102, 89, 7, 10, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (116,10);
+INSERT INTO Aplicacao_FP_Variedade(operacao_id,METODO_APLICACAO_ID)
+VALUES (116, 7);
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (116,102,89);
 INSERT INTO FP_APLICADOS(operacao_id, fp_id)
 VALUES (116, 3);
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
@@ -1113,20 +1121,32 @@ INSERT INTO Op_Plantacao(operacao_id, parcela_id, variedade_id, metodo_execucao_
 VALUES (121, 107, 95, null, 700);
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (122, TO_DATE('06-02-2018', 'dd-mm-yyyy'), null, 1);
-INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, metodo_aplicacao_id, quantidade, area)
-VALUES (122, 104, 41, 7, 10, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (122,10);
+INSERT INTO Aplicacao_FP_Variedade(operacao_id,METODO_APLICACAO_ID)
+VALUES (122, 7);
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (122,104,41);
 INSERT INTO FP_APLICADOS(operacao_id, fp_id)
 VALUES (122, 4);
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (123, TO_DATE('06-02-2018', 'dd-mm-yyyy'), null, 1);
-INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, metodo_aplicacao_id, quantidade, area)
-VALUES (123, 104, 37, 7, 6, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (123,6);
+INSERT INTO Aplicacao_FP_Variedade(operacao_id,METODO_APLICACAO_ID)
+VALUES (123, 7);
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (123,104,37);
 INSERT INTO FP_APLICADOS(operacao_id, fp_id)
 VALUES (123, 4);
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (124, TO_DATE('06-02-2018', 'dd-mm-yyyy'), null, 1);
-INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, metodo_aplicacao_id, quantidade, area)
-VALUES (124, 104, 48, 7, 5, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (124,5);
+INSERT INTO Aplicacao_FP_Variedade(operacao_id,METODO_APLICACAO_ID)
+VALUES (124, 7);
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (124,104,48);
 INSERT INTO FP_APLICADOS(operacao_id, fp_id)
 VALUES (124, 4);
 
@@ -1166,32 +1186,52 @@ INSERT INTO Poda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execu
 VALUES (142, 104, 48, 40, null);
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (143, TO_DATE('20-01-2019', 'dd-mm-yyyy'), null, 1);
-INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, metodo_aplicacao_id, quantidade, area)
-VALUES (143, 107, 94, null, 2, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (143,2);
+INSERT INTO Aplicacao_FP_Variedade(operacao_id,METODO_APLICACAO_ID)
+VALUES (143, null);;
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (143,107,94);
 INSERT INTO FP_APLICADOS(operacao_id, fp_id)
 VALUES (143, 1);
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (144, TO_DATE('20-01-2019', 'dd-mm-yyyy'), null, 1);
-INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, metodo_aplicacao_id, quantidade, area)
-VALUES (144, 107, 95, null, 2.5, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (144,2.5);
+INSERT INTO Aplicacao_FP_Variedade(operacao_id,METODO_APLICACAO_ID)
+VALUES (144, null);
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (144,107,95);
 INSERT INTO FP_APLICADOS(operacao_id, fp_id)
 VALUES (144, 1);
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (145, TO_DATE('06-02-2019', 'dd-mm-yyyy'), null, 1);
-INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, metodo_aplicacao_id, quantidade, area)
-VALUES (145, 104, 41, 7, 10, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (145,10);
+INSERT INTO Aplicacao_FP_Variedade(operacao_id,METODO_APLICACAO_ID)
+VALUES (145, 7);
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (145,104,41);
 INSERT INTO FP_APLICADOS(operacao_id, fp_id)
 VALUES (145, 4);
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (146, TO_DATE('06-02-2019', 'dd-mm-yyyy'), null, 1);
-INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, metodo_aplicacao_id, quantidade, area)
-VALUES (146, 104, 37, 7, 5, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (146,5);
+INSERT INTO Aplicacao_FP_Variedade(operacao_id,METODO_APLICACAO_ID)
+VALUES (146, 7);
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (146,104,37);
 INSERT INTO FP_APLICADOS(operacao_id, fp_id)
 VALUES (146, 4);
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (147, TO_DATE('06-02-2019', 'dd-mm-yyyy'), null, 1);
-INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, metodo_aplicacao_id, quantidade, area)
-VALUES (147, 104, 48, 7, 7, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (147,7);
+INSERT INTO Aplicacao_FP_Variedade(operacao_id,METODO_APLICACAO_ID)
+VALUES (147, 7);
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (147,104,48);
 INSERT INTO FP_APLICADOS(operacao_id, fp_id)
 VALUES (147, 4);
 
@@ -1215,22 +1255,34 @@ INSERT INTO Poda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execu
 VALUES (159, 107, 95, 700, null);
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (160, TO_DATE('20-01-2020', 'dd-mm-yyyy'), null, 1);
-INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, metodo_aplicacao_id, quantidade, area)
-VALUES (160, 107, 94, null, 2, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (160,2);
+INSERT INTO Aplicacao_FP_Variedade(operacao_id,METODO_APLICACAO_ID)
+VALUES (160, null);
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (160,107,94);
 INSERT INTO FP_APLICADOS(operacao_id, fp_id)
 VALUES (160, 1);
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (161, TO_DATE('20-01-2020', 'dd-mm-yyyy'), null, 1);
-INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, metodo_aplicacao_id, quantidade, area)
-VALUES (161, 107, 95, null, 2.5, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (161,2.5);
+INSERT INTO Aplicacao_FP_Variedade(operacao_id,METODO_APLICACAO_ID)
+VALUES (161, null);
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (161,107,95);
 INSERT INTO FP_APLICADOS(operacao_id, fp_id)
 VALUES (161, 1);
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (162, TO_DATE('12-03-2020', 'dd-mm-yyyy'), null, 1);
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (163, TO_DATE('30-03-2020', 'dd-mm-yyyy'), null, 1);
-INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, metodo_aplicacao_id, quantidade, area)
-VALUES (163, 103, null, 7, 600, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (163,600);
+INSERT INTO Aplicacao_FP_Variedade(operacao_id,METODO_APLICACAO_ID)
+VALUES (163, 7);
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (163,103,40);
 INSERT INTO FP_APLICADOS(operacao_id, fp_id)
 VALUES (163, 8);
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
@@ -1267,14 +1319,22 @@ INSERT INTO Poda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execu
 VALUES (189, 104, 41, 50, null);
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (190, TO_DATE('10-12-2020', 'dd-mm-yyyy'), null, 1);
-INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, metodo_aplicacao_id, quantidade, area)
-VALUES (190, 102, 92, 7, 10, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (190,10);
+INSERT INTO Aplicacao_FP_Variedade(operacao_id,METODO_APLICACAO_ID)
+VALUES (190, 7);
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (190,102,92);
 INSERT INTO FP_APLICADOS(operacao_id, fp_id)
 VALUES (190, 3);
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (191, TO_DATE('10-12-2020', 'dd-mm-yyyy'), null, 1);
-INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, metodo_aplicacao_id, quantidade, area)
-VALUES (191, 102, 89, 7, 7, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (191,7);
+INSERT INTO Aplicacao_FP_Variedade(operacao_id,METODO_APLICACAO_ID)
+VALUES (191, 7);
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (191,102,89);
 INSERT INTO FP_APLICADOS(operacao_id, fp_id)
 VALUES (191, 3);
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
@@ -1297,14 +1357,22 @@ VALUES (196, 107, 95, 700, null);
 
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (198, TO_DATE('20-01-2021', 'dd-mm-yyyy'), null, 1);
-INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, metodo_aplicacao_id, quantidade, area)
-VALUES (198, 107, 94, null, 2, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (198,2);
+INSERT INTO Aplicacao_FP_Variedade(operacao_id,METODO_APLICACAO_ID)
+VALUES (198,null);
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (198,107,94);
 INSERT INTO FP_APLICADOS(operacao_id, fp_id)
 VALUES (198, 1);
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (199, TO_DATE('20-01-2021', 'dd-mm-yyyy'), null, 1);
-INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, metodo_aplicacao_id, quantidade, area)
-VALUES (199, 107, 95, null, 2.5, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (199,2.5);
+INSERT INTO Aplicacao_FP_Variedade(operacao_id,METODO_APLICACAO_ID)
+VALUES (199, null);
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (199,107,95);
 INSERT INTO FP_APLICADOS(operacao_id, fp_id)
 VALUES (199, 1);
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
@@ -1323,8 +1391,10 @@ INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (204, TO_DATE('15-04-2021', 'dd-mm-yyyy'), null, 1);
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (205, TO_DATE('02-05-2021', 'dd-mm-yyyy'), null, 1);
-INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, metodo_aplicacao_id, quantidade, area)
-VALUES (205, 104, null, null, 10, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (205,10);
+INSERT INTO Aplicacao_FP_Solo(operacao_id,parcela_id,area)
+VALUES (205, 104,null);
 INSERT INTO FP_APLICADOS(operacao_id, fp_id)
 VALUES (205, 5);
 
@@ -1376,14 +1446,22 @@ VALUES (248, 107, 95, 700, null);
 
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (250, TO_DATE('20-01-2022', 'dd-mm-yyyy'), null, 1);
-INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, metodo_aplicacao_id, quantidade, area)
-VALUES (250, 107, 94, null, 3, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (250,3);
+INSERT INTO Aplicacao_FP_Variedade(operacao_id,METODO_APLICACAO_ID)
+VALUES (250,  null);
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (250,107,94);
 INSERT INTO FP_APLICADOS(operacao_id, fp_id)
 VALUES (250, 1);
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (251, TO_DATE('20-01-2022', 'dd-mm-yyyy'), null, 1);
-INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, metodo_aplicacao_id, quantidade, area)
-VALUES (251, 107, 95, null, 3.5, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (251,3.5);
+INSERT INTO Aplicacao_FP_Variedade(operacao_id,METODO_APLICACAO_ID)
+VALUES (251, null);
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (251,107,95);
 INSERT INTO FP_APLICADOS(operacao_id, fp_id)
 VALUES (251, 1);
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
@@ -1403,8 +1481,10 @@ VALUES (256, TO_DATE('15-04-2022', 'dd-mm-yyyy'), null, 1);
 
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (258, TO_DATE('13-05-2022', 'dd-mm-yyyy'), null, 1);
-INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, metodo_aplicacao_id, quantidade, area)
-VALUES (258, 104, null, null, 10, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (258,10);
+INSERT INTO Aplicacao_FP_Solo(operacao_id,parcela_id, area)
+VALUES (258, 104, null);
 INSERT INTO FP_APLICADOS(operacao_id, fp_id)
 VALUES (258, 5);
 
@@ -1440,14 +1520,22 @@ INSERT INTO Poda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execu
 VALUES (298, 104, 41, 90, null);
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (299, TO_DATE('11-12-2022', 'dd-mm-yyyy'), null, 1);
-INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, metodo_aplicacao_id, quantidade, area)
-VALUES (299, 102, 92, 7, 15, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (299,15);
+INSERT INTO Aplicacao_FP_Variedade(operacao_id,METODO_APLICACAO_ID)
+VALUES (299, 7);
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (299,102,92);
 INSERT INTO FP_APLICADOS(operacao_id, fp_id)
 VALUES (299, 3);
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (300, TO_DATE('11-12-2022', 'dd-mm-yyyy'), null, 1);
-INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, metodo_aplicacao_id, quantidade, area)
-VALUES (300, 102, 89, 7, 10, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (300,10);
+INSERT INTO Aplicacao_FP_Variedade(operacao_id,METODO_APLICACAO_ID)
+VALUES (300, 7);
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (300,107,89);
 INSERT INTO FP_APLICADOS(operacao_id, fp_id)
 VALUES (300, 3);
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
@@ -1466,14 +1554,22 @@ VALUES (304, 104, 37, 60, null);
 
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (306, TO_DATE('20-01-2023', 'dd-mm-yyyy'), null, 1);
-INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, metodo_aplicacao_id, quantidade, area)
-VALUES (306, 107, 94, null, 4, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (306,4);
+INSERT INTO Aplicacao_FP_Variedade(operacao_id,METODO_APLICACAO_ID)
+VALUES (306, null);
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (306,107,94);
 INSERT INTO FP_APLICADOS(operacao_id, fp_id)
 VALUES (306, 1);
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (307, TO_DATE('20-01-2023', 'dd-mm-yyyy'), null, 1);
-INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, metodo_aplicacao_id, quantidade, area)
-VALUES (307, 107, 95, null, 5, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (307,5);
+INSERT INTO Aplicacao_FP_Variedade(operacao_id,METODO_APLICACAO_ID)
+VALUES (307,null);
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (307,107,95);
 INSERT INTO FP_APLICADOS(operacao_id, fp_id)
 VALUES (307, 1);
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
@@ -1627,9 +1723,13 @@ VALUES (329, 104, 4, null, 800);
 -- 04/01/2019 operação de aplicação de fator de produção BIOFERTIL N6, no solo, 1.1 ha, 3200 kg
 INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
 VALUES (330, TO_DATE('04/01/2019', 'DD/MM/YYYY'), 1);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (330, 105, null, 13, 7, 3200, 1.1);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (330,3200);
+INSERT INTO APLICACAO_FP_Solo(OPERACAO_ID,parcela_id,area)
+VALUES (330, 105,1.1);
+INSERT INTO FP_Aplicados(operacao_id,fp_id)
+VALUES (330,13);
+
 
 -- 09/01/2019 operação de plantação de Macieira Porta da Loja, 50 un
 INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
@@ -1670,170 +1770,303 @@ VALUES (336, 105, 57, NULL, 50);
 -- 06/01/2020 operação de aplicação de fator de produção Fertimax Extrume de Cavalo, no solo, Macieira Porta da Loja, 100 kg
 INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
 VALUES (337, TO_DATE('06/01/2020', 'DD/MM/YYYY'), 1);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (337, 105, 44, 12, 7, 100, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (337,100);
+INSERT INTO APLICACAO_FP_Variedade(OPERACAO_ID,METODO_APLICACAO_ID)
+VALUES (337, 7);
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (337,105,44);
+INSERT INTO FP_Aplicados(operacao_id,fp_id)
+VALUES (337,12);
 
 -- 06/01/2020 operação de aplicação de fator de produção Fertimax Extrume de Cavalo, no solo, Macieira Malápio, 40 kg
 INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
 VALUES (338, TO_DATE('06/01/2020', 'DD/MM/YYYY'), 1);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (338, 105, 56, 12, 7, 40, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (338,40);
+INSERT INTO APLICACAO_FP_Variedade(OPERACAO_ID,METODO_APLICACAO_ID)
+VALUES (338, 7);
+
+
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (338,105,56);
+INSERT INTO FP_Aplicados(operacao_id,fp_id)
+VALUES (338,12);
 
 -- 06/01/2020 operação de aplicação de fator de produção Fertimax Extrume de Cavalo, no solo, Macieira Pipo de Basto, 80 kg
 INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
 VALUES (339, TO_DATE('06/01/2020', 'DD/MM/YYYY'), 1);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (339, 105, 61, 12, 7, 80, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (339,80);
+INSERT INTO APLICACAO_FP_Variedade(OPERACAO_ID,METODO_APLICACAO_ID)
+VALUES (339, 7);
+
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (339,105,61);
+INSERT INTO FP_Aplicados(operacao_id,fp_id)
+VALUES (339,12);
 
 -- 06/01/2020 operação de aplicação de fator de produção Fertimax Extrume de Cavalo, no solo, Macieira Canada, 60 kg
 INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
 VALUES (340, TO_DATE('06/01/2020', 'DD/MM/YYYY'), 1);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (340, 105, 97, 12, 7, 60, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (340,60);
+INSERT INTO APLICACAO_FP_Variedade(OPERACAO_ID,METODO_APLICACAO_ID)
+VALUES (340, 7);
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (340,105,97);
+INSERT INTO FP_Aplicados(operacao_id,fp_id)
+VALUES (340,12);
 
 -- 07/01/2020 operação de aplicação de fator de produção Fertimax Extrume de Cavalo, no solo, Macieira Grand Fay, 80 kg
 INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
 VALUES (341, TO_DATE('07/01/2020', 'DD/MM/YYYY'), 1);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (341, 105, 98, 12, 7, 80, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (341,80);
+INSERT INTO APLICACAO_FP_Variedade(OPERACAO_ID,METODO_APLICACAO_ID)
+VALUES (341, 7);
+
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (341,105,98);
+INSERT INTO FP_Aplicados(operacao_id,fp_id)
+VALUES (341,12);
 
 -- 07/01/2020 operação de aplicação de fator de produção Fertimax Extrume de Cavalo, no solo, Macieira Gronho Doce, 100 kg
 INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
 VALUES (342, TO_DATE('07/01/2020', 'DD/MM/YYYY'), 1);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (342, 105, 57, 12, 7, 100, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (342,100);
+INSERT INTO APLICACAO_FP_Variedade(OPERACAO_ID,METODO_APLICACAO_ID)
+VALUES (342, 7);
+INSERT INTO FP_Aplicados(operacao_id,fp_id)
+VALUES (342,13);
+
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (342,105,57);
+INSERT INTO FP_Aplicados(operacao_id,fp_id)
+VALUES (342,12);
 
 -- 07/01/2021 operação de aplicação de fator de produção Fertimax Extrume de Cavalo, no solo, Macieira Porta da Loja, 150 kg
 INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
 VALUES (343, TO_DATE('07/01/2021', 'DD/MM/YYYY'), 1);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (343, 105, 44, 12, 7, 150, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (343,150);
+INSERT INTO APLICACAO_FP_Variedade(OPERACAO_ID,METODO_APLICACAO_ID)
+VALUES (343, 7);
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (343,105,44);
+INSERT INTO FP_Aplicados(operacao_id,fp_id)
+VALUES (343,12);
 
 -- 07/01/2021 operação de aplicação de fator de produção Fertimax Extrume de Cavalo, no solo, Macieira Malápio, 60 kg
 INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
 VALUES (344, TO_DATE('07/01/2021', 'DD/MM/YYYY'), 1);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (344, 105, 56, 12, 7, 60, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (344,60);
+INSERT INTO APLICACAO_FP_Variedade(OPERACAO_ID,METODO_APLICACAO_ID)
+VALUES (344, 7);
+
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (344,105,56);
+INSERT INTO FP_Aplicados(operacao_id,fp_id)
+VALUES (344,12);
 
 -- 08/01/2021 operação de aplicação de fator de produção Fertimax Extrume de Cavalo, no solo, Macieira Pipo de Basto, 120 kg
 INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
 VALUES (345, TO_DATE('08/01/2021', 'DD/MM/YYYY'), 1);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (345, 105, 61, 12, 7, 120, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (345,120);
+INSERT INTO APLICACAO_FP_Variedade(OPERACAO_ID,METODO_APLICACAO_ID)
+VALUES (345, 7);
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (345,105,61);
+INSERT INTO FP_Aplicados(operacao_id,fp_id)
+VALUES (345,12);
 
 -- 07/01/2021 operação de aplicação de fator de produção Fertimax Extrume de Cavalo, no solo, Macieira Canada, 90 kg
 INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
 VALUES (346, TO_DATE('07/01/2021', 'DD/MM/YYYY'), 1);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (346, 105, 97, 12, 7, 90, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (346,90);
+INSERT INTO APLICACAO_FP_Variedade(OPERACAO_ID,METODO_APLICACAO_ID)
+VALUES (346, 7);
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (346,105,97);
+INSERT INTO FP_Aplicados(operacao_id,fp_id)
+VALUES (346,12);
 
 -- 07/01/2021 operação de aplicação de fator de produção Fertimax Extrume de Cavalo, no solo, Macieira Grand Fay, 120 kg
 INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
 VALUES (347, TO_DATE('07/01/2021', 'DD/MM/YYYY'), 1);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (347, 105, 98, 12, 7, 120, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (347,120);
+INSERT INTO APLICACAO_FP_Variedade(OPERACAO_ID,METODO_APLICACAO_ID)
+VALUES (347, 7);
+INSERT INTO FP_Aplicados(operacao_id,fp_id)
+VALUES (347,13);
+
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (347,105,98);
+INSERT INTO FP_Aplicados(operacao_id,fp_id)
+VALUES (347,12);
 
 -- 08/01/2021 operação de aplicação de fator de produção Fertimax Extrume de Cavalo, no solo, Macieira Gronho Doce, 150 kg
 INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
 VALUES (348, TO_DATE('08/01/2021', 'DD/MM/YYYY'), 1);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (348, 105, 57, 12, 7, 150, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (348,150);
+INSERT INTO APLICACAO_FP_Variedade(OPERACAO_ID,METODO_APLICACAO_ID)
+VALUES (348, 7);
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (348,105,57);
+INSERT INTO FP_Aplicados(operacao_id,fp_id)
+VALUES (348,12);
 
 -- 15/01/2022 operação de aplicação de fator de produção BIOFERTIL N6, no solo, Macieira Porta da Loja, 150 kg
 INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
 VALUES (349, TO_DATE('15/01/2022', 'DD/MM/YYYY'), 1);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (349, 105, 44, 13, 7, 150, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (349,150);
+INSERT INTO APLICACAO_FP_Variedade(OPERACAO_ID,METODO_APLICACAO_ID)
+VALUES (349, 7);
+
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (349,105,44);
+INSERT INTO FP_Aplicados(operacao_id,fp_id)
+VALUES (349,13);
 
 -- 15/01/2022 operação de aplicação de fator de produção BIOFERTIL N6, no solo, Macieira Malápio, 60 kg
 INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
 VALUES (350, TO_DATE('15/01/2022', 'DD/MM/YYYY'), 1);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (350, 105, 56, 13, 7, 60, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (350,60);
+INSERT INTO APLICACAO_FP_Variedade(OPERACAO_ID,METODO_APLICACAO_ID)
+VALUES (350, 7);
+
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (350,105,56);
+INSERT INTO FP_Aplicados(operacao_id,fp_id)
+VALUES (350,13);
 
 -- 15/01/2022 operação de aplicação de fator de produção BIOFERTIL N6, no solo, Macieira Pipo de Basto, 120 kg
 INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
 VALUES (351, TO_DATE('15/01/2022', 'DD/MM/YYYY'), 1);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (351, 105, 61, 13, 7, 120, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (351,120);
+INSERT INTO APLICACAO_FP_Variedade(OPERACAO_ID,METODO_APLICACAO_ID)
+VALUES (351, 7);
+
+
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (351,105,61);
+INSERT INTO FP_Aplicados(operacao_id,fp_id)
+VALUES (351,13);
 
 -- 16/01/2022 operação de aplicação de fator de produção BIOFERTIL N6, no solo, Macieira Canada, 90 kg
 INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
 VALUES (352, TO_DATE('16/01/2022', 'DD/MM/YYYY'), 1);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (352, 105, 97, 13, 7, 90, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (352,90);
+INSERT INTO APLICACAO_FP_Solo(OPERACAO_ID,parcela_id,area)
+VALUES (352, 105, null);
+INSERT INTO FP_Aplicados(operacao_id,fp_id)
+VALUES (352,13);
 
 -- 16/01/2022 operação de aplicação de fator de produção BIOFERTIL N6, no solo, Macieira Grand Fay, 120 kg
 INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
 VALUES (353, TO_DATE('16/01/2022', 'DD/MM/YYYY'), 1);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (353, 105, 98, 13, 7, 120, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (353,120);
+INSERT INTO APLICACAO_FP_Variedade(OPERACAO_ID,METODO_APLICACAO_ID)
+VALUES (353, 7);
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (353,105,98);
+INSERT INTO FP_Aplicados(operacao_id,fp_id)
+VALUES (353,13);
 
 -- 16/01/2022 operação de aplicação de fator de produção BIOFERTIL N6, no solo, Macieira Gronho Doce, 150 kg
 INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
 VALUES (354, TO_DATE('16/01/2022', 'DD/MM/YYYY'), 1);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (354, 105, 57, 13, 7, 150, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (354,150);
+INSERT INTO APLICACAO_FP_Variedade(OPERACAO_ID,METODO_APLICACAO_ID)
+VALUES (354, 7);
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (354,105,57);
+INSERT INTO FP_Aplicados(operacao_id,fp_id)
+VALUES (354,13);
 
 -- 15/05/2023 operação de aplicação de fator de produção EPSO Microtop, foliar, Macieira Porta da Loja, 5 kg
 INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
 VALUES (355, TO_DATE('15/05/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (355, 105, 44, 5, 8, 5, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (355,5);
+INSERT INTO APLICACAO_FP_Variedade(OPERACAO_ID,METODO_APLICACAO_ID)
+VALUES (355, 8);
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (355,105,44);
+INSERT INTO FP_Aplicados(operacao_id,fp_id)
+VALUES (338,5);
 
 -- 15/05/2023 operação de aplicação de fator de produção EPSO Microtop, foliar, Macieira Malápio, 2 kg
 INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
 VALUES (356, TO_DATE('15/05/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (356, 105, 56, 5, 8, 2, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (356,2);
+INSERT INTO APLICACAO_FP_Variedade(OPERACAO_ID,METODO_APLICACAO_ID)
+VALUES (356, 8);
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (356,105,56);
+INSERT INTO FP_Aplicados(operacao_id,fp_id)
+VALUES (356,5);
 
 -- 15/05/2023 operação de aplicação de fator de produção EPSO Microtop, foliar, Macieira Pipo de Basto, 4 kg
 INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
 VALUES (357, TO_DATE('15/05/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (357, 105, 61, 5, 8, 4, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (357,4);
+INSERT INTO APLICACAO_FP_Variedade(OPERACAO_ID,METODO_APLICACAO_ID)
+VALUES (357, 8);
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (357,105,61);
+INSERT INTO FP_Aplicados(operacao_id,fp_id)
+VALUES (357,5);
 
 -- 15/05/2023 operação de aplicação de fator de produção EPSO Microtop, foliar, Macieira Canada, 3 kg
 INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
 VALUES (358, TO_DATE('15/05/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (358, 105, 97, 5, 8, 3, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (358,3);
+INSERT INTO APLICACAO_FP_Variedade(OPERACAO_ID,METODO_APLICACAO_ID)
+VALUES (358, 8);
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (358,105,97);
+INSERT INTO FP_Aplicados(operacao_id,fp_id)
+VALUES (358,5);
 
 -- 15/05/2023 operação de aplicação de fator de produção EPSO Microtop, foliar, Macieira Grand Fay, 4 kg
 INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
 VALUES (359, TO_DATE('15/05/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (359, 105, 98, 5, 8, 4, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (359,4);
+INSERT INTO APLICACAO_FP_Variedade(OPERACAO_ID,METODO_APLICACAO_ID)
+VALUES (359, 8);
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (359,105,98);
+INSERT INTO FP_Aplicados(operacao_id,fp_id)
+VALUES (359,5);
 
 -- 15/05/2023 operação de aplicação de fator de produção EPSO Microtop, foliar, Macieira Gronho Doce, 5 kg
 INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
 VALUES (360, TO_DATE('15/05/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_ID, METODO_APLICACAO_ID, QUANTIDADE,
-                         AREA)
-VALUES (360, 105, 57, 5, 8, 5, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (360,5);
+INSERT INTO APLICACAO_FP_Variedade(OPERACAO_ID,METODO_APLICACAO_ID)
+VALUES (360, 8);
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (360,105,57);
+INSERT INTO FP_Aplicados(operacao_id,fp_id)
+VALUES (360,5);
 
 
 -- 15/09/2023 operação de colheita de maçã Canada, 700 kg
@@ -1994,65 +2227,111 @@ values (386, 102, 86, 40);
 -- 13/01/2021 operação de aplicação de fator de produção BIOFERTIL N6, Oliveira Picual, 120 kg
 INSERT INTO Operacao_Agricola(id, data, validade)
 VALUES (387, TO_DATE('2021-01-13', 'YYYY-MM-DD'), 1);
-INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, fator_producao_id, metodo_aplicacao_id, quantidade,
-                         area)
-VALUES (387, 102, 89, 13, null, 120, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (387,120);
+INSERT INTO Aplicacao_FP_Variedade(operacao_id,metodo_aplicacao_id)
+VALUES (387, null);
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (387,102,89);
+INSERT INTO FP_Aplicados(operacao_id,fp_id)
+VALUES (387,13);
 
 -- 12/01/2021 operação de aplicação de fator de produção BIOFERTIL N6, Oliveira Galega, 180 kg
 INSERT INTO Operacao_Agricola(id, data, validade)
 VALUES (388, TO_DATE('2021-01-12', 'YYYY-MM-DD'), 1);
-INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, fator_producao_id, metodo_aplicacao_id, quantidade,
-                         area)
-VALUES (388, 102, 92, 13, null, 180, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (388,180);
+INSERT INTO Aplicacao_FP_Variedade(operacao_id,metodo_aplicacao_id)
+VALUES (388, null);
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (388,102,92);
+INSERT INTO FP_Aplicados(operacao_id,fp_id)
+VALUES (388,13);
 
 -- 12/01/2021 operação de aplicação de fator de produção BIOFERTIL N6, Oliveira Arbequina, 240 kg
 INSERT INTO Operacao_Agricola(id, data, validade)
 VALUES (389, TO_DATE('2021-01-12', 'YYYY-MM-DD'), 1);
-INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, fator_producao_id, metodo_aplicacao_id, quantidade,
-                         area)
-VALUES (389, 102, 86, 13, null, 240, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (389,240);
+INSERT INTO Aplicacao_FP_Variedade(operacao_id,metodo_aplicacao_id)
+VALUES (389, null);
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (389,102,86);
+INSERT INTO FP_Aplicados(operacao_id,fp_id)
+VALUES (389,13);
 
 -- 12/01/2022 operação de aplicação de fator de produção BIOFERTIL N6, Oliveira Picual, 120 kg
 INSERT INTO Operacao_Agricola(id, data, validade)
 VALUES (390, TO_DATE('2022-01-12', 'YYYY-MM-DD'), 1);
-INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, fator_producao_id, metodo_aplicacao_id, quantidade,
-                         area)
-VALUES (390, 102, 89, 13, null, 120, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (390,120);
+INSERT INTO Aplicacao_FP_Variedade(operacao_id,metodo_aplicacao_id)
+VALUES (390, null);
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (390,102,89);
+INSERT INTO FP_Aplicados(operacao_id,fp_id)
+VALUES (390,13);
 
 -- 12/01/2022 operação de aplicação de fator de produção BIOFERTIL N6, Oliveira Galega, 180 kg
 INSERT INTO Operacao_Agricola(id, data, validade)
 VALUES (391, TO_DATE('2022-01-12', 'YYYY-MM-DD'), 1);
-INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, fator_producao_id, metodo_aplicacao_id, quantidade,
-                         area)
-VALUES (391, 102, 92, 13, null, 180, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (391,180);
+INSERT INTO Aplicacao_FP_Variedade(operacao_id,metodo_aplicacao_id)
+VALUES (391, null);
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (391,102,92);
+INSERT INTO FP_Aplicados(operacao_id,fp_id)
+VALUES (391,13);
 
 -- 13/01/2022 operação de aplicação de fator de produção BIOFERTIL N6, Oliveira Arbequina, 240 kg
 INSERT INTO Operacao_Agricola(id, data, validade)
 VALUES (392, TO_DATE('2022-01-13', 'YYYY-MM-DD'), 1);
-INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, fator_producao_id, metodo_aplicacao_id, quantidade,
-                         area)
-VALUES (392, 102, 86, 13, null, 240, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (392,240);
+INSERT INTO Aplicacao_FP_Variedade(operacao_id,metodo_aplicacao_id)
+VALUES (392, null);
+
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (392,102,86);
+INSERT INTO FP_Aplicados(operacao_id,fp_id)
+VALUES (392,13);
 
 -- 12/01/2023 operação de aplicação de fator de produção BIOFERTIL N6, Oliveira Picual, 120 kg
 INSERT INTO Operacao_Agricola(id, data, validade)
 VALUES (393, TO_DATE('2023-01-12', 'YYYY-MM-DD'), 1);
-INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, fator_producao_id, metodo_aplicacao_id, quantidade,
-                         area)
-VALUES (393, 102, 89, 13, null, 120, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (393,120);
+INSERT INTO Aplicacao_FP_Variedade(operacao_id,metodo_aplicacao_id)
+VALUES (393, null);
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (393,102,89);
+INSERT INTO FP_Aplicados(operacao_id,fp_id)
+VALUES (393,13);
 
 -- 12/01/2023 operação de aplicação de fator de produção BIOFERTIL N6, Oliveira Galega, 180 kg
 INSERT INTO Operacao_Agricola(id, data, validade)
 VALUES (394, TO_DATE('2023-01-12', 'YYYY-MM-DD'), 1);
-INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, fator_producao_id, metodo_aplicacao_id, quantidade,
-                         area)
-VALUES (394, 102, 92, 13, null, 180, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (394,120);
+INSERT INTO Aplicacao_FP_Variedade(operacao_id,metodo_aplicacao_id)
+VALUES (394, null);
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (394,102,92);
+INSERT INTO FP_Aplicados(operacao_id,fp_id)
+VALUES (394,13);
 
 -- 12/01/2023 operação de aplicação de fator de produção BIOFERTIL N6, Oliveira Arbequina, 240 kg
 INSERT INTO Operacao_Agricola(id, data, validade)
 VALUES (395, TO_DATE('2023-01-12', 'YYYY-MM-DD'), 1);
-INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, fator_producao_id, metodo_aplicacao_id, quantidade,
-                         area)
-VALUES (395, 102, 86, 13, null, 240, null);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (395,240);
+INSERT INTO Aplicacao_FP_Variedade(operacao_id,metodo_aplicacao_id)
+VALUES (395, null);
+INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
+VALUES (395,102,86);
+INSERT INTO FP_Aplicados(operacao_id,fp_id)
+VALUES (395,13);
 --
 -- 02/11/2023 operação de colheita de azeitona Arbequina, 400 kg
 INSERT INTO Operacao_Agricola(id, data, validade)
@@ -2109,9 +2388,12 @@ VALUES (403, 10, 60, '06:00');
 -- 01/04/2023 operação de aplicação de fator de produção Biocal Composto, no solo, 1.1 ha, 500 kg
 INSERT INTO Operacao_Agricola(id, data, validade)
 VALUES (404, TO_DATE('01/04/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, fator_producao_id, metodo_aplicacao_id, quantidade,
-                         area)
-VALUES (404, 108, null, 8, 7, 500, 1.1);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (404,500);
+INSERT INTO Aplicacao_FP_Solo(operacao_id,parcela_id,area)
+VALUES (404, 108, 1.1);
+INSERT INTO FP_Aplicados(operacao_id,fp_id)
+VALUES (404,8);
 
 
 -- 05/04/2023 operação de semeadura de cenouras Sugarsnax Hybrid, 0.5 ha, 1.2 kg
@@ -2130,14 +2412,14 @@ VALUES (406, 108, 96, 1.5, 0.6, null);
 -- 08/05/2023 operação de monda de plantação de cenouras Sugarsnax Hybrid, 0.5 ha
 INSERT INTO Operacao_Agricola(id, data, validade)
 VALUES (407, TO_DATE('08/05/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Monda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id, fator_producao_id)
-VALUES (407, 108, 77, 0.5, null, null);
+INSERT INTO Monda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id)
+VALUES (407, 108, 77, 0.5, null);
 
 -- 20/05/2023 operação de monda de plantação de abóbora manteiga, 0.6 ha
 INSERT INTO Operacao_Agricola(id, data, validade)
 VALUES (408, TO_DATE('20/05/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Monda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id, fator_producao_id)
-VALUES (408, 108, 96, 0.6, null, null);
+INSERT INTO Monda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id)
+VALUES (408, 108, 96, 0.6, null);
 
 -- 14/06/2023 operação de colheita de cenouras Sugarsnax Hybrid, 1500 kg
 INSERT INTO Operacao_Agricola(id, data, validade)
@@ -2148,8 +2430,8 @@ values (409, 108, 14, null, 1500);
 -- 20/06/2023 operação de monda de plantação de abóbora manteiga, 0.6 ha
 INSERT INTO Operacao_Agricola(id, data, validade)
 VALUES (410, TO_DATE('20/06/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Monda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id, fator_producao_id)
-VALUES (410, 108, 96, 0.6, null, null);
+INSERT INTO Monda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id)
+VALUES (410, 108, 96, 0.6, null);
 
 -- 28/06/2023 operação de colheita de cenouras Sugarsnax Hybrid, 2500 kg
 INSERT INTO Operacao_Agricola(id, data, validade)
@@ -2160,9 +2442,15 @@ values (411, 108, 14, null, 2500);
 -- 03/07/2023 operação de aplicação de fator de produção Fertimax Extrume de Cavalo, no solo, 0.5 ha, 1800 kg
 INSERT INTO Operacao_Agricola(id, data, validade)
 VALUES (412, TO_DATE('03/07/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, fator_producao_id, metodo_aplicacao_id, quantidade,
-                         area)
-VALUES (412, 108, null, 12, 7, 1800, 0.5);
+INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+VALUES (412,1800);
+INSERT INTO Aplicacao_FP_Solo(operacao_id,parcela_id,area)
+VALUES (412, 108,0.5);
+INSERT INTO FP_Aplicados(operacao_id,fp_id)
+VALUES (412,12);
+
+
+
 
 
 -- 04/07/2023 operação de mobilização do solo, 0.5 ha
@@ -2181,8 +2469,8 @@ VALUES (414, 108, 75, 1.2, 0.5, null);
 -- 08/08/2023 operação de monda de plantação de cenouras Danvers Half Long, 0.5 ha
 INSERT INTO Operacao_Agricola(id, data, validade)
 VALUES (415, TO_DATE('08/08/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Monda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id, fator_producao_id)
-VALUES (415, 108, 75, 0.5, null, null);
+INSERT INTO Monda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id)
+VALUES (415, 108, 75, 0.5, null);
 
 -- 15/09/2023 operação de colheita de abóbora manteiga, 8000 kg
 INSERT INTO Operacao_Agricola(id, data, validade)

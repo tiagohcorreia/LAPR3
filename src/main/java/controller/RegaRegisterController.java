@@ -50,18 +50,24 @@ public class RegaRegisterController {
                 }
 
                 String[] parts = line.split(",");
-                if (parts.length == 5) {
+                if (parts.length == 5 || parts.length == 6) {
                     try {
                         int operacaoId = new OperacaoAgricolaRegisterController().getNextId();
                         Date data = new SimpleDateFormat("yyyy-MM-dd").parse(parts[0]);
                         String sectorId = (parts[1].trim());
                         int duration = Integer.parseInt(parts[2].trim());
                         String startTime = parts[3].trim();
-
+                        if(parts[5]== null){
                         regaTableList.add(new RegaTable(data,operacaoId, sectorId, duration, startTime));
-                    } catch (ParseException | NumberFormatException e) {
+                        }
+                        else{
+                            String mix = parts[5].trim();
+                            regaTableList.add(new RegaTable(data,operacaoId, sectorId,duration,startTime,mix));
+                        }
+                    }catch (ParseException | NumberFormatException e) {
                         e.printStackTrace();
                     }
+
                 }
             }
         } catch (IOException e) {
