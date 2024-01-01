@@ -1,7 +1,7 @@
-8:00,15:30
-Setor 10,2,T
-Setor 11,2,T,mix1,3
-Setor 21,2,P
-Setor 22,2,I
-Setor 41,7,T,mix2,2
-Setor 42,10,3
+1:00,08:50
+Setor 21,1,T,mix1,1
+Setor 11,1,T
+Setor 10,1,P
+Setor 22,1,I
+Setor 41,1,T,mix2,2
+Setor 42,1,3

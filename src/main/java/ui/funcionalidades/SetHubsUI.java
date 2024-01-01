@@ -68,7 +68,7 @@ public class SetHubsUI implements Runnable {
 
     public void askDischargeTimes() {
         localsAndDischargeTimes = new HashMap<>();
-        System.out.println("Introduza os tempos de descarga, em horas, para cada hub:\n");
+        System.out.println("Introduza os tempos de descarga, em minutos, para cada hub:\n");
 
         for (VertexMetrics<Local, Integer> vm : idealLocals) {
             Local local = vm.getVertex();

@@ -24,9 +24,14 @@ public class GestorAgricolaUI implements Runnable {
         options.add(new MenuItem("Registar Monda", new MondaRegisterUI()));
         options.add(new MenuItem("Registar Aplicacao FP", new AplicacaoFP_UI()));
         options.add(new MenuItem("Registar Poda", new PodaRegisterUI()));
+        options.add(new MenuItem("Cancelar Operação Agrícola", new CancelarOperacaoUI()));
+
         try {
+
             options.add(new MenuItem("Gerar Plano de Rega", new RegaUI()));
+
         } catch (SQLException e) {
+
             e.printStackTrace();
         }
         options.add(new MenuItem("Verificar Estado da Rega", new EstadoRegaUI()));

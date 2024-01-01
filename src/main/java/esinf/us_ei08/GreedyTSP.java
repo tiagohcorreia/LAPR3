@@ -35,9 +35,9 @@ public class GreedyTSP<V, E> {
         int hubCount = (currentVertex instanceof Hub) ? 1 : 0;
 
         while (circuit.size() < numVertices && hubCount < numHubs) {
-            V nextVertex = findNextVertex(graph, currentVertex, origin, visited, vehicle, numHubs - hubCount);
+            V nextVertex = findNextVertex(graph, currentVertex, origin, visited, vehicle, numHubs - hubCount, circuit);
             if (nextVertex == null) {
-                throw new IllegalStateException("Unable to find the next vertex.");
+                throw new IllegalStateException("Unable to find a valid circuit for the current specifications");
             }
 
             if (nextVertex instanceof Hub && nextVertex != origin) {
@@ -75,6 +75,26 @@ public class GreedyTSP<V, E> {
             numberOfChargings++;
         }
 
+        if (graph.edge(lastVertex, origin) == null) {
+            System.out.println("Backtracking to find a path from " + lastVertex + " to " + origin);
+
+            // Backtrack to find a path from lastVertex to origin
+            for (int i = circuit.size() - 2; i >= 0; i--) {
+                V backtrackVertex = circuit.get(i);
+                Edge<V, E> backtrackEdge = graph.edge(backtrackVertex, origin);
+
+                if (backtrackEdge != null) {
+                    // Found a path to the origin, add the backtracked vertices to the circuit
+                    for (int j = i + 1; j < circuit.size(); j++) {
+                        V backtrackedVertex = circuit.get(j);
+                        circuit.add(backtrackedVertex);
+                    }
+                    break;
+                }
+            }
+        }
+
+
         circuit.add(origin);
 
         return circuit;
@@ -89,7 +109,7 @@ public class GreedyTSP<V, E> {
         return numberOfChargings;
     }
 
-    private V findNextVertex(Graph<V, E> graph, V currentVertex, V origin, boolean[] visited, Vehicle vehicle, int remainingHubs) {
+    private V findNextVertex(Graph<V, E> graph, V currentVertex, V origin, boolean[] visited, Vehicle vehicle, int remainingHubs, List<V> circuit) {
         double maxScore = Double.MIN_VALUE;
         V nextVertex = null;
 
@@ -100,6 +120,11 @@ public class GreedyTSP<V, E> {
                 int weight = (edgeWeight != null) ? (int) edgeWeight : 0;
 
                 if (weight <= vehicle.getAutonomyDistance()) {
+                    // Check if the vertex is a hub and has already been visited (except the last one)
+                    if (vertex instanceof Hub && circuit.contains(vertex) && vertex != circuit.get(circuit.size() - 1)) {
+                        continue; // Skip this hub
+                    }
+
                     double score = calculateScore((Local) vertex, edgeWeight, vehicle);
 
                     if (vertex instanceof Hub && remainingHubs > 0) {
@@ -122,6 +147,11 @@ public class GreedyTSP<V, E> {
                     int weight = (edgeWeight != null) ? (int) edgeWeight : 0;
 
                     if (weight <= vehicle.getAutonomyDistance()) {
+                        // Check if the vertex is a hub and has already been visited (except the last one)
+                        if (vertex instanceof Hub && circuit.contains(vertex) && vertex != circuit.get(circuit.size() - 1)) {
+                            continue; // Skip this hub
+                        }
+
                         double score = calculateScore((Local) vertex, edgeWeight, vehicle);
 
                         if (score > maxScore) {
@@ -152,4 +182,3 @@ public class GreedyTSP<V, E> {
         return graph;
     }
 }
-
