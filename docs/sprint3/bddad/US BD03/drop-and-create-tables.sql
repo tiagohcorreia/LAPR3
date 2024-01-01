@@ -43,9 +43,10 @@ DROP TABLE Variedade_Temporaria CASCADE CONSTRAINTS;
 
 
 
+
 CREATE TABLE Aplicacao_FP (Operacao_id number(10) NOT NULL, quantidade float(10) NOT NULL, PRIMARY KEY (Operacao_id));
-CREATE TABLE Aplicacao_FP_Solo (Operacao_id number(10) NOT NULL, Parcela_id number(10) NOT NULL, area float(10) NOT NULL, PRIMARY KEY (Operacao_id));
-CREATE TABLE APLICACAO_FP_VARIEDADE (Operacao_id number(10) NOT NULL, Metodo_Aplicacao_id number(10) NOT NULL, PRIMARY KEY (Operacao_id));
+CREATE TABLE Aplicacao_FP_Solo (Operacao_id number(10) NOT NULL, Parcela_id number(10) NOT NULL, area float(10), PRIMARY KEY (Operacao_id));
+CREATE TABLE APLICACAO_FP_VARIEDADE (Operacao_id number(10) NOT NULL, Metodo_Aplicacao_id number(10), PRIMARY KEY (Operacao_id));
 CREATE TABLE Colheita (operacao_id number(10) NOT NULL, parcela_id number(10) NOT NULL, produto_id number(10) NOT NULL, metodo_execucao_id number(10), quantidade float(10) NOT NULL, PRIMARY KEY (operacao_id));
 CREATE TABLE Composto_Quimico (id number(10) NOT NULL, nome nvarchar2(255) NOT NULL, PRIMARY KEY (id));
 CREATE TABLE Cultura (id number(10) NOT NULL, nome_comum nvarchar2(255) NOT NULL, nome_cientifico nvarchar2(255), PRIMARY KEY (id));
@@ -72,7 +73,7 @@ CREATE TABLE Plantacao_Temporaria (plantacao_id number(10) NOT NULL, variedade_t
 CREATE TABLE Poda (operacao_id number(10) NOT NULL, parcela_id number(10) NOT NULL, variedade_id number(10) NOT NULL, quantidade float(10) NOT NULL, metodo_execucao_id number(10), PRIMARY KEY (operacao_id));
 CREATE TABLE Produto (id number(10) NOT NULL, nome nvarchar2(255) NOT NULL, variedade_id number(10) NOT NULL, PRIMARY KEY (id));
 CREATE TABLE Receita_Fertirrega (id number(10) NOT NULL, nome nvarchar2(255) NOT NULL UNIQUE, PRIMARY KEY (id));
-CREATE TABLE Receita_FP (receita_id number(10) NOT NULL, fp_id number(10) NOT NULL, proporcao number(10) NOT NULL, unidade_id nvarchar2(255) NOT NULL, PRIMARY KEY (receita_id, fp_id));
+CREATE TABLE Receita_FP (receita_id number(10) NOT NULL, fp_id number(10) NOT NULL, proporcao number(10) NOT NULL, unidade nvarchar2(255) NOT NULL, PRIMARY KEY (receita_id, fp_id));
 CREATE TABLE Rega (operacao_id number(10) NOT NULL, setor_id number(10), duracao number(10) NOT NULL, hora varchar2(255) NOT NULL, PRIMARY KEY (operacao_id));
 CREATE TABLE Registro_Sensor (id number(10) NOT NULL, sensor_id number(10) NOT NULL, valor float(10) NOT NULL, PRIMARY KEY (id));
 CREATE TABLE Sementeira (operacao_id number(10) NOT NULL, parcela_id number(10) NOT NULL, variedade_id number(10) NOT NULL, quantidade float(10) NOT NULL, area float(10) NOT NULL, metodo_execucao_id number(10), PRIMARY KEY (operacao_id));
