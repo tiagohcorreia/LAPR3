@@ -1,4 +1,6 @@
 DROP TABLE Aplicacao_FP CASCADE CONSTRAINTS;
+DROP TABLE Aplicacao_FP_Solo CASCADE CONSTRAINTS;
+DROP TABLE APLICACAO_FP_VARIEDADE CASCADE CONSTRAINTS;
 DROP TABLE Colheita CASCADE CONSTRAINTS;
 DROP TABLE Composto_Quimico CASCADE CONSTRAINTS;
 DROP TABLE Cultura CASCADE CONSTRAINTS;
@@ -18,6 +20,7 @@ DROP TABLE Monda CASCADE CONSTRAINTS;
 DROP TABLE Op_Plantacao CASCADE CONSTRAINTS;
 DROP TABLE Operacao_Agricola CASCADE CONSTRAINTS;
 DROP TABLE Parcela CASCADE CONSTRAINTS;
+DROP TABLE Parcelas_Variedades_Aplicadas CASCADE CONSTRAINTS;
 DROP TABLE Plantacao CASCADE CONSTRAINTS;
 DROP TABLE Plantacao_Permanente CASCADE CONSTRAINTS;
 DROP TABLE Plantacao_Temporaria CASCADE CONSTRAINTS;
@@ -40,7 +43,9 @@ DROP TABLE Variedade_Temporaria CASCADE CONSTRAINTS;
 
 
 
-CREATE TABLE Aplicacao_FP (operacao_id number(10) NOT NULL, parcela_id number(10) NOT NULL, variedade_id number(10), metodo_aplicacao_id number(10), quantidade float(10) NOT NULL, area float(10), PRIMARY KEY (operacao_id));
+CREATE TABLE Aplicacao_FP (Operacao_id number(10) NOT NULL, quantidade float(10) NOT NULL, PRIMARY KEY (Operacao_id));
+CREATE TABLE Aplicacao_FP_Solo (Operacao_id number(10) NOT NULL, Parcela_id number(10) NOT NULL, area float(10) NOT NULL, PRIMARY KEY (Operacao_id));
+CREATE TABLE APLICACAO_FP_VARIEDADE (Operacao_id number(10) NOT NULL, Metodo_Aplicacao_id number(10) NOT NULL, PRIMARY KEY (Operacao_id));
 CREATE TABLE Colheita (operacao_id number(10) NOT NULL, parcela_id number(10) NOT NULL, produto_id number(10) NOT NULL, metodo_execucao_id number(10), quantidade float(10) NOT NULL, PRIMARY KEY (operacao_id));
 CREATE TABLE Composto_Quimico (id number(10) NOT NULL, nome nvarchar2(255) NOT NULL, PRIMARY KEY (id));
 CREATE TABLE Cultura (id number(10) NOT NULL, nome_comum nvarchar2(255) NOT NULL, nome_cientifico nvarchar2(255), PRIMARY KEY (id));
@@ -48,7 +53,7 @@ CREATE TABLE Edificio (id number(10) NOT NULL, nome nvarchar2(255) NOT NULL, dim
 CREATE TABLE Fator_Producao (id number(10) NOT NULL, nome nvarchar2(255) NOT NULL, tipo_id number(10) NOT NULL, formulacao_id number(10) NOT NULL, PRIMARY KEY (id));
 CREATE TABLE Ficha_Tecnica (fator_producao_id number(10) NOT NULL, composto_quimico_id number(10) NOT NULL, quantidade float(10) NOT NULL, PRIMARY KEY (fator_producao_id, composto_quimico_id));
 CREATE TABLE Formulacao_FP (id number(10) NOT NULL, tipo nvarchar2(255) NOT NULL, PRIMARY KEY (id));
-CREATE TABLE FP_APLICADOS (operacao_id number(10) NOT NULL, fp_id number(10) NOT NULL, PRIMARY KEY (operacao_id, fp_id));
+CREATE TABLE FP_APLICADOS (Operacao_id number(10) NOT NULL, fp_id number(10) NOT NULL, PRIMARY KEY (Operacao_id, fp_id));
 CREATE TABLE FP_Metodo_Aplicacao (fator_producao_id number(10) NOT NULL, metodo_aplicacao_id number(10) NOT NULL, PRIMARY KEY (fator_producao_id, metodo_aplicacao_id));
 CREATE TABLE Incorporacao_Solo (operacao_id number(10) NOT NULL, parcela_id number(10) NOT NULL, variedade_id number(10) NOT NULL, quantidade float(10) NOT NULL, PRIMARY KEY (operacao_id));
 CREATE TABLE LOG_OPERACAO (id number(10) NOT NULL, operacao_id number(10) NOT NULL, log nvarchar2(255) NOT NULL, PRIMARY KEY (id));
@@ -60,6 +65,7 @@ CREATE TABLE Monda (operacao_id number(10) NOT NULL, parcela_id number(10) NOT N
 CREATE TABLE Op_Plantacao (operacao_id number(10) NOT NULL, parcela_id number(10) NOT NULL, variedade_id number(10) NOT NULL, metodo_execucao_id number(10), quantidade float(10) NOT NULL, PRIMARY KEY (operacao_id));
 CREATE TABLE Operacao_Agricola (id number(10) NOT NULL, data date NOT NULL, instante_registo timestamp(0), validade number(10) NOT NULL, PRIMARY KEY (id));
 CREATE TABLE Parcela (id number(10) NOT NULL, nome nvarchar2(255) NOT NULL, area float(10) NOT NULL, PRIMARY KEY (id));
+CREATE TABLE Parcelas_Variedades_Aplicadas (Operacao_id number(10) NOT NULL, Parcela_id number(10) NOT NULL, Variedade_id number(10) NOT NULL, PRIMARY KEY (Operacao_id, Parcela_id, Variedade_id));
 CREATE TABLE Plantacao (id number(10) NOT NULL, parcela_id number(10) NOT NULL, PRIMARY KEY (id));
 CREATE TABLE Plantacao_Permanente (plantacao_id number(10) NOT NULL, variedade_perm_id number(10) NOT NULL, compasso float(10) NOT NULL, distancia_filas float(10) NOT NULL, quantidade number(10) NOT NULL, data_inicio date NOT NULL, data_fim date, PRIMARY KEY (plantacao_id));
 CREATE TABLE Plantacao_Temporaria (plantacao_id number(10) NOT NULL, variedade_temp_id number(10) NOT NULL, area float(10) NOT NULL, data_início date NOT NULL, data_fim date, PRIMARY KEY (plantacao_id));
@@ -89,7 +95,6 @@ ALTER TABLE FP_Metodo_Aplicacao ADD CONSTRAINT FKFP_Metodo_165080 FOREIGN KEY (f
 ALTER TABLE FP_Metodo_Aplicacao ADD CONSTRAINT FKFP_Metodo_683093 FOREIGN KEY (metodo_aplicacao_id) REFERENCES Metodo_Aplicacao (id);
 ALTER TABLE Plantacao_Permanente ADD CONSTRAINT FKPlantacao_614284 FOREIGN KEY (plantacao_id) REFERENCES Plantacao (id);
 ALTER TABLE Plantacao_Temporaria ADD CONSTRAINT FKPlantacao_628676 FOREIGN KEY (plantacao_id) REFERENCES Plantacao (id);
-ALTER TABLE Aplicacao_FP ADD CONSTRAINT FKAplicacao_70749 FOREIGN KEY (operacao_id) REFERENCES Operacao_Agricola (id);
 ALTER TABLE Ficha_Tecnica ADD CONSTRAINT FKFicha_Tecn282238 FOREIGN KEY (fator_producao_id) REFERENCES Fator_Producao (id);
 ALTER TABLE Ficha_Tecnica ADD CONSTRAINT FKFicha_Tecn211506 FOREIGN KEY (composto_quimico_id) REFERENCES Composto_Quimico (id);
 ALTER TABLE Sementeira ADD CONSTRAINT FKSementeira762506 FOREIGN KEY (operacao_id) REFERENCES Operacao_Agricola (id);
@@ -110,8 +115,6 @@ ALTER TABLE Variedade_Temporaria ADD CONSTRAINT FKVariedade_459248 FOREIGN KEY (
 ALTER TABLE Produto ADD CONSTRAINT FKProduto421276 FOREIGN KEY (variedade_id) REFERENCES Variedade (id);
 ALTER TABLE Sementeira ADD CONSTRAINT FKSementeira595630 FOREIGN KEY (parcela_id) REFERENCES Parcela (id);
 ALTER TABLE Rega ADD CONSTRAINT FKRega982559 FOREIGN KEY (setor_id) REFERENCES Setor_Rega (id);
-ALTER TABLE Aplicacao_FP ADD CONSTRAINT FKAplicacao_237625 FOREIGN KEY (parcela_id) REFERENCES Parcela (id);
-ALTER TABLE Aplicacao_FP ADD CONSTRAINT FKAplicacao_284829 FOREIGN KEY (variedade_id) REFERENCES Variedade (id);
 ALTER TABLE Colheita ADD CONSTRAINT FKColheita176882 FOREIGN KEY (parcela_id) REFERENCES Parcela (id);
 ALTER TABLE Op_Plantacao ADD CONSTRAINT FKOp_Plantac202505 FOREIGN KEY (parcela_id) REFERENCES Parcela (id);
 ALTER TABLE Colheita ADD CONSTRAINT FKColheita239953 FOREIGN KEY (metodo_execucao_id) REFERENCES Metodo_Execucao (id);
@@ -133,9 +136,16 @@ ALTER TABLE Incorporacao_Solo ADD CONSTRAINT FKIncorporac654866 FOREIGN KEY (ope
 ALTER TABLE Incorporacao_Solo ADD CONSTRAINT FKIncorporac487990 FOREIGN KEY (parcela_id) REFERENCES Parcela (id);
 ALTER TABLE Incorporacao_Solo ADD CONSTRAINT FKIncorporac38854 FOREIGN KEY (variedade_id) REFERENCES Variedade (id);
 ALTER TABLE Op_Plantacao ADD CONSTRAINT FKOp_Plantac35629 FOREIGN KEY (operacao_id) REFERENCES Operacao_Agricola (id);
-ALTER TABLE Aplicacao_FP ADD CONSTRAINT FKAplicacao_80198 FOREIGN KEY (metodo_aplicacao_id) REFERENCES Metodo_Aplicacao (id);
 ALTER TABLE Receita_FP ADD CONSTRAINT FKReceita_FP437299 FOREIGN KEY (receita_id) REFERENCES Receita_Fertirrega (id);
 ALTER TABLE Receita_FP ADD CONSTRAINT FKReceita_FP984213 FOREIGN KEY (fp_id) REFERENCES Fator_Producao (id);
-ALTER TABLE FP_APLICADOS ADD CONSTRAINT FKFP_APLICAD914226 FOREIGN KEY (operacao_id) REFERENCES Aplicacao_FP (operacao_id);
+ALTER TABLE FP_APLICADOS ADD CONSTRAINT FKFP_APLICAD683251 FOREIGN KEY (Operacao_id) REFERENCES Aplicacao_FP (Operacao_id);
 ALTER TABLE FP_APLICADOS ADD CONSTRAINT FKFP_APLICAD17458 FOREIGN KEY (fp_id) REFERENCES Fator_Producao (id);
 ALTER TABLE LOG_OPERACAO ADD CONSTRAINT FKLOG_OPERAC853230 FOREIGN KEY (operacao_id) REFERENCES Operacao_Agricola (id);
+ALTER TABLE Parcelas_Variedades_Aplicadas ADD CONSTRAINT FKParcelas_V663684 FOREIGN KEY (Parcela_id) REFERENCES Parcela (id);
+ALTER TABLE Parcelas_Variedades_Aplicadas ADD CONSTRAINT FKParcelas_V39734 FOREIGN KEY (Variedade_id) REFERENCES Variedade (id);
+ALTER TABLE APLICACAO_FP_VARIEDADE ADD CONSTRAINT FKAPLICACAO_687965 FOREIGN KEY (Operacao_id) REFERENCES Aplicacao_FP (Operacao_id);
+ALTER TABLE Parcelas_Variedades_Aplicadas ADD CONSTRAINT FKParcelas_V746486 FOREIGN KEY (Operacao_id) REFERENCES APLICACAO_FP_VARIEDADE (Operacao_id);
+ALTER TABLE APLICACAO_FP_VARIEDADE ADD CONSTRAINT FKAPLICACAO_224925 FOREIGN KEY (Metodo_Aplicacao_id) REFERENCES Metodo_Aplicacao (id);
+ALTER TABLE Aplicacao_FP ADD CONSTRAINT FKAplicacao_200441 FOREIGN KEY (Operacao_id) REFERENCES Operacao_Agricola (id);
+ALTER TABLE Aplicacao_FP_Solo ADD CONSTRAINT FKAplicacao_359100 FOREIGN KEY (Operacao_id) REFERENCES Aplicacao_FP (Operacao_id);
+ALTER TABLE Aplicacao_FP_Solo ADD CONSTRAINT FKAplicacao_803223 FOREIGN KEY (Parcela_id) REFERENCES Parcela (id);

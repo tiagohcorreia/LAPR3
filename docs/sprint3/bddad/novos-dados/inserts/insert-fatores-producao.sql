@@ -1,3 +1,5 @@
+
+
 --compostos químicos que faltavam em relação ao legacy
 
 INSERT INTO Composto_Quimico(id, nome)
