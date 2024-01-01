@@ -2,11 +2,8 @@ package controller;
 
 import dataAccess.DatabaseConnection;
 import dataAccess.FatorProducaoRepository;
-import dataAccess.OperacaoAgricolaRepository;
 import dataAccess.Repositories;
 import dataAccess.fertigation_mixes.FertigationMixesRepository;
-import domain.FertigationMix;
-import org.apache.commons.lang3.tuple.Pair;
 
 import java.sql.*;
 import java.util.AbstractMap;
@@ -125,7 +122,6 @@ public class FertirregaController {
                     if (resultSet.next()) {
                         int setorId = resultSet.getInt("id");
 
-                        // Find all plantacao_ids, parcela_ids, and variedade_ids within the setor_id
                         String findDataQuery = "SELECT SP.plantacao_id, P.parcela_id, " +
                                 "CASE WHEN PP.variedade_perm_id IS NOT NULL THEN PP.variedade_perm_id ELSE PT.variedade_temp_id END AS variedade_id " +
                                 "FROM SetorRega_Plantacao SP " +
