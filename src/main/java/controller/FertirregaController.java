@@ -1,0 +1,159 @@
+package controller;
+
+import dataAccess.DatabaseConnection;
+import dataAccess.FatorProducaoRepository;
+import dataAccess.OperacaoAgricolaRepository;
+import dataAccess.Repositories;
+import dataAccess.fertigation_mixes.FertigationMixesRepository;
+import domain.FertigationMix;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.sql.*;
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+public class FertirregaController {
+    private DatabaseConnection database;
+    private FertigationMixesRepository fertigationMixesRepository;
+    private FatorProducaoRepository fatorProducaoRepository;
+
+    {
+        try {
+            database = DatabaseConnection.getInstance();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private Connection connection;
+
+    public FertirregaController() {
+        getFertirregaRepository();
+        try {
+            connection = DriverManager.getConnection(database.url(), database.user(), database.password());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private FertigationMixesRepository getFertirregaRepository() {
+        if (Objects.isNull(fertigationMixesRepository)) {
+            Repositories repositories = Repositories.getInstance();
+            fertigationMixesRepository= repositories.getFertigationMixes();
+            fatorProducaoRepository = repositories.getFatorProducaoRepository();
+        }
+        return fertigationMixesRepository;
+    }
+
+
+    public List<Integer> getFpIdsByMix(String mix) {
+        List<Integer> fpIds = new ArrayList<>();
+
+        try {
+            String findIdQuery = "SELECT id FROM Receita_Fertirrega WHERE nome = ?";
+            try (PreparedStatement findIdStatement = connection.prepareStatement(findIdQuery)) {
+                findIdStatement.setString(1, mix);
+                try (ResultSet resultSet = findIdStatement.executeQuery()) {
+                    if (resultSet.next()) {
+                        int receitaId = resultSet.getInt("id");
+
+                        String findFpIdsQuery = "SELECT fp_id FROM Receita_FP WHERE receita_id = ?";
+                        try (PreparedStatement findFpIdsStatement = connection.prepareStatement(findFpIdsQuery)) {
+                            findFpIdsStatement.setInt(1, receitaId);
+                            try (ResultSet fpIdsResultSet = findFpIdsStatement.executeQuery()) {
+                                while (fpIdsResultSet.next()) {
+                                    int fpId = fpIdsResultSet.getInt("fp_id");
+                                    fpIds.add(fpId);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return fpIds;
+    }
+
+    public int getProporcaoByFpId(int fpId) {
+        int proporcao = 0;
+
+        try {
+            String query = "SELECT proporcao FROM Receita_FP WHERE fp_id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setInt(1, fpId);
+
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if (resultSet.next()) {
+                        proporcao = resultSet.getInt("proporcao");
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return proporcao;
+    }
+
+    public void registerFpIds(int operacaoId,String mix,String setorNome) throws SQLException {
+        List<Integer> fpIds = getFpIdsByMix(mix);
+        float quantidade = 0;
+        for (int fpId : fpIds) {
+            quantidade = quantidade + (float) getProporcaoByFpId(fpId);
+
+        }
+        List<AbstractMap.SimpleEntry<Integer, Integer>> parcelaVariedadePairs = getParcelaAndVariedade(setorNome);
+        fatorProducaoRepository.registerAplicacaoFP(operacaoId,quantidade);
+        fertigationMixesRepository.registerAplicacaoFPVariedade(operacaoId);
+        fertigationMixesRepository.registerParcelasVariedadesAplicadas(operacaoId,parcelaVariedadePairs);
+        fertigationMixesRepository.registerFpAplicados(operacaoId,fpIds);
+    }
+
+    public List<AbstractMap.SimpleEntry<Integer, Integer>> getParcelaAndVariedade(String setorNome) {
+        List<AbstractMap.SimpleEntry<Integer, Integer>> parcelaVariedadePairs = new ArrayList<>();
+
+        try {
+            String findIdQuery = "SELECT id FROM Setor_Rega WHERE nome = ?";
+            try (PreparedStatement findIdStatement = connection.prepareStatement(findIdQuery)) {
+                findIdStatement.setString(1, setorNome);
+                try (ResultSet resultSet = findIdStatement.executeQuery()) {
+                    if (resultSet.next()) {
+                        int setorId = resultSet.getInt("id");
+
+                        // Find all plantacao_ids, parcela_ids, and variedade_ids within the setor_id
+                        String findDataQuery = "SELECT SP.plantacao_id, P.parcela_id, " +
+                                "CASE WHEN PP.variedade_perm_id IS NOT NULL THEN PP.variedade_perm_id ELSE PT.variedade_temp_id END AS variedade_id " +
+                                "FROM SetorRega_Plantacao SP " +
+                                "JOIN Plantacao P ON SP.plantacao_id = P.id " +
+                                "LEFT JOIN Plantacao_Permanente PP ON SP.plantacao_id = PP.plantacao_id " +
+                                "LEFT JOIN Plantacao_Temporaria PT ON SP.plantacao_id = PT.plantacao_id " +
+                                "WHERE SP.setor_id = ?";
+
+                        try (PreparedStatement findDataStatement = connection.prepareStatement(findDataQuery)) {
+                            findDataStatement.setInt(1, setorId);
+
+                            try (ResultSet dataResultSet = findDataStatement.executeQuery()) {
+                                while (dataResultSet.next()) {
+                                    int plantacaoId = dataResultSet.getInt("plantacao_id");
+                                    int parcelaId = dataResultSet.getInt("parcela_id");
+                                    int variedadeId = dataResultSet.getInt("variedade_id");
+
+                                    parcelaVariedadePairs.add(new AbstractMap.SimpleEntry<>(parcelaId, variedadeId));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return parcelaVariedadePairs;
+    }
+}

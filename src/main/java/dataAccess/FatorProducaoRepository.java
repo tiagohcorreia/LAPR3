@@ -3,10 +3,7 @@ package dataAccess;
 import domain.FatorProducao;
 import oracle.jdbc.OracleTypes;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -83,6 +80,34 @@ public class FatorProducaoRepository {
             callStmt.setFloat(7, area);
 
             callStmt.execute();
+            connection.commit();
+        } finally {
+            if (!Objects.isNull(callStmt)) {
+                callStmt.close();
+            }
+        }
+    }
+
+    public void registerAplicacaoFP(int operacaoId, float quantidade) throws SQLException {
+        CallableStatement callStmt = null;
+
+        try {
+            Connection connection = DatabaseConnection.getInstance().getConnection();
+            callStmt = connection.prepareCall("{ ? = call Registrar_Aplicacao_FPs(?, ?) }");
+
+            // Register the OUT parameter for the function result
+            callStmt.registerOutParameter(1, Types.INTEGER);
+
+            // Set the parameters
+            callStmt.setInt(2, operacaoId);
+            callStmt.setFloat(3, quantidade);
+
+            // Execute the function call
+            callStmt.execute();
+
+            // No need to retrieve the result as it's not used
+
+            // Commit the transaction if needed
             connection.commit();
         } finally {
             if (!Objects.isNull(callStmt)) {

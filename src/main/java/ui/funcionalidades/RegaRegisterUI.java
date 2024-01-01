@@ -1,7 +1,10 @@
 package ui.funcionalidades;
 
+import controller.FertirregaController;
 import controller.OperacaoAgricolaRegisterController;
 import controller.RegaRegisterController;
+import dataAccess.fertigation_mixes.FertigationMixesRepository;
+import domain.FertigationMix;
 import domain.RegaTable;
 import ui.menu.MainMenuUI;
 import java.sql.SQLException;
@@ -16,11 +19,13 @@ public class RegaRegisterUI implements Runnable {
 
     private RegaRegisterController controller;
     private OperacaoAgricolaRegisterController operacaoController;
+    private FertirregaController fertirregaController;
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
     public RegaRegisterUI() throws SQLException {
         this.controller = new RegaRegisterController();
         this.operacaoController = new OperacaoAgricolaRegisterController();
+        this.fertirregaController = new FertirregaController();
     }
 
     public void run() {
@@ -57,6 +62,7 @@ public class RegaRegisterUI implements Runnable {
             Date endDate = dateTimeFormat.parse(endTime);
 
             Date currentDate = new Date();
+            boolean check = false;
 
             System.out.println("Data Atual: " + currentDate);
             System.out.println("Data Final da Rega: " + endDate);
@@ -69,8 +75,11 @@ public class RegaRegisterUI implements Runnable {
                 System.out.println("Final da rega programado no futuro as horas: " + dateTimeFormat.format(endDate));
 
                 long delay = endDate.getTime() - System.currentTimeMillis();
-
-                scheduler.schedule(() -> performRegistration(index, operacaoId, regaTable, callback), delay, TimeUnit.MILLISECONDS);
+                if(regaTable.getMix() != null){
+                    check = true;
+                }
+                boolean finalCheck = check;
+                scheduler.schedule(() -> performRegistration(index, operacaoId, regaTable, callback, finalCheck), delay, TimeUnit.MILLISECONDS);
                 new MainMenuUI();
             }
 
@@ -79,23 +88,38 @@ public class RegaRegisterUI implements Runnable {
         }
     }
 
-    private void performRegistration(int index, int operacaoId, RegaTable regaTable, Runnable callback) {
+    private void performRegistration(int index, int operacaoId, RegaTable regaTable, Runnable callback,boolean check) {
         try {
 
             String setor = regaTable.getSetor();
             String hora = regaTable.getHora();
             Date date = regaTable.getData();
             int duracao = regaTable.getDuracao();
+            String mix = "";
+            if (check){
+                mix = regaTable.getMix();
+            }
+
+
 
             operacaoController.operacaoAgricolaRegister(operacaoId, date);
+            if (check){
+                fertirregaController.registerFpIds(operacaoId, mix,setor);
 
+            }
             controller.regaRegister(operacaoId, setor, duracao, hora);
 
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String registrationTime = dateFormat.format(new Date());
 
+            if(check){
+                System.out.println("\nFertirrega registada na hora local : " + registrationTime);
+                duracao = duracao*60*1000;
+            }
+            else{
+
             System.out.println("\nRega registada na hora local : " + registrationTime);
-            duracao = duracao*60*1000;
+            duracao = duracao*60*1000; }
 
             if (index < controller.getRegaTableList().size() - 1) {
                 Thread.sleep(duracao);

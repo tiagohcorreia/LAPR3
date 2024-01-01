@@ -13,7 +13,16 @@ public class RegaTable {
     private Integer duracao;
     private String hora;
     private Date data;
-    private String mix; // New variable
+
+    public String getMix() {
+        return mix;
+    }
+
+    public void setMix(String mix) {
+        this.mix = mix;
+    }
+
+    private String mix;
 
     public RegaTable(Date data,Integer operacaoId, String setor, Integer duracao, String hora,String mix) {
         this.data = data;
@@ -21,11 +30,11 @@ public class RegaTable {
         this.setor = setor;
         this.duracao = duracao;
         this.hora = hora;
-        this.mix = mix; // Set the new variable
+        this.mix = mix;
     }
 
     public RegaTable(Date data, Integer operacaoId, String setor, Integer duracao, String hora) {
-        this(data, operacaoId, setor, duracao, hora, null); // Calls the main constructor with mix as null
+        this(data, operacaoId, setor, duracao, hora, null);
     }
 
     public Integer getOperacaoId() {

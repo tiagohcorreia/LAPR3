@@ -50,14 +50,14 @@ public class RegaRegisterController {
                 }
 
                 String[] parts = line.split(",");
-                if (parts.length == 5 || parts.length == 6) {
+                if (parts.length >= 5) {
                     try {
                         int operacaoId = new OperacaoAgricolaRegisterController().getNextId();
                         Date data = new SimpleDateFormat("yyyy-MM-dd").parse(parts[0]);
                         String sectorId = (parts[1].trim());
                         int duration = Integer.parseInt(parts[2].trim());
                         String startTime = parts[3].trim();
-                        if(parts[5]== null){
+                        if(!(parts.length==6)){
                         regaTableList.add(new RegaTable(data,operacaoId, sectorId, duration, startTime));
                         }
                         else{
