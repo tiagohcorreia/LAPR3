@@ -135,7 +135,6 @@ public class FertirregaController {
 
                             try (ResultSet dataResultSet = findDataStatement.executeQuery()) {
                                 while (dataResultSet.next()) {
-                                    int plantacaoId = dataResultSet.getInt("plantacao_id");
                                     int parcelaId = dataResultSet.getInt("parcela_id");
                                     int variedadeId = dataResultSet.getInt("variedade_id");
 
