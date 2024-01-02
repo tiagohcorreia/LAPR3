@@ -2,7 +2,6 @@ package esinf.us_ei11;
 
 import dataAccess.Repositories;
 import esinf.model.Hub;
-import esinf.model.Local;
 import esinf.model.Schedule;
 import esinf.store.GraphStore;
 
@@ -12,8 +11,7 @@ import java.io.IOException;
 import java.time.LocalTime;
 
 public class LoadHubsFromFile {
-
-    public boolean loadHubsFormFile() {
+    public static boolean loadHubsFormFile() {
 
         GraphStore graphStore = Repositories.getInstance().getGraphStore();
 
@@ -43,9 +41,16 @@ public class LoadHubsFromFile {
 
                 if (graphStore.getGraph().validVertex(hub)) {
 
-                    graphStore.addVertex(hub);
+                    if (graphStore.isHubInGraph(hub)) {
+
+                        graphStore.addVertex(hub);
+
+                    } else {
+
+                        System.err.println("Hub especificado no ficheiro não existe");
+                        return false;
+                    }
                 }
-                return true;
             }
 
         } catch (IOException ioException) {
@@ -56,7 +61,9 @@ public class LoadHubsFromFile {
         } catch (Exception e) {
 
             System.err.println(e.getMessage());
+            return false;
         }
-        return false;
+
+        return true;
     }
 }
