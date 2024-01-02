@@ -1182,24 +1182,24 @@ INSERT INTO Poda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execu
 VALUES (114, 102, 89, 20, null);
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (115, TO_DATE('10-12-2017', 'dd-mm-yyyy'), null, 1);
-INSERT INTO Aplicacao_FP(operacao_id,quantidade)
-VALUES (115,15);
+INSERT INTO Aplicacao_FP(operacao_id)
+VALUES (115);
 INSERT INTO Aplicacao_FP_Variedade(operacao_id,METODO_APLICACAO_ID)
 VALUES (115,7);
 INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
 VALUES (115,102,92);
-INSERT INTO FP_APLICADOS(operacao_id, fp_id)
-VALUES (115, 3);
+INSERT INTO FP_APLICADOS(operacao_id, fp_id, quantidade, UNIDADE)
+VALUES (115, 3, 15, 'kg');
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (116, TO_DATE('10-12-2017', 'dd-mm-yyyy'), null, 1);
-INSERT INTO Aplicacao_FP(operacao_id,quantidade)
-VALUES (116,10);
+INSERT INTO Aplicacao_FP(operacao_id)
+VALUES (116);
 INSERT INTO Aplicacao_FP_Variedade(operacao_id,METODO_APLICACAO_ID)
 VALUES (116, 7);
 INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
 VALUES (116,102,89);
-INSERT INTO FP_APLICADOS(operacao_id, fp_id)
-VALUES (116, 3);
+INSERT INTO FP_APLICADOS(operacao_id, fp_id, quantidade, unidade)
+VALUES (116, 3, 10, 'kg');
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (117, TO_DATE('07-01-2018', 'dd-mm-yyyy'), null, 1);
 INSERT INTO Poda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id)
@@ -1222,34 +1222,34 @@ INSERT INTO Op_Plantacao(operacao_id, parcela_id, variedade_id, metodo_execucao_
 VALUES (121, 107, 95, null, 700);
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (122, TO_DATE('06-02-2018', 'dd-mm-yyyy'), null, 1);
-INSERT INTO Aplicacao_FP(operacao_id,quantidade)
-VALUES (122,10);
+INSERT INTO Aplicacao_FP(operacao_id)
+VALUES (122);
 INSERT INTO Aplicacao_FP_Variedade(operacao_id,METODO_APLICACAO_ID)
 VALUES (122, 7);
 INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
 VALUES (122,104,41);
-INSERT INTO FP_APLICADOS(operacao_id, fp_id)
-VALUES (122, 4);
+INSERT INTO FP_APLICADOS(operacao_id, fp_id, quantidade, UNIDADE)
+VALUES (122, 4, 10, 'kg');
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (123, TO_DATE('06-02-2018', 'dd-mm-yyyy'), null, 1);
-INSERT INTO Aplicacao_FP(operacao_id,quantidade)
-VALUES (123,6);
+INSERT INTO Aplicacao_FP(operacao_id)
+VALUES (123);
 INSERT INTO Aplicacao_FP_Variedade(operacao_id,METODO_APLICACAO_ID)
 VALUES (123, 7);
 INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
 VALUES (123,104,37);
-INSERT INTO FP_APLICADOS(operacao_id, fp_id)
-VALUES (123, 4);
+INSERT INTO FP_APLICADOS(operacao_id, fp_id, quantidade, unidade)
+VALUES (123, 4, 6, 'kg');
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (124, TO_DATE('06-02-2018', 'dd-mm-yyyy'), null, 1);
-INSERT INTO Aplicacao_FP(operacao_id,quantidade)
-VALUES (124,5);
+INSERT INTO Aplicacao_FP(operacao_id)
+VALUES (124);
 INSERT INTO Aplicacao_FP_Variedade(operacao_id,METODO_APLICACAO_ID)
 VALUES (124, 7);
 INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
 VALUES (124,104,48);
-INSERT INTO FP_APLICADOS(operacao_id, fp_id)
-VALUES (124, 4);
+INSERT INTO FP_APLICADOS(operacao_id, fp_id, quantidade, unidade)
+VALUES (124, 4, 5, 'kg');
 
 
 
@@ -1287,54 +1287,59 @@ INSERT INTO Poda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execu
 VALUES (142, 104, 48, 40, null);
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (143, TO_DATE('20-01-2019', 'dd-mm-yyyy'), null, 1);
-INSERT INTO Aplicacao_FP(operacao_id,quantidade)
-VALUES (143,2);
+
+INSERT INTO Aplicacao_FP(operacao_id)
+VALUES (143);
 INSERT INTO Aplicacao_FP_Variedade(operacao_id,METODO_APLICACAO_ID)
 VALUES (143, null);;
 INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
 VALUES (143,107,94);
-INSERT INTO FP_APLICADOS(operacao_id, fp_id)
-VALUES (143, 1);
+INSERT INTO FP_APLICADOS(operacao_id, fp_id, quantidade, unidade)
+VALUES (143, 1, 2, 'kg');
+
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (144, TO_DATE('20-01-2019', 'dd-mm-yyyy'), null, 1);
-INSERT INTO Aplicacao_FP(operacao_id,quantidade)
-VALUES (144,2.5);
+INSERT INTO Aplicacao_FP(operacao_id)
+VALUES (144);
 INSERT INTO Aplicacao_FP_Variedade(operacao_id,METODO_APLICACAO_ID)
 VALUES (144, null);
 INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
 VALUES (144,107,95);
-INSERT INTO FP_APLICADOS(operacao_id, fp_id)
-VALUES (144, 1);
+INSERT INTO FP_APLICADOS(operacao_id, fp_id, quantidade, unidade)
+VALUES (144, 2.5, 'kg');
+
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (145, TO_DATE('06-02-2019', 'dd-mm-yyyy'), null, 1);
-INSERT INTO Aplicacao_FP(operacao_id,quantidade)
+INSERT INTO Aplicacao_FP(operacao_id)
 VALUES (145,10);
 INSERT INTO Aplicacao_FP_Variedade(operacao_id,METODO_APLICACAO_ID)
 VALUES (145, 7);
 INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
 VALUES (145,104,41);
-INSERT INTO FP_APLICADOS(operacao_id, fp_id)
-VALUES (145, 4);
+INSERT INTO FP_APLICADOS(operacao_id, fp_id, quantidade, unidade)
+VALUES (145, 4, 10, 'kg');
+
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (146, TO_DATE('06-02-2019', 'dd-mm-yyyy'), null, 1);
-INSERT INTO Aplicacao_FP(operacao_id,quantidade)
-VALUES (146,5);
+INSERT INTO Aplicacao_FP(operacao_id)
+VALUES (146);
 INSERT INTO Aplicacao_FP_Variedade(operacao_id,METODO_APLICACAO_ID)
 VALUES (146, 7);
 INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
 VALUES (146,104,37);
-INSERT INTO FP_APLICADOS(operacao_id, fp_id)
-VALUES (146, 4);
+INSERT INTO FP_APLICADOS(operacao_id, fp_id, quantidade, unidade)
+VALUES (146, 4, 5, 'kg');
+
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (147, TO_DATE('06-02-2019', 'dd-mm-yyyy'), null, 1);
-INSERT INTO Aplicacao_FP(operacao_id,quantidade)
-VALUES (147,7);
+INSERT INTO Aplicacao_FP(operacao_id)
+VALUES (147);
 INSERT INTO Aplicacao_FP_Variedade(operacao_id,METODO_APLICACAO_ID)
 VALUES (147, 7);
 INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
 VALUES (147,104,48);
-INSERT INTO FP_APLICADOS(operacao_id, fp_id)
-VALUES (147, 4);
+INSERT INTO FP_APLICADOS(operacao_id, fp_id, quantidade, unidade)
+VALUES (147, 4, 7, 'kg');
 
 
 
@@ -1354,38 +1359,43 @@ INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (159, TO_DATE('18-12-2019', 'dd-mm-yyyy'), null, 1);
 INSERT INTO Poda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id)
 VALUES (159, 107, 95, 700, null);
+
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (160, TO_DATE('20-01-2020', 'dd-mm-yyyy'), null, 1);
-INSERT INTO Aplicacao_FP(operacao_id,quantidade)
-VALUES (160,2);
+INSERT INTO Aplicacao_FP(operacao_id)
+VALUES (160);
 INSERT INTO Aplicacao_FP_Variedade(operacao_id,METODO_APLICACAO_ID)
 VALUES (160, null);
 INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
 VALUES (160,107,94);
-INSERT INTO FP_APLICADOS(operacao_id, fp_id)
-VALUES (160, 1);
+INSERT INTO FP_APLICADOS(operacao_id, fp_id, quantidade, unidade)
+VALUES (160, 1, 2, 'kg');
+
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (161, TO_DATE('20-01-2020', 'dd-mm-yyyy'), null, 1);
-INSERT INTO Aplicacao_FP(operacao_id,quantidade)
-VALUES (161,2.5);
+INSERT INTO Aplicacao_FP(operacao_id)
+VALUES (161);
 INSERT INTO Aplicacao_FP_Variedade(operacao_id,METODO_APLICACAO_ID)
 VALUES (161, null);
 INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
 VALUES (161,107,95);
-INSERT INTO FP_APLICADOS(operacao_id, fp_id)
-VALUES (161, 1);
+INSERT INTO FP_APLICADOS(operacao_id, fp_id, quantidade, unidade)
+VALUES (161, 1, 2.5, 'kd');
+
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (162, TO_DATE('12-03-2020', 'dd-mm-yyyy'), null, 1);
+
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (163, TO_DATE('30-03-2020', 'dd-mm-yyyy'), null, 1);
-INSERT INTO Aplicacao_FP(operacao_id,quantidade)
-VALUES (163,600);
+INSERT INTO Aplicacao_FP(operacao_id)
+VALUES (163);
 INSERT INTO Aplicacao_FP_Variedade(operacao_id,METODO_APLICACAO_ID)
 VALUES (163, 7);
 INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
 VALUES (163,103,40);
-INSERT INTO FP_APLICADOS(operacao_id, fp_id)
-VALUES (163, 8);
+INSERT INTO FP_APLICADOS(operacao_id, fp_id, quantidade, unidade)
+VALUES (163, 8, 600, 'kg');
+
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (164, TO_DATE('05-04-2020', 'dd-mm-yyyy'), null, 1);
 
@@ -1418,16 +1428,18 @@ INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (189, TO_DATE('05-12-2020', 'dd-mm-yyyy'), null, 1);
 INSERT INTO Poda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id)
 VALUES (189, 104, 41, 50, null);
+
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (190, TO_DATE('10-12-2020', 'dd-mm-yyyy'), null, 1);
-INSERT INTO Aplicacao_FP(operacao_id,quantidade)
-VALUES (190,10);
+INSERT INTO Aplicacao_FP(operacao_id)
+VALUES (190);
 INSERT INTO Aplicacao_FP_Variedade(operacao_id,METODO_APLICACAO_ID)
 VALUES (190, 7);
 INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
 VALUES (190,102,92);
-INSERT INTO FP_APLICADOS(operacao_id, fp_id)
-VALUES (190, 3);
+INSERT INTO FP_APLICADOS(operacao_id, fp_id, quantidade, unidade)
+VALUES (190, 3, 10, 'kg');
+
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (191, TO_DATE('10-12-2020', 'dd-mm-yyyy'), null, 1);
 INSERT INTO Aplicacao_FP(operacao_id,quantidade)
@@ -1438,6 +1450,7 @@ INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
 VALUES (191,102,89);
 INSERT INTO FP_APLICADOS(operacao_id, fp_id)
 VALUES (191, 3);
+
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (192, TO_DATE('15-12-2020', 'dd-mm-yyyy'), null, 1);
 INSERT INTO Poda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id)
@@ -1832,41 +1845,41 @@ INSERT INTO FP_Aplicados(operacao_id,fp_id)
 VALUES (330,13);
 
 
--- 09/01/2019 operação de plantação de Macieira Porta da Loja, 50 un
-INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
-VALUES (331, TO_DATE('09/01/2019', 'DD/MM/YYYY'), 1);
-INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, METODO_EXECUCAO_ID, QUANTIDADE)
-VALUES (331, 105, 44, NULL, 50);
+-- 09/01/2019 operação de plantação de Macieira Porta da Loja, 50 un, compasso de 5 m, distancia entre filas de 5 m
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA, INSTANTE_REGISTO, VALIDADE)
+VALUES (331, TO_DATE('09/01/2019', 'DD/MM/YYYY'), null, 1);
+INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, METODO_EXECUCAO_ID, QUANTIDADE, COMPASSO, DISTANCIA_FILAS)
+VALUES (331, 105, 44, NULL, 50, 5, 5);
 
--- 09/01/2019 operação de plantação de Macieira Malápio, 20 un
-INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
-VALUES (332, TO_DATE('09/01/2019', 'DD/MM/YYYY'), 1);
-INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, METODO_EXECUCAO_ID, QUANTIDADE)
-VALUES (332, 105, 56, NULL, 20);
+-- 09/01/2019 operação de plantação de Macieira Malápio, 20 un, compasso de 5 m, distancia entre filas de 5 m
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA, INSTANTE_REGISTO, VALIDADE)
+VALUES (332, TO_DATE('09/01/2019', 'DD/MM/YYYY'), null, 1);
+INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, METODO_EXECUCAO_ID, QUANTIDADE, COMPASSO, DISTANCIA_FILAS)
+VALUES (332, 105, 56, NULL, 20, 5, 5);
 
--- 10/01/2019 operação de plantação de Macieira Pipo de Basto, 40 un
-INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
-VALUES (333, TO_DATE('10/01/2019', 'DD/MM/YYYY'), 1);
-INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, METODO_EXECUCAO_ID, QUANTIDADE)
-VALUES (333, 105, 61, NULL, 40);
+-- 10/01/2019 operação de plantação de Macieira Pipo de Basto, 40 un, compasso de 5 m, distancia entre filas de 5 m
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA, INSTANTE_REGISTO, VALIDADE)
+VALUES (333, TO_DATE('10/01/2019', 'DD/MM/YYYY'), null, 1);
+INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, METODO_EXECUCAO_ID, QUANTIDADE, COMPASSO, DISTANCIA_FILAS)
+VALUES (333, 105, 61, NULL, 40, 5, 5);
 
--- 10/01/2019 operação de plantação de Macieira Canada, 30 un
-INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
-VALUES (334, TO_DATE('10/01/2019', 'DD/MM/YYYY'), 1);
-INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, METODO_EXECUCAO_ID, QUANTIDADE)
-VALUES (334, 105, 97, NULL, 30);
+-- 10/01/2019 operação de plantação de Macieira Canada, 30 un, compasso de 5 m, distancia entre filas de 5 m
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA, INSTANTE_REGISTO, VALIDADE)
+VALUES (334, TO_DATE('10/01/2019', 'DD/MM/YYYY'), null, 1);
+INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, METODO_EXECUCAO_ID, QUANTIDADE, COMPASSO, DISTANCIA_FILAS)
+VALUES (334, 105, 97, NULL, 30, 5, 5);
 
--- 11/01/2019 operação de plantação de Macieira Grand Fay, 40 un
-INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
-VALUES (335, TO_DATE('11/01/2019', 'DD/MM/YYYY'), 1);
-INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, METODO_EXECUCAO_ID, QUANTIDADE)
-VALUES (335, 105, 98, NULL, 40);
+-- 11/01/2019 operação de plantação de Macieira Grand Fay, 40 un, compasso de 5 m, distancia entre filas de 5 m
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA, INSTANTE_REGISTO, VALIDADE)
+VALUES (335, TO_DATE('11/01/2019', 'DD/MM/YYYY'), null, 1);
+INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, METODO_EXECUCAO_ID, QUANTIDADE, COMPASSO, DISTANCIA_FILAS)
+VALUES (335, 105, 98, NULL, 40, 5, 5);
 
--- 11/01/2019 operação de plantação de Macieira Gronho Doce, 50 un
-INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
-VALUES (336, TO_DATE('11/01/2019', 'DD/MM/YYYY'), 1);
-INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, METODO_EXECUCAO_ID, QUANTIDADE)
-VALUES (336, 105, 57, NULL, 50);
+-- 11/01/2019 operação de plantação de Macieira Gronho Doce, 50 un, compasso de 5 m, distancia entre filas de 5 m
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA, INSTANTE_REGISTO, VALIDADE)
+VALUES (336, TO_DATE('11/01/2019', 'DD/MM/YYYY'), null, 1);
+INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, METODO_EXECUCAO_ID, QUANTIDADE, COMPASSO, DISTANCIA_FILAS)
+VALUES (336, 105, 57, NULL, 50, 5, 5);
 
 -- 06/01/2020 operação de aplicação de fator de produção Fertimax Extrume de Cavalo, no solo, Macieira Porta da Loja, 100 kg
 INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
@@ -2224,106 +2237,15 @@ VALUES (369, TO_DATE('15/11/2023', 'DD/MM/YYYY'), 1);
 INSERT INTO COLHEITA(OPERACAO_ID, PARCELA_ID, PRODUTO_ID, METODO_EXECUCAO_ID, QUANTIDADE)
 VALUES (369, 105, 10, NULL, 800);
 
-
--- 13/05/2023 operação de rega, setor 22, 120 min, 23:00
-INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
-VALUES (370, TO_DATE('13/05/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (370, 22, 120, '23:00');
-
--- 02/06/2023 operação de rega, setor 22, 120 min, 23:00
-INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
-VALUES (371, TO_DATE('02/06/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (371, 22, 120, '23:00');
-
--- 16/06/2023 operação de rega, setor 22, 120 min, 23:00
-INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
-VALUES (372, TO_DATE('16/06/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (372, 22, 120, '23:00');
-
--- 01/07/2023 operação de rega, setor 22, 120 min, 23:00
-INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
-VALUES (373, TO_DATE('01/07/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (373, 22, 120, '23:00');
-
--- 08/07/2023 operação de rega, setor 22, 180 min, 23:00
-INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
-VALUES (375, TO_DATE('08/07/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (375, 22, 180, '23:00');
-
--- 15/07/2023 operação de rega, setor 22, 180 min, 23:00
-INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
-VALUES (376, TO_DATE('15/07/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (376, 22, 180, '23:00');
-
--- 22/07/2023 operação de rega, setor 22, 180 min, 23:00
-INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
-VALUES (377, TO_DATE('22/07/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (377, 22, 180, '23:00');
-
--- 29/07/2023 operação de rega, setor 22, 180 min, 23:00
-INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
-VALUES (378, TO_DATE('29/07/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (378, 22, 180, '23:00');
-
--- 05/08/2023 operação de rega, setor 22, 150 min, 23:00
-INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
-VALUES (379, TO_DATE('05/08/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (379, 22, 150, '23:00');
-
--- 10/08/2023 operação de rega, setor 22, 150 min, 23:00
-INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
-VALUES (380, TO_DATE('10/08/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (380, 22, 150, '23:00');
-
--- 17/08/2023 operação de rega, setor 22, 150 min, 23:00
-INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
-VALUES (381, TO_DATE('17/08/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (381, 22, 150, '23:00');
-
--- 24/08/2023 operação de rega, setor 22, 120 min, 23:00
-INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
-VALUES (382, TO_DATE('24/08/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (382, 22, 120, '23:00');
-
--- 02/09/2023 operação de rega, setor 22, 120 min, 23:00
-INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
-VALUES (383, TO_DATE('02/09/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (383, 22, 120, '23:00');
-
--- 09/09/2023 operação de rega, setor 22, 120 min, 23:00
-INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
-VALUES (384, TO_DATE('09/09/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (384, 22, 120, '23:00');
-
--- 18/09/2023 operação de rega, setor 22, 120 min, 23:00
-INSERT INTO OPERACAO_AGRICOLA(ID, DATA, validade)
-VALUES (385, TO_DATE('18/09/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (385, 22, 120, '23:00');
-
 ---------------------------------------------------------------------------------
 
 -- OPERAÇOES CAMPO GRANDE
 
--- 12/10/2016 operação de plantação de Oliveira Arbequina, 40 un
-INSERT INTO Operacao_Agricola(id, data, validade)
-VALUES (386, TO_DATE('2016-10-12', 'YYYY-MM-DD'), 1);
-INSERT INTO Op_Plantacao(operacao_id, parcela_id, VARIEDADE_ID, quantidade)
-values (386, 102, 86, 40);
+-- 12/10/2016 operação de plantação de Oliveira Arbequina, 40 un, compasso de 6 m, distancia entre filas de 6 m
+INSERT INTO Operacao_Agricola(id, data, INSTANTE_REGISTO, VALIDADE)
+VALUES (386, TO_DATE('2016-10-12', 'YYYY-MM-DD'), null, 1);
+INSERT INTO Op_Plantacao(operacao_id, parcela_id, VARIEDADE_ID, quantidade, COMPASSO, DISTANCIA_FILAS)
+values (386, 102, 86, 40, 6, 6);
 
 -- 13/01/2021 operação de aplicação de fator de produção BIOFERTIL N6, Oliveira Picual, 120 kg
 INSERT INTO Operacao_Agricola(id, data, validade)
@@ -2452,35 +2374,7 @@ VALUES (398, TO_DATE('2023-11-08', 'YYYY-MM-DD'), 1);
 INSERT INTO Colheita(operacao_id, parcela_id, produto_id, quantidade)
 values (398, 102, 13, 350);
 --
--- 02/06/2023 operação de rega, setor 10, 60 min, 06:00
-INSERT INTO Operacao_Agricola(id, data, validade)
-VALUES (399, TO_DATE('2023-06-02', 'YYYY-MM-DD'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (399, 10, 60, '06:00');
 
--- 02/07/2023 operação de rega, setor 10, 120 min, 06:00
-INSERT INTO Operacao_Agricola(id, data, validade)
-VALUES (400, TO_DATE('2023-07-02', 'YYYY-MM-DD'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (400, 10, 120, '06:00');
-
--- 02/08/2023 operação de rega, setor 10, 180 min, 05:00
-INSERT INTO Operacao_Agricola(id, data, validade)
-VALUES (401, TO_DATE('2023-08-02', 'YYYY-MM-DD'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (401, 10, 180, '05:00');
-
--- 04/09/2023 operação de rega, setor 10, 120 min, 06:00
-INSERT INTO Operacao_Agricola(id, data, validade)
-VALUES (402, TO_DATE('2023-09-04', 'YYYY-MM-DD'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (402, 10, 120, '06:00');
-
--- 02/10/2023 operação de rega, setor 10, 60 min, 06:00
-INSERT INTO Operacao_Agricola(id, data, validade)
-VALUES (403, TO_DATE('2023-10-02', 'YYYY-MM-DD'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (403, 10, 60, '06:00');
 
 ---------------------------------------------------------------------------------
 
@@ -2616,167 +2510,6 @@ INSERT INTO Sementeira(operacao_id, parcela_id, variedade_id, quantidade, area, 
 VALUES (422, 108, 80, 32, 1.1, null);
 
 
--- 12/06/2023 operação de rega, setor 42, 60 min, 06:00
-INSERT INTO Operacao_Agricola(id, data, validade)
-VALUES (423, TO_DATE('12/06/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (423, 42, 60, '06:00');
 
--- 19/06/2023 operação de rega, setor 42, 60 min, 06:00
-INSERT INTO Operacao_Agricola(id, data, validade)
-VALUES (424, TO_DATE('19/06/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (424, 42, 60, '06:00');
-
--- 30/06/2023 operação de rega, setor 42, 120 min, 04:00
-INSERT INTO Operacao_Agricola(id, data, validade)
-VALUES (425, TO_DATE('30/06/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (425, 42, 120, '04:00');
-
--- 08/07/2023 operação de rega, setor 42, 120 min, 04:00
-INSERT INTO Operacao_Agricola(id, data, validade)
-VALUES (426, TO_DATE('08/07/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (426, 42, 120, '04:00');
-
--- 15/07/2023 operação de rega, setor 42, 120 min, 04:00
-INSERT INTO Operacao_Agricola(id, data, validade)
-VALUES (427, TO_DATE('15/07/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (427, 42, 120, '04:00');
-
--- 22/07/2023 operação de rega, setor 42, 150 min, 04:00
-INSERT INTO Operacao_Agricola(id, data, validade)
-VALUES (428, TO_DATE('22/07/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (428, 42, 150, '04:00');
-
--- 29/07/2023 operação de rega, setor 42, 150 min, 04:00
-INSERT INTO Operacao_Agricola(id, data, validade)
-VALUES (429, TO_DATE('29/07/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (429, 42, 150, '04:00');
-
--- 05/08/2023 operação de rega, setor 42, 120 min, 21:30
-INSERT INTO Operacao_Agricola(id, data, validade)
-VALUES (430, TO_DATE('05/08/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (430, 42, 120, '21:30');
-
--- 12/08/2023 operação de rega, setor 42, 120 min, 21:30
-INSERT INTO Operacao_Agricola(id, data, validade)
-VALUES (431, TO_DATE('12/08/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (431, 42, 120, '21:30');
-
--- 19/08/2023 operação de rega, setor 42, 120 min, 21:30
-INSERT INTO Operacao_Agricola(id, data, validade)
-VALUES (432, TO_DATE('19/08/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (432, 42, 120, '21:30');
-
--- 26/08/2023 operação de rega, setor 42, 120 min, 21:30
-INSERT INTO Operacao_Agricola(id, data, validade)
-VALUES (433, TO_DATE('26/08/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (433, 42, 120, '21:30');
-
--- 31/08/2023 operação de rega, setor 42, 120 min, 21:30
-INSERT INTO Operacao_Agricola(id, data, validade)
-VALUES (434, TO_DATE('31/08/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (434, 42, 120, '21:30');
-
--- 05/09/2023 operação de rega, setor 42, 120 min, 21:30
-INSERT INTO Operacao_Agricola(id, data, validade)
-VALUES (435, TO_DATE('05/09/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (435, 42, 120, '21:30');
-
-
--- 20/05/2023 operação de rega, setor 41, 120 min, 07:30
-INSERT INTO Operacao_Agricola(id, data, validade)
-VALUES (436, TO_DATE('20/05/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (436, 41, 120, '07.30');
-
--- 02/06/2023 operação de rega, setor 41, 120 min, 07:30
-INSERT INTO Operacao_Agricola(id, data, validade)
-VALUES (437, TO_DATE('02/06/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (437, 41, 120, '07.30');
-
--- 09/06/2023 operação de rega, setor 41, 120 min, 06:20
-INSERT INTO Operacao_Agricola(id, data, validade)
-VALUES (438, TO_DATE('09/06/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (438, 41, 120, '06:20');
-
--- 09/07/2023 operação de rega, setor 41, 120 min, 06:20
-INSERT INTO Operacao_Agricola(id, data, validade)
-VALUES (439, TO_DATE('09/07/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (439, 41, 120, '06:20');
-
--- 16/07/2023 operação de rega, setor 41, 120 min, 06:20
-INSERT INTO Operacao_Agricola(id, data, validade)
-VALUES (440, TO_DATE('16/07/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (440, 41, 120, '06:20');
-
--- 23/07/2023 operação de rega, setor 41, 120 min, 06:20
-INSERT INTO Operacao_Agricola(id, data, validade)
-VALUES (441, TO_DATE('23/07/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (441, 41, 120, '06:20');
-
--- 30/07/2023 operação de rega, setor 41, 120 min, 06:20
-INSERT INTO Operacao_Agricola(id, data, validade)
-VALUES (442, TO_DATE('30/07/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (442, 41, 120, '06:20');
-
--- 07/08/2023 operação de rega, setor 41, 120 min, 06:20
-INSERT INTO Operacao_Agricola(id, data, validade)
-VALUES (443, TO_DATE('07/08/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (443, 41, 120, '06:20');
-
--- 14/08/2023 operação de rega, setor 41, 120 min, 06:20
-INSERT INTO Operacao_Agricola(id, data, validade)
-VALUES (444, TO_DATE('14/08/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (444, 41, 120, '06:20');
-
--- 21/08/2023 operação de rega, setor 41, 120 min, 06:20
-INSERT INTO Operacao_Agricola(id, data, validade)
-VALUES (445, TO_DATE('21/08/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (445, 41, 120, '06:20');
-
--- 28/08/2023 operação de rega, setor 41, 120 min, 06:20
-INSERT INTO Operacao_Agricola(id, data, validade)
-VALUES (446, TO_DATE('28/08/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (446, 41, 120, '06:20');
-
--- 06/09/2023 operação de rega, setor 41, 120 min, 06:20
-INSERT INTO Operacao_Agricola(id, data, validade)
-VALUES (447, TO_DATE('06/09/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (447, 41, 120, '06:20');
-
--- 13/09/2023 operação de rega, setor 41, 120 min, 07:00
-INSERT INTO Operacao_Agricola(id, data, validade)
-VALUES (448, TO_DATE('13/09/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (448, 41, 120, '07:00');
-
--- 20/09/2023 operação de rega, setor 41, 120 min, 07:00
-INSERT INTO Operacao_Agricola(id, data, validade)
-VALUES (449, TO_DATE('20/09/2023', 'DD/MM/YYYY'), 1);
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (449, 41, 120, '07:00');
 
 commit;
