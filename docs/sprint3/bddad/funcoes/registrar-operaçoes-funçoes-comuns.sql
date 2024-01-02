@@ -240,7 +240,7 @@ create or replace function get_parcels_and_varieties_in_sector(sector_id SETOR_R
     c sys_refcursor;
 begin
     open c for
-        select distinct parcela.id, parcela.nome, variedade.nome, variedade.id, plantacao.id
+        select distinct parcela.id, variedade.id
         from SETOR_REGA,
              SETORREGA_PLANTACAO,
              PLANTACAO,
