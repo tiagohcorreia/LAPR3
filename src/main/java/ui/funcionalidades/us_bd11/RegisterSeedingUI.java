@@ -1,29 +1,24 @@
 package ui.funcionalidades.us_bd11;
 
 import controller.*;
+import controller.us_bd11.RegisterSeedingController;
+import domain.MetodoExecucao;
+import domain.Parcela;
+import domain.Variedade;
 import ui.utils.Utils;
 
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 public class RegisterSeedingUI implements Runnable {
-    private SementeiraRegisterController controller;
-    private ParcelasListController controller2;
-    private VariedadeListController controller3;
-    private MetodoExecucaoListController controller4;
-    private OperacaoAgricolaRegisterController controllerop;
 
-    public RegisterSeedingUI() {
-
-        controller = new SementeiraRegisterController();
-        controller2 = new ParcelasListController();
-        controller3 = new VariedadeListController();
-        controller4 = new MetodoExecucaoListController();
-        controllerop = new OperacaoAgricolaRegisterController();
-    }
+    private RegisterSeedingController ctrl=new RegisterSeedingController();
 
     @Override
     public void run() {
@@ -35,7 +30,7 @@ public class RegisterSeedingUI implements Runnable {
             Scanner scanner = new Scanner(System.in);
             System.out.print("OperacaoId: ");
 
-            int operacaoId = controllerop.getNextId();
+            int operacaoId = ctrl.getNextId();
 
             System.out.printf("Usando id %d\n", operacaoId);
 
@@ -49,16 +44,16 @@ public class RegisterSeedingUI implements Runnable {
                 return;
             }
 
-            Date date = null;
+            Date tmpDate = null;
             boolean validDate = false;
 
             while (!validDate) {
 
                 try {
 
-                    date = formatter.parse(strDate);
+                    tmpDate = formatter.parse(strDate);
 
-                    if (date.after(currentDate)) {
+                    if (tmpDate.after(currentDate)) {
 
                         System.out.println("Erro: Data invalida.Insira uma data que nao se encontre no futuro.");
                         System.out.print("Data (yyyy-mm-dd): ");
@@ -77,21 +72,22 @@ public class RegisterSeedingUI implements Runnable {
                 }
             }
 
-            controllerop.getTableData("Parcela");
-            controllerop.printTableData("Parcela");
+            LocalDate date=tmpDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
-            int parcelaId = Utils.readIntegerFromConsole("Insira a ID da parcela");
+            List<Parcela> parcelas=ctrl.getParcelas();
+            Utils.printDatabaseObjects(parcelas, "ID", "PARCELA");
 
-            controllerop.getTableData("Variedade");
-            controllerop.printTableData("Variedade");
+            int parcelaId = Utils.readIntegerFromConsole("Insira o ID da parcela");
+
+            List<Variedade> variedades=ctrl.getVarietiesInParcel(parcelaId);
+            Utils.printDatabaseObjects(variedades, "ID", "VARIEDADE");
 
             int variedadeId = Utils.readIntegerFromConsole("Insira a ID da variedade");
 
+            List<MetodoExecucao> metodoExecucao=ctrl.getExecutionMethods();
+            Utils.printDatabaseObjects(metodoExecucao, "ID", "MÉTODOS DE EXECUÇÃO");
 
-            controllerop.getTableData("Metodo_Execucao");
-            controllerop.printTableData("Metodo_Execucao");
-
-            int metodoExecucaoId = 0;
+            int metodoExecucaoId = -1;
             String metodoExecucaoInput;
 
             do {
@@ -107,7 +103,7 @@ public class RegisterSeedingUI implements Runnable {
                 try {
 
                     metodoExecucaoId = Integer.parseInt(metodoExecucaoInput);
-                    if (!controllerop.isIdValid("Metodo_Execucao", metodoExecucaoId)) {
+                    if (!ctrl.isThereExecutionMethod(metodoExecucaoId)) {
                         System.out.println("Erro: ProdutoId nao registado na base de dados. Insira um Id existente.");
                     }
 
@@ -116,7 +112,7 @@ public class RegisterSeedingUI implements Runnable {
                     System.out.println("Erro: Insira um numero valido para metodoExecucaoId ou E para sair.");
                 }
 
-            } while (!controllerop.isIdValid("Metodo_Execucao", metodoExecucaoId));
+            } while (!ctrl.isThereExecutionMethod(metodoExecucaoId));
 
             float quantidade = Utils.readFloatFromConsole("Insira a quantidade");
 
@@ -134,18 +130,13 @@ public class RegisterSeedingUI implements Runnable {
 
             if (optValidation == 1) {
 
-                controllerop.operacaoAgricolaRegister(operacaoId, date);
-                controller.sementeiraRegister(operacaoId, parcelaId, variedadeId, quantidade, area, metodoExecucaoId);
+                ctrl.registerSeeding(date, parcelaId, variedadeId, quantidade, area, metodoExecucaoId);
                 System.out.println("\nSementeira registada.");
 
             } else {
 
                 System.out.println("Operação cancelada");
             }
-
-        } catch (SQLException e) {
-
-            System.err.println("Não foi possível registar a sementeira!\n" + e.getMessage());
 
         } catch (IllegalArgumentException iax) {
 

@@ -1,10 +1,11 @@
-package dataAccess;
+package dataAccess.pruning_operations;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Objects;
 
+import dataAccess.DatabaseConnection;
 import oracle.jdbc.OracleTypes;
 
 public class PodaRepository {

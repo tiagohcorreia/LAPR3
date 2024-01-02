@@ -1,9 +1,11 @@
 package controller;
 
 import dataAccess.Repositories;
-import dataAccess.SementeiraRepository;
+import dataAccess.seeding_operations.SementeiraRepository;
 
+import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class SementeiraRegisterController {
@@ -24,8 +26,8 @@ public class SementeiraRegisterController {
         return sementeiraRepository;
     }
 
-    public void sementeiraRegister(int operacaoId,int parcelaId, int variedadeId, float quantidade, float area, int metodoExecucaoId) throws SQLException {
+    public void sementeiraRegister(LocalDate date, int parcelaId, int variedadeId, float quantidade, float area, int metodoExecucaoId) throws SQLException {
 
-        sementeiraRepository.sementeiraRegister(operacaoId,parcelaId, variedadeId, quantidade, area, metodoExecucaoId);
+        sementeiraRepository.registerSeeding(date,parcelaId, variedadeId, quantidade, area, metodoExecucaoId);
     }
 }

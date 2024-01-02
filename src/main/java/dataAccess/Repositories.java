@@ -1,6 +1,10 @@
 package dataAccess;
 
+import dataAccess.execution_methods.MetodoExcucaoRepository;
 import dataAccess.fertigation_mixes.FertigationMixesRepository;
+import dataAccess.pruning_operations.PodaRepository;
+import dataAccess.seeding_operations.SementeiraRepository;
+import dataAccess.varieties.VariedadeRepository;
 import dataAccess.watering_sectors.WateringSectorsRepository;
 import esinf.store.GraphStore;
 

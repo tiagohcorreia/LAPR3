@@ -3067,5 +3067,9 @@ VALUES (449, TO_DATE('20/09/2023', 'DD/MM/YYYY'), 1);
 INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
 VALUES (449, 41, 120, '07:00');
 
+INSERT INTO METODO_EXECUCAO(ID, NOME)
+VALUES (1, 'Manual');
+INSERT INTO METODO_EXECUCAO(ID, NOME)
+VALUES (2, 'Mecânica');
 
 commit;

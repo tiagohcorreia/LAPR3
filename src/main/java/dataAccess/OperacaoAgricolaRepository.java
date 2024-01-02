@@ -15,11 +15,29 @@ import oracle.jdbc.OracleTypes;
  */
 public class OperacaoAgricolaRepository {
 
+    public int getNextId() {
 
-    /**
-     * Instantiates a new Operacao agricola repository.
-     */
-    public OperacaoAgricolaRepository() {
+        try {
+            Connection connection = DatabaseConnection.getInstance().getConnection();
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+
+            String query = "SELECT MAX(id) FROM OPERACAO_AGRICOLA";
+
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+                 ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    int maxId = resultSet.getInt(1);
+                    return maxId + 1;
+                } else {
+                    return 1;
+                }
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return -1;
     }
 
     /**

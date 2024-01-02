@@ -1,6 +1,6 @@
 package domain;
 
-public class MetodoExecucao {
+public class MetodoExecucao implements DatabaseObject{
 
     //INSERT INTO Metodo_Execucao(id, nome) VALUES (?, ?);
 
@@ -29,5 +29,15 @@ public class MetodoExecucao {
         sb.append(", Nome='").append(nome).append('\'');
 
         return sb.toString();
+    }
+
+    @Override
+    public int getID() {
+        return id;
+    }
+
+    @Override
+    public String getName() {
+        return nome;
     }
 }

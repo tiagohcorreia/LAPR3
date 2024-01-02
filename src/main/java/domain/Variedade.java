@@ -1,6 +1,6 @@
 package domain;
 
-public class Variedade {
+public class Variedade implements DatabaseObject{
 
     private int id;
     private String nome;
@@ -34,5 +34,15 @@ public class Variedade {
         sb.append(", Id Cultura: ").append(culturaId);
 
         return sb.toString();
+    }
+
+    @Override
+    public int getID() {
+        return id;
+    }
+
+    @Override
+    public String getName() {
+        return nome;
     }
 }

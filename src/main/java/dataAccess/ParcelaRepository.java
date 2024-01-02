@@ -13,36 +13,35 @@ import java.util.Objects;
 
 public class ParcelaRepository {
 
-    public ParcelaRepository() {
-    }
-
-    public List<Parcela> getParcelas() throws SQLException {
+    public List<Parcela> getParcelas() {
 
         CallableStatement callStmt = null;
         ResultSet resultSet = null;
         List<Parcela> parcelas = null;
 
-        try {
+        try{
+            try {
 
-            Connection connection = DatabaseConnection.getInstance().getConnection();
+                Connection connection = DatabaseConnection.getInstance().getConnection();
 
-            callStmt = connection.prepareCall("{ ? = call fncParcelas() }");
+                callStmt = connection.prepareCall("{ ? = call fncParcelas() }");
+                callStmt.registerOutParameter(1, OracleTypes.CURSOR);
+                callStmt.execute();
+                resultSet = (ResultSet) callStmt.getObject(1);
 
-            callStmt.registerOutParameter(1, OracleTypes.CURSOR);
+                parcelas = resultSetToList(resultSet);
 
-            callStmt.execute();
-            resultSet = (ResultSet) callStmt.getObject(1);
+            } finally {
 
-            parcelas = resultSetToList(resultSet);
-
-        } finally {
-
-            if (!Objects.isNull(callStmt)) {
-                callStmt.close();
+                if (!Objects.isNull(callStmt)) {
+                    callStmt.close();
+                }
+                if (!Objects.isNull(resultSet)) {
+                    resultSet.close();
+                }
             }
-            if (!Objects.isNull(resultSet)) {
-                resultSet.close();
-            }
+        } catch (SQLException e){
+            e.printStackTrace();
         }
 
         return parcelas;

@@ -1,5 +1,6 @@
 package ui.utils;
 
+import domain.DatabaseObject;
 import ui.DatabaseConnectionTestUI;
 import ui.ExitUI;
 import ui.menu.MenuItem;
@@ -68,7 +69,7 @@ public class Utils {
                 String input = readLineFromConsole(prompt);
 
                 value = Integer.parseInt(input);
-                if (value < 0){
+                if (value < 0) {
                     throw new NumberFormatException();
                 }
 
@@ -319,7 +320,7 @@ public class Utils {
     }
 
     public static void runMenu(List<MenuItem> options, String header) {
-        String space="----------------";
+        String space = "----------------";
         int option = 0;
 
         do {
@@ -338,5 +339,31 @@ public class Utils {
 
         int in = showAndSelectIndex(yes_or_no, header);
         return in == 0;
+    }
+
+    public static <E extends DatabaseObject> void printDatabaseObjects(List<E> list, String h1, String h2) {
+        printTableHeader(h1, h2);
+        for (E o : list) {
+            printTableLine(String.valueOf(o.getID()), o.getName());
+            printTableSeparator(2);
+        }
+    }
+
+    private static void printTableHeader(String s1, String s2) {
+        System.out.printf("%50s|\t%50s|\n", s1, s2);
+        printTableSeparator(2);
+    }
+
+    private static void printTableLine(String s1, String s2) {
+        System.out.printf("%50s|\t%50s|\n", s1, s2);
+        printTableSeparator(2);
+    }
+
+    private static void printTableSeparator(int columnCount) {
+
+        for (int i = 0; i < columnCount; i++) {
+            System.out.printf("%50s|\t", "--------------------------------------------------");
+        }
+        System.out.println();
     }
 }

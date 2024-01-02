@@ -1,6 +1,6 @@
 package domain;
 
-public class Parcela {
+public class Parcela implements DatabaseObject{
     private int id;
     private String nome;
     private double area;
@@ -33,5 +33,15 @@ public class Parcela {
         sb.append(", Area: ").append(area);
 
         return sb.toString();
+    }
+
+    @Override
+    public int getID() {
+        return id;
+    }
+
+    @Override
+    public String getName() {
+        return nome;
     }
 }
