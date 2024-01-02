@@ -233,6 +233,27 @@ begin
 end;
 
 
+create or replace function check_if_mix_exists(mix_id RECEITA_FERTIRREGA.id%type)
+    return number
+    is
+    other_id RECEITA_FERTIRREGA.id%type;
+    cursor c is select id
+                from RECEITA_FERTIRREGA;
+begin
+    open c;
+    loop
+        fetch c into other_id;
+        if other_id = mix_id then
+            close c;
+            return 1;
+        end if;
+        exit when c%notfound;
+    end loop;
+    close c;
+    return 0;
+end;
+
+
 create or replace function get_parcels_and_varieties_in_sector(sector_id SETOR_REGA.id%type,
                                                                this_date operacao_agricola.data%type)
     return sys_refcursor
@@ -274,3 +295,99 @@ begin
           and RECEITA_FP.FP_ID = FATOR_PRODUCAO.ID;
     return c;
 end;
+
+-- verifica se um id de operação foi registado na tabela aplicação de fp
+create or replace function is_in_table_aplicacao_fp(id OPERACAO_AGRICOLA.id%type)
+    return number
+    is
+    other_Id OPERACAO_AGRICOLA.id%type;
+    cursor c1 is select operacao_id
+                 from APLICACAO_FP;
+begin
+    open c1;
+    loop
+        fetch c1 into other_Id;
+        if (id = other_Id) then
+            close c1;
+            return 1;
+        end if;
+        exit when c1%notfound;
+    end loop;
+    close c1;
+    return 0;
+end;
+
+-- verifica se um id de operação foi registado na tabela aplicacao_fp_variedade
+create or replace function is_in_table_aplicacao_fp_variedade(id OPERACAO_AGRICOLA.id%type)
+    return number
+    is
+    other_Id OPERACAO_AGRICOLA.id%type;
+    cursor c1 is select operacao_id
+                 from APLICACAO_FP_VARIEDADE;
+begin
+    open c1;
+    loop
+        fetch c1 into other_Id;
+        if (id = other_Id) then
+            close c1;
+            return 1;
+        end if;
+        exit when c1%notfound;
+    end loop;
+    close c1;
+    return 0;
+end;
+
+-- verifica se um fator de produçao foi registado na tabela fp_aplicados
+create or replace function is_in_table_fp_aplicados(this_operation_id OPERACAO_AGRICOLA.id%type,
+                                                    this_fp_id FATOR_PRODUCAO.id%type)
+    return number
+    is
+    other_operation_id OPERACAO_AGRICOLA.id%type;
+    other_fp_id        FATOR_PRODUCAO.id%type;
+    cursor c1 is select operacao_id, fp_id
+                 from FP_APLICADOS;
+begin
+    open c1;
+    loop
+        fetch c1 into other_operation_id, other_fp_id;
+        if (this_operation_id = other_operation_id and
+            this_fp_id = other_fp_id) then
+            close c1;
+            return 1;
+        end if;
+        exit when c1%notfound;
+    end loop;
+    close c1;
+    return 0;
+end;
+
+
+-- verifica se um fator de produçao foi registado na tabela Parcelas_Variedades_Aplicadas
+create or replace function is_in_table_Parcelas_Variedades_Aplicadas(this_operation_id OPERACAO_AGRICOLA.id%type,
+                                                                     this_parcel_id parcela.id%type,
+                                                                     this_variety_id VARIEDADE.id%type)
+    return number
+    is
+    other_operation_id OPERACAO_AGRICOLA.id%type;
+    other_parcel_id    parcela.id%type;
+    other_variety_id   VARIEDADE.id%type;
+    cursor c1 is select operacao_id, PARCELA_ID, VARIEDADE_ID
+                 from Parcelas_Variedades_Aplicadas;
+begin
+    open c1;
+    loop
+        fetch c1 into other_operation_id, other_parcel_id, other_variety_id;
+        if (this_operation_id = other_operation_id and
+            this_parcel_id = other_parcel_id and
+            this_variety_id = other_variety_id) then
+            close c1;
+            return 1;
+        end if;
+        exit when c1%notfound;
+    end loop;
+    close c1;
+    return 0;
+end;
+
+
