@@ -1,10 +1,10 @@
 /* Operacoes campo grande */
 
--- 12/10/2016 operação de plantação de Oliveira Arbequina, 40 un
-INSERT INTO Operacao_Agricola(id, data)
-VALUES (?, TO_DATE('2016-10-12', 'YYYY-MM-DD'));
-INSERT INTO Op_Plantacao(operacao_id, parcela_id, VARIEDADE_ID, quantidade)
-values (?, ?, ?, 40);
+-- 12/10/2016 operação de plantação de Oliveira Arbequina, 40 un, compasso de 6 m, distancia entre filas de 6 m
+INSERT INTO Operacao_Agricola(id, data, INSTANTE_REGISTO, VALIDADE)
+VALUES (?, TO_DATE('2016-10-12', 'YYYY-MM-DD'), null, 1);
+INSERT INTO Op_Plantacao(operacao_id, parcela_id, VARIEDADE_ID, quantidade, COMPASSO, DISTANCIA_FILAS)
+values (?, ?, ?, 40, 6, 6);
 
 -- 13/01/2021 operação de aplicação de fator de produção BIOFERTIL N6, Oliveira Picual, 120 kg
 INSERT INTO Operacao_Agricola(id, data)
@@ -86,33 +86,4 @@ INSERT INTO Operacao_Agricola(id, data)
 VALUES (?, TO_DATE('2023-11-08', 'YYYY-MM-DD'));
 INSERT INTO Colheita(operacao_id, parcela_id, produto_id, quantidade)
 values (?, ?, ?, 350);
---
--- 02/06/2023 operação de rega, setor 10, 60 min, 06:00
-INSERT INTO Operacao_Agricola(id, data)
-VALUES (?, TO_DATE('2023-06-02', 'YYYY-MM-DD'));
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (?, 10, 60, '06:00');
 
--- 02/07/2023 operação de rega, setor 10, 120 min, 06:00
-INSERT INTO Operacao_Agricola(id, data)
-VALUES (?, TO_DATE('2023-07-02', 'YYYY-MM-DD'));
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (?, 10, 120, '06:00');
-
--- 02/08/2023 operação de rega, setor 10, 180 min, 05:00
-INSERT INTO Operacao_Agricola(id, data)
-VALUES (?, TO_DATE('2023-08-02', 'YYYY-MM-DD'));
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (?, 10, 180, '05:00');
-
--- 04/09/2023 operação de rega, setor 10, 120 min, 06:00
-INSERT INTO Operacao_Agricola(id, data)
-VALUES (?, TO_DATE('2023-09-04', 'YYYY-MM-DD'));
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (?, 10, 120, '06:00');
-
--- 02/10/2023 operação de rega, setor 10, 60 min, 06:00
-INSERT INTO Operacao_Agricola(id, data)
-VALUES (?, TO_DATE('2023-10-02', 'YYYY-MM-DD'));
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (?, 10, 60, '06:00');

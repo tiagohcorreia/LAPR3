@@ -5,41 +5,47 @@ INSERT INTO APLICACAO_FP(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, FATOR_PRODUCAO_I
                          AREA)
 VALUES (?, ?, ?, ?, ?, 3200, 1.1);
 
--- 09/01/2019 operação de plantação de Macieira Porta da Loja, 50 un
-INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
-VALUES (?, TO_DATE('09/01/2019', 'DD/MM/YYYY'));
-INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, METODO_EXECUCAO_ID, QUANTIDADE)
-VALUES (?, ?, ?, NULL, 50);
+-- 09/01/2019 operação de plantação de Macieira Porta da Loja, 50 un, compasso de 5 m, distancia entre filas de 5 m
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA, INSTANTE_REGISTO, VALIDADE)
+VALUES (?, TO_DATE('09/01/2019', 'DD/MM/YYYY'), null, 1);
+INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, METODO_EXECUCAO_ID, QUANTIDADE, COMPASSO,
+                         DISTANCIA_FILAS)
+VALUES (?, ?, ?, NULL, 50, 5, 5);
 
--- 09/01/2019 operação de plantação de Macieira Malápio, 20 un
-INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
-VALUES (?, TO_DATE('09/01/2019', 'DD/MM/YYYY'));
-INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, METODO_EXECUCAO_ID, QUANTIDADE)
-VALUES (?, ?, ?, NULL, 20);
+-- 09/01/2019 operação de plantação de Macieira Malápio, 20 un, compasso de 5 m, distancia entre filas de 5 m
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA, INSTANTE_REGISTO, VALIDADE)
+VALUES (?, TO_DATE('09/01/2019', 'DD/MM/YYYY'), null, 1);
+INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, METODO_EXECUCAO_ID, QUANTIDADE, COMPASSO,
+                         DISTANCIA_FILAS)
+VALUES (?, ?, ?, NULL, 20, 5, 5);
 
--- 10/01/2019 operação de plantação de Macieira Pipo de Basto, 40 un
-INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
-VALUES (?, TO_DATE('10/01/2019', 'DD/MM/YYYY'));
-INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, METODO_EXECUCAO_ID, QUANTIDADE)
-VALUES (?, ?, ?, NULL, 40);
+-- 10/01/2019 operação de plantação de Macieira Pipo de Basto, 40 un, compasso de 5 m, distancia entre filas de 5 m
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA, INSTANTE_REGISTO, VALIDADE)
+VALUES (?, TO_DATE('10/01/2019', 'DD/MM/YYYY'), null, 1);
+INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, METODO_EXECUCAO_ID, QUANTIDADE, COMPASSO,
+                         DISTANCIA_FILAS)
+VALUES (?, ?, ?, NULL, 40, 5, 5);
 
--- 10/01/2019 operação de plantação de Macieira Canada, 30 un
-INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
-VALUES (?, TO_DATE('10/01/2019', 'DD/MM/YYYY'));
-INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, METODO_EXECUCAO_ID, QUANTIDADE)
-VALUES (?, ?, ?, NULL, 30);
+-- 10/01/2019 operação de plantação de Macieira Canada, 30 un, compasso de 5 m, distancia entre filas de 5 m
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA, INSTANTE_REGISTO, VALIDADE)
+VALUES (?, TO_DATE('10/01/2019', 'DD/MM/YYYY'), null, 1);
+INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, METODO_EXECUCAO_ID, QUANTIDADE, COMPASSO,
+                         DISTANCIA_FILAS)
+VALUES (?, ?, ?, NULL, 30, 5, 5);
 
--- 11/01/2019 operação de plantação de Macieira Grand Fay, 40 un
-INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
-VALUES (?, TO_DATE('11/01/2019', 'DD/MM/YYYY'));
-INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, METODO_EXECUCAO_ID, QUANTIDADE)
-VALUES (?, ?, ?, NULL, 40);
+-- 11/01/2019 operação de plantação de Macieira Grand Fay, 40 un, compasso de 5 m, distancia entre filas de 5 m
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA, INSTANTE_REGISTO, VALIDADE)
+VALUES (?, TO_DATE('11/01/2019', 'DD/MM/YYYY'), null, 1);
+INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, METODO_EXECUCAO_ID, QUANTIDADE, COMPASSO,
+                         DISTANCIA_FILAS)
+VALUES (?, ?, ?, NULL, 40, 5, 5);
 
--- 11/01/2019 operação de plantação de Macieira Gronho Doce, 50 un
-INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
-VALUES (?, TO_DATE('11/01/2019', 'DD/MM/YYYY'));
-INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, METODO_EXECUCAO_ID, QUANTIDADE)
-VALUES (?, ?, ?, NULL, 50);
+-- 11/01/2019 operação de plantação de Macieira Gronho Doce, 50 un, compasso de 5 m, distancia entre filas de 5 m
+INSERT INTO OPERACAO_AGRICOLA(ID, DATA, INSTANTE_REGISTO, VALIDADE)
+VALUES (?, TO_DATE('11/01/2019', 'DD/MM/YYYY'), null, 1);
+INSERT INTO OP_PLANTACAO(OPERACAO_ID, PARCELA_ID, VARIEDADE_ID, METODO_EXECUCAO_ID, QUANTIDADE, COMPASSO,
+                         DISTANCIA_FILAS)
+VALUES (?, ?, ?, NULL, 50, 5, 5);
 
 -- 06/01/2020 operação de aplicação de fator de produção Fertimax Extrume de Cavalo, no solo, Macieira Porta da Loja, 100 kg
 INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
@@ -265,93 +271,3 @@ INSERT INTO COLHEITA(OPERACAO_ID, PARCELA_ID, PRODUTO_ID, METODO_EXECUCAO_ID, QU
 VALUES (?, ?, ?, NULL, 800);
 
 
-
--- 13/05/2023 operação de rega, setor 22, 120 min, 23:00
-INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
-VALUES (?, TO_DATE('13/05/2023', 'DD/MM/YYYY'));
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (?, 22, 120, '23:00');
-
--- 02/06/2023 operação de rega, setor 22, 120 min, 23:00
-INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
-VALUES (?, TO_DATE('02/06/2023', 'DD/MM/YYYY'));
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (?, 22, 120, '23:00');
-
--- 16/06/2023 operação de rega, setor 22, 120 min, 23:00
-INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
-VALUES (?, TO_DATE('16/06/2023', 'DD/MM/YYYY'));
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (?, 22, 120, '23:00');
-
--- 01/07/2023 operação de rega, setor 22, 120 min, 23:00
-INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
-VALUES (?, TO_DATE('01/07/2023', 'DD/MM/YYYY'));
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (?, 22, 120, '23:00');
-
--- 08/07/2023 operação de rega, setor 22, 180 min, 23:00
-INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
-VALUES (?, TO_DATE('08/07/2023', 'DD/MM/YYYY'));
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (?, 22, 180, '23:00');
-
--- 15/07/2023 operação de rega, setor 22, 180 min, 23:00
-INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
-VALUES (?, TO_DATE('15/07/2023', 'DD/MM/YYYY'));
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (?, 22, 180, '23:00');
-
--- 22/07/2023 operação de rega, setor 22, 180 min, 23:00
-INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
-VALUES (?, TO_DATE('22/07/2023', 'DD/MM/YYYY'));
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (?, 22, 180, '23:00');
-
--- 29/07/2023 operação de rega, setor 22, 180 min, 23:00
-INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
-VALUES (?, TO_DATE('29/07/2023', 'DD/MM/YYYY'));
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (?, 22, 180, '23:00');
-
--- 05/08/2023 operação de rega, setor 22, 150 min, 23:00
-INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
-VALUES (?, TO_DATE('05/08/2023', 'DD/MM/YYYY'));
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (?, 22, 150, '23:00');
-
--- 10/08/2023 operação de rega, setor 22, 150 min, 23:00
-INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
-VALUES (?, TO_DATE('10/08/2023', 'DD/MM/YYYY'));
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (?, 22, 150, '23:00');
-
--- 17/08/2023 operação de rega, setor 22, 150 min, 23:00
-INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
-VALUES (?, TO_DATE('17/08/2023', 'DD/MM/YYYY'));
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (?, 22, 150, '23:00');
-
--- 24/08/2023 operação de rega, setor 22, 120 min, 23:00
-INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
-VALUES (?, TO_DATE('24/08/2023', 'DD/MM/YYYY'));
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (?, 22, 120, '23:00');
-
--- 02/09/2023 operação de rega, setor 22, 120 min, 23:00
-INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
-VALUES (?, TO_DATE('02/09/2023', 'DD/MM/YYYY'));
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (?, 22, 120, '23:00');
-
--- 09/09/2023 operação de rega, setor 22, 120 min, 23:00
-INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
-VALUES (?, TO_DATE('09/09/2023', 'DD/MM/YYYY'));
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (?, 22, 120, '23:00');
-
--- 18/09/2023 operação de rega, setor 22, 120 min, 23:00
-INSERT INTO OPERACAO_AGRICOLA(ID, DATA)
-VALUES (?, TO_DATE('18/09/2023', 'DD/MM/YYYY'));
-INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-VALUES (?, 22, 120, '23:00');
