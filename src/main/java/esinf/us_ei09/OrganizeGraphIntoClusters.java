@@ -9,7 +9,6 @@ import java.util.*;
 import java.util.function.BinaryOperator;
 import java.util.stream.Collectors;
 
-
 public class OrganizeGraphIntoClusters {
     public static Map<HubLocal, Set<Local>> organizeGraph(Graph<Local, Integer> graph) {
 
@@ -86,6 +85,4 @@ public class OrganizeGraphIntoClusters {
         }
         return count;
     }
-
-
 }

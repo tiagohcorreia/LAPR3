@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.time.LocalTime;
 
 public class LoadHubsFromFile {
-    public boolean loadHubsFormFile() {
+    public static boolean loadHubsFormFile() {
 
         GraphStore graphStore = Repositories.getInstance().getGraphStore();
 
@@ -49,9 +49,9 @@ public class LoadHubsFromFile {
                     } else {
 
                         System.err.println("Hub especificado no ficheiro não existe");
+                        return false;
                     }
                 }
-                return true;
             }
 
         } catch (IOException ioException) {
@@ -62,8 +62,9 @@ public class LoadHubsFromFile {
         } catch (Exception e) {
 
             System.err.println(e.getMessage());
+            return false;
         }
 
-        return false;
+        return true;
     }
 }
