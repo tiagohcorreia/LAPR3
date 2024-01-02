@@ -94,9 +94,9 @@ public class VariedadeRepository {
             if (!resultSet.next()) break;
             Variedade variedade = new Variedade(
 
-                    resultSet.getInt("VariedadeID"),
+                    resultSet.getInt("ID"),
                     resultSet.getString("Nome"),
-                    resultSet.getInt("CulturaID")
+                    resultSet.getInt("Cultura_ID")
             );
             variedades.add(variedade);
         }

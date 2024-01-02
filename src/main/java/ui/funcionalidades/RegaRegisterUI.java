@@ -22,7 +22,7 @@ public class RegaRegisterUI implements Runnable {
     private FertirregaController fertirregaController;
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
-    public RegaRegisterUI() throws SQLException {
+    public RegaRegisterUI() {
         this.controller = new RegaRegisterController();
         this.operacaoController = new OperacaoAgricolaRegisterController();
         this.fertirregaController = new FertirregaController();

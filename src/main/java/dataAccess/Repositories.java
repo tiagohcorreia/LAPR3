@@ -3,7 +3,7 @@ package dataAccess;
 import dataAccess.execution_methods.MetodoExcucaoRepository;
 import dataAccess.fertigation_mixes.FertigationMixesRepository;
 import dataAccess.pruning_operations.PodaRepository;
-import dataAccess.seeding_operations.SementeiraRepository;
+import dataAccess.seeding_operations.SeedingOperationsRepository;
 import dataAccess.varieties.VariedadeRepository;
 import dataAccess.watering_sectors.WateringSectorsRepository;
 import esinf.store.GraphStore;
@@ -11,7 +11,7 @@ import esinf.store.GraphStore;
 public class Repositories {
 
     private static final Repositories instance = new Repositories();
-    private SementeiraRepository sementeiraRepository = null;
+    private SeedingOperationsRepository SeedingOperationsRepository = null;
     private ColheitaRepository colheitaRepository = null;
     private MondaRepository mondaRepository = null;
     private ParcelaRepository parcelaRepository = null;
@@ -26,7 +26,7 @@ public class Repositories {
     private FertigationMixesRepository fertigationMixes=new FertigationMixesRepository();
 
     private Repositories() {
-        sementeiraRepository = new SementeiraRepository();
+        SeedingOperationsRepository = new SeedingOperationsRepository();
         colheitaRepository = new ColheitaRepository();
         mondaRepository = new MondaRepository();
         operacaoAgricolaRepository  = new OperacaoAgricolaRepository();
@@ -47,8 +47,8 @@ public class Repositories {
     public ParcelaRepository getParcelaRepository() {
         return parcelaRepository;
     }
-    public SementeiraRepository getSementeiraRepository() {
-        return sementeiraRepository;
+    public SeedingOperationsRepository getSeedingOperationsRepository() {
+        return SeedingOperationsRepository;
     }
     public ColheitaRepository getColheitaRepository() { return colheitaRepository; }
     public OperacaoAgricolaRepository getOperacaoAgricolaRepository() { return operacaoAgricolaRepository;}

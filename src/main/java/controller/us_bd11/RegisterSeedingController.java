@@ -34,13 +34,13 @@ public class RegisterSeedingController {
         return repo.getMetodoExcucaoRepository().isThereExecutionMethod(methodId);
     }
 
-    public void registerSeeding(LocalDate date,
+    public boolean registerSeeding(LocalDate date,
                                 int parcelaId,
                                 int variedadeId,
                                 float quantidade,
                                 float area,
                                 int metodoExecucaoId){
 
-        repo.getSementeiraRepository().registerSeeding(date, parcelaId, variedadeId, quantidade, area, metodoExecucaoId);
+        return repo.getSeedingOperationsRepository().registerSeeding(date, parcelaId, variedadeId, quantidade, area, metodoExecucaoId);
     }
 }

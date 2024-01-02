@@ -8,6 +8,9 @@ import ui.menu.MenuItem;
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -345,7 +348,6 @@ public class Utils {
         printTableHeader(h1, h2);
         for (E o : list) {
             printTableLine(String.valueOf(o.getID()), o.getName());
-            printTableSeparator(2);
         }
     }
 
@@ -365,5 +367,27 @@ public class Utils {
             System.out.printf("%50s|\t", "--------------------------------------------------");
         }
         System.out.println();
+    }
+
+    public static LocalDate getLocalDateFromConsole(String header, String dateFormat) {
+        boolean validInput = false;
+        LocalDate date = null;
+
+        do {
+            String input = readLineFromConsole(header);
+
+            try {
+                date = LocalDate.parse(input, DateTimeFormatter.ofPattern(dateFormat));
+                validInput = true;
+
+            } catch (DateTimeParseException e) {
+                System.out.println("Data inválida\n");
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+
+        } while (!validInput);
+
+        return date;
     }
 }

@@ -28,7 +28,7 @@ public class MetodoExcucaoRepository {
             try {
 
                 Connection connection = DatabaseConnection.getInstance().getConnection();
-                callStmt = connection.prepareCall("{ ? = call fncMetodoExecucao() }");
+                callStmt = connection.prepareCall("{ ? = call fncMetodosExecucao() }");
 
                 callStmt.registerOutParameter(1, OracleTypes.CURSOR);
 
@@ -62,7 +62,7 @@ public class MetodoExcucaoRepository {
             if (!resultSet.next()) break;
 
             MetodoExecucao metodoExecucao = new MetodoExecucao(
-                    resultSet.getInt("MetodoExecucaoID"),
+                    resultSet.getInt("ID"),
                     resultSet.getString("Nome")
 
             );

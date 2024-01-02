@@ -33,9 +33,13 @@ public class RegisterSeedingUI implements Runnable {
             int operacaoId = ctrl.getNextId();
 
             System.out.printf("Usando id %d\n", operacaoId);
+/*
+            boolean validDate=false;
 
-            System.out.print("Date (yyyy-mm-dd): (Insira E para sair) \n");
-            String strDate = scanner.next();
+            do{
+
+            }while (!validDate)
+            Date tmpDate = Utils.readDateFromConsole("Indique a data prevista da operação (aaaa-mm-dd): ");
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             formatter.setLenient(false);
 
@@ -70,9 +74,9 @@ public class RegisterSeedingUI implements Runnable {
                     System.out.print("Data (yyyy-mm-dd): ");
                     strDate = scanner.next();
                 }
-            }
+            }*/
 
-            LocalDate date=tmpDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDate date=Utils.getLocalDateFromConsole("Introduza a data prevista da operação (DD-MM-AAAA)", "dd-MM-yyyy");
 
             List<Parcela> parcelas=ctrl.getParcelas();
             Utils.printDatabaseObjects(parcelas, "ID", "PARCELA");
@@ -130,8 +134,10 @@ public class RegisterSeedingUI implements Runnable {
 
             if (optValidation == 1) {
 
-                ctrl.registerSeeding(date, parcelaId, variedadeId, quantidade, area, metodoExecucaoId);
-                System.out.println("\nSementeira registada.");
+                boolean out=ctrl.registerSeeding(date, parcelaId, variedadeId, quantidade, area, metodoExecucaoId);
+                if (out){
+                    System.out.println("\nSementeira registada.");
+                } else System.out.println("Não foi possível registar a operação\n");
 
             } else {
 

@@ -24,7 +24,7 @@ public class ParcelaRepository {
 
                 Connection connection = DatabaseConnection.getInstance().getConnection();
 
-                callStmt = connection.prepareCall("{ ? = call fncParcelas() }");
+                callStmt = connection.prepareCall("{ ? = call funcParcelas() }");
                 callStmt.registerOutParameter(1, OracleTypes.CURSOR);
                 callStmt.execute();
                 resultSet = (ResultSet) callStmt.getObject(1);
@@ -56,7 +56,7 @@ public class ParcelaRepository {
             if (!resultSet.next()) break;
 
             Parcela parcela = new Parcela(
-                    resultSet.getInt("ParcelaId"),
+                    resultSet.getInt("Id"),
                     resultSet.getString("Nome"),
                     resultSet.getDouble("Area")
             );

@@ -10,9 +10,6 @@ public class RegaUI implements Runnable {
 
     RegaRegisterUI regaRegisterUI = new RegaRegisterUI();
 
-    public RegaUI() throws SQLException {
-    }
-
     public void run() {
 
         simularSistemaRegaUI.run();

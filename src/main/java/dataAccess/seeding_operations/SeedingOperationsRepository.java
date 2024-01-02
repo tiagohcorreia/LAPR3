@@ -2,6 +2,7 @@ package dataAccess.seeding_operations;
 
 import dataAccess.DatabaseConnection;
 import domain.Sementeira;
+import oracle.jdbc.OracleTypes;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -9,9 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class SementeiraRepository {
+public class SeedingOperationsRepository {
 
-    public void registerSeeding(LocalDate date, int parcelaId, int variedadeId, float quantidade, float area, int metodoExecucaoId) {
+    public boolean registerSeeding(LocalDate date, int parcelaId, int variedadeId, float quantidade, float area, int metodoExecucaoId) {
 
         CallableStatement callableStatement = null;
         try {
@@ -19,27 +20,28 @@ public class SementeiraRepository {
 
                 Connection connection = DatabaseConnection.getInstance().getConnection();
 
-                callableStatement = connection.prepareCall("{ call registar_Sementeira(?, ?, ?, ?, ?, ?)}");
-
-                callableStatement.setInt(1, parcelaId);
-                callableStatement.setInt(2, variedadeId);
-                callableStatement.setDate(3, Date.valueOf(date));
-                callableStatement.setFloat(4, quantidade);
-                callableStatement.setFloat(5, area);
-                callableStatement.setInt(6, metodoExecucaoId);
+                callableStatement = connection.prepareCall("{ ? = call registar_Sementeira(?, ?, ?, ?, ?, ?)}");
+                callableStatement.registerOutParameter(1, OracleTypes.NUMBER);
+                callableStatement.setInt(2, parcelaId);
+                callableStatement.setInt(3, variedadeId);
+                callableStatement.setDate(4, java.sql.Date.valueOf(date));
+                callableStatement.setFloat(5, quantidade);
+                callableStatement.setFloat(6, area);
+                callableStatement.setInt(7, metodoExecucaoId);
 
                 callableStatement.execute();
-                connection.commit();
+                int out = callableStatement.getInt(1);
+                return out == 1;
 
             } finally {
 
                 if (!Objects.isNull(callableStatement)) {
-
                     callableStatement.close();
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
 

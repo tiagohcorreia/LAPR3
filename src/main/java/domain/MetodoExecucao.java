@@ -9,7 +9,7 @@ public class MetodoExecucao implements DatabaseObject{
 
     public MetodoExecucao(int id, String nome) {
         this.id = id;
-        nome = nome;
+        this.nome = nome;
     }
 
     public int getId() {

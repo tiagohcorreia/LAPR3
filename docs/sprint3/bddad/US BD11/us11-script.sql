@@ -72,7 +72,7 @@ BEGIN
     -- Insert into Operacao_Agricola
     SAVEPOINT savePoint1;
 
-    INSERT INTO Operacao_Agricola(id, data) VALUES (id, TO_DATE(data_v, 'YYYY-MM-DD'));
+    INSERT INTO Operacao_Agricola(id, data, VALIDADE) VALUES (id, TO_DATE(data_v, 'YYYY-MM-DD'), 1);
 
     -- Insert into Sementeira
     INSERT INTO Sementeira(operacao_id, parcela_id, variedade_id, quantidade, area, metodo_execucao_id)

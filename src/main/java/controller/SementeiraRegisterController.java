@@ -1,7 +1,7 @@
 package controller;
 
 import dataAccess.Repositories;
-import dataAccess.seeding_operations.SementeiraRepository;
+import dataAccess.seeding_operations.SeedingOperationsRepository;
 
 import java.sql.Date;
 import java.sql.SQLException;
@@ -10,24 +10,24 @@ import java.util.Objects;
 
 public class SementeiraRegisterController {
 
-    private SementeiraRepository sementeiraRepository;
+    private SeedingOperationsRepository SeedingOperationsRepository;
 
     public SementeiraRegisterController() {
-        getSementeiraRepository();
+        getSeedingOperationsRepository();
     }
 
-    private SementeiraRepository getSementeiraRepository() {
+    private SeedingOperationsRepository getSeedingOperationsRepository() {
 
-        if (Objects.isNull(sementeiraRepository)) {
+        if (Objects.isNull(SeedingOperationsRepository)) {
 
             Repositories repositories = Repositories.getInstance();
-            sementeiraRepository = repositories.getSementeiraRepository();
+            SeedingOperationsRepository = repositories.getSeedingOperationsRepository();
         }
-        return sementeiraRepository;
+        return SeedingOperationsRepository;
     }
 
     public void sementeiraRegister(LocalDate date, int parcelaId, int variedadeId, float quantidade, float area, int metodoExecucaoId) throws SQLException {
 
-        sementeiraRepository.registerSeeding(date,parcelaId, variedadeId, quantidade, area, metodoExecucaoId);
+        SeedingOperationsRepository.registerSeeding(date,parcelaId, variedadeId, quantidade, area, metodoExecucaoId);
     }
 }

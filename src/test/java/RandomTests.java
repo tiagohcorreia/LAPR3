@@ -1,11 +1,18 @@
 import org.junit.jupiter.api.Test;
+import ui.utils.Utils;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class RandomTests {
 
     @Test
-    void test(){
-        System.out.println(Date.valueOf("03-12-2023"));
+    void test() {
+    }
+
+    public static void main(String[] args) {
+        LocalDate d=Utils.getLocalDateFromConsole("teste:", "yyyy-MM-dd");
+        System.out.println(Date.valueOf(d));;
+
     }
 }
