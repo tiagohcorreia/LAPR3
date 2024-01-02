@@ -1,6 +1,11 @@
 package ui.user;
 
 import ui.funcionalidades.*;
+import ui.funcionalidades.us_bd11.RegisterSeedingUI;
+import ui.funcionalidades.us_bd12.RegisterWeedingUI;
+import ui.funcionalidades.us_bd13.RegisterHarvestUI;
+import ui.funcionalidades.us_bd14.RegisterFpApplicationUI;
+import ui.funcionalidades.us_bd15.RegisterPruningUI;
 import ui.menu.MenuItem;
 import ui.utils.Utils;
 
@@ -19,11 +24,11 @@ public class GestorAgricolaUI implements Runnable {
 
         List<MenuItem> options = new ArrayList<MenuItem>();
 
-        options.add(new MenuItem("Registar Sementeira", new SementeiraRegisterUI()));
-        options.add(new MenuItem("Registar Colheita", new ColheitaRegisterUI()));
-        options.add(new MenuItem("Registar Monda", new MondaRegisterUI()));
-        options.add(new MenuItem("Registar Aplicacao FP", new AplicacaoFP_UI()));
-        options.add(new MenuItem("Registar Poda", new PodaRegisterUI()));
+        options.add(new MenuItem("Registar Sementeira", new RegisterSeedingUI()));
+        options.add(new MenuItem("Registar Colheita", new RegisterHarvestUI()));
+        options.add(new MenuItem("Registar Monda", new RegisterWeedingUI()));
+        options.add(new MenuItem("Registar Aplicacao FP", new RegisterFpApplicationUI()));
+        options.add(new MenuItem("Registar Poda", new RegisterPruningUI()));
         options.add(new MenuItem("Cancelar Operação Agrícola", new CancelarOperacaoUI()));
 
         try {

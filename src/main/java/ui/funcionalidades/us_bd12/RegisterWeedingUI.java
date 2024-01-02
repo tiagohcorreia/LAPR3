@@ -1,35 +1,34 @@
-package ui.funcionalidades;
+package ui.funcionalidades.us_bd12;
 
-import controller.ColheitaRegisterController;
-import controller.FatorProducaoRegisterController;
-import controller.OperacaoAgricolaRegisterController;
+import controller.*;
 import ui.utils.Utils;
 
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Scanner;
 
-public class AplicacaoFP_UI implements Runnable {
+public class RegisterWeedingUI implements Runnable {
 
-    private FatorProducaoRegisterController controller;
+    private MondaRegisterController controller;
     private OperacaoAgricolaRegisterController controllerop;
 
-    public AplicacaoFP_UI() {
-        controller = new FatorProducaoRegisterController();
+    public RegisterWeedingUI() {
+        controller = new MondaRegisterController();
         controllerop = new OperacaoAgricolaRegisterController();
+
     }
 
     public void run() {
         try {
-            System.out.println("Registar Aplicacao FP");
-
             Scanner scanner = new Scanner(System.in);
+            System.out.println("Registar nova Monda");
+
             System.out.print("OperacaoId: ");
             int operacaoId = controllerop.getNextId();
-            System.out.printf("Usando id %d\n", operacaoId);
+            System.out.printf("Using %d\n", operacaoId);
+
 
             System.out.print("Date (yyyy-mm-dd): (Insira E para sair) \n");
             String strDate = scanner.next();
@@ -62,25 +61,24 @@ public class AplicacaoFP_UI implements Runnable {
 
             controllerop.getTableData("Parcela");
             controllerop.printTableData("Parcela");
-
             int parcelaId = 0;
             String parcelaInput;
             do {
                 System.out.print("ParcelaId (Insira E para sair): \n");
                 parcelaInput = scanner.next().trim();
                 if (parcelaInput.equalsIgnoreCase("E")) {
-                    // Go back to the main menu or exit the program
                     return;
                 }
                 try {
                     parcelaId = Integer.parseInt(parcelaInput);
-                    if (!controllerop.isIdValid("PARCELA", parcelaId)) {
+                    if (!controllerop.isIdValid("Parcela", parcelaId)) {
                         System.out.println("Erro: ParcelaId nao registado na base de dados. Insira um Id existente.");
                     }
                 } catch (NumberFormatException e) {
                     System.out.println("Erro: Insira um número válido para ParcelaId ou E para sair.");
                 }
-            } while (!controllerop.isIdValid("PARCELA", parcelaId));
+            } while (!controllerop.isIdValid("Parcela", parcelaId));
+
 
             controllerop.getTableData("Variedade");
             controllerop.printTableData("Variedade");
@@ -110,6 +108,7 @@ public class AplicacaoFP_UI implements Runnable {
                 System.out.print("Fator Producao Id (Insira E para sair): \n");
                 fatorProducaoInput = scanner.next().trim();
                 if (fatorProducaoInput.equalsIgnoreCase("E")) {
+                    // Go back to the main menu or exit the program
                     return;
                 }
                 try {
@@ -118,99 +117,69 @@ public class AplicacaoFP_UI implements Runnable {
                         System.out.println("Erro: FatorProducaoId nao registado na base de dados. Insira um Id existente.");
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("Erro: Insira um numero valido para FatorProducaoId ou E para sair.");
+                    System.out.println("Erro: Insira um numero válido para FatorProducaoId ou E para sair.");
                 }
             } while (!controllerop.isIdValid("FATOR_PRODUCAO", fatorProducaoId));
 
+            controllerop.getTableData("Metodo_Execucao");
+            controllerop.printTableData("Metodo_Execucao");
 
-            List<String[]> data = controllerop.getTableDataByFatorProducaoId("FP_Metodo_Aplicacao", fatorProducaoId);
-
-            if (data.isEmpty()) {
-                System.out.println("Data nao encontrada para o Fator Producao ID.");
-            } else {
-
-                controllerop.printTableDataByFatorId("FP_Metodo_Aplicacao", data, fatorProducaoId);
-            }
-            int metodoAplicacaoId = 0;
-            String metodoAplicacaoInput;
-
-            System.out.print("Metodo Aplicacao Id (Insira E para sair): \n");
-            metodoAplicacaoInput = scanner.next().trim();
-            if (metodoAplicacaoInput.equalsIgnoreCase("E")) {
-                return;
-            }
-            metodoAplicacaoId = Integer.parseInt(metodoAplicacaoInput);
-
-
-            float quantidade;
-            String quantidadeInput;
-            while (true) {
-                System.out.print("Quantidade (Insira E para sair): \n");
-                quantidadeInput = scanner.next().trim();
-                if (quantidadeInput.equalsIgnoreCase("E")) {
+            int metodoExecucaoId = 0;
+            String metodoExecucaoInput;
+            do {
+                System.out.print("Metodo Execucao Id (Insira E para sair): \n");
+                metodoExecucaoInput = scanner.next().trim();
+                if (metodoExecucaoInput.equalsIgnoreCase("E")) {
+                    // Go back to the main menu or exit the program
                     return;
                 }
                 try {
-                    quantidade = Float.parseFloat(quantidadeInput);
-                    if (quantidade > 0) {
-                        break;
-                    } else {
-                        System.out.println("Erro: Quantidade nao pode ser um valor negativo.");
+                    metodoExecucaoId = Integer.parseInt(metodoExecucaoInput);
+                    if (!controllerop.isIdValid("Metodo_Execucao", metodoExecucaoId)) {
+                        System.out.println("Erro: ProdutoId nao registado na base de dados. Insira um Id existente.");
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("Erro: Insira um numero valido para Quantidade ou E para sair.");
+                    System.out.println("Erro: Insira um numero valido para metodoExecucaoId ou E para sair.");
                 }
+            } while (!controllerop.isIdValid("Metodo_Execucao", metodoExecucaoId));
+
+            float quantidade = Utils.readFloatFromConsole("Quantidade: ");
+
+            while (quantidade < 0) {
+
+                System.out.println("Error: Quantity cannot be a negative number. Please enter a non-negative quantity.");
+                quantidade = Utils.readFloatFromConsole("Quantidade: ");
             }
 
-            float area;
-            String areaInput;
-            while (true) {
-                System.out.print("Area (Insira E para sair): \n");
-                areaInput = scanner.next().trim();
-                if (areaInput.equalsIgnoreCase("E")) {
-                    return;
-                }
-                try {
-                    area = Float.parseFloat(areaInput);
-                    if (area > 0) {
-                        break;
-                    } else {
-                        System.out.println("Erro: Area nao pode ser um valor negativo.");
-                    }
-                } catch (NumberFormatException e) {
-                    System.out.println("Erro: Insira um numero valido para area ou E para sair.");
-                }
-            }
-
-            if (operacaoId != controllerop.getNextId()) {
+            if (operacaoId != controllerop.getNextId()){
                 System.out.println("Erro: Id operacao ja em uso.");
                 run();
             }
 
-            System.out.println(" === Dados da Aplicacao FP ===");
+            System.out.println(" === Dados da Monda ===");
             System.out.println("ID Operacao: " + operacaoId);
             System.out.println("ID Parcela: " + parcelaId);
             System.out.println("ID Variedade: " + variedadeId);
             System.out.println("ID Fator Producao: " + fatorProducaoId);
-            System.out.println("ID Metodo de Aplicacao: " + metodoAplicacaoId);
+            System.out.println("ID Metodo de Aplicacao: " + metodoExecucaoId);
             System.out.println("Quantidade: " + quantidade);
-            System.out.println("Area: " + area);
 
 
             int optValidation = Utils.readIntegerFromConsole("1-CONFIRMAR\n0-CANCELAR");
 
             if (optValidation == 1) {
                 controllerop.operacaoAgricolaRegister(operacaoId, date);
-                controller.fatorProducaoRegister(operacaoId, parcelaId, variedadeId,fatorProducaoId,metodoAplicacaoId,quantidade,area);
-                System.out.println("\nAplicacao FP registada.");
-            } else {
+                controller.mondaRegister(operacaoId, parcelaId, variedadeId, fatorProducaoId, metodoExecucaoId, quantidade);
 
+                System.out.println("\nMonda registada.");
+            } else {
                 System.out.println("Operação cancelada");
             }
+
+
         } catch (SQLException e) {
 
-
-            System.out.println("\nAplicacaoFP nao registada!\n" + e.getMessage());
+            System.err.println("\nMonda não foi registada!\n" + e.getMessage());
 
         }
     }

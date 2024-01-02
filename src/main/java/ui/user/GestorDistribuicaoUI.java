@@ -1,6 +1,8 @@
 package ui.user;
 
 import ui.funcionalidades.*;
+import ui.funcionalidades.us_ei02.SetHubsUI;
+import ui.funcionalidades.us_ei06.GetPossibleRoutesUI;
 import ui.menu.MenuItem;
 import ui.utils.Utils;
 

@@ -1,4 +1,4 @@
-package ui.funcionalidades;
+package ui.funcionalidades.us_lp10;
 
 import controller.GenerateWateringPlanCtrl;
 import ui.utils.Utils;

@@ -1,6 +1,5 @@
-package ui.funcionalidades;
+package ui.funcionalidades.us_bd15;
 
-import controller.ColheitaRegisterController;
 import controller.OperacaoAgricolaRegisterController;
 import controller.PodaRegisterController;
 import ui.utils.Utils;
@@ -11,12 +10,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
-public class PodaRegisterUI implements Runnable {
+public class RegisterPruningUI implements Runnable {
 
     private PodaRegisterController controller;
     private OperacaoAgricolaRegisterController controllerop;
 
-    public PodaRegisterUI() {
+    public RegisterPruningUI() {
         controller = new PodaRegisterController();
         controllerop = new OperacaoAgricolaRegisterController();
     }
