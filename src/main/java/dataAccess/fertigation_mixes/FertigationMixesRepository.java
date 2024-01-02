@@ -106,7 +106,7 @@ public class FertigationMixesRepository {
             callStmt.registerOutParameter(1, Types.INTEGER);
 
             for (int fpId : fpIds) {
-                // Set the parameters for each fpId
+
                 callStmt.setInt(2, operacaoId);
                 callStmt.setInt(3, fpId);
 
@@ -171,12 +171,12 @@ public class FertigationMixesRepository {
                 int parcelaId = pair.getKey();
                 int variedadeId = pair.getValue();
 
-                // Check if the entry already exists
+
                 if (isEntryExists(connection, operacaoId, parcelaId, variedadeId)) {
                     continue;
                 }
 
-                // Set the parameters for each pair
+
                 callStmt.setInt(2, operacaoId);
                 callStmt.setInt(3, parcelaId);
                 callStmt.setInt(4, variedadeId);
@@ -201,7 +201,7 @@ public class FertigationMixesRepository {
         }
     }
 
-    // Helper method to check if the entry already exists
+
     private boolean isEntryExists(Connection connection, int operacaoId, int parcelaId, int variedadeId) throws SQLException {
         String checkQuery = "SELECT COUNT(*) FROM LOC.Parcelas_Variedades_Aplicadas WHERE Operacao_id = ? AND Parcela_id = ? AND Variedade_id = ?";
         try (PreparedStatement checkStmt = connection.prepareStatement(checkQuery)) {
