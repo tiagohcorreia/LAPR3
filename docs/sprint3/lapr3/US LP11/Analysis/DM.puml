@@ -1,0 +1,66 @@
+@startuml
+
+
+class RegaTable {
+  - setor: String
+  - hora: String
+  - data: Date
+  - duracao: int
+  - mix: String
+  - endTime: String
+  --
+  + getSetor(): String
+  + getHora(): String
+  + getData(): Date
+  + getDuracao(): int
+  + getMix(): String
+  + getEndTime(): String
+}
+
+class RegaRegisterUI {
+  - controller: RegaRegisterController
+  - operacaoController: OperacaoAgricolaRegisterController
+  - fertirregaController: FertirregaController
+  - scheduler: ScheduledExecutorService
+  --
+  + RegaRegisterUI()
+  + run(): void
+  - registerNextOperation(index: int): void
+  - registerRegaOperation(index: int, endTime: String, callback: Runnable): void
+  - performRegistration(index: int, operacaoId: int, regaTable: RegaTable, callback: Runnable, check: boolean): void
+}
+
+class RegaRegisterController {
+  - regaTableList: List<RegaTable>
+  --
+  + RegaRegisterController()
+  + readCSV(filePath: String): void
+  + registerNextOperation(index: int): void
+  + registerRegaOperation(index: int, endTime: String, callback: Runnable): void
+  + regaRegister(operacaoId: int, setor: String, duracao: int, hora: String): void
+}
+
+class OperacaoAgricolaRegisterController {
+  --
+  + getNextId(): int
+  + operacaoAgricolaRegister(operacaoId: int, date: Date): void
+}
+
+class FertirregaController {
+  --
+  + getFpIdsByMix(mix: String): List<Integer>
+  + getProporcaoByFpId(fpId: int): int
+  + registerFpIds(operacaoId: int, mix: String, setorNome: String): void
+  + getParcelaAndVariedade(setorNome: String): List<AbstractMap.SimpleEntry<Integer, Integer>>
+}
+RegaRegisterUI --> RegaRegisterController
+RegaRegisterUI --> OperacaoAgricolaRegisterController
+RegaRegisterUI --> FertirregaController
+RegaRegisterUI --> ScheduledExecutorService
+
+RegaRegisterController --> RegaTable
+RegaRegisterController --> OperacaoAgricolaRegisterController
+RegaRegisterController --> FertirregaController
+
+OperacaoAgricolaRegisterController --> FertirregaController
+@enduml

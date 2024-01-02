@@ -1,0 +1,48 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+
+interface Runnable {
+  +run()
+}
+
+class RegisterPruningUI {
+  +run()
+  +getOperatID()
+  +getParcelID()
+  +getVarietyID()
+  +getExecMethodID()
+  +registerPruning()
+}
+
+class AgrOperatDataAccess {
+  +getNextAgrOperatID()
+}
+
+class ParcelsDataAccess {
+  +getParcels()
+}
+
+class VarietiesDataAccess {
+  +getVarieties()
+}
+
+class ExecMethodsDataAccess {
+  +getExecMethods()
+}
+
+class PruningsDataAccess {
+  +registerPruning()
+}
+
+Runnable <|-- RegisterPruningUI
+
+RegisterPruningUI --|> AgrOperatDataAccess
+RegisterPruningUI --|> ParcelsDataAccess
+RegisterPruningUI --|> VarietiesDataAccess
+RegisterPruningUI --|> ExecMethodsDataAccess
+RegisterPruningUI --|> PruningsDataAccess
+
+@enduml

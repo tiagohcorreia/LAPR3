@@ -1,0 +1,67 @@
+@startuml
+
+actor User
+participant "RegaRegisterUI" as UI
+participant "RegaRegisterController" as Controller
+participant "OperacaoAgricolaRegisterController" as OperacaoController
+participant "FertirregaController" as FertirregaController
+participant "ScheduledExecutorService" as Scheduler
+User -> UI: run()
+activate User
+activate UI
+
+UI -> Controller: readCSV(filePath)
+activate Controller
+Controller -> UI: regaTableList
+deactivate Controller
+
+UI -> Controller: registerNextOperation(0)
+activate Controller
+Controller -> UI: regaTableList
+deactivate Controller
+
+UI -> Controller: registerRegaOperation(index, endTime, callback)
+activate Controller
+Controller -> Scheduler: schedule(callback, delay)
+activate Scheduler
+Scheduler --> Controller: Callback
+deactivate Scheduler
+Controller -> UI: performRegistration(index, operacaoId, regaTable, callback, check)
+deactivate Controller
+
+UI -> OperacaoController: getNextId()
+activate OperacaoController
+OperacaoController --> UI: nextId
+deactivate OperacaoController
+
+UI -> OperacaoController: operacaoAgricolaRegister(operacaoId, date)
+activate OperacaoController
+OperacaoController --> UI: operation registered
+deactivate OperacaoController
+
+UI -> FertirregaController: getFpIdsByMix(mix)
+activate FertirregaController
+FertirregaController --> UI: fpIds
+deactivate FertirregaController
+
+UI -> FertirregaController: getParcelaAndVariedade(setorNome)
+activate FertirregaController
+FertirregaController --> UI: parcelaVariedadePairs
+deactivate FertirregaController
+
+UI -> FertirregaController: registerFpIds(operacaoId, mix, setorNome)
+activate FertirregaController
+FertirregaController --> UI: registration complete
+deactivate FertirregaController
+
+UI -> Scheduler: schedule(callback, delay)
+activate Scheduler
+Scheduler --> UI: Callback
+deactivate Scheduler
+
+
+UI -> User: Display registration summary
+UI -> User: Confirm submission
+
+
+@enduml
