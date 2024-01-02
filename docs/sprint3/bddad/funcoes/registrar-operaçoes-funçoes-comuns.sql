@@ -212,17 +212,22 @@ begin
     return 0;
 end;
 
-create or replace function check_if_sector_exists(sector_id SETOR_REGA.id%type)
+create or replace function check_if_sector_exists(sector_id SETOR_REGA.id%type,
+                                                  this_date date)
     return number
     is
-    other_id SETOR_REGA.id%type;
-    cursor c is select id
+    other_sector_id  SETOR_REGA.id%type;
+    other_begin_date setor_rega.data_inicio%type;
+    other_end_date   setor_rega.data_fim%type;
+    cursor c is select id, DATA_INICIO, DATA_FIM
                 from SETOR_REGA;
 begin
     open c;
     loop
-        fetch c into other_id;
-        if other_id = sector_id then
+        fetch c into other_sector_id, other_begin_date, other_end_date;
+        if (other_sector_id = sector_id and
+            ((this_date between other_begin_date and other_end_date) or
+             (this_date > other_begin_date and other_end_date is null))) then
             close c;
             return 1;
         end if;
@@ -389,5 +394,4 @@ begin
     close c1;
     return 0;
 end;
-
 

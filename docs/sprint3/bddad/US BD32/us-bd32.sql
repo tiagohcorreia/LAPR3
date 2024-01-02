@@ -17,8 +17,8 @@ begin
         return 0;
     end if;
 
-    if CHECK_IF_SECTOR_EXISTS(sector_id) = 0 then
-        dbms_output.PUT_LINE('ERR0: ID de setor inválido (não existe na tabela)');
+    if CHECK_IF_SECTOR_EXISTS(sector_id, operation_date) = 0 then
+        dbms_output.PUT_LINE('ERR0: ID de setor ou data inválido');
         return 0;
     end if;
 
@@ -72,8 +72,8 @@ begin
         return 0;
     end if;
 
-    if CHECK_IF_SECTOR_EXISTS(sector_id) = 0 then
-        dbms_output.PUT_LINE('ERR0: ID de setor inválido (não existe na tabela)');
+    if CHECK_IF_SECTOR_EXISTS(sector_id, operation_date) = 0 then
+        dbms_output.PUT_LINE('ERR0: ID de setor ou data inválido');
         return 0;
     end if;
 
@@ -175,4 +175,22 @@ begin
     end loop;
     close c1;
     return 0;
+end;
+
+
+
+declare
+    sector_id      SETOR_REGA.id%type          := 10;
+    operation_date OPERACAO_AGRICOLA.data%type := to_date('01-06-2017', 'dd-mm-yyyy');
+    duration       REGA.duracao%type           := 60;
+    hour           rega.hora%type              := '08:00';
+    mix_id         RECEITA_FERTIRREGA.id%type  := 1;
+    out            number;
+begin
+    out := register_fertigation(sector_id, operation_date, duration, hour, mix_id);
+    if out = 1 then
+        dbms_output.PUT_LINE('SUCESSO. OUT = ' || out);
+    else
+        dbms_output.PUT_LINE('INSUCESSO. OUT = ' || out);
+    end if;
 end;
