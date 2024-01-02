@@ -259,3 +259,18 @@ begin
             or (this_date between SETORREGA_PLANTACAO.DATA_INICIO and SETORREGA_PLANTACAO.DATA_FIM));
     return c;
 end;
+
+create or replace function get_fp_in_mix(mix_id RECEITA_FERTIRREGA.id%type)
+    return sys_refcursor
+    is
+    c sys_refcursor;
+begin
+    open c for
+        select distinct FATOR_PRODUCAO.id
+        from RECEITA_FERTIRREGA,
+             RECEITA_FP,
+             FATOR_PRODUCAO
+        where mix_id = RECEITA_FP.RECEITA_ID
+          and RECEITA_FP.FP_ID = FATOR_PRODUCAO.ID;
+    return c;
+end;
