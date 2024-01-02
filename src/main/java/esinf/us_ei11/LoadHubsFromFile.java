@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.time.LocalTime;
 
 public class LoadHubsFromFile {
-
     public boolean loadHubsFormFile() {
 
         GraphStore graphStore = Repositories.getInstance().getGraphStore();
@@ -43,7 +42,14 @@ public class LoadHubsFromFile {
 
                 if (graphStore.getGraph().validVertex(hub)) {
 
-                    graphStore.addVertex(hub);
+                    if (graphStore.isHubInGraph(hub)) {
+
+                        graphStore.addVertex(hub);
+
+                    } else {
+
+                        System.err.println("Hub especificado no ficheiro não existe");
+                    }
                 }
                 return true;
             }
@@ -57,6 +63,7 @@ public class LoadHubsFromFile {
 
             System.err.println(e.getMessage());
         }
+
         return false;
     }
 }
