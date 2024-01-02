@@ -2,7 +2,6 @@ package esinf.us_ei11;
 
 import dataAccess.Repositories;
 import esinf.model.Hub;
-import esinf.model.Local;
 import esinf.model.Schedule;
 import esinf.store.GraphStore;
 

@@ -4,7 +4,6 @@ import esinf.map.MapGraph;
 import esinf.map.MapGraphLoader;
 import esinf.model.Local;
 import esinf.store.GraphStore;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
