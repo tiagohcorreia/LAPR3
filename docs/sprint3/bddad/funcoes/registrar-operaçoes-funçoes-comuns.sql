@@ -198,7 +198,7 @@ create or replace function check_if_product_exists(product_id produto.id%type)
     is
     other_product_id produto.id%type;
     cursor c1 is select id
-                from produto;
+                 from produto;
 begin
     open c1;
     loop
@@ -210,4 +210,52 @@ begin
     end loop;
     close c1;
     return 0;
+end;
+
+create or replace function check_if_sector_exists(sector_id SETOR_REGA.id%type)
+    return number
+    is
+    other_id SETOR_REGA.id%type;
+    cursor c is select id
+                from SETOR_REGA;
+begin
+    open c;
+    loop
+        fetch c into other_id;
+        if other_id = sector_id then
+            close c;
+            return 1;
+        end if;
+        exit when c%notfound;
+    end loop;
+    close c;
+    return 0;
+end;
+
+
+create or replace function get_parcels_and_varieties_in_sector(sector_id SETOR_REGA.id%type,
+                                                               this_date operacao_agricola.data%type)
+    return sys_refcursor
+    is
+    c sys_refcursor;
+begin
+    open c for
+        select distinct parcela.id, parcela.nome, variedade.nome, variedade.id, plantacao.id
+        from SETOR_REGA,
+             SETORREGA_PLANTACAO,
+             PLANTACAO,
+             PARCELA,
+             PLANTACAO_TEMPORARIA,
+             PLANTACAO_PERMANENTE,
+             VARIEDADE
+        where sector_id = SETORREGA_PLANTACAO.SETOR_ID
+          and SETORREGA_PLANTACAO.PLANTACAO_ID = PLANTACAO.ID
+          and PLANTACAO.PARCELA_ID = PARCELA.ID
+          and ((PLANTACAO.ID = PLANTACAO_PERMANENTE.PLANTACAO_ID
+            and PLANTACAO_PERMANENTE.VARIEDADE_PERM_ID = VARIEDADE.ID)
+            or (PLANTACAO.ID = PLANTACAO_TEMPORARIA.PLANTACAO_ID
+                and PLANTACAO_TEMPORARIA.VARIEDADE_temp_ID = VARIEDADE.ID))
+          and ((this_date > SETORREGA_PLANTACAO.DATA_INICIO and SETORREGA_PLANTACAO.DATA_FIM is null)
+            or (this_date between SETORREGA_PLANTACAO.DATA_INICIO and SETORREGA_PLANTACAO.DATA_FIM));
+    return c;
 end;

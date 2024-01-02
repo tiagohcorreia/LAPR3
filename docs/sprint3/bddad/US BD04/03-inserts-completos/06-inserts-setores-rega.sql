@@ -29,7 +29,7 @@ VALUES (11, 'Setor 11', NULL, 1500, TO_DATE('01/05/2017', 'DD/MM/YYYY'), NULL, N
 
 -- Oliveira Arbequina, 40 un, 01/05/2017, sem data fim
 INSERT INTO SetorRega_Plantacao(id, setor_id, plantacao_id, data_inicio, data_fim)
-VALUES (3, 11, 27, TO_DATE('01/05/2017', 'DD/MM/YYYY'), NULL);
+VALUES (3, 11, 28, TO_DATE('01/05/2017', 'DD/MM/YYYY'), NULL);
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -61,7 +61,7 @@ VALUES (7, 21, 25, TO_DATE('01/05/2019', 'DD/MM/YYYY'), NULL);
 -- Macieira Pipo de Basto, 40 un, 01/05/2019, sem data fim
 -- inserir em Lameiro do Moinho
 INSERT INTO SetorRega_Plantacao(id, setor_id, plantacao_id, data_inicio, data_fim)
-VALUES (8, 21, 28, TO_DATE('01/05/2019', 'DD/MM/YYYY'), NULL);
+VALUES (8, 21, 29, TO_DATE('01/05/2019', 'DD/MM/YYYY'), NULL);
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -76,23 +76,23 @@ VALUES (22, 'Setor 22', NULL, 3500, TO_DATE('01/05/2019', 'DD/MM/YYYY'), NULL, N
 
 -- Macieira Porta da Loja, 50 un, 01/05/2019, sem data fim
 INSERT INTO SetorRega_Plantacao(id, setor_id, plantacao_id, data_inicio, data_fim)
-VALUES (9, 22, 29, TO_DATE('01/05/2019', 'DD/MM/YYYY'), NULL);
+VALUES (9, 22, 30, TO_DATE('01/05/2019', 'DD/MM/YYYY'), NULL);
 
 -- Macieira Malápio, 20 un, 01/05/2019, sem data fim
 INSERT INTO SetorRega_Plantacao(id, setor_id, plantacao_id, data_inicio, data_fim)
-VALUES (10, 22, 30, TO_DATE('01/05/2019', 'DD/MM/YYYY'), NULL);
+VALUES (10, 22, 31, TO_DATE('01/05/2019', 'DD/MM/YYYY'), NULL);
 
 -- Macieira Canada, 30 un, 01/05/2019, sem data fim
 INSERT INTO SetorRega_Plantacao(id, setor_id, plantacao_id, data_inicio, data_fim)
-VALUES (11, 22, 31, TO_DATE('01/05/2019', 'DD/MM/YYYY'), NULL);
+VALUES (11, 22, 32, TO_DATE('01/05/2019', 'DD/MM/YYYY'), NULL);
 
 -- Macieira Grand Fay, 40 un, 01/05/2019, sem data fim
 INSERT INTO SetorRega_Plantacao(id, setor_id, plantacao_id, data_inicio, data_fim)
-VALUES (12, 22, 32, TO_DATE('01/05/2019', 'DD/MM/YYYY'), NULL);
+VALUES (12, 22, 33, TO_DATE('01/05/2019', 'DD/MM/YYYY'), NULL);
 
 -- Macieira Gronho Doce, 50 un, 01/05/2019, sem data fim
 INSERT INTO SetorRega_Plantacao(id, setor_id, plantacao_id, data_inicio, data_fim)
-VALUES (13, 22, 33, TO_DATE('01/05/2019', 'DD/MM/YYYY'), NULL);
+VALUES (13, 22, 34, TO_DATE('01/05/2019', 'DD/MM/YYYY'), NULL);
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -108,11 +108,11 @@ VALUES (41, 'Setor 41', NULL, 2500, TO_DATE('01/04/2023', 'DD/MM/YYYY'), TO_DATE
 
 -- Cenoura Sugarsnax Hybrid, 05/04/2023 a 31/05/2023
 INSERT INTO SetorRega_Plantacao(id, setor_id, plantacao_id, data_inicio, data_fim)
-VALUES (14, 41, 34, TO_DATE('05/04/2023', 'DD/MM/YYYY'), TO_DATE('31/05/2023', 'DD/MM/YYYY'));
+VALUES (14, 41, 35, TO_DATE('05/04/2023', 'DD/MM/YYYY'), TO_DATE('31/05/2023', 'DD/MM/YYYY'));
 
 -- Cenoura Danvers Half Long, 05/07/2023 a 08/10/2023
 INSERT INTO SetorRega_Plantacao(id, setor_id, plantacao_id, data_inicio, data_fim)
-VALUES (15, 41, 35, TO_DATE('05/07/2023', 'DD/MM/YYYY'), TO_DATE('08/10/2023', 'DD/MM/YYYY'));
+VALUES (15, 41, 36, TO_DATE('05/07/2023', 'DD/MM/YYYY'), TO_DATE('08/10/2023', 'DD/MM/YYYY'));
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -128,4 +128,5 @@ VALUES (42, 'Setor 42', NULL, 3500, TO_DATE('01/04/2023', 'DD/MM/YYYY'), TO_DATE
 
 -- Abóbora Manteiga, 06/04/2023 a 10/09/2023
 INSERT INTO SetorRega_Plantacao(id, setor_id, plantacao_id, data_inicio, data_fim)
-VALUES (16, 42, 36, TO_DATE('06/04/2023', 'DD/MM/YYYY'), TO_DATE('10/09/2023', 'DD/MM/YYYY'));
+VALUES (16, 42, 37, TO_DATE('06/04/2023', 'DD/MM/YYYY'), TO_DATE('10/09/2023', 'DD/MM/YYYY'));
+
