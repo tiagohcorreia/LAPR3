@@ -1306,12 +1306,12 @@ VALUES (144, null);
 INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
 VALUES (144,107,95);
 INSERT INTO FP_APLICADOS(operacao_id, fp_id, quantidade, unidade)
-VALUES (144, 2.5, 'kg');
+VALUES (144, 1, 2.5, 'kg');
 
 INSERT INTO Operacao_Agricola (id, data, instante_registo, validade)
 VALUES (145, TO_DATE('06-02-2019', 'dd-mm-yyyy'), null, 1);
 INSERT INTO Aplicacao_FP(operacao_id)
-VALUES (145,10);
+VALUES (145);
 INSERT INTO Aplicacao_FP_Variedade(operacao_id,METODO_APLICACAO_ID)
 VALUES (145, 7);
 INSERT INTO Parcelas_Variedades_Aplicadas(operacao_id,parcela_id,variedade_id)
