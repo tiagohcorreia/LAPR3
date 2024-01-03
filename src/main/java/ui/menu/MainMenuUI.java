@@ -2,6 +2,7 @@ package ui.menu;
 
 import ui.*;
 import ui.utils.ChooseRoleUI;
+import ui.utils.DevTeamUI;
 import ui.utils.Utils;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class MainMenuUI implements Runnable {
 
         options.add(new MenuItem("Teste conexao com base de dados", new DatabaseConnectionTestUI()));
         options.add(new MenuItem("Escolher User", new ChooseRoleUI()));
-        options.add(new MenuItem("Conhecer equipa de desenvolvimento", new ChooseRoleUI()));
+        options.add(new MenuItem("Conhecer equipa de desenvolvimento", new DevTeamUI()));
         options.add(new MenuItem("Exit", new ExitUI()));
 
         Utils.runMenu(options, "MENU PRINCIPAL");
