@@ -1,7 +1,6 @@
 package dataAccess.others;
 
 import dataAccess.DatabaseConnection;
-import domain.FatorProducao;
 import oracle.jdbc.OracleTypes;
 
 import java.sql.CallableStatement;
@@ -9,7 +8,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Objects;
 
 public class OtherDataAccesses {
@@ -31,6 +29,116 @@ public class OtherDataAccesses {
                 callStmt.setDate(2, java.sql.Date.valueOf(dataInferior));
                 callStmt.setDate(3, java.sql.Date.valueOf(dataSuperior));
                 callStmt.setInt(4, parcelaID);
+
+                callStmt.execute();
+                resultSet = callStmt.getResultSet();
+
+            } finally {
+
+                if (!Objects.isNull(callStmt)) {
+                    callStmt.close();
+                }
+                if (!Objects.isNull(resultSet)) {
+                    resultSet.close();
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
+
+    public ResultSet obterFatoresProducaoAplicados(int parcelaID,
+                                                   LocalDate dataInferior,
+                                                   LocalDate dataSuperior) {
+
+        CallableStatement callStmt = null;
+        ResultSet resultSet = null;
+
+        try {
+            try {
+
+                Connection connection = DatabaseConnection.getInstance().getConnection();
+                callStmt = connection.prepareCall("{ ? = call obterParcelasFP(?, ?, ?) }");
+
+                callStmt.registerOutParameter(1, OracleTypes.CURSOR);
+                callStmt.setInt(2, parcelaID);
+                callStmt.setDate(3, java.sql.Date.valueOf(dataInferior));
+                callStmt.setDate(4, java.sql.Date.valueOf(dataSuperior));
+
+                callStmt.execute();
+                resultSet = callStmt.getResultSet();
+
+            } finally {
+
+                if (!Objects.isNull(callStmt)) {
+                    callStmt.close();
+                }
+                if (!Objects.isNull(resultSet)) {
+                    resultSet.close();
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
+
+    public ResultSet obterOperacoes(int parcelaID,
+                                    LocalDate dataInferior,
+                                    LocalDate dataSuperior) {
+
+        CallableStatement callStmt = null;
+        ResultSet resultSet = null;
+
+        try {
+            try {
+
+                Connection connection = DatabaseConnection.getInstance().getConnection();
+                callStmt = connection.prepareCall("{ ? = call obterOperacoesPorParcela(?, ?, ?) }");
+
+                callStmt.registerOutParameter(1, OracleTypes.CURSOR);
+                callStmt.setInt(2, parcelaID);
+                callStmt.setDate(3, java.sql.Date.valueOf(dataInferior));
+                callStmt.setDate(4, java.sql.Date.valueOf(dataSuperior));
+
+                callStmt.execute();
+                resultSet = callStmt.getResultSet();
+
+            } finally {
+
+                if (!Objects.isNull(callStmt)) {
+                    callStmt.close();
+                }
+                if (!Objects.isNull(resultSet)) {
+                    resultSet.close();
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
+
+    public ResultSet obterAplicacoesFP(int parcelaID,
+                                       LocalDate dataInferior,
+                                       LocalDate dataSuperior,
+                                       int tipoFpId) {
+
+        CallableStatement callStmt = null;
+        ResultSet resultSet = null;
+
+        try {
+            try {
+
+                Connection connection = DatabaseConnection.getInstance().getConnection();
+                callStmt = connection.prepareCall("{ ? = call obterOperacoesPorParcela(?, ?, ?, ?) }");
+
+                callStmt.registerOutParameter(1, OracleTypes.CURSOR);
+                callStmt.setInt(2, parcelaID);
+                callStmt.setDate(3, java.sql.Date.valueOf(dataInferior));
+                callStmt.setDate(4, java.sql.Date.valueOf(dataSuperior));
+                callStmt.setInt(5, tipoFpId);
 
                 callStmt.execute();
                 resultSet = callStmt.getResultSet();

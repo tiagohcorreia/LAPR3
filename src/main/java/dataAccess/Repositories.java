@@ -11,6 +11,7 @@ import dataAccess.operacoes_monda.MondaRepository;
 import dataAccess.operacoes_poda.PodaRepository;
 import dataAccess.produtos.ProdutoRepo;
 import dataAccess.operacoes_sementeira.OperacoesSementeiraRepo;
+import dataAccess.tipos_fp.TiposFPRepo;
 import dataAccess.variedades.VariedadeRepository;
 import dataAccess.setores_rega.SetoresRegaRepository;
 import esinf.store.GraphStore;
@@ -34,8 +35,8 @@ public class Repositories {
     private MetodosAplicacaoRepo metodosAplicacao=new MetodosAplicacaoRepo();
     private ProdutoRepo produtos=new ProdutoRepo();
     private OtherDataAccesses others=new OtherDataAccesses();
-
     private AplicacoesFPRepo aplicacoesFP=new AplicacoesFPRepo();
+    private TiposFPRepo tiposFP=new TiposFPRepo();
 
     private Repositories() {
         OperacoesSementeiraRepo = new OperacoesSementeiraRepo();
@@ -93,9 +94,11 @@ public class Repositories {
     public ProdutoRepo getProdutos() {
         return produtos;
     }
-
     public OtherDataAccesses getOthers() {
         return others;
+    }
+    public TiposFPRepo getTiposFP(){
+        return tiposFP;
     }
 
     public void clear(){
