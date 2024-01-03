@@ -31,7 +31,7 @@ public class OtherDataAccesses {
                 callStmt.setInt(4, parcelaID);
 
                 callStmt.execute();
-                resultSet = callStmt.getResultSet();
+                resultSet = (ResultSet) callStmt.getObject(1);
 
             } finally {
 
@@ -67,7 +67,7 @@ public class OtherDataAccesses {
                 callStmt.setDate(4, java.sql.Date.valueOf(dataSuperior));
 
                 callStmt.execute();
-                resultSet = callStmt.getResultSet();
+                resultSet = (ResultSet) callStmt.getObject(1);
 
             } finally {
 
@@ -103,7 +103,7 @@ public class OtherDataAccesses {
                 callStmt.setDate(4, java.sql.Date.valueOf(dataSuperior));
 
                 callStmt.execute();
-                resultSet = callStmt.getResultSet();
+                resultSet = (ResultSet) callStmt.getObject(1);
 
             } finally {
 
@@ -141,7 +141,7 @@ public class OtherDataAccesses {
                 callStmt.setInt(5, tipoFpId);
 
                 callStmt.execute();
-                resultSet = callStmt.getResultSet();
+                resultSet = (ResultSet) callStmt.getObject(1);
 
             } finally {
 
@@ -177,7 +177,7 @@ public class OtherDataAccesses {
                 callStmt.setDate(4, java.sql.Date.valueOf(dataSuperior));
 
                 callStmt.execute();
-                resultSet = callStmt.getResultSet();
+                resultSet = (ResultSet) callStmt.getObject(1);
 
             } finally {
 
