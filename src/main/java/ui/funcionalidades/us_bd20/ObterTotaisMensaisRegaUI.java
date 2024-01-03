@@ -58,7 +58,7 @@ public class ObterTotaisMensaisRegaUI implements Runnable{
                     int mes=resultado.getInt(2);
                     int totalRega= resultado.getInt(3);
 
-                    System.out.printf("%-30s | %-30s | %-30s\n", parcela, Month.of(mes), totalRega);
+                    System.out.printf("%-30s | %-30s | %-30s\n", parcela, Month.of(mes), totalRega + " mn");
                 }
 
                 System.out.println();
