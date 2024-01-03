@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION funcFatores
+CREATE OR REPLACE FUNCTION obter_fp
     RETURN SYS_REFCURSOR IS
     v_cursor SYS_REFCURSOR;
 BEGIN
@@ -7,4 +7,4 @@ BEGIN
         FROM FATOR_PRODUCAO
         ORDER BY id;
     RETURN v_cursor;
-END funcFatores;
+END;

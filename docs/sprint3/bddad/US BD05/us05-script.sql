@@ -1,15 +1,21 @@
-SELECT
-    p.nome AS produto,
-    pc.quantidade AS quantidade_colhida,
-    c.data_inicio AS data_colheita_inicio,
-    c.semana AS semana_colheita
-FROM Colheita co
-         JOIN Previsao_Colheita pc ON co.previsao_colheita_id = pc.id
-         JOIN Plantacao p ON pc.plantacao_id = p.id
-         JOIN Variedade v ON p.variedade_id = v.id
-         JOIN Cultura cu ON v.id = cu.variedade_id
-         JOIN Parcela pa ON cu.plantacao_id = pa.id
-         JOIN Ciclo c ON v.ciclo_id = c.id
-WHERE
-        pa.id = 101
-  AND c.data_inicio BETWEEN '2023-01-01' AND '2023-12-31';
+create or replace function obter_produtos_colhidos(v_parcela_id PARCELA.id%type,
+                                                   data_inferior date,
+                                                   data_superior date)
+    return sys_refcursor
+    is
+    c sys_refcursor;
+begin
+    open c for
+        select distinct PRODUTO.nome, sum(COLHEITA.quantidade)
+        from PRODUTO,
+             COLHEITA,
+             PARCELA,
+             OPERACAO_AGRICOLA
+        where v_parcela_id = COLHEITA.PARCELA_ID
+          and PRODUTO.ID = COLHEITA.PRODUTO_ID
+          and COLHEITA.OPERACAO_ID = OPERACAO_AGRICOLA.ID
+          and OPERACAO_AGRICOLA.DATA between data_inferior and data_superior
+        group by PRODUTO.nome
+        order by produto.NOME;
+    return c;
+end;

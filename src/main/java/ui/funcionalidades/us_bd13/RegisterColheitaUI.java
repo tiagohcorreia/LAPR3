@@ -21,18 +21,23 @@ public class RegisterColheitaUI implements Runnable {
     public void run() {
         System.out.println("---------------- REGISTAR COLHEITA ----------------\n");
         getParcelID();
-        getProdutoID();
-        getMetodoExecucaoID();
-        getQuantidade();
-        getDataOperacao();
 
-        if (getConfirmation()) {
-            boolean out;
-            out = ctrl.registerColheita(data, parcelaID, produtoID, quantidade, metodoExecucaoID);
-            if (out) {
-                System.out.println("Operação registada com sucesso\n");
-            } else System.out.println("Não foi possível registar a operação\n");
-        }
+        if (getProdutoID()) {
+
+            if (getMetodoExecucaoID()) {
+
+                getQuantidade();
+                getDataOperacao();
+
+                if (getConfirmation()) {
+                    boolean out;
+                    out = ctrl.registerColheita(data, parcelaID, produtoID, quantidade, metodoExecucaoID);
+                    if (out) {
+                        System.out.println("Operação registada com sucesso\n");
+                    } else System.out.println("Não foi possível registar a operação\n");
+                }
+            }
+        } else System.err.println("Sem variedades na parcela\n");
 
     }
 
@@ -41,14 +46,22 @@ public class RegisterColheitaUI implements Runnable {
         parcelaID = Utils.getTableIdFromConsole(parcelas, "ID", "PARCELA", "Introduza o id da parcela:");
     }
 
-    private void getProdutoID() {
+    private boolean getProdutoID() {
         List<Produto> produtos = ctrl.getProdutosInParcela(parcelaID);
-        produtoID = Utils.getTableIdFromConsole(produtos, "ID", "PRODUTO", "Introduza o id da produto");
+        if (!produtos.isEmpty()) {
+            produtoID = Utils.getTableIdFromConsole(produtos, "ID", "PRODUTO", "Introduza o id da produto");
+            return true;
+        }
+        return false;
     }
 
-    private void getMetodoExecucaoID() {
+    private boolean getMetodoExecucaoID() {
         List<MetodoExecucao> metodosExecucao = ctrl.getMetodosExecucao();
-        metodoExecucaoID = Utils.getTableIdFromConsole(metodosExecucao, "ID", "MÉTODO DE EXECUÇÃO", "Introduza o id do método de execução");
+        if (!metodosExecucao.isEmpty()) {
+            metodoExecucaoID = Utils.getTableIdFromConsole(metodosExecucao, "ID", "MÉTODO DE EXECUÇÃO", "Introduza o id do método de execução");
+            return true;
+        }
+        return false;
     }
 
     private void getQuantidade() {

@@ -7,47 +7,45 @@ create or replace function obterProdutosEmParcelaDeIntervalo(
     dataSuperior Operacao_agricola.data%TYPE,
     parcelaId Parcela.id%type
 )
-
     return sys_refcursor
-    is queryCursor sys_refcursor;
+    is
+    queryCursor sys_refcursor;
 begin
     open queryCursor for
-        SELECT
-            Cultura.nome_comum AS nome_cultura,
-            Variedade.nome AS nome_variedade,
-            Produto.nome AS nome_produto,
-            Colheita.quantidade AS quantidade_colhida,
-            Operacao_Agricola.data AS data_operacao
-        FROM
-            Colheita
-                JOIN
-            Produto ON Colheita.produto_id = Produto.id
-                JOIN
-            Variedade ON Produto.variedade_id = Variedade.id
-                JOIN
-            Cultura ON Variedade.cultura_id = Cultura.id
-                JOIN
-            Parcela ON Colheita.parcela_id = Parcela.id
-                JOIN
-            Operacao_Agricola ON Colheita.operacao_id = Operacao_Agricola.id
-        WHERE
-            Operacao_Agricola.data BETWEEN dataInferior AND dataSuperior
-          AND Parcela.id = parcelaId;
+        SELECT distinct Variedade.nome           AS nome_variedade,
+               Produto.nome             AS nome_produto,
+               sum(colheita.QUANTIDADE) AS quantidade_colhida
+        FROM Colheita,
+             Produto,
+             Variedade,
+             Parcela,
+             Operacao_Agricola
+        WHERE OPERACAO_AGRICOLA.ID = COLHEITA.OPERACAO_ID
+          and COLHEITA.PARCELA_ID = parcelaId
+          and COLHEITA.PRODUTO_ID = PRODUTO.ID
+          and PRODUTO.VARIEDADE_ID = VARIEDADE.ID
+          and Operacao_Agricola.data BETWEEN dataInferior AND dataSuperior
+          AND Parcela.id = parcelaId
+        group by Variedade.nome, Produto.nome
+        order by nome_variedade, nome_produto;
     return queryCursor;
 end;
 /
 
-create or replace procedure imprimirProdutosEmParcelaDeIntervalo(parcelaId Parcela.id%type, dataInferior OPERACAO_AGRICOLA.data%type, dataSuperior OPERACAO_AGRICOLA.data%type)
+create or replace procedure imprimirProdutosEmParcelaDeIntervalo(parcelaId Parcela.id%type,
+                                                                 dataInferior OPERACAO_AGRICOLA.data%type,
+                                                                 dataSuperior OPERACAO_AGRICOLA.data%type)
     is
-    nomeParcela Parcela.nome%type;
-    nomeCultura Cultura.nome_comum%type;
+    nomeParcela   Parcela.nome%type;
+    nomeCultura   Cultura.nome_comum%type;
     nomeVariedade Variedade.nome%type;
-    nomeProduto Produto.nome%type;
-    Quantidade Colheita.quantidade%type;
-    Data OPERACAO_AGRICOLA.data%type;
-    c1 sys_refcursor:=obterProdutosEmParcelaDeIntervalo(dataInferior, dataSuperior, parcelaId);
+    nomeProduto   Produto.nome%type;
+    Quantidade    Colheita.quantidade%type;
+    Data          OPERACAO_AGRICOLA.data%type;
+    c1            sys_refcursor := obterProdutosEmParcelaDeIntervalo(dataInferior, dataSuperior, parcelaId);
 begin
-    select nome into nomeParcela
+    select nome
+    into nomeParcela
     from parcela p
     where p.id = parcelaId;
 
@@ -68,9 +66,9 @@ end;
 
 
 declare
-    parcelaId Parcela.id%type:=108;
-    dataInferior OPERACAO_AGRICOLA.data%type:=to_date('20/05/2023', 'dd/mm/yyyy');
-    dataSuperior OPERACAO_AGRICOLA.data%type:=to_date('06/11/2023', 'dd/mm/yyyy');
+    parcelaId    Parcela.id%type             := 108;
+    dataInferior OPERACAO_AGRICOLA.data%type := to_date('20/05/2023', 'dd/mm/yyyy');
+    dataSuperior OPERACAO_AGRICOLA.data%type := to_date('06/11/2023', 'dd/mm/yyyy');
 begin
     imprimirProdutosEmParcelaDeIntervalo(parcelaId, dataInferior, dataSuperior);
 end;

@@ -28,37 +28,51 @@ public class RegisterFpApplicationUI implements Runnable {
     public void run() {
         System.out.println("---------------- REGISTAR APLICAÇÃO DE FATOR DE PRODUÇÃO ----------------\n");
         askIsAplicacaoFPSolo();
+
         if (isAplicacaoFPSolo) {
             getParcelID();
-            getFatorProducaoID();
-            getArea();
-            getQuantidade();
-            getUnidade();
-            getDataOperacao();
-        } else {
-            getParcelID();
-            getVariedadeID();
-            getFatorProducaoID();
-            getMetodoAplicacaoID();
-            getQuantidade();
-            getUnidade();
-            getDataOperacao();
-        }
 
-        if (getConfirmation()) {
-            boolean out;
+            if (getFatorProducaoID()) {
+                getArea();
+                getQuantidade();
+                getUnidade();
+                getDataOperacao();
 
-            if (isAplicacaoFPSolo){
-                out=ctrl.registerAplicacaoFPSolo(parcelaID, quantidade, unidade, area, fpID, data);
-            } else {
-                out=ctrl.registerAplicacaoFPVariedade(parcelaID, variedadeID, metodoAplicacaoID, quantidade, unidade, fpID, data);
+                if (getConfirmation()) {
+                    boolean out;
+                    out = ctrl.registerAplicacaoFPSolo(parcelaID, quantidade, unidade, area, fpID, data);
+
+                    if (out) {
+                        System.out.println("Operação registada com sucesso\n");
+                    } else System.out.println("Não foi possível registar a operação\n");
+                }
+
             }
 
-            if (out){
-                System.out.println("Operação registada com sucesso\n");
-            } else System.out.println("Não foi possível registar a operação\n");
-        }
+        } else {
+            getParcelID();
 
+            if (getVariedadeID()) {
+
+                if (getFatorProducaoID()) {
+
+                    if (getMetodoAplicacaoID()) {
+                        getQuantidade();
+                        getUnidade();
+                        getDataOperacao();
+
+                        if (getConfirmation()) {
+                            boolean out;
+                            out = ctrl.registerAplicacaoFPVariedade(parcelaID, variedadeID, metodoAplicacaoID, quantidade, unidade, fpID, data);
+
+                            if (out) {
+                                System.out.println("Operação registada com sucesso\n");
+                            } else System.out.println("Não foi possível registar a operação\n");
+                        }
+                    }
+                }
+            } else System.err.println("Sem variedades na parcela\n");
+        }
     }
 
     private void askIsAplicacaoFPSolo() {
@@ -70,29 +84,41 @@ public class RegisterFpApplicationUI implements Runnable {
         parcelaID = Utils.getTableIdFromConsole(parcelas, "ID", "PARCELA", "Introduza o id da parcela:");
     }
 
-    private void getVariedadeID() {
+    private boolean getVariedadeID() {
         List<Variedade> variedades = ctrl.getVarietiesInParcel(parcelaID);
-        variedadeID = Utils.getTableIdFromConsole(variedades, "ID", "VARIEDADE", "Introduza o id da variedade");
+        if (!variedades.isEmpty()) {
+            variedadeID = Utils.getTableIdFromConsole(variedades, "ID", "VARIEDADE", "Introduza o id da variedade");
+            return true;
+        }
+        return false;
     }
 
-    private void getFatorProducaoID() {
+    private boolean getFatorProducaoID() {
         List<FatorProducao> fatoresProducao = ctrl.getFatoresProducao();
-        fpID = Utils.getTableIdFromConsole(fatoresProducao, "ID", "FATOR DE PRODUÇÃO", "Introduza o id do fator de produção");
+        if (!fatoresProducao.isEmpty()) {
+            fpID = Utils.getTableIdFromConsole(fatoresProducao, "ID", "FATOR DE PRODUÇÃO", "Introduza o id do fator de produção");
+            return true;
+        }
+        return false;
     }
 
     private void getArea() {
         boolean valid = false;
         do {
-            area = Utils.readDoubleFromConsole("Introduza a área, em hectares, em que vai se feita a aplicação:");
+            area = Utils.readDoubleFromConsole("Introduza a área, em hectares, da aplicação:");
             if (area > 0) {
                 valid = true;
             } else System.err.println("ERRO: Valor introduzido inválido\n");
         } while (!valid);
     }
 
-    private void getMetodoAplicacaoID() {
+    private boolean getMetodoAplicacaoID() {
         List<MetodoAplicacao> metodosAplicacao = ctrl.getMetodosAplicacao();
-        metodoAplicacaoID = Utils.getTableIdFromConsole(metodosAplicacao, "ID", "MÉTODO DE APLICAÇÃO", "Introduza o id do método de aplicação");
+        if (!metodosAplicacao.isEmpty()) {
+            metodoAplicacaoID = Utils.getTableIdFromConsole(metodosAplicacao, "ID", "MÉTODO DE APLICAÇÃO", "Introduza o id do método de aplicação");
+            return true;
+        }
+        return false;
     }
 
     private void getQuantidade() {

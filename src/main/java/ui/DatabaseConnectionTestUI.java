@@ -21,8 +21,8 @@ public class DatabaseConnectionTestUI implements Runnable {
         }
 
         if(result==DatabaseConnection.CONNECTION_SUCCESS)
-            System.out.println("Connected to the database.");
+            System.out.println("Connected to the database.\n");
         else
-            System.out.println("Not connected to the database!");
+            System.out.println("Not connected to the database!\n");
     }
 }

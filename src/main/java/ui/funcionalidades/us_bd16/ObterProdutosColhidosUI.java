@@ -42,21 +42,24 @@ public class ObterProdutosColhidosUI implements Runnable{
     }
 
     private void obterDataSuperior(){
-        Date tmpDate=Utils.readDateFromConsole("Introduza a data de início do intervalo pretendido:");
+        Date tmpDate=Utils.readDateFromConsole("Introduza a data de fim do intervalo pretendido:");
         dataSuperior=tmpDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     }
 
     private void imprimirResultado(){
 
         try{
-            while (resultado.next()){
-                String variedade= resultado.getString("nome_variedade");
-                String produto= resultado.getString("nome_produto");
-                double quantidade= resultado.getFloat("quantidade_colhida");
-                Date tmpDate=resultado.getDate("data_operacao");
-                LocalDate data=tmpDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            try{
+                System.out.printf("%-30s | %-30s | %-30s\n", "VARIEDADE", "PRODUTO", "QUANTIDADE");
+                while (resultado.next()){
+                    String variedade= resultado.getString(1);
+                    String produto= resultado.getString(2);
+                    double quantidade= resultado.getFloat(3);
 
-                System.out.printf("-20%s | -20%s | -20%s | -20%s\n", "Variedade: " + variedade, "Produto: " + produto, "Quantidade: " + quantidade, "Data: " + data);
+                    System.out.printf("%-30s | %-30s | %-30s\n", variedade, produto, quantidade + " Kg");
+                }
+            } finally {
+                resultado.close();
             }
 
             System.out.println();

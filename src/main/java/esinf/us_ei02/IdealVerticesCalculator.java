@@ -24,7 +24,7 @@ public class IdealVerticesCalculator<V, E> {
     private boolean calculationsMade = false;
 
     public IdealVerticesCalculator(Graph<V, E> graph, ArrayList<V> vertices, Comparator<E> comparator, BinaryOperator<E> binaryOperator, E neutralValue) {
-        this.graph=graph;
+        this.graph = graph;
         this.vertices = vertices;
         this.comparator = comparator;
         this.binaryOperator = binaryOperator;
@@ -48,7 +48,7 @@ public class IdealVerticesCalculator<V, E> {
             getAllShortestPaths();
             getMetrics();
             sortVertices();
-            calculationsMade=true;
+            calculationsMade = true;
         }
         return verticesAndMetrics;
     }
@@ -68,7 +68,7 @@ public class IdealVerticesCalculator<V, E> {
 
     private void getMetrics() {
 
-        for (V v : graph.vertices()) {
+        for (V v : vertices) {
             int centrality = 0;
             int influence = graph.inDegree(v);
             E proximity = neutralValue;
@@ -81,7 +81,8 @@ public class IdealVerticesCalculator<V, E> {
                 }
             }
 
-            for (E distance : verticesAndPathsDistances.get(v)) {
+            ArrayList<E> distances = verticesAndPathsDistances.get(v);
+            for (E distance : distances) {
                 proximity = binaryOperator.apply(proximity, distance);
             }
 
