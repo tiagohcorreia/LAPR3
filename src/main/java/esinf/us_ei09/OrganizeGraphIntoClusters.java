@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class OrganizeGraphIntoClusters {
     public static Map<HubLocal, Set<Local>> organizeGraph(Graph<Local, Integer> graph) {
 
-        if (graph.isDirected()) return null;
+        if (graph.isDirected()) throw new IllegalArgumentException("Operação não pode ser feita num grafo orientado");
 
         Map<HubLocal, Set<Local>> hubList = new HashMap<>();
         List<Local> vertexList = new ArrayList<>(graph.vertices());

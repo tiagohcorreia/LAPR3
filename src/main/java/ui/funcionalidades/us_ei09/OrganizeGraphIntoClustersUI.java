@@ -1,4 +1,4 @@
-package ui.funcionalidades;
+package ui.funcionalidades.us_ei09;
 
 import controller.OrganizeGraphIntoClustersController;
 import ui.user.GestorDistribuicaoUI;
