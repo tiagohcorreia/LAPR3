@@ -12,7 +12,7 @@ import java.util.Objects;
 public class PathWithMostHubsData {
     private final int DEFAULT_VALUE = 0;
     private final Local DEFAULT_LOCAL = null;
-    private final Duration DEFAULT_VALUE2 = null;
+    private final float DEFAULT_VALUE2 = 0;
     private final List<LocalsData> DEFAULT_LOCALS = null;
     private final LinkedList<Local> DEFAULT_SHORTPATH = null;
 
@@ -22,10 +22,12 @@ public class PathWithMostHubsData {
     LinkedList<Local> path;
     private double pathTotalDistance; // distancia do percurso inteiro
     private int numberOfTimesTheVehicleWasCharged;
-    private Duration routeTotalDuration;  // duração total do percurso
-    private Duration vehicleChargingDuration;  // duração total dos carregamentos do veiculo
-    private Duration vehicleInTheRoadDuration;  // duração total do percurso na estrada
-    private Duration vehicleDischargingDuration;  // duração total dos descarregamentos dos cabazes
+    private float routeTotalDuration;  // duração total do percurso
+    private float vehicleChargingDuration;  // duração total dos carregamentos do veiculo
+    private float vehicleInTheRoadDuration;  // duração total do percurso na estrada
+    private float vehicleDischargingDuration;  // duração total dos descarregamentos dos cabazes
+    private int numberOfHubsTheVehicleWentThrough=0;  //numero de hubs pelo qual o veiculo conseguiu passar
+
 
     public PathWithMostHubsData() {
         this.origin = DEFAULT_LOCAL;
@@ -39,7 +41,7 @@ public class PathWithMostHubsData {
         this.vehicleDischargingDuration = DEFAULT_VALUE2;
     }
 
-    public PathWithMostHubsData(Local origin, List<LocalsData> locals, LinkedList<Local> path, double pathTotalDistance, int numberOfTimesTheVehicleWasCharged, Duration routeTotalDuration, Duration vehicleChargingDuration, Duration vehicleInTheRoadDuration, Duration vehicleDischargingDuration) {
+    public PathWithMostHubsData(Local origin, List<LocalsData> locals, LinkedList<Local> path, double pathTotalDistance, int numberOfTimesTheVehicleWasCharged, float routeTotalDuration, float vehicleChargingDuration, float vehicleInTheRoadDuration, float vehicleDischargingDuration) {
         this.origin = origin;
         this.locals = locals;
         this.path = path;
@@ -91,35 +93,43 @@ public class PathWithMostHubsData {
         this.numberOfTimesTheVehicleWasCharged = numberOfTimesTheVehicleWasCharged;
     }
 
-    public Duration getRouteTotalDuration() {
+    public float getRouteTotalDuration() {
         return routeTotalDuration;
     }
 
-    public void setRouteTotalDuration(Duration routeTotalDuration) {
+    public void setRouteTotalDuration(float routeTotalDuration) {
         this.routeTotalDuration = routeTotalDuration;
     }
 
-    public Duration getVehicleChargingDuration() {
+    public float getVehicleChargingDuration() {
         return vehicleChargingDuration;
     }
 
-    public void setVehicleChargingDuration(Duration vehicleChargingDuration) {
+    public void setVehicleChargingDuration(float vehicleChargingDuration) {
         this.vehicleChargingDuration = vehicleChargingDuration;
     }
 
-    public Duration getVehicleInTheRoadDuration() {
+    public void setNumberOfHubsTheVehicleWentThrough(int x) {
+        this.numberOfHubsTheVehicleWentThrough = x;
+    }
+
+    public int getnumberOfHubsTheVehicleWentThrough() {
+        return numberOfHubsTheVehicleWentThrough;
+    }
+    public float getVehicleInTheRoadDuration() {
         return vehicleInTheRoadDuration;
     }
 
-    public void setVehicleInTheRoadDuration(Duration vehicleInTheRoadDuration) {
+
+    public void setVehicleInTheRoadDuration(float vehicleInTheRoadDuration) {
         this.vehicleInTheRoadDuration = vehicleInTheRoadDuration;
     }
 
-    public Duration getVehicleDischargingDuration() {
+    public float getVehicleDischargingDuration() {
         return vehicleDischargingDuration;
     }
 
-    public void setVehicleDischargingDuration(Duration vehicleDischargingDuration) {
+    public void setVehicleDischargingDuration(float vehicleDischargingDuration) {
         this.vehicleDischargingDuration = vehicleDischargingDuration;
     }
 
