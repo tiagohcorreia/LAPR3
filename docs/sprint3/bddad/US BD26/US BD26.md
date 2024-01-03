@@ -1,18 +1,24 @@
-# US BD30
+# US BD26
 
 ## 1. Engenharia de Requsitos
 
 ### 1.1 Descrição da User Story
 
-Como Gestor Agrícola, pretendo anular uma operação que estava prevista e não se realizou ou que foi criada por engano,
-sabendo que isso só  possível até aos 3 dias seguintes à sua data prevista de execução, se não houver operações 
-posteriores dependentes desta.
+Como Gestor Agrícola, pretendo que a criação ou alteração de um registo de uma operação deva ser registado num log que indique o instante, tipo de operação e todos os dados relacionados com a opera¸c˜ao (e.g. data da operação, parcela, etc.).
+
 
 ### 1.2. Especificações e Clarificações
 
 Clarificações do Cliente:
 
-* 
+>Question:Para registar o instante em que foram criados os registos relacionados com operações, deve-se criar uma tabela para log de operações com a data de criação dos inserts sem modificar a tabela principal "Operações"?
+>Answer:A US24 nada tem a ver com triggers e logs. Tive a oportunidade de explicar isso nas aulas teóricas.
+
+>Question:Na USBD26, "registado num log que indique o instante, tipo de operação e todos os dados relacionados com a operação (e.g. data da operação, parcela, etc.)."
+Onde se refere a "tipo de operação", pretende que seja por exemplo se foi um "insert", "update", "delete" ou trata-se do tipo de operação, "colheita", "rega", etc.?
+
+>Answer:"Como Gestor Agrícola, " diz tudo, não? Que sabe o sujeito de bases de dados para estar a referir-se a operações SQL?
+Tem de estar a referir-se a operações de negócio.
 
 Clarificações dos Professores:
 
@@ -36,7 +42,7 @@ Clarificações dos Professores:
 
 ### 2.1. Excerto Modelo Domínio
 
-![US BD30-MD](/png/DM.png)
+
 
 ### 2.2. Outros Pontos
 
@@ -53,11 +59,10 @@ Outras classes:
 
 ## 3.2. Diagrama de Sequência (SSD)
 
-![US BD30-SSD](/svg/SSD.svg)
+
 
 ## 3.3. Diagrama de Classes (CD)
 
-![US BD30-CD](/svg/CD.svg)
 
 # 5. Implementação
 
