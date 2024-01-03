@@ -1934,5 +1934,5 @@ sensor_id:2#type:soil_humidity#value:69.00#unit:percentage#time:1830031
 
 sensor_id:7#type:atmospheric_temperature#value:14.00#unit:celsius#time:1832030
 
-sensor_id:5#type:atmospheric_humidity#value:69.00#unit:percentage#time:1832030
+sensor_id:5#type:atmospheric_humidity#value:69.00#unit:percentage#time:9832030
 

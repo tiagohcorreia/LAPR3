@@ -1,0 +1,3 @@
+C:/Users/rafa1/Documents/sem-3-pi-2023-24-g11/docs/sprint3/arqcp/Processador de dados v2/cmake-build-debug/CMakeFiles/ARQCP.dir
+C:/Users/rafa1/Documents/sem-3-pi-2023-24-g11/docs/sprint3/arqcp/Processador de dados v2/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/rafa1/Documents/sem-3-pi-2023-24-g11/docs/sprint3/arqcp/Processador de dados v2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
