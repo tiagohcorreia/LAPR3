@@ -4,7 +4,7 @@ import controller.LoadHubsFromFileController;
 
 public class LoadHubsFromFileUI implements Runnable {
 
-    private LoadHubsFromFileController controller;
+    private final LoadHubsFromFileController controller = new LoadHubsFromFileController();
 
     @Override
     public void run() {
