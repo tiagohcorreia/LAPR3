@@ -1,0 +1,60 @@
+Sensor ID: 1
+Write Counter: 50
+Type: soil_humidity
+Unit: percentage
+Median: 71.00
+------------------------
+Sensor ID: 2
+Write Counter: 60
+Type: soil_humidity
+Unit: percentage
+Median: 70.00
+------------------------
+Sensor ID: 3
+Write Counter: 70
+Type: atmospheric_humidity
+Unit: percentage
+Median: 70.00
+------------------------
+Sensor ID: 4
+Write Counter: 80
+Type: atmospheric_humidity
+Unit: percentage
+Median: 70.50
+------------------------
+Sensor ID: 5
+Write Counter: 50
+Type: atmospheric_humidity
+Unit: percentage
+Median: 71.00
+------------------------
+Sensor ID: 6
+Write Counter: 50
+Type: atmospheric_humidity
+Unit: celsius
+Median: 71.50
+------------------------
+Sensor ID: 7
+Write Counter: 40
+Type: atmospheric_temperature
+Unit: celsius
+Median: 14.30
+------------------------
+Sensor ID: 8
+Write Counter: 50
+Type: atmospheric_temperature
+Unit: celsius
+Median: 14.30
+------------------------
+Sensor ID: 9
+Write Counter: 50
+Type: atmospheric_temperature
+Unit: celsius
+Median: 14.30
+------------------------
+Sensor ID: 10
+Write Counter: 50
+Type: atmospheric_temperature
+Unit: ŒB
+Median: 14.30
+------------------------
