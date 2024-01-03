@@ -1,5 +1,6 @@
 package ui.user.gestor_agricola;
 
+import ui.funcionalidades.us_bd06.ObterQuantidadeFpPorTipoUI;
 import ui.funcionalidades.us_bd11.RegistarSementeiraUI;
 import ui.funcionalidades.us_bd12.RegistarMondaUI;
 import ui.funcionalidades.us_bd13.RegisterColheitaUI;
@@ -23,6 +24,7 @@ public class MenuConsultarDados implements Runnable{
     public void run() {
         List<MenuItem> options = new ArrayList<MenuItem>();
 
+        options.add(new MenuItem("Consultar Quantidade de Fatores Aplicados", new ObterQuantidadeFpPorTipoUI()));
         options.add(new MenuItem("Consultar Produtos Colhidos", new ObterProdutosColhidosUI()));
         options.add(new MenuItem("Consultar Fatores Aplicados", new ObterFPAplicadosUI()));
         options.add(new MenuItem("Consultar Operações", new ObterOperacoesUI()));

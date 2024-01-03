@@ -12,9 +12,9 @@ import java.util.Objects;
 
 public class OtherDataAccesses {
 
-    public ResultSet obterProdutosColhidos(int parcelaID,
-                                                 LocalDate dataInferior,
-                                                 LocalDate dataSuperior) {
+    public ResultSet obterFpPorTipo(int parcelaID,
+                                    LocalDate dataInicio,
+                                    LocalDate dataFim) {
 
         CallableStatement callStmt = null;
         ResultSet resultSet = null;
@@ -23,12 +23,12 @@ public class OtherDataAccesses {
             try {
 
                 Connection connection = DatabaseConnection.getInstance().getConnection();
-                callStmt = connection.prepareCall("{ ? = call obter_produtos_colhidos(?, ?, ?) }");
+                callStmt = connection.prepareCall("{ ? = call obter_quantidade_fp_por_tipo(?, ?, ?) }");
 
                 callStmt.registerOutParameter(1, OracleTypes.CURSOR);
                 callStmt.setInt(2, parcelaID);
-                callStmt.setDate(3, java.sql.Date.valueOf(dataInferior));
-                callStmt.setDate(4, java.sql.Date.valueOf(dataSuperior));
+                callStmt.setDate(3, java.sql.Date.valueOf(dataInicio));
+                callStmt.setDate(4, java.sql.Date.valueOf(dataFim));
 
                 callStmt.execute();
                 resultSet = (ResultSet) callStmt.getObject(1);
@@ -165,7 +165,7 @@ public class OtherDataAccesses {
     }
 
     public ResultSet obterTotaisMensaisRega(LocalDate dataInferior,
-                                       LocalDate dataSuperior) {
+                                            LocalDate dataSuperior) {
 
         CallableStatement callStmt = null;
         ResultSet resultSet = null;
