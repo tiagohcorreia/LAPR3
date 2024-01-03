@@ -45,39 +45,44 @@ begin
     return 1;
 end;
 
-create or replace function register_fertigation(sector_id SETOR_REGA.id%type,
-                                                operation_date OPERACAO_AGRICOLA.data%type,
-                                                duration REGA.duracao%type,
-                                                hour rega.hora%type,
-                                                mix_id RECEITA_FERTIRREGA.id%type)
+
+
+create or replace function register_fertigation(v_setor_id SETOR_REGA.id%type,
+                                                v_data_operacao OPERACAO_AGRICOLA.data%type,
+                                                v_duration REGA.duracao%type,
+                                                v_hora rega.hora%type,
+                                                v_receita_id RECEITA_FERTIRREGA.id%type)
     return number
     is
-    operation_id          OPERACAO_AGRICOLA.id%type;
-    parcels_and_varieties sys_refcursor            := GET_PARCELS_AND_VARIETIES_IN_SECTOR(sector_id,
-                                                                                          operation_date);
-    other_parcel_id       parcela.id%type;
-    other_variety_id      variedade.id%type;
-    fp_from_mix           sys_refcursor            := GET_FP_IN_MIX(mix_id);
-    other_fp_id           FATOR_PRODUCAO.id%type;
-    application_method_id METODO_APLICACAO.id%type := 4;
+    v_operacao_id           OPERACAO_AGRICOLA.id%type;
+    parcelas_variedades     sys_refcursor            := GET_PARCELS_AND_VARIETIES_IN_SECTOR(v_setor_id,
+                                                                                            v_data_operacao);
+    fps_receita             sys_refcursor            := GET_FP_IN_MIX(v_receita_id);
+    other_parcela_id        parcela.id%type;
+    other_variedade_id      variedade.id%type;
+    other_fp_id             FATOR_PRODUCAO.id%type;
+    last_other_parcela_id   parcela.id%type          := -1;
+    last_other_variedade_id variedade.id%type        := -1;
+    last_other_fp_id        FATOR_PRODUCAO.id%type   := -1;
+    v_metodo_aplicacao_id   METODO_APLICACAO.id%type := 4;
 begin
     select max(id)
-    into operation_id
+    into v_operacao_id
     from OPERACAO_AGRICOLA;
 
-    operation_id := operation_id + 1;
+    v_operacao_id := v_operacao_id + 1;
 
-    if CHECKIFOPERATIONIDEXISTS(operation_id) = 1 then
+    if CHECKIFOPERATIONIDEXISTS(v_operacao_id) = 1 then
         dbms_output.PUT_LINE('ERR0: ID inválido (já existe na tabela)');
         return 0;
     end if;
 
-    if CHECK_IF_SECTOR_EXISTS(sector_id, operation_date) = 0 then
+    if CHECK_IF_SECTOR_EXISTS(v_setor_id, v_data_operacao) = 0 then
         dbms_output.PUT_LINE('ERR0: ID de setor ou data inválido');
         return 0;
     end if;
 
-    if CHECK_IF_MIX_EXISTS(mix_id) = 0 then
+    if CHECK_IF_MIX_EXISTS(v_receita_id) = 0 then
         dbms_output.PUT_LINE('ERR0: ID de receita inválida (não existe na tabela)');
         return 0;
     end if;
@@ -85,27 +90,27 @@ begin
     savepoint sp;
 
     insert into OPERACAO_AGRICOLA(id, data, validade)
-    values (operation_id, operation_date, 1);
+    values (v_operacao_id, v_data_operacao, 1);
 
-    if CHECKIFOPERATIONIDEXISTS(operation_id) = 0 then
+    if CHECKIFOPERATIONIDEXISTS(v_operacao_id) = 0 then
         rollback to sp;
         DBMS_OUTPUT.PUT_LINE('Não foi possível fazer o registo na tabela OPERACAO_AGRICOLA');
         return 0;
     end if;
 
     INSERT INTO Rega(operacao_id, setor_id, duracao, hora)
-    VALUES (operation_id, sector_id, duration, hour);
+    VALUES (v_operacao_id, v_setor_id, v_duration, v_hora);
 
-    if CHECK_IF_WATERING_IS_REGISTERED(operation_id) = 0 then
+    if CHECK_IF_WATERING_IS_REGISTERED(v_operacao_id) = 0 then
         rollback to sp;
         DBMS_OUTPUT.PUT_LINE('Não foi possível fazer o registo na tabela REGA');
         return 0;
     end if;
 
     INSERT INTO Aplicacao_FP(Operacao_id)
-    VALUES (operation_id);
+    VALUES (v_operacao_id);
 
-    if IS_IN_TABLE_APLICACAO_FP(operation_id) = 0 then
+    if IS_IN_TABLE_APLICACAO_FP(v_operacao_id) = 0 then
         rollback to sp;
         DBMS_OUTPUT.PUT_LINE('Não foi possível fazer o registo na tabela APLICACAO_FP');
         return 0;
@@ -113,48 +118,54 @@ begin
 
 
     INSERT INTO APLICACAO_FP_VARIEDADE(Operacao_id, Metodo_Aplicacao_id)
-    VALUES (operation_id, application_method_id);
+    VALUES (v_operacao_id, v_metodo_aplicacao_id);
 
-    if IS_IN_TABLE_APLICACAO_FP_VARIEDADE(operation_id) = 0 then
+    if IS_IN_TABLE_APLICACAO_FP_VARIEDADE(v_operacao_id) = 0 then
         rollback to sp;
         DBMS_OUTPUT.PUT_LINE('Não foi possível fazer o registo na tabela APLICACAO_FP_VARIEDADE');
         return 0;
     end if;
 
-
     loop
-        fetch fp_from_mix into other_fp_id;
+        fetch parcelas_variedades into other_parcela_id, other_variedade_id;
 
-        INSERT INTO FP_APLICADOS(Operacao_id, fp_id, quantidade, unidade)
-        VALUES (operation_id, other_fp_id, null, null);
+        if (not (last_other_parcela_id = other_parcela_id and last_other_variedade_id = other_variedade_id)) then
+            INSERT INTO Parcelas_Variedades_Aplicadas(Operacao_id, Parcela_id, Variedade_id)
+            VALUES (v_operacao_id, other_parcela_id, other_variedade_id);
 
-        if IS_IN_TABLE_FP_APLICADOS(operation_id, other_fp_id) = 0 then
-            rollback to sp;
-            DBMS_OUTPUT.PUT_LINE('Não foi possível fazer o registo na tabela FP_APLICADOS');
-            return 0;
+            if IS_IN_TABLE_PARCELAS_VARIEDADES_APLICADAS(v_operacao_id, other_parcela_id, other_variedade_id) = 0 then
+                DBMS_OUTPUT.PUT_LINE('Não foi possível fazer o registo na tabela PARCELAS_VARIEDADES_APLICADAS');
+                return 0;
+            end if;
         end if;
 
-        exit when fp_from_mix%notfound;
+        last_other_parcela_id := other_parcela_id;
+        last_other_variedade_id := other_variedade_id;
+
+        exit when parcelas_variedades%notfound;
     end loop;
 
     loop
-        fetch parcels_and_varieties into other_parcel_id, other_variety_id;
+        fetch fps_receita into other_fp_id;
 
-        INSERT INTO Parcelas_Variedades_Aplicadas(Operacao_id, Parcela_id, Variedade_id)
-        VALUES (operation_id, other_parcel_id, other_variety_id);
+        if (not last_other_fp_id = other_fp_id) then
+            INSERT INTO FP_APLICADOS(Operacao_id, fp_id)
+            VALUES (v_operacao_id, other_fp_id);
 
-        if IS_IN_TABLE_PARCELAS_VARIEDADES_APLICADAS(operation_id, other_parcel_id, other_variety_id) = 0 then
-            rollback to sp;
-            DBMS_OUTPUT.PUT_LINE('Não foi possível fazer o registo na tabela PARCELAS_VARIEDADES_APLICADAS');
-            return 0;
+            if IS_IN_TABLE_FP_APLICADOS(v_operacao_id, other_fp_id) = 0 then
+                DBMS_OUTPUT.PUT_LINE('Não foi possível fazer o registo na tabela FP_APLICADOS');
+                return 0;
+            end if;
         end if;
 
-        exit when parcels_and_varieties%notfound;
+        last_other_fp_id := other_fp_id;
+        exit when fps_receita%notfound;
     end loop;
 
     commit;
     return 1;
 end;
+
 
 
 create or replace function check_if_watering_is_registered(id rega.operacao_id%type)
