@@ -9,12 +9,9 @@ import watering_system_manager.watering_plan.WateringPlanEntry;
 import watering_system_manager.watering_plan.WateringPlanEntryComparator;
 
 import java.io.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.ZoneId;
 import java.util.*;
 
 
@@ -107,7 +104,7 @@ public class WateringPlanGenerator {
 
                         if (elements.length == 3 || elements.length == 5) {
                             String sector = elements[0];
-                            if (!repo.getWateringSectors().isThereSector(sector)) {
+                            if (!repo.getSetoresRega().isThereSector(sector)) {
                                 throw new InvalidSectorException();
                             }
 
@@ -126,7 +123,7 @@ public class WateringPlanGenerator {
                             if (elements.length == 5) {
                                 String mix = elements[3];
 
-                                if (repo.getFertigationMixes().isThereMix(mix)) {
+                                if (repo.getReceitasFertirrega().isThereMix(mix)) {
 
                                     int fertigationRecurrence;
                                     try {

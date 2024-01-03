@@ -916,11 +916,11 @@ VALUES (13, 5, 0.000020);
 
 --Matéria Orgânica Líquida, Tecniferti MOL, da Tecniferti, líquido, Matéria Orgânica 27%, Azoto (N) 3,6%, Azoto orgânico (N) 2%,
 -- Fósforo total (P2O5) 1%, Potássio total (K2O) 3%, Carbono Orgânico Total (COT) 15%, Ácidos Fúlvicos (AF) 10%
-INSERT INTO Fator_Producao(id, nome, tipo_id, formulacao_id)
-VALUES (14, 'Tecniferti MOL', 4, 4);
-
 insert into TIPO_FP(id, tipo)
 values (4, 'Matéria Orgânica Líquida');
+
+INSERT INTO Fator_Producao(id, nome, tipo_id, formulacao_id)
+VALUES (14, 'Tecniferti MOL', 4, 4);
 
 INSERT INTO Composto_Quimico(id, nome)
 VALUES (19, 'Azoto orgânico (N)');
@@ -946,11 +946,11 @@ VALUES (14, 21, 10);
 
 
 --Adubo orgânico, soluSOP 52, da K+S, pó molhavel, Enxofre (SO3) 45%, Potássio total (K2O) 52,5%, pH 7
-INSERT INTO Fator_Producao(id, nome, tipo_id, formulacao_id)
-VALUES (15, 'soluSOP 52', 5, 1);
-
 insert into TIPO_FP(id, tipo)
 values (5, 'Adubo orgânico');
+
+INSERT INTO Fator_Producao(id, nome, tipo_id, formulacao_id)
+VALUES (15, 'soluSOP 52', 5, 1);
 
 INSERT INTO Composto_Quimico(id, nome)
 VALUES (22, 'Enxofre (SO3)');
@@ -962,11 +962,11 @@ VALUES (15, 15, 52.5);
 
 
 --Adubo líquido, Floracal Flow SL, da Plymag, líquido, pH 7.8, densidade 1,6 kg/l, Óxido de calcio (CaO) 35%
-INSERT INTO Fator_Producao(id, nome, tipo_id, formulacao_id)
-VALUES (16, 'Floracal Flow SL', 6, 4);
-
 insert into TIPO_FP(id, tipo)
 values (6, 'Adubo líquido');
+
+INSERT INTO Fator_Producao(id, nome, tipo_id, formulacao_id)
+VALUES (16, 'Floracal Flow SL', 6, 4);
 
 INSERT INTO Composto_Quimico(id, nome)
 VALUES (23, 'Óxido de calcio (CaO)');
@@ -2515,7 +2515,7 @@ insert into OPERACAO_AGRICOLA(id, data, instante_registo, validade)
 VALUES (451, to_date('17/07/2023', 'dd/mm/yyyy'), null, 1);
 
 insert into REGA(operacao_id, setor_id, duracao, hora)
-VALUES (450, 10, 30, '05:00');
+VALUES (451, 10, 30, '05:00');
 
 -- 17/08/2023 operação de rega, setor 10, 60 min, 05:00
 insert into OPERACAO_AGRICOLA(id, data, instante_registo, validade)
@@ -3072,7 +3072,6 @@ VALUES (449, 41, 120, '07:00');
 INSERT INTO METODO_EXECUCAO(ID, NOME)
 VALUES (1, 'Manual');
 INSERT INTO METODO_EXECUCAO(ID, NOME)
-VALUES (2, 'Mecânica');INSERT INTO METODO_EXECUCAO(ID, NOME)
 VALUES (2, 'Mecânica');
 
 commit;

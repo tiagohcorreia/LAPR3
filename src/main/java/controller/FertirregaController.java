@@ -3,7 +3,7 @@ package controller;
 import dataAccess.DatabaseConnection;
 import dataAccess.FatorProducaoRepository;
 import dataAccess.Repositories;
-import dataAccess.fertigation_mixes.FertigationMixesRepository;
+import dataAccess.fertigation_mixes.ReceitasFertirregaRepository;
 
 import java.sql.*;
 import java.util.AbstractMap;
@@ -13,7 +13,7 @@ import java.util.Objects;
 
 public class FertirregaController {
     private DatabaseConnection database;
-    private FertigationMixesRepository fertigationMixesRepository;
+    private ReceitasFertirregaRepository receitasFertirregaRepository;
     private FatorProducaoRepository fatorProducaoRepository;
 
     {
@@ -35,13 +35,13 @@ public class FertirregaController {
         }
     }
 
-    private FertigationMixesRepository getFertirregaRepository() {
-        if (Objects.isNull(fertigationMixesRepository)) {
+    private ReceitasFertirregaRepository getFertirregaRepository() {
+        if (Objects.isNull(receitasFertirregaRepository)) {
             Repositories repositories = Repositories.getInstance();
-            fertigationMixesRepository= repositories.getFertigationMixes();
+            receitasFertirregaRepository = repositories.getReceitasFertirrega();
             fatorProducaoRepository = repositories.getFatorProducaoRepository();
         }
-        return fertigationMixesRepository;
+        return receitasFertirregaRepository;
     }
 
 
@@ -106,9 +106,9 @@ public class FertirregaController {
         }
         List<AbstractMap.SimpleEntry<Integer, Integer>> parcelaVariedadePairs = getParcelaAndVariedade(setorNome);
         fatorProducaoRepository.registerAplicacaoFP(operacaoId,quantidade);
-        fertigationMixesRepository.registerAplicacaoFPVariedade(operacaoId);
-        fertigationMixesRepository.registerParcelasVariedadesAplicadas(operacaoId,parcelaVariedadePairs);
-        fertigationMixesRepository.registerFpAplicados(operacaoId,fpIds);
+        receitasFertirregaRepository.registerAplicacaoFPVariedade(operacaoId);
+        receitasFertirregaRepository.registerParcelasVariedadesAplicadas(operacaoId,parcelaVariedadePairs);
+        receitasFertirregaRepository.registerFpAplicados(operacaoId,fpIds);
     }
 
     public List<AbstractMap.SimpleEntry<Integer, Integer>> getParcelaAndVariedade(String setorNome) {

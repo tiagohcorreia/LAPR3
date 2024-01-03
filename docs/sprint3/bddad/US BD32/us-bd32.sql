@@ -53,8 +53,8 @@ create or replace function register_fertigation(sector_id SETOR_REGA.id%type,
     return number
     is
     operation_id          OPERACAO_AGRICOLA.id%type;
-    parcels_and_varieties sys_refcursor            := MARCELO4.GET_PARCELS_AND_VARIETIES_IN_SECTOR(sector_id,
-                                                                                                   operation_date);
+    parcels_and_varieties sys_refcursor            := GET_PARCELS_AND_VARIETIES_IN_SECTOR(sector_id,
+                                                                                          operation_date);
     other_parcel_id       parcela.id%type;
     other_variety_id      variedade.id%type;
     fp_from_mix           sys_refcursor            := GET_FP_IN_MIX(mix_id);

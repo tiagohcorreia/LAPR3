@@ -3,7 +3,7 @@ package domain;
 import java.util.Date;
 import java.util.Objects;
 
-public class WateringSector {
+public class SetorRega implements DatabaseObject{
     private int id;
     private String name;
     private float area;
@@ -20,7 +20,7 @@ public class WateringSector {
     private final Date DEFAULT_END_DATE=new Date();
     private final int DEFAULT_DISPENSING_METHOD_ID=-1;
 
-    public WateringSector() {
+    public SetorRega() {
         this.id = DEFAULT_ID;
         this.name=DEFAULT_NAME;
         this.area = DEFAULT_AREA;
@@ -30,7 +30,7 @@ public class WateringSector {
         this.dispensingMethodId = DEFAULT_DISPENSING_METHOD_ID;
     }
 
-    public WateringSector(int id, String name, float area, float maximumFlowRate, Date beginDate, Date endDate, int dispensingMethodId) {
+    public SetorRega(int id, String name, float area, float maximumFlowRate, Date beginDate, Date endDate, int dispensingMethodId) {
         this.id = id;
         this.name = name;
         this.area = area;
@@ -40,7 +40,7 @@ public class WateringSector {
         this.dispensingMethodId = dispensingMethodId;
     }
 
-    public int getId() {
+    public int getID() {
         return id;
     }
 
@@ -100,15 +100,15 @@ public class WateringSector {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        WateringSector that = (WateringSector) o;
-        return getId() == that.getId() &&
+        SetorRega that = (SetorRega) o;
+        return getID() == that.getID() &&
                 getName().equals(that.getName()) &&
                 Float.compare(getArea(), that.getArea()) == 0 && Float.compare(getMaximumFlowRate(), that.getMaximumFlowRate()) == 0 && getDispensingMethodId() == that.getDispensingMethodId() && Objects.equals(getBeginDate(), that.getBeginDate()) && Objects.equals(getEndDate(), that.getEndDate());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(),getArea(), getMaximumFlowRate(), getBeginDate(), getEndDate(), getDispensingMethodId());
+        return Objects.hash(getID(), getName(),getArea(), getMaximumFlowRate(), getBeginDate(), getEndDate(), getDispensingMethodId());
     }
 
     @Override

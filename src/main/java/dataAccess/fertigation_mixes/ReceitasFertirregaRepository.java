@@ -2,8 +2,7 @@ package dataAccess.fertigation_mixes;
 
 import dataAccess.DatabaseConnection;
 import oracle.jdbc.OracleTypes;
-import domain.FertigationMix;
-import org.apache.commons.lang3.tuple.Pair;
+import domain.ReceitaFertirrega;
 
 import java.sql.*;
 import java.util.AbstractMap;
@@ -11,18 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class FertigationMixesRepository {
+public class ReceitasFertirregaRepository {
 
-
-
-
-    public ArrayList<FertigationMix> getFertigationMixes() {
+    public ArrayList<ReceitaFertirrega> getReceitas() {
 
         CallableStatement callStmt = null;
         ResultSet resultSet = null;
-        ArrayList<FertigationMix> mixes = null;
-
-
+        ArrayList<ReceitaFertirrega> mixes = null;
 
         try{
             try {
@@ -31,7 +25,7 @@ public class FertigationMixesRepository {
                 callStmt = connection.prepareCall("{ ? = call get_fertigation_mixes() }");
                 callStmt.registerOutParameter(1, OracleTypes.CURSOR);
                 callStmt.execute();
-                resultSet = (ResultSet) callStmt.getObject(1);
+                resultSet = callStmt.getResultSet();
 
                 mixes = resultSetToList(resultSet);
 
@@ -51,13 +45,13 @@ public class FertigationMixesRepository {
         return mixes;
     }
 
-    private ArrayList<FertigationMix> resultSetToList(ResultSet resultSet) throws SQLException {
+    private ArrayList<ReceitaFertirrega> resultSetToList(ResultSet resultSet) throws SQLException {
 
-        ArrayList<FertigationMix> mixes = new ArrayList<>();
+        ArrayList<ReceitaFertirrega> mixes = new ArrayList<>();
 
         while (resultSet.next()) {
 
-            FertigationMix mix = new FertigationMix(
+            ReceitaFertirrega mix = new ReceitaFertirrega(
                     resultSet.getInt("id"),
                     resultSet.getString("nome")
             );

@@ -2,15 +2,15 @@ package dataAccess.fertigation_mixes;
 
 import dataAccess.Repositories;
 import org.junit.jupiter.api.Test;
-import domain.FertigationMix;
+import domain.ReceitaFertirrega;
 
-class FertigationMixesRepositoryTest {
+class ReceitasFertirregaRepositoryTest {
 
     Repositories repo=Repositories.getInstance();
 
     @Test
     void getFertigationMixes() {
-        for (FertigationMix m: repo.getFertigationMixes().getFertigationMixes()){
+        for (ReceitaFertirrega m: repo.getReceitasFertirrega().getReceitas()){
             System.out.println(m);
         }
     }
