@@ -1,11 +1,11 @@
 package ui.user;
 
 import ui.funcionalidades.*;
-import ui.funcionalidades.us_bd11.RegisterSeedingUI;
+import ui.funcionalidades.us_bd11.RegistarSementeiraUI;
 import ui.funcionalidades.us_bd12.RegistarMondaUI;
 import ui.funcionalidades.us_bd13.RegisterColheitaUI;
 import ui.funcionalidades.us_bd14.RegisterFpApplicationUI;
-import ui.funcionalidades.us_bd15.RegisterPruningUI;
+import ui.funcionalidades.us_bd15.RegistarPodaUI;
 import ui.funcionalidades.us_bd32.RegisterWateringOperationUI;
 import ui.menu.MenuItem;
 import ui.utils.Utils;
@@ -24,11 +24,11 @@ public class GestorAgricolaUI implements Runnable {
 
         List<MenuItem> options = new ArrayList<MenuItem>();
 
-        options.add(new MenuItem("Registar Sementeira", new RegisterSeedingUI()));
+        options.add(new MenuItem("Registar Sementeira", new RegistarSementeiraUI()));
         options.add(new MenuItem("Registar Colheita", new RegisterColheitaUI()));
         options.add(new MenuItem("Registar Monda", new RegistarMondaUI()));
         options.add(new MenuItem("Registar Aplicacao FP", new RegisterFpApplicationUI()));
-        options.add(new MenuItem("Registar Poda", new RegisterPruningUI()));
+        options.add(new MenuItem("Registar Poda", new RegistarPodaUI()));
         options.add(new MenuItem("Registar Rega (Fertirrega)", new RegisterWateringOperationUI()));
         options.add(new MenuItem("Cancelar Operação Agrícola", new CancelarOperacaoUI()));
         options.add(new MenuItem("Gerar Plano de Rega", new RegaUI()));

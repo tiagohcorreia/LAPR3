@@ -1,14 +1,15 @@
 package dataAccess;
 
-import dataAccess.aplicacoes_fp.AplicacaoFPRepo;
+import dataAccess.aplicacoes_fp.AplicacoesFPRepo;
 import dataAccess.execution_methods.MetodoExecucaoRepository;
 import dataAccess.fatores_producao.FatorProducaoRepository;
 import dataAccess.fertigation_mixes.ReceitasFertirregaRepository;
 import dataAccess.metodos_aplicacao.MetodosAplicacaoRepo;
 import dataAccess.operacoes_colheita.ColheitaRepository;
+import dataAccess.operacoes_monda.MondaRepository;
 import dataAccess.operacoes_poda.PodaRepository;
 import dataAccess.produtos.ProdutoRepo;
-import dataAccess.seeding_operations.SeedingOperationsRepository;
+import dataAccess.operacoes_sementeira.OperacoesSementeiraRepo;
 import dataAccess.varieties.VariedadeRepository;
 import dataAccess.setores_rega.SetoresRegaRepository;
 import esinf.store.GraphStore;
@@ -16,7 +17,7 @@ import esinf.store.GraphStore;
 public class Repositories {
 
     private static final Repositories instance = new Repositories();
-    private SeedingOperationsRepository SeedingOperationsRepository = null;
+    private OperacoesSementeiraRepo OperacoesSementeiraRepo = null;
     private ColheitaRepository colheitaRepository = null;
     private MondaRepository mondaRepository = null;
     private ParcelaRepository parcelaRepository = null;
@@ -32,10 +33,10 @@ public class Repositories {
     private MetodosAplicacaoRepo metodosAplicacao=new MetodosAplicacaoRepo();
     private ProdutoRepo produtos=new ProdutoRepo();
 
-    private AplicacaoFPRepo aplicacoesFP=new AplicacaoFPRepo();
+    private AplicacoesFPRepo aplicacoesFP=new AplicacoesFPRepo();
 
     private Repositories() {
-        SeedingOperationsRepository = new SeedingOperationsRepository();
+        OperacoesSementeiraRepo = new OperacoesSementeiraRepo();
         colheitaRepository = new ColheitaRepository();
         mondaRepository = new MondaRepository();
         operacaoAgricolaRepository  = new OperacaoAgricolaRepository();
@@ -56,8 +57,8 @@ public class Repositories {
     public ParcelaRepository getParcelaRepository() {
         return parcelaRepository;
     }
-    public SeedingOperationsRepository getSeedingOperationsRepository() {
-        return SeedingOperationsRepository;
+    public OperacoesSementeiraRepo getOperacoesSementeiraRepo() {
+        return OperacoesSementeiraRepo;
     }
     public ColheitaRepository getColheitaRepository() { return colheitaRepository; }
     public OperacaoAgricolaRepository getOperacaoAgricolaRepository() { return operacaoAgricolaRepository;}
@@ -84,7 +85,7 @@ public class Repositories {
     public MetodosAplicacaoRepo getMetodosAplicacao(){
         return metodosAplicacao;
     }
-    public AplicacaoFPRepo getAplicacoesFP() {
+    public AplicacoesFPRepo getAplicacoesFP() {
         return aplicacoesFP;
     }
 

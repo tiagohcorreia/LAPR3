@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class AplicacaoFPRepo {
+public class AplicacoesFPRepo {
 
     public boolean registarAplicacaoFPSolo(int parcelaID,
                                            double quantidade,

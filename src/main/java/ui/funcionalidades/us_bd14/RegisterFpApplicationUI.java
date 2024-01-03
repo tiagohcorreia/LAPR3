@@ -27,12 +27,13 @@ public class RegisterFpApplicationUI implements Runnable {
 
     public void run() {
         System.out.println("---------------- REGISTAR APLICAÇÃO DE FATOR DE PRODUÇÃO ----------------\n");
+        askIsAplicacaoFPSolo();
         if (isAplicacaoFPSolo) {
             getParcelID();
+            getFatorProducaoID();
+            getArea();
             getQuantidade();
             getUnidade();
-            getArea();
-            getFatorProducaoID();
             getDataOperacao();
         } else {
             getParcelID();
@@ -122,7 +123,6 @@ public class RegisterFpApplicationUI implements Runnable {
             System.out.printf("Área: %.2f\n", area);
             System.out.printf("Quantidade: %.2f%s\n", quantidade, unidade);
             System.out.printf("Data da operação: %s\n", data);
-            System.out.println();
         } else {
             System.out.printf("ID Parcela: %d\n", parcelaID);
             System.out.printf("ID Variedade: %d\n", variedadeID);

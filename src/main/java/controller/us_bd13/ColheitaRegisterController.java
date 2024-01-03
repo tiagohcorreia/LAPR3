@@ -22,6 +22,6 @@ public class ColheitaRegisterController {
     }
 
     public boolean registerColheita(LocalDate data, int parcelaId, int produtoId, double quantidade, int metodoExecucaoId){
-        return repo.getColheitaRepository().colheitaRegister(data, parcelaId, produtoId, quantidade, metodoExecucaoId);
+        return repo.getColheitaRepository().registarColheita(data, parcelaId, produtoId, quantidade, metodoExecucaoId);
     }
 }

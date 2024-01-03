@@ -1,7 +1,9 @@
-package ui.funcionalidades.us_bd13;
+package ui.funcionalidades.us_bd11;
 
-import controller.us_bd13.ColheitaRegisterController;
-import domain.*;
+import controller.us_bd11.RegistarSementeiraController;
+import domain.MetodoExecucao;
+import domain.Parcela;
+import domain.Variedade;
 import ui.utils.Utils;
 
 import java.time.LocalDate;
@@ -9,26 +11,30 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
-public class RegisterColheitaUI implements Runnable {
+public class RegistarSementeiraUI implements Runnable {
 
-    private ColheitaRegisterController ctrl = new ColheitaRegisterController();
+    private RegistarSementeiraController ctrl = new RegistarSementeiraController();
     private int parcelaID;
-    private int produtoID;
+    private int variedadeID;
     private int metodoExecucaoID;
+    private double area;
     private double quantidade;
+    private String unidade;
     private LocalDate data;
 
     public void run() {
-        System.out.println("---------------- REGISTAR COLHEITA ----------------\n");
+        System.out.println("---------------- REGISTAR SEMENTEIRA ----------------\n");
         getParcelID();
-        getProdutoID();
+        getVariedadeID();
         getMetodoExecucaoID();
+        getArea();
         getQuantidade();
+        getUnidade();
         getDataOperacao();
 
         if (getConfirmation()) {
             boolean out;
-            out = ctrl.registerColheita(data, parcelaID, produtoID, quantidade, metodoExecucaoID);
+            out = ctrl.registarSementeira(data, parcelaID, variedadeID,quantidade, area, metodoExecucaoID);
             if (out) {
                 System.out.println("Operação registada com sucesso\n");
             } else System.out.println("Não foi possível registar a operação\n");
@@ -41,9 +47,9 @@ public class RegisterColheitaUI implements Runnable {
         parcelaID = Utils.getTableIdFromConsole(parcelas, "ID", "PARCELA", "Introduza o id da parcela:");
     }
 
-    private void getProdutoID() {
-        List<Produto> produtos = ctrl.getProdutosInParcela(parcelaID);
-        produtoID = Utils.getTableIdFromConsole(produtos, "ID", "PRODUTO", "Introduza o id da produto");
+    private void getVariedadeID() {
+        List<Variedade> variedades = ctrl.getVarietiesInParcel(parcelaID);
+        variedadeID = Utils.getTableIdFromConsole(variedades, "ID", "VARIEDADE", "Introduza o id da variedade");
     }
 
     private void getMetodoExecucaoID() {
@@ -51,14 +57,28 @@ public class RegisterColheitaUI implements Runnable {
         metodoExecucaoID = Utils.getTableIdFromConsole(metodosExecucao, "ID", "MÉTODO DE EXECUÇÃO", "Introduza o id do método de execução");
     }
 
+    private void getArea() {
+        boolean valid = false;
+        do {
+            area = Utils.readDoubleFromConsole("Introduza a área da sementeira, em hectares:");
+            if (area > 0) {
+                valid = true;
+            } else System.err.println("ERRO: Valor introduzido inválido\n");
+        } while (!valid);
+    }
+
     private void getQuantidade() {
         boolean valid = false;
         do {
-            quantidade = Utils.readDoubleFromConsole("Introduza a quantidade colhida, em Kg:");
+            quantidade = Utils.readDoubleFromConsole("Introduza a quantidade semeada, em Kg:");
             if (quantidade > 0) {
                 valid = true;
             } else System.err.println("ERRO: Valor introduzido inválido\n");
         } while (!valid);
+    }
+
+    private void getUnidade(){
+        unidade=Utils.readLineFromConsole("Introduza a unidade:");
     }
 
     private void getDataOperacao() {
@@ -70,9 +90,10 @@ public class RegisterColheitaUI implements Runnable {
         System.out.println("----------------- DADOS DA OPERAÇÃO -----------------\n");
 
         System.out.printf("ID Parcela: %d\n", parcelaID);
-        System.out.printf("ID Produto: %d\n", produtoID);
+        System.out.printf("ID Variedade: %d\n", variedadeID);
         System.out.printf("ID Método de execução: %d\n", metodoExecucaoID);
-        System.out.printf("Quantidade: %.2fkg\n", quantidade);
+        System.out.printf("Área: %.2f\n", area);
+        System.out.printf("Quantidade: %.2f%s\n", quantidade, unidade);
         System.out.printf("Data da operação: %s\n", data);
 
         System.out.println();
@@ -80,4 +101,3 @@ public class RegisterColheitaUI implements Runnable {
         return Utils.getBooleanAnswer("Deseja registrar a operação:");
     }
 }
-

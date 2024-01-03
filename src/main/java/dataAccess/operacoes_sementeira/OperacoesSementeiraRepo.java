@@ -1,4 +1,4 @@
-package dataAccess.seeding_operations;
+package dataAccess.operacoes_sementeira;
 
 import dataAccess.DatabaseConnection;
 import domain.Sementeira;
@@ -10,9 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class SeedingOperationsRepository {
+public class OperacoesSementeiraRepo {
 
-    public boolean registerSeeding(LocalDate date, int parcelaId, int variedadeId, float quantidade, float area, int metodoExecucaoId) {
+    public boolean registarSementeira(LocalDate date,
+                                      int parcelaId,
+                                      int variedadeId,
+                                      double quantidade,
+                                      double area,
+                                      int metodoExecucaoId) {
 
         CallableStatement callableStatement = null;
         try {
@@ -25,8 +30,8 @@ public class SeedingOperationsRepository {
                 callableStatement.setInt(2, parcelaId);
                 callableStatement.setInt(3, variedadeId);
                 callableStatement.setDate(4, java.sql.Date.valueOf(date));
-                callableStatement.setFloat(5, quantidade);
-                callableStatement.setFloat(6, area);
+                callableStatement.setDouble(5, quantidade);
+                callableStatement.setDouble(6, area);
                 callableStatement.setInt(7, metodoExecucaoId);
 
                 callableStatement.execute();

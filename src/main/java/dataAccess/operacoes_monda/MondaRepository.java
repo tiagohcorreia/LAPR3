@@ -1,16 +1,18 @@
 
-package dataAccess;
+package dataAccess.operacoes_monda;
 
-        import java.sql.CallableStatement;
-        import java.sql.Connection;
-        import java.sql.ResultSet;
-        import java.sql.SQLException;
-        import java.util.ArrayList;
-        import java.util.List;
-        import java.util.Objects;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
-        import domain.Monda;
-        import oracle.jdbc.OracleTypes;
+import dataAccess.DatabaseConnection;
+import domain.Monda;
+import oracle.jdbc.OracleTypes;
 
 public class MondaRepository {
 
@@ -45,27 +47,36 @@ public class MondaRepository {
         return mondas;
     }
 
-    public static void mondaRegister(int operacaoId, int parcelaId, int variedadeId,int fatorProducaoId, int metodoExecucaoId, float quantidade) throws SQLException {
+    public boolean registarMonda(int parcelaId,
+                                 int variedadeId,
+                                 int metodoExecucaoId,
+                                 double quantidade,
+                                 LocalDate data) {
 
         CallableStatement callStmt = null;
         try {
-            Connection connection = DatabaseConnection.getInstance().getConnection();
-            callStmt = connection.prepareCall("{ call registrarMonda(?,?,?,?,?,?) }");
+            try {
+                Connection connection = DatabaseConnection.getInstance().getConnection();
+                callStmt = connection.prepareCall("{ ? = call registar_Monda(?,?,?,?,?) }");
 
-            callStmt.setInt(1, operacaoId);
-            callStmt.setInt(2, parcelaId);
-            callStmt.setInt(3, variedadeId);
-            callStmt.setInt(4, fatorProducaoId);
-            callStmt.setInt(5, metodoExecucaoId);
-            callStmt.setFloat(6, quantidade);
+                callStmt.registerOutParameter(1, OracleTypes.NUMBER);
+                callStmt.setInt(2, parcelaId);
+                callStmt.setInt(3, variedadeId);
+                callStmt.setDouble(4, quantidade);
+                callStmt.setInt(5, metodoExecucaoId);
+                callStmt.setDate(6, java.sql.Date.valueOf(data));
 
-            callStmt.execute();
-            connection.commit();
-        } finally {
-            if (!Objects.isNull(callStmt)) {
-                callStmt.close();
+                callStmt.execute();
+                return callStmt.getInt(1) == 1;
+            } finally {
+                if (!Objects.isNull(callStmt)) {
+                    callStmt.close();
+                }
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+        return false;
     }
 
     public int mondaDelete(int operacaoId) throws SQLException {

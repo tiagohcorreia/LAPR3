@@ -47,7 +47,7 @@ public class ColheitaRepository {
         return colheitas;
     }
 
-    public boolean colheitaRegister(LocalDate data, int parcelaId, int produtoId, double quantidade, int metodoExecucaoId) {
+    public boolean registarColheita(LocalDate data, int parcelaId, int produtoId, double quantidade, int metodoExecucaoId) {
 
         CallableStatement callStmt = null;
 

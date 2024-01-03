@@ -12,10 +12,10 @@ import oracle.jdbc.OracleTypes;
 public class PodaRepository {
 
 
-    public boolean podaRegister(LocalDate date,
+    public boolean registarPoda(LocalDate date,
                                 int parcelaId,
                                 int variedadeId,
-                                float quantidade,
+                                double quantidade,
                                 int metodoExecucaoId) {
 
         CallableStatement callStmt = null;
@@ -23,13 +23,13 @@ public class PodaRepository {
         try {
             try {
                 Connection connection = DatabaseConnection.getInstance().getConnection();
-                callStmt = connection.prepareCall("{ ? = call REGISTARPODA(?,?,?,?,?) }");
+                callStmt = connection.prepareCall("{ ? = call registar_Poda(?,?,?,?,?) }");
 
                 callStmt.registerOutParameter(1, OracleTypes.NUMBER);
                 callStmt.setInt(2, parcelaId);
                 callStmt.setInt(3, variedadeId);
                 callStmt.setDate(4, java.sql.Date.valueOf(date));
-                callStmt.setFloat(5, quantidade);
+                callStmt.setDouble(5, quantidade);
                 callStmt.setInt(6, metodoExecucaoId);
 
                 callStmt.execute();
