@@ -1,8 +1,6 @@
 package ui.user.gestor_agricola;
 
-import ui.funcionalidades.CancelarOperacaoUI;
-import ui.funcionalidades.EstadoRegaUI;
-import ui.funcionalidades.RegaUI;
+import ui.funcionalidades.us_bd30.CancelarOperacaoUI;
 import ui.funcionalidades.us_bd11.RegistarSementeiraUI;
 import ui.funcionalidades.us_bd12.RegistarMondaUI;
 import ui.funcionalidades.us_bd13.RegisterColheitaUI;

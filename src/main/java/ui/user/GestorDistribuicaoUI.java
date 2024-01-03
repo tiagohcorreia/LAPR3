@@ -3,6 +3,8 @@ package ui.user;
 import ui.funcionalidades.*;
 import ui.funcionalidades.us_ei02.SetHubsUI;
 import ui.funcionalidades.us_ei06.GetPossibleRoutesUI;
+import ui.funcionalidades.us_ei09.OrganizeGraphIntoClustersUI;
+import ui.funcionalidades.us_ei11.LoadHubsFromFileUI;
 import ui.menu.MenuItem;
 import ui.utils.Utils;
 

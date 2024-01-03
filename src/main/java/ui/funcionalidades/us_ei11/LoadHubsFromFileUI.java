@@ -1,4 +1,4 @@
-package ui.funcionalidades;
+package ui.funcionalidades.us_ei11;
 
 import controller.LoadHubsFromFileController;
 
