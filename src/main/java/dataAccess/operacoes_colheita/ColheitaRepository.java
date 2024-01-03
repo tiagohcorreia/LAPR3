@@ -1,69 +1,79 @@
-package dataAccess;
+package dataAccess.operacoes_colheita;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import dataAccess.DatabaseConnection;
 import domain.Colheita;
 import oracle.jdbc.OracleTypes;
 
 public class ColheitaRepository {
 
-    public ColheitaRepository() {
-    }
-
-    public List<Colheita> getColheitas() throws SQLException {
+    public List<Colheita> getColheitas() {
 
         CallableStatement callStmt = null;
         ResultSet resultSet = null;
         List<Colheita> colheitas = null;
 
         try {
-            Connection connection = DatabaseConnection.getInstance().getConnection();
-            callStmt = connection.prepareCall("{ ? = call fncColheitas() }");
+            try {
+                Connection connection = DatabaseConnection.getInstance().getConnection();
+                callStmt = connection.prepareCall("{ ? = call fncColheitas() }");
 
-            callStmt.registerOutParameter(1, OracleTypes.CURSOR);
+                callStmt.registerOutParameter(1, OracleTypes.CURSOR);
 
-            callStmt.execute();
-            resultSet = (ResultSet) callStmt.getObject(1);
+                callStmt.execute();
+                resultSet = (ResultSet) callStmt.getObject(1);
 
-            colheitas = resultSetToList(resultSet);
-        } finally {
-            if (!Objects.isNull(callStmt)) {
-                callStmt.close();
+                colheitas = resultSetToList(resultSet);
+            } finally {
+                if (!Objects.isNull(callStmt)) {
+                    callStmt.close();
+                }
+                if (!Objects.isNull(resultSet)) {
+                    resultSet.close();
+                }
             }
-            if (!Objects.isNull(resultSet)) {
-                resultSet.close();
-            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return colheitas;
     }
 
-    public static void colheitaRegister(int operacaoId, int parcelaId, int produtoId, int metodoExecucaoId, float quantidade) throws SQLException {
+    public boolean colheitaRegister(LocalDate data, int parcelaId, int produtoId, double quantidade, int metodoExecucaoId) {
 
         CallableStatement callStmt = null;
+
         try {
-            Connection connection = DatabaseConnection.getInstance().getConnection();
-            callStmt = connection.prepareCall("{ call registrarColheita(?,?,?,?,?) }");
+            try {
+                Connection connection = DatabaseConnection.getInstance().getConnection();
+                callStmt = connection.prepareCall("{ ? = call registar_Colheita(?,?,?,?,?) }");
 
-            callStmt.setInt(1, operacaoId);
-            callStmt.setInt(2, parcelaId);
-            callStmt.setInt(3, produtoId);
-            callStmt.setInt(4, metodoExecucaoId);
-            callStmt.setFloat(5, quantidade);
+                callStmt.registerOutParameter(1, OracleTypes.NUMBER);
+                callStmt.setDate(2, java.sql.Date.valueOf(data));
+                callStmt.setInt(3, parcelaId);
+                callStmt.setInt(4, produtoId);
+                callStmt.setDouble(5, quantidade);
+                callStmt.setInt(6, metodoExecucaoId);
 
-            callStmt.execute();
-            connection.commit();
-        } finally {
-            if (!Objects.isNull(callStmt)) {
-                callStmt.close();
+                callStmt.execute();
+                return callStmt.getInt(1) == 1;
+            } finally {
+                if (!Objects.isNull(callStmt)) {
+                    callStmt.close();
+                }
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+        return false;
     }
 
     public int colheitaDelete(int operacaoId) throws SQLException {

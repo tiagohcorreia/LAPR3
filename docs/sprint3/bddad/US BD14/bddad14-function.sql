@@ -21,50 +21,156 @@ begin
     return returnValue;
 end;
 
-CREATE OR REPLACE function registrar_Aplicacao_FP(
-    parcelaId number,
-    variedadeId number,
-    quantidade aplicacao_fp.quantidade%TYPE,
-    metodoAplicacaoId number,
-    area aplicacao_fp.area%TYPE,
-    fatorProducaoId number,
-    data date
-)
+CREATE OR REPLACE function registrar_Aplicacao_FP_solo(
+    this_parcela_id number,
+    this_quantidade FP_APLICADOS.quantidade%TYPE,
+    this_unidade FP_APLICADOS.unidade%TYPE,
+    this_area APLICACAO_FP_SOLO.area%TYPE,
+    this_fp_id FATOR_PRODUCAO.id%type,
+    this_data OPERACAO_AGRICOLA.data%type)
     return number
     IS
-    p_operacaoId Operacao_Agricola.id%TYPE;
+    this_operacao_id Operacao_Agricola.id%TYPE;
 BEGIN
-    -- Verificar se parcela_id existe
-    IF (checkIfParcelExists(parcelaId) = 0
-        or checkIfFpExists(fatorProducaoId) = 0
-        or check_if_area_is_greater_then_parcel(parcelaId, area) = 1) THEN
+
+    IF checkIfParcelExists(this_parcela_id) = 0 THEN
+        DBMS_OUTPUT.PUT_LINE('ERRO: Parcela não existe na base de dados');
         return 0;
     END IF;
 
-    if variedadeId is not null then
-        if (checkIfVarietyExists(variedadeId) = 0 or checkIfVarietyIsInParcel(parcelaId, variedadeId) = 0) then
-            return 0;
-        end if;
-    end if;
+    IF checkIfFpExists(this_fp_id) = 0 THEN
+        DBMS_OUTPUT.PUT_LINE('ERRO: Fator de produção não existe na base de dados');
+        return 0;
+    END IF;
+
+    IF check_if_area_is_greater_then_parcel(this_parcela_id, this_area) = 1 THEN
+        DBMS_OUTPUT.PUT_LINE('ERRO: A área indicada é maior que a área da parcela');
+        return 0;
+    END IF;
 
     savepoint sp;
 
     -- Inserir na tabela Operacao_Agricola
-    SELECT MAX(id) + 1 INTO p_operacaoId FROM Operacao_Agricola;
-    INSERT INTO Operacao_Agricola(id, data) VALUES (p_operacaoId, data);
+    SELECT MAX(id) + 1 INTO this_operacao_id FROM Operacao_Agricola;
 
-    -- Inserir na tabela Aplicacao_FP
-    INSERT INTO Aplicacao_FP(operacao_id, parcela_id, variedade_id, fator_producao_id, metodo_aplicacao_id, quantidade,
-                             area)
-    VALUES (p_operacaoId, parcelaId, variedadeId, fatorProducaoId, metodoAplicacaoId, quantidade, area);
+    INSERT INTO Operacao_Agricola(id, data, validade)
+    VALUES (this_operacao_id, this_data, 1);
 
-    if (checkIfOperationIdExists(p_operacaoId) = 1 and verificarSeAplicacaoFpExiste(p_operacaoId) = 1) then
-        commit;
-        return 1;
-    else
+    if CHECKIFOPERATIONIDEXISTS(this_operacao_id) = 0 then
         rollback to sp;
+        DBMS_OUTPUT.PUT_LINE('Não foi possível fazer o registo na tabela OPERACAO_AGRICOLA');
         return 0;
     end if;
+
+    INSERT INTO Aplicacao_FP(Operacao_id)
+    VALUES (this_operacao_id);
+
+    if IS_IN_TABLE_APLICACAO_FP(this_operacao_id) = 0 then
+        rollback to sp;
+        DBMS_OUTPUT.PUT_LINE('Não foi possível fazer o registo na tabela APLICACAO_FP');
+        return 0;
+    end if;
+
+
+    INSERT INTO APLICACAO_FP_SOLO(operacao_id, parcela_id, area) VALUES (this_operacao_id, this_parcela_id, this_area);
+
+    if IS_IN_TABLE_APLICACAO_FP_solo(this_operacao_id) = 0 then
+        rollback to sp;
+        DBMS_OUTPUT.PUT_LINE('Não foi possível fazer o registo na tabela APLICACAO_FP_SOLO');
+        return 0;
+    end if;
+
+
+    INSERT INTO FP_APLICADOS(Operacao_id, fp_id, quantidade, unidade)
+    VALUES (this_operacao_id, this_fp_id, this_quantidade, this_unidade);
+
+    if IS_IN_TABLE_FP_APLICADOS(this_operacao_id, this_fp_id) = 0 then
+        rollback to sp;
+        DBMS_OUTPUT.PUT_LINE('Não foi possível fazer o registo na tabela FP_APLICADOS');
+        return 0;
+    end if;
+
+    commit;
+    return 1;
+END;
+
+
+CREATE OR REPLACE function registrar_Aplicacao_FP_variedade(
+    this_parcela_id number,
+    this_variedade_id VARIEDADE.id%type,
+    this_metodo_aplicacao_id METODO_APLICACAO.id%type,
+    this_quantidade FP_APLICADOS.quantidade%TYPE,
+    this_unidade FP_APLICADOS.unidade%TYPE,
+    this_fp_id FATOR_PRODUCAO.id%type,
+    this_data OPERACAO_AGRICOLA.data%type)
+    return number
+    IS
+    this_operacao_id Operacao_Agricola.id%TYPE;
+BEGIN
+
+    IF checkIfParcelExists(this_parcela_id) = 0 THEN
+        DBMS_OUTPUT.PUT_LINE('ERRO: Parcela não existe na base de dados');
+        return 0;
+    END IF;
+
+    IF checkIfFpExists(this_fp_id) = 0 THEN
+        DBMS_OUTPUT.PUT_LINE('ERRO: Fator de produção não existe na base de dados');
+        return 0;
+    END IF;
+
+    savepoint sp;
+
+    -- Inserir na tabela Operacao_Agricola
+    SELECT MAX(id) + 1 INTO this_operacao_id FROM Operacao_Agricola;
+
+    INSERT INTO Operacao_Agricola(id, data, validade)
+    VALUES (this_operacao_id, this_data, 1);
+
+    if CHECKIFOPERATIONIDEXISTS(this_operacao_id) = 0 then
+        rollback to sp;
+        DBMS_OUTPUT.PUT_LINE('Não foi possível fazer o registo na tabela OPERACAO_AGRICOLA');
+        return 0;
+    end if;
+
+    INSERT INTO Aplicacao_FP(Operacao_id)
+    VALUES (this_operacao_id);
+
+    if IS_IN_TABLE_APLICACAO_FP(this_operacao_id) = 0 then
+        rollback to sp;
+        DBMS_OUTPUT.PUT_LINE('Não foi possível fazer o registo na tabela APLICACAO_FP');
+        return 0;
+    end if;
+
+
+    INSERT INTO APLICACAO_FP_VARIEDADE (OPERACAO_ID, METODO_APLICACAO_ID) VALUES (this_operacao_id, this_metodo_aplicacao_id);
+
+    if IS_IN_TABLE_APLICACAO_FP_VARIEDADE(this_operacao_id) = 0 then
+        rollback to sp;
+        DBMS_OUTPUT.PUT_LINE('Não foi possível fazer o registo na tabela APLICACAO_FP_VARIEDADE');
+        return 0;
+    end if;
+
+
+    INSERT INTO FP_APLICADOS(Operacao_id, fp_id, quantidade, unidade)
+    VALUES (this_operacao_id, this_fp_id, this_quantidade, this_unidade);
+
+    if IS_IN_TABLE_FP_APLICADOS(this_operacao_id, this_fp_id) = 0 then
+        rollback to sp;
+        DBMS_OUTPUT.PUT_LINE('Não foi possível fazer o registo na tabela FP_APLICADOS');
+        return 0;
+    end if;
+
+    INSERT INTO Parcelas_Variedades_Aplicadas(Operacao_id, Parcela_id, Variedade_id)
+    VALUES (this_operacao_id, this_parcela_id, this_variedade_id);
+
+    if IS_IN_TABLE_PARCELAS_VARIEDADES_APLICADAS(this_operacao_id, this_parcela_id, this_variedade_id) = 0 then
+        rollback to sp;
+        DBMS_OUTPUT.PUT_LINE('Não foi possível fazer o registo na tabela PARCELAS_VARIEDADES_APLICADAS');
+        return 0;
+    end if;
+
+    commit;
+    return 1;
 END;
 
 

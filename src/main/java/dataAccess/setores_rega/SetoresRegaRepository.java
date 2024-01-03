@@ -1,4 +1,4 @@
-package dataAccess.watering_sectors;
+package dataAccess.setores_rega;
 
 import dataAccess.DatabaseConnection;
 import domain.SetorRega;
@@ -19,7 +19,7 @@ public class SetoresRegaRepository {
         ResultSet resultSet = null;
         ArrayList<SetorRega> sectors = null;
 
-        try{
+        try {
             try {
 
                 Connection connection = DatabaseConnection.getInstance().getConnection();
@@ -39,30 +39,34 @@ public class SetoresRegaRepository {
                     resultSet.close();
                 }
             }
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
         return sectors;
     }
 
-    private ArrayList<SetorRega> resultSetToList(ResultSet resultSet) throws SQLException {
+    private ArrayList<SetorRega> resultSetToList(ResultSet resultSet) {
 
         ArrayList<SetorRega> sectors = new ArrayList<>();
+        try {
+            while (resultSet.next()) {
 
-        while (resultSet.next()) {
-
-            SetorRega sector = new SetorRega(
-                    resultSet.getInt("id"),
-                    resultSet.getString("nome"),
-                    resultSet.getFloat("area"),
-                    resultSet.getFloat("caudal_maximo"),
-                    resultSet.getDate("data_inicio"),
-                    resultSet.getDate("data_fim"),
-                    resultSet.getInt("metodo_dispensasao_id")
-            );
-            sectors.add(sector);
+                SetorRega sector = new SetorRega(
+                        resultSet.getInt("id"),
+                        resultSet.getString("nome"),
+                        resultSet.getFloat("area"),
+                        resultSet.getFloat("caudal_maximo"),
+                        resultSet.getDate("data_inicio"),
+                        resultSet.getDate("data_fim"),
+                        resultSet.getInt("metodo_dispensasao_id")
+                );
+                sectors.add(sector);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+
         return sectors;
     }
 

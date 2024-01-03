@@ -1,7 +1,7 @@
 package controller;
 
 import dataAccess.DatabaseConnection;
-import dataAccess.FatorProducaoRepository;
+import dataAccess.fatores_producao.FatorProducaoRepository;
 import dataAccess.Repositories;
 import dataAccess.fertigation_mixes.ReceitasFertirregaRepository;
 

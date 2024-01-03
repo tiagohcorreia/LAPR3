@@ -1,6 +1,6 @@
 package domain;
 
-public class FatorProducao {
+public class FatorProducao implements DatabaseObject{
 
     private int id;
     private String nome;
@@ -26,11 +26,11 @@ public class FatorProducao {
         this.formulacaoId = formulacaoId;
     }
 
-    public int getId() {
+    public int getID() {
         return id;
     }
 
-    public String getNome() {
+    public String getName() {
         return nome;
     }
 

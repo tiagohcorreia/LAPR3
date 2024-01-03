@@ -13,9 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class MetodoExcucaoRepository {
+public class MetodoExecucaoRepository {
 
-    public MetodoExcucaoRepository() {
+    public MetodoExecucaoRepository() {
     }
 
     public List<MetodoExecucao> getMetodosExecucao() {

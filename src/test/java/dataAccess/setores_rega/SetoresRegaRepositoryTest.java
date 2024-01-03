@@ -1,4 +1,4 @@
-package dataAccess.watering_sectors;
+package dataAccess.setores_rega;
 
 import dataAccess.Repositories;
 import domain.SetorRega;

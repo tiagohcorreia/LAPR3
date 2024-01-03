@@ -1,5 +1,6 @@
-package dataAccess;
+package dataAccess.fatores_producao;
 
+import dataAccess.DatabaseConnection;
 import domain.FatorProducao;
 import oracle.jdbc.OracleTypes;
 
@@ -10,36 +11,37 @@ import java.util.Objects;
 
 public class FatorProducaoRepository {
 
-    public FatorProducaoRepository() {
-    }
-
-    public List<FatorProducao> getFatoresProducao() throws SQLException {
+    public List<FatorProducao> getFatoresProducao() {
 
         CallableStatement callStmt = null;
         ResultSet resultSet = null;
         List<FatorProducao> fatoresProducao = null;
 
         try {
+            try {
 
-            Connection connection = DatabaseConnection.getInstance().getConnection();
+                Connection connection = DatabaseConnection.getInstance().getConnection();
 
-            callStmt = connection.prepareCall("{ ? = call fncFatores() }");
+                callStmt = connection.prepareCall("{ ? = call funcFatores() }");
 
-            callStmt.registerOutParameter(1, OracleTypes.CURSOR);
+                callStmt.registerOutParameter(1, OracleTypes.CURSOR);
 
-            callStmt.execute();
-            resultSet = (ResultSet) callStmt.getObject(1);
+                callStmt.execute();
+                resultSet = (ResultSet) callStmt.getObject(1);
 
-            fatoresProducao = resultSetToList(resultSet);
+                fatoresProducao = resultSetToList(resultSet);
 
-        } finally {
+            } finally {
 
-            if (!Objects.isNull(callStmt)) {
-                callStmt.close();
+                if (!Objects.isNull(callStmt)) {
+                    callStmt.close();
+                }
+                if (!Objects.isNull(resultSet)) {
+                    resultSet.close();
+                }
             }
-            if (!Objects.isNull(resultSet)) {
-                resultSet.close();
-            }
+        } catch (SQLException e){
+            e.printStackTrace();
         }
 
         return fatoresProducao;
@@ -49,18 +51,23 @@ public class FatorProducaoRepository {
 
         List<FatorProducao> fatorProducaoList = new ArrayList<>();
 
-        while (true) {
+        try {
+            while (true) {
 
-            if (!resultSet.next()) break;
+                if (!resultSet.next()) break;
 
-            FatorProducao fatorProducao = new FatorProducao(
-                    resultSet.getInt("FatorProducaoId"),
-                    resultSet.getString("Nome"),
-                    resultSet.getInt("TipoId"),
-                    resultSet.getInt("FormulacaoId")
-            );
-            fatorProducaoList.add(fatorProducao);
+                FatorProducao fatorProducao = new FatorProducao(
+                        resultSet.getInt("id"),
+                        resultSet.getString("nome"),
+                        resultSet.getInt("tipo_id"),
+                        resultSet.getInt("formulacao_id")
+                );
+                fatorProducaoList.add(fatorProducao);
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
         }
+
         return fatorProducaoList;
     }
 

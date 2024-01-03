@@ -1,4 +1,4 @@
-package dataAccess.pruning_operations;
+package dataAccess.operacoes_poda;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -25,6 +25,7 @@ public class PodaRepository {
                 Connection connection = DatabaseConnection.getInstance().getConnection();
                 callStmt = connection.prepareCall("{ ? = call REGISTARPODA(?,?,?,?,?) }");
 
+                callStmt.registerOutParameter(1, OracleTypes.NUMBER);
                 callStmt.setInt(2, parcelaId);
                 callStmt.setInt(3, variedadeId);
                 callStmt.setDate(4, java.sql.Date.valueOf(date));
@@ -34,6 +35,7 @@ public class PodaRepository {
                 callStmt.execute();
                 int out = callStmt.getInt(1);
                 return out == 1;
+
             } finally {
                 if (!Objects.isNull(callStmt)) {
                     callStmt.close();

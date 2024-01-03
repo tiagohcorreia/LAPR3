@@ -101,6 +101,8 @@ public class RegisterWateringOperationUI implements Runnable {
             System.out.printf("Hora da rega: %s\n", hour);
         }
 
+        System.out.println();
+
         return Utils.getBooleanAnswer("Deseja registrar a operação:");
     }
 }

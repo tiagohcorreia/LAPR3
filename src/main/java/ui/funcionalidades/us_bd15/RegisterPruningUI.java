@@ -22,7 +22,7 @@ public class RegisterPruningUI implements Runnable {
     public void run() {
         try {
             String space="----------------------------";
-            System.out.printf("%s REGISTAR SEMENTEIRA %s\n\n", space, space);
+            System.out.printf("%s REGISTAR PODA %s\n\n", space, space);
 
             System.out.print("OperacaoId: ");
 
