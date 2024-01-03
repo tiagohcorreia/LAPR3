@@ -3,8 +3,6 @@ package ui.funcionalidades;
 import controller.FertirregaController;
 import controller.OperacaoAgricolaRegisterController;
 import controller.RegaRegisterController;
-import dataAccess.fertigation_mixes.FertigationMixesRepository;
-import domain.FertigationMix;
 import domain.RegaTable;
 import ui.menu.MainMenuUI;
 import java.sql.SQLException;

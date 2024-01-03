@@ -1,8 +1,7 @@
 package dataAccess.watering_sectors;
 
 import dataAccess.DatabaseConnection;
-import domain.Parcela;
-import domain.WateringSector;
+import domain.SetorRega;
 import oracle.jdbc.OracleTypes;
 
 import java.sql.CallableStatement;
@@ -10,16 +9,15 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
-public class WateringSectorsRepository {
+public class SetoresRegaRepository {
 
-    public ArrayList<WateringSector> getSectors() {
+    public ArrayList<SetorRega> getSetores() {
 
         CallableStatement callStmt = null;
         ResultSet resultSet = null;
-        ArrayList<WateringSector> sectors = null;
+        ArrayList<SetorRega> sectors = null;
 
         try{
             try {
@@ -48,13 +46,13 @@ public class WateringSectorsRepository {
         return sectors;
     }
 
-    private ArrayList<WateringSector> resultSetToList(ResultSet resultSet) throws SQLException {
+    private ArrayList<SetorRega> resultSetToList(ResultSet resultSet) throws SQLException {
 
-        ArrayList<WateringSector> sectors = new ArrayList<>();
+        ArrayList<SetorRega> sectors = new ArrayList<>();
 
         while (resultSet.next()) {
 
-            WateringSector sector = new WateringSector(
+            SetorRega sector = new SetorRega(
                     resultSet.getInt("id"),
                     resultSet.getString("nome"),
                     resultSet.getFloat("area"),

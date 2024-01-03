@@ -6,6 +6,7 @@ import ui.ExitUI;
 import ui.menu.MenuItem;
 
 import java.io.*;
+import java.security.InvalidParameterException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -57,7 +58,7 @@ public class Utils {
                 value = Integer.parseInt(input);
                 valid = true;
             } catch (NumberFormatException ex) {
-                System.out.println("ERRO: Input inválido\n");
+                System.out.println("ERRO: O valor introduzido não é um número inteiro\n");
             }
         } while (!valid);
         return value;
@@ -73,12 +74,12 @@ public class Utils {
 
                 value = Integer.parseInt(input);
                 if (value < 0) {
-                    throw new NumberFormatException();
+                    throw new InvalidParameterException();
                 }
 
                 valid = true;
-            } catch (NumberFormatException ex) {
-                System.out.println("ERRO: Input inválido\n");
+            } catch (InvalidParameterException ex) {
+                System.out.println("ERRO: O valor introduzido não é um inteiro positivo\n");
             }
         } while (!valid);
 
@@ -382,7 +383,7 @@ public class Utils {
 
             } catch (DateTimeParseException e) {
                 System.out.println("Data inválida\n");
-            } catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -390,4 +391,36 @@ public class Utils {
 
         return date;
     }
+
+    /**
+     * prints the elements from the param list and asks the to select the id
+     * it checks automatically if the select id is valid, and asks to select again if necessary
+     * @param list list of options
+     * @param h1 header of first column
+     * @param h2 header of second column
+     * @param prompt message to be displayed to the user, like "choose the wanted id"
+     * @return the id selected
+     * @param <E> the elements of the list must implement the interface DatabaseObject
+     */
+    public static <E extends DatabaseObject> int getTableIdFromConsole(List<E> list, String h1, String h2, String prompt) {
+        printDatabaseObjects(list, h1, h2);
+        boolean validInput = false;
+        int input;
+
+        do {
+            input = readIntegerFromConsole(prompt);
+            for (DatabaseObject o : list) {
+                if (o.getID() == input) {
+                    validInput = true;
+                    break;
+                }
+            }
+            if (!validInput) {
+                System.out.println("ERRO: ID inválido\n");
+            }
+        } while (!validInput);
+
+        return input;
+    }
+
 }

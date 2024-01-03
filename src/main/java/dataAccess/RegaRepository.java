@@ -4,48 +4,50 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import domain.Colheita;
 import domain.RegaTable;
 import oracle.jdbc.OracleTypes;
 
 public class RegaRepository {
 
-    public RegaRepository() {
-    }
 
-    public List<RegaTable> getRegas() throws SQLException {
+    public List<RegaTable> getRegas() {
 
         CallableStatement callStmt = null;
         ResultSet resultSet = null;
         List<RegaTable> regas = null;
 
         try {
-            Connection connection = DatabaseConnection.getInstance().getConnection();
-            callStmt = connection.prepareCall("{ ? = call registarRega() }");
+            try {
+                Connection connection = DatabaseConnection.getInstance().getConnection();
+                callStmt = connection.prepareCall("{ ? = call registarRega() }");
 
-            callStmt.registerOutParameter(1, OracleTypes.CURSOR);
+                callStmt.registerOutParameter(1, OracleTypes.CURSOR);
 
-            callStmt.execute();
-            resultSet = (ResultSet) callStmt.getObject(1);
+                callStmt.execute();
+                resultSet = (ResultSet) callStmt.getObject(1);
 
-            regas = resultSetToList(resultSet);
-        } finally {
-            if (!Objects.isNull(callStmt)) {
-                callStmt.close();
+                regas = resultSetToList(resultSet);
+            } finally {
+                if (!Objects.isNull(callStmt)) {
+                    callStmt.close();
+                }
+                if (!Objects.isNull(resultSet)) {
+                    resultSet.close();
+                }
             }
-            if (!Objects.isNull(resultSet)) {
-                resultSet.close();
-            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return regas;
     }
 
-    public static void regaRegister(int operacaoId, String setor, int duracao,String hora) throws SQLException {
+    public static void regaRegister(int operacaoId, String setor, int duracao, String hora) throws SQLException {
 
         CallableStatement callStmt = null;
         try {
@@ -64,6 +66,71 @@ public class RegaRepository {
                 callStmt.close();
             }
         }
+    }
+
+    public boolean registerWateringOperation(int setorId, LocalDate date, int duracao, String hora) {
+
+        CallableStatement callStmt = null;
+
+        try {
+            try {
+                Connection connection = DatabaseConnection.getInstance().getConnection();
+                callStmt = connection.prepareCall("{ ? = call register_watering(?,?,?,?) }");
+
+                callStmt.registerOutParameter(1, OracleTypes.NUMBER);
+                callStmt.setInt(2, setorId);
+                callStmt.setDate(3, java.sql.Date.valueOf(date));
+                callStmt.setInt(4, duracao);
+                callStmt.setString(5, hora);
+
+                callStmt.execute();
+                return callStmt.getInt(1) == 1;
+
+            } finally {
+                if (!Objects.isNull(callStmt)) {
+                    callStmt.close();
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public boolean registerFertigationOperation(int setorId,
+                                                       LocalDate date,
+                                                       int duracao,
+                                                       String hora,
+                                                       int receitaId) {
+
+        CallableStatement callStmt = null;
+
+        try {
+            try {
+                Connection connection = DatabaseConnection.getInstance().getConnection();
+                callStmt = connection.prepareCall("{ ? = call register_fertigation(?,?,?,?,?) }");
+
+                callStmt.registerOutParameter(1, OracleTypes.NUMBER);
+                callStmt.setInt(2, setorId);
+                callStmt.setDate(3, java.sql.Date.valueOf(date));
+                callStmt.setInt(4, duracao);
+                callStmt.setString(5, hora);
+                callStmt.setInt(6, receitaId);
+
+                callStmt.execute();
+                return callStmt.getInt(1) == 1;
+
+            } finally {
+                if (!Objects.isNull(callStmt)) {
+                    callStmt.close();
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
 
     public int regaDelete(int operacaoId) throws SQLException {

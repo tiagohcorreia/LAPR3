@@ -20,8 +20,10 @@ begin
     return 0;
 end;
 
-CREATE OR REPLACE FUNCTION registrarPoda(parcelaId Parcela.id%TYPE, variedadeId Variedade.id%TYPE,
-                                         data Operacao_Agricola.data%TYPE, quantidade Poda.quantidade%TYPE,
+CREATE OR REPLACE FUNCTION registar_Poda(parcelaId Parcela.id%TYPE,
+                                         variedadeId Variedade.id%TYPE,
+                                         this_data Operacao_Agricola.data%TYPE,
+                                         quantidade Poda.quantidade%TYPE,
                                          metodoExecucaoId Metodo_Execucao.id%TYPE)
     RETURN NUMBER
     IS
@@ -44,8 +46,8 @@ BEGIN
 
     SAVEPOINT sp1;
 
-    INSERT INTO Operacao_Agricola(id, data)
-    VALUES (id, data);
+    INSERT INTO Operacao_Agricola(id, data, validade)
+    VALUES (id, this_data, 1);
     INSERT INTO Poda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id)
     VALUES (id, parcelaId, variedadeId, quantidade, metodoExecucaoId);
 

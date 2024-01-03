@@ -1,11 +1,11 @@
 package dataAccess;
 
 import dataAccess.execution_methods.MetodoExcucaoRepository;
-import dataAccess.fertigation_mixes.FertigationMixesRepository;
+import dataAccess.fertigation_mixes.ReceitasFertirregaRepository;
 import dataAccess.pruning_operations.PodaRepository;
 import dataAccess.seeding_operations.SeedingOperationsRepository;
 import dataAccess.varieties.VariedadeRepository;
-import dataAccess.watering_sectors.WateringSectorsRepository;
+import dataAccess.watering_sectors.SetoresRegaRepository;
 import esinf.store.GraphStore;
 
 public class Repositories {
@@ -22,8 +22,8 @@ public class Repositories {
     private RegaRepository regaRepository = null;
     private PodaRepository podaRepository = null;
     private GraphStore graphStore=new GraphStore();
-    private WateringSectorsRepository wateringSectors=new WateringSectorsRepository();
-    private FertigationMixesRepository fertigationMixes=new FertigationMixesRepository();
+    private SetoresRegaRepository wateringSectors=new SetoresRegaRepository();
+    private ReceitasFertirregaRepository fertigationMixes=new ReceitasFertirregaRepository();
 
     private Repositories() {
         SeedingOperationsRepository = new SeedingOperationsRepository();
@@ -66,10 +66,10 @@ public class Repositories {
     public GraphStore getGraphStore(){
         return graphStore;
     }
-    public WateringSectorsRepository getWateringSectors(){
+    public SetoresRegaRepository getSetoresRega(){
         return wateringSectors;
     }
-    public FertigationMixesRepository getFertigationMixes(){
+    public ReceitasFertirregaRepository getReceitasFertirrega(){
         return fertigationMixes;
     }
 

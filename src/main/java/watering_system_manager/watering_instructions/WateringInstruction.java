@@ -1,7 +1,5 @@
 package watering_system_manager.watering_instructions;
 
-import domain.WateringSector;
-
 import java.util.Objects;
 
 public class WateringInstruction {

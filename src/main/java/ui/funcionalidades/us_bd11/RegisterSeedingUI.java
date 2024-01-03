@@ -33,48 +33,6 @@ public class RegisterSeedingUI implements Runnable {
             int operacaoId = ctrl.getNextId();
 
             System.out.printf("Usando id %d\n", operacaoId);
-/*
-            boolean validDate=false;
-
-            do{
-
-            }while (!validDate)
-            Date tmpDate = Utils.readDateFromConsole("Indique a data prevista da operação (aaaa-mm-dd): ");
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            formatter.setLenient(false);
-
-            Date currentDate = new Date();
-            if (strDate.equalsIgnoreCase("E")) {
-                return;
-            }
-
-            Date tmpDate = null;
-            boolean validDate = false;
-
-            while (!validDate) {
-
-                try {
-
-                    tmpDate = formatter.parse(strDate);
-
-                    if (tmpDate.after(currentDate)) {
-
-                        System.out.println("Erro: Data invalida.Insira uma data que nao se encontre no futuro.");
-                        System.out.print("Data (yyyy-mm-dd): ");
-                        strDate = scanner.next();
-
-                    } else {
-                        validDate = true;
-                    }
-
-                } catch (ParseException e) {
-
-                    System.out.println("Erro: Formato de data invalido. Insira a data no formato yyyy-mm-dd.");
-                    scanner.nextLine();
-                    System.out.print("Data (yyyy-mm-dd): ");
-                    strDate = scanner.next();
-                }
-            }*/
 
             LocalDate date=Utils.getLocalDateFromConsole("Introduza a data prevista da operação (DD-MM-AAAA)", "dd-MM-yyyy");
 
