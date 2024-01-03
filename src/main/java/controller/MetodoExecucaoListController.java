@@ -8,10 +8,16 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * The type Metodo execucao list controller.
+ */
 public class MetodoExecucaoListController {
 
     private MetodoExecucaoRepository metodoExecucaoRepository;
 
+    /**
+     * Instantiates a new Metodo execucao list controller.
+     */
     public MetodoExecucaoListController() {
         getMetodoExecucao();
     }
@@ -26,10 +32,19 @@ public class MetodoExecucaoListController {
         return metodoExecucaoRepository;
     }
 
+    /**
+     * Gets metodos execucao.
+     *
+     * @return the metodos execucao
+     * @throws SQLException the sql exception
+     */
     public List<MetodoExecucao> getMetodosExecucao() throws SQLException {
         return metodoExecucaoRepository.getMetodosExecucao();
     }
 
+    /**
+     * Show metodos execucao.
+     */
     public void showMetodosExecucao() {
 
         try {

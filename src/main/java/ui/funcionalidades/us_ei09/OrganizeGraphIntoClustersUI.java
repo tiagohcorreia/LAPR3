@@ -4,6 +4,9 @@ import controller.OrganizeGraphIntoClustersController;
 import ui.user.GestorDistribuicaoUI;
 import ui.utils.Utils;
 
+/**
+ * The type Organize graph into clusters ui.
+ */
 public class OrganizeGraphIntoClustersUI implements Runnable {
 
     private final OrganizeGraphIntoClustersController controller = new OrganizeGraphIntoClustersController();

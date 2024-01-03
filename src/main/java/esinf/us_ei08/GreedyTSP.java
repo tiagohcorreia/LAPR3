@@ -11,12 +11,31 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * The type Greedy tsp.
+ *
+ * @param <V> the type parameter
+ * @param <E> the type parameter
+ */
 public class GreedyTSP<V, E> {
 
     private double totalDistance;
+    /**
+     * The Number of chargings.
+     */
     int numberOfChargings;
     private GraphStore graphStore = new GraphStore();
 
+    /**
+     * Find shortest circuit list.
+     *
+     * @param graph       the graph
+     * @param origin      the origin
+     * @param numVertices the num vertices
+     * @param numHubs     the num hubs
+     * @param vehicle     the vehicle
+     * @return the list
+     */
     public List<V> findShortestCircuit(Graph<V, E> graph, V origin, int numVertices, int numHubs, Vehicle vehicle) {
         float autonomy = vehicle.getAutonomyDistance();
         numberOfChargings = 0;
@@ -101,10 +120,20 @@ public class GreedyTSP<V, E> {
     }
 
 
+    /**
+     * Gets total distance.
+     *
+     * @return the total distance
+     */
     public double getTotalDistance() {
         return totalDistance;
     }
 
+    /**
+     * Gets number of chargings.
+     *
+     * @return the number of chargings
+     */
     public int getNumberOfChargings() {
         return numberOfChargings;
     }
@@ -171,6 +200,16 @@ public class GreedyTSP<V, E> {
 
         return collaborators * (1 / (1 + weight));
     }
+
+    /**
+     * Remove edges above autonomy graph.
+     *
+     * @param <V>     the type parameter
+     * @param <E>     the type parameter
+     * @param vehicle the vehicle
+     * @param graph   the graph
+     * @return the graph
+     */
     public <V, E> Graph<V, E> removeEdgesAboveAutonomy(Vehicle vehicle, Graph<V, E> graph) {
         Iterator<Edge<V, E>> iterator = graph.edges().iterator();
         while (iterator.hasNext()) {

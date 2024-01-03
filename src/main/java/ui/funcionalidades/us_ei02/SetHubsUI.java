@@ -9,11 +9,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * The type Set hubs ui.
+ */
 public class SetHubsUI implements Runnable {
 
+    /**
+     * The Ctrl.
+     */
     SetHubsCtrl ctrl = new SetHubsCtrl();
     private int numberOfHubs;
+    /**
+     * The Ideal locals.
+     */
     List<VertexMetrics<Local, Integer>> idealLocals;
+    /**
+     * The Locals and discharge times.
+     */
     Map<Local, Integer> localsAndDischargeTimes;
 
     @Override
@@ -36,6 +48,11 @@ public class SetHubsUI implements Runnable {
         }
     }
 
+    /**
+     * Gets number of hubs.
+     *
+     * @return the number of hubs
+     */
     public int getNumberOFHubs() {
         int numberOfHubs;
         boolean valid = false;
@@ -53,6 +70,9 @@ public class SetHubsUI implements Runnable {
         return numberOfHubs;
     }
 
+    /**
+     * Display ideal locals.
+     */
     public void displayIdealLocals() {
         idealLocals = ctrl.getIdealLocalsForHubs(numberOfHubs);
         for (VertexMetrics<Local, Integer> vm : idealLocals) {
@@ -61,11 +81,19 @@ public class SetHubsUI implements Runnable {
         System.out.println();
     }
 
+    /**
+     * Ask to generate hubs boolean.
+     *
+     * @return the boolean
+     */
     public boolean askToGenerateHubs() {
 
         return Utils.getBooleanAnswer("Pretende gerar os hubs?");
     }
 
+    /**
+     * Ask discharge times.
+     */
     public void askDischargeTimes() {
         localsAndDischargeTimes = new HashMap<>();
         System.out.println("Introduza os tempos de descarga, em minutos, para cada hub:\n");

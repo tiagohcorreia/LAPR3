@@ -14,11 +14,23 @@ import dataAccess.DatabaseConnection;
 import domain.Monda;
 import oracle.jdbc.OracleTypes;
 
+/**
+ * The type Monda repository.
+ */
 public class MondaRepository {
 
+    /**
+     * Instantiates a new Monda repository.
+     */
     public MondaRepository() {
     }
 
+    /**
+     * Gets mondas.
+     *
+     * @return the mondas
+     * @throws SQLException the sql exception
+     */
     public List<Monda> getMondas() throws SQLException {
 
         CallableStatement callStmt = null;
@@ -47,6 +59,16 @@ public class MondaRepository {
         return mondas;
     }
 
+    /**
+     * Registar monda boolean.
+     *
+     * @param parcelaId        the parcela id
+     * @param variedadeId      the variedade id
+     * @param metodoExecucaoId the metodo execucao id
+     * @param quantidade       the quantidade
+     * @param data             the data
+     * @return the boolean
+     */
     public boolean registarMonda(int parcelaId,
                                  int variedadeId,
                                  int metodoExecucaoId,
@@ -79,6 +101,13 @@ public class MondaRepository {
         return false;
     }
 
+    /**
+     * Monda delete int.
+     *
+     * @param operacaoId the operacao id
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public int mondaDelete(int operacaoId) throws SQLException {
 
         CallableStatement callStmt = null;

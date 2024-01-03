@@ -11,8 +11,14 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * The type Obter produtos colhidos ui.
+ */
 public class ObterProdutosColhidosUI implements Runnable{
 
+    /**
+     * The Ctrl.
+     */
     ObterProdutosColhidosController ctrl=new ObterProdutosColhidosController();
 
     private int parcelaID;

@@ -2,6 +2,9 @@ package esinf;
 
 import java.util.function.BinaryOperator;
 
+/**
+ * The type Integer binary operator.
+ */
 public class IntegerBinaryOperator implements BinaryOperator<Integer> {
 
     @Override

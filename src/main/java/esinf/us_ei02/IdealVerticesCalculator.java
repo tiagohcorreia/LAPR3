@@ -11,6 +11,12 @@ import java.util.Comparator;
 import java.util.Map;
 import java.util.function.BinaryOperator;
 
+/**
+ * The type Ideal vertices calculator.
+ *
+ * @param <V> the type parameter
+ * @param <E> the type parameter
+ */
 public class IdealVerticesCalculator<V, E> {
 
     private Graph<V, E> graph;
@@ -23,6 +29,15 @@ public class IdealVerticesCalculator<V, E> {
     private Map<V, ArrayList<E>> verticesAndPathsDistances = new HashMap<>();
     private boolean calculationsMade = false;
 
+    /**
+     * Instantiates a new Ideal vertices calculator.
+     *
+     * @param graph          the graph
+     * @param vertices       the vertices
+     * @param comparator     the comparator
+     * @param binaryOperator the binary operator
+     * @param neutralValue   the neutral value
+     */
     public IdealVerticesCalculator(Graph<V, E> graph, ArrayList<V> vertices, Comparator<E> comparator, BinaryOperator<E> binaryOperator, E neutralValue) {
         this.graph = graph;
         this.vertices = vertices;
@@ -31,18 +46,38 @@ public class IdealVerticesCalculator<V, E> {
         this.neutralValue = neutralValue;
     }
 
+    /**
+     * Gets graph.
+     *
+     * @return the graph
+     */
     public Graph<V, E> getGraph() {
         return graph;
     }
 
+    /**
+     * Gets vertices and all shortest paths.
+     *
+     * @return the vertices and all shortest paths
+     */
     public Map<V, ArrayList<LinkedList<V>>> getVerticesAndAllShortestPaths() {
         return verticesAndAllShortestPaths;
     }
 
+    /**
+     * Gets vertices and paths distances.
+     *
+     * @return the vertices and paths distances
+     */
     public Map<V, ArrayList<E>> getVerticesAndPathsDistances() {
         return verticesAndPathsDistances;
     }
 
+    /**
+     * Gets ideal vertices.
+     *
+     * @return the ideal vertices
+     */
     public ArrayList<VertexMetrics<V, E>> getIdealVertices() {
         if (!calculationsMade) {
             getAllShortestPaths();

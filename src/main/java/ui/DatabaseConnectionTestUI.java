@@ -4,10 +4,16 @@ import controller.DatabaseConnectionTestController;
 import dataAccess.DatabaseConnection;
 import java.sql.SQLException;
 
+/**
+ * The type Database connection test ui.
+ */
 public class DatabaseConnectionTestUI implements Runnable {
 
     private DatabaseConnectionTestController controller;
 
+    /**
+     * Instantiates a new Database connection test ui.
+     */
     public DatabaseConnectionTestUI() {
         controller = new DatabaseConnectionTestController();
     }

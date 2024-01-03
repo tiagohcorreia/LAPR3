@@ -2,6 +2,9 @@ package ui.funcionalidades.us_ei11;
 
 import controller.LoadHubsFromFileController;
 
+/**
+ * The type Load hubs from file ui.
+ */
 public class LoadHubsFromFileUI implements Runnable {
 
     private final LoadHubsFromFileController controller = new LoadHubsFromFileController();

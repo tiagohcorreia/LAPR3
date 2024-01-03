@@ -14,8 +14,14 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * The type Obter totais mensais rega ui.
+ */
 public class ObterTotaisMensaisRegaUI implements Runnable{
 
+    /**
+     * The Ctrl.
+     */
     ObterTotaisMensaisRegaController ctrl = new ObterTotaisMensaisRegaController();
     private int parcelaID;
     private LocalDate dataInferior;

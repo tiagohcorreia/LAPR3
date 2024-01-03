@@ -10,8 +10,19 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Objects;
 
+/**
+ * The type Other data accesses.
+ */
 public class OtherDataAccesses {
 
+    /**
+     * Obter fp por tipo result set.
+     *
+     * @param parcelaID  the parcela id
+     * @param dataInicio the data inicio
+     * @param dataFim    the data fim
+     * @return the result set
+     */
     public ResultSet obterFpPorTipo(int parcelaID,
                                     LocalDate dataInicio,
                                     LocalDate dataFim) {
@@ -42,6 +53,13 @@ public class OtherDataAccesses {
         return resultSet;
     }
 
+    /**
+     * Obter aplicacoes fp por tipo result set.
+     *
+     * @param dataInicio the data inicio
+     * @param dataFim    the data fim
+     * @return the result set
+     */
     public ResultSet obterAplicacoesFpPorTipo(LocalDate dataInicio,
                                     LocalDate dataFim) {
 
@@ -70,6 +88,14 @@ public class OtherDataAccesses {
         return resultSet;
     }
 
+    /**
+     * Produtos colhidos numa parcela result set.
+     *
+     * @param parcelaID    the parcela id
+     * @param dataInferior the data inferior
+     * @param dataSuperior the data superior
+     * @return the result set
+     */
     public ResultSet produtosColhidosNumaParcela(int parcelaID,
                                                  LocalDate dataInferior,
                                                  LocalDate dataSuperior) {
@@ -100,6 +126,14 @@ public class OtherDataAccesses {
         return resultSet;
     }
 
+    /**
+     * Obter fatores producao aplicados result set.
+     *
+     * @param parcelaID    the parcela id
+     * @param dataInferior the data inferior
+     * @param dataSuperior the data superior
+     * @return the result set
+     */
     public ResultSet obterFatoresProducaoAplicados(int parcelaID,
                                                    LocalDate dataInferior,
                                                    LocalDate dataSuperior) {
@@ -130,6 +164,14 @@ public class OtherDataAccesses {
         return resultSet;
     }
 
+    /**
+     * Obter operacoes result set.
+     *
+     * @param parcelaID    the parcela id
+     * @param dataInferior the data inferior
+     * @param dataSuperior the data superior
+     * @return the result set
+     */
     public ResultSet obterOperacoes(int parcelaID,
                                     LocalDate dataInferior,
                                     LocalDate dataSuperior) {
@@ -160,6 +202,15 @@ public class OtherDataAccesses {
         return resultSet;
     }
 
+    /**
+     * Obter aplicacoes fp result set.
+     *
+     * @param parcelaID    the parcela id
+     * @param dataInferior the data inferior
+     * @param dataSuperior the data superior
+     * @param tipoFpId     the tipo fp id
+     * @return the result set
+     */
     public ResultSet obterAplicacoesFP(int parcelaID,
                                        LocalDate dataInferior,
                                        LocalDate dataSuperior,
@@ -192,6 +243,13 @@ public class OtherDataAccesses {
         return resultSet;
     }
 
+    /**
+     * Obter totais mensais rega result set.
+     *
+     * @param dataInferior the data inferior
+     * @param dataSuperior the data superior
+     * @return the result set
+     */
     public ResultSet obterTotaisMensaisRega(LocalDate dataInferior,
                                             LocalDate dataSuperior) {
 

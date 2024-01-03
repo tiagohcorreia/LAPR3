@@ -13,6 +13,9 @@ import ui.utils.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Gestor agricola ui.
+ */
 public class GestorAgricolaUI implements Runnable {
 
     @Override

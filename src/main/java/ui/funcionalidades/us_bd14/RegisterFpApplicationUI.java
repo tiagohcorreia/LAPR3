@@ -12,6 +12,9 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * The type Register fp application ui.
+ */
 public class RegisterFpApplicationUI implements Runnable {
 
     private FatorProducaoRegisterController ctrl = new FatorProducaoRegisterController();
@@ -23,6 +26,9 @@ public class RegisterFpApplicationUI implements Runnable {
     private double area;
     private int fpID;
     private LocalDate data;
+    /**
+     * The Is aplicacao fp solo.
+     */
     boolean isAplicacaoFPSolo;
 
     public void run() {

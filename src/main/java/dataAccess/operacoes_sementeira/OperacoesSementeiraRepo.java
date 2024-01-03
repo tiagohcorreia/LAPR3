@@ -10,8 +10,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * The type Operacoes sementeira repo.
+ */
 public class OperacoesSementeiraRepo {
 
+    /**
+     * Registar sementeira boolean.
+     *
+     * @param date             the date
+     * @param parcelaId        the parcela id
+     * @param variedadeId      the variedade id
+     * @param quantidade       the quantidade
+     * @param area             the area
+     * @param metodoExecucaoId the metodo execucao id
+     * @return the boolean
+     */
     public boolean registarSementeira(LocalDate date,
                                       int parcelaId,
                                       int variedadeId,

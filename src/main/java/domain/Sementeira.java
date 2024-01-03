@@ -1,5 +1,8 @@
 package domain;
 
+/**
+ * The type Sementeira.
+ */
 public class Sementeira {
     private Integer operacaoId;
     private Integer parcelaId;
@@ -8,6 +11,16 @@ public class Sementeira {
     private Float area;
     private Integer metodoExecucaoId;
 
+    /**
+     * Instantiates a new Sementeira.
+     *
+     * @param operacaoId       the operacao id
+     * @param parcelaId        the parcela id
+     * @param variedadeTempId  the variedade temp id
+     * @param quantidade       the quantidade
+     * @param area             the area
+     * @param metodoExecucaoId the metodo execucao id
+     */
     public Sementeira(Integer operacaoId,Integer parcelaId, Integer variedadeTempId, Float quantidade, Float area, Integer metodoExecucaoId) {
         this.operacaoId = operacaoId;
         this.parcelaId = parcelaId;
@@ -17,35 +30,76 @@ public class Sementeira {
         this.metodoExecucaoId = metodoExecucaoId;
     }
 
+    /**
+     * Gets parcela id.
+     *
+     * @return the parcela id
+     */
     public Integer getParcelaId() {
         return parcelaId;
     }
 
+    /**
+     * Gets variedade temp id.
+     *
+     * @return the variedade temp id
+     */
     public Integer getVariedadeTempId() {
         return variedadeTempId;
     }
 
+    /**
+     * Gets quantidade.
+     *
+     * @return the quantidade
+     */
     public Float getQuantidade() {
         return quantidade;
     }
 
+    /**
+     * Gets area.
+     *
+     * @return the area
+     */
     public Float getArea() {
         return area;
     }
 
+    /**
+     * Gets metodo execucao id.
+     *
+     * @return the metodo execucao id
+     */
     public Integer getMetodoExecucaoId() {
         return metodoExecucaoId;
     }
 
 
+    /**
+     * Sets parcela id.
+     *
+     * @param parcelaId the parcela id
+     */
     public void setParcelaId(Integer parcelaId) {
         this.parcelaId = parcelaId;
     }
 
+    /**
+     * Sets variedade temp id.
+     *
+     * @param variedadeTempId the variedade temp id
+     */
     public void setVariedadeTempId(Integer variedadeTempId) {
         this.variedadeTempId = variedadeTempId;
     }
 
+    /**
+     * Sets quantidade.
+     *
+     * @param quantidade the quantidade
+     * @return the quantidade
+     */
     public float setQuantidade(Float quantidade) {
 
         if (quantidade < 0) {
@@ -59,6 +113,12 @@ public class Sementeira {
         return quantidade;
     }
 
+    /**
+     * Sets area.
+     *
+     * @param area the area
+     * @return the area
+     */
     public float setArea(Float area) {
 
         if (area < 0) {
@@ -72,6 +132,11 @@ public class Sementeira {
         return area;
     }
 
+    /**
+     * Sets metodo execucao id.
+     *
+     * @param metodoExecucaoId the metodo execucao id
+     */
     public void setMetodoExecucaoId(Integer metodoExecucaoId) {
         this.metodoExecucaoId = metodoExecucaoId;
     }

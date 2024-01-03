@@ -7,6 +7,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * The type Furthest places data.
+ */
 public class FurthestPlacesData {
 
     private Local local1;
@@ -27,6 +30,9 @@ public class FurthestPlacesData {
     private final List<Distance> DEFAULT_DISTANCE2 = new ArrayList<>();
 
 
+    /**
+     * Instantiates a new Furthest places data.
+     */
     public FurthestPlacesData() {
         this.local1 = DEFAULT_LOCAL;
         this.local2 = DEFAULT_LOCAL;
@@ -39,6 +45,19 @@ public class FurthestPlacesData {
         this.numberOfTimesVehicleWasCharged = DEFAULT_VALUE;
     }
 
+    /**
+     * Instantiates a new Furthest places data.
+     *
+     * @param local1                          the local 1
+     * @param local2                          the local 2
+     * @param vehicleAutonomy                 the vehicle autonomy
+     * @param shortPath                       the short path
+     * @param distanceFromOriginToDestination the distance from origin to destination
+     * @param vehicleChargeStops              the vehicle charge stops
+     * @param distanceBetweenLocals           the distance between locals
+     * @param vehiclesStops                   the vehicles stops
+     * @param numberOfTimesVehicleWasCharged  the number of times vehicle was charged
+     */
     public FurthestPlacesData(Local local1, Local local2, double vehicleAutonomy, LinkedList<Local> shortPath, double distanceFromOriginToDestination, List<Local> vehicleChargeStops, List<Distance> distanceBetweenLocals, int vehiclesStops, int numberOfTimesVehicleWasCharged) {
         this.local1 = local1;
         this.local2 = local2;
@@ -51,74 +70,164 @@ public class FurthestPlacesData {
         this.numberOfTimesVehicleWasCharged = numberOfTimesVehicleWasCharged;
     }
 
+    /**
+     * Gets local 1.
+     *
+     * @return the local 1
+     */
     public Local getLocal1() {
         return local1;
     }
 
+    /**
+     * Sets local 1.
+     *
+     * @param local1 the local 1
+     */
     public void setLocal1(Local local1) {
         this.local1 = local1;
     }
 
+    /**
+     * Gets local 2.
+     *
+     * @return the local 2
+     */
     public Local getLocal2() {
         return local2;
     }
 
+    /**
+     * Sets local 2.
+     *
+     * @param local2 the local 2
+     */
     public void setLocal2(Local local2) {
         this.local2 = local2;
     }
 
+    /**
+     * Gets vehicle autonomy.
+     *
+     * @return the vehicle autonomy
+     */
     public double getVehicleAutonomy() {
         return vehicleAutonomy;
     }
 
+    /**
+     * Sets vehicle autonomy.
+     *
+     * @param vehicleAutonomy the vehicle autonomy
+     */
     public void setVehicleAutonomy(double vehicleAutonomy) {
         this.vehicleAutonomy = vehicleAutonomy;
     }
 
+    /**
+     * Gets short path.
+     *
+     * @return the short path
+     */
     public List<Local> getShortPath() {
         return shortPath;
     }
 
+    /**
+     * Sets short path.
+     *
+     * @param shortPath the short path
+     */
     public void setShortPath(LinkedList<Local> shortPath) {
         this.shortPath = shortPath;
     }
 
+    /**
+     * Gets distance from origin to destination.
+     *
+     * @return the distance from origin to destination
+     */
     public double getDistanceFromOriginToDestination() {
         return distanceFromOriginToDestination;
     }
 
+    /**
+     * Sets distance from origin to destination.
+     *
+     * @param distanceFromOriginToDestination the distance from origin to destination
+     */
     public void setDistanceFromOriginToDestination(double distanceFromOriginToDestination) {
         this.distanceFromOriginToDestination = distanceFromOriginToDestination;
     }
 
+    /**
+     * Gets vehicle charge stops.
+     *
+     * @return the vehicle charge stops
+     */
     public List<Local> getVehicleChargeStops() {
         return vehicleChargeStops;
     }
 
+    /**
+     * Sets vehicle charge stops.
+     *
+     * @param vehicleChargeStops the vehicle charge stops
+     */
     public void setVehicleChargeStops(List<Local> vehicleChargeStops) {
         this.vehicleChargeStops = vehicleChargeStops;
     }
 
+    /**
+     * Gets distance between locals.
+     *
+     * @return the distance between locals
+     */
     public List<Distance> getDistanceBetweenLocals() {
         return distanceBetweenLocals;
     }
 
+    /**
+     * Sets distance between locals.
+     *
+     * @param distanceBetweenLocals the distance between locals
+     */
     public void setDistanceBetweenLocals(List<Distance> distanceBetweenLocals) {
         this.distanceBetweenLocals = distanceBetweenLocals;
     }
 
+    /**
+     * Gets vehicles stops.
+     *
+     * @return the vehicles stops
+     */
     public int getVehiclesStops() {
         return vehiclesStops;
     }
 
+    /**
+     * Sets vehicles stops.
+     *
+     * @param vehiclesStops the vehicles stops
+     */
     public void setVehiclesStops(int vehiclesStops) {
         this.vehiclesStops = vehiclesStops;
     }
 
+    /**
+     * Gets number of times vehicle was charged.
+     *
+     * @return the number of times vehicle was charged
+     */
     public int getNumberOfTimesVehicleWasCharged() {
         return numberOfTimesVehicleWasCharged;
     }
 
+    /**
+     * Sets number of times vehicle was charged.
+     *
+     * @param numberOfTimesVehicleWasCharged the number of times vehicle was charged
+     */
     public void setNumberOfTimesVehicleWasCharged(int numberOfTimesVehicleWasCharged) {
         this.numberOfTimesVehicleWasCharged = numberOfTimesVehicleWasCharged;
     }

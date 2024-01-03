@@ -9,7 +9,16 @@ import java.util.*;
 import java.util.function.BinaryOperator;
 import java.util.stream.Collectors;
 
+/**
+ * The type Organize graph into clusters.
+ */
 public class OrganizeGraphIntoClusters {
+    /**
+     * Organize graph map.
+     *
+     * @param graph the graph
+     * @return the map
+     */
     public static Map<HubLocal, Set<Local>> organizeGraph(Graph<Local, Integer> graph) {
 
         if (graph.isDirected()) throw new IllegalArgumentException("Operação não pode ser feita num grafo orientado");
@@ -55,6 +64,13 @@ public class OrganizeGraphIntoClusters {
         return hubList;
     }
 
+    /**
+     * Find edge with max shortest paths edge.
+     *
+     * @param graph         the graph
+     * @param shortestPaths the shortest paths
+     * @return the edge
+     */
     public static Edge<Local, Integer> findEdgeWithMaxShortestPaths(Graph<Local, Integer> graph, List<LinkedList<Local>> shortestPaths) {
 
         Edge<Local, Integer> edgeWithMaxShortestPaths = null;

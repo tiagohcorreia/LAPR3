@@ -6,7 +6,9 @@ import esinf.dataStructure.Distance;
 import java.util.List;
 
 
-
+/**
+ * The type Circuit.
+ */
 public class Circuit {
     private Vehicle vehicle;
     private Local origin;
@@ -17,6 +19,18 @@ public class Circuit {
     private int numberOfChargings;
     private double totalTime;
 
+    /**
+     * Instantiates a new Circuit.
+     *
+     * @param vehicle           the vehicle
+     * @param origin            the origin
+     * @param locals            the locals
+     * @param hubs              the hubs
+     * @param distances         the distances
+     * @param totalDistance     the total distance
+     * @param numberOfChargings the number of chargings
+     * @param totalTime         the total time
+     */
     public Circuit(Vehicle vehicle, Local origin, List<Local> locals,List<Hub> hubs, List<Distance> distances, double totalDistance, int numberOfChargings, double totalTime) {
         this.vehicle = vehicle;
         this.origin = origin;
@@ -28,62 +42,135 @@ public class Circuit {
         this.totalTime = totalTime;
     }
 
+    /**
+     * Gets vehicle.
+     *
+     * @return the vehicle
+     */
     public Vehicle getVehicle() {
         return vehicle;
     }
 
+    /**
+     * Sets vehicle.
+     *
+     * @param vehicle the vehicle
+     */
     public void setVehicle(Vehicle vehicle) {
         this.vehicle = vehicle;
     }
 
+    /**
+     * Gets origin.
+     *
+     * @return the origin
+     */
     public Local getOrigin() {
         return origin;
     }
 
+    /**
+     * Sets origin.
+     *
+     * @param origin the origin
+     */
     public void setOrigin(Hub origin) {
         this.origin = origin;
     }
 
+    /**
+     * Gets locals.
+     *
+     * @return the locals
+     */
     public List<Local> getLocals() {
         return locals;
     }
 
+    /**
+     * Sets locals.
+     *
+     * @param locals the locals
+     */
     public void setLocals(List<Local> locals) {
         this.locals = locals;
     }
 
+    /**
+     * Gets distances.
+     *
+     * @return the distances
+     */
     public List<Distance> getDistances() {
         return distances;
     }
 
+    /**
+     * Sets distances.
+     *
+     * @param distances the distances
+     */
     public void setDistances(List<Distance> distances) {
         this.distances = distances;
     }
 
+    /**
+     * Gets total distance.
+     *
+     * @return the total distance
+     */
     public double getTotalDistance() {
         return totalDistance;
     }
 
+    /**
+     * Sets total distance.
+     *
+     * @param totalDistance the total distance
+     */
     public void setTotalDistance(double totalDistance) {
         this.totalDistance = totalDistance;
     }
 
+    /**
+     * Gets number of chargings.
+     *
+     * @return the number of chargings
+     */
     public int getNumberOfChargings() {
         return numberOfChargings;
     }
 
+    /**
+     * Sets number of chargings.
+     *
+     * @param numberOfChargings the number of chargings
+     */
     public void setNumberOfChargings(int numberOfChargings) {
         this.numberOfChargings = numberOfChargings;
     }
 
+    /**
+     * Gets total time.
+     *
+     * @return the total time
+     */
     public double getTotalTime() {
         return totalTime;
     }
 
+    /**
+     * Sets total time.
+     *
+     * @param totalTime the total time
+     */
     public void setTotalTime(double totalTime) {
         this.totalTime = totalTime;
     }
 
+    /**
+     * Print details.
+     */
     public void printDetails() {
         System.out.println("Printing Circuit Details:");
         System.out.println("Vehicle: " + vehicle);

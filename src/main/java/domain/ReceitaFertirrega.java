@@ -2,6 +2,9 @@ package domain;
 
 import java.util.Objects;
 
+/**
+ * The type Receita fertirrega.
+ */
 public class ReceitaFertirrega implements DatabaseObject {
     private int id;
     private String nome;
@@ -9,11 +12,20 @@ public class ReceitaFertirrega implements DatabaseObject {
     private final int DEFAULT_ID=-1;
     private final String DEFAULT_NAME ="(no name)";
 
+    /**
+     * Instantiates a new Receita fertirrega.
+     */
     public ReceitaFertirrega(){
         this.id=DEFAULT_ID;
         this.nome = DEFAULT_NAME;
     }
 
+    /**
+     * Instantiates a new Receita fertirrega.
+     *
+     * @param id   the id
+     * @param nome the nome
+     */
     public ReceitaFertirrega(int id, String nome) {
         this.id=id;
         this.nome = nome;
@@ -26,10 +38,20 @@ public class ReceitaFertirrega implements DatabaseObject {
         return nome;
     }
 
+    /**
+     * Set id.
+     *
+     * @param id the id
+     */
     public void setId(int id){
         this.id=id;
     }
 
+    /**
+     * Sets nome.
+     *
+     * @param nome the nome
+     */
     public void setNome(String nome) {
         this.nome = nome;
     }

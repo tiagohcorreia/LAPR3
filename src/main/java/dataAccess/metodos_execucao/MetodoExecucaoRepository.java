@@ -13,11 +13,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * The type Metodo execucao repository.
+ */
 public class MetodoExecucaoRepository {
 
+    /**
+     * Instantiates a new Metodo execucao repository.
+     */
     public MetodoExecucaoRepository() {
     }
 
+    /**
+     * Gets metodos execucao.
+     *
+     * @return the metodos execucao
+     */
     public List<MetodoExecucao> getMetodosExecucao() {
 
         CallableStatement callStmt = null;
@@ -71,6 +82,12 @@ public class MetodoExecucaoRepository {
         return metodosExecucao;
     }
 
+    /**
+     * Is there execution method boolean.
+     *
+     * @param methodId the method id
+     * @return the boolean
+     */
     public boolean isThereExecutionMethod(int methodId) {
         CallableStatement callStmt = null;
         boolean isThereMethod = false;

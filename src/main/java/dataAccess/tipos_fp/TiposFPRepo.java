@@ -12,8 +12,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * The type Tipos fp repo.
+ */
 public class TiposFPRepo {
 
+    /**
+     * Obter tipos fp array list.
+     *
+     * @return the array list
+     */
     public ArrayList<TipoFP> obterTiposFP() {
 
         CallableStatement callStmt = null;

@@ -15,6 +15,9 @@ import esinf.Graph;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * The type Find shortest circuit with hubs ui.
+ */
 public class FindShortestCircuitWithHubsUI implements Runnable {
 
     private GraphStore graphStore = new GraphStore();

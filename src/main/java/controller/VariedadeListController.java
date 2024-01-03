@@ -8,10 +8,16 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * The type Variedade list controller.
+ */
 public class VariedadeListController {
 
     private VariedadeRepository variedadeRepository;
 
+    /**
+     * Instantiates a new Variedade list controller.
+     */
     public VariedadeListController() {
         getVariedadeRepository();
     }
@@ -26,10 +32,19 @@ public class VariedadeListController {
         return variedadeRepository;
     }
 
+    /**
+     * Gets variedades.
+     *
+     * @return the variedades
+     * @throws SQLException the sql exception
+     */
     public List<Variedade> getVariedades() throws SQLException {
         return variedadeRepository.getVarieties();
     }
 
+    /**
+     * Show variedades.
+     */
     public void showVariedades() {
 
         try {

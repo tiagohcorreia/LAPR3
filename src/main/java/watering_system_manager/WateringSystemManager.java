@@ -12,8 +12,16 @@ import java.time.format.DateTimeFormatterBuilder;
 import java.util.Date;
 import java.util.Scanner;
 
+/**
+ * The type Watering system manager.
+ */
 public class WateringSystemManager {
 
+    /**
+     * Check watering in progress watering plan entry.
+     *
+     * @return the watering plan entry
+     */
     public WateringPlanEntry checkWateringInProgress() {
         Scanner fileReader = null;
         LocalDateTime currentDateTime = LocalDateTime.now();

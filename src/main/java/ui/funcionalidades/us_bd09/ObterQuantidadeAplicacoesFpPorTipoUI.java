@@ -12,8 +12,14 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * The type Obter quantidade aplicacoes fp por tipo ui.
+ */
 public class ObterQuantidadeAplicacoesFpPorTipoUI implements Runnable{
 
+    /**
+     * The Ctrl.
+     */
     ObterQuantidadeAplicacoesFpPorTipoController ctrl=new ObterQuantidadeAplicacoesFpPorTipoController();
     private LocalDate dataInferior;
     private LocalDate dataSuperior;

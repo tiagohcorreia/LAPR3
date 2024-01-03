@@ -16,9 +16,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+/**
+ * The type Get possible routes ui.
+ */
 public class GetPossibleRoutesUI implements Runnable {
 
+    /**
+     * The Ctrl.
+     */
     GetPossibleRoutesCtrl ctrl = new GetPossibleRoutesCtrl();
+    /**
+     * The In.
+     */
     Scanner in = new Scanner(System.in);
     private Local origin;
     private Hub destiny;
@@ -54,10 +63,20 @@ public class GetPossibleRoutesUI implements Runnable {
         }
     }
 
+    /**
+     * Gets origin.
+     *
+     * @param locals the locals
+     */
     public void getOrigin(ArrayList<Local> locals) {
         origin = showAndSelectLocal(locals, "Selecione o local de partida:");
     }
 
+    /**
+     * Gets destiny.
+     *
+     * @param locals the locals
+     */
     public void getDestiny(ArrayList<Local> locals) {
         ArrayList<Hub> hubs = new ArrayList<>();
 
@@ -73,14 +92,23 @@ public class GetPossibleRoutesUI implements Runnable {
         } else System.out.println("Não existem hubs registados no sistema\n");
     }
 
+    /**
+     * Gets autonomy.
+     */
     public void getAutonomy() {
         autonomy = Utils.readPositiveIntegerFromConsole("Introduza a autonomia (em Km) do veículo:");
     }
 
+    /**
+     * Gets vehicle speed.
+     */
     public void getVehicleSpeed() {
         vehicleSpeed = Utils.readPositiveIntegerFromConsole("Introduza a velocidade média (em Km/h) do veículo:");
     }
 
+    /**
+     * Print routes.
+     */
     public void printRoutes() {
         ArrayList<Path<Local>> paths = possibleRoutes.getRoutes();
         Map<Path<Local>, ArrayList<Edge<Local, Integer>>> routesAndSimpleDistances = possibleRoutes.getRoutesAndSimpleDistances();

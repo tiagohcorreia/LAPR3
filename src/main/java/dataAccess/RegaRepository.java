@@ -12,9 +12,17 @@ import java.util.Objects;
 import domain.RegaTable;
 import oracle.jdbc.OracleTypes;
 
+/**
+ * The type Rega repository.
+ */
 public class RegaRepository {
 
 
+    /**
+     * Gets regas.
+     *
+     * @return the regas
+     */
     public List<RegaTable> getRegas() {
 
         CallableStatement callStmt = null;
@@ -47,6 +55,15 @@ public class RegaRepository {
         return regas;
     }
 
+    /**
+     * Rega register.
+     *
+     * @param operacaoId the operacao id
+     * @param setor      the setor
+     * @param duracao    the duracao
+     * @param hora       the hora
+     * @throws SQLException the sql exception
+     */
     public static void regaRegister(int operacaoId, String setor, int duracao, String hora) throws SQLException {
 
         CallableStatement callStmt = null;
@@ -68,6 +85,15 @@ public class RegaRepository {
         }
     }
 
+    /**
+     * Registar rega boolean.
+     *
+     * @param setorId the setor id
+     * @param date    the date
+     * @param duracao the duracao
+     * @param hora    the hora
+     * @return the boolean
+     */
     public boolean registarRega(int setorId, LocalDate date, int duracao, String hora) {
 
         CallableStatement callStmt = null;
@@ -98,6 +124,16 @@ public class RegaRepository {
         return false;
     }
 
+    /**
+     * Registar fertirrega boolean.
+     *
+     * @param setorId   the setor id
+     * @param date      the date
+     * @param duracao   the duracao
+     * @param hora      the hora
+     * @param receitaId the receita id
+     * @return the boolean
+     */
     public boolean registarFertirrega(int setorId,
                                       LocalDate date,
                                       int duracao,
@@ -133,6 +169,13 @@ public class RegaRepository {
         return false;
     }
 
+    /**
+     * Rega delete int.
+     *
+     * @param operacaoId the operacao id
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public int regaDelete(int operacaoId) throws SQLException {
 
         CallableStatement callStmt = null;

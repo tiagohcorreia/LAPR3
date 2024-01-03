@@ -13,6 +13,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * The type Rega register ui.
+ */
 public class RegaRegisterUI implements Runnable {
 
     private RegaRegisterController controller;
@@ -20,6 +23,9 @@ public class RegaRegisterUI implements Runnable {
     private FertirregaController fertirregaController;
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
+    /**
+     * Instantiates a new Rega register ui.
+     */
     public RegaRegisterUI() {
         this.controller = new RegaRegisterController();
         this.operacaoController = new OperacaoAgricolaRegisterController();

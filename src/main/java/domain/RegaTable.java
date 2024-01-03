@@ -6,6 +6,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * The type Rega table.
+ */
 public class RegaTable {
 
     private Integer operacaoId;
@@ -14,16 +17,36 @@ public class RegaTable {
     private String hora;
     private Date data;
 
+    /**
+     * Gets mix.
+     *
+     * @return the mix
+     */
     public String getMix() {
         return mix;
     }
 
+    /**
+     * Sets mix.
+     *
+     * @param mix the mix
+     */
     public void setMix(String mix) {
         this.mix = mix;
     }
 
     private String mix;
 
+    /**
+     * Instantiates a new Rega table.
+     *
+     * @param data       the data
+     * @param operacaoId the operacao id
+     * @param setor      the setor
+     * @param duracao    the duracao
+     * @param hora       the hora
+     * @param mix        the mix
+     */
     public RegaTable(Date data,Integer operacaoId, String setor, Integer duracao, String hora,String mix) {
         this.data = data;
         this.operacaoId = operacaoId;
@@ -33,28 +56,67 @@ public class RegaTable {
         this.mix = mix;
     }
 
+    /**
+     * Instantiates a new Rega table.
+     *
+     * @param data       the data
+     * @param operacaoId the operacao id
+     * @param setor      the setor
+     * @param duracao    the duracao
+     * @param hora       the hora
+     */
     public RegaTable(Date data, Integer operacaoId, String setor, Integer duracao, String hora) {
         this(data, operacaoId, setor, duracao, hora, null);
     }
 
+    /**
+     * Gets operacao id.
+     *
+     * @return the operacao id
+     */
     public Integer getOperacaoId() {
         return operacaoId;
     }
 
+    /**
+     * Gets setor.
+     *
+     * @return the setor
+     */
     public String  getSetor() {
         return setor;
     }
 
+    /**
+     * Gets duracao.
+     *
+     * @return the duracao
+     */
     public Integer getDuracao() {
         return duracao;
     }
 
+    /**
+     * Gets hora.
+     *
+     * @return the hora
+     */
     public String getHora() {
         return hora;
     }
 
+    /**
+     * Get data date.
+     *
+     * @return the date
+     */
     public Date getData(){return data;}
 
+    /**
+     * Gets end time.
+     *
+     * @return the end time
+     */
     public String getEndTime() {
         try {
             SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");

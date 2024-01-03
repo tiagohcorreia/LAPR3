@@ -3,6 +3,8 @@ package esinf;
 import java.util.Objects;
 
 /**
+ * The type Edge.
+ *
  * @param <V> Vertex value type
  * @param <E> Edge value type
  */
@@ -12,6 +14,13 @@ public class Edge<V, E> {
     private E weight;        // Edge weight
 
 
+    /**
+     * Instantiates a new Edge.
+     *
+     * @param vOrig  the v orig
+     * @param vDest  the v dest
+     * @param weight the weight
+     */
     public Edge(V vOrig, V vDest, E weight) {
         if ((vOrig == null) || (vDest == null)) throw new RuntimeException("Edge vertices cannot be null!");
         this.vOrig = vOrig;
@@ -19,18 +28,38 @@ public class Edge<V, E> {
         this.weight = weight;
     }
 
+    /**
+     * Gets v orig.
+     *
+     * @return the v orig
+     */
     public V getVOrig() {
         return vOrig;
     }
 
+    /**
+     * Gets v dest.
+     *
+     * @return the v dest
+     */
     public V getVDest() {
         return vDest;
     }
 
+    /**
+     * Gets weight.
+     *
+     * @return the weight
+     */
     public E getWeight() {
         return weight;
     }
 
+    /**
+     * Sets weight.
+     *
+     * @param weight the weight
+     */
     public void setWeight(E weight) {
         this.weight = weight;
     }
@@ -60,6 +89,11 @@ public class Edge<V, E> {
     }
 
 
+    /**
+     * Gets weight double.
+     *
+     * @return the weight double
+     */
     public double getWeightDouble() {
         return (double) weight;
     }

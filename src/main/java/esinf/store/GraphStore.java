@@ -17,22 +17,50 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 
+/**
+ * The type Graph store.
+ */
 public class GraphStore {
+    /**
+     * The Directed.
+     */
     static boolean directed = false;
     private static MapGraph<Local, Integer> graph = new MapGraph<>(directed);
 
+    /**
+     * Gets graph.
+     *
+     * @return the graph
+     */
     public MapGraph<Local, Integer> getGraph() {
         return graph;
     }
 
+    /**
+     * Add vertex.
+     *
+     * @param vertex the vertex
+     */
     public void addVertex(Local vertex) {
         graph.addVertex(vertex);
     }
 
+    /**
+     * Add edge.
+     *
+     * @param local1    the local 1
+     * @param local2    the local 2
+     * @param distancia the distancia
+     */
     public void addEdge(Local local1, Local local2, int distancia) {
         graph.addEdge(local1, local2, distancia);
     }
 
+    /**
+     * Gets hubs.
+     *
+     * @return the hubs
+     */
     public ArrayList<Hub> getHubs() {
 
         ArrayList<Hub> hubs = new ArrayList<>();
@@ -44,6 +72,11 @@ public class GraphStore {
         return hubs;
     }
 
+    /**
+     * Gets simple locals.
+     *
+     * @return the simple locals
+     */
     public ArrayList<Local> getSimpleLocals() {
 
         ArrayList<Local> simpleLocals = new ArrayList<>();
@@ -119,6 +152,12 @@ public class GraphStore {
         return true;
     }
 
+    /**
+     * Remove edges above autonomy map graph.
+     *
+     * @param autonomy the autonomy
+     * @return the map graph
+     */
     public MapGraph<Local, Integer> removeEdgesAboveAutonomy(double autonomy) {
 
         MapGraph<Local, Integer> clone = graph.clone();
@@ -137,6 +176,11 @@ public class GraphStore {
         return clone;
     }
 
+    /**
+     * Gets furthest places.
+     *
+     * @return the furthest places
+     */
     public Distance getFurthestPlaces() {
 
         MapGraph<Local, Integer> clone = graph.clone();
@@ -152,6 +196,14 @@ public class GraphStore {
         return data;
     }
 
+    /**
+     * Gets vehicle charge stops.
+     *
+     * @param graph     the graph
+     * @param shortPath the short path
+     * @param autonomy  the autonomy
+     * @return the vehicle charge stops
+     */
     public List<Local> getVehicleChargeStops(MapGraph graph, LinkedList<Local> shortPath, double autonomy) {
 
         Integer sum = 0;
@@ -176,6 +228,13 @@ public class GraphStore {
         return stops;
     }
 
+    /**
+     * Gets distance between pairs.
+     *
+     * @param graph     the graph
+     * @param shortPath the short path
+     * @return the distance between pairs
+     */
     public List<Distance> getDistanceBetweenPairs(MapGraph graph, LinkedList<Local> shortPath) {
 
         List<Distance> cumulativeDistances = new ArrayList<>();
@@ -187,17 +246,41 @@ public class GraphStore {
         return cumulativeDistances;
     }
 
+    /**
+     * Gets number of vehicle stops.
+     *
+     * @param graph     the graph
+     * @param shortPath the short path
+     * @param autonomy  the autonomy
+     * @return the number of vehicle stops
+     */
     public int getNumberOfVehicleStops(MapGraph graph, LinkedList<Local> shortPath, double autonomy) {
 
         return getVehicleChargeStops(graph, shortPath, autonomy).size();
     }
 
+    /**
+     * Gets number of vehicle charges.
+     *
+     * @param graph     the graph
+     * @param shortPath the short path
+     * @param autonomy  the autonomy
+     * @return the number of vehicle charges
+     */
     public int getNumberOfVehicleCharges(MapGraph graph, LinkedList<Local> shortPath, double autonomy) {
 
         return getVehicleChargeStops(graph, shortPath, autonomy).size();
     }
 
 
+    /**
+     * Check existent distance boolean.
+     *
+     * @param cumulativeDistances the cumulative distances
+     * @param local               the local
+     * @param local2              the local 2
+     * @return the boolean
+     */
     public boolean checkExistentDistance(List<Distance> cumulativeDistances, Local local, Local local2) {
 
         boolean found = false;
@@ -213,6 +296,14 @@ public class GraphStore {
     }
 
 
+    /**
+     * Check attributes non null boolean.
+     *
+     * @param data     the data
+     * @param clone    the clone
+     * @param autonomy the autonomy
+     * @return the boolean
+     */
     public boolean checkAttributesNonNull(Distance data, MapGraph<Local, Integer> clone, double autonomy) {
 
         if (data == null || clone == null) {
@@ -241,6 +332,12 @@ public class GraphStore {
     }
 
 
+    /**
+     * Gets furthest places data.
+     *
+     * @param autonomy the autonomy
+     * @return the furthest places data
+     */
     public FurthestPlacesData getFurthestPlacesData(double autonomy) {
 
         FurthestPlacesData data2;
@@ -271,6 +368,12 @@ public class GraphStore {
     }
 
 
+    /**
+     * Generate hubs boolean.
+     *
+     * @param localsAndDischargeTimes the locals and discharge times
+     * @return the boolean
+     */
     public boolean generateHubs(Map<Local, Integer> localsAndDischargeTimes) {
 
         boolean out = false;
@@ -286,6 +389,13 @@ public class GraphStore {
         return out;
     }
 
+    /**
+     * Replace locals with hubs boolean.
+     *
+     * @param graph the graph
+     * @param hubs  the hubs
+     * @return the boolean
+     */
     public boolean replaceLocalsWithHubs(Graph<Local, Integer> graph, List<Hub> hubs) {
 
         try {
@@ -326,6 +436,11 @@ public class GraphStore {
         }
     }
 
+    /**
+     * Clean boolean.
+     *
+     * @return the boolean
+     */
     public boolean clean() {
 
         boolean directed = false;
@@ -333,6 +448,15 @@ public class GraphStore {
         return graph.vertices().isEmpty();
     }
 
+    /**
+     * Find max hub passing route path with most hubs data.
+     *
+     * @param local         the local
+     * @param departuretime the departuretime
+     * @param vehicle       the vehicle
+     * @param hubs          the hubs
+     * @return the path with most hubs data
+     */
     public PathWithMostHubsData findMaxHubPassingRoute(Local local, LocalTime departuretime, Vehicle vehicle, List<Hub> hubs) {
 
 
@@ -499,6 +623,12 @@ public class GraphStore {
         }
     }
 
+    /**
+     * Is hub in graph boolean.
+     *
+     * @param hub the hub
+     * @return the boolean
+     */
     public boolean isHubInGraph(Hub hub) {
 
         for (Local local : graph.vertices()) {

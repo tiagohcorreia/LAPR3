@@ -2,6 +2,9 @@ package esinf.gps;
 
 import java.util.Objects;
 
+/**
+ * The type Gps.
+ */
 public class GPS {
 
     private double latitude;
@@ -10,33 +13,67 @@ public class GPS {
     private final double DEFAULT_LATIT = 0;
     private final double DEFAULT_LONGIT = 0;
 
+    /**
+     * Instantiates a new Gps.
+     */
     public GPS() {
         this.latitude = DEFAULT_LATIT;
         this.longitude = DEFAULT_LONGIT;
     }
 
+    /**
+     * Instantiates a new Gps.
+     *
+     * @param latitude  the latitude
+     * @param longitude the longitude
+     */
     public GPS(double latitude, double longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
     }
 
+    /**
+     * Instantiates a new Gps.
+     *
+     * @param gps the gps
+     */
     public GPS(String gps) {
         this.latitude = Double.parseDouble(String.valueOf(gps.split(",")));
         this.longitude = Double.parseDouble(gps);
     }
 
+    /**
+     * Gets latitude.
+     *
+     * @return the latitude
+     */
     public double getLatitude() {
         return latitude;
     }
 
+    /**
+     * Sets latitude.
+     *
+     * @param latitude the latitude
+     */
     public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
+    /**
+     * Gets longitude.
+     *
+     * @return the longitude
+     */
     public double getLongitude() {
         return longitude;
     }
 
+    /**
+     * Sets longitude.
+     *
+     * @param longitude the longitude
+     */
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
@@ -85,15 +122,34 @@ public class GPS {
         return distance;
     }
 
+    /**
+     * Compare longitude int.
+     *
+     * @param other the other
+     * @return the int
+     */
     public int compareLongitude(GPS other) {
         return Double.compare(this.longitude, other.longitude);
     }
 
+    /**
+     * Compare latitude int.
+     *
+     * @param other the other
+     * @return the int
+     */
     public int compareLatitude(GPS other) {
         return Double.compare(this.latitude, other.latitude);
     }
 
-    //just for ex4
+    /**
+     * Gets distance.
+     *
+     * @param gps  the gps
+     * @param gps2 the gps 2
+     * @return the distance
+     */
+//just for ex4
     public static double getDistance(GPS gps, GPS gps2) {
         double latitude1 = gps.getLatitude();
         double longitude1 = gps.getLongitude();

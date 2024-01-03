@@ -5,12 +5,35 @@ import java.util.Collection;
 import java.util.Objects;
 import java.util.function.Predicate;
 
+/**
+ * The type Common graph.
+ *
+ * @param <V> the type parameter
+ * @param <E> the type parameter
+ */
 public abstract class CommonGraph<V, E> implements Graph<V, E> {
+    /**
+     * The Num verts.
+     */
     protected int numVerts;
+    /**
+     * The Num edges.
+     */
     protected int numEdges;
+    /**
+     * The Is directed.
+     */
     protected final boolean isDirected;
+    /**
+     * The Vertices.
+     */
     protected ArrayList<V> vertices;       // Used to maintain a numeric key to each vertex
 
+    /**
+     * Instantiates a new Common graph.
+     *
+     * @param directed the directed
+     */
     public CommonGraph(boolean directed) {
         numVerts = 0;
         numEdges = 0;

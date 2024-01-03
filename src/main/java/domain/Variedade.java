@@ -1,25 +1,50 @@
 package domain;
 
+/**
+ * The type Variedade.
+ */
 public class Variedade implements DatabaseObject{
 
     private int id;
     private String nome;
     private int culturaId;
 
+    /**
+     * Instantiates a new Variedade.
+     *
+     * @param id        the id
+     * @param nome      the nome
+     * @param culturaId the cultura id
+     */
     public Variedade(int id, String nome, int culturaId) {
         this.id = id;
         this.nome = nome;
         this.culturaId = culturaId;
     }
 
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Gets nome.
+     *
+     * @return the nome
+     */
     public String getNome() {
         return nome;
     }
 
+    /**
+     * Gets cultura id.
+     *
+     * @return the cultura id
+     */
     public int getCulturaId() {
         return culturaId;
     }

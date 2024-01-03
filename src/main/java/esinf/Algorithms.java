@@ -16,10 +16,15 @@ import static esinf.AlgorithmsAlternative.removeDuplicates;
 import static esinf.AlgorithmsAlternative.removeElementsAfter;
 
 
+/**
+ * The type Algorithms.
+ */
 public class Algorithms {
     /**
      * Performs breadth-first search of a Graph starting in a vertex
      *
+     * @param <V>  the type parameter
+     * @param <E>  the type parameter
      * @param g    Graph instance
      * @param vert vertex that will be the source of the search
      * @return a LinkedList with the vertices of breadth-first search
@@ -78,6 +83,8 @@ public class Algorithms {
     /**
      * Performs depth-first search starting in a vertex
      *
+     * @param <V>  the type parameter
+     * @param <E>  the type parameter
      * @param g    Graph instance
      * @param vert vertex of graph g that will be the source of the search
      * @return a LinkedList with the vertices of depth-first search
@@ -128,6 +135,8 @@ public class Algorithms {
     /**
      * Returns all paths from vOrig to vDest
      *
+     * @param <V>   the type parameter
+     * @param <E>   the type parameter
      * @param g     Graph instance
      * @param vOrig information of the Vertex origin
      * @param vDest information of the Vertex destination
@@ -148,8 +157,13 @@ public class Algorithms {
      * vertices of a graph g with non-negative edge weights
      * This implementation uses Dijkstra's algorithm
      *
+     * @param <V>      the type parameter
+     * @param <E>      the type parameter
      * @param g        Graph instance
      * @param vOrig    Vertex that will be the source of the path
+     * @param ce       the ce
+     * @param sum      the sum
+     * @param zero     the zero
      * @param visited  set of previously visited vertices
      * @param pathKeys minimum path vertices keys
      * @param dist     minimum distances
@@ -216,6 +230,8 @@ public class Algorithms {
     /**
      * Shortest-path between two vertices
      *
+     * @param <V>       the type parameter
+     * @param <E>       the type parameter
      * @param g         graph
      * @param vOrig     origin vertex
      * @param vDest     destination vertex
@@ -225,8 +241,6 @@ public class Algorithms {
      * @param shortPath returns the vertices which make the shortest path
      * @return if vertices exist in the graph and are connected, true, false otherwise
      */
-
-
     public static <V, E> E shortestPath(Graph<V, E> g, V vOrig, V vDest,
                                         Comparator<E> ce, BinaryOperator<E> sum, E zero,
                                         LinkedList<V> shortPath) {
@@ -248,6 +262,8 @@ public class Algorithms {
     /**
      * Shortest-path between a vertex and all other vertices
      *
+     * @param <V>   the type parameter
+     * @param <E>   the type parameter
      * @param g     graph
      * @param vOrig start vertex
      * @param ce    comparator between elements of type E
@@ -290,6 +306,8 @@ public class Algorithms {
      * Extracts from pathKeys the minimum path between voInf and vdInf
      * The path is constructed from the end to the beginning
      *
+     * @param <V>      the type parameter
+     * @param <E>      the type parameter
      * @param g        Graph instance
      * @param vOrig    information of the Vertex origin
      * @param vDest    information of the Vertex destination
@@ -332,6 +350,8 @@ public class Algorithms {
      * Given an undirected, connected graph with positive edge weights, a minimum spanning tree (MST) is calculated.
      * This algorithm uses Prim's algorithm.
      *
+     * @param <V>  the type parameter
+     * @param <E>  the type parameter
      * @param g    graph to calculate.
      * @param zero neutral element of the sum in elements of type E.
      * @param ce   comparator between elements of type E.
@@ -403,7 +423,9 @@ public class Algorithms {
     /**
      * Calculates a minimum spanning tree using Kruskal's algorithm
      *
-     * @param g graph to calculate
+     * @param <V> the type parameter
+     * @param <E> the type parameter
+     * @param g   graph to calculate
      * @return minimum spanning tree
      */
     public static <V, E> MapGraph<V, E> kruskalMST(Graph<V, E> g) {
@@ -432,6 +454,14 @@ public class Algorithms {
         return mst;
     }
 
+    /**
+     * Total graph distance double.
+     *
+     * @param <V> the type parameter
+     * @param <E> the type parameter
+     * @param g   the g
+     * @return the double
+     */
     public static <V, E> Double totalGraphDistance(Graph<V, E> g) {
         if (g == null) return null;
         Double totalDistance = 0.0;
@@ -447,6 +477,8 @@ public class Algorithms {
     /**
      * Shortest-path between two vertices in an unweighted graph
      *
+     * @param <V>       the type parameter
+     * @param <E>       the type parameter
      * @param g         graph
      * @param vOrig     origin vertex
      * @param vDest     destination vertex
@@ -466,6 +498,8 @@ public class Algorithms {
     /**
      * Shortest-path between a vertex and all other vertices in an unweighted graph
      *
+     * @param <V>   the type parameter
+     * @param <E>   the type parameter
      * @param g     graph
      * @param vOrig start vertex
      * @param paths returns all the minimum paths

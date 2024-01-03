@@ -11,8 +11,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * The type Metodos aplicacao repo.
+ */
 public class MetodosAplicacaoRepo {
 
+    /**
+     * Get metodos aplicacao array list.
+     *
+     * @return the array list
+     */
     public ArrayList<MetodoAplicacao> getMetodosAplicacao(){
         CallableStatement callStmt = null;
         ResultSet resultSet = null;

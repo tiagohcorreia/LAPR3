@@ -15,6 +15,9 @@ import java.time.LocalTime;
 import java.util.*;
 
 
+/**
+ * The type Watering plan generator.
+ */
 public class WateringPlanGenerator {
 
     private BufferedReader fileReader;
@@ -23,18 +26,30 @@ public class WateringPlanGenerator {
     private WateringPlan plan;
     //private List<String[]> adjustedPlanoDeRega;
 
+    /**
+     * Instantiates a new Watering plan generator.
+     *
+     * @param fileReader       the file reader
+     * @param numberOfPlanDays the number of plan days
+     */
     public WateringPlanGenerator(BufferedReader fileReader, int numberOfPlanDays) {
         this.fileReader = fileReader;
         this.numberOfPlanDays = numberOfPlanDays;
         generationDay = LocalDate.now();
     }
 
+    /**
+     * Generate plan.
+     */
     public void generatePlan() {
         if (plan == null) {
             parse();
         }
     }
 
+    /**
+     * Parse.
+     */
     public void parse() {
         ArrayList<WateringInstruction> instructions = new ArrayList<>();
         ArrayList<LocalTime> wateringMoments = new ArrayList<>();
@@ -70,6 +85,12 @@ public class WateringPlanGenerator {
 
     }
 
+    /**
+     * Gets watering instructions.
+     *
+     * @param horasDeRega  the horas de rega
+     * @param instructions the instructions
+     */
     public void getWateringInstructions(ArrayList<LocalTime> horasDeRega,
                                         ArrayList<WateringInstruction> instructions) {
         Repositories repo = Repositories.getInstance();

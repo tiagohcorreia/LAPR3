@@ -3,6 +3,9 @@ package domain;
 import java.util.Date;
 import java.util.Objects;
 
+/**
+ * The type Setor rega.
+ */
 public class SetorRega implements DatabaseObject{
     private int id;
     private String name;
@@ -20,6 +23,9 @@ public class SetorRega implements DatabaseObject{
     private final Date DEFAULT_END_DATE=new Date();
     private final int DEFAULT_DISPENSING_METHOD_ID=-1;
 
+    /**
+     * Instantiates a new Setor rega.
+     */
     public SetorRega() {
         this.id = DEFAULT_ID;
         this.name=DEFAULT_NAME;
@@ -30,6 +36,17 @@ public class SetorRega implements DatabaseObject{
         this.dispensingMethodId = DEFAULT_DISPENSING_METHOD_ID;
     }
 
+    /**
+     * Instantiates a new Setor rega.
+     *
+     * @param id                 the id
+     * @param name               the name
+     * @param area               the area
+     * @param maximumFlowRate    the maximum flow rate
+     * @param beginDate          the begin date
+     * @param endDate            the end date
+     * @param dispensingMethodId the dispensing method id
+     */
     public SetorRega(int id, String name, float area, float maximumFlowRate, Date beginDate, Date endDate, int dispensingMethodId) {
         this.id = id;
         this.name = name;
@@ -48,50 +65,110 @@ public class SetorRega implements DatabaseObject{
         return name;
     }
 
+    /**
+     * Gets area.
+     *
+     * @return the area
+     */
     public float getArea() {
         return area;
     }
 
+    /**
+     * Gets maximum flow rate.
+     *
+     * @return the maximum flow rate
+     */
     public float getMaximumFlowRate() {
         return maximumFlowRate;
     }
 
+    /**
+     * Gets begin date.
+     *
+     * @return the begin date
+     */
     public Date getBeginDate() {
         return beginDate;
     }
 
+    /**
+     * Gets end date.
+     *
+     * @return the end date
+     */
     public Date getEndDate() {
         return endDate;
     }
 
+    /**
+     * Gets dispensing method id.
+     *
+     * @return the dispensing method id
+     */
     public int getDispensingMethodId() {
         return dispensingMethodId;
     }
 
+    /**
+     * Sets id.
+     *
+     * @param id the id
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * Sets name.
+     *
+     * @param name the name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Sets area.
+     *
+     * @param area the area
+     */
     public void setArea(float area) {
         this.area = area;
     }
 
+    /**
+     * Sets maximum flow rate.
+     *
+     * @param maximumFlowRate the maximum flow rate
+     */
     public void setMaximumFlowRate(float maximumFlowRate) {
         this.maximumFlowRate = maximumFlowRate;
     }
 
+    /**
+     * Sets begin date.
+     *
+     * @param beginDate the begin date
+     */
     public void setBeginDate(Date beginDate) {
         this.beginDate = beginDate;
     }
 
+    /**
+     * Sets end date.
+     *
+     * @param endDate the end date
+     */
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 
+    /**
+     * Sets dispensing method id.
+     *
+     * @param dispensingMethodId the dispensing method id
+     */
     public void setDispensingMethodId(int dispensingMethodId) {
         this.dispensingMethodId = dispensingMethodId;
     }

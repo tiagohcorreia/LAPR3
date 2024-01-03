@@ -7,6 +7,12 @@ import esinf.model.Path;
 import java.util.*;
 import java.util.function.BinaryOperator;
 
+/**
+ * The type Possible routes.
+ *
+ * @param <V> the type parameter
+ * @param <E> the type parameter
+ */
 public class PossibleRoutes<V, E> {
 
     private Graph<V, E> graph;
@@ -17,6 +23,14 @@ public class PossibleRoutes<V, E> {
     private Map<Path<V>, ArrayList<Edge<V, E>>> routesAndSimpleDistances;
     private Map<Path<V>, E> routesAndTotalDistances;
 
+    /**
+     * Instantiates a new Possible routes.
+     *
+     * @param graph        the graph
+     * @param operat       the operat
+     * @param comparat     the comparat
+     * @param neutralValue the neutral value
+     */
     public PossibleRoutes(Graph<V, E> graph, BinaryOperator<E> operat, Comparator<E> comparat, E neutralValue) {
         this.graph = graph;
         this.operat = operat;
@@ -24,34 +38,77 @@ public class PossibleRoutes<V, E> {
         this.neutralValue = neutralValue;
     }
 
+    /**
+     * Gets graph.
+     *
+     * @return the graph
+     */
     public Graph<V, E> getGraph() {
         return graph;
     }
 
+    /**
+     * Gets operat.
+     *
+     * @return the operat
+     */
     public BinaryOperator<E> getOperat() {
         return operat;
     }
 
+    /**
+     * Gets comparat.
+     *
+     * @return the comparat
+     */
     public Comparator<E> getComparat() {
         return comparat;
     }
 
+    /**
+     * Gets neutral value.
+     *
+     * @return the neutral value
+     */
     public E getNeutralValue() {
         return neutralValue;
     }
 
+    /**
+     * Gets routes.
+     *
+     * @return the routes
+     */
     public ArrayList<Path<V>> getRoutes() {
         return paths;
     }
 
+    /**
+     * Gets routes and simple distances.
+     *
+     * @return the routes and simple distances
+     */
     public Map<Path<V>, ArrayList<Edge<V, E>>> getRoutesAndSimpleDistances() {
         return routesAndSimpleDistances;
     }
 
+    /**
+     * Gets routes and total distances.
+     *
+     * @return the routes and total distances
+     */
     public Map<Path<V>, E> getRoutesAndTotalDistances() {
         return routesAndTotalDistances;
     }
 
+    /**
+     * Calculate possible routes boolean.
+     *
+     * @param orig     the orig
+     * @param dest     the dest
+     * @param autonomy the autonomy
+     * @return the boolean
+     */
     public boolean calculatePossibleRoutes(V orig,
                                            V dest,
                                            E autonomy) {
