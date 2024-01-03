@@ -1,6 +1,7 @@
 --  USBD14 - Como Gestor Agrícola, quero registar uma operação de aplicação de
 --  fator de produção
 
+-- Função para verificar se uma aplicação de fator de produção já existe
 create or replace function verificarSeAplicacaoFpExiste(id aplicacao_fp.operacao_id%type)
     return number
     is
@@ -13,7 +14,7 @@ begin
     loop
         fetch c1 into otherId;
         if (id = otherId) then
-            returnValue := 1;
+            returnValue := 1; -- A operação já existe
         end if;
         exit when c1%notfound;
     end loop;
@@ -21,6 +22,7 @@ begin
     return returnValue;
 end;
 
+-- Procedimento para registrar uma aplicação de fator de produção
 CREATE OR REPLACE function registrar_Aplicacao_FP(
     parcelaId number,
     variedadeId number,
@@ -34,20 +36,21 @@ CREATE OR REPLACE function registrar_Aplicacao_FP(
     IS
     p_operacaoId Operacao_Agricola.id%TYPE;
 BEGIN
-    -- Verificar se parcela_id existe
+    -- Verificar se a parcela, fator de produção e área são válidos
     IF (checkIfParcelExists(parcelaId) = 0
         or checkIfFpExists(fatorProducaoId) = 0
         or check_if_area_is_greater_then_parcel(parcelaId, area) = 1) THEN
-        return 0;
+        return 0; -- Falha nas verificações, abortar
     END IF;
 
+    -- Se a variedade for fornecida, verificar se é válida
     if variedadeId is not null then
         if (checkIfVarietyExists(variedadeId) = 0 or checkIfVarietyIsInParcel(parcelaId, variedadeId) = 0) then
-            return 0;
+            return 0; -- Variedade inválida, abortar
         end if;
     end if;
 
-    savepoint sp;
+    savepoint sp; -- Ponto de salvamento para rollback em caso de falha
 
     -- Inserir na tabela Operacao_Agricola
     SELECT MAX(id) + 1 INTO p_operacaoId FROM Operacao_Agricola;
@@ -58,17 +61,18 @@ BEGIN
                              area)
     VALUES (p_operacaoId, parcelaId, variedadeId, fatorProducaoId, metodoAplicacaoId, quantidade, area);
 
+    -- Verificar se as inserções foram bem-sucedidas
     if (checkIfOperationIdExists(p_operacaoId) = 1 and verificarSeAplicacaoFpExiste(p_operacaoId) = 1) then
-        commit;
-        return 1;
+        commit; -- Confirmar transação
+        return 1; -- Sucesso
     else
-        rollback to sp;
-        return 0;
+        rollback to sp; -- Reverter para o ponto de salvamento em caso de falha
+        return 0; -- Falha
     end if;
 END;
 
 
--- caso de sucesso
+-- Caso de sucesso
 declare
     parcelaId         number                       := 108;
     variedadeId       number                       := null;
@@ -88,8 +92,9 @@ begin
     end if;
 end;
 
+select * from Aplicacao_FP;
 
--- caso de insucesso
+-- Caso de insucesso
 declare
     parcelaId         number                       := 108;
     variedadeId       number                       := null;
@@ -108,3 +113,5 @@ begin
         dbms_output.put_line('Aplicação de fator de produção não registada');
     end if;
 end;
+
+
