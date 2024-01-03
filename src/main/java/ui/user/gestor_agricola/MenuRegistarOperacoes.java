@@ -28,6 +28,7 @@ public class MenuRegistarOperacoes implements Runnable{
         options.add(new MenuItem("Registar Aplicacao FP", new RegisterFpApplicationUI()));
         options.add(new MenuItem("Registar Poda", new RegistarPodaUI()));
         options.add(new MenuItem("Registar Rega (Fertirrega)", new RegisterWateringOperationUI()));
+        options.add(new MenuItem("Cancelar Operação Agrícola", new CancelarOperacaoUI()));
 
         Utils.runMenu(options, "REGISTAR OPERAÇÕES");
     }
