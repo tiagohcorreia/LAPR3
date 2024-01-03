@@ -47,6 +47,18 @@ end;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 create or replace function register_fertigation(v_setor_id SETOR_REGA.id%type,
                                                 v_data_operacao OPERACAO_AGRICOLA.data%type,
                                                 v_duration REGA.duracao%type,
@@ -134,6 +146,7 @@ begin
             VALUES (v_operacao_id, other_parcela_id, other_variedade_id);
 
             if IS_IN_TABLE_PARCELAS_VARIEDADES_APLICADAS(v_operacao_id, other_parcela_id, other_variedade_id) = 0 then
+                rollback to sp;
                 DBMS_OUTPUT.PUT_LINE('Não foi possível fazer o registo na tabela PARCELAS_VARIEDADES_APLICADAS');
                 return 0;
             end if;
@@ -153,6 +166,7 @@ begin
             VALUES (v_operacao_id, other_fp_id);
 
             if IS_IN_TABLE_FP_APLICADOS(v_operacao_id, other_fp_id) = 0 then
+                rollback to sp;
                 DBMS_OUTPUT.PUT_LINE('Não foi possível fazer o registo na tabela FP_APLICADOS');
                 return 0;
             end if;
@@ -165,6 +179,16 @@ begin
     commit;
     return 1;
 end;
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -187,6 +211,17 @@ begin
     close c1;
     return 0;
 end;
+
+
+
+
+
+
+
+
+
+
+
 
 
 
