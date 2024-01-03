@@ -9,7 +9,7 @@ float calculateMedian(SameSensor* sensor,Config* config,int numConfigs,int i) {
     int timesElapsed = 0;
     float median;
     int numValues = config[i].window_len;
-
+    
     int* indices = (int*)malloc(numValues * sizeof(int));
     if (indices == NULL) {
         return 0.0f;

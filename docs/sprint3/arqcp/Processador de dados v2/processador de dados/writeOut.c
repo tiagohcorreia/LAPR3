@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <time.h>
 
-void writeSensorDataToFile(int sensor_id, int write_counter, const char* type, const char* unit, float mediana, const char* output_directory) {
+void writeSensorDataToFile(int sensor_id, int write_counter, const char* type, const char* unit, int mediana, const char* output_directory) {
     time_t current_time = time(NULL);
     struct tm* time_info = localtime(&current_time);
 
@@ -22,7 +22,7 @@ void writeSensorDataToFile(int sensor_id, int write_counter, const char* type, c
         return;
     }
 
-    fprintf(file, "%d,%d,%s,%s,%.2f#\n", sensor_id, write_counter, type, unit, mediana);
+    fprintf(file, "%d,%d,%s,%s,%d#\n", sensor_id, write_counter, type, unit, mediana);
 
     fclose(file);
 }

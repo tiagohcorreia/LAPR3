@@ -17,7 +17,8 @@ void populateSameSensor(SameSensor* sensor, Config* configs, int numConfigs, Sen
     sensor[sensorId].sensor_id = sensorId + 1;
     strcpy(sensor[sensorId].type,configs[configIndex].type);
     sensor[sensorId].timeout = configs[configIndex].timeout;
-    sensor[sensorId].buffer.data = malloc(sizeof(float) * configs[configIndex].buffer_len);
+    allocateMemoryForSensor(sensor,configs,sensorId,configIndex);
+   // sensor[sensorId].buffer.data = malloc(sizeof(float) * configs[configIndex].buffer_len);
     if (sensor[sensorId].buffer.data == NULL) {
         fprintf(stderr, "Memory allocation failed\n");
         exit(EXIT_FAILURE);
@@ -26,15 +27,15 @@ void populateSameSensor(SameSensor* sensor, Config* configs, int numConfigs, Sen
     int lastTimestamp = 0;
     for (int i = 0; i < numSensorInfos; ++i) {
         if (sensorInfos[i].sensor_id == sensorId + 1) {
-            float value = atof(sensorInfos[i].value);
+            float value = atof(sensorInfos[i].value) * 100;
             sensor[sensorId].buffer.data[aux] = value;
             aux++;
-            if(aux>1){
+            /*if(aux>1){
                 if(sensorInfos[i].time - lastTimestamp > timeout){
                     sensor[sensorId].timeout = -1;
 
                 }
-            }
+            } */
             lastTimestamp = sensorInfos[i].time;
 
 

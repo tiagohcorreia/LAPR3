@@ -8,8 +8,8 @@ int main(int argc, char* argv[]) {
 
 
     char *data_file_path = argv[1]; //"C:\\Users\\rafa1\\Desktop\\ARQCP\\dados_sensores\\sensores.txt";
-    char *config_file =argv[2];     //"C:\\Users\\rafa1\\Desktop\\ARQCP\\config.txt";//
-    char *output_directory = argv[3];//"C:\\Users\\rafa1\\Desktop\\ARQCP\\out";
+    char *config_file = argv[2]; // "C:\\Users\\rafa1\\Desktop\\ARQCP\\config.txt";//
+    char *output_directory = argv[3]; //"C:\\Users\\rafa1\\Desktop\\ARQCP\\out";
      int num_readings = atoi(argv[4]);
     checkAndCreateDirectory(output_directory);
 
@@ -17,7 +17,7 @@ int main(int argc, char* argv[]) {
     int num_configs = 10;
     num_configs = readConfigFile(config_file, &configs); // le e guarda num struct a config file para uso futuro
 
-   /*  int num_readings = getNumSensorsFromConfig(data_file_path);  //numero de entradas totais na lista de dados */
+    //int num_readings = getNumSensorsFromConfig(data_file_path);  //numero de entradas totais na lista de dados
     SensorInfo *sensors = (SensorInfo *) malloc(num_readings * sizeof(SensorInfo));
     if (sensors == NULL) {
         perror("Error allocating memory for sensors");
@@ -61,7 +61,7 @@ int main(int argc, char* argv[]) {
             writeSensorDataToFileError(i+1,sameSensors[i].writeCounter,sameSensors[i].type,configs[i].unit,erro,output_directory);
         }else{
         median[i] = calculateMedian(sameSensors, configs, num_configs, i);
-        writeSensorDataToFile(i+1,sameSensors[i].writeCounter,sameSensors[i].type,configs[i].unit,median[i],output_directory);
+        writeSensorDataToFile(i+1,sameSensors[i].writeCounter,sameSensors[i].type,configs[i].unit,(int)median[i],output_directory);
         }
     }
         free(sensors);
