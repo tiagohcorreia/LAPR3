@@ -1,6 +1,7 @@
-package ui.funcionalidades.us_bd05;
+package ui.funcionalidades.us_bd09;
 
-import controller.us_bd16.ObterProdutosColhidosController;
+import controller.us_bd06.ObterQuantidadeFpPorTipoController;
+import controller.us_bd09.ObterQuantidadeAplicacoesFpPorTipoController;
 import domain.Parcela;
 import ui.utils.Utils;
 
@@ -11,29 +12,21 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
-public class ObterProdutosColhidosUI implements Runnable{
+public class ObterQuantidadeAplicacoesFpPorTipoUI implements Runnable{
 
-    ObterProdutosColhidosController ctrl=new ObterProdutosColhidosController();
-
-    private int parcelaID;
+    ObterQuantidadeAplicacoesFpPorTipoController ctrl=new ObterQuantidadeAplicacoesFpPorTipoController();
     private LocalDate dataInferior;
     private LocalDate dataSuperior;
     private ResultSet resultado;
 
     @Override
     public void run() {
-        obterIDParcela();
         obterDataInferior();
         obterDataSuperior();
-        resultado = ctrl.getQuery(parcelaID, dataInferior, dataSuperior);
+        resultado = ctrl.getQuery(dataInferior, dataSuperior);
         if (resultado!=null){
             imprimirResultado();
         } else System.err.println("Sem resultado\n");
-    }
-
-    private void obterIDParcela() {
-        List<Parcela> parcelas = ctrl.obterParcelas();
-        parcelaID = Utils.getTableIdFromConsole(parcelas, "ID", "PARCELA", "Introduza o id da parcela:");
     }
 
     private void obterDataInferior(){
@@ -50,14 +43,12 @@ public class ObterProdutosColhidosUI implements Runnable{
 
         try{
             try{
-                System.out.printf("%-30s | %-30s | %-30s | %-30s\n", "VARIEDADE", "PRODUTO", "QUANTIDADE", "DATA");
+                System.out.printf("%-30s | %-30s\n", "TIPO DE FATOR", "QUANTIDADE");
                 while (resultado.next()){
-                    String variedade= resultado.getString(2);
-                    String produto= resultado.getString(3);
-                    double quantidade= resultado.getFloat(4);
-                    java.sql.Date date=resultado.getDate(5);
+                    String tipoFP= resultado.getString(1);
+                    int quantidade= resultado.getInt(2);
 
-                    System.out.printf("%-30s | %-30s | %-30s | %-30s\n", variedade, produto, quantidade + " Kg", date);
+                    System.out.printf("%-30s | %-30s\n", tipoFP, quantidade);
                 }
             } finally {
                 resultado.close();

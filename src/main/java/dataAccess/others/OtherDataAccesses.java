@@ -42,6 +42,34 @@ public class OtherDataAccesses {
         return resultSet;
     }
 
+    public ResultSet obterAplicacoesFpPorTipo(LocalDate dataInicio,
+                                    LocalDate dataFim) {
+
+        CallableStatement callStmt = null;
+        ResultSet resultSet = null;
+
+        try {
+            try {
+
+                Connection connection = DatabaseConnection.getInstance().getConnection();
+                callStmt = connection.prepareCall("{ ? = call obter_aplicacoes_fp_por_tipo(?, ?) }");
+
+                callStmt.registerOutParameter(1, OracleTypes.CURSOR);
+                callStmt.setDate(2, java.sql.Date.valueOf(dataInicio));
+                callStmt.setDate(3, java.sql.Date.valueOf(dataFim));
+
+                callStmt.execute();
+                resultSet = (ResultSet) callStmt.getObject(1);
+
+            } finally {
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
+
     public ResultSet produtosColhidosNumaParcela(int parcelaID,
                                                  LocalDate dataInferior,
                                                  LocalDate dataSuperior) {

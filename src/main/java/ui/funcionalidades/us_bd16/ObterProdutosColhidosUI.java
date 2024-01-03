@@ -50,14 +50,13 @@ public class ObterProdutosColhidosUI implements Runnable{
 
         try{
             try{
-                System.out.printf("%-30s | %-30s | %-30s | %-30s\n", "VARIEDADE", "PRODUTO", "QUANTIDADE", "DATA");
+                System.out.printf("%-30s | %-30s | %-30s\n", "VARIEDADE", "PRODUTO", "QUANTIDADE");
                 while (resultado.next()){
-                    String variedade= resultado.getString(2);
-                    String produto= resultado.getString(3);
-                    double quantidade= resultado.getFloat(4);
-                    java.sql.Date date=resultado.getDate(5);
+                    String variedade= resultado.getString(1);
+                    String produto= resultado.getString(2);
+                    double quantidade= resultado.getFloat(3);
 
-                    System.out.printf("%-30s | %-30s | %-30s | %-30s\n", variedade, produto, quantidade + " Kg", date);
+                    System.out.printf("%-30s | %-30s | %-30s\n", variedade, produto, quantidade + " Kg");
                 }
             } finally {
                 resultado.close();
