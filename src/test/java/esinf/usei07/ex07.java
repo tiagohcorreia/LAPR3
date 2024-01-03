@@ -82,36 +82,30 @@ public class ex07 {
         MapGraph clone = storage.getGraph().clone();
         // get hubs
         List<Local> locals = clone.vertices();
-        Map<Local, Integer> hubs2 = new HashMap<>();
-        hubs2.put(locals.get(8), 100);
-        hubs2.put(locals.get(122), 200);
-        hubs2.put(locals.get(46), 300);
-        hubs2.put(locals.get(238), 400);
+
 //
-        MapGraphLoader.loadGraph("docs/esinf_data/locais_smallv1.csv", "docs/esinf_data/distancias_smallv1.csv");
-        int numHubs = 5;
+
         int id = 1;
         float autonomyDistance = 150000;
         float averageVelocity = 60000;
         float chargingTime = 90;
 
-        GPS gpsCT6 = new GPS(40.123, -8.456);
-        GPS gpsCT13 = new GPS(41.789, -7.012);
 
         List<Hub> hubs = new ArrayList<>();
 
-        Hub hubCT290 = new Hub(new Local("CT290", locals.get(7).getGps()), 5);
-        Hub hubCT150 = new Hub(new Local("CT150", locals.get(121).getGps()), 15);
-        Hub hubCT309 = new Hub(new Local("CT309", locals.get(45).getGps()), 15);
-        Hub hubCT226 = new Hub(new Local("CT226", locals.get(237).getGps()), 15);
+        Hub hubCT102 = new Hub(new Local("CT102", locals.get(39).getGps()), 5);
+        Hub hubCT202 = new Hub(new Local("CT202", locals.get(256).getGps()), 15);
+        Hub hubCT104 = new Hub(new Local("CT104", locals.get(253).getGps()), 15);
+        Hub hubCT79 = new Hub(new Local("CT79", locals.get(88).getGps()), 15);
+        Hub hubCT223 = new Hub(new Local("CT223", locals.get(88).getGps()), 15);
 
 
+        hubs.add(hubCT102);
+        hubs.add(hubCT202);
+        hubs.add(hubCT104);
+        hubs.add(hubCT79);
+        hubs.add(hubCT223);
 
-
-        hubs.add(hubCT290);
-        hubs.add(hubCT150);
-        hubs.add(hubCT309);
-        hubs.add(hubCT226);
 
         vehicle = new Vehicle(id, autonomyDistance, averageVelocity, chargingTime);
 
@@ -119,9 +113,15 @@ public class ex07 {
 
         System.out.println(locals.get(7));
         //ex7
-        PathWithMostHubsData data = storage.findMaxHubPassingRoute(locals.get(7), LocalTime.of(14, 00, 00), vehicle, hubs);
+        PathWithMostHubsData data = storage.findMaxHubPassingRoute(locals.get(7), LocalTime.of(14, 00, 00), vehicle, hubs);//local de origem, horario de partida,veiculo,lista de hubs
         System.out.println(data);
-
-
-    }
+        System.out.println();
+        double sum=0;
+        if(data.getPath()!=null){
+        for (int i = 0; i < data.getPath().size()-1; i++) {
+            sum+=(int)clone.edge(data.getPath().get(i),data.getPath().get(i+1)).getWeight();
+            System.out.println(clone.edge(data.getPath().get(i),data.getPath().get(i+1)).getWeight());
+        }
+        System.out.println(sum);
+    }}
 }
