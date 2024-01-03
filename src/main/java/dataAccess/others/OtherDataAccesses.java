@@ -157,4 +157,40 @@ public class OtherDataAccesses {
         }
         return resultSet;
     }
+
+    public ResultSet obterTotaisMensaisRega(int parcelaID,
+                                       LocalDate dataInferior,
+                                       LocalDate dataSuperior) {
+
+        CallableStatement callStmt = null;
+        ResultSet resultSet = null;
+
+        try {
+            try {
+
+                Connection connection = DatabaseConnection.getInstance().getConnection();
+                callStmt = connection.prepareCall("{ ? = call getMonthlyWateringTotal(?, ?, ?) }");
+
+                callStmt.registerOutParameter(1, OracleTypes.CURSOR);
+                callStmt.setInt(2, parcelaID);
+                callStmt.setDate(3, java.sql.Date.valueOf(dataInferior));
+                callStmt.setDate(4, java.sql.Date.valueOf(dataSuperior));
+
+                callStmt.execute();
+                resultSet = callStmt.getResultSet();
+
+            } finally {
+
+                if (!Objects.isNull(callStmt)) {
+                    callStmt.close();
+                }
+                if (!Objects.isNull(resultSet)) {
+                    resultSet.close();
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
 }
