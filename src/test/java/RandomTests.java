@@ -12,7 +12,7 @@ public class RandomTests {
     }
 
     public static void main(String[] args) {
-        Date tmp=Utils.readDateFromConsole("input:");
-        System.out.println(tmp.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        java.sql.Date date=java.sql.Date.valueOf(LocalDate.now());
+        System.out.println(date);
     }
 }

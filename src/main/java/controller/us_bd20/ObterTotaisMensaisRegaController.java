@@ -16,9 +16,8 @@ public class ObterTotaisMensaisRegaController {
         return repo.getParcelaRepository().getParcelas();
     }
 
-    public ResultSet getQuery(int parcelaID,
-                              LocalDate dataInferior,
+    public ResultSet getQuery(LocalDate dataInferior,
                               LocalDate dataSuperior){
-        return repo.getOthers().obterTotaisMensaisRega(parcelaID, dataInferior, dataSuperior);
+        return repo.getOthers().obterTotaisMensaisRega(dataInferior, dataSuperior);
     }
 }

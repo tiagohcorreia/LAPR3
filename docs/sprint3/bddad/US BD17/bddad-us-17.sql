@@ -1,4 +1,4 @@
-SELECT Fator_Producao.nome,
+SELECT distinct Fator_Producao.nome,
        Composto_Quimico.nome,
        Ficha_Tecnica.quantidade,
        Operacao_Agricola.data
@@ -23,10 +23,9 @@ create or replace function obterParcelasFP(parcelaId PARCELA.id%type, dataInicio
     c sys_refcursor;
 begin
     open c for
-        SELECT Fator_Producao.nome,
+        SELECT distinct Fator_Producao.nome,
                Composto_Quimico.nome,
-               Ficha_Tecnica.quantidade,
-               Operacao_Agricola.data
+               sum(Ficha_Tecnica.quantidade)
         FROM Fator_Producao,
              Ficha_Tecnica,
              Composto_Quimico,
@@ -48,7 +47,9 @@ begin
           and FP_APLICADOS.FP_ID = FATOR_PRODUCAO.id
           and APLICACAO_FP.OPERACAO_ID = FP_APLICADOS.OPERACAO_ID
           and Aplicacao_FP.operacao_id = Operacao_Agricola.id
-          AND Operacao_Agricola.data BETWEEN dataInicio AND dataFim;
+          AND Operacao_Agricola.data BETWEEN dataInicio AND dataFim
+    group by Fator_Producao.nome, COMPOSTO_QUIMICO.NOME
+    order by FATOR_PRODUCAO.NOME, COMPOSTO_QUIMICO.NOME;
 
     return c;
 end;

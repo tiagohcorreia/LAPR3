@@ -9,6 +9,7 @@ import ui.utils.Utils;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
@@ -23,10 +24,10 @@ public class ObterTotaisMensaisRegaUI implements Runnable{
 
     @Override
     public void run() {
-        obterIDParcela();
+        //obterIDParcela();
         obterDataInferior();
         obterDataSuperior();
-        resultado = ctrl.getQuery(parcelaID, dataInferior, dataSuperior);
+        resultado = ctrl.getQuery(dataInferior, dataSuperior);
         if (resultado != null) {
             imprimirResultado();
         } else System.err.println("Sem resultado\n");
@@ -43,21 +44,27 @@ public class ObterTotaisMensaisRegaUI implements Runnable{
     }
 
     private void obterDataSuperior() {
-        Date tmpDate = Utils.readDateFromConsole("Introduza a data de início do intervalo pretendido:");
+        Date tmpDate = Utils.readDateFromConsole("Introduza a data de fim do intervalo pretendido:");
         dataSuperior = tmpDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     }
 
     private void imprimirResultado() {
 
         try {
-            while (resultado.next()) {
-                String mes=resultado.getString(1);
-                int totalRega= resultado.getInt(2);
+            try{
+                System.out.printf("%-30s | %-30s | %-30s\n", "PARCELA", "MÊS", "TOTAL DE REGA");
+                while (resultado.next()) {
+                    String parcela= resultado.getString(1);
+                    int mes=resultado.getInt(2);
+                    int totalRega= resultado.getInt(3);
 
-                System.out.printf("-20%s | -20%s\n", "Mês: " + mes, "Total de rega desse mês: " + totalRega);
+                    System.out.printf("%-30s | %-30s | %-30s\n", parcela, Month.of(mes), totalRega + " mn");
+                }
+
+                System.out.println();
+            } finally {
+                resultado.close();
             }
-
-            System.out.println();
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -25,16 +25,6 @@ public class GestorAgricolaUI implements Runnable {
         options.add(new MenuItem("Gerir Rega", new MenuGestaoRega()));
 
         Utils.runMenu(options, "MENU GESTOR AGRÍCOLA");
-        /*int option = 0;
-
-        do {
-            option = Utils.showAndSelectIndex(options, "\n\nMain Menu");
-
-            if ((option >= 0) && (option < options.size())) {
-                options.get(option).run();
-            }
-
-        } while (option != -1);*/
     }
 }
 
