@@ -1,6 +1,6 @@
 package controller;
 
-import dataAccess.execution_methods.MetodoExcucaoRepository;
+import dataAccess.metodos_execucao.MetodoExecucaoRepository;
 import dataAccess.Repositories;
 import domain.MetodoExecucao;
 
@@ -10,24 +10,24 @@ import java.util.Objects;
 
 public class MetodoExecucaoListController {
 
-    private MetodoExcucaoRepository metodoExcucaoRepository;
+    private MetodoExecucaoRepository metodoExecucaoRepository;
 
     public MetodoExecucaoListController() {
         getMetodoExecucao();
     }
 
-    private MetodoExcucaoRepository getMetodoExecucao() {
+    private MetodoExecucaoRepository getMetodoExecucao() {
 
-        if (Objects.isNull(metodoExcucaoRepository)) {
+        if (Objects.isNull(metodoExecucaoRepository)) {
 
             Repositories repositories = Repositories.getInstance();
-            metodoExcucaoRepository = repositories.getMetodoExcucaoRepository();
+            metodoExecucaoRepository = repositories.getMetodoExcucaoRepository();
         }
-        return metodoExcucaoRepository;
+        return metodoExecucaoRepository;
     }
 
     public List<MetodoExecucao> getMetodosExecucao() throws SQLException {
-        return metodoExcucaoRepository.getMetodosExecucao();
+        return metodoExecucaoRepository.getMetodosExecucao();
     }
 
     public void showMetodosExecucao() {

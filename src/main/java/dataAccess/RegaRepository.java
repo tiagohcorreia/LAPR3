@@ -68,7 +68,7 @@ public class RegaRepository {
         }
     }
 
-    public boolean registerWateringOperation(int setorId, LocalDate date, int duracao, String hora) {
+    public boolean registarRega(int setorId, LocalDate date, int duracao, String hora) {
 
         CallableStatement callStmt = null;
 
@@ -98,11 +98,11 @@ public class RegaRepository {
         return false;
     }
 
-    public boolean registerFertigationOperation(int setorId,
-                                                       LocalDate date,
-                                                       int duracao,
-                                                       String hora,
-                                                       int receitaId) {
+    public boolean registarFertirrega(int setorId,
+                                      LocalDate date,
+                                      int duracao,
+                                      String hora,
+                                      int receitaId) {
 
         CallableStatement callStmt = null;
 

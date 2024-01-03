@@ -21,7 +21,7 @@ public class RegisterWateringOperationUI implements Runnable {
     @Override
     public void run() {
         String space = "----------------------------";
-        System.out.printf("%s REGISTAR SEMENTEIRA %s\n\n", space, space);
+        System.out.printf("%s REGISTAR REGA (FERTIRREGA) %s\n\n", space, space);
 
         getSectorId();
         getOperationDate();
@@ -100,6 +100,8 @@ public class RegisterWateringOperationUI implements Runnable {
             System.out.printf("Duração da rega: %dmn\n", duration);
             System.out.printf("Hora da rega: %s\n", hour);
         }
+
+        System.out.println();
 
         return Utils.getBooleanAnswer("Deseja registrar a operação:");
     }

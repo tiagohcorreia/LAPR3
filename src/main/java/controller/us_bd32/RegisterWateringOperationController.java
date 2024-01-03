@@ -21,7 +21,7 @@ public class RegisterWateringOperationController {
 
     public boolean registerWateringOperation(int setorId, LocalDate date, int duracao, String hora){
 
-        return repo.getRegaRepository().registerWateringOperation(setorId, date, duracao, hora);
+        return repo.getRegaRepository().registarRega(setorId, date, duracao, hora);
     }
 
     public boolean registerFertigationOperation(int setorId,
@@ -29,6 +29,6 @@ public class RegisterWateringOperationController {
                                                 int duracao,
                                                 String hora,
                                                 int receitaId){
-        return repo.getRegaRepository().registerFertigationOperation(setorId, date, duracao, hora, receitaId);
+        return repo.getRegaRepository().registarFertirrega(setorId, date, duracao, hora, receitaId);
     }
 }

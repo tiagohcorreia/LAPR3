@@ -1,7 +1,8 @@
 import org.junit.jupiter.api.Test;
 import ui.utils.Utils;
 
-import java.sql.Date;
+import java.time.ZoneId;
+import java.util.Date;
 import java.time.LocalDate;
 
 public class RandomTests {
@@ -11,8 +12,7 @@ public class RandomTests {
     }
 
     public static void main(String[] args) {
-        LocalDate d=Utils.getLocalDateFromConsole("teste:", "yyyy-MM-dd");
-        System.out.println(Date.valueOf(d));;
-
+        Date tmp=Utils.readDateFromConsole("input:");
+        System.out.println(tmp.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
     }
 }

@@ -1,7 +1,7 @@
 package controller;
 
 import dataAccess.Repositories;
-import dataAccess.varieties.VariedadeRepository;
+import dataAccess.variedades.VariedadeRepository;
 import domain.Variedade;
 
 import java.sql.SQLException;

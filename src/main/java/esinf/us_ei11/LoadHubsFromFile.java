@@ -11,13 +11,13 @@ import java.io.IOException;
 import java.time.LocalTime;
 
 public class LoadHubsFromFile {
-    public static boolean loadHubsFormFile() {
+    public static boolean loadHubsFormFile(String file) {
 
         GraphStore graphStore = Repositories.getInstance().getGraphStore();
 
         try {
 
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("hubs.txt"));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(String.valueOf(file)));
 
             String line;
             boolean isFirstLine = true;
@@ -44,11 +44,12 @@ public class LoadHubsFromFile {
                     if (graphStore.isHubInGraph(hub)) {
 
                         graphStore.addVertex(hub);
+                        return true; // Representa que os hubs não foram carregados com successo
 
                     } else {
 
                         System.err.println("Hub especificado no ficheiro não existe");
-                        return false;
+                        return false; // Representa que os hubs não foram carregados com successo
                     }
                 }
             }
@@ -64,6 +65,6 @@ public class LoadHubsFromFile {
             return false;
         }
 
-        return true;
+        return false; // Representa que os hubs não foram carregados com successo
     }
 }
