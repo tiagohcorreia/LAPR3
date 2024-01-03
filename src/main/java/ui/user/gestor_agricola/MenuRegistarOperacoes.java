@@ -1,6 +1,8 @@
-package ui.user;
+package ui.user.gestor_agricola;
 
-import ui.funcionalidades.*;
+import ui.funcionalidades.CancelarOperacaoUI;
+import ui.funcionalidades.EstadoRegaUI;
+import ui.funcionalidades.RegaUI;
 import ui.funcionalidades.us_bd11.RegistarSementeiraUI;
 import ui.funcionalidades.us_bd12.RegistarMondaUI;
 import ui.funcionalidades.us_bd13.RegisterColheitaUI;
@@ -13,11 +15,7 @@ import ui.utils.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GestorAgricolaUI implements Runnable {
-
-    public GestorAgricolaUI() {
-
-    }
+public class MenuRegistarOperacoes implements Runnable{
 
     @Override
     public void run() {
@@ -30,22 +28,7 @@ public class GestorAgricolaUI implements Runnable {
         options.add(new MenuItem("Registar Aplicacao FP", new RegisterFpApplicationUI()));
         options.add(new MenuItem("Registar Poda", new RegistarPodaUI()));
         options.add(new MenuItem("Registar Rega (Fertirrega)", new RegisterWateringOperationUI()));
-        options.add(new MenuItem("Cancelar Operação Agrícola", new CancelarOperacaoUI()));
-        options.add(new MenuItem("Gerar Plano de Rega", new RegaUI()));
-        options.add(new MenuItem("Verificar Estado da Rega", new EstadoRegaUI()));
 
-
-        Utils.runMenu(options, "MENU GESTOR AGRÍCOLA");
-        /*int option = 0;
-
-        do {
-            option = Utils.showAndSelectIndex(options, "\n\nMain Menu");
-
-            if ((option >= 0) && (option < options.size())) {
-                options.get(option).run();
-            }
-
-        } while (option != -1);*/
+        Utils.runMenu(options, "REGISTAR OPERAÇÕES");
     }
 }
-

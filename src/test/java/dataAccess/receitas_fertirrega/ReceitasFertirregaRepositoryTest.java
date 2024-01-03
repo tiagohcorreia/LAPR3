@@ -1,4 +1,4 @@
-package dataAccess.fertigation_mixes;
+package dataAccess.receitas_fertirrega;
 
 import dataAccess.Repositories;
 import org.junit.jupiter.api.Test;

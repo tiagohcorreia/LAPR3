@@ -1,4 +1,4 @@
-package dataAccess.fertigation_mixes;
+package dataAccess.receitas_fertirrega;
 
 import dataAccess.DatabaseConnection;
 import oracle.jdbc.OracleTypes;

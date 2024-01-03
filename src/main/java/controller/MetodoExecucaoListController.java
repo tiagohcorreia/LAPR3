@@ -1,6 +1,6 @@
 package controller;
 
-import dataAccess.execution_methods.MetodoExecucaoRepository;
+import dataAccess.metodos_execucao.MetodoExecucaoRepository;
 import dataAccess.Repositories;
 import domain.MetodoExecucao;
 

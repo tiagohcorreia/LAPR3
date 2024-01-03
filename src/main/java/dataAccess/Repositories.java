@@ -1,16 +1,17 @@
 package dataAccess;
 
 import dataAccess.aplicacoes_fp.AplicacoesFPRepo;
-import dataAccess.execution_methods.MetodoExecucaoRepository;
+import dataAccess.metodos_execucao.MetodoExecucaoRepository;
 import dataAccess.fatores_producao.FatorProducaoRepository;
-import dataAccess.fertigation_mixes.ReceitasFertirregaRepository;
+import dataAccess.others.OtherDataAccesses;
+import dataAccess.receitas_fertirrega.ReceitasFertirregaRepository;
 import dataAccess.metodos_aplicacao.MetodosAplicacaoRepo;
 import dataAccess.operacoes_colheita.ColheitaRepository;
 import dataAccess.operacoes_monda.MondaRepository;
 import dataAccess.operacoes_poda.PodaRepository;
 import dataAccess.produtos.ProdutoRepo;
 import dataAccess.operacoes_sementeira.OperacoesSementeiraRepo;
-import dataAccess.varieties.VariedadeRepository;
+import dataAccess.variedades.VariedadeRepository;
 import dataAccess.setores_rega.SetoresRegaRepository;
 import esinf.store.GraphStore;
 
@@ -32,6 +33,7 @@ public class Repositories {
     private ReceitasFertirregaRepository fertigationMixes=new ReceitasFertirregaRepository();
     private MetodosAplicacaoRepo metodosAplicacao=new MetodosAplicacaoRepo();
     private ProdutoRepo produtos=new ProdutoRepo();
+    private OtherDataAccesses others=new OtherDataAccesses();
 
     private AplicacoesFPRepo aplicacoesFP=new AplicacoesFPRepo();
 
@@ -88,9 +90,12 @@ public class Repositories {
     public AplicacoesFPRepo getAplicacoesFP() {
         return aplicacoesFP;
     }
-
     public ProdutoRepo getProdutos() {
         return produtos;
+    }
+
+    public OtherDataAccesses getOthers() {
+        return others;
     }
 
     public void clear(){

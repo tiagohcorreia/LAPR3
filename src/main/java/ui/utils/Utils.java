@@ -135,7 +135,7 @@ public class Utils {
     static public Date readDateFromConsole(String prompt) {
         do {
             try {
-                String strDate = readLineFromConsole(prompt);
+                String strDate = readLineFromConsole(prompt + " (dd-mm-yyyy)");
 
                 SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
 

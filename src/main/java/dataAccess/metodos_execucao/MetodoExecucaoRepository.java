@@ -1,4 +1,4 @@
-package dataAccess.execution_methods;
+package dataAccess.metodos_execucao;
 
 import dataAccess.DatabaseConnection;
 import domain.MetodoExecucao;

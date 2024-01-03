@@ -1,4 +1,4 @@
-package dataAccess.varieties;
+package dataAccess.variedades;
 
 import dataAccess.DatabaseConnection;
 import domain.Variedade;
