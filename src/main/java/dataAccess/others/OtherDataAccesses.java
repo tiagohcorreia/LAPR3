@@ -35,12 +35,6 @@ public class OtherDataAccesses {
 
             } finally {
 
-                if (!Objects.isNull(callStmt)) {
-                    callStmt.close();
-                }
-                if (!Objects.isNull(resultSet)) {
-                    resultSet.close();
-                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -71,12 +65,6 @@ public class OtherDataAccesses {
 
             } finally {
 
-                if (!Objects.isNull(callStmt)) {
-                    callStmt.close();
-                }
-                if (!Objects.isNull(resultSet)) {
-                    resultSet.close();
-                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -107,12 +95,6 @@ public class OtherDataAccesses {
 
             } finally {
 
-                if (!Objects.isNull(callStmt)) {
-                    callStmt.close();
-                }
-                if (!Objects.isNull(resultSet)) {
-                    resultSet.close();
-                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -132,7 +114,7 @@ public class OtherDataAccesses {
             try {
 
                 Connection connection = DatabaseConnection.getInstance().getConnection();
-                callStmt = connection.prepareCall("{ ? = call obterOperacoesPorParcela(?, ?, ?, ?) }");
+                callStmt = connection.prepareCall("{ ? = call obterAplicacoesFpDentroDeIntervalo(?, ?, ?, ?) }");
 
                 callStmt.registerOutParameter(1, OracleTypes.CURSOR);
                 callStmt.setInt(2, parcelaID);
@@ -145,12 +127,6 @@ public class OtherDataAccesses {
 
             } finally {
 
-                if (!Objects.isNull(callStmt)) {
-                    callStmt.close();
-                }
-                if (!Objects.isNull(resultSet)) {
-                    resultSet.close();
-                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -158,8 +134,7 @@ public class OtherDataAccesses {
         return resultSet;
     }
 
-    public ResultSet obterTotaisMensaisRega(int parcelaID,
-                                       LocalDate dataInferior,
+    public ResultSet obterTotaisMensaisRega(LocalDate dataInferior,
                                        LocalDate dataSuperior) {
 
         CallableStatement callStmt = null;
@@ -169,24 +144,17 @@ public class OtherDataAccesses {
             try {
 
                 Connection connection = DatabaseConnection.getInstance().getConnection();
-                callStmt = connection.prepareCall("{ ? = call getMonthlyWateringTotal(?, ?, ?) }");
+                callStmt = connection.prepareCall("{ ? = call getMonthlyWateringTotal(?, ?) }");
 
                 callStmt.registerOutParameter(1, OracleTypes.CURSOR);
-                callStmt.setInt(2, parcelaID);
-                callStmt.setDate(3, java.sql.Date.valueOf(dataInferior));
-                callStmt.setDate(4, java.sql.Date.valueOf(dataSuperior));
+                callStmt.setDate(2, java.sql.Date.valueOf(dataInferior));
+                callStmt.setDate(3, java.sql.Date.valueOf(dataSuperior));
 
                 callStmt.execute();
                 resultSet = (ResultSet) callStmt.getObject(1);
 
             } finally {
 
-                if (!Objects.isNull(callStmt)) {
-                    callStmt.close();
-                }
-                if (!Objects.isNull(resultSet)) {
-                    resultSet.close();
-                }
             }
         } catch (SQLException e) {
             e.printStackTrace();

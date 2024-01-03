@@ -4,6 +4,7 @@ import dataAccess.aplicacoes_fp.AplicacoesFPRepo;
 import dataAccess.metodos_execucao.MetodoExecucaoRepository;
 import dataAccess.fatores_producao.FatorProducaoRepository;
 import dataAccess.others.OtherDataAccesses;
+import dataAccess.parcelas.ParcelaRepository;
 import dataAccess.receitas_fertirrega.ReceitasFertirregaRepository;
 import dataAccess.metodos_aplicacao.MetodosAplicacaoRepo;
 import dataAccess.operacoes_colheita.ColheitaRepository;

@@ -1,5 +1,6 @@
-package dataAccess;
+package dataAccess.parcelas;
 
+import dataAccess.DatabaseConnection;
 import domain.Parcela;
 import oracle.jdbc.OracleTypes;
 
@@ -24,7 +25,7 @@ public class ParcelaRepository {
 
                 Connection connection = DatabaseConnection.getInstance().getConnection();
 
-                callStmt = connection.prepareCall("{ ? = call funcParcelas() }");
+                callStmt = connection.prepareCall("{ ? = call obter_parcelas() }");
                 callStmt.registerOutParameter(1, OracleTypes.CURSOR);
                 callStmt.execute();
                 resultSet = (ResultSet) callStmt.getObject(1);

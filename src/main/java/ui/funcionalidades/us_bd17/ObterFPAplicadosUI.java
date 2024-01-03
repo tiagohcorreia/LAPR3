@@ -42,24 +42,28 @@ public class ObterFPAplicadosUI implements Runnable {
     }
 
     private void obterDataSuperior() {
-        Date tmpDate = Utils.readDateFromConsole("Introduza a data de início do intervalo pretendido:");
+        Date tmpDate = Utils.readDateFromConsole("Introduza a data de fim do intervalo pretendido:");
         dataSuperior = tmpDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     }
 
     private void imprimirResultado() {
 
         try {
-            while (resultado.next()) {
-                String fp = resultado.getString(1);
-                String compostoQuimico = resultado.getString(2);
-                double quantidade = resultado.getFloat(3);
-                Date tmpDate = resultado.getDate(4);
-                LocalDate data = tmpDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            try{
+                System.out.printf("%-30s | %-30s | %-30s\n", "FATOR DE PRODUÇÃO", "COMPOSTO QUÍMICO", "QUANTIDADE");
+                while (resultado.next()) {
+                    String fp = resultado.getString(1);
+                    String compostoQuimico = resultado.getString(2);
+                    double quantidade = resultado.getFloat(3);
+                    //java.sql.Date date = resultado.getDate(4);
 
-                System.out.printf("-20%s | -20%s | -20%s | -20%s\n", "Fator de produção: " + fp, "Composto Químico: " + compostoQuimico, "Quantidade: " + quantidade, "Data: " + data);
+                    System.out.printf("%-30s | %-30s | %-30s\n", fp, compostoQuimico, String.format("%.2f Kg", quantidade));
+                }
+
+                System.out.println();
+            } finally {
+                resultado.close();
             }
-
-            System.out.println();
         } catch (SQLException e) {
             e.printStackTrace();
         }

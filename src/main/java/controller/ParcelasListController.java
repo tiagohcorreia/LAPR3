@@ -1,6 +1,6 @@
 package controller;
 
-import dataAccess.ParcelaRepository;
+import dataAccess.parcelas.ParcelaRepository;
 import dataAccess.Repositories;
 import domain.Parcela;
 

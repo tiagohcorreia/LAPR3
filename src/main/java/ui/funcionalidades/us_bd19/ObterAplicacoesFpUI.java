@@ -50,23 +50,27 @@ public class ObterAplicacoesFpUI implements Runnable{
     }
 
     private void obterDataSuperior() {
-        Date tmpDate = Utils.readDateFromConsole("Introduza a data de início do intervalo pretendido:");
+        Date tmpDate = Utils.readDateFromConsole("Introduza a data de fim do intervalo pretendido:");
         dataSuperior = tmpDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     }
 
     private void imprimirResultado() {
 
         try {
-            while (resultado.next()) {
-                Date tmpDate = resultado.getDate(1);
-                LocalDate data = tmpDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                String fp=resultado.getString(2);
-                String variedade= resultado.getString(3);
+            try{
+                System.out.printf("%-30s | %-30s | %-30s\n", "DATA", "FATOR DE PRODUÇÃO", "VARIEDADE");
+                while (resultado.next()) {
+                    java.sql.Date data = resultado.getDate(1);
+                    String fp=resultado.getString(2);
+                    String variedade= resultado.getString(3);
 
-                System.out.printf("-20%s | -20%s | -20%s\n", "Data: " + data, "Fator de produção: " + fp, "Variedade: " + variedade);
+                    System.out.printf("%-30s | %-30s | %-30s\n", data, fp, variedade);
+                }
+
+                System.out.println();
+            } finally {
+                resultado.close();
             }
-
-            System.out.println();
         } catch (SQLException e) {
             e.printStackTrace();
         }
