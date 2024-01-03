@@ -21,7 +21,7 @@ public class RegisterWateringOperationUI implements Runnable {
     @Override
     public void run() {
         String space = "----------------------------";
-        System.out.printf("%s REGISTAR SEMENTEIRA %s\n\n", space, space);
+        System.out.printf("%s REGISTAR REGA (FERTIRREGA) %s\n\n", space, space);
 
         getSectorId();
         getOperationDate();
