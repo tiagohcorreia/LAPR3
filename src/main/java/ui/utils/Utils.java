@@ -89,7 +89,9 @@ public class Utils {
 
                 valid = true;
             } catch (InvalidParameterException ex) {
-                System.out.println("ERRO: O valor introduzido não é um inteiro positivo\n");
+                System.err.println("ERRO: O valor introduzido não é um inteiro positivo\n");
+            } catch (NumberFormatException e){
+                System.err.println("ERRO: O valor introduzido não é um inteiro positivo\n");
             }
         } while (!valid);
 
