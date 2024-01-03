@@ -12,6 +12,36 @@ import java.util.Objects;
 
 public class OtherDataAccesses {
 
+    public ResultSet obterFpPorTipo(int parcelaID,
+                                    LocalDate dataInicio,
+                                    LocalDate dataFim) {
+
+        CallableStatement callStmt = null;
+        ResultSet resultSet = null;
+
+        try {
+            try {
+
+                Connection connection = DatabaseConnection.getInstance().getConnection();
+                callStmt = connection.prepareCall("{ ? = call obter_quantidade_fp_por_tipo(?, ?, ?) }");
+
+                callStmt.registerOutParameter(1, OracleTypes.CURSOR);
+                callStmt.setInt(2, parcelaID);
+                callStmt.setDate(3, java.sql.Date.valueOf(dataInicio));
+                callStmt.setDate(4, java.sql.Date.valueOf(dataFim));
+
+                callStmt.execute();
+                resultSet = (ResultSet) callStmt.getObject(1);
+
+            } finally {
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
+
     public ResultSet produtosColhidosNumaParcela(int parcelaID,
                                                  LocalDate dataInferior,
                                                  LocalDate dataSuperior) {
@@ -135,7 +165,7 @@ public class OtherDataAccesses {
     }
 
     public ResultSet obterTotaisMensaisRega(LocalDate dataInferior,
-                                       LocalDate dataSuperior) {
+                                            LocalDate dataSuperior) {
 
         CallableStatement callStmt = null;
         ResultSet resultSet = null;
