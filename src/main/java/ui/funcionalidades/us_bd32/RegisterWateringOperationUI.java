@@ -44,7 +44,7 @@ public class RegisterWateringOperationUI implements Runnable {
 
             if (out){
                 System.out.println("Operação registada com sucesso\n");
-            } else System.err.println("ERRO: Não foi possível registar a operação");
+            } else System.err.println("ERRO: Não foi possível registar a operação\n");
         }
     }
 
@@ -54,7 +54,7 @@ public class RegisterWateringOperationUI implements Runnable {
     }
 
     private void getOperationDate() {
-        date = Utils.getLocalDateFromConsole("Introduza a data prevista da operação (DD-MM-AAAA)", "dd-MM-yyyy");
+        date = Utils.getLocalDateFromConsole("Introduza a data da operação (DD-MM-AAAA)", "dd-MM-yyyy");
     }
 
     private void getWateringDuration() {

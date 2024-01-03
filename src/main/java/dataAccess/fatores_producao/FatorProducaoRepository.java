@@ -22,7 +22,7 @@ public class FatorProducaoRepository {
 
                 Connection connection = DatabaseConnection.getInstance().getConnection();
 
-                callStmt = connection.prepareCall("{ ? = call funcFatores() }");
+                callStmt = connection.prepareCall("{ ? = call obter_fp() }");
 
                 callStmt.registerOutParameter(1, OracleTypes.CURSOR);
 

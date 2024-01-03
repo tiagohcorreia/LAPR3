@@ -61,8 +61,8 @@ BEGIN
 
 
     savepoint s1;
-    INSERT INTO Operacao_Agricola(id, data)
-    VALUES (operation_id, p_data);
+    INSERT INTO Operacao_Agricola(id, data, validade)
+    VALUES (operation_id, p_data, 1);
 -- Insert into Colheita
     INSERT INTO Colheita(operacao_id, parcela_id, produto_id, metodo_execucao_id, quantidade)
     VALUES (operation_id, p_parcela_id, p_produto_id, p_metodo_execucao_id, p_quantidade);

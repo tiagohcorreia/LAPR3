@@ -25,7 +25,7 @@ public class ReceitasFertirregaRepository {
                 callStmt = connection.prepareCall("{ ? = call get_fertigation_mixes() }");
                 callStmt.registerOutParameter(1, OracleTypes.CURSOR);
                 callStmt.execute();
-                resultSet = callStmt.getResultSet();
+                resultSet = (ResultSet) callStmt.getObject(1);
 
                 mixes = resultSetToList(resultSet);
 

@@ -95,7 +95,7 @@ public class ProdutoRepo {
                 Produto produto = new Produto(
                         resultSet.getInt("id"),
                         resultSet.getString("nome"),
-                        resultSet.getInt("variedade_id"));
+                        -1);
                 produtos.add(produto);
             }
         } catch (SQLException e) {
