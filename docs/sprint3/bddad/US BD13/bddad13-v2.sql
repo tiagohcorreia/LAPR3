@@ -18,9 +18,8 @@ begin
     return 0;
 end;
 
-create or replace function registrar_Colheita(
+create or replace function registar_Colheita(
     p_data Operacao_Agricola.data%TYPE,
-    p_current_date_in Operacao_Agricola.data%TYPE := NULL,
     p_parcela_id Parcela.id%TYPE,
     p_produto_id Produto.id%TYPE,
     p_quantidade Colheita.quantidade%TYPE,
@@ -32,10 +31,6 @@ create or replace function registrar_Colheita(
     variedade_id  variedade.id%TYPE;
 
 BEGIN
-    -- Check if the provided data is valid
-    if (p_data > p_current_date_in) then
-        return 0;
-    end if;
 
     select max(id) into operation_id from Operacao_Agricola;
     operation_id := operation_id + 1;
@@ -66,8 +61,8 @@ BEGIN
 
 
     savepoint s1;
-    INSERT INTO Operacao_Agricola(id, data)
-    VALUES (operation_id, p_data);
+    INSERT INTO Operacao_Agricola(id, data, validade)
+    VALUES (operation_id, p_data, 1);
 -- Insert into Colheita
     INSERT INTO Colheita(operacao_id, parcela_id, produto_id, metodo_execucao_id, quantidade)
     VALUES (operation_id, p_parcela_id, p_produto_id, p_metodo_execucao_id, p_quantidade);
@@ -94,7 +89,7 @@ declare
     p_quantidade         Colheita.quantidade%TYPE    := 100;
     p_metodo_execucao_id Metodo_Execucao.id%TYPE     := null;
 BEGIN
-    if (registrar_Colheita(p_data, p_current_date_in, p_parcela_id, p_produto_id, p_quantidade, p_metodo_execucao_id) =
+    if (registar_Colheita(p_data, p_current_date_in, p_parcela_id, p_produto_id, p_quantidade, p_metodo_execucao_id) =
         0) then
         DBMS_OUTPUT.put_line('Não foi possível registrar a colheita');
     else
@@ -114,7 +109,7 @@ declare
     p_quantidade         Colheita.quantidade%TYPE    := 800;
     p_metodo_execucao_id Metodo_Execucao.id%TYPE     := null;
 BEGIN
-    if (registrar_Colheita(p_data, p_current_date_in, p_parcela_id, p_produto_id, p_quantidade, p_metodo_execucao_id) =
+    if (registar_Colheita(p_data, p_current_date_in, p_parcela_id, p_produto_id, p_quantidade, p_metodo_execucao_id) =
         0) then
         DBMS_OUTPUT.put_line('Não foi possível registrar a colheita');
     else

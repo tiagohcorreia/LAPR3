@@ -1,67 +1,79 @@
-CREATE OR REPLACE PROCEDURE registrarMonda(
-    p_parcelaId  NUMBER ,
-    p_variedadeId  NUMBER ,
-    p_quantidade  float ,
-    p_metodoExecucaoId  NUMBER ,
-    p_fatorProducaoId  NUMBER ,
-    p_data  DATE
-)
+CREATE OR REPLACE FUNCTION is_monda_registered(id MONDA.operacao_id%TYPE)
+    RETURN NUMBER
     IS
-    v_id Operacao_Agricola.id%TYPE;
-    parcela_nao_existe EXCEPTION;
-    variedade_nao_existe EXCEPTION;
-    fator_producao_nao_existe EXCEPTION;
+    other_id MONDA.operacao_id%TYPE;
+    CURSOR c1 IS SELECT operacao_id FROM MONDA;
 BEGIN
-    -- Verificar se parcela_id existe
-    IF p_parcelaId IS NOT NULL THEN
-        SELECT COUNT(*)
-        INTO v_id
-        FROM Parcela
-        WHERE id = p_parcelaId;
+    OPEN c1;
 
-        IF v_id = 0 THEN
-            -- Caso a Parcela não exista
-            DBMS_OUTPUT.put_line('Parcela especificada não existe na base de dados.');
-            RETURN;
-        END IF;
-    END IF;
+    loop
+        fetch c1 INTO other_id;
+        IF (id = other_id) THEN
+            close c1;
+            return 1;
+        end if;
+        exit when c1%notfound;
+    end loop;
+    close c1;
+    return 0;
+end;
 
-    -- Verificar se variedade existe
-    IF p_variedadeId IS NOT NULL THEN
-        SELECT COUNT(*)
-        INTO v_id
-        FROM Variedade
-        WHERE id = p_variedadeId;
+CREATE OR REPLACE function registar_Monda(
+    this_parcela_id parcela.id%type,
+    this_variedade_id variedade.id%type,
+    this_quantidade monda.quantidade%type,
+    this_metodo_execucao_id METODO_EXECUCAO.id%type,
+    this_data OPERACAO_AGRICOLA.data%type)
+    return number
+    IS
+    this_operacao_id OPERACAO_AGRICOLA.id%type;
+BEGIN
 
-        IF v_id = 0 THEN
-            -- Caso variedade não exista
-            DBMS_OUTPUT.put_line('Variedade especificada não existe na base de dados.');
-            RETURN;
-        END IF;
-    END IF;
+    if CHECKIFPARCELEXISTS(this_parcela_id) = 0 then
+        DBMS_OUTPUT.PUT_LINE('ERRO: O id da parcela não existe na base de dados');
+        return 0;
+    end if;
 
-    -- Check if fatorProducaoId exists in Fator_Producao table
-    IF p_fatorProducaoId IS NOT NULL THEN
-        BEGIN
-            SELECT 1 INTO v_id FROM Fator_Producao WHERE id = p_fatorProducaoId;
-        EXCEPTION
-            WHEN NO_DATA_FOUND THEN
-                RAISE fator_producao_nao_existe;
-        END;
-    END IF;
+    if CHECKIFVARIETYEXISTS(this_variedade_id) = 0 then
+        DBMS_OUTPUT.PUT_LINE('ERRO: O id da variedade não existe na base de dados');
+        return 0;
+    end if;
 
-    -- Insert into Operacao_Agricola table
-    SELECT COALESCE(MAX(id), 0) + 1 INTO v_id FROM Operacao_Agricola;
-    INSERT INTO Operacao_Agricola(id, data) VALUES (v_id, p_data);
+    if CHECKIFVARIETYISINPARCEL(this_parcela_id, this_variedade_id) = 0 then
+        DBMS_OUTPUT.PUT_LINE('ERRO: A variedade não existe na parcela');
+        return 0;
+    end if;
 
-    -- Insert into Monda table
-    INSERT INTO Monda(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id, fator_producao_id)
-    VALUES (v_id, p_parcelaId, p_variedadeId, p_quantidade, p_metodoExecucaoId, p_fatorProducaoId);
+    select max(id) + 1
+    into this_operacao_id
+    from OPERACAO_AGRICOLA;
 
-    DBMS_OUTPUT.put_line('Operação registrada com sucesso.');
-EXCEPTION
-    WHEN fator_producao_nao_existe THEN
-        DBMS_OUTPUT.put_line('O fator de produção especificado não está registrada na base de dados');
+    if CHECKIFOPERATIONIDEXISTS(this_operacao_id)=1 then
+        DBMS_OUTPUT.PUT_LINE('ERRO: O id da operação já existe na tabela');
+        return 0;
+    end if;
+
+    savepoint sp;
+
+    insert into OPERACAO_AGRICOLA(id, data, validade) VALUES (this_operacao_id, this_data, 1);
+
+    if CHECKIFOPERATIONIDEXISTS(this_operacao_id)=0 then
+        DBMS_OUTPUT.PUT_LINE('ERRO: Não foi possível fazer o registo na tabela OPERACAO_AGRICOLA');
+        rollback to sp;
+        return 0;
+    end if;
+
+    insert into MONDA(operacao_id, parcela_id, variedade_id, quantidade, metodo_execucao_id)
+    VALUES (this_operacao_id, this_parcela_id, this_variedade_id, this_quantidade, this_metodo_execucao_id);
+
+    if is_monda_registered(this_operacao_id) = 0 then
+        DBMS_OUTPUT.PUT_LINE('ERRO: Não foi possível fazer o registo na tabela MONDA');
+        rollback to sp;
+        return 0;
+    end if;
+
+    commit;
+    return 1;
 END;
 
 -- caso sucesso

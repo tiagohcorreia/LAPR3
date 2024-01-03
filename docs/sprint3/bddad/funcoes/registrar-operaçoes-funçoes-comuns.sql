@@ -343,6 +343,29 @@ begin
     return 0;
 end;
 
+
+-- verifica se um id de operação foi registado na tabela aplicacao_fp_solo
+create or replace function is_in_table_aplicacao_fp_solo(id OPERACAO_AGRICOLA.id%type)
+    return number
+    is
+    other_Id OPERACAO_AGRICOLA.id%type;
+    cursor c1 is select operacao_id
+                 from aplicacao_fp_solo;
+begin
+    open c1;
+    loop
+        fetch c1 into other_Id;
+        if (id = other_Id) then
+            close c1;
+            return 1;
+        end if;
+        exit when c1%notfound;
+    end loop;
+    close c1;
+    return 0;
+end;
+
+
 -- verifica se um fator de produçao foi registado na tabela fp_aplicados
 create or replace function is_in_table_fp_aplicados(this_operation_id OPERACAO_AGRICOLA.id%type,
                                                     this_fp_id FATOR_PRODUCAO.id%type)

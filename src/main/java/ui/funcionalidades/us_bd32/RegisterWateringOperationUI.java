@@ -21,7 +21,7 @@ public class RegisterWateringOperationUI implements Runnable {
     @Override
     public void run() {
         String space = "----------------------------";
-        System.out.printf("%s REGISTAR SEMENTEIRA %s\n\n", space, space);
+        System.out.printf("%s REGISTAR REGA (FERTIRREGA) %s\n\n", space, space);
 
         getSectorId();
         getOperationDate();
@@ -44,7 +44,7 @@ public class RegisterWateringOperationUI implements Runnable {
 
             if (out){
                 System.out.println("Operação registada com sucesso\n");
-            } else System.err.println("ERRO: Não foi possível registar a operação");
+            } else System.err.println("ERRO: Não foi possível registar a operação\n");
         }
     }
 
@@ -54,7 +54,7 @@ public class RegisterWateringOperationUI implements Runnable {
     }
 
     private void getOperationDate() {
-        date = Utils.getLocalDateFromConsole("Introduza a data prevista da operação (DD-MM-AAAA)", "dd-MM-yyyy");
+        date = Utils.getLocalDateFromConsole("Introduza a data da operação (DD-MM-AAAA)", "dd-MM-yyyy");
     }
 
     private void getWateringDuration() {
@@ -100,6 +100,8 @@ public class RegisterWateringOperationUI implements Runnable {
             System.out.printf("Duração da rega: %dmn\n", duration);
             System.out.printf("Hora da rega: %s\n", hour);
         }
+
+        System.out.println();
 
         return Utils.getBooleanAnswer("Deseja registrar a operação:");
     }

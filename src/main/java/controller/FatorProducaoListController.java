@@ -1,6 +1,6 @@
 package controller;
 
-import dataAccess.FatorProducaoRepository;
+import dataAccess.fatores_producao.FatorProducaoRepository;
 import dataAccess.Repositories;
 import domain.FatorProducao;
 
@@ -41,7 +41,7 @@ public class FatorProducaoListController {
             System.out.printf("%8s %10s %8s %n", "ParcelaId", "Nome", "Area");
 
             for (FatorProducao fatorProducao : fatorProducaoList) {
-                System.out.printf("%8d %10s %8d %n", fatorProducao.getId(), fatorProducao.getNome(), fatorProducao.getTipoId(), fatorProducao.getFormulacaoId());
+                System.out.printf("%8d %10s %8d %n", fatorProducao.getID(), fatorProducao.getName(), fatorProducao.getTipoId(), fatorProducao.getFormulacaoId());
             }
 
         } catch (SQLException e) {

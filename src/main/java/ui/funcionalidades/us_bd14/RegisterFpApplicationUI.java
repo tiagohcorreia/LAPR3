@@ -1,217 +1,166 @@
 package ui.funcionalidades.us_bd14;
 
-import controller.FatorProducaoRegisterController;
-import controller.OperacaoAgricolaRegisterController;
+import controller.us_bd14.FatorProducaoRegisterController;
+import domain.FatorProducao;
+import domain.MetodoAplicacao;
+import domain.Parcela;
+import domain.Variedade;
 import ui.utils.Utils;
 
-import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
-import java.util.Scanner;
 
 public class RegisterFpApplicationUI implements Runnable {
 
-    private FatorProducaoRegisterController controller;
-    private OperacaoAgricolaRegisterController controllerop;
-
-    public RegisterFpApplicationUI() {
-        controller = new FatorProducaoRegisterController();
-        controllerop = new OperacaoAgricolaRegisterController();
-    }
+    private FatorProducaoRegisterController ctrl = new FatorProducaoRegisterController();
+    private int parcelaID;
+    private int variedadeID;
+    private int metodoAplicacaoID;
+    private double quantidade;
+    private String unidade;
+    private double area;
+    private int fpID;
+    private LocalDate data;
+    boolean isAplicacaoFPSolo;
 
     public void run() {
-        try {
-            System.out.println("Registar Aplicacao FP");
+        System.out.println("---------------- REGISTAR APLICAÇÃO DE FATOR DE PRODUÇÃO ----------------\n");
+        askIsAplicacaoFPSolo();
 
-            Scanner scanner = new Scanner(System.in);
-            System.out.print("OperacaoId: ");
-            int operacaoId = controllerop.getNextId();
-            System.out.printf("Usando id %d\n", operacaoId);
+        if (isAplicacaoFPSolo) {
+            getParcelID();
 
-            System.out.print("Date (yyyy-mm-dd): (Insira E para sair) \n");
-            String strDate = scanner.next();
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            formatter.setLenient(false);
+            if (getFatorProducaoID()) {
+                getArea();
+                getQuantidade();
+                getUnidade();
+                getDataOperacao();
 
-            Date currentDate = new Date();
-            if (strDate.equalsIgnoreCase("E")) {
-                return;
+                if (getConfirmation()) {
+                    boolean out;
+                    out = ctrl.registerAplicacaoFPSolo(parcelaID, quantidade, unidade, area, fpID, data);
+
+                    if (out) {
+                        System.out.println("Operação registada com sucesso\n");
+                    } else System.out.println("Não foi possível registar a operação\n");
+                }
+
             }
-            Date date = null;
-            boolean validDate = false;
-            while (!validDate) {
-                try {
-                    date = formatter.parse(strDate);
-                    if (date.after(currentDate)) {
-                        System.out.println("Erro: Data invalida.Insira uma data que nao se encontre no futuro.");
-                        System.out.print("Data (yyyy-mm-dd): ");
-                        strDate = scanner.next();
-                    } else {
-                        validDate = true;
+
+        } else {
+            getParcelID();
+
+            if (getVariedadeID()) {
+
+                if (getFatorProducaoID()) {
+
+                    if (getMetodoAplicacaoID()) {
+                        getQuantidade();
+                        getUnidade();
+                        getDataOperacao();
+
+                        if (getConfirmation()) {
+                            boolean out;
+                            out = ctrl.registerAplicacaoFPVariedade(parcelaID, variedadeID, metodoAplicacaoID, quantidade, unidade, fpID, data);
+
+                            if (out) {
+                                System.out.println("Operação registada com sucesso\n");
+                            } else System.out.println("Não foi possível registar a operação\n");
+                        }
                     }
-                } catch (ParseException e) {
-                    System.out.println("Erro: Formato de data invalido. Insira a data no formato yyyy-mm-dd.");
-                    scanner.nextLine();
-                    System.out.print("Data (yyyy-mm-dd): ");
-                    strDate = scanner.next();
                 }
-            }
-
-            controllerop.getTableData("Parcela");
-            controllerop.printTableData("Parcela");
-
-            int parcelaId = 0;
-            String parcelaInput;
-            do {
-                System.out.print("ParcelaId (Insira E para sair): \n");
-                parcelaInput = scanner.next().trim();
-                if (parcelaInput.equalsIgnoreCase("E")) {
-                    // Go back to the main menu or exit the program
-                    return;
-                }
-                try {
-                    parcelaId = Integer.parseInt(parcelaInput);
-                    if (!controllerop.isIdValid("PARCELA", parcelaId)) {
-                        System.out.println("Erro: ParcelaId nao registado na base de dados. Insira um Id existente.");
-                    }
-                } catch (NumberFormatException e) {
-                    System.out.println("Erro: Insira um número válido para ParcelaId ou E para sair.");
-                }
-            } while (!controllerop.isIdValid("PARCELA", parcelaId));
-
-            controllerop.getTableData("Variedade");
-            controllerop.printTableData("Variedade");
-            int variedadeId = 0;
-            String variedadeInput;
-            do {
-                System.out.print("VariedadeId (Insira E para sair): \n");
-                variedadeInput = scanner.next().trim();
-                if (variedadeInput.equalsIgnoreCase("E")) {
-                    return;
-                }
-                try {
-                    variedadeId = Integer.parseInt(variedadeInput);
-                    if (!controllerop.isIdValid("Variedade", variedadeId)) {
-                        System.out.println("Erro: VariedadeId nao registado na base de dados. Insira um Id existente.");
-                    }
-                } catch (NumberFormatException e) {
-                    System.out.println("Erro: Insira um número válido para VariedadeId ou E para sair.");
-                }
-            } while (!controllerop.isIdValid("Variedade", variedadeId));
-
-            controllerop.getTableData("Fator_Producao");
-            controllerop.printTableData("Fator_Producao");
-            int fatorProducaoId = 0;
-            String fatorProducaoInput;
-            do {
-                System.out.print("Fator Producao Id (Insira E para sair): \n");
-                fatorProducaoInput = scanner.next().trim();
-                if (fatorProducaoInput.equalsIgnoreCase("E")) {
-                    return;
-                }
-                try {
-                    fatorProducaoId = Integer.parseInt(fatorProducaoInput);
-                    if (!controllerop.isIdValid("FATOR_PRODUCAO", fatorProducaoId)) {
-                        System.out.println("Erro: FatorProducaoId nao registado na base de dados. Insira um Id existente.");
-                    }
-                } catch (NumberFormatException e) {
-                    System.out.println("Erro: Insira um numero valido para FatorProducaoId ou E para sair.");
-                }
-            } while (!controllerop.isIdValid("FATOR_PRODUCAO", fatorProducaoId));
-
-
-            List<String[]> data = controllerop.getTableDataByFatorProducaoId("FP_Metodo_Aplicacao", fatorProducaoId);
-
-            if (data.isEmpty()) {
-                System.out.println("Data nao encontrada para o Fator Producao ID.");
-            } else {
-
-                controllerop.printTableDataByFatorId("FP_Metodo_Aplicacao", data, fatorProducaoId);
-            }
-            int metodoAplicacaoId = 0;
-            String metodoAplicacaoInput;
-
-            System.out.print("Metodo Aplicacao Id (Insira E para sair): \n");
-            metodoAplicacaoInput = scanner.next().trim();
-            if (metodoAplicacaoInput.equalsIgnoreCase("E")) {
-                return;
-            }
-            metodoAplicacaoId = Integer.parseInt(metodoAplicacaoInput);
-
-
-            float quantidade;
-            String quantidadeInput;
-            while (true) {
-                System.out.print("Quantidade (Insira E para sair): \n");
-                quantidadeInput = scanner.next().trim();
-                if (quantidadeInput.equalsIgnoreCase("E")) {
-                    return;
-                }
-                try {
-                    quantidade = Float.parseFloat(quantidadeInput);
-                    if (quantidade > 0) {
-                        break;
-                    } else {
-                        System.out.println("Erro: Quantidade nao pode ser um valor negativo.");
-                    }
-                } catch (NumberFormatException e) {
-                    System.out.println("Erro: Insira um numero valido para Quantidade ou E para sair.");
-                }
-            }
-
-            float area;
-            String areaInput;
-            while (true) {
-                System.out.print("Area (Insira E para sair): \n");
-                areaInput = scanner.next().trim();
-                if (areaInput.equalsIgnoreCase("E")) {
-                    return;
-                }
-                try {
-                    area = Float.parseFloat(areaInput);
-                    if (area > 0) {
-                        break;
-                    } else {
-                        System.out.println("Erro: Area nao pode ser um valor negativo.");
-                    }
-                } catch (NumberFormatException e) {
-                    System.out.println("Erro: Insira um numero valido para area ou E para sair.");
-                }
-            }
-
-            if (operacaoId != controllerop.getNextId()) {
-                System.out.println("Erro: Id operacao ja em uso.");
-                run();
-            }
-
-            System.out.println(" === Dados da Aplicacao FP ===");
-            System.out.println("ID Operacao: " + operacaoId);
-            System.out.println("ID Parcela: " + parcelaId);
-            System.out.println("ID Variedade: " + variedadeId);
-            System.out.println("ID Fator Producao: " + fatorProducaoId);
-            System.out.println("ID Metodo de Aplicacao: " + metodoAplicacaoId);
-            System.out.println("Quantidade: " + quantidade);
-            System.out.println("Area: " + area);
-
-
-            int optValidation = Utils.readIntegerFromConsole("1-CONFIRMAR\n0-CANCELAR");
-
-            if (optValidation == 1) {
-                controllerop.operacaoAgricolaRegister(operacaoId, date);
-                controller.fatorProducaoRegister(operacaoId, parcelaId, variedadeId,fatorProducaoId,metodoAplicacaoId,quantidade,area);
-                System.out.println("\nAplicacao FP registada.");
-            } else {
-
-                System.out.println("Operação cancelada");
-            }
-        } catch (SQLException e) {
-
-
-            System.out.println("\nAplicacaoFP nao registada!\n" + e.getMessage());
-
+            } else System.err.println("Sem variedades na parcela\n");
         }
+    }
+
+    private void askIsAplicacaoFPSolo() {
+        isAplicacaoFPSolo = Utils.getBooleanAnswer("É uma aplicação de fator de produção no solo apenas?");
+    }
+
+    private void getParcelID() {
+        List<Parcela> parcelas = ctrl.getParcelas();
+        parcelaID = Utils.getTableIdFromConsole(parcelas, "ID", "PARCELA", "Introduza o id da parcela:");
+    }
+
+    private boolean getVariedadeID() {
+        List<Variedade> variedades = ctrl.getVarietiesInParcel(parcelaID);
+        if (!variedades.isEmpty()) {
+            variedadeID = Utils.getTableIdFromConsole(variedades, "ID", "VARIEDADE", "Introduza o id da variedade");
+            return true;
+        }
+        return false;
+    }
+
+    private boolean getFatorProducaoID() {
+        List<FatorProducao> fatoresProducao = ctrl.getFatoresProducao();
+        if (!fatoresProducao.isEmpty()) {
+            fpID = Utils.getTableIdFromConsole(fatoresProducao, "ID", "FATOR DE PRODUÇÃO", "Introduza o id do fator de produção");
+            return true;
+        }
+        return false;
+    }
+
+    private void getArea() {
+        boolean valid = false;
+        do {
+            area = Utils.readDoubleFromConsole("Introduza a área, em hectares, da aplicação:");
+            if (area > 0) {
+                valid = true;
+            } else System.err.println("ERRO: Valor introduzido inválido\n");
+        } while (!valid);
+    }
+
+    private boolean getMetodoAplicacaoID() {
+        List<MetodoAplicacao> metodosAplicacao = ctrl.getMetodosAplicacao();
+        if (!metodosAplicacao.isEmpty()) {
+            metodoAplicacaoID = Utils.getTableIdFromConsole(metodosAplicacao, "ID", "MÉTODO DE APLICAÇÃO", "Introduza o id do método de aplicação");
+            return true;
+        }
+        return false;
+    }
+
+    private void getQuantidade() {
+        boolean valid = false;
+        do {
+            quantidade = Utils.readDoubleFromConsole("Introduza a quantidade aplicada:");
+            if (quantidade > 0) {
+                valid = true;
+            } else System.err.println("ERRO: Valor introduzido inválido\n");
+        } while (!valid);
+    }
+
+    private void getUnidade() {
+        unidade = Utils.readLineFromConsole("Introduza a unidade (por exemplo quilogramas, litros...):");
+    }
+
+    private void getDataOperacao() {
+        Date tmpDate = Utils.readDateFromConsole("Introduza a data da operação:");
+        data = tmpDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    }
+
+    private boolean getConfirmation() {
+        System.out.println("----------------- DADOS DA OPERAÇÃO -----------------\n");
+
+        if (isAplicacaoFPSolo) {
+            System.out.printf("ID Parcela: %d\n", parcelaID);
+            System.out.printf("ID Fator de produção: %d\n", fpID);
+            System.out.printf("Área: %.2f\n", area);
+            System.out.printf("Quantidade: %.2f%s\n", quantidade, unidade);
+            System.out.printf("Data da operação: %s\n", data);
+        } else {
+            System.out.printf("ID Parcela: %d\n", parcelaID);
+            System.out.printf("ID Variedade: %d\n", variedadeID);
+            System.out.printf("ID Fator de produção: %d\n", fpID);
+            System.out.printf("ID Método de aplicação: %d\n", metodoAplicacaoID);
+            System.out.printf("Quantidade: %.2f%s\n", quantidade, unidade);
+            System.out.printf("Data da operação: %s\n", data);
+        }
+
+        System.out.println();
+
+        return Utils.getBooleanAnswer("Deseja registrar a operação:");
     }
 }
 

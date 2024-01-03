@@ -10,6 +10,7 @@ import java.security.InvalidParameterException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -135,15 +136,14 @@ public class Utils {
     static public Date readDateFromConsole(String prompt) {
         do {
             try {
-                String strDate = readLineFromConsole(prompt);
+                String strDate = readLineFromConsole(prompt + " (dd-mm-yyyy)");
 
                 SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-
                 Date date = df.parse(strDate);
 
                 return date;
             } catch (ParseException ex) {
-                Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
+                System.err.println("ERRO: Formato de data inválido");
             }
         } while (true);
     }

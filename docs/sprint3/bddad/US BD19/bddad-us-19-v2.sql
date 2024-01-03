@@ -15,17 +15,30 @@ begin
     open queryCursor for
         select Operacao_Agricola.data, fator_producao.nome, Variedade.nome
         from Aplicacao_fp,
+             FP_APLICADOS,
+             APLICACAO_FP_SOLO,
+             APLICACAO_FP_VARIEDADE,
+             PARCELAS_VARIEDADES_APLICADAS,
              fator_producao,
              tipo_fp,
              Operacao_agricola,
              Parcela,
              Variedade
-        where Aplicacao_fp.parcela_id = parcela_id
-          and aplicacao_fp.fator_producao_id = fator_producao.id
+
+        where ((APLICACAO_FP.OPERACAO_ID=APLICACAO_FP_SOLO.OPERACAO_ID and
+                APLICACAO_FP_SOLO.PARCELA_ID=parcela_id) or
+
+               (APLICACAO_FP.OPERACAO_ID=APLICACAO_FP_VARIEDADE.OPERACAO_ID and
+                APLICACAO_FP_VARIEDADE.OPERACAO_ID=PARCELAS_VARIEDADES_APLICADAS.OPERACAO_ID and
+                PARCELAS_VARIEDADES_APLICADAS.PARCELA_ID=parcela_id and
+                PARCELAS_VARIEDADES_APLICADAS.VARIEDADE_ID=VARIEDADE.ID))
+
+          and APLICACAO_FP.OPERACAO_ID=FP_APLICADOS.OPERACAO_ID
+          and FP_APLICADOS.FP_ID = fator_producao.id
           and fator_producao.tipo_id = tipo_Fp_Id
-          and Aplicacao_fp.variedade_id = Variedade.id
           and Aplicacao_fp.operacao_id = Operacao_agricola.id
           and Operacao_agricola.data between data_Inferior and data_Superior
+
         order by Operacao_Agricola.data asc;
     return queryCursor;
 end;
