@@ -12,6 +12,36 @@ import java.util.Objects;
 
 public class OtherDataAccesses {
 
+    public ResultSet obterProdutosColhidos(int parcelaID,
+                                                 LocalDate dataInferior,
+                                                 LocalDate dataSuperior) {
+
+        CallableStatement callStmt = null;
+        ResultSet resultSet = null;
+
+        try {
+            try {
+
+                Connection connection = DatabaseConnection.getInstance().getConnection();
+                callStmt = connection.prepareCall("{ ? = call obter_produtos_colhidos(?, ?, ?) }");
+
+                callStmt.registerOutParameter(1, OracleTypes.CURSOR);
+                callStmt.setInt(2, parcelaID);
+                callStmt.setDate(3, java.sql.Date.valueOf(dataInferior));
+                callStmt.setDate(4, java.sql.Date.valueOf(dataSuperior));
+
+                callStmt.execute();
+                resultSet = (ResultSet) callStmt.getObject(1);
+
+            } finally {
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
+
     public ResultSet produtosColhidosNumaParcela(int parcelaID,
                                                  LocalDate dataInferior,
                                                  LocalDate dataSuperior) {
