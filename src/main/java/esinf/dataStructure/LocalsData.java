@@ -85,7 +85,6 @@ public class LocalsData {
                 "local=" + local +
                 ", arrivingHour=" + arrivingHour +
                 ", departureHour=" + departureHour +
-                ", DEFAULT_VALUE=" + DEFAULT_VALUE +
                 ", isHub=" + isHub +
                 '}';
     }

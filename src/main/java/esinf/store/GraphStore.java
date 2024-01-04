@@ -333,27 +333,31 @@ public class GraphStore {
         return graph.vertices().isEmpty();
     }
 
-    public PathWithMostHubsData findMaxHubPassingRoute(Local local, LocalTime departuretime, Vehicle vehicle, List<Hub> hubs) {
-
+    public List<PathWithMostHubsData> findMaxHubPassingRoute(Local local, LocalTime departuretime, Vehicle vehicle, List<Hub> hubs) {
 
         MapGraph<Local, Integer> clone = removeEdgesAboveAutonomy(vehicle.getAutonomyDistance());
         IdealVerticesCalculator<Local, Integer> calculator = new IdealVerticesCalculator<>(clone, clone.vertices(), new IntegerComparator(), new IntegerBinaryOperator(), 0);
-
         ArrayList<LinkedList<Local>> paths = new ArrayList<>();
         ArrayList<Integer> dists = new ArrayList<>();
-        Algorithms.shortestPaths(clone, local, Integer::compare, Integer::sum, 0, paths, dists);
-        replaceLocalsWithHubs(clone, hubs); //cria os hubs
-        List<Local> hubsList = new ArrayList<>();
-        for (Local l : clone.vertices()) {
-            if (l instanceof Hub) {
-                System.out.println("hooray " + l.getLocalId());
-                hubsList.add(l);
-            }
-        }
 
-        // LinkedList<Local> path = checkPathWithMostHubs(paths);
+        replaceLocalsWithHubs(clone, hubs); //cria os hubs
+
+        Algorithms.shortestPaths(clone, local, Integer::compare, Integer::sum, 0, paths, dists);
+
+        // replaceLocalsWithHubs(clone, hubs); //cria os hubs
+
+        List<Local> hubsList = new ArrayList<>();
+
+        hubsList = getListOfHubs(hubsList, clone);
+
+
         List<PathWithMostHubsData> list = new ArrayList<>();
-        // paths=checkPathWithMostHubs(paths, 0);
+        list = getListOfPathsWithMostHubs(list, paths, departuretime, clone, vehicle, hubsList);
+
+        return findCorrectPathWithMostHubsData(list);
+    }
+
+    private List<PathWithMostHubsData> getListOfPathsWithMostHubs(List<PathWithMostHubsData> list, ArrayList<LinkedList<Local>> paths, LocalTime departuretime, MapGraph<Local, Integer> clone, Vehicle vehicle, List<Local> hubsList) {
         int count = 0;
         for (LinkedList<Local> path : paths) {
             if (!path.isEmpty()) {
@@ -362,31 +366,43 @@ public class GraphStore {
                 list.add(data);
             }
         }
-        System.out.println(count);
-
-
-        return findCorrectPathWithMostHubsData(list);
+        return list;
     }
 
-    private PathWithMostHubsData findCorrectPathWithMostHubsData(List<PathWithMostHubsData> list) {
+    public List<Local> getListOfHubs(List<Local> hubsList, MapGraph<Local, Integer> clone) {
+        for (Local l : clone.vertices()) {
+            if (l instanceof Hub) {
+                hubsList.add(l);
+            }
+        }
+        return hubsList;
+    }
+
+
+    public List<PathWithMostHubsData> findCorrectPathWithMostHubsData(List<PathWithMostHubsData> list) {
+        List<PathWithMostHubsData> correctPathWithMostHubsData = new ArrayList<>();
         PathWithMostHubsData pathWithMostHubs = null;
         if (!list.isEmpty()) {
             pathWithMostHubs = list.get(0);
             int numberOfHubsTheVehicleWentThrough = 0;
             for (PathWithMostHubsData p : list) {
                 if (p.getnumberOfHubsTheVehicleWentThrough() > numberOfHubsTheVehicleWentThrough) {
+                    correctPathWithMostHubsData.add(p);
                     numberOfHubsTheVehicleWentThrough = p.getnumberOfHubsTheVehicleWentThrough();
                     pathWithMostHubs = p;
                 }
             }
+            for (PathWithMostHubsData data : correctPathWithMostHubsData) {
+                if (data.getnumberOfHubsTheVehicleWentThrough() != numberOfHubsTheVehicleWentThrough) list.remove(data);
+            }
         }
-
-        return pathWithMostHubs;
+        return correctPathWithMostHubsData;
 
     }
 
 
     private PathWithMostHubsData checkData(MapGraph<Local, Integer> clone, LocalTime departuretime, LinkedList<Local> path, Vehicle vehicle, List<Local> hubsList) {
+
         int countValidHubs = 0;
         float routetime = 0;// tempo entre dois locais
         float routeTotalDuration = 0; // duração total do percurso
@@ -398,40 +414,38 @@ public class GraphStore {
         List<LocalsData> localsDataList = new ArrayList<>();
         LocalsData localsData;
         int distance;
+
         if (!path.isEmpty()) {
+
             Local currentStop = path.get(0);
 
             List<Local> vehicleChargeStops = getVehicleChargeStops(clone, path, vehicle.getAutonomyDistance());
             int numberOfTimesVehicleWasCharged = vehicleChargeStops.size();
             vehicleChargingDuration = numberOfTimesVehicleWasCharged * vehicle.getChargingTime();
             Local origin = currentStop;
-            double pathTotalDistance = getPathTotalDistance(clone, path);
-            System.out.println(path);
-            System.out.println();
-
+            //double pathTotalDistance = getPathTotalDistance(clone, path);
+            double pathTotalDistance = 0;
             for (int i = 0; i < path.size() - 1; i++) {
 
                 currentStop = path.get(i);
                 nextStop = path.get(i + 1);
 
                 if (clone.edge(currentStop, nextStop) != null) {
+
                     distance = clone.edge(currentStop, nextStop).getWeight();
                     routetime = getroutetime(vehicle.getAverageVelocity(), distance); //obtem tempo de um local ate o outro
-                    vehicleInTheRoadDuration += routetime;
+                    pathTotalDistance += routetime;
+                    vehicleInTheRoadDuration += routetime; //soma o tempo nas estradas
                     pathDuration = pathDuration.plus(Duration.ofMinutes((long) routetime)); // soma o tempo entre os locals ao tempo de partida
 
-                    localsData = new LocalsData(nextStop, pathDuration); //tempo de chegada no prox local
+                    localsData = new LocalsData(nextStop, pathDuration); //estrutura de dados que guarda informação do local, hora de chegada no mesmo e hora de partida caso for um hub
 
-                    if (vehicleChargeStops.contains(nextStop)) {
-
-                        pathDuration = pathDuration.plus((long) vehicle.getChargingTime(), ChronoUnit.MINUTES); //se o local for um dos locais onde o veicuoloo carrega, adicionamos o tempo que levou a carregar ao tempo do percurso
+                    if (checkIfNextStopIsAChargingSpot(nextStop, vehicleChargeStops)) {
+                        pathDuration = pathDuration.plus((long) vehicle.getChargingTime(), ChronoUnit.MINUTES); //se o local for um dos locais onde o veiculo carrega, adicionamos o tempo que levou a carregar ao tempo do percurso
                     }
 
-                    System.out.println(checkIfHub(hubsList,nextStop));
-                    if (checkIfHub(hubsList,nextStop)) {
-                        System.out.println("dephane");
+                    if (checkIfHub(hubsList, nextStop)) {
                         localsData.setHub(true);
-
                         if (pathDuration.isAfter((((Hub) nextStop).getSchedule().getOpeningHours())) && pathDuration.isBefore((((Hub) nextStop).getSchedule().getClosingHours()))) { //se chegar a horas no hub(antes de fechar e depois de abrir)
                             countValidHubs++;
                             pathDuration = pathDuration.plus(Duration.ofSeconds(((Hub) nextStop).getDischargeTime()));//adicionamos o tempo que levou a descarregar os produtos
@@ -440,50 +454,37 @@ public class GraphStore {
                         localsData.setDepartureHour(pathDuration);
                     }
                     localsDataList.add(localsData);
-                }}
-                Duration duration = Duration.between(departuretime, pathDuration);
-                routeTotalDuration = (float) duration.toMinutes();
-                PathWithMostHubsData data = new PathWithMostHubsData(origin, localsDataList, path, pathTotalDistance, numberOfTimesVehicleWasCharged, routeTotalDuration, vehicleChargingDuration, vehicleInTheRoadDuration, hubDischargingDuration);
-                data.setNumberOfHubsTheVehicleWentThrough(countValidHubs);
-                return data;
+                }
+            }
+            routeTotalDuration = vehicleChargingDuration + vehicleInTheRoadDuration + hubDischargingDuration;
+            PathWithMostHubsData data = new PathWithMostHubsData(origin, localsDataList, path, pathTotalDistance, numberOfTimesVehicleWasCharged, routeTotalDuration, vehicleChargingDuration, vehicleInTheRoadDuration, hubDischargingDuration);
+            data.setNumberOfHubsTheVehicleWentThrough(countValidHubs);
+            return data;
 
         }
         return new PathWithMostHubsData();
     }
 
-    private boolean checkIfHub(List<Local> hubsList, Local nextStop) {
-        boolean found=false;
-        for(Local l:hubsList){
-            System.out.println(l.getLocalId()+" "+nextStop.getLocalId());
-
-            if(l.getLocalId().equals(nextStop.getLocalId()))found= true;
-        }return found;
-    }
-
-    private double getPathTotalDistance(MapGraph<Local, Integer> clone, LinkedList<Local> path) {
-
-        int distance = 0;
-
-        for (int i = 0; i < path.size() - 1; i++) {
-            if (clone.edge(path.get(i), path.get(i + 1)) != null)
-                distance += clone.edge(path.get(i), path.get(i + 1)).getWeight();
+    public boolean checkIfNextStopIsAChargingSpot(Local nextStop, List<Local> vehicleChargeStops) {
+        boolean is = false;
+        for (Local l : vehicleChargeStops) {
+            if (nextStop.getLocalId().equals(l.getLocalId())) ;
+            is = true;
         }
-        return distance;
+        return is;
     }
 
-    private float getDurationOfTheVehicleInTheRoad(LinkedList<Local> stops, MapGraph<Local, Integer> clone, float speed) {
-
-        float duration = 0;
-
-        for (int i = 0; i < stops.size() - 1; i++) {
-            if (clone.edge(stops.get(i), stops.get(i + 1)) != null) {
-                duration += getroutetime(clone.edge(stops.get(i), stops.get(i + 1)).getWeight(), speed);
-            }
+    public boolean checkIfHub(List<Local> hubsList, Local nextStop) {
+        boolean found = false;
+        for (Local l : hubsList) {
+            if (l.getLocalId().equals(nextStop.getLocalId())) found = true;
         }
-        return duration;
+        return found;
     }
 
-    private static float getroutetime(double distance, double speed) {
+
+
+    public float getroutetime(double distance, double speed) {
 
         int secondsInAHour = 3600;
         int limit = 0;
