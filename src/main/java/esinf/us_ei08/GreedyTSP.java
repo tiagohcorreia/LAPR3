@@ -66,7 +66,7 @@ public class GreedyTSP<V, E> {
             E edgeWeight = graph.edge(currentVertex, nextVertex).getWeight();
             totalDistance += (edgeWeight != null) ? (int) edgeWeight : 0;
             if ((int) edgeWeight > autonomy) {
-                // Check if the next vertex is the origin
+
                 if (nextVertex != origin) {
                     numberOfChargings++;
                     autonomy = vehicle.getAutonomyDistance();
@@ -146,49 +146,20 @@ public class GreedyTSP<V, E> {
             int vertexKey = graph.key(vertex);
             if (!visited[vertexKey]) {
                 E edgeWeight = graph.edge(currentVertex, vertex).getWeight();
-                int weight = (edgeWeight != null) ? (int) edgeWeight : 0;
-
-                if (weight <= vehicle.getAutonomyDistance()) {
-                    // Check if the vertex is a hub and has already been visited (except the last one)
                     if (vertex instanceof Hub && circuit.contains(vertex) && vertex != circuit.get(circuit.size() - 1)) {
-                        continue; // Skip this hub
+                        continue;
                     }
 
                     double score = calculateScore((Local) vertex, edgeWeight, vehicle);
 
                     if (vertex instanceof Hub && remainingHubs > 0) {
-                        score *= 2; // Give higher priority to hubs when there are remaining hubs to visit
+                        score *= 2;
                     }
-
                     if (score > maxScore) {
                         maxScore = score;
                         nextVertex = vertex;
                     }
-                }
-            }
-        }
 
-        if (nextVertex == null) {
-            for (V vertex : graph.adjVertices(currentVertex)) {
-                int vertexKey = graph.key(vertex);
-                if (!visited[vertexKey]) {
-                    E edgeWeight = graph.edge(currentVertex, vertex).getWeight();
-                    int weight = (edgeWeight != null) ? (int) edgeWeight : 0;
-
-                    if (weight <= vehicle.getAutonomyDistance()) {
-                        // Check if the vertex is a hub and has already been visited (except the last one)
-                        if (vertex instanceof Hub && circuit.contains(vertex) && vertex != circuit.get(circuit.size() - 1)) {
-                            continue; // Skip this hub
-                        }
-
-                        double score = calculateScore((Local) vertex, edgeWeight, vehicle);
-
-                        if (score > maxScore) {
-                            maxScore = score;
-                            nextVertex = vertex;
-                        }
-                    }
-                }
             }
         }
 
