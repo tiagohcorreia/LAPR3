@@ -149,7 +149,7 @@ public class GreedyTSP<V, E> {
                         continue;
                     }
 
-                    double score = calculateScore((Local) vertex, edgeWeight, vehicle);
+                    double score = calculateScore((Local) vertex, edgeWeight);
 
                     if (vertex instanceof Hub && remainingHubs > 0) {
                         score *= 2;
@@ -164,7 +164,7 @@ public class GreedyTSP<V, E> {
 
         return nextVertex;
     }
-    private double calculateScore(Local hub, E edgeWeight, Vehicle vehicle) {
+    private double calculateScore(Local hub, E edgeWeight) {
         int collaborators = hub.getNumberOfCollaborators();
         double weight = (edgeWeight != null) ? (int) edgeWeight : 0;
 
