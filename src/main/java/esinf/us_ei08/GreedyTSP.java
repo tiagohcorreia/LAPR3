@@ -43,7 +43,6 @@ public class GreedyTSP<V, E> {
         List<V> circuit = new ArrayList<>();
         boolean[] visited = new boolean[graph.numVertices()];
 
-        // Remove edges above autonomy at the beginning
         graph = removeEdgesAboveAutonomy(vehicle, graph);
 
         V currentVertex = origin;
