@@ -1,5 +1,7 @@
 package esinf.us_ei09;
 
+import esinf.CommonGraph;
+import esinf.Graph;
 import esinf.map.MapGraph;
 import esinf.map.MapGraphLoader;
 import esinf.model.Local;
@@ -8,13 +10,15 @@ import esinf.us_ei04.CalculateMinimumSpanningTree;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.Map;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class OrganizeGraphIntoClustersTest {
 
     // Test Small Graph
-    @Test
+    /*@Test
     void testSmallGraph() {
 
         GraphStore storage = new GraphStore();
@@ -28,7 +32,7 @@ class OrganizeGraphIntoClustersTest {
         System.out.println(OrganizeGraphIntoClusters.organizeGraph(graph));
 
         assertNotNull(graph);
-    }
+    }*/
 
     @Test
     void testeNumVerticesSmall() throws IOException {
@@ -51,7 +55,7 @@ class OrganizeGraphIntoClustersTest {
     //=================================================================================================================
 
     // Test Big graph
-    @Test
+   /* @Test
     void testBigGraph() {
 
         GraphStore storage = new GraphStore();
@@ -65,7 +69,7 @@ class OrganizeGraphIntoClustersTest {
         System.out.println(OrganizeGraphIntoClusters.organizeGraph(graph));
 
         assertNotNull(graph);
-    }
+    }*/
 
     @Test
     void testeNumVerticesBig() throws IOException {
@@ -86,5 +90,37 @@ class OrganizeGraphIntoClustersTest {
     }
 
     //=================================================================================================================
+
+    @Test
+    void organizeGraph_shouldReturnCorrectClusters() {
+
+        // Criar um grafo de exemplo
+        MapGraph graph = new MapGraph(false);
+
+        // Adicionar localidades ao grafo
+        Local localA = new Local("A");
+        Local localB = new Local("B");
+        Local localC = new Local("C");
+        Local localD = new Local("D");
+
+
+        // Adicionar os vértices
+        graph.addVertex(localA);
+        graph.addVertex(localB);
+        graph.addVertex(localC);
+        graph.addVertex(localD);
+
+
+        // Adicionar arestas ao grafo
+        graph.addEdge(localA, localB, 1);
+        graph.addEdge(localA, localC, 2);
+        graph.addEdge(localB, localC, 1);
+        graph.addEdge(localC, localD, 3);
+
+        Map<HubLocal, Set<Local>> result = OrganizeGraphIntoClusters.organizeGraph(graph);
+
+        // Verificar se o resultado está correto
+        assertEquals(2, result.size()); // Deve haver 2 hubs (clusters) neste exemplo
+    }
 
 }

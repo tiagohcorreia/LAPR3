@@ -29,6 +29,11 @@ public class Local implements Cloneable{
         gps=DEFAULT_GPS;
     }
 
+    public Local(String localId) {
+        this.localId = localId;
+        this.gps = DEFAULT_GPS;
+    }
+
     /**
      * Instantiates a new Local.
      *
