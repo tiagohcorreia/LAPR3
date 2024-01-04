@@ -9,8 +9,22 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Objects;
 
+/**
+ * The type Aplicacoes fp repo.
+ */
 public class AplicacoesFPRepo {
 
+    /**
+     * Registar aplicacao fp solo boolean.
+     *
+     * @param parcelaID  the parcela id
+     * @param quantidade the quantidade
+     * @param unidade    the unidade
+     * @param area       the area
+     * @param fpID       the fp id
+     * @param data       the data
+     * @return the boolean
+     */
     public boolean registarAplicacaoFPSolo(int parcelaID,
                                            double quantidade,
                                            String unidade,
@@ -48,6 +62,18 @@ public class AplicacoesFPRepo {
         return false;
     }
 
+    /**
+     * Registar aplicacao fp variedade boolean.
+     *
+     * @param parcelaID         the parcela id
+     * @param variedadeID       the variedade id
+     * @param metodoAplicacaoID the metodo aplicacao id
+     * @param quantidade        the quantidade
+     * @param unidade           the unidade
+     * @param fpID              the fp id
+     * @param data              the data
+     * @return the boolean
+     */
     public boolean registarAplicacaoFPVariedade(int parcelaID,
                                                 int variedadeID,
                                                 int metodoAplicacaoID,

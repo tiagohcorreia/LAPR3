@@ -4,10 +4,16 @@ import controller.ExitController;
 
 import java.sql.SQLException;
 
+/**
+ * The type Exit ui.
+ */
 public class ExitUI implements Runnable {
 
     private ExitController controller;
 
+    /**
+     * Instantiates a new Exit ui.
+     */
     public ExitUI() {
         controller = new ExitController();
     }

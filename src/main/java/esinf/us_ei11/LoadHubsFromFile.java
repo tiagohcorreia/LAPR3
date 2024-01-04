@@ -10,7 +10,16 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalTime;
 
+/**
+ * The type Load hubs from file.
+ */
 public class LoadHubsFromFile {
+    /**
+     * Load hubs form file boolean.
+     *
+     * @param file the file
+     * @return the boolean
+     */
     public static boolean loadHubsFormFile(String file) {
 
         GraphStore graphStore = Repositories.getInstance().getGraphStore();

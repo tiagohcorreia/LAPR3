@@ -8,6 +8,9 @@ import java.sql.*;
 import java.util.*;
 import java.util.Date;
 
+/**
+ * The type Operacao agricola register controller.
+ */
 public class OperacaoAgricolaRegisterController {
 
     private OperacaoAgricolaRepository operacaoAgricolaRepository;
@@ -24,6 +27,9 @@ public class OperacaoAgricolaRegisterController {
     private Connection connection;
 
 
+    /**
+     * Instantiates a new Operacao agricola register controller.
+     */
     public OperacaoAgricolaRegisterController() {
         getOperacaoAgricolaRepository();
         try {
@@ -41,10 +47,22 @@ public class OperacaoAgricolaRegisterController {
         return operacaoAgricolaRepository;
     }
 
+    /**
+     * Operacao agricola register.
+     *
+     * @param operacaoId the operacao id
+     * @param date       the date
+     * @throws SQLException the sql exception
+     */
     public void operacaoAgricolaRegister(int operacaoId, Date date) throws SQLException {
         OperacaoAgricolaRepository.OperacaoAgricolaRegister(operacaoId, date);
     }
 
+    /**
+     * Gets next id.
+     *
+     * @return the next id
+     */
     public int getNextId() {
 
         try {
@@ -70,6 +88,14 @@ public class OperacaoAgricolaRegisterController {
         return -1;
     }
 
+    /**
+     * Is id valid boolean.
+     *
+     * @param tableName the table name
+     * @param id        the id
+     * @return the boolean
+     * @throws SQLException the sql exception
+     */
     public boolean isIdValid(String tableName, int id) throws SQLException {
         Connection connection = DatabaseConnection.getInstance().getConnection();
         String sql = "SELECT COUNT(*) FROM " + tableName + " WHERE id = ?";
@@ -86,6 +112,12 @@ public class OperacaoAgricolaRegisterController {
         return false;
     }
 
+    /**
+     * Gets table data.
+     *
+     * @param tableName the table name
+     * @return the table data
+     */
     public List<String[]> getTableData(String tableName) {
 
         List<String[]> result = new ArrayList<>();
@@ -119,6 +151,11 @@ public class OperacaoAgricolaRegisterController {
     }
 
 
+    /**
+     * Print table data.
+     *
+     * @param tableName the table name
+     */
     public void printTableData(String tableName) {
 
         List<String[]> data = getTableData(tableName);
@@ -180,6 +217,13 @@ public class OperacaoAgricolaRegisterController {
         System.out.println();
     }
 
+    /**
+     * Gets table data by fator producao id.
+     *
+     * @param tableName       the table name
+     * @param fatorProducaoId the fator producao id
+     * @return the table data by fator producao id
+     */
     public List<String[]> getTableDataByFatorProducaoId(String tableName, int fatorProducaoId) {
 
         List<String[]> result = new ArrayList<>();
@@ -210,6 +254,13 @@ public class OperacaoAgricolaRegisterController {
         return result;
     }
 
+    /**
+     * Print table data by fator id.
+     *
+     * @param tableName       the table name
+     * @param data            the data
+     * @param fatorProducaoId the fator producao id
+     */
     public void printTableDataByFatorId(String tableName, List<String[]> data, int fatorProducaoId) {
 
         if (data.isEmpty()) {

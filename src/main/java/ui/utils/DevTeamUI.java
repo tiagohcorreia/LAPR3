@@ -1,7 +1,13 @@
 package ui.utils;
 
+/**
+ * The type Dev team ui.
+ */
 public class DevTeamUI implements Runnable {
 
+    /**
+     * Instantiates a new Dev team ui.
+     */
     public DevTeamUI() {
 
     }

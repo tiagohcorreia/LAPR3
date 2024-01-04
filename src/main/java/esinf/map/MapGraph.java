@@ -7,6 +7,8 @@ import esinf.Graph;
 import java.util.*;
 
 /**
+ * The type Map graph.
+ *
  * @param <V> Vertex value type
  * @param <E> Edge value type
  */
@@ -14,12 +16,22 @@ public class MapGraph<V, E> extends CommonGraph<V, E> {
 
     final private Map<V, MapVertex<V, E>> mapVertices;  // all the Vertices of the graph
 
-    // Constructs an empty graph (either undirected or directed)
+    /**
+     * Instantiates a new Map graph.
+     *
+     * @param directed the directed
+     */
+// Constructs an empty graph (either undirected or directed)
     public MapGraph(boolean directed) {
         super(directed);
         mapVertices = new LinkedHashMap<>();
     }
 
+    /**
+     * Instantiates a new Map graph.
+     *
+     * @param g the g
+     */
     public MapGraph(Graph<V, E> g) {
         this(g.isDirected());
         copy(g, this);

@@ -19,6 +19,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * The type Utils.
+ */
 public class Utils {
 
     /**
@@ -65,6 +68,12 @@ public class Utils {
         return value;
     }
 
+    /**
+     * Read positive integer from console int.
+     *
+     * @param prompt the prompt
+     * @return the int
+     */
     static public int readPositiveIntegerFromConsole(String prompt) {
         int value = -1;
         boolean valid = false;
@@ -80,7 +89,9 @@ public class Utils {
 
                 valid = true;
             } catch (InvalidParameterException ex) {
-                System.out.println("ERRO: O valor introduzido não é um inteiro positivo\n");
+                System.err.println("ERRO: O valor introduzido não é um inteiro positivo\n");
+            } catch (NumberFormatException e){
+                System.err.println("ERRO: O valor introduzido não é um inteiro positivo\n");
             }
         } while (!valid);
 
@@ -248,6 +259,13 @@ public class Utils {
         return value - 1;
     }
 
+    /**
+     * Send email boolean.
+     *
+     * @param email   the email
+     * @param content the content
+     * @return the boolean
+     */
     static public boolean sendEmail(String email, String content) {
         String filename = email.replace("@", "_at_");
         try {
@@ -285,15 +303,33 @@ public class Utils {
         } while (true);
     }
 
+    /**
+     * Enter to continue.
+     */
     static public void enterToContinue() {
         readLineFromConsole("Press [Enter] to continue...");
     }
 
+    /**
+     * Show and select one generic e.
+     *
+     * @param <E>    the type parameter
+     * @param list   the list
+     * @param header the header
+     * @return the e
+     */
     static public <E> E showAndSelectOneGeneric(List<E> list, String header) {
         showListGeneric(list, header);
         return selectObjectGeneric(list);
     }
 
+    /**
+     * Show list generic.
+     *
+     * @param <E>    the type parameter
+     * @param list   the list
+     * @param header the header
+     */
     static public <E> void showListGeneric(List<E> list, String header) {
         System.out.println(header);
 
@@ -307,6 +343,13 @@ public class Utils {
         System.out.println("0 - Cancel");
     }
 
+    /**
+     * Select object generic e.
+     *
+     * @param <E>  the type parameter
+     * @param list the list
+     * @return the e
+     */
     static public <E> E selectObjectGeneric(List<E> list) {
         String input;
         int value;
@@ -323,6 +366,12 @@ public class Utils {
         }
     }
 
+    /**
+     * Run menu.
+     *
+     * @param options the options
+     * @param header  the header
+     */
     public static void runMenu(List<MenuItem> options, String header) {
         String space = "----------------";
         int option = 0;
@@ -336,6 +385,12 @@ public class Utils {
         } while (option != -1);
     }
 
+    /**
+     * Gets boolean answer.
+     *
+     * @param header the header
+     * @return the boolean answer
+     */
     public static boolean getBooleanAnswer(String header) {
         ArrayList<String> yes_or_no = new ArrayList<>();
         yes_or_no.add("Sim");
@@ -345,6 +400,14 @@ public class Utils {
         return in == 0;
     }
 
+    /**
+     * Print database objects.
+     *
+     * @param <E>  the type parameter
+     * @param list the list
+     * @param h1   the h 1
+     * @param h2   the h 2
+     */
     public static <E extends DatabaseObject> void printDatabaseObjects(List<E> list, String h1, String h2) {
         printTableHeader(h1, h2);
         for (E o : list) {
@@ -370,6 +433,13 @@ public class Utils {
         System.out.println();
     }
 
+    /**
+     * Gets local date from console.
+     *
+     * @param header     the header
+     * @param dateFormat the date format
+     * @return the local date from console
+     */
     public static LocalDate getLocalDateFromConsole(String header, String dateFormat) {
         boolean validInput = false;
         LocalDate date = null;
@@ -395,12 +465,13 @@ public class Utils {
     /**
      * prints the elements from the param list and asks the to select the id
      * it checks automatically if the select id is valid, and asks to select again if necessary
-     * @param list list of options
-     * @param h1 header of first column
-     * @param h2 header of second column
+     *
+     * @param <E>    the elements of the list must implement the interface DatabaseObject
+     * @param list   list of options
+     * @param h1     header of first column
+     * @param h2     header of second column
      * @param prompt message to be displayed to the user, like "choose the wanted id"
      * @return the id selected
-     * @param <E> the elements of the list must implement the interface DatabaseObject
      */
     public static <E extends DatabaseObject> int getTableIdFromConsole(List<E> list, String h1, String h2, String prompt) {
         printDatabaseObjects(list, h1, h2);

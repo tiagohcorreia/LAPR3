@@ -11,6 +11,9 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * The type Registar poda ui.
+ */
 public class RegistarPodaUI implements Runnable {
 
     private RegistarPodaController ctrl = new RegistarPodaController();

@@ -12,8 +12,14 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * The type Obter quantidade fp por tipo ui.
+ */
 public class ObterQuantidadeFpPorTipoUI implements Runnable {
 
+    /**
+     * The Ctrl.
+     */
     ObterQuantidadeFpPorTipoController ctrl=new ObterQuantidadeFpPorTipoController();
 
     private int parcelaID;

@@ -2,6 +2,9 @@ package watering_system_manager.watering_plan;
 
 import java.util.Comparator;
 
+/**
+ * The type Watering plan entry comparator.
+ */
 public class WateringPlanEntryComparator implements Comparator<WateringPlanEntry> {
 
     @Override

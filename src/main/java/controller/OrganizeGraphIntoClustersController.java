@@ -10,12 +10,23 @@ import esinf.us_ei09.OrganizeGraphIntoClusters;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * The type Organize graph into clusters controller.
+ */
 public class OrganizeGraphIntoClustersController {
 
+    /**
+     * Instantiates a new Organize graph into clusters controller.
+     */
     public OrganizeGraphIntoClustersController() {
 
     }
 
+    /**
+     * Organize small map.
+     *
+     * @return the map
+     */
     public Map<HubLocal, Set<Local>> organizeSmall() {
 
         GraphStore storage = new GraphStore();
@@ -29,6 +40,11 @@ public class OrganizeGraphIntoClustersController {
         return OrganizeGraphIntoClusters.organizeGraph(graph);
     }
 
+    /**
+     * Organize big map.
+     *
+     * @return the map
+     */
     public Map<HubLocal, Set<Local>> organizeBig() {
 
         GraphStore storage = new GraphStore();

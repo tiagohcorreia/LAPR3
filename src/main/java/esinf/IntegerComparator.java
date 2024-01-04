@@ -9,6 +9,9 @@ import java.util.function.BinaryOperator;
 import static esinf.Algorithms.getPath;
 import static esinf.Algorithms.shortestPathDijkstra;
 
+/**
+ * The type Integer comparator.
+ */
 public class IntegerComparator implements Comparator<Integer> {
 
 

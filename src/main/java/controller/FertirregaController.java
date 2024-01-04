@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * The type Fertirrega controller.
+ */
 public class FertirregaController {
     private DatabaseConnection database;
     private ReceitasFertirregaRepository receitasFertirregaRepository;
@@ -26,6 +29,9 @@ public class FertirregaController {
 
     private Connection connection;
 
+    /**
+     * Instantiates a new Fertirrega controller.
+     */
     public FertirregaController() {
         getFertirregaRepository();
         try {
@@ -45,6 +51,12 @@ public class FertirregaController {
     }
 
 
+    /**
+     * Gets fp ids by mix.
+     *
+     * @param mix the mix
+     * @return the fp ids by mix
+     */
     public List<Integer> getFpIdsByMix(String mix) {
         List<Integer> fpIds = new ArrayList<>();
 
@@ -76,6 +88,12 @@ public class FertirregaController {
         return fpIds;
     }
 
+    /**
+     * Gets proporcao by fp id.
+     *
+     * @param fpId the fp id
+     * @return the proporcao by fp id
+     */
     public int getProporcaoByFpId(int fpId) {
         int proporcao = 0;
 
@@ -97,6 +115,14 @@ public class FertirregaController {
         return proporcao;
     }
 
+    /**
+     * Register fp ids.
+     *
+     * @param operacaoId the operacao id
+     * @param mix        the mix
+     * @param setorNome  the setor nome
+     * @throws SQLException the sql exception
+     */
     public void registerFpIds(int operacaoId,String mix,String setorNome) throws SQLException {
         List<Integer> fpIds = getFpIdsByMix(mix);
         float quantidade = 0;
@@ -111,6 +137,12 @@ public class FertirregaController {
         receitasFertirregaRepository.registerFpAplicados(operacaoId,fpIds);
     }
 
+    /**
+     * Gets parcela and variedade.
+     *
+     * @param setorNome the setor nome
+     * @return the parcela and variedade
+     */
     public List<AbstractMap.SimpleEntry<Integer, Integer>> getParcelaAndVariedade(String setorNome) {
         List<AbstractMap.SimpleEntry<Integer, Integer>> parcelaVariedadePairs = new ArrayList<>();
 

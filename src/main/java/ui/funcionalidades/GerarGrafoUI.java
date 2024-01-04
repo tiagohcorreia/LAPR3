@@ -5,8 +5,17 @@ import esinf.store.GraphStore;
 
 import java.util.Scanner;
 
+/**
+ * The type Gerar grafo ui.
+ */
 public class GerarGrafoUI implements Runnable {
+    /**
+     * The Local.
+     */
     String local = "src/test/java/esinf/usei08/files/locais3.csv";
+    /**
+     * The Distancias.
+     */
     String distancias = "src/test/java/esinf/usei08/files/distancias3.csv";
 
     @Override

@@ -19,6 +19,9 @@ import ui.utils.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Menu consultar dados.
+ */
 public class MenuConsultarDados implements Runnable{
 
     @Override

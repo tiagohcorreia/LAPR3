@@ -7,8 +7,14 @@ import ui.utils.Utils;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * The type Register watering operation ui.
+ */
 public class RegisterWateringOperationUI implements Runnable {
 
+    /**
+     * The Ctrl.
+     */
     RegisterWateringOperationController ctrl = new RegisterWateringOperationController();
 
     private int setorId;

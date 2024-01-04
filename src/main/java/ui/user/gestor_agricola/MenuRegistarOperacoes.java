@@ -13,6 +13,9 @@ import ui.utils.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Menu registar operacoes.
+ */
 public class MenuRegistarOperacoes implements Runnable{
 
     @Override

@@ -12,8 +12,14 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * The type Obter operacoes ui.
+ */
 public class ObterOperacoesUI implements Runnable {
 
+    /**
+     * The Ctrl.
+     */
     ObterOperacoesController ctrl = new ObterOperacoesController();
     private int parcelaID;
     private LocalDate dataInferior;

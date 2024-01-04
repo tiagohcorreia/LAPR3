@@ -12,6 +12,9 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * The type Registar monda ui.
+ */
 public class RegistarMondaUI implements Runnable {
 
     private MondaRegisterController ctrl = new MondaRegisterController();

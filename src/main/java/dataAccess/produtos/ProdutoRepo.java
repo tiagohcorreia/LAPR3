@@ -12,8 +12,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * The type Produto repo.
+ */
 public class ProdutoRepo {
 
+    /**
+     * Gets produtos.
+     *
+     * @return the produtos
+     */
     public List<Produto> getProdutos() {
 
         CallableStatement callStmt = null;
@@ -50,6 +58,12 @@ public class ProdutoRepo {
         return produtos;
     }
 
+    /**
+     * Gets produtos in parcela.
+     *
+     * @param parcelID the parcel id
+     * @return the produtos in parcela
+     */
     public List<Produto> getProdutosInParcela(int parcelID) {
 
         CallableStatement callStmt = null;

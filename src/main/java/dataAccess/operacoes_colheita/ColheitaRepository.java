@@ -13,8 +13,16 @@ import dataAccess.DatabaseConnection;
 import domain.Colheita;
 import oracle.jdbc.OracleTypes;
 
+/**
+ * The type Colheita repository.
+ */
 public class ColheitaRepository {
 
+    /**
+     * Gets colheitas.
+     *
+     * @return the colheitas
+     */
     public List<Colheita> getColheitas() {
 
         CallableStatement callStmt = null;
@@ -47,6 +55,16 @@ public class ColheitaRepository {
         return colheitas;
     }
 
+    /**
+     * Registar colheita boolean.
+     *
+     * @param data             the data
+     * @param parcelaId        the parcela id
+     * @param produtoId        the produto id
+     * @param quantidade       the quantidade
+     * @param metodoExecucaoId the metodo execucao id
+     * @return the boolean
+     */
     public boolean registarColheita(LocalDate data, int parcelaId, int produtoId, double quantidade, int metodoExecucaoId) {
 
         CallableStatement callStmt = null;
@@ -76,6 +94,13 @@ public class ColheitaRepository {
         return false;
     }
 
+    /**
+     * Colheita delete int.
+     *
+     * @param operacaoId the operacao id
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public int colheitaDelete(int operacaoId) throws SQLException {
 
         CallableStatement callStmt = null;

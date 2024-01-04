@@ -11,8 +11,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * The type Setores rega repository.
+ */
 public class SetoresRegaRepository {
 
+    /**
+     * Gets setores.
+     *
+     * @return the setores
+     */
     public ArrayList<SetorRega> getSetores() {
 
         CallableStatement callStmt = null;
@@ -70,6 +78,12 @@ public class SetoresRegaRepository {
         return sectors;
     }
 
+    /**
+     * Is there sector boolean.
+     *
+     * @param sectorName the sector name
+     * @return the boolean
+     */
     public boolean isThereSector(String sectorName) {
         CallableStatement callStmt = null;
         int out = -1;

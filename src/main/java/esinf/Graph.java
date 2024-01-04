@@ -6,6 +6,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.function.Predicate;
 
+/**
+ * The interface Graph.
+ *
+ * @param <V> the type parameter
+ * @param <E> the type parameter
+ */
 public interface Graph<V, E> extends Cloneable {
 
     /**

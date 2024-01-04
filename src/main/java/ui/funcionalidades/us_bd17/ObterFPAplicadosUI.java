@@ -12,8 +12,14 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * The type Obter fp aplicados ui.
+ */
 public class ObterFPAplicadosUI implements Runnable {
 
+    /**
+     * The Ctrl.
+     */
     ObterFPAplicadosController ctrl = new ObterFPAplicadosController();
     private int parcelaID;
     private LocalDate dataInferior;

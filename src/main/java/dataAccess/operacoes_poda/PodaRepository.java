@@ -9,9 +9,22 @@ import java.util.Objects;
 import dataAccess.DatabaseConnection;
 import oracle.jdbc.OracleTypes;
 
+/**
+ * The type Poda repository.
+ */
 public class PodaRepository {
 
 
+    /**
+     * Registar poda boolean.
+     *
+     * @param date             the date
+     * @param parcelaId        the parcela id
+     * @param variedadeId      the variedade id
+     * @param quantidade       the quantidade
+     * @param metodoExecucaoId the metodo execucao id
+     * @return the boolean
+     */
     public boolean registarPoda(LocalDate date,
                                 int parcelaId,
                                 int variedadeId,

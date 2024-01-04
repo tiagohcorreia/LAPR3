@@ -10,6 +10,9 @@ import java.util.function.ToDoubleFunction;
 import java.util.function.ToIntFunction;
 import java.util.function.ToLongFunction;
 
+/**
+ * The type Local.
+ */
 public class Local implements Cloneable{
 
     private String localId;
@@ -18,32 +21,66 @@ public class Local implements Cloneable{
     final private String DEFAULT_LOCAL_ID="(no id)";
     final private GPS DEFAULT_GPS=new GPS();
 
+    /**
+     * Instantiates a new Local.
+     */
     public Local(){
         localId=DEFAULT_LOCAL_ID;
         gps=DEFAULT_GPS;
     }
 
+    /**
+     * Instantiates a new Local.
+     *
+     * @param localId the local id
+     * @param gps     the gps
+     */
     public Local(String localId, GPS gps) {
         this.localId = localId;
         this.gps = gps;
     }
 
+    /**
+     * Gets local id.
+     *
+     * @return the local id
+     */
     public String getLocalId() {
         return localId;
     }
 
+    /**
+     * Gets gps.
+     *
+     * @return the gps
+     */
     public GPS getGps() {
         return gps;
     }
 
+    /**
+     * Sets local id.
+     *
+     * @param localId the local id
+     */
     public void setLocalId(String localId) {
         this.localId = localId;
     }
 
+    /**
+     * Sets gps.
+     *
+     * @param gps the gps
+     */
     public void setGps(GPS gps) {
         this.gps = gps;
     }
 
+    /**
+     * Get number of collaborators int.
+     *
+     * @return the int
+     */
     public int getNumberOfCollaborators(){
         return Integer.parseInt(localId.substring(2));
     }

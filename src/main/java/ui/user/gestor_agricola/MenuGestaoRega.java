@@ -14,6 +14,9 @@ import ui.utils.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Menu gestao rega.
+ */
 public class MenuGestaoRega implements Runnable{
 
     @Override

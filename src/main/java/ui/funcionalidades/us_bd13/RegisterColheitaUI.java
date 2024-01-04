@@ -9,6 +9,9 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * The type Register colheita ui.
+ */
 public class RegisterColheitaUI implements Runnable {
 
     private ColheitaRegisterController ctrl = new ColheitaRegisterController();

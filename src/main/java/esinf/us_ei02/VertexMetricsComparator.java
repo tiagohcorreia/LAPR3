@@ -4,10 +4,24 @@ import java.util.Comparator;
 
 import esinf.dataStructure.VertexMetrics;
 
+/**
+ * The type Vertex metrics comparator.
+ *
+ * @param <V> the type parameter
+ * @param <E> the type parameter
+ */
 public class VertexMetricsComparator<V, E> implements Comparator<VertexMetrics<V, E>> {
 
+    /**
+     * The Edge comp.
+     */
     Comparator<E> edgeComp;
 
+    /**
+     * Instantiates a new Vertex metrics comparator.
+     *
+     * @param edgeComp the edge comp
+     */
     public VertexMetricsComparator(Comparator<E> edgeComp) {
         this.edgeComp = edgeComp;
     }

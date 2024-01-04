@@ -14,17 +14,41 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+/**
+ * The type Hub shortest path finder.
+ *
+ * @param <V> the type parameter
+ * @param <E> the type parameter
+ */
 public class HubShortestPathFinder<V, E> {
 
     private Graph<V, E> graph;
     private GraphStore graphStore;
+    /**
+     * The Greedy tsp.
+     */
     GreedyTSP<V, E> greedyTSP = new GreedyTSP<>();
 
+    /**
+     * Instantiates a new Hub shortest path finder.
+     *
+     * @param graph the graph
+     */
     public HubShortestPathFinder(Graph<V, E> graph) {
         this.graph = graph;
         this.graphStore = new GraphStore();
     }
 
+    /**
+     * Find shortest circuit with hubs circuit.
+     *
+     * @param graph       the graph
+     * @param originLocal the origin local
+     * @param numHubs     the num hubs
+     * @param vehicle     the vehicle
+     * @param numVertices the num vertices
+     * @return the circuit
+     */
     public Circuit findShortestCircuitWithHubs(Graph<V,E> graph,V originLocal, int numHubs, Vehicle vehicle,int numVertices) {
 
         System.out.println("originHub: " + originLocal);
@@ -79,6 +103,15 @@ public class HubShortestPathFinder<V, E> {
 
     }
 
+    /**
+     * Calculate total details double.
+     *
+     * @param hubs              the hubs
+     * @param numberOfChargings the number of chargings
+     * @param totalDistance     the total distance
+     * @param vehicle           the vehicle
+     * @return the double
+     */
     public double calculateTotalDetails(List<Hub> hubs,int numberOfChargings,double totalDistance,Vehicle vehicle) {
         double chargingTime = numberOfChargings * vehicle.getChargingTime();
         double routeTime = (totalDistance / vehicle.getAverageVelocity()) * 60;

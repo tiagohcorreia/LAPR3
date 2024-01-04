@@ -2,6 +2,9 @@ package watering_system_manager.watering_instructions;
 
 import java.util.Objects;
 
+/**
+ * The type Watering instruction.
+ */
 public class WateringInstruction {
     private String regularidade;
     private String setor;
@@ -11,38 +14,78 @@ public class WateringInstruction {
     private final String DEFAULT_SECTOR="(no sector)";
     private final int DEFAULT_DURATION=-1;
 
+    /**
+     * Instantiates a new Watering instruction.
+     */
     public WateringInstruction() {
         this.setor = DEFAULT_SECTOR;
         this.duracao = DEFAULT_DURATION;
         this.regularidade = DEFAULT_REGULARITY;
     }
 
+    /**
+     * Instantiates a new Watering instruction.
+     *
+     * @param setor        the setor
+     * @param duracao      the duracao
+     * @param regularidade the regularidade
+     */
     public WateringInstruction(String setor, int duracao, String regularidade) {
         this.setor = setor;
         this.duracao = duracao;
         this.regularidade = regularidade;
     }
 
+    /**
+     * Gets regularidade.
+     *
+     * @return the regularidade
+     */
     public String getRegularidade() {
         return regularidade;
     }
 
+    /**
+     * Gets setor.
+     *
+     * @return the setor
+     */
     public String getSetor() {
         return setor;
     }
 
+    /**
+     * Gets duracao.
+     *
+     * @return the duracao
+     */
     public int getDuracao() {
         return duracao;
     }
 
+    /**
+     * Sets regularidade.
+     *
+     * @param regularidade the regularidade
+     */
     public void setRegularidade(String regularidade) {
         this.regularidade = regularidade;
     }
 
+    /**
+     * Sets setor.
+     *
+     * @param setor the setor
+     */
     public void setSetor(String setor) {
         this.setor = setor;
     }
 
+    /**
+     * Sets duracao.
+     *
+     * @param duracao the duracao
+     */
     public void setDuracao(int duracao) {
         this.duracao = duracao;
     }

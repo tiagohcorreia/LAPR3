@@ -11,6 +11,9 @@ import ui.utils.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Gestor distribuicao ui.
+ */
 public class GestorDistribuicaoUI implements Runnable {
 
     @Override

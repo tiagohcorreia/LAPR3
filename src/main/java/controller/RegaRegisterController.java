@@ -15,11 +15,17 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * The type Rega register controller.
+ */
 public class RegaRegisterController {
 
     private RegaRepository regaRepository;
     private List<RegaTable> regaTableList;
 
+    /**
+     * Instantiates a new Rega register controller.
+     */
     public RegaRegisterController() {
         this.regaTableList = new ArrayList<>();
         getRegaRepository();
@@ -33,11 +39,25 @@ public class RegaRegisterController {
         return regaRepository;
     }
 
+    /**
+     * Rega register.
+     *
+     * @param operacaoId the operacao id
+     * @param setor      the setor
+     * @param duracao    the duracao
+     * @param hora       the hora
+     * @throws SQLException the sql exception
+     */
     public void regaRegister(int operacaoId, String setor, int duracao, String hora) throws SQLException {
         RegaRepository.regaRegister(operacaoId, setor, duracao, hora);
     }
 
 
+    /**
+     * Read csv.
+     *
+     * @param filePath the file path
+     */
     public void readCSV(String filePath) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
@@ -75,10 +95,21 @@ public class RegaRegisterController {
         }
     }
 
+    /**
+     * Gets rega table list.
+     *
+     * @return the rega table list
+     */
     public List<RegaTable> getRegaTableList() {
         return regaTableList;
     }
 
+    /**
+     * Gets rega table.
+     *
+     * @param index the index
+     * @return the rega table
+     */
     public RegaTable getRegaTable(int index) {
         if (index >= 0 && index < regaTableList.size()) {
             return regaTableList.get(index);

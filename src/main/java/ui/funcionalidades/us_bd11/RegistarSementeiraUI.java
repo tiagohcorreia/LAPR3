@@ -11,6 +11,9 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * The type Registar sementeira ui.
+ */
 public class RegistarSementeiraUI implements Runnable {
 
     private RegistarSementeiraController ctrl = new RegistarSementeiraController();

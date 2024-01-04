@@ -9,8 +9,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * The type Fator producao repository.
+ */
 public class FatorProducaoRepository {
 
+    /**
+     * Gets fatores producao.
+     *
+     * @return the fatores producao
+     */
     public List<FatorProducao> getFatoresProducao() {
 
         CallableStatement callStmt = null;
@@ -71,6 +79,18 @@ public class FatorProducaoRepository {
         return fatorProducaoList;
     }
 
+    /**
+     * Fator producao register.
+     *
+     * @param operacaoId        the operacao id
+     * @param parcelaId         the parcela id
+     * @param variedadeId       the variedade id
+     * @param fatorProducaoId   the fator producao id
+     * @param metodoAplicacaoId the metodo aplicacao id
+     * @param quantidade        the quantidade
+     * @param area              the area
+     * @throws SQLException the sql exception
+     */
     public static void fatorProducaoRegister(int operacaoId, int parcelaId, int variedadeId,int fatorProducaoId, int metodoAplicacaoId, float quantidade,float area) throws SQLException {
 
         CallableStatement callStmt = null;
@@ -95,6 +115,13 @@ public class FatorProducaoRepository {
         }
     }
 
+    /**
+     * Register aplicacao fp.
+     *
+     * @param operacaoId the operacao id
+     * @param quantidade the quantidade
+     * @throws SQLException the sql exception
+     */
     public void registerAplicacaoFP(int operacaoId, float quantidade) throws SQLException {
         CallableStatement callStmt = null;
 

@@ -12,8 +12,18 @@ import java.io.IOException;
 import java.sql.SQLOutput;
 import java.util.Objects;
 
+/**
+ * The type Map graph loader.
+ */
 public class MapGraphLoader {
 
+    /**
+     * Load graph boolean.
+     *
+     * @param locaisFile     the locais file
+     * @param distanciasFile the distancias file
+     * @return the boolean
+     */
     public static boolean loadGraph(String locaisFile, String distanciasFile) {
         GraphStore graphStore = Repositories.getInstance().getGraphStore();
 

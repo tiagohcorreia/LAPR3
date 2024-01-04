@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * The type Choose role ui.
+ */
 public class ChooseRoleUI implements Runnable{
 
     @Override

@@ -10,6 +10,9 @@ import java.io.FileReader;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+/**
+ * The type Simular sistema rega ui.
+ */
 public class SimularSistemaRegaUI implements Runnable {
 
     private final int NUMBER_OF_PLAN_DAYS = 30;
@@ -36,6 +39,11 @@ public class SimularSistemaRegaUI implements Runnable {
         regaRegisterUI.run();*/
     }
 
+    /**
+     * Gets file reader.
+     *
+     * @return the file reader
+     */
     public BufferedReader getFileReader() {
         boolean validIn = false;
         BufferedReader reader = null;

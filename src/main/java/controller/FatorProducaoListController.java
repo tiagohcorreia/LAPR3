@@ -8,10 +8,16 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * The type Fator producao list controller.
+ */
 public class FatorProducaoListController {
 
     private FatorProducaoRepository fatorProducaoRepository;
 
+    /**
+     * Instantiates a new Fator producao list controller.
+     */
     public FatorProducaoListController() {
         getFatorProducaoRepository();
     }
@@ -26,10 +32,19 @@ public class FatorProducaoListController {
         return fatorProducaoRepository;
     }
 
+    /**
+     * Gets fatores producao.
+     *
+     * @return the fatores producao
+     * @throws SQLException the sql exception
+     */
     public List<FatorProducao> getFatoresProducao() throws SQLException {
         return fatorProducaoRepository.getFatoresProducao();
     }
 
+    /**
+     * Show all fatores producao.
+     */
     public void showAllFatoresProducao() {
 
         try {

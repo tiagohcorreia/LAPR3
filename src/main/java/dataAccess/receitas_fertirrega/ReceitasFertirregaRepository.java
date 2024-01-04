@@ -10,8 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * The type Receitas fertirrega repository.
+ */
 public class ReceitasFertirregaRepository {
 
+    /**
+     * Gets receitas.
+     *
+     * @return the receitas
+     */
     public ArrayList<ReceitaFertirrega> getReceitas() {
 
         CallableStatement callStmt = null;
@@ -60,6 +68,12 @@ public class ReceitasFertirregaRepository {
         return mixes;
     }
 
+    /**
+     * Is there mix boolean.
+     *
+     * @param mixName the mix name
+     * @return the boolean
+     */
     public boolean isThereMix(String mixName) {
         CallableStatement callStmt = null;
         int out = -1;
@@ -88,6 +102,13 @@ public class ReceitasFertirregaRepository {
         return out == 1;
     }
 
+    /**
+     * Register fp aplicados.
+     *
+     * @param operacaoId the operacao id
+     * @param fpIds      the fp ids
+     * @throws SQLException the sql exception
+     */
     public void registerFpAplicados(int operacaoId, List<Integer> fpIds) throws SQLException {
         CallableStatement callStmt = null;
 
@@ -119,6 +140,12 @@ public class ReceitasFertirregaRepository {
         }
     }
 
+    /**
+     * Register aplicacao fp variedade.
+     *
+     * @param operacaoId the operacao id
+     * @throws SQLException the sql exception
+     */
     public void registerAplicacaoFPVariedade(int operacaoId) throws SQLException {
         CallableStatement callStmt = null;
         int metodoAplicacaoId = 4;
@@ -151,6 +178,13 @@ public class ReceitasFertirregaRepository {
         }
     }
 
+    /**
+     * Register parcelas variedades aplicadas.
+     *
+     * @param operacaoId            the operacao id
+     * @param parcelaVariedadePairs the parcela variedade pairs
+     * @throws SQLException the sql exception
+     */
     public void registerParcelasVariedadesAplicadas(int operacaoId, List<AbstractMap.SimpleEntry<Integer, Integer>> parcelaVariedadePairs) throws SQLException {
         CallableStatement callStmt = null;
 

@@ -2,7 +2,21 @@ package esinf;
 
 import java.util.*;
 
+/**
+ * The type Algorithms alternative.
+ */
 public class AlgorithmsAlternative extends Algorithms {
+    /**
+     * Gets path.
+     *
+     * @param <V>      the type parameter
+     * @param <E>      the type parameter
+     * @param g        the g
+     * @param vOrig    the v orig
+     * @param vDest    the v dest
+     * @param pathKeys the path keys
+     * @param path     the path
+     */
     public static <V, E> void getPath(Graph<V, E> g, V vOrig, V vDest, List<V> pathKeys, List<V> path) {
         if (g == null || !g.validVertex(vOrig) || !g.validVertex(vDest)) return;
 
@@ -24,6 +38,13 @@ public class AlgorithmsAlternative extends Algorithms {
     }
 
 
+    /**
+     * Clean.
+     *
+     * @param <V>    the type parameter
+     * @param source the source
+     * @param v      the v
+     */
     public static <V> void clean(LinkedList<V> source, V v) {
         LinkedList<V> destination = new LinkedList<>();
         for (V element : source) {
@@ -34,6 +55,13 @@ public class AlgorithmsAlternative extends Algorithms {
 
     }
 
+    /**
+     * Remove elements after.
+     *
+     * @param <V>    the type parameter
+     * @param list   the list
+     * @param target the target
+     */
     public static <V> void removeElementsAfter(LinkedList<V> list, V target) {
         if (list == null || target == null || list.isEmpty()) {
             return; // Handle null or empty list
@@ -47,6 +75,12 @@ public class AlgorithmsAlternative extends Algorithms {
         }
     }
 
+    /**
+     * Remove duplicates.
+     *
+     * @param <V>  the type parameter
+     * @param list the list
+     */
     public static <V> void removeDuplicates(LinkedList<V> list) {
         Set<V> uniqueElements = new HashSet<>();
         LinkedList<V> result = new LinkedList<>();

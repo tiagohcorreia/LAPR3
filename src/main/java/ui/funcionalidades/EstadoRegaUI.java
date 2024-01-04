@@ -6,8 +6,14 @@ import watering_system_manager.watering_plan.WateringPlanEntry;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 
+/**
+ * The type Estado rega ui.
+ */
 public class EstadoRegaUI implements Runnable {
 
+    /**
+     * The Ctrl.
+     */
     EstadoRegaController ctrl = new EstadoRegaController();
 
     @Override

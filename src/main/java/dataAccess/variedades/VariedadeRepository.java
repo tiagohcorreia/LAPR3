@@ -12,11 +12,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * The type Variedade repository.
+ */
 public class VariedadeRepository {
 
+    /**
+     * Instantiates a new Variedade repository.
+     */
     public VariedadeRepository() {
     }
 
+    /**
+     * Gets varieties.
+     *
+     * @return the varieties
+     */
     public List<Variedade> getVarieties() {
 
         CallableStatement callStmt = null;
@@ -51,6 +62,12 @@ public class VariedadeRepository {
         return variedades;
     }
 
+    /**
+     * Get varieties in parcel list.
+     *
+     * @param parcelId the parcel id
+     * @return the list
+     */
     public List<Variedade> getVarietiesInParcel(int parcelId){
 
         CallableStatement callStmt = null;

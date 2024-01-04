@@ -6,6 +6,9 @@ import domain.Parcela;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * The type Parcela list ui.
+ */
 public class ParcelaListUI implements Runnable {
 
     private ParcelasListController parcelaController;

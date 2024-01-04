@@ -8,30 +8,68 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
+/**
+ * The type Matrix graph.
+ *
+ * @param <V> the type parameter
+ * @param <E> the type parameter
+ */
 public class MatrixGraph<V, E> extends CommonGraph<V, E> {
 
+    /**
+     * The constant INITIAL_CAPACITY.
+     */
     public static final int INITIAL_CAPACITY = 10;
+    /**
+     * The constant RESIZE_FACTOR.
+     */
     public static final float RESIZE_FACTOR = 1.5F;
 
+    /**
+     * The Edge matrix.
+     */
     Edge<V, E>[][] edgeMatrix;
 
 
+    /**
+     * Instantiates a new Matrix graph.
+     *
+     * @param directed        the directed
+     * @param initialCapacity the initial capacity
+     */
     @SuppressWarnings("unchecked")
     public MatrixGraph(boolean directed, int initialCapacity) {
         super(directed);
         edgeMatrix = (Edge<V, E>[][]) (new Edge<?, ?>[initialCapacity][initialCapacity]);
     }
 
+    /**
+     * Instantiates a new Matrix graph.
+     *
+     * @param directed the directed
+     */
     public MatrixGraph(boolean directed) {
         this(directed, INITIAL_CAPACITY);
     }
 
+    /**
+     * Instantiates a new Matrix graph.
+     *
+     * @param g the g
+     */
     public MatrixGraph(Graph<V, E> g) {
 
         this(g.isDirected(), g.numVertices());
         copy(g, this);
     }
 
+    /**
+     * Instantiates a new Matrix graph.
+     *
+     * @param directed the directed
+     * @param vs       the vs
+     * @param m        the m
+     */
     public MatrixGraph(boolean directed, ArrayList<V> vs, E[][] m) {
 
         this(directed, vs.size());

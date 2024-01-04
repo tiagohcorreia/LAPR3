@@ -15,6 +15,11 @@ import oracle.jdbc.OracleTypes;
  */
 public class OperacaoAgricolaRepository {
 
+    /**
+     * Gets next id.
+     *
+     * @return the next id
+     */
     public int getNextId() {
 
         try {

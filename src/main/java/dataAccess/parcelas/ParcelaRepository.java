@@ -12,8 +12,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * The type Parcela repository.
+ */
 public class ParcelaRepository {
 
+    /**
+     * Gets parcelas.
+     *
+     * @return the parcelas
+     */
     public List<Parcela> getParcelas() {
 
         CallableStatement callStmt = null;
