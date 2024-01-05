@@ -234,6 +234,9 @@ SELECT *
 FROM OPERACAO_AGRICOLA;
 
 
+
+
+
 -- SELECT REGA
 select distinct operacao_agricola.id as id_operacao,
                 rega.operacao_id     as id_rega,
@@ -262,6 +265,10 @@ where OPERACAO_AGRICOLA.ID = 465
   AND PLANTACAO.PARCELA_ID = PARCELA.ID
   AND PLANTACAO.ID = PLANTACAO_PERMANENTE.PLANTACAO_ID
   AND PLANTACAO_PERMANENTE.VARIEDADE_PERM_ID = VARIEDADE.ID;
+
+
+
+
 
 
 -- SELECT PARCELA, VARIEDADES E HECTARES
@@ -301,6 +308,11 @@ GROUP BY operacao_agricola.id, aplicacao_fp.operacao_id, PARCELA.NOME,
           PLANTACAO_PERMANENTE.QUANTIDADE) / 10000, variedade.nome;
 
 
+
+
+
+
+
 -- SELECT PARCELA, VARIEDADE, LITROS POR FP
 select distinct operacao_agricola.id     as id_operacao,
                 aplicacao_fp.operacao_id as id_aplicacao_id,
@@ -324,7 +336,6 @@ from operacao_agricola,
      plantacao_permanente
 
 where OPERACAO_AGRICOLA.ID = 465
-  AND RECEITA_FERTIRREGA.ID = 2
 
   and APLICACAO_FP.OPERACAO_ID = OPERACAO_AGRICOLA.ID
 
@@ -347,3 +358,33 @@ GROUP BY operacao_agricola.id, aplicacao_fp.operacao_id, PARCELA.NOME, VARIEDADE
          receita_fp.PROPORCAO * (PLANTACAO_PERMANENTE.compasso * PLANTACAO_PERMANENTE.DISTANCIA_FILAS *
                                  PLANTACAO_PERMANENTE.QUANTIDADE / 10000)
 ORDER BY operacao_agricola.id, aplicacao_fp.operacao_id, PARCELA.NOME, VARIEDADE.NOME, fator_producao.nome;
+
+
+
+
+
+/*
+CASO INSUCESSO
+
+Inserir 02/09/2023 operação de fertirrega, setor 10, 90 min, 05:00, receita 50
+Deve dar erro por não existir receita de fertirrega registada no sistema.
+ */
+declare
+    sector_id      SETOR_REGA.id%type          := 10;
+    operation_date OPERACAO_AGRICOLA.data%type := to_date('02-09-2023', 'dd-mm-yyyy');
+    duration       REGA.duracao%type           := 90;
+    hour           rega.hora%type              := '05:00';
+    mix_id         RECEITA_FERTIRREGA.id%type  := -1;
+    out            number;
+begin
+    out := register_fertigation(sector_id, operation_date, duration, hour, mix_id);
+    if out = 1 then
+        dbms_output.PUT_LINE('SUCESSO. OUT = ' || out);
+    else
+        dbms_output.PUT_LINE('INSUCESSO. OUT = ' || out);
+    end if;
+end;
+
+--464
+SELECT *
+FROM OPERACAO_AGRICOLA;
