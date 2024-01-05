@@ -1,10 +1,3 @@
-/*
- NÃO ADICIONADOS:
-
-
- */
-
-
 CREATE OR REPLACE FUNCTION funcFatores
     RETURN SYS_REFCURSOR IS
     v_cursor SYS_REFCURSOR;

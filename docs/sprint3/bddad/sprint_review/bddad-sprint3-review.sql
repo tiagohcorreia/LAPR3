@@ -25,8 +25,15 @@ Fazer pesquisa para mostrar que foram registadas as duas seguintes operações c
 
 Cada operação tem de dar lugar a duas operações especializadas com o mesmo ID, uma rega e uma aplicação de fator de produção.
 Não faz sentido registar a receita, uma vez que este conceito não existe numa aplicação de fator de produção isolada (se ser através de fertirrega).
+*/
 
- */
+-- VER ESTADO DA TABELA
+SELECT *
+FROM OPERACAO_AGRICOLA
+order by ID desc;
+
+
+
 declare
     sector_id      SETOR_REGA.id%type          := 10;
     operation_date OPERACAO_AGRICOLA.data%type := to_date('02-09-2023', 'dd-mm-yyyy');
@@ -42,12 +49,6 @@ begin
         dbms_output.PUT_LINE('INSUCESSO. OUT = ' || out);
     end if;
 end;
-
-
--- OBTER ID DA OPERAÇÃO
-SELECT *
-FROM OPERACAO_AGRICOLA
-order by ID desc;
 
 
 -- VER REGA REGISTADA
@@ -170,6 +171,13 @@ CASO INSUCESSO
 Inserir 02/09/2023 operação de fertirrega, setor 10, 90 min, 05:00, receita 50
 Deve dar erro por não existir receita de fertirrega registada no sistema.
  */
+
+SELECT *
+FROM OPERACAO_AGRICOLA
+order by id desc;
+
+
+
 declare
     sector_id      SETOR_REGA.id%type          := 10;
     operation_date OPERACAO_AGRICOLA.data%type := to_date('02-09-2023', 'dd-mm-yyyy');
@@ -186,9 +194,8 @@ begin
     end if;
 end;
 
---464
-SELECT *
-FROM OPERACAO_AGRICOLA;
+
+
 
 
 -- US 30 ---------------------------------------------------------------------------------------------------------------
@@ -204,6 +211,11 @@ Fazer pesquisa a mostrar operação como anulada.
 <\Caso de sucesso>
  */
 
+SELECT *
+FROM OPERACAO_AGRICOLA
+order by id desc;
+
+
 declare
     sector_id      SETOR_REGA.id%type          := 11;
     operation_date OPERACAO_AGRICOLA.data%type := sysdate;
@@ -218,10 +230,6 @@ begin
 end;
 
 
--- VER ID OPERAÇÃO
-select *
-from OPERACAO_AGRICOLA
-order by id desc;
 
 
 -- TENTAR ANULAR
@@ -263,8 +271,9 @@ where OPERACAO_AGRICOLA.ID = REGA.OPERACAO_ID
 
 
 -- VER ESTADO DA TABELA
-select *
-from OPERACAO_AGRICOLA;
+select id, validade
+from OPERACAO_AGRICOLA
+where id=403;
 
 
 
@@ -278,35 +287,12 @@ end;
 
 
 
--- US 24 ---------------------------------------------------------------------------------------------------------------
+
+
+
+-- US 24 e 25 ---------------------------------------------------------------------------------------------------------------
 
 -- ** USBD24 Como Gestor Agrícola, pretendo que todos os registos relacionados com operações tenham registado o instante em que foram criados, gerado pelo SGBD.
-
-/*
- PRIMEIRO VERIFICAR O ESTADO DA TABELA OPERAÇÃO AGRICOLA, DE SEGUIDA FAZER OS INSERTS E VERIFICAR QUE OS INSTANTES FORAM REGISTADOS
- */
-
-select id, INSTANTE_REGISTO
-from OPERACAO_AGRICOLA
-order by id desc;
-
-declare
-    v_parcela    parcela.id%type             := 105;
-    v_variedade  variedade.id%type           := 44;
-    v_quantidade monda.quantidade%type       := 10;
-    v_metodo     METODO_EXECUCAO.id%type     := 1;
-    v_data       OPERACAO_AGRICOLA.data%type := to_date('10-10-2020', 'dd-mm-yyyy');
-    v_produto    produto.id%type             := 10;
-    tmp          number;
-begin
-    tmp := REGISTAR_MONDA(v_parcela, v_variedade, v_quantidade, v_metodo, v_data);
-    tmp := REGISTAR_PODA(v_parcela, v_variedade, v_data, v_quantidade, v_metodo);
-    tmp := registar_colheita(v_data, v_parcela, v_produto, v_quantidade, v_metodo);
-end;
-
-
-
--- US 25 ---------------------------------------------------------------------------------------------------------------
 
 -- ** USBD25 Como Gestor Agrícola, pretendo que a identificação da operação seja um número sequencial, não gerado automaticamente pelo SGBD, que deve ser gerado no contexto da transação de registo da operação. Se este registo falhar, não deve haver consequências, nomeadamente a existência de "buracos" na numeração.
 --
@@ -314,9 +300,12 @@ end;
 -- Efetuar pesquisa sobre a tabela de operações para mostrar que TODAS as operações inseridas acima aparecem com um timestamp correspondente ao dia da apresentação e que a numeração é sequencial e sem falhas.
 -- <\Caso de sucesso>
 
-select id
+select id, INSTANTE_REGISTO
 from OPERACAO_AGRICOLA
 order by id desc;
+
+
+
 
 
 
@@ -345,34 +334,27 @@ Deve dar erro por operação ilegal/não permitida.
 O log da anulação realizada na demonstração da USBD30 deve estar na tabela de logs.
 <\Caso de sucesso>
  */
-insert into OPERACAO_AGRICOLA(id, data, validade)
-values (-1, to_date('01-01-2000', 'dd-mm-yyyy'), 0);
 
 select *
-from OPERACAO_AGRICOLA;
-
-
-insert into REGA(operacao_id, setor_id, duracao, hora)
-VALUES (-1, 10, -1, '00:00');
-
-select *
-from REGA;
+from REGA
+order by OPERACAO_ID desc;
 
 delete
 from REGA
-where OPERACAO_ID = -1;
+where OPERACAO_ID = ?;
 
 
-
-insert into LOG_OPERACAO(id, OPERACAO_ID, log)
-values (-1, -1, 'log_teste');
 
 select *
 from LOG_OPERACAO;
 
+insert into LOG_OPERACAO(id, OPERACAO_ID, log)
+values (-1, 101, 'log_teste');
+
 update LOG_OPERACAO
 set LOG='log_teste_update'
 where id = -1;
+
 delete
 from LOG_OPERACAO
 where id = -1;
@@ -416,3 +398,18 @@ END;
 begin
     IMPRIMIR_COMPOSTOS_QUIMICOS_USADOS_NAO_NESSE_ANO(2023);
 end;
+
+
+select distinct extract(year from OPERACAO_AGRICOLA.DATA) as ano,
+                COMPOSTO_QUIMICO.nome as composto
+from OPERACAO_AGRICOLA,
+     FP_APLICADOS,
+     FATOR_PRODUCAO,
+     FICHA_TECNICA,
+     COMPOSTO_QUIMICO
+where not extract(year from OPERACAO_AGRICOLA.DATA) = ?
+  and OPERACAO_AGRICOLA.ID = FP_APLICADOS.OPERACAO_ID
+  and FP_APLICADOS.FP_ID = FATOR_PRODUCAO.ID
+  and FP_APLICADOS.FP_ID = FICHA_TECNICA.FATOR_PRODUCAO_ID
+  and FICHA_TECNICA.COMPOSTO_QUIMICO_ID = COMPOSTO_QUIMICO.ID
+order by ano desc, composto;
