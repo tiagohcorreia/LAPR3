@@ -9,6 +9,49 @@ create or replace type dados_receita is table of dados_fp_receita;
 
 
 
+
+create or replace function existe_receita_com_id(v_receita_id RECEITA_FERTIRREGA.id%type)
+    return boolean
+    is
+    tmp number;
+begin
+    select count(*)
+    into tmp
+    from RECEITA_FERTIRREGA
+    where ID = v_receita_id;
+
+    if tmp > 0 then
+        return true;
+    end if;
+
+    return false;
+end;
+
+
+
+create or replace function fp_registado_em_receita(v_receita_id RECEITA_FERTIRREGA.id%type,
+                                                   v_fp_id FATOR_PRODUCAO.id%type)
+    return boolean
+    is
+    tmp number;
+begin
+    select count(*)
+    into tmp
+    from RECEITA_FP
+    where RECEITA_FP.RECEITA_ID = v_receita_id
+      and RECEITA_FP.FP_ID = v_fp_id;
+
+    if tmp > 0 then
+        return true;
+    end if;
+
+    return false;
+end;
+
+
+
+
+
 -- Função para registrar uma receita de fertirrigação
 CREATE OR REPLACE FUNCTION registrar_receita_fertirrega(v_nome RECEITA_FERTIRREGA.nome%type,
                                                         v_dados_receita dados_fp_receita)
@@ -66,44 +109,6 @@ BEGIN
 END;
 
 
-
-create or replace function existe_receita_com_id(v_receita_id RECEITA_FERTIRREGA.id%type)
-    return boolean
-    is
-    tmp number;
-begin
-    select count(*)
-    into tmp
-    from RECEITA_FERTIRREGA
-    where ID = v_receita_id;
-
-    if tmp > 0 then
-        return true;
-    end if;
-
-    return false;
-end;
-
-
-
-create or replace function fp_registado_em_receita(v_receita_id RECEITA_FERTIRREGA.id%type,
-                                                   v_fp_id FATOR_PRODUCAO.id%type)
-    return boolean
-    is
-    tmp number;
-begin
-    select count(*)
-    into tmp
-    from RECEITA_FP
-    where RECEITA_FP.RECEITA_ID = v_receita_id
-      and RECEITA_FP.FP_ID = v_fp_id;
-
-    if tmp > 0 then
-        return true;
-    end if;
-
-    return false;
-end;
 
 
 /*
