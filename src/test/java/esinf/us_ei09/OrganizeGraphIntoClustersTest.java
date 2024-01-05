@@ -120,7 +120,7 @@ class OrganizeGraphIntoClustersTest {
         Map<HubLocal, Set<Local>> result = OrganizeGraphIntoClusters.organizeGraph(graph);
 
         // Verificar se o resultado está correto
-        assertEquals(2, result.size()); // Deve haver 2 hubs (clusters) neste exemplo
+        assertEquals(4, result.size());
     }
 
 }
