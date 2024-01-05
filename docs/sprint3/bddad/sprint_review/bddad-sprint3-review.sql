@@ -1,3 +1,84 @@
+-- US 31 ---------------------------------------------------------------------------------------------------------------
+
+
+/*
+CASO SUCESSO:
+
+Inserir Receita 22
+Tecniferti MOL, Tecniferti, 60 l/ha
+Kiplant AllGrip, Asfertglobal, 2 l/ha
+soluSOP 52, K+S, 2.5 kg/ha
+
+Fazer pesquisa para mostrar que a receita ficou registada, incluindo os 3 componentes.
+
+ */
+declare
+    v_nome          RECEITA_FERTIRREGA.nome%type := 'Receita 22';
+
+    --Tecniferti MOL, Tecniferti, 60 l/ha
+    dados_fp_1      dados_fp_receita             := dados_fp_receita(14, 60, 'l/ha');
+    --Kiplant AllGrip, Asfertglobal, 2 l/ha
+    dados_fp_2      dados_fp_receita             := dados_fp_receita(17, 2, 'l/ha');
+    --soluSOP 52, K+S, 2.5 kg/ha
+    dados_fp_3      dados_fp_receita             := dados_fp_receita(15, 2.5, 'kg/ha');
+    v_dados_receita dados_receita                := dados_receita(dados_fp_1, dados_fp_2, dados_fp_3);
+begin
+    if registrar_receita_fertirrega(v_nome, v_dados_receita) then
+        DBMS_OUTPUT.PUT_LINE('SUCESSO');
+    else
+        DBMS_OUTPUT.PUT_LINE('INSUCESSO');
+    end if;
+end;
+
+select *
+from RECEITA_FERTIRREGA
+order by ID desc;
+
+select distinct RECEITA_FERTIRREGA.nome as receita, FATOR_PRODUCAO.nome as fator_producao
+from RECEITA_FERTIRREGA,
+     FATOR_PRODUCAO,
+     RECEITA_FP
+where RECEITA_FERTIRREGA.ID = ?
+  and RECEITA_FERTIRREGA.ID = RECEITA_FP.RECEITA_ID
+  and RECEITA_FP.FP_ID = FATOR_PRODUCAO.ID;
+
+
+/*
+CASO INSUCESSO
+
+Inserir Receita 23
+Tecniferti MOL, Tecniferti, 60 l/ha
+Kiplant AllFit Plus, Asfertglobal, 2.5 l/ha
+
+Deve dar erro por não existir um dos componentes registado no sistema.
+ */
+declare
+    v_nome          RECEITA_FERTIRREGA.nome%type := 'Receita 23';
+
+    --Tecniferti MOL, Tecniferti, 60 l/ha
+    dados_fp_1      dados_fp_receita             := dados_fp_receita(14, 60, 'l/ha');
+    --Kiplant AllFit Plus, Asfertglobal, 2.5 l/ha
+    dados_fp_2      dados_fp_receita             := dados_fp_receita(-1, 2.5, 'l/ha');
+    v_dados_receita dados_receita                := dados_receita(dados_fp_1, dados_fp_2);
+begin
+    if registrar_receita_fertirrega(v_nome, v_dados_receita) then
+        DBMS_OUTPUT.PUT_LINE('SUCESSO');
+    else
+        DBMS_OUTPUT.PUT_LINE('INSUCESSO');
+    end if;
+end;
+
+select *
+from RECEITA_FERTIRREGA
+order by ID desc;
+
+
+
+
+
+
+
+
 -- US 32 ---------------------------------------------------------------------------------------------------------------
 
 
