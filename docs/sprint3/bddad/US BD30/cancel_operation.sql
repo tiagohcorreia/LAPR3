@@ -1,9 +1,8 @@
 CREATE OR REPLACE FUNCTION cancel_operation(p_operacao_id NUMBER)
-
-    RETURN NUMBER IS returnValue NUMBER := 0;
-
+    RETURN NUMBER IS
+    returnValue     NUMBER := 0;
     v_data_prevista DATE;
-    v_data_atual DATE;
+    v_data_atual    DATE;
 
 BEGIN
     -------------------------------------------------------------------------------------------------------------------
@@ -28,9 +27,9 @@ BEGIN
     -- Verificar operações dependentes
 
     --IF EXISTS(SELECT 1 FROM OPERACAO_AGRICOLA WHERE id_dependente = p_operacao_id) THEN
-        --existem operações dependentes
-        --DBMS_OUTPUT.put_line('Não é possível anular a operação. Existem operações dependentes');
-        --RETURN returnValue; -- falha na anulação da operação
+    --existem operações dependentes
+    --DBMS_OUTPUT.put_line('Não é possível anular a operação. Existem operações dependentes');
+    --RETURN returnValue; -- falha na anulação da operação
     --end if;
 
     -------------------------------------------------------------------------------------------------------------------
@@ -40,10 +39,12 @@ BEGIN
     UPDATE OPERACAO_AGRICOLA SET validade = 0 WHERE id = p_operacao_id;
 
     COMMIT;
-    RETURN 1; -- Operação Anulada com sucesso
+    RETURN 1;
+    -- Operação Anulada com sucesso
 
     -------------------------------------------------------------------------------------------------------------------
 
 END;
 /
+
 

@@ -13,3 +13,5 @@ BEGIN
     RAISE_APPLICATION_ERROR(-20002, 'Deletions are not allowed on the LOG_OPERACAO table.');
 END;
 /
+
+

@@ -1,3 +1,27 @@
+
+create or replace function check_if_watering_is_registered(id rega.operacao_id%type)
+    return number
+    is
+    otherId rega.operacao_id%type;
+    cursor c1 is select operacao_id
+                 from REGA;
+begin
+    open c1;
+    loop
+        fetch c1 into otherId;
+        if (id = otherId) then
+            close c1;
+            return 1;
+        end if;
+        exit when c1%notfound;
+    end loop;
+    close c1;
+    return 0;
+end;
+
+
+
+
 create or replace function register_watering(sector_id SETOR_REGA.id%type,
                                              operation_date OPERACAO_AGRICOLA.data%type,
                                              duration REGA.duracao%type,
@@ -44,18 +68,6 @@ begin
     commit;
     return 1;
 end;
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -184,59 +196,3 @@ end;
 
 
 
-
-
-
-
-
-
-
-
-create or replace function check_if_watering_is_registered(id rega.operacao_id%type)
-    return number
-    is
-    otherId rega.operacao_id%type;
-    cursor c1 is select operacao_id
-                 from REGA;
-begin
-    open c1;
-    loop
-        fetch c1 into otherId;
-        if (id = otherId) then
-            close c1;
-            return 1;
-        end if;
-        exit when c1%notfound;
-    end loop;
-    close c1;
-    return 0;
-end;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-declare
-    sector_id      SETOR_REGA.id%type          := 10;
-    operation_date OPERACAO_AGRICOLA.data%type := to_date('01-06-2017', 'dd-mm-yyyy');
-    duration       REGA.duracao%type           := 60;
-    hour           rega.hora%type              := '08:00';
-    mix_id         RECEITA_FERTIRREGA.id%type  := 1;
-    out            number;
-begin
-    out := register_fertigation(sector_id, operation_date, duration, hour, mix_id);
-    if out = 1 then
-        dbms_output.PUT_LINE('SUCESSO. OUT = ' || out);
-    else
-        dbms_output.PUT_LINE('INSUCESSO. OUT = ' || out);
-    end if;
-end;

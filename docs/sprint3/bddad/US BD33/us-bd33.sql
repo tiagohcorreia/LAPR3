@@ -124,10 +124,3 @@ BEGIN
     END LOOP;
     CLOSE c;
 END;
-
-DECLARE
-    ano  NUMBER := 2019;
-BEGIN
-    imprimirCulturasComMaiorConsumoAgua(ano);
-END;
-/
