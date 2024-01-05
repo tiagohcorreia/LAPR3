@@ -1,12 +1,11 @@
 create or replace type dados_fp_receita as object
 (
-    fp_id     FATOR_PRODUCAO.id%type,
+    fp_id     number,
     proporcao float,
-    unidade   nvarchar2
+    unidade   nvarchar2(225)
 );
 
 create or replace type dados_receita is table of dados_fp_receita;
-
 
 
 
@@ -50,11 +49,9 @@ end;
 
 
 
-
-
 -- Função para registrar uma receita de fertirrigação
 CREATE OR REPLACE FUNCTION registrar_receita_fertirrega(v_nome RECEITA_FERTIRREGA.nome%type,
-                                                        v_dados_receita dados_fp_receita)
+                                                        v_dados_receita dados_receita)
     RETURN boolean
     IS
     v_receita_id RECEITA_FERTIRREGA.id%type;
@@ -68,12 +65,13 @@ BEGIN
     into v_receita_id
     from RECEITA_FERTIRREGA;
 
+    --v_count:=v_dados_receita.count;
     for i in 1..v_dados_receita.count
         loop
 
             v_fp_id := v_dados_receita(i).fp_id;
             v_proporcao := v_dados_receita(i).proporcao;
-            v_unidade = v_dados_receita(i).unidade;
+            v_unidade := v_dados_receita(i).unidade;
 
             if CHECKIFFPEXISTS(v_fp_id) = 0 then
                 DBMS_OUTPUT.PUT_LINE('ERRO: O id ' || v_fp_id || ' não existe na tabela FATOR_PRODUÇÃO');
@@ -109,8 +107,6 @@ BEGIN
 END;
 
 
-
-
 /*
 CASO SUCESSO:
 
@@ -135,7 +131,6 @@ declare
 begin
     if registrar_receita_fertirrega(v_nome, v_dados_receita) then
         DBMS_OUTPUT.PUT_LINE('SUCESSO');
-        select * from RECEITA_FERTIRREGA;
     else
         DBMS_OUTPUT.PUT_LINE('INSUCESSO');
     end if;
@@ -149,15 +144,9 @@ select distinct RECEITA_FERTIRREGA.nome as receita, FATOR_PRODUCAO.nome as fator
 from RECEITA_FERTIRREGA,
      FATOR_PRODUCAO,
      RECEITA_FP
-where RECEITA_FERTIRREGA.ID = 2
+where RECEITA_FERTIRREGA.ID = ?
   and RECEITA_FERTIRREGA.ID = RECEITA_FP.RECEITA_ID
   and RECEITA_FP.FP_ID = FATOR_PRODUCAO.ID;
-
-
-
-
-
-
 
 
 /*
@@ -170,7 +159,7 @@ Kiplant AllFit Plus, Asfertglobal, 2.5 l/ha
 Deve dar erro por não existir um dos componentes registado no sistema.
  */
 declare
-    v_nome          RECEITA_FERTIRREGA.nome%type := 'Receita 22';
+    v_nome          RECEITA_FERTIRREGA.nome%type := 'Receita 23';
 
     --Tecniferti MOL, Tecniferti, 60 l/ha
     dados_fp_1      dados_fp_receita             := dados_fp_receita(14, 60, 'l/ha');
@@ -180,7 +169,6 @@ declare
 begin
     if registrar_receita_fertirrega(v_nome, v_dados_receita) then
         DBMS_OUTPUT.PUT_LINE('SUCESSO');
-        select * from RECEITA_FERTIRREGA;
     else
         DBMS_OUTPUT.PUT_LINE('INSUCESSO');
     end if;
