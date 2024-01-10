@@ -1717,16 +1717,17 @@ create or replace function obter_compostos_quimicos_usados_nao_nesse_ano(v_ano n
 begin
     open c for
         select distinct COMPOSTO_QUIMICO.nome as composto
-        from OPERACAO_AGRICOLA,
-             FP_APLICADOS,
-             FATOR_PRODUCAO,
-             FICHA_TECNICA,
-             COMPOSTO_QUIMICO
-        where not extract(year from OPERACAO_AGRICOLA.DATA) = v_ano
-          and OPERACAO_AGRICOLA.ID = FP_APLICADOS.OPERACAO_ID
-          and FP_APLICADOS.FP_ID = FATOR_PRODUCAO.ID
-          and FP_APLICADOS.FP_ID = FICHA_TECNICA.FATOR_PRODUCAO_ID
-          and FICHA_TECNICA.COMPOSTO_QUIMICO_ID = COMPOSTO_QUIMICO.ID
+        from COMPOSTO_QUIMICO
+        where COMPOSTO_QUIMICO.ID not in (select distinct COMPOSTO_QUIMICO.ID
+                                          from OPERACAO_AGRICOLA,
+                                               FP_APLICADOS,
+                                               FICHA_TECNICA,
+                                               COMPOSTO_QUIMICO
+                                          where extract(year from OPERACAO_AGRICOLA.DATA) = v_ano
+                                            and OPERACAO_AGRICOLA.ID = FP_APLICADOS.OPERACAO_ID
+                                            and FP_APLICADOS.FP_ID = FICHA_TECNICA.FATOR_PRODUCAO_ID
+                                            and FICHA_TECNICA.COMPOSTO_QUIMICO_ID = COMPOSTO_QUIMICO.ID)
+
         order by COMPOSTO_QUIMICO.NOME;
     return c;
 end;
