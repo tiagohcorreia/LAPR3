@@ -277,4 +277,54 @@ public class OtherDataAccesses {
         }
         return resultSet;
     }
+
+    public ResultSet obterCulturasComMaiorConsumoAgua(int ano){
+        CallableStatement callStmt = null;
+        ResultSet resultSet = null;
+
+        try {
+            try {
+
+                Connection connection = DatabaseConnection.getInstance().getConnection();
+                callStmt = connection.prepareCall("{ ? = call obterCulturasComMaiorConsumoAgua(?) }");
+
+                callStmt.registerOutParameter(1, OracleTypes.CURSOR);
+                callStmt.setInt(2, ano);
+
+                callStmt.execute();
+                resultSet = (ResultSet) callStmt.getObject(1);
+
+            } finally {
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
+
+    public ResultSet obterCompostosQuimicosUsadosNaoNesseAno(int ano){
+        CallableStatement callStmt = null;
+        ResultSet resultSet = null;
+
+        try {
+            try {
+
+                Connection connection = DatabaseConnection.getInstance().getConnection();
+                callStmt = connection.prepareCall("{ ? = call obter_compostos_quimicos_usados_nao_nesse_ano(?) }");
+
+                callStmt.registerOutParameter(1, OracleTypes.CURSOR);
+                callStmt.setInt(2, ano);
+
+                callStmt.execute();
+                resultSet = (ResultSet) callStmt.getObject(1);
+
+            } finally {
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
 }

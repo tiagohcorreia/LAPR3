@@ -387,7 +387,7 @@ order by id desc;
 
 
 
-
+select * from LOG_OPERACAO;
 
 
 -- US 27 e 28 ---------------------------------------------------------------------------------------------------------------
@@ -434,11 +434,11 @@ values (-1, 101, 'log_teste');
 
 update LOG_OPERACAO
 set LOG='log_teste_update'
-where id = -1;
+where id = ?;
 
 delete
 from LOG_OPERACAO
-where id = -1;
+where id = 1;
 
 
 
@@ -470,7 +470,7 @@ END;
 
 
 
--- US 33 ---------------------------------------------------------------------------------------------------------------
+-- US 34 ---------------------------------------------------------------------------------------------------------------
 
 /*
  ** USBD34 Como Gestor Agrícola, pretendo obter a lista das substâncias de fatores de produção usadas noutros anos civis, mas não usadas no ano civil indicado.

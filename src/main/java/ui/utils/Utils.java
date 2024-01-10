@@ -6,6 +6,7 @@ import ui.ExitUI;
 import ui.menu.MenuItem;
 
 import java.io.*;
+import java.nio.channels.ScatteringByteChannel;
 import java.security.InvalidParameterException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -90,7 +91,7 @@ public class Utils {
                 valid = true;
             } catch (InvalidParameterException ex) {
                 System.err.println("ERRO: O valor introduzido não é um inteiro positivo\n");
-            } catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 System.err.println("ERRO: O valor introduzido não é um inteiro positivo\n");
             }
         } while (!valid);
@@ -492,6 +493,23 @@ public class Utils {
         } while (!validInput);
 
         return input;
+    }
+
+    public static int readYearFromConsole(String prompt) {
+        boolean valid = false;
+        int year = -1;
+        do {
+            try {
+                year = Integer.parseInt(readLineFromConsole(prompt));
+                if (year < 0 || year > LocalDate.now().getYear()) {
+                    throw new NumberFormatException();
+                }
+                valid = true;
+            } catch (NumberFormatException | NullPointerException e) {
+                System.err.println("ERRO: Ano inválido\n");
+            }
+        } while (!valid);
+        return year;
     }
 
 }

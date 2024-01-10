@@ -13,6 +13,8 @@ import ui.funcionalidades.us_bd18.ObterOperacoesUI;
 import ui.funcionalidades.us_bd19.ObterAplicacoesFpUI;
 import ui.funcionalidades.us_bd20.ObterTotaisMensaisRegaUI;
 import ui.funcionalidades.us_bd32.RegisterWateringOperationUI;
+import ui.funcionalidades.us_bd33.ObterCulturasMaiorConsumoAguaUI;
+import ui.funcionalidades.us_bd34.ObterCompostosNaoNesseAnoUI;
 import ui.menu.MenuItem;
 import ui.utils.Utils;
 
@@ -34,6 +36,8 @@ public class MenuConsultarDados implements Runnable{
         options.add(new MenuItem("Consultar operações", new ObterOperacoesUI()));
         options.add(new MenuItem("Consultar aplicações de fatores de produção, por tipo de fator", new ObterAplicacoesFpUI()));
         options.add(new MenuItem("Consultar totais mensais de rega", new ObterTotaisMensaisRegaUI()));
+        options.add(new MenuItem("Consultar culturas com maior consumo anual de rega", new ObterCulturasMaiorConsumoAguaUI()));
+        options.add(new MenuItem("Consultar compostos químicos não usados em dado ano", new ObterCompostosNaoNesseAnoUI()));
 
         Utils.runMenu(options, "CONSULTAR DADOS");
     }
