@@ -1662,10 +1662,10 @@ begin
                  JOIN Operacao_Agricola OA ON R.operacao_id = OA.id
                  JOIN Setor_Rega SR ON R.setor_id = SR.id
                  JOIN SetorRega_Plantacao SRP ON R.setor_id = SRP.setor_id
-                 JOIN Plantacao PL
+                 JOIN Plantacao PL ON SRP.plantacao_id =PL.id
                  JOIN Plantacao_Permanente PLP ON PL.id = PLP.plantacao_id
                  LEFT JOIN Plantacao_Temporaria PLT ON PL.id = PLT.plantacao_id
-                           ON SRP.plantacao_id = PL.id
+
                  JOIN Parcela P ON PL.parcela_id = P.id
                  JOIN Variedade V ON (PLP.variedade_perm_id = V.id OR PLT.variedade_temp_id = V.id)
                  JOIN Cultura C ON V.cultura_id = C.id
