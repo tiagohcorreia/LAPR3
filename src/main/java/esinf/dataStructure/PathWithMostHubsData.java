@@ -31,8 +31,8 @@ public class PathWithMostHubsData {
     private float routeTotalDuration;  // duração total do percurso
     private float vehicleChargingDuration;  // duração total dos carregamentos do veiculo
     private float vehicleInTheRoadDuration;  // duração total do percurso na estrada
-    private float vehicleDischargingDuration;  // duração total dos descarregamentos dos cabazes
-    private int numberOfHubsTheVehicleWentThrough=0;  //numero de hubs pelo qual o veiculo conseguiu passar
+    private float vehicleDischargingDuration;  // duração total dos descarregamentos dos cabazes nos hubs
+    private int numberOfHubsTheVehicleWentThrough=0;  //numero de hubs pelo qual o veiculo conseguiu passar a horas
 
 
     /**
